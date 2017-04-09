@@ -3,23 +3,25 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>bets</artifactId>
-        <groupId>savik</groupId>
+        <groupId>savik.infrastructure</groupId>
+        <artifactId>infrastructure-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>savik.domain</groupId>
-    <artifactId>domain-parent</artifactId>
+    <artifactId>common-infrastructure</artifactId>
 
+
+    <properties>
+        <commons-collections4.version>4.1</commons-collections4.version>
+    </properties>
 
     <dependencies>
         <dependency>
-            <groupId>savik.infrastructure</groupId>
-            <artifactId>jpa-infrastructure</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>${commons-collections4.version}</version>
         </dependency>
-
     </dependencies>
 
 
