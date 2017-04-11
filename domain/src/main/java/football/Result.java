@@ -1,18 +1,19 @@
+/*
+ * Copyright (c) 2017, AT-Consulting. All Rights Reserved.
+ * Use is subject to license terms.
+ */
+
 package football;
 
-import java.util.Set;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
 /**
  * @author Savushkin Yauheni
- * @since 10.4.17
+ * @since 11.04.2017
  */
 @Entity
-public class Period {
-
-    @NotNull
-    PeriodNumber periodNumber;
+public class Result {
 
     @NotNull
     Integer homeScore;
@@ -25,12 +26,6 @@ public class Period {
 
     @NotNull
     Winner winner;
-
-    @NotNull
-    Set<Goal> goals;
-
-    @NotNull
-    Set<Card> cards;
 
     @NotNull
     Integer homeCorners;
@@ -56,8 +51,5 @@ public class Period {
     @NotNull
     Integer guestFouls;
 
-    enum PeriodNumber {
-        FIRST,
-        SECOND
-    }
+
 }

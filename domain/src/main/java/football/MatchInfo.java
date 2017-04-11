@@ -10,17 +10,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class MatchInfo {
 
-    @NotNull
-    Integer homeScore;
 
-    @NotNull
-    Integer guestScore;
-
-    @NotNull
-    Integer totalScore;
-
-    @NotNull
-    Winner winner;
 
     @NotNull
     Period firstPeriod;
