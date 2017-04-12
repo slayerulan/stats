@@ -1,18 +1,24 @@
-package football;
+package football.model;
 
 import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+
+import domain.Identifiable;
 
 /**
  * @author Savushkin Yauheni
  * @since 10.4.17
  */
 @Entity
-public class Period {
+public class Period extends Identifiable {
 
     @NotNull
-    PeriodNumber periodNumber;
+    PeriodStatus periodStatus;
 
     @NotNull
     Integer homeScore;
@@ -27,9 +33,11 @@ public class Period {
     Winner winner;
 
     @NotNull
+    @OneToMany(cascade= CascadeType.ALL, fetch = FetchType.EAGER)
     Set<Goal> goals;
 
     @NotNull
+    @OneToMany(cascade= CascadeType.ALL, fetch = FetchType.EAGER)
     Set<Card> cards;
 
     @NotNull
@@ -56,8 +64,9 @@ public class Period {
     @NotNull
     Integer guestFouls;
 
-    enum PeriodNumber {
+    enum PeriodStatus {
         FIRST,
-        SECOND
+        SECOND,
+        MATCH
     }
 }

@@ -1,4 +1,4 @@
-package football;
+package football.model;
 
 /**
  * @author Savushkin Yauheni

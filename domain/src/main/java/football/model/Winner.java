@@ -1,10 +1,11 @@
-package football;
+package football.model;
 
 /**
  * @author Savushkin Yauheni
  * @since 10.4.17
  */
-public enum Who {
+public enum Winner {
     HOME,
-    GUEST
+    GUEST,
+    DRAW
 }
