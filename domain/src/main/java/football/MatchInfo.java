@@ -10,7 +10,8 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class MatchInfo {
 
-
+    @NotNull
+    Result result;
 
     @NotNull
     Period firstPeriod;
