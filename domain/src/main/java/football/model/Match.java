@@ -2,6 +2,8 @@ package football.model;
 
 import java.time.LocalDate;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
@@ -23,9 +25,11 @@ public class Match extends Identifiable {
     Team guestTeam;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
     Championship championship;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
     Season season;
 
     @NotNull
