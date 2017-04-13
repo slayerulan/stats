@@ -4,6 +4,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+import com.codiform.moo.annotation.Optionality;
+import com.codiform.moo.annotation.Property;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -24,5 +26,6 @@ public abstract class Identifiable {
     @Id
     @GenericGenerator(name = "sequence", strategy = "sequence")
     @GeneratedValue(generator = "sequence")
+    @Property(optionality = Optionality.OPTIONAL)
     private Long id;
 }

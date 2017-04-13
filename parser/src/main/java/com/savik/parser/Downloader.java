@@ -4,8 +4,12 @@ package com.savik.parser;/*
  */
 
 import lombok.*;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.io.IOException;
 
 /**
  * @author Savushkin Yauheni
@@ -18,16 +22,20 @@ public class Downloader {
     @Autowired
     private DownloaderConfiguration configuration;
 
-    /*public Document downloadGeneralInfo(String matchId) throws IOException {
-        return download(String.format(configuration.getINFO_URL_TEMPLATE(), matchId));
+    public Document downloadGeneralInfo(String matchId) throws IOException {
+        return download(String.format(configuration.getInfoUrlTemplate(), matchId));
     }
 
     public Document downloadStatsInfo(String matchId) throws IOException {
-        return download(String.format(configuration.getSTATS_URL_TEMPLATE(), matchId));
+        return download(String.format(configuration.getStatsUrlTemplate(), matchId));
+    }
+
+    public Document downloadSummaryInfo(String matchId) throws IOException {
+        return download(String.format(configuration.getSummaryUrlTemplate(), matchId));
     }
 
     private Document download(String url) throws IOException {
         return Jsoup.connect(url)
-                    .header("X-Fsign", configuration.getFSIGN()).get();
-    }*/
+                    .header("X-Fsign", configuration.getFsign()).get();
+    }
 }

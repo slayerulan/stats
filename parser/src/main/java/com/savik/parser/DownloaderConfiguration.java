@@ -19,26 +19,20 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @EnableConfigurationProperties
-@PropertySource("classpath:test.properties")
+@PropertySource("classpath:downloader-config.properties")
 @Getter
 public class DownloaderConfiguration {
 
-   /* @Value("${url}")
-    private String url;*/
-
-    @PostConstruct
-    public void init() {
-       // System.out.println(url);
-    }
-
     @Value("${url.generalinfo}")
-    private String INFO_URL_TEMPLATE;
-
-   /*
+    private String infoUrlTemplate;
 
     @Value("${url.statsinfo}")
-    private String STATS_URL_TEMPLATE;
+    private String statsUrlTemplate;
+
+    @Value("${url.summary}")
+    private String summaryUrlTemplate;
 
     @Value("${fsign}")
-    private String FSIGN;*/
+    private String fsign;
+
 }

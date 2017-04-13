@@ -20,12 +20,29 @@
         <version>1.5.2.RELEASE</version>
     </parent>
 
+    <properties>
+        <not-build-as-service>true</not-build-as-service>
+    </properties>
+
     <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>1.5.2.RELEASE</version>
+                <configuration>
+                    <skip>${not-build-as-service}</skip>
+                    <executable>true</executable>
+                    <classifier>onejar</classifier>
+                    <attach>false</attach>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

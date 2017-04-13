@@ -9,6 +9,9 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+import com.codiform.moo.annotation.CollectionProperty;
+import com.codiform.moo.annotation.Optionality;
+import com.codiform.moo.annotation.Property;
 import domain.Identifiable;
 import lombok.*;
 
@@ -19,32 +22,39 @@ import lombok.*;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Builder(toBuilder = true)
 public class Period extends Identifiable {
 
     @NotNull
     @Enumerated(EnumType.STRING)
+    @Property(optionality = Optionality.OPTIONAL)
     PeriodStatus periodStatus;
 
     @NotNull
+    @Property(optionality = Optionality.OPTIONAL)
     Integer homeScore;
 
     @NotNull
+    @Property(optionality = Optionality.OPTIONAL)
     Integer guestScore;
 
     @NotNull
+    @Property(optionality = Optionality.OPTIONAL)
     Integer totalScore;
 
     @NotNull
     @Enumerated(EnumType.STRING)
+    @Property(optionality = Optionality.OPTIONAL)
     Winner winner;
 
     @NotNull
     @OneToMany(cascade= CascadeType.ALL, fetch = FetchType.EAGER)
+    @CollectionProperty(optionality = Optionality.OPTIONAL)
     Set<Goal> goals;
 
     @NotNull
     @OneToMany(cascade= CascadeType.ALL, fetch = FetchType.EAGER)
+    @CollectionProperty(optionality = Optionality.OPTIONAL)
     Set<Card> cards;
 
     @NotNull
@@ -77,7 +87,7 @@ public class Period extends Identifiable {
     @NotNull
     Integer guestFouls;
 
-    enum PeriodStatus {
+    public enum PeriodStatus {
         FIRST,
         SECOND,
         MATCH

@@ -11,6 +11,10 @@
 
     <artifactId>parser</artifactId>
 
+    <properties>
+        <not-build-as-service>false</not-build-as-service>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.jsoup</groupId>

@@ -1,6 +1,7 @@
 package com.savik.football.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -37,7 +38,7 @@ public class Match extends Identifiable {
     Season season;
 
     @NotNull
-    LocalDate date;
+    LocalDateTime date;
 
     @NotNull
     String myscoreCode;

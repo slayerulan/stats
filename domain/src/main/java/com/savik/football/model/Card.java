@@ -16,7 +16,8 @@ import lombok.*;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Getter
+@Builder(toBuilder = true)
 public class Card extends Identifiable {
 
     @NotNull

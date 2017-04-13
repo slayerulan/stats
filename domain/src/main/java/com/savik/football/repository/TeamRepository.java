@@ -17,4 +17,5 @@ import repository.JpaEntryRepository;
 @Repository
 public interface TeamRepository extends JpaEntryRepository<Team> {
 
+    Team findOneByName(String name);
 }
