@@ -1,4 +1,4 @@
-package football.model;
+package com.savik.football.model;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;

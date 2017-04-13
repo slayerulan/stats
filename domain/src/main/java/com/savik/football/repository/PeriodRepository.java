@@ -3,10 +3,9 @@
  * Use is subject to license terms.
  */
 
-package football.repository;
+package com.savik.football.repository;
 
-import football.model.Card;
-import football.model.Goal;
+import com.savik.football.model.Period;
 import org.springframework.stereotype.Repository;
 import repository.JpaEntryRepository;
 
@@ -16,5 +15,5 @@ import repository.JpaEntryRepository;
  */
 
 @Repository
-public interface CardRepository extends JpaEntryRepository<Card> {
+public interface PeriodRepository extends JpaEntryRepository<Period> {
 }

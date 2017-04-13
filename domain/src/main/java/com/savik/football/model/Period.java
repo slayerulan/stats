@@ -1,8 +1,7 @@
-package football.model;
+package com.savik.football.model;
 
 import java.util.Set;
 import javax.persistence.CascadeType;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -11,12 +10,16 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 import domain.Identifiable;
+import lombok.*;
 
 /**
  * @author Savushkin Yauheni
  * @since 10.4.17
  */
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Period extends Identifiable {
 
     @NotNull
@@ -49,6 +52,12 @@ public class Period extends Identifiable {
 
     @NotNull
     Integer guestCorners;
+
+    @NotNull
+    Integer homeHits;
+
+    @NotNull
+    Integer guestHits;
 
     @NotNull
     Integer homePossession;

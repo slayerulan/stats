@@ -1,4 +1,4 @@
-package football.model;
+package com.savik.football.model;
 
 import java.time.LocalDate;
 import javax.persistence.Entity;
@@ -8,8 +8,12 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import domain.Identifiable;
+import lombok.*;
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Match extends Identifiable {
 
     @NotNull

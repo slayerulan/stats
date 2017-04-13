@@ -3,9 +3,9 @@
  * Use is subject to license terms.
  */
 
-package football.repository;
+package com.savik.football.repository;
 
-import football.model.Team;
+import com.savik.football.model.Team;
 import org.springframework.stereotype.Repository;
 import repository.JpaEntryRepository;
 

@@ -1,4 +1,4 @@
-package football.model;
+package com.savik.football.model;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -14,6 +14,7 @@ import lombok.*;
  * @since 10.04.2017
  */
 @Entity
+@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class Goal extends Identifiable {
