@@ -14,6 +14,7 @@ import com.savik.football.model.Championship;
 import com.savik.football.model.Match;
 import com.savik.football.model.Season;
 import com.savik.football.model.Team;
+import com.savik.football.repository.MatchRepository;
 import com.savik.football.repository.TeamRepository;
 import com.savik.parser.Downloader;
 import org.jsoup.nodes.Document;
@@ -31,6 +32,9 @@ public class Test {
 
     @Autowired
     TeamRepository teamRepository;
+
+    @Autowired
+    MatchRepository matchRepository;
 
     @Autowired
     Downloader downloader;
@@ -117,7 +121,7 @@ public class Test {
                                   .build()
                                   .createMatch();
 
-        String a = "";
+        matchRepository.save(match);
 
     }
 }

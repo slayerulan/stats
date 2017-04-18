@@ -2,6 +2,7 @@ package com.savik.football.model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -18,7 +19,7 @@ import lombok.*;
 public class Match extends Identifiable {
 
     @NotNull
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     MatchInfo matchInfo;
 
     @NotNull

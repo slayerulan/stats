@@ -1,5 +1,6 @@
 package com.savik.football.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
@@ -18,15 +19,15 @@ import lombok.*;
 public class MatchInfo extends Identifiable {
 
     @NotNull
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     Period match;
 
     @NotNull
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     Period firstPeriod;
 
     @NotNull
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     Period secondPeriod;
 
 }

@@ -1,8 +1,10 @@
 package com.savik.parser.football;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.codiform.moo.curry.Update;
 import com.savik.football.model.Card;
@@ -58,19 +60,30 @@ public class MatchCreator {
     }
 
     private MatchInfo createMatchInfo() {
+        Period firstPeriod = createPeriod(
+                firstPeriodGeneralInfoDto,
+                firstPeriodStatsInfoDto,
+                Period.PeriodStatus.FIRST
+        );
+        Period secondPeriod = createPeriod(
+                secondPeriodGeneralInfoDto,
+                secondPeriodStatsInfoDto,
+                Period.PeriodStatus.SECOND
+        );
         return MatchInfo.builder()
-                        .firstPeriod(createPeriod(
-                                firstPeriodGeneralInfoDto,
-                                firstPeriodStatsInfoDto,
-                                Period.PeriodStatus.FIRST
-                        ))
-                        .secondPeriod(createPeriod(
-                                secondPeriodGeneralInfoDto,
-                                secondPeriodStatsInfoDto,
-                                Period.PeriodStatus.SECOND
-                        ))
-                        .match(createPeriod(matchGeneralInfoDto, matchStatsInfoDto, Period.PeriodStatus.MATCH))
+                        .firstPeriod(firstPeriod)
+                        .secondPeriod(secondPeriod)
+                        .match(createMatchPeriod(firstPeriod, secondPeriod))
                         .build();
+    }
+
+    private Period createMatchPeriod(Period firstPeriod, Period secondPeriod) {
+        Period period = createPeriod(matchGeneralInfoDto, matchStatsInfoDto, Period.PeriodStatus.MATCH);
+        period = period.toBuilder()
+              .goals(Stream.concat(firstPeriod.getGoals().stream(), secondPeriod.getGoals().stream()).collect(Collectors.toSet()))
+              .cards(Stream.concat(firstPeriod.getCards().stream(), secondPeriod.getCards().stream()).collect(Collectors.toSet()))
+              .build();
+        return period;
     }
 
     private Period createPeriod(

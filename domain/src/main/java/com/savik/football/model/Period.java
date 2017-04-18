@@ -20,6 +20,7 @@ import lombok.*;
  * @since 10.4.17
  */
 @Entity
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
