@@ -20,10 +20,6 @@ public class MatchInfo extends Identifiable {
 
     @NotNull
     @OneToOne(cascade = CascadeType.ALL)
-    Period match;
-
-    @NotNull
-    @OneToOne(cascade = CascadeType.ALL)
     Period firstPeriod;
 
     @NotNull

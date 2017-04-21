@@ -23,13 +23,11 @@ import lombok.*;
 @Builder
 public class MatchCreator {
 
-    MatchParser.GeneralInfoDto matchGeneralInfoDto;
 
     MatchParser.GeneralInfoDto firstPeriodGeneralInfoDto;
 
     MatchParser.GeneralInfoDto secondPeriodGeneralInfoDto;
 
-    MatchParser.StatsInfoDto matchStatsInfoDto;
 
     MatchParser.StatsInfoDto firstPeriodStatsInfoDto;
 
@@ -73,17 +71,7 @@ public class MatchCreator {
         return MatchInfo.builder()
                         .firstPeriod(firstPeriod)
                         .secondPeriod(secondPeriod)
-                        .match(createMatchPeriod(firstPeriod, secondPeriod))
                         .build();
-    }
-
-    private Period createMatchPeriod(Period firstPeriod, Period secondPeriod) {
-        Period period = createPeriod(matchGeneralInfoDto, matchStatsInfoDto, Period.PeriodStatus.MATCH);
-        period = period.toBuilder()
-              .goals(Stream.concat(firstPeriod.getGoals().stream(), secondPeriod.getGoals().stream()).collect(Collectors.toSet()))
-              .cards(Stream.concat(firstPeriod.getCards().stream(), secondPeriod.getCards().stream()).collect(Collectors.toSet()))
-              .build();
-        return period;
     }
 
     private Period createPeriod(

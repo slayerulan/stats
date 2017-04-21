@@ -8,6 +8,8 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.annotation.PostConstruct;
 
 import com.savik.football.model.Championship;
@@ -46,6 +48,17 @@ public class Test {
         String url = "http://d.myscore.com.ua/x/feed/d_st_Ae9H9qT0_ru_1"; // статистика
         // String url = "http://d.myscore.com.ua/x/feed/d_od_Ae9H9qT0_ru_1_eu";
 
+
+        Document download = downloader.download("http://d.myscore.com.ua/x/feed/tr_1_81_W6BOzpK2_167_1_3_ru_1");
+
+        Pattern pattern =  Pattern.compile("AA÷(.{8})¬AD");
+        Matcher matcher = pattern.matcher(download.toString());
+
+        while (matcher.find()) {
+            System.out.println("group 1: " + matcher.g roup());
+        }
+
+        // "tournament-page-results-more";
         String matchId = "GW4G2O9L";
         Document generalInfo = downloader.downloadGeneralInfo(matchId);
         Document statsInfo = downloader.downloadStatsInfo(matchId);
@@ -90,13 +103,9 @@ public class Test {
         List<Element> secondPeriodRows = allRows.subList(secondTimeIndex, allRows.size());
 
 
-        MatchParser.GeneralInfoDto matchPeriodInfo = MatchParser.parseGeneralInfo(new Elements(allRows));
         MatchParser.GeneralInfoDto firstPeriodInfo = MatchParser.parseGeneralInfo(new Elements(firstPeriodRows));
         MatchParser.GeneralInfoDto secondPeriodInfo = MatchParser.parseGeneralInfo(new Elements(secondPeriodRows));
 
-
-        MatchParser.StatsInfoDto matchStats =
-                MatchParser.parseStats(statsInfo.select("#tab-statistics-0-statistic .parts").select("tr.odd,tr.even"));
 
         MatchParser.StatsInfoDto firstPeriodStats =
                 MatchParser.parseStats(statsInfo.select("#tab-statistics-1-statistic .parts").select("tr.odd,tr.even"));
@@ -106,10 +115,8 @@ public class Test {
 
 
         Match match = MatchCreator.builder()
-                                  .matchGeneralInfoDto(matchPeriodInfo)
                                   .firstPeriodGeneralInfoDto(firstPeriodInfo)
                                   .secondPeriodGeneralInfoDto(secondPeriodInfo)
-                                  .matchStatsInfoDto(matchStats)
                                   .firstPeriodStatsInfoDto(firstPeriodStats)
                                   .secondPeriodStatsInfoDto(secondPeriodStats)
                                   .homeTeam(home)

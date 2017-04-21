@@ -34,7 +34,7 @@ public class Downloader {
         return download(String.format(configuration.getSummaryUrlTemplate(), matchId));
     }
 
-    private Document download(String url) throws IOException {
+    public Document download(String url) throws IOException {
         return Jsoup.connect(url)
                     .header("X-Fsign", configuration.getFsign()).get();
     }
