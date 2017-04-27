@@ -1,151 +1,113 @@
-/*
+package com.savik.parser.football;/*
  * Copyright (c) 2017, AT-Consulting. All Rights Reserved.
  * Use is subject to license terms.
  */
 
-package com.savik.parser.football;
-
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import com.savik.football.model.Card;
-import com.savik.football.model.Goal;
-import com.savik.football.model.Who;
-import lombok.*;
+import com.savik.football.model.Championship;
+import com.savik.football.model.Match;
+import com.savik.football.model.Season;
+import com.savik.football.model.Team;
+import com.savik.football.repository.MatchRepository;
+import com.savik.football.repository.TeamRepository;
+import com.savik.parser.Downloader;
+import com.savik.parser.LeagueParser;
+import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * @author Savushkin Yauheni
  * @since 12.04.2017
  */
+@Service
 public class MatchParser {
 
-    public static GeneralInfoDto parseGeneralInfo(Elements elements) {
+    @Autowired
+    TeamRepository teamRepository;
 
-        return new GeneralInfoDto(
-                parseGoals(elements.select("div.soccer-ball")),
-                parseCards(elements.select("div.y-card,div.r-card,div.yr-card"))
-        );
-    }
+    @Autowired
+    MatchRepository matchRepository;
 
-    public static StatsInfoDto parseStats(Elements elements) {
+    @Autowired
+    Downloader downloader;
 
-        Element possesionElement = elements.select(".score.stats:containsOwn(Владение мячом)").get(0);
-        Element cornersElement = elements.select(".score.stats:containsOwn(Угловые)").get(0);
-        Element hitsElement = elements.select(".score.stats:containsOwn(Удары)").get(0);
-        Element foulsElement = elements.select(".score.stats:containsOwn(Фолы)").get(0);
-        Element offsidesElement = elements.select(".score.stats:containsOwn(Офсайды)").get(0);
+    @Autowired
+    LeagueParser leagueParser;
 
-        return StatsInfoDto.builder()
-                           .homePossession(Integer.valueOf(possesionElement
-                                   .parent()
-                                   .select(".fl")
-                                   .text()
-                                   .replaceAll("\\D+", "")))
-                           .guestPossession(Integer.valueOf(possesionElement
-                                   .parent()
-                                   .select(".fr")
-                                   .text()
-                                   .replaceAll("\\D+", "")))
-                           .homeCorners(Integer.valueOf(cornersElement
-                                   .parent()
-                                   .select(".fl")
-                                   .text()
-                                   .replaceAll("\\D+", "")))
-                           .guestCorners(Integer.valueOf(cornersElement
-                                   .parent()
-                                   .select(".fr")
-                                   .text()
-                                   .replaceAll("\\D+", "")))
-                           .homeHits(Integer.valueOf(hitsElement.parent().select(".fl").text().replaceAll("\\D+", "")))
-                           .guestHits(Integer.valueOf(hitsElement.parent().select(".fr").text().replaceAll("\\D+", "")))
-                           .homeFouls(Integer.valueOf(foulsElement
-                                   .parent()
-                                   .select(".fl")
-                                   .text()
-                                   .replaceAll("\\D+", "")))
-                           .guestFouls(Integer.valueOf(foulsElement
-                                   .parent()
-                                   .select(".fr")
-                                   .text()
-                                   .replaceAll("\\D+", "")))
-                           .homeOffsides(Integer.valueOf(offsidesElement
-                                   .parent()
-                                   .select(".fl")
-                                   .text()
-                                   .replaceAll("\\D+", "")))
-                           .guestOffsides(Integer.valueOf(offsidesElement
-                                   .parent()
-                                   .select(".fr")
-                                   .text()
-                                   .replaceAll("\\D+", "")))
-                           .build();
+    public Match parse(String matchId, Championship championship, Season season) {
 
-    }
+        Document generalInfo = downloader.downloadGeneralInfo(matchId);
+        Document statsInfo = downloader.downloadStatsInfo(matchId);
+        Document summaryInfo = downloader.downloadSummaryInfo(matchId);
 
-    static List<Goal> parseGoals(Elements goalsDivs) {
-        return goalsDivs
-                .stream()
-                .map(d -> Goal.builder()
-                              .minute(calculateTime(d))
-                              .whoScored(d.parent().parent().hasClass("fl") ? Who.HOME : Who.GUEST)
-                              .build())
-                .collect(Collectors.toList());
-    }
 
-    static Integer calculateTime(Element element) {
-        Integer minute =
-                Integer.valueOf(element.parent().select(".time-box,.time-box-wide").text().replaceAll("\\D+", ""));
-        return minute > 90 ? (minute / 10 + minute % 10) : minute;
-    }
+        String homeTeam = summaryInfo.select(".tname-home a").text();
+        String guestTeam = summaryInfo.select(".tname-away a").text();
 
-    static List<Card> parseCards(Elements goalsDivs) {
-        return goalsDivs
-                .stream()
-                .map(d -> Card
-                        .builder()
-                        .who(d.parent().parent().hasClass("fl") ? Who.HOME : Who.GUEST)
-                        .minute(calculateTime(d))
-                        .type(d.hasClass("y-card") ? Card.Type.YELLOW :
-                                d.hasClass("r-card") ? Card.Type.RED :
-                                        d.hasClass("yr-card") ? Card.Type.YELLOW_RED : null
-                        )
-                        .build())
-                .collect(Collectors.toList());
-    }
+        String outerHtml = summaryInfo.outerHtml();
+        Long epoch = Long.valueOf(outerHtml.substring(
+                outerHtml.indexOf("game_utime") + 13,
+                outerHtml.indexOf("game_utime") + 23
+        ));
 
-    @AllArgsConstructor
-    @Getter
-    public static class GeneralInfoDto {
+        LocalDateTime dateTime = Instant.ofEpochSecond(epoch).atZone(ZoneId.systemDefault()).toLocalDateTime();
 
-        List<Goal> goals;
+        Team home = teamRepository.findOneByNameAndChampionship(homeTeam, championship);
+        if (home == null) {
+            home = teamRepository.save(Team.builder().name(homeTeam).championship(championship).build());
+        }
 
-        List<Card> cards;
-    }
+        Team guest = teamRepository.findOneByNameAndChampionship(guestTeam, championship);
+        if (guest == null) {
+            guest = teamRepository.save(Team.builder().name(guestTeam).championship(championship).build());
+        }
 
-    @Getter
-    @Builder
-    public static class StatsInfoDto {
 
-        Integer homeCorners;
+        Elements allRows = generalInfo.getElementById("parts").select("tr");
+        int secondTimeIndex = generalInfo.getElementById("parts").select("tr .h-part").get(1).parent().siblingIndex();
 
-        Integer guestCorners;
+        List<Element> firstPeriodRows = allRows.subList(0, secondTimeIndex);
+        List<Element> secondPeriodRows = allRows.subList(secondTimeIndex, allRows.size());
 
-        Integer homeHits;
 
-        Integer guestHits;
+        MatchInfoParser.GeneralInfoDto firstPeriodInfo =
+                MatchInfoParser.parseGeneralInfo(new Elements(firstPeriodRows));
+        MatchInfoParser.GeneralInfoDto secondPeriodInfo =
+                MatchInfoParser.parseGeneralInfo(new Elements(secondPeriodRows));
 
-        Integer homePossession;
 
-        Integer guestPossession;
+        MatchInfoParser.StatsInfoDto firstPeriodStats =
+                MatchInfoParser.parseStats(statsInfo
+                        .select("#tab-statistics-1-statistic .parts")
+                        .select("tr.odd,tr.even"));
 
-        Integer homeOffsides;
+        MatchInfoParser.StatsInfoDto secondPeriodStats =
+                MatchInfoParser.parseStats(statsInfo
+                        .select("#tab-statistics-2-statistic .parts")
+                        .select("tr.odd,tr.even"));
 
-        Integer guestOffsides;
 
-        Integer homeFouls;
+        Match match = MatchCreator.builder()
+                                  .firstPeriodGeneralInfoDto(firstPeriodInfo)
+                                  .secondPeriodGeneralInfoDto(secondPeriodInfo)
+                                  .firstPeriodStatsInfoDto(firstPeriodStats)
+                                  .secondPeriodStatsInfoDto(secondPeriodStats)
+                                  .homeTeam(home)
+                                  .guestTeam(guest)
+                                  .date(dateTime)
+                                  .championship(championship)
+                                  .season(season)
+                                  .myscoreCode(matchId)
+                                  .build()
+                                  .createMatch();
 
-        Integer guestFouls;
+        return match;
     }
 }

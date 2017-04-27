@@ -5,6 +5,7 @@
 
 package com.savik.football.repository;
 
+import com.savik.football.model.Championship;
 import com.savik.football.model.Team;
 import org.springframework.stereotype.Repository;
 import repository.JpaEntryRepository;
@@ -17,5 +18,5 @@ import repository.JpaEntryRepository;
 @Repository
 public interface TeamRepository extends JpaEntryRepository<Team> {
 
-    Team findOneByName(String name);
+    Team findOneByNameAndChampionship(String name, Championship championship);
 }

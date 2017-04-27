@@ -18,11 +18,13 @@ import lombok.*;
 @Builder
 public class MatchInfo extends Identifiable {
 
-    @NotNull
+    /*@NotNull
+    @OneToOne(cascade = CascadeType.ALL)
+    Period match;*/
+
     @OneToOne(cascade = CascadeType.ALL)
     Period firstPeriod;
 
-    @NotNull
     @OneToOne(cascade = CascadeType.ALL)
     Period secondPeriod;
 

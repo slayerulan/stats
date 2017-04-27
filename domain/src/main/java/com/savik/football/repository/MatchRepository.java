@@ -16,4 +16,5 @@ import repository.JpaEntryRepository;
 
 @Repository
 public interface MatchRepository extends JpaEntryRepository<Match> {
+    public Match findByMyscoreCode(String code);
 }

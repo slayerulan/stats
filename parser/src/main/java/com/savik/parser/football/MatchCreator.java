@@ -1,10 +1,8 @@
 package com.savik.parser.football;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import com.codiform.moo.curry.Update;
 import com.savik.football.model.Card;
@@ -24,14 +22,14 @@ import lombok.*;
 public class MatchCreator {
 
 
-    MatchParser.GeneralInfoDto firstPeriodGeneralInfoDto;
+    MatchInfoParser.GeneralInfoDto firstPeriodGeneralInfoDto;
 
-    MatchParser.GeneralInfoDto secondPeriodGeneralInfoDto;
+    MatchInfoParser.GeneralInfoDto secondPeriodGeneralInfoDto;
 
 
-    MatchParser.StatsInfoDto firstPeriodStatsInfoDto;
+    MatchInfoParser.StatsInfoDto firstPeriodStatsInfoDto;
 
-    MatchParser.StatsInfoDto secondPeriodStatsInfoDto;
+    MatchInfoParser.StatsInfoDto secondPeriodStatsInfoDto;
 
     Team homeTeam;
 
@@ -75,8 +73,8 @@ public class MatchCreator {
     }
 
     private Period createPeriod(
-            MatchParser.GeneralInfoDto infoDto,
-            MatchParser.StatsInfoDto statsDto,
+            MatchInfoParser.GeneralInfoDto infoDto,
+            MatchInfoParser.StatsInfoDto statsDto,
             Period.PeriodStatus periodStatus
     ) {
         Period period = new Period();

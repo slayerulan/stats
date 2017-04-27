@@ -1,0 +1,28 @@
+/*
+ * Copyright (c) 2017, AT-Consulting. All Rights Reserved.
+ * Use is subject to license terms.
+ */
+
+package com.savik.parser;
+
+import javax.annotation.PostConstruct;
+
+import com.savik.parser.football.FootballParser;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+/**
+ * @author Savushkin Yauheni
+ * @since 27.04.2017
+ */
+@Service
+public class Parser {
+
+    @Autowired
+    FootballParser footballParser;
+
+    @PostConstruct
+    public void parse() {
+        footballParser.parse();
+    }
+}
