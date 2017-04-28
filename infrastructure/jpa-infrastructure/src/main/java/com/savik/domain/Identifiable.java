@@ -1,6 +1,7 @@
 package com.savik.domain;
 
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
@@ -24,8 +25,7 @@ import org.hibernate.annotations.GenericGenerator;
 public abstract class Identifiable {
 
     @Id
-    @GenericGenerator(name = "sequence", strategy = "sequence")
-    @GeneratedValue(generator = "sequence")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_id")
     @Property(optionality = Optionality.OPTIONAL)
     private Long id;
 }

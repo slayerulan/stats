@@ -1,11 +1,7 @@
 package com.savik.football.model;
 
 import java.time.LocalDateTime;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import com.savik.domain.Identifiable;
@@ -15,6 +11,11 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(
+        uniqueConstraints = @UniqueConstraint(columnNames = "myscoreCode"),
+        indexes = @Index(columnList = "myscoreCode")
+)
+@SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "match_id_generator")
 public class Match extends Identifiable {
 
     @NotNull

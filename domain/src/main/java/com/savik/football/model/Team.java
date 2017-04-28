@@ -3,6 +3,7 @@ package com.savik.football.model;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotNull;
 
 import com.savik.domain.Identifiable;
@@ -16,6 +17,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "team_id_generator")
 public class Team extends Identifiable {
 
     @NotNull

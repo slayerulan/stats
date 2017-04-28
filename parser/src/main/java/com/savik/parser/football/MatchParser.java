@@ -18,6 +18,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 /**
  * @author Savushkin Yauheni
@@ -73,27 +74,42 @@ public class MatchParser {
         List<Element> firstPeriodRows = allRows.subList(0, secondTimeIndex);
         List<Element> secondPeriodRows = allRows.subList(secondTimeIndex, allRows.size());
 
-
+        MatchInfoParser.GeneralInfoDto matchPeriodInfo = MatchInfoParser.parseGeneralInfo(new Elements(allRows));
         MatchInfoParser.GeneralInfoDto firstPeriodInfo =
                 MatchInfoParser.parseGeneralInfo(new Elements(firstPeriodRows));
         MatchInfoParser.GeneralInfoDto secondPeriodInfo =
                 MatchInfoParser.parseGeneralInfo(new Elements(secondPeriodRows));
 
 
+        MatchInfoParser.StatsInfoDto matchStats =
+                CollectionUtils.isEmpty(statsInfo.select("#tab-statistics-0-statistic .parts")) ?
+                        MatchInfoParser.parseStats(statsInfo
+                                .select("table.parts")
+                                .select("tr.odd,tr.even")) :
+                        MatchInfoParser.parseStats(statsInfo
+                                .select("#tab-statistics-0-statistic .parts")
+                                .select("tr.odd,tr.even"));
+
         MatchInfoParser.StatsInfoDto firstPeriodStats =
-                MatchInfoParser.parseStats(statsInfo
-                        .select("#tab-statistics-1-statistic .parts")
-                        .select("tr.odd,tr.even"));
+                CollectionUtils.isEmpty(statsInfo.select("#tab-statistics-1-statistic .parts")) ?
+                        null :
+                        MatchInfoParser.parseStats(statsInfo
+                                .select("#tab-statistics-1-statistic .parts")
+                                .select("tr.odd,tr.even"));
 
         MatchInfoParser.StatsInfoDto secondPeriodStats =
-                MatchInfoParser.parseStats(statsInfo
-                        .select("#tab-statistics-2-statistic .parts")
-                        .select("tr.odd,tr.even"));
+                CollectionUtils.isEmpty(statsInfo.select("#tab-statistics-2-statistic .parts")) ?
+                        null :
+                        MatchInfoParser.parseStats(statsInfo
+                                .select("#tab-statistics-2-statistic .parts")
+                                .select("tr.odd,tr.even"));
 
 
         Match match = MatchCreator.builder()
+                                  .matchGeneralInfoDto(matchPeriodInfo)
                                   .firstPeriodGeneralInfoDto(firstPeriodInfo)
                                   .secondPeriodGeneralInfoDto(secondPeriodInfo)
+                                  .matchStatsInfoDto(matchStats)
                                   .firstPeriodStatsInfoDto(firstPeriodStats)
                                   .secondPeriodStatsInfoDto(secondPeriodStats)
                                   .homeTeam(home)

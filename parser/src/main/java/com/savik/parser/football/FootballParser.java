@@ -37,12 +37,15 @@ public class FootballParser {
 
     public void parse() {
 
-       // List<String> allMatches = leagueParser.findAllMatches("http://www.myscore.ru/football/spain/laliga/results/");
-
-     //   for (String matchId : allMatches) {
+        /*
+        bcLlhGkn - кривой матч без статы по таймам
+        * */
+     //   List<String> allMatches = leagueParser.findAllMatches("http://www.myscore.ru/football/spain/laliga/results/");
+/*
+        for (String matchId : allMatches) {*/
             try {
-                if(matchRepository.findByMyscoreCode("0pzb3GHT") == null) {
-                    Match match = matchParser.parse("0pzb3GHT", Championship.LA, Season.S2016);
+               if(matchRepository.findByMyscoreCode("bcLlhGkn") == null) {
+                    Match match = matchParser.parse("bcLlhGkn", Championship.LA, Season.S2016);
                     matchRepository.save(match);
                     Thread.sleep(1000);
                 }
@@ -50,7 +53,7 @@ public class FootballParser {
                 throw new RuntimeException(ex);
             }
 ;
-   //     }
+    //    }
 
     }
 }

@@ -1,12 +1,7 @@
 package com.savik.football.model;
 
 import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import com.codiform.moo.annotation.CollectionProperty;
@@ -24,6 +19,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
+@SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "period_id_generator")
 public class Period extends Identifiable {
 
     @NotNull
@@ -31,61 +27,45 @@ public class Period extends Identifiable {
     @Property(optionality = Optionality.OPTIONAL)
     PeriodStatus periodStatus;
 
-    @NotNull
     @Property(optionality = Optionality.OPTIONAL)
     Integer homeScore;
 
-    @NotNull
     @Property(optionality = Optionality.OPTIONAL)
     Integer guestScore;
 
-    @NotNull
     @Property(optionality = Optionality.OPTIONAL)
     Integer totalScore;
 
-    @NotNull
     @Enumerated(EnumType.STRING)
     @Property(optionality = Optionality.OPTIONAL)
     Winner winner;
 
-    @NotNull
     @OneToMany(cascade= CascadeType.ALL, fetch = FetchType.EAGER)
     @CollectionProperty(optionality = Optionality.OPTIONAL)
     Set<Goal> goals;
 
-    @NotNull
     @OneToMany(cascade= CascadeType.ALL, fetch = FetchType.EAGER)
     @CollectionProperty(optionality = Optionality.OPTIONAL)
     Set<Card> cards;
 
-    @NotNull
     Integer homeCorners;
 
-    @NotNull
     Integer guestCorners;
 
-    @NotNull
     Integer homeHits;
 
-    @NotNull
     Integer guestHits;
 
-    @NotNull
     Integer homePossession;
 
-    @NotNull
     Integer guestPossession;
 
-    @NotNull
     Integer homeOffsides;
 
-    @NotNull
     Integer guestOffsides;
 
-    @NotNull
     Integer homeFouls;
 
-    @NotNull
     Integer guestFouls;
 
     public enum PeriodStatus {

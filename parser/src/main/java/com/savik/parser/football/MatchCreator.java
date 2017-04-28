@@ -5,27 +5,20 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.codiform.moo.curry.Update;
-import com.savik.football.model.Card;
-import com.savik.football.model.Championship;
-import com.savik.football.model.Goal;
-import com.savik.football.model.Match;
-import com.savik.football.model.MatchInfo;
-import com.savik.football.model.Period;
-import com.savik.football.model.Season;
-import com.savik.football.model.Team;
-import com.savik.football.model.Who;
-import com.savik.football.model.Winner;
+import com.savik.football.model.*;
 import lombok.*;
 
 @AllArgsConstructor
 @Builder
 public class MatchCreator {
 
+    MatchInfoParser.GeneralInfoDto matchGeneralInfoDto;
 
     MatchInfoParser.GeneralInfoDto firstPeriodGeneralInfoDto;
 
     MatchInfoParser.GeneralInfoDto secondPeriodGeneralInfoDto;
 
+    MatchInfoParser.StatsInfoDto matchStatsInfoDto;
 
     MatchInfoParser.StatsInfoDto firstPeriodStatsInfoDto;
 
@@ -66,9 +59,11 @@ public class MatchCreator {
                 secondPeriodStatsInfoDto,
                 Period.PeriodStatus.SECOND
         );
+        Period match = createPeriod(matchGeneralInfoDto, matchStatsInfoDto, Period.PeriodStatus.MATCH);
         return MatchInfo.builder()
                         .firstPeriod(firstPeriod)
                         .secondPeriod(secondPeriod)
+                        .match(match)
                         .build();
     }
 
@@ -78,28 +73,35 @@ public class MatchCreator {
             Period.PeriodStatus periodStatus
     ) {
         Period period = new Period();
-        Update.from(statsDto).to(period);
+        if (statsDto != null) {
+            Update.from(statsDto).to(period);
+        }
 
-        Set<Card> cards = infoDto
-                .getCards()
-                .stream()
-                .map(c -> c.toBuilder().team(c.getWho() == Who.HOME ? homeTeam : guestTeam).build())
-                .collect(Collectors.toSet());
+        Set<Card> cards = null;
+        Set<Goal> goals = null;
+        if (periodStatus != Period.PeriodStatus.MATCH) {
+            cards = infoDto
+                    .getCards()
+                    .stream()
+                    .map(c -> c.toBuilder().team(c.getWho() == Who.HOME ? homeTeam : guestTeam).build())
+                    .collect(Collectors.toSet());
 
-        Set<Goal> goals = infoDto
-                .getGoals()
-                .stream()
-                .map(c -> c.toBuilder().team(c.getWhoScored() == Who.HOME ? homeTeam : guestTeam).build())
-                .collect(Collectors.toSet());
+            goals = infoDto
+                    .getGoals()
+                    .stream()
+                    .map(c -> c.toBuilder().team(c.getWhoScored() == Who.HOME ? homeTeam : guestTeam).build())
+                    .collect(Collectors.toSet());
+        }
 
-        int homeScore = (int) goals.stream().filter(g -> g.getWhoScored() == Who.HOME).count();
-        int guestScore = (int) goals.stream().filter(g -> g.getWhoScored() == Who.GUEST).count();
+
+        Integer homeScore = goals != null ? (int) goals.stream().filter(g -> g.getWhoScored() == Who.HOME).count() : null;
+        Integer guestScore = goals != null ? (int) goals.stream().filter(g -> g.getWhoScored() == Who.GUEST).count() : null;
         return period.toBuilder()
                      .goals(goals)
                      .cards(cards)
                      .homeScore(homeScore)
                      .guestScore(guestScore)
-                     .totalScore(goals.size())
+                     .totalScore(goals != null ? goals.size() : null)
                      .winner(homeScore > guestScore ? Winner.HOME : homeScore < guestScore ? Winner.GUEST : Winner.DRAW)
                      .periodStatus(periodStatus)
                      .build();
