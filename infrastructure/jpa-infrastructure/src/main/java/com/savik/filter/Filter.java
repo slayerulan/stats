@@ -1,4 +1,4 @@
-package filter;
+package com.savik.filter;
 
 import org.springframework.data.jpa.domain.Specification;
 

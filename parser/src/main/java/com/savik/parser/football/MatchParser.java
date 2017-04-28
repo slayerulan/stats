@@ -1,7 +1,4 @@
-package com.savik.parser.football;/*
- * Copyright (c) 2017, AT-Consulting. All Rights Reserved.
- * Use is subject to license terms.
- */
+package com.savik.parser.football;
 
 import java.time.Instant;
 import java.time.LocalDateTime;

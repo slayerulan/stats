@@ -1,8 +1,3 @@
-/*
- * Copyright (c) 2017, AT-Consulting. All Rights Reserved.
- * Use is subject to license terms.
- */
-
 package com.savik.parser.football;
 
 import java.util.List;

@@ -1,6 +1,5 @@
 package com.savik.football.model;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -9,7 +8,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
-import domain.Identifiable;
+import com.savik.domain.Identifiable;
 import lombok.*;
 
 @Entity

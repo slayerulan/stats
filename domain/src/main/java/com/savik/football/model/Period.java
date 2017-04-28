@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 import com.codiform.moo.annotation.CollectionProperty;
 import com.codiform.moo.annotation.Optionality;
 import com.codiform.moo.annotation.Property;
-import domain.Identifiable;
+import com.savik.domain.Identifiable;
 import lombok.*;
 
 /**

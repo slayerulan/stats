@@ -1,4 +1,4 @@
-package domain;
+package com.savik.domain;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;

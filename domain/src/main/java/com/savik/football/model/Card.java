@@ -6,7 +6,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
-import domain.Identifiable;
+import com.savik.domain.Identifiable;
 import lombok.*;
 
 /**

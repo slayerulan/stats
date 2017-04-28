@@ -1,11 +1,11 @@
-package repository;
+package com.savik.repository;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import domain.Identifiable;
-import filter.Filter;
+import com.savik.domain.Identifiable;
+import com.savik.filter.Filter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -3,9 +3,8 @@ package com.savik.football.model;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.NotNull;
 
-import domain.Identifiable;
+import com.savik.domain.Identifiable;
 import lombok.*;
 
 /**
