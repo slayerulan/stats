@@ -39,21 +39,30 @@ public class FootballParser {
 
         /*
         bcLlhGkn - кривой матч без статы по таймам
+        v9xniz5h - есть матч и 2 тайм
         * */
-     //   List<String> allMatches = leagueParser.findAllMatches("http://www.myscore.ru/football/spain/laliga/results/");
-/*
-        for (String matchId : allMatches) {*/
+        try {
+     //       if(matchRepository.findByMyscoreCode("v9xniz5h") == null) {
+                Match match = matchParser.parse("v9xniz5h", Championship.LA, Season.S2016);
+                matchRepository.save(match);
+                Thread.sleep(1000);
+ //           }
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
+
+      /*  List<String> allMatches = leagueParser.findAllMatches("http://www.myscore.ru/football/spain/laliga/results/");
+        for (String matchId : allMatches) {
             try {
-               if(matchRepository.findByMyscoreCode("bcLlhGkn") == null) {
-                    Match match = matchParser.parse("bcLlhGkn", Championship.LA, Season.S2016);
+               if(matchRepository.findByMyscoreCode(matchId) == null) {
+                    Match match = matchParser.parse(matchId, Championship.LA, Season.S2016);
                     matchRepository.save(match);
                     Thread.sleep(1000);
                 }
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }
-;
-    //    }
+        }*/
 
     }
 }

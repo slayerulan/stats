@@ -94,14 +94,14 @@ public class MatchCreator {
         }
 
 
-        Integer homeScore = goals != null ? (int) goals.stream().filter(g -> g.getWhoScored() == Who.HOME).count() : null;
-        Integer guestScore = goals != null ? (int) goals.stream().filter(g -> g.getWhoScored() == Who.GUEST).count() : null;
+        Integer homeScore = (int) infoDto.getGoals().stream().filter(g -> g.getWhoScored() == Who.HOME).count();
+        Integer guestScore =  (int) infoDto.getGoals().stream().filter(g -> g.getWhoScored() == Who.GUEST).count();
         return period.toBuilder()
                      .goals(goals)
                      .cards(cards)
                      .homeScore(homeScore)
                      .guestScore(guestScore)
-                     .totalScore(goals != null ? goals.size() : null)
+                     .totalScore(homeScore + guestScore)
                      .winner(homeScore > guestScore ? Winner.HOME : homeScore < guestScore ? Winner.GUEST : Winner.DRAW)
                      .periodStatus(periodStatus)
                      .build();

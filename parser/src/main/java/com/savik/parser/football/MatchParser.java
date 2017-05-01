@@ -81,45 +81,59 @@ public class MatchParser {
                 MatchInfoParser.parseGeneralInfo(new Elements(secondPeriodRows));
 
 
+        String matchPeriodStatsSelector = statsInfo.select(".ifmenu li[id$=\"statistic\"] a:containsOwn(Матч)").isEmpty() ?
+                null : statsInfo.select(".ifmenu li[id$=\"statistic\"] a:containsOwn(Матч)").get(0).parent().parent().attr("id");
+
+        String firstPeriodStatsSelector = statsInfo.select(".ifmenu li[id$=\"statistic\"] a:containsOwn(1-й тайм)").isEmpty() ?
+                null : statsInfo.select(".ifmenu li[id$=\"statistic\"] a:containsOwn(1-й тайм)").get(0).parent().parent().attr("id");
+
+        String secondPeriodStatsSelector = statsInfo.select(".ifmenu li[id$=\"statistic\"] a:containsOwn(2-й тайм)").isEmpty() ?
+                null : statsInfo.select(".ifmenu li[id$=\"statistic\"] a:containsOwn(1-й тайм)").get(0).parent().parent().attr("id");
+
+
         MatchInfoParser.StatsInfoDto matchStats =
-                CollectionUtils.isEmpty(statsInfo.select("#tab-statistics-0-statistic .parts")) ?
+                matchPeriodStatsSelector != null ?
                         MatchInfoParser.parseStats(statsInfo
-                                .select("table.parts")
+                                .select("#tab-" + matchPeriodStatsSelector + " .parts")
                                 .select("tr.odd,tr.even")) :
-                        MatchInfoParser.parseStats(statsInfo
-                                .select("#tab-statistics-0-statistic .parts")
-                                .select("tr.odd,tr.even"));
+
+                        !CollectionUtils.isEmpty(statsInfo.select("table.parts").select("tr.odd,tr.even")) ?
+
+                                MatchInfoParser.parseStats(statsInfo
+                                        .select("table.parts")
+                                        .select("tr.odd,tr.even")) :
+                                null;
 
         MatchInfoParser.StatsInfoDto firstPeriodStats =
-                CollectionUtils.isEmpty(statsInfo.select("#tab-statistics-1-statistic .parts")) ?
+                firstPeriodStatsSelector == null ?
                         null :
                         MatchInfoParser.parseStats(statsInfo
-                                .select("#tab-statistics-1-statistic .parts")
+                                .select("#tab-" + firstPeriodStatsSelector + " .parts")
                                 .select("tr.odd,tr.even"));
 
         MatchInfoParser.StatsInfoDto secondPeriodStats =
-                CollectionUtils.isEmpty(statsInfo.select("#tab-statistics-2-statistic .parts")) ?
+                secondPeriodStatsSelector == null ?
                         null :
                         MatchInfoParser.parseStats(statsInfo
-                                .select("#tab-statistics-2-statistic .parts")
+                                .select("#tab-" + secondPeriodStatsSelector + " .parts")
                                 .select("tr.odd,tr.even"));
 
 
         Match match = MatchCreator.builder()
-                                  .matchGeneralInfoDto(matchPeriodInfo)
-                                  .firstPeriodGeneralInfoDto(firstPeriodInfo)
-                                  .secondPeriodGeneralInfoDto(secondPeriodInfo)
-                                  .matchStatsInfoDto(matchStats)
-                                  .firstPeriodStatsInfoDto(firstPeriodStats)
-                                  .secondPeriodStatsInfoDto(secondPeriodStats)
-                                  .homeTeam(home)
-                                  .guestTeam(guest)
-                                  .date(dateTime)
-                                  .championship(championship)
-                                  .season(season)
-                                  .myscoreCode(matchId)
-                                  .build()
-                                  .createMatch();
+                .matchGeneralInfoDto(matchPeriodInfo)
+                .firstPeriodGeneralInfoDto(firstPeriodInfo)
+                .secondPeriodGeneralInfoDto(secondPeriodInfo)
+                .matchStatsInfoDto(matchStats)
+                .firstPeriodStatsInfoDto(firstPeriodStats)
+                .secondPeriodStatsInfoDto(secondPeriodStats)
+                .homeTeam(home)
+                .guestTeam(guest)
+                .date(dateTime)
+                .championship(championship)
+                .season(season)
+                .myscoreCode(matchId)
+                .build()
+                .createMatch();
 
         return match;
     }

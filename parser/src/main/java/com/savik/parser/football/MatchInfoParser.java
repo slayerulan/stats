@@ -16,6 +16,9 @@ import org.jsoup.select.Elements;
  */
 public class MatchInfoParser {
 
+    public static final String HOME = ".fl";
+    public static final String GUEST = ".fr";
+
     public static GeneralInfoDto parseGeneralInfo(Elements elements) {
 
         return new GeneralInfoDto(
@@ -26,66 +29,42 @@ public class MatchInfoParser {
 
     public static StatsInfoDto parseStats(Elements elements) {
 
-        Element possesionElement = elements.select(".score.stats:containsOwn(Владение мячом)").get(0);
-        Element cornersElement = elements.select(".score.stats:containsOwn(Угловые)").get(0);
-        Element hitsElement = elements.select(".score.stats:containsOwn(Удары)").get(0);
-        Element foulsElement = elements.select(".score.stats:containsOwn(Фолы)").get(0);
-        Element offsidesElement = elements.select(".score.stats:containsOwn(Офсайды)").get(0);
+        Elements possessionElement = elements.select(".score.stats:containsOwn(Владение мячом)");
+        Elements cornersElement = elements.select(".score.stats:containsOwn(Угловые)");
+        Elements hitsElement = elements.select(".score.stats:containsOwn(Удары)");
+        Elements foulsElement = elements.select(".score.stats:containsOwn(Фолы)");
+        Elements offsidesElement = elements.select(".score.stats:containsOwn(Офсайды)");
 
         return StatsInfoDto.builder()
-                           .homePossession(Integer.valueOf(possesionElement
-                                   .parent()
-                                   .select(".fl")
-                                   .text()
-                                   .replaceAll("\\D+", "")))
-                           .guestPossession(Integer.valueOf(possesionElement
-                                   .parent()
-                                   .select(".fr")
-                                   .text()
-                                   .replaceAll("\\D+", "")))
-                           .homeCorners(Integer.valueOf(cornersElement
-                                   .parent()
-                                   .select(".fl")
-                                   .text()
-                                   .replaceAll("\\D+", "")))
-                           .guestCorners(Integer.valueOf(cornersElement
-                                   .parent()
-                                   .select(".fr")
-                                   .text()
-                                   .replaceAll("\\D+", "")))
-                           .homeHits(Integer.valueOf(hitsElement.parent().select(".fl").text().replaceAll("\\D+", "")))
-                           .guestHits(Integer.valueOf(hitsElement.parent().select(".fr").text().replaceAll("\\D+", "")))
-                           .homeFouls(Integer.valueOf(foulsElement
-                                   .parent()
-                                   .select(".fl")
-                                   .text()
-                                   .replaceAll("\\D+", "")))
-                           .guestFouls(Integer.valueOf(foulsElement
-                                   .parent()
-                                   .select(".fr")
-                                   .text()
-                                   .replaceAll("\\D+", "")))
-                           .homeOffsides(Integer.valueOf(offsidesElement
-                                   .parent()
-                                   .select(".fl")
-                                   .text()
-                                   .replaceAll("\\D+", "")))
-                           .guestOffsides(Integer.valueOf(offsidesElement
-                                   .parent()
-                                   .select(".fr")
-                                   .text()
-                                   .replaceAll("\\D+", "")))
-                           .build();
+                .homePossession(getStat(possessionElement, HOME))
+                .guestPossession(getStat(possessionElement, GUEST))
+                .homeCorners(getStat(cornersElement, HOME))
+                .guestCorners(getStat(cornersElement, GUEST))
+                .homeHits(getStat(hitsElement, HOME))
+                .guestHits(getStat(hitsElement, GUEST))
+                .homeFouls(getStat(foulsElement, HOME))
+                .guestFouls(getStat(foulsElement, GUEST))
+                .homeOffsides(getStat(offsidesElement, HOME))
+                .guestOffsides(getStat(offsidesElement, GUEST))
+                .build();
 
+    }
+
+    private static Integer getStat(Elements elements, String selector) {
+        return elements.isEmpty() ? null : Integer.valueOf(elements.get(0)
+                .parent()
+                .select(selector)
+                .text()
+                .replaceAll("\\D+", ""));
     }
 
     static List<Goal> parseGoals(Elements goalsDivs) {
         return goalsDivs
                 .stream()
                 .map(d -> Goal.builder()
-                              .minute(calculateTime(d))
-                              .whoScored(d.parent().parent().hasClass("fl") ? Who.HOME : Who.GUEST)
-                              .build())
+                        .minute(calculateTime(d))
+                        .whoScored(d.parent().parent().hasClass("fl") ? Who.HOME : Who.GUEST)
+                        .build())
                 .collect(Collectors.toList());
     }
 
