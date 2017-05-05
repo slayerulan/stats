@@ -44,3 +44,32 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
+
+# Folders
+build
+generated
+.gradle
+.idea
+node_modules
+classes
+target
+logs
+/src/main/resources/static
+jspm_packages
+tmp
+**/target/
+
+# File Patterns
+*.class
+*.iml
+*.ipr
+*.iws
+*.map
+*.sublime-project
+.classpath
+.settings
+.project
+.codekit-chache
+.sass-chache
+/webapp/npm-debug.log.*
+/mqjms.log.*

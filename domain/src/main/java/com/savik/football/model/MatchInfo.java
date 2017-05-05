@@ -18,6 +18,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "match_info_id_generator")
+@Getter
 public class MatchInfo extends Identifiable {
 
     @NotNull

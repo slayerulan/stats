@@ -43,6 +43,13 @@
         </dependency>
 
         <dependency>
+            <groupId>savik.infrastructure</groupId>
+            <artifactId>test-infrastructure</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
             <groupId>savik.domain</groupId>
             <artifactId>domain-parent</artifactId>
             <version>1.0-SNAPSHOT</version>

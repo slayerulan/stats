@@ -18,6 +18,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "team_id_generator")
+@EqualsAndHashCode
 public class Team extends Identifiable {
 
     @NotNull

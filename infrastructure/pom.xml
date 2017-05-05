@@ -15,6 +15,7 @@
     <modules>
         <module>jpa-infrastructure</module>
         <module>common-infrastructure</module>
+        <module>test-infrastructure</module>
     </modules>
 
 

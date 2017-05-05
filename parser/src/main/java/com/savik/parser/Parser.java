@@ -16,8 +16,8 @@ public class Parser {
     @Autowired
     FootballParser footballParser;
 
-    @PostConstruct
+    /*@PostConstruct
     public void parse() {
         footballParser.parse();
-    }
+    }*/
 }

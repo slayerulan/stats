@@ -88,7 +88,7 @@ public class MatchParser {
                 null : statsInfo.select(".ifmenu li[id$=\"statistic\"] a:containsOwn(1-й тайм)").get(0).parent().parent().attr("id");
 
         String secondPeriodStatsSelector = statsInfo.select(".ifmenu li[id$=\"statistic\"] a:containsOwn(2-й тайм)").isEmpty() ?
-                null : statsInfo.select(".ifmenu li[id$=\"statistic\"] a:containsOwn(1-й тайм)").get(0).parent().parent().attr("id");
+                null : statsInfo.select(".ifmenu li[id$=\"statistic\"] a:containsOwn(2-й тайм)").get(0).parent().parent().attr("id");
 
 
         MatchInfoParser.StatsInfoDto matchStats =

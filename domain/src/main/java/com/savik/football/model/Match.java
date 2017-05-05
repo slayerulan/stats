@@ -16,6 +16,7 @@ import lombok.*;
         indexes = @Index(columnList = "myscoreCode")
 )
 @SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "match_id_generator")
+@Data
 public class Match extends Identifiable {
 
     @NotNull

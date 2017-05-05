@@ -16,6 +16,7 @@ import lombok.*;
 @Getter
 @Builder(toBuilder = true)
 @SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "card_id_generator")
+@EqualsAndHashCode
 public class Card extends Identifiable {
 
     @NotNull

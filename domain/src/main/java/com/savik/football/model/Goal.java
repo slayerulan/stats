@@ -16,6 +16,7 @@ import lombok.*;
 @Getter
 @Builder(toBuilder = true)
 @SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "goal_id_generator")
+@EqualsAndHashCode
 public class Goal extends Identifiable {
 
     @NotNull
