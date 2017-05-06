@@ -1,5 +1,5 @@
 fsign: SW9D1eZo
 url:
-  generalinfo: http://d.myscore.com.ua/x/feed/d_su_%s_ru_1
-  statsinfo: http://d.myscore.com.ua/x/feed/d_st_%s_ru_1
-  summary: http://www.myscore.com.ua/match/%s/#match-summary
+  generalinfo: http://d.myscore.ru/x/feed/d_su_%s_ru_1
+  statsinfo: http://d.myscore.ru/x/feed/d_st_%s_ru_1
+  summary: http://www.myscore.ru/match/%s/#match-summary

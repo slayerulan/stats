@@ -17,6 +17,7 @@ import org.jsoup.select.Elements;
 public class MatchInfoParser {
 
     public static final String HOME = ".fl";
+
     public static final String GUEST = ".fr";
 
     public static GeneralInfoDto parseGeneralInfo(Elements elements) {
@@ -32,16 +33,20 @@ public class MatchInfoParser {
         Elements possessionElement = elements.select(".score.stats:containsOwn(Владение мячом)");
         Elements cornersElement = elements.select(".score.stats:containsOwn(Угловые)");
         Elements hitsElement = elements.select(".score.stats:containsOwn(Удары)");
+        Elements hitsOnTargetElement = elements.select(".score.stats:containsOwn(Удары в створ)");
         Elements foulsElement = elements.select(".score.stats:containsOwn(Фолы)");
         Elements offsidesElement = elements.select(".score.stats:containsOwn(Офсайды)");
 
-        return StatsInfoDto.builder()
+        return StatsInfoDto
+                .builder()
                 .homePossession(getStat(possessionElement, HOME))
                 .guestPossession(getStat(possessionElement, GUEST))
                 .homeCorners(getStat(cornersElement, HOME))
                 .guestCorners(getStat(cornersElement, GUEST))
                 .homeHits(getStat(hitsElement, HOME))
                 .guestHits(getStat(hitsElement, GUEST))
+                .homeHitsOnTarget(getStat(hitsOnTargetElement, HOME))
+                .guestHitsOnTarget(getStat(hitsOnTargetElement, GUEST))
                 .homeFouls(getStat(foulsElement, HOME))
                 .guestFouls(getStat(foulsElement, GUEST))
                 .homeOffsides(getStat(offsidesElement, HOME))
@@ -52,19 +57,19 @@ public class MatchInfoParser {
 
     private static Integer getStat(Elements elements, String selector) {
         return elements.isEmpty() ? null : Integer.valueOf(elements.get(0)
-                .parent()
-                .select(selector)
-                .text()
-                .replaceAll("\\D+", ""));
+                                                                   .parent()
+                                                                   .select(selector)
+                                                                   .text()
+                                                                   .replaceAll("\\D+", ""));
     }
 
     static List<Goal> parseGoals(Elements goalsDivs) {
         return goalsDivs
                 .stream()
                 .map(d -> Goal.builder()
-                        .minute(calculateTime(d))
-                        .whoScored(d.parent().parent().hasClass("fl") ? Who.HOME : Who.GUEST)
-                        .build())
+                              .minute(calculateTime(d))
+                              .whoScored(d.parent().parent().hasClass("fl") ? Who.HOME : Who.GUEST)
+                              .build())
                 .collect(Collectors.toList());
     }
 
@@ -109,6 +114,10 @@ public class MatchInfoParser {
         Integer homeHits;
 
         Integer guestHits;
+
+        Integer homeHitsOnTarget;
+
+        Integer guestHitsOnTarget;
 
         Integer homePossession;
 

@@ -24,6 +24,10 @@ public class Match extends Identifiable {
     MatchInfo matchInfo;
 
     @NotNull
+    @OneToOne(cascade = CascadeType.ALL)
+    BookieStats bookieStats;
+
+    @NotNull
     @OneToOne
     Team homeTeam;
 

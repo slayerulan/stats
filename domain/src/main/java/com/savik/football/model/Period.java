@@ -56,6 +56,10 @@ public class Period extends Identifiable {
 
     Integer guestHits;
 
+    Integer homeHitsOnTarget;
+
+    Integer guestHitsOnTarget;
+
     Integer homePossession;
 
     Integer guestPossession;

@@ -6,5 +6,6 @@ package com.savik.football.model;
  */
 public enum Who {
     HOME,
-    GUEST
+    GUEST,
+    UNKNOWN
 }
