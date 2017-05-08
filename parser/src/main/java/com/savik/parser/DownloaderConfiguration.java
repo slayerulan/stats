@@ -31,6 +31,9 @@ public class DownloaderConfiguration {
     @Value("${url.summary}")
     private String summaryUrlTemplate;
 
+    @Value("${url.odds}")
+    private String oddsUrlTemplate;
+
     @Value("${fsign}")
     private String fsign;
 

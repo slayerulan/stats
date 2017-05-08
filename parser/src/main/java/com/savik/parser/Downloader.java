@@ -32,6 +32,10 @@ public class Downloader {
         return download(String.format(configuration.getSummaryUrlTemplate(), matchId));
     }
 
+    public Document downloadOddsInfo(String matchId) {
+        return download(String.format(configuration.getOddsUrlTemplate(), matchId));
+    }
+
     public Document download(String url) {
         try {
             return Jsoup.connect(url).header("X-Fsign", configuration.getFsign()).get();

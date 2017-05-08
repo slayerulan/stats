@@ -36,16 +36,19 @@ public class MatchCreator {
 
     String myscoreCode;
 
+    BookieStats bookieStats;
+
     public Match createMatch() {
         return Match.builder()
-                    .myscoreCode(myscoreCode)
-                    .season(season)
-                    .championship(championship)
-                    .date(date)
-                    .matchInfo(createMatchInfo())
-                    .homeTeam(homeTeam)
-                    .guestTeam(guestTeam)
-                    .build();
+                .myscoreCode(myscoreCode)
+                .season(season)
+                .championship(championship)
+                .date(date)
+                .matchInfo(createMatchInfo())
+                .homeTeam(homeTeam)
+                .guestTeam(guestTeam)
+                .bookieStats(bookieStats)
+                .build();
     }
 
     private MatchInfo createMatchInfo() {
@@ -61,10 +64,10 @@ public class MatchCreator {
         );
         Period match = createPeriod(matchGeneralInfoDto, matchStatsInfoDto, Period.PeriodStatus.MATCH);
         return MatchInfo.builder()
-                        .firstPeriod(firstPeriod)
-                        .secondPeriod(secondPeriod)
-                        .match(match)
-                        .build();
+                .firstPeriod(firstPeriod)
+                .secondPeriod(secondPeriod)
+                .match(match)
+                .build();
     }
 
     private Period createPeriod(
@@ -95,15 +98,15 @@ public class MatchCreator {
 
 
         Integer homeScore = (int) infoDto.getGoals().stream().filter(g -> g.getWhoScored() == Who.HOME).count();
-        Integer guestScore =  (int) infoDto.getGoals().stream().filter(g -> g.getWhoScored() == Who.GUEST).count();
+        Integer guestScore = (int) infoDto.getGoals().stream().filter(g -> g.getWhoScored() == Who.GUEST).count();
         return period.toBuilder()
-                     .goals(goals)
-                     .cards(cards)
-                     .homeScore(homeScore)
-                     .guestScore(guestScore)
-                     .totalScore(homeScore + guestScore)
-                     .winner(homeScore > guestScore ? Winner.HOME : homeScore < guestScore ? Winner.GUEST : Winner.DRAW)
-                     .periodStatus(periodStatus)
-                     .build();
+                .goals(goals)
+                .cards(cards)
+                .homeScore(homeScore)
+                .guestScore(guestScore)
+                .totalScore(homeScore + guestScore)
+                .winner(homeScore > guestScore ? Winner.HOME : homeScore < guestScore ? Winner.GUEST : Winner.DRAW)
+                .periodStatus(periodStatus)
+                .build();
     }
 }

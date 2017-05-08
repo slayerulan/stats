@@ -1,9 +1,12 @@
 package com.savik.football.model;
 
-import javax.persistence.Entity;
-import javax.persistence.SequenceGenerator;
-
+import com.savik.domain.Identifiable;
 import lombok.*;
+
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.SequenceGenerator;
 
 /**
  * @author Savushkin Yauheni
@@ -16,6 +19,14 @@ import lombok.*;
 @Builder(toBuilder = true)
 @SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "bookie_id_generator")
 @EqualsAndHashCode
-public class BookieStats {
+public class BookieStats extends Identifiable {
+
+    @Enumerated(EnumType.STRING)
     Who favorite;
+
+    Double homeRate;
+
+    Double drawRate;
+
+    Double guestRate;
 }

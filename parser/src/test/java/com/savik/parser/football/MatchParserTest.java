@@ -48,7 +48,11 @@ public class MatchParserTest {
         assertEquals(match.getChampionship(), Championship.LA);
         assertEquals(match.getHomeTeam(), home);
         assertEquals(match.getGuestTeam(), guest);
+        assertEquals(match.getBookieStats().getHomeRate(), Double.valueOf(2.2));
+        assertEquals(match.getBookieStats().getDrawRate(), Double.valueOf(3.2));
+        assertEquals(match.getBookieStats().getGuestRate(), Double.valueOf(3.5));
         assertEquals(match.getDate(), LocalDateTime.of(2017, 3, 31, 21, 45));
+
 
         MatchInfo matchInfo = match.getMatchInfo();
 
@@ -154,6 +158,9 @@ public class MatchParserTest {
         assertEquals(match.getChampionship(), Championship.LA);
         assertEquals(match.getHomeTeam(), home);
         assertEquals(match.getGuestTeam(), guest);
+        assertEquals(match.getBookieStats().getHomeRate(), Double.valueOf(1.91));
+        assertEquals(match.getBookieStats().getDrawRate(), Double.valueOf(3.5));
+        assertEquals(match.getBookieStats().getGuestRate(), Double.valueOf(4.2));
         assertEquals(match.getDate(), LocalDateTime.of(2017, 4, 1, 14, 0));
 
         MatchInfo matchInfo = match.getMatchInfo();
@@ -267,6 +274,9 @@ public class MatchParserTest {
         assertEquals(match.getChampionship(), Championship.LA);
         assertEquals(match.getHomeTeam(), home);
         assertEquals(match.getGuestTeam(), guest);
+        assertEquals(match.getBookieStats().getHomeRate(), Double.valueOf(1.91));
+        assertEquals(match.getBookieStats().getDrawRate(), Double.valueOf(4.2));
+        assertEquals(match.getBookieStats().getGuestRate(), Double.valueOf(3.5));
         assertEquals(match.getDate(), LocalDateTime.of(2017, 4, 23, 21, 45));
 
         MatchInfo matchInfo = match.getMatchInfo();

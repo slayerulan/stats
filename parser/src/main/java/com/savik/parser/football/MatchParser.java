@@ -4,11 +4,10 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
+import java.util.function.ToDoubleFunction;
+import java.util.stream.Collectors;
 
-import com.savik.football.model.Championship;
-import com.savik.football.model.Match;
-import com.savik.football.model.Season;
-import com.savik.football.model.Team;
+import com.savik.football.model.*;
 import com.savik.football.repository.MatchRepository;
 import com.savik.football.repository.TeamRepository;
 import com.savik.parser.Downloader;
@@ -44,6 +43,7 @@ public class MatchParser {
         Document generalInfo = downloader.downloadGeneralInfo(matchId);
         Document statsInfo = downloader.downloadStatsInfo(matchId);
         Document summaryInfo = downloader.downloadSummaryInfo(matchId);
+        Document oddsInfo = downloader.downloadOddsInfo(matchId);
 
 
         String homeTeam = summaryInfo.select(".tname-home a").text();
@@ -119,6 +119,17 @@ public class MatchParser {
                                 .select("tr.odd,tr.even"));
 
 
+        BookieStats bookieStats = null;
+        Elements odds = oddsInfo.select("#block-1x2 tr.odd");
+        if (!odds.isEmpty()) {
+            List<Element> rates = odds.get(0).select("td > span");
+            bookieStats = BookieStats.builder()
+                    .homeRate(Double.valueOf(rates.get(0).text()))
+                    .drawRate(Double.valueOf(rates.get(1).text()))
+                    .guestRate(Double.valueOf(rates.get(2).text()))
+                    .build();
+        }
+
         Match match = MatchCreator.builder()
                 .matchGeneralInfoDto(matchPeriodInfo)
                 .firstPeriodGeneralInfoDto(firstPeriodInfo)
@@ -132,6 +143,7 @@ public class MatchParser {
                 .championship(championship)
                 .season(season)
                 .myscoreCode(matchId)
+                .bookieStats(bookieStats)
                 .build()
                 .createMatch();
 
