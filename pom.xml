@@ -12,6 +12,7 @@
         <module>domain</module>
         <module>infrastructure</module>
         <module>parser</module>
+        <module>analysis</module>
     </modules>
 
     <parent>
