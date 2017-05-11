@@ -1,16 +1,17 @@
-package com.savik.football.bets;
+package com.savik.football.bets.total.over.match;
 
+import com.savik.football.bets.GeneralBet;
 import com.savik.football.model.Match;
 
-public class OverInMatch extends GeneralBet {
+public class Over extends GeneralBet {
     private int amount;
 
-    public OverInMatch(int amount) {
+    public Over(int amount) {
         this.amount = amount;
     }
 
     @Override
-    public boolean canAnalize(Match match) {
+    public boolean canAnalyze(Match match) {
         return match.getMatchInfo().getMatch().getTotalScore() != null;
     }
 

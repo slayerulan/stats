@@ -1,12 +1,9 @@
 package com.savik.football.model;
 
+import javax.persistence.*;
+
 import com.savik.domain.Identifiable;
 import lombok.*;
-
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.SequenceGenerator;
 
 /**
  * @author Savushkin Yauheni
@@ -22,6 +19,7 @@ import javax.persistence.SequenceGenerator;
 public class BookieStats extends Identifiable {
 
     @Enumerated(EnumType.STRING)
+    @Transient
     Who favorite;
 
     Double homeRate;
@@ -29,4 +27,17 @@ public class BookieStats extends Identifiable {
     Double drawRate;
 
     Double guestRate;
+
+    public Who getFavorite() {
+        if (homeRate == null || guestRate == null) {
+            return Who.UNKNOWN;
+        }
+        if ((homeRate * 2) < guestRate) {
+            return Who.HOME;
+        }
+        if ((guestRate * 2) < homeRate) {
+            return Who.GUEST;
+        }
+        return Who.UNKNOWN;
+    }
 }
