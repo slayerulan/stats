@@ -6,5 +6,5 @@ public abstract class GeneralBet {
 
     public abstract boolean canAnalyze(Match match);
 
-    public abstract boolean match(Match match);
+    public abstract boolean check(Match match);
 }

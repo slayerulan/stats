@@ -16,7 +16,7 @@ public class Over extends GeneralBet {
     }
 
     @Override
-    public boolean match(Match match) {
+    public boolean check(Match match) {
         return match.getMatchInfo().getMatch().getTotalScore() > amount;
     }
 }

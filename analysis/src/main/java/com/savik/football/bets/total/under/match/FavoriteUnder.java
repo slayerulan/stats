@@ -28,7 +28,7 @@ public class FavoriteUnder extends GeneralBet {
     }
 
     @Override
-    public boolean match(Match match) {
+    public boolean check(Match match) {
         Who favorite = match.getBookieStats().getFavorite();
         if (favorite == Who.HOME) {
             return match.getMatchInfo().getMatch().getHomeScore() < amount;
@@ -36,6 +36,6 @@ public class FavoriteUnder extends GeneralBet {
         if (favorite == Who.GUEST) {
             return match.getMatchInfo().getMatch().getGuestScore() < amount;
         }
-        throw new IllegalArgumentException("Match doesn't have favorite, match id = " + match.getId());
+        throw new IllegalArgumentException("Match doesn't have favorite, check id = " + match.getId());
     }
 }
