@@ -3,20 +3,20 @@ package com.savik.football.bets.total.under.match;
 import com.savik.football.bets.GeneralBet;
 import com.savik.football.model.Match;
 
-public class GuestUnder extends GeneralBet {
+public class MatchHomeUnder extends GeneralBet {
     private int amount;
 
-    public GuestUnder(int amount) {
+    public MatchHomeUnder(int amount) {
         this.amount = amount;
     }
 
     @Override
     public boolean canAnalyze(Match match) {
-        return match.getMatchInfo().getMatch().getGuestScore() != null;
+        return match.getMatchInfo().getMatch().getHomeScore() != null;
     }
 
     @Override
     public boolean check(Match match) {
-        return match.getMatchInfo().getMatch().getGuestScore() < amount;
+        return match.getMatchInfo().getMatch().getHomeScore() < amount;
     }
 }

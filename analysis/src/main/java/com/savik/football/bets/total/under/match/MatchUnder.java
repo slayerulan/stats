@@ -3,10 +3,10 @@ package com.savik.football.bets.total.under.match;
 import com.savik.football.bets.GeneralBet;
 import com.savik.football.model.Match;
 
-public class Under extends GeneralBet {
+public class MatchUnder extends GeneralBet {
     private int amount;
 
-    public Under(int amount) {
+    public MatchUnder(int amount) {
         this.amount = amount;
     }
 

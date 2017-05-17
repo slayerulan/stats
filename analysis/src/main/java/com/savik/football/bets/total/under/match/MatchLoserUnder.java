@@ -4,11 +4,11 @@ import com.savik.football.bets.GeneralBet;
 import com.savik.football.model.Match;
 import com.savik.football.model.Who;
 
-public class FavoriteUnder extends GeneralBet {
+public class MatchLoserUnder extends GeneralBet {
 
     private int amount;
 
-    public FavoriteUnder(int amount) {
+    public MatchLoserUnder(int amount) {
         this.amount = amount;
     }
 
@@ -19,10 +19,10 @@ public class FavoriteUnder extends GeneralBet {
             return false;
         }
         if (favorite == Who.HOME) {
-            return match.getMatchInfo().getMatch().getHomeScore() != null;
+            return match.getMatchInfo().getMatch().getGuestScore() != null;
         }
         if (favorite == Who.GUEST) {
-            return match.getMatchInfo().getMatch().getGuestScore() != null;
+            return match.getMatchInfo().getMatch().getHomeScore() != null;
         }
         throw new IllegalArgumentException("Unknown favorite value = " + favorite);
     }
@@ -31,10 +31,10 @@ public class FavoriteUnder extends GeneralBet {
     public boolean check(Match match) {
         Who favorite = match.getBookieStats().getFavorite();
         if (favorite == Who.HOME) {
-            return match.getMatchInfo().getMatch().getHomeScore() < amount;
+            return match.getMatchInfo().getMatch().getGuestScore() < amount;
         }
         if (favorite == Who.GUEST) {
-            return match.getMatchInfo().getMatch().getGuestScore() < amount;
+            return match.getMatchInfo().getMatch().getHomeScore() < amount;
         }
         throw new IllegalArgumentException("Match doesn't have favorite, check id = " + match.getId());
     }
