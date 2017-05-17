@@ -3,20 +3,20 @@ package com.savik.football.bets.total.over.match;
 import com.savik.football.bets.GeneralBet;
 import com.savik.football.model.Match;
 
-public class HomeOver extends GeneralBet {
+public class MatchOver extends GeneralBet {
     private int amount;
 
-    public HomeOver(int amount) {
+    public MatchOver(int amount) {
         this.amount = amount;
     }
 
     @Override
     public boolean canAnalyze(Match match) {
-        return match.getMatchInfo().getMatch().getHomeScore() != null;
+        return match.getMatchInfo().getMatch().getTotalScore() != null;
     }
 
     @Override
     public boolean check(Match match) {
-        return match.getMatchInfo().getMatch().getHomeScore() > amount;
+        return match.getMatchInfo().getMatch().getTotalScore() > amount;
     }
 }
