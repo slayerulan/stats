@@ -40,4 +40,9 @@ public class BookieStats extends Identifiable {
         }
         return Who.UNKNOWN;
     }
+
+    public boolean hasFavorite() {
+        Who favorite = getFavorite();
+        return favorite == Who.HOME || favorite == Who.GUEST;
+    }
 }
