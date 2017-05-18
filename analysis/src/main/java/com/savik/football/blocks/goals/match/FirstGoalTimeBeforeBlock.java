@@ -1,18 +1,19 @@
 package com.savik.football.blocks.goals.match;
 
-import java.util.Arrays;
-
 import com.savik.football.blocks.GeneralBetContainer;
+
+import java.util.Arrays;
 
 /**
  * @author Savushkin Yauheni
  * @since 16.05.2017
  */
-public class GoalBetweenTimeBlock extends GeneralBetContainer {
+public class FirstGoalTimeBeforeBlock extends GeneralBetContainer {
 
-    public GoalBetweenTimeBlock(int from, int before) {
+    public FirstGoalTimeBeforeBlock() {
         super(Arrays.asList(
-                new GoalBetweenTimeSingleBlock(0, 16)
+                new FirstGoalTimeBeforeSingleBlock(20),
+                new FirstGoalTimeBeforeSingleBlock(30)
         ));
     }
 
