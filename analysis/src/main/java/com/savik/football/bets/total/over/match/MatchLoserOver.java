@@ -14,28 +14,12 @@ public class MatchLoserOver extends GeneralBet {
 
     @Override
     public boolean canAnalyze(Match match) {
-        Who favorite = match.getBookieStats().getFavorite();
-        if (favorite == Who.UNKNOWN) {
-            return false;
-        }
-        if (favorite == Who.HOME) {
-            return match.getMatchInfo().getMatch().getGuestScore() != null;
-        }
-        if (favorite == Who.GUEST) {
-            return match.getMatchInfo().getMatch().getHomeScore() != null;
-        }
-        throw new IllegalArgumentException("Unknown favorite value = " + favorite);
+        return match.getBookieStats().hasFavorite() &&
+               match.getMatchInfo().getMatch().getLoserScore(match.getBookieStats().getFavorite()) != null;
     }
 
     @Override
     public boolean check(Match match) {
-        Who favorite = match.getBookieStats().getFavorite();
-        if (favorite == Who.HOME) {
-            return match.getMatchInfo().getMatch().getGuestScore() > amount;
-        }
-        if (favorite == Who.GUEST) {
-            return match.getMatchInfo().getMatch().getHomeScore() > amount;
-        }
-        throw new IllegalArgumentException("Match doesn't have favorite, check id = " + match.getId());
+        return match.getMatchInfo().getMatch().getLoserScore(match.getBookieStats().getFavorite()) > amount;
     }
 }

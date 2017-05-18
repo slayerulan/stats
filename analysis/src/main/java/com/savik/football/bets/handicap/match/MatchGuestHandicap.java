@@ -26,8 +26,8 @@ public class MatchGuestHandicap extends GeneralBet {
     public boolean check(Match match) {
         Period matchInfo = match.getMatchInfo().getMatch();
         if (amount <= 0) {
-            return (matchInfo.getGuestScore() - matchInfo.getHomeScore()) > Math.abs(amount);
+            return matchInfo.getGuestScore() - matchInfo.getHomeScore() > Math.abs(amount);
         }
-        return (matchInfo.getHomeScore() - matchInfo.getGuestScore()) < amount;
+        return matchInfo.getHomeScore() - matchInfo.getGuestScore() < amount;
     }
 }

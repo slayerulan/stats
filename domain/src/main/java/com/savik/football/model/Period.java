@@ -40,11 +40,11 @@ public class Period extends Identifiable {
     @Property(optionality = Optionality.OPTIONAL)
     Winner winner;
 
-    @OneToMany(cascade= CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @CollectionProperty(optionality = Optionality.OPTIONAL)
     Set<Goal> goals;
 
-    @OneToMany(cascade= CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @CollectionProperty(optionality = Optionality.OPTIONAL)
     Set<Card> cards;
 
@@ -76,5 +76,23 @@ public class Period extends Identifiable {
         FIRST,
         SECOND,
         MATCH
+    }
+
+    public Integer getFavoriteScore(Who favorite) {
+        if (favorite == Who.HOME) {
+            return homeScore;
+        } else if (favorite == Who.GUEST) {
+            return guestScore;
+        }
+        throw new IllegalArgumentException("Favorite is incorrect = " + favorite);
+    }
+
+    public Integer getLoserScore(Who favorite) {
+        if (favorite == Who.HOME) {
+            return guestScore;
+        } else if (favorite == Who.GUEST) {
+            return homeScore;
+        }
+        throw new IllegalArgumentException("Favorite is incorrect = " + favorite);
     }
 }

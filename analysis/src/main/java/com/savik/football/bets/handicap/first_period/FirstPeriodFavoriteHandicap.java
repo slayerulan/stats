@@ -1,4 +1,4 @@
-package com.savik.football.bets.handicap.match;
+package com.savik.football.bets.handicap.first_period;
 
 import com.savik.football.bets.GeneralBet;
 import com.savik.football.model.Match;
@@ -9,25 +9,25 @@ import com.savik.football.model.Who;
  * @author Savushkin Yauheni
  * @since 17.05.2017
  */
-public class MatchFavoriteHandicap extends GeneralBet {
+public class FirstPeriodFavoriteHandicap extends GeneralBet {
 
     private int amount;
 
-    public MatchFavoriteHandicap(int amount) {
+    public FirstPeriodFavoriteHandicap(int amount) {
         this.amount = amount;
     }
 
     @Override
     public boolean canAnalyze(Match match) {
         return match.getBookieStats().hasFavorite() &&
-               match.getMatchInfo().getMatch().getHomeScore() != null &&
-               match.getMatchInfo().getMatch().getGuestScore() != null;
+               match.getMatchInfo().getFirstPeriod().getHomeScore() != null &&
+               match.getMatchInfo().getFirstPeriod().getGuestScore() != null;
     }
 
     @Override
     public boolean check(Match match) {
         Who favorite = match.getBookieStats().getFavorite();
-        Period period = match.getMatchInfo().getMatch();
+        Period period = match.getMatchInfo().getFirstPeriod();
         if (amount <= 0) {
             return period.getFavoriteScore(favorite) - period.getLoserScore(favorite) > Math.abs(amount);
         }

@@ -9,11 +9,11 @@ import com.savik.football.model.Who;
  * @author Savushkin Yauheni
  * @since 17.05.2017
  */
-public class MatchFavoriteHandicap extends GeneralBet {
+public class MatchLoserHandicap extends GeneralBet {
 
     private int amount;
 
-    public MatchFavoriteHandicap(int amount) {
+    public MatchLoserHandicap(int amount) {
         this.amount = amount;
     }
 
@@ -29,8 +29,8 @@ public class MatchFavoriteHandicap extends GeneralBet {
         Who favorite = match.getBookieStats().getFavorite();
         Period period = match.getMatchInfo().getMatch();
         if (amount <= 0) {
-            return period.getFavoriteScore(favorite) - period.getLoserScore(favorite) > Math.abs(amount);
+            return period.getLoserScore(favorite) - period.getFavoriteScore(favorite) > Math.abs(amount);
         }
-        return period.getLoserScore(favorite) - period.getFavoriteScore(favorite) < amount;
+        return period.getFavoriteScore(favorite) - period.getLoserScore(favorite) < amount;
     }
 }
