@@ -5,10 +5,8 @@ import com.savik.football.model.Match;
 
 public class FirstPeriodMostGoals extends GeneralBet {
 
-    private int amount;
 
-    public FirstPeriodMostGoals(int amount) {
-        this.amount = amount;
+    public FirstPeriodMostGoals() {
     }
 
     @Override

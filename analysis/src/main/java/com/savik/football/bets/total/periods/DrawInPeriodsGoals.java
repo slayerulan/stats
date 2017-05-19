@@ -7,10 +7,8 @@ import com.savik.football.model.Match;
 
 public class DrawInPeriodsGoals extends GeneralBet {
 
-    private int amount;
 
-    public DrawInPeriodsGoals(int amount) {
-        this.amount = amount;
+    public DrawInPeriodsGoals() {
     }
 
     @Override
