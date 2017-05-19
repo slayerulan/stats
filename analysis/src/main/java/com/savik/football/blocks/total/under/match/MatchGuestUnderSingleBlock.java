@@ -1,6 +1,5 @@
 package com.savik.football.blocks.total.under.match;
 
-import com.savik.football.bets.total.over.match.MatchGuestOver;
 import com.savik.football.bets.total.under.match.MatchGuestUnder;
 import com.savik.football.blocks.GeneralBetContainer;
 

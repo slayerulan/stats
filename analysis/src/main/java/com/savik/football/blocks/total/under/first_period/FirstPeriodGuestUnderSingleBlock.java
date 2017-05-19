@@ -1,6 +1,5 @@
 package com.savik.football.blocks.total.under.first_period;
 
-import com.savik.football.bets.total.over.first_period.FirstPeriodGuestOver;
 import com.savik.football.bets.total.under.first_period.FirstPeriodGuestUnder;
 import com.savik.football.blocks.GeneralBetContainer;
 
