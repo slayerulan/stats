@@ -13,8 +13,5 @@ public class MatchLooserUnderSingleBlock extends GeneralBetContainer {
         super(new MatchLoserOver(amount));
     }
 
-    @Override
-    public boolean isLeaf() {
-        return true;
-    }
+
 }

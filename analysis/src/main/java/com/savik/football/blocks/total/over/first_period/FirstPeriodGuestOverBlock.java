@@ -20,8 +20,5 @@ public class FirstPeriodGuestOverBlock extends GeneralBetContainer {
         ));
     }
 
-    @Override
-    public boolean isLeaf() {
-        return false;
-    }
+
 }

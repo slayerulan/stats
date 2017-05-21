@@ -20,8 +20,5 @@ public class SecondPeriodLooserUnderBlock extends GeneralBetContainer {
         ));
     }
 
-    @Override
-    public boolean isLeaf() {
-        return false;
-    }
+
 }

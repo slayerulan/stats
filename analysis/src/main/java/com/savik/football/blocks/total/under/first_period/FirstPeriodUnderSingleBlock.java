@@ -13,8 +13,5 @@ public class FirstPeriodUnderSingleBlock extends GeneralBetContainer {
         super(new FirstPeriodUnder(amount));
     }
 
-    @Override
-    public boolean isLeaf() {
-        return true;
-    }
+
 }

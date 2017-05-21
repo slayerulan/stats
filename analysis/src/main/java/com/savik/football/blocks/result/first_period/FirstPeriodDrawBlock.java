@@ -13,8 +13,5 @@ public class FirstPeriodDrawBlock extends GeneralBetContainer {
         super(new FirstPeriodDraw());
     }
 
-    @Override
-    public boolean isLeaf() {
-        return true;
-    }
+
 }

@@ -13,8 +13,5 @@ public class FirstPeriodFavoriteOverSingleBlock extends GeneralBetContainer {
         super(new FirstPeriodFavoriteOver(amount));
     }
 
-    @Override
-    public boolean isLeaf() {
-        return true;
-    }
+
 }

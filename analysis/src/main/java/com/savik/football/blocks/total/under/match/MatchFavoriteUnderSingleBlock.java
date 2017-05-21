@@ -13,8 +13,5 @@ public class MatchFavoriteUnderSingleBlock extends GeneralBetContainer {
         super(new MatchFavoriteUnder(amount));
     }
 
-    @Override
-    public boolean isLeaf() {
-        return true;
-    }
+
 }

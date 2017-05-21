@@ -20,8 +20,5 @@ public class FirstPeriodHomeUnderBlock extends GeneralBetContainer {
         ));
     }
 
-    @Override
-    public boolean isLeaf() {
-        return false;
-    }
+
 }

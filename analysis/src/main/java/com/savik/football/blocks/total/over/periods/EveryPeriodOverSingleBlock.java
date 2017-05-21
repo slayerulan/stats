@@ -14,8 +14,5 @@ public class EveryPeriodOverSingleBlock extends GeneralBetContainer {
         super(new EveryPeriodOver(amount));
     }
 
-    @Override
-    public boolean isLeaf() {
-        return true;
-    }
+
 }

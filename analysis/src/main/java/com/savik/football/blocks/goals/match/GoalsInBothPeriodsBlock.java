@@ -13,8 +13,5 @@ public class GoalsInBothPeriodsBlock extends GeneralBetContainer {
         super(new GoalsInBothPeriods());
     }
 
-    @Override
-    public boolean isLeaf() {
-        return true;
-    }
+
 }

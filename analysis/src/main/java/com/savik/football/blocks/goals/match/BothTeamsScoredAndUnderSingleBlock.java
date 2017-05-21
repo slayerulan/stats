@@ -13,8 +13,5 @@ public class BothTeamsScoredAndUnderSingleBlock extends GeneralBetContainer {
         super(new BothTeamsScoredAndUnder(amount));
     }
 
-    @Override
-    public boolean isLeaf() {
-        return true;
-    }
+
 }

@@ -20,8 +20,5 @@ public class SecondPeriodOverBlock extends GeneralBetContainer {
         ));
     }
 
-    @Override
-    public boolean isLeaf() {
-        return false;
-    }
+
 }

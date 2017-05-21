@@ -13,8 +13,5 @@ public class MatchLoserHandicapSingleBlock extends GeneralBetContainer {
         super(new MatchLoserHandicap(amount));
     }
 
-    @Override
-    public boolean isLeaf() {
-        return true;
-    }
+
 }

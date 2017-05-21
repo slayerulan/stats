@@ -13,8 +13,5 @@ public class FirstPeriodMostGoalsBlock extends GeneralBetContainer {
         super(new FirstPeriodMostGoals());
     }
 
-    @Override
-    public boolean isLeaf() {
-        return true;
-    }
+
 }

@@ -14,8 +14,5 @@ public class SecondPeriodFavoriteHandicapSingleBlock extends GeneralBetContainer
         super(new SecondPeriodFavoriteHandicap(amount));
     }
 
-    @Override
-    public boolean isLeaf() {
-        return true;
-    }
+
 }

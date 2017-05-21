@@ -13,8 +13,5 @@ public class AtLeastOneTeamNotScoredAndUnderSingleBlock extends GeneralBetContai
         super(new AtLeastOneTeamNotScoredAndUnder(amount));
     }
 
-    @Override
-    public boolean isLeaf() {
-        return true;
-    }
+
 }

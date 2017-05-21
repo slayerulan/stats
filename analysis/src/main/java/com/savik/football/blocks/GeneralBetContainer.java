@@ -4,12 +4,16 @@ import java.util.List;
 
 import com.savik.football.bets.GeneralBet;
 import com.savik.football.model.Match;
+import lombok.Getter;
 
+@Getter
 public abstract class GeneralBetContainer {
 
     private List<GeneralBetContainer> childrenBetBlocks;
 
     private GeneralBet bet;
+
+    private Boolean leaf;
 
     private Integer analyzedMatchesAmount;
 
@@ -18,29 +22,25 @@ public abstract class GeneralBetContainer {
     private Integer successfullyMatchesAmount;
 
     public GeneralBetContainer(List<GeneralBetContainer> childrenBetBlocks) {
-        this(childrenBetBlocks, null);
+        this.childrenBetBlocks = childrenBetBlocks;
+        this.leaf = false;
     }
 
     public GeneralBetContainer(GeneralBet bet) {
-        this(null, bet);
+        this.bet = bet;
+        this.leaf = true;
+        this.analyzedMatchesAmount = 0;
+        this.skippedMatchesAmount = 0;
+        this.successfullyMatchesAmount = 0;
     }
 
-    public GeneralBetContainer(List<GeneralBetContainer> childrenBetBlocks, GeneralBet bet) {
-        this.childrenBetBlocks = childrenBetBlocks;
-        this.bet = bet;
-        if(isLeaf()) {
-            analyzedMatchesAmount = 0;
-            skippedMatchesAmount = 0;
-            successfullyMatchesAmount = 0;
-        }
-    }
 
     public void check(Match match) {
-        if (isLeaf()) {
+        if (leaf) {
             if (bet.canAnalyze(match)) {
                 analyzedMatchesAmount++;
                 boolean success = bet.check(match);
-                if(success) {
+                if (success) {
                     successfullyMatchesAmount++;
                 }
             } else {
@@ -50,6 +50,4 @@ public abstract class GeneralBetContainer {
             childrenBetBlocks.forEach(b -> b.check(match));
         }
     }
-
-    public abstract boolean isLeaf();
 }

@@ -18,8 +18,5 @@ public class FirstPeriodLoserHandicapBlock extends GeneralBetContainer {
         ));
     }
 
-    @Override
-    public boolean isLeaf() {
-        return false;
-    }
+
 }

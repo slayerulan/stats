@@ -13,8 +13,5 @@ public class GoalBetweenTimeSingleBlock extends GeneralBetContainer {
         super(new GoalBetweenTime(from, before));
     }
 
-    @Override
-    public boolean isLeaf() {
-        return true;
-    }
+
 }

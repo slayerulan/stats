@@ -16,8 +16,5 @@ public class GoalBetweenTimeBlock extends GeneralBetContainer {
         ));
     }
 
-    @Override
-    public boolean isLeaf() {
-        return false;
-    }
+
 }

@@ -18,8 +18,5 @@ public class MatchHomeHandicapBlock extends GeneralBetContainer {
         ));
     }
 
-    @Override
-    public boolean isLeaf() {
-        return false;
-    }
+
 }

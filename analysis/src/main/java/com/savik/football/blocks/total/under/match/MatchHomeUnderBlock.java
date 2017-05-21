@@ -20,8 +20,5 @@ public class MatchHomeUnderBlock extends GeneralBetContainer {
         ));
     }
 
-    @Override
-    public boolean isLeaf() {
-        return false;
-    }
+
 }

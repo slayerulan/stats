@@ -13,8 +13,5 @@ public class GuestOverSingleBlock extends GeneralBetContainer {
         super(new MatchGuestOver(amount));
     }
 
-    @Override
-    public boolean isLeaf() {
-        return true;
-    }
+
 }

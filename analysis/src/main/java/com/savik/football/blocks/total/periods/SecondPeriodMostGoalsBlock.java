@@ -14,8 +14,5 @@ public class SecondPeriodMostGoalsBlock extends GeneralBetContainer {
         super(new SecondPeriodMostGoals());
     }
 
-    @Override
-    public boolean isLeaf() {
-        return true;
-    }
+
 }

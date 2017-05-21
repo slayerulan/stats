@@ -13,8 +13,5 @@ public class FavoriteOverSingleBlock extends GeneralBetContainer {
         super(new MatchFavoriteOver(amount));
     }
 
-    @Override
-    public boolean isLeaf() {
-        return true;
-    }
+
 }

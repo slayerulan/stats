@@ -13,8 +13,5 @@ public class LoserScoredBothPeriodsBlock extends GeneralBetContainer {
         super(new LoserScoredBothPeriods());
     }
 
-    @Override
-    public boolean isLeaf() {
-        return true;
-    }
+
 }

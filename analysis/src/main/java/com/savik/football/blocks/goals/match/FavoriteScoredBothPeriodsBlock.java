@@ -13,8 +13,5 @@ public class FavoriteScoredBothPeriodsBlock extends GeneralBetContainer {
         super(new FavoriteScoredBothPeriods());
     }
 
-    @Override
-    public boolean isLeaf() {
-        return true;
-    }
+
 }

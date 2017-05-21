@@ -14,8 +14,5 @@ public class LastGoalTimeAfterSingleBlock extends GeneralBetContainer {
         super(new LastGoalTimeAfter(amount));
     }
 
-    @Override
-    public boolean isLeaf() {
-        return true;
-    }
+
 }

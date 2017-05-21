@@ -14,8 +14,5 @@ public class FirstPeriodHomeHandicapSingleBlock extends GeneralBetContainer {
         super(new FirstPeriodHomeHandicap(amount));
     }
 
-    @Override
-    public boolean isLeaf() {
-        return true;
-    }
+
 }

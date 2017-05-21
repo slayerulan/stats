@@ -14,8 +14,5 @@ public class FirstGoalTimeBeforeSingleBlock extends GeneralBetContainer {
         super(new FirstGoalTimeBefore(amount));
     }
 
-    @Override
-    public boolean isLeaf() {
-        return true;
-    }
+
 }

@@ -13,8 +13,5 @@ public class SecondPeriodLoserHandicapSingleBlock extends GeneralBetContainer {
         super(new SecondPeriodLoserHandicap(amount));
     }
 
-    @Override
-    public boolean isLeaf() {
-        return true;
-    }
+
 }

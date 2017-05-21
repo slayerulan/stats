@@ -13,8 +13,5 @@ public class FirstPeriodGuestOverSingleBlock extends GeneralBetContainer {
         super(new FirstPeriodGuestOver(amount));
     }
 
-    @Override
-    public boolean isLeaf() {
-        return true;
-    }
+
 }
