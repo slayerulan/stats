@@ -10,7 +10,7 @@ public class AtLeastOneTeamNotScoredAndUnder extends GeneralBet {
 
     private MatchUnder matchUnder;
 
-    public AtLeastOneTeamNotScoredAndUnder(int amount) {
+    public AtLeastOneTeamNotScoredAndUnder(double amount) {
         bothTeamsScored = new BothTeamsScored();
         matchUnder = new MatchUnder(amount);
     }

@@ -12,11 +12,11 @@ public class MatchGuestUnderBlock extends GeneralBetContainer {
 
     public MatchGuestUnderBlock() {
         super(Arrays.asList(
-                new MatchGuestUnderSingleBlock(0),
-                new MatchGuestUnderSingleBlock(1),
-                new MatchGuestUnderSingleBlock(2),
-                new MatchGuestUnderSingleBlock(3),
-                new MatchGuestUnderSingleBlock(4)
+                new MatchGuestUnderSingleBlock(0.5),
+                new MatchGuestUnderSingleBlock(1.5),
+                new MatchGuestUnderSingleBlock(2.5),
+                new MatchGuestUnderSingleBlock(3.5),
+                new MatchGuestUnderSingleBlock(4.5)
         ));
     }
 

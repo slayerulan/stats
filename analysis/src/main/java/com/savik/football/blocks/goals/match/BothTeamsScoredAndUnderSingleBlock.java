@@ -9,7 +9,7 @@ import com.savik.football.blocks.GeneralBetContainer;
  */
 public class BothTeamsScoredAndUnderSingleBlock extends GeneralBetContainer {
 
-    public BothTeamsScoredAndUnderSingleBlock(int amount) {
+    public BothTeamsScoredAndUnderSingleBlock(double amount) {
         super(new BothTeamsScoredAndUnder(amount));
     }
 

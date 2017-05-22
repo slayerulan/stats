@@ -4,9 +4,9 @@ import com.savik.football.bets.GeneralBet;
 import com.savik.football.model.Match;
 
 public class FirstPeriodGuestUnder extends GeneralBet {
-    private int amount;
+    private double amount;
 
-    public FirstPeriodGuestUnder(int amount) {
+    public FirstPeriodGuestUnder(double amount) {
         this.amount = amount;
     }
 

@@ -5,9 +5,9 @@ import com.savik.football.model.Match;
 
 public class FirstGoalTimeBefore extends GeneralBet {
 
-    int amount;
+    double amount;
 
-    public FirstGoalTimeBefore(int amount) {
+    public FirstGoalTimeBefore(double amount) {
         this.amount = amount;
     }
 

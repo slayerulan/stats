@@ -6,9 +6,9 @@ import com.savik.football.model.Who;
 
 public class MatchLoserUnder extends GeneralBet {
 
-    private int amount;
+    private double amount;
 
-    public MatchLoserUnder(int amount) {
+    public MatchLoserUnder(double amount) {
         this.amount = amount;
     }
 

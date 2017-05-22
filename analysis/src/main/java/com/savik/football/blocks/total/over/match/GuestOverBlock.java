@@ -12,11 +12,11 @@ public class GuestOverBlock extends GeneralBetContainer {
 
     public GuestOverBlock() {
         super(Arrays.asList(
-                new GuestOverSingleBlock(0),
-                new GuestOverSingleBlock(1),
-                new GuestOverSingleBlock(2),
-                new GuestOverSingleBlock(3),
-                new GuestOverSingleBlock(4)
+                new GuestOverSingleBlock(0.5),
+                new GuestOverSingleBlock(1.5),
+                new GuestOverSingleBlock(2.5),
+                new GuestOverSingleBlock(3.5),
+                new GuestOverSingleBlock(4.5)
         ));
     }
 

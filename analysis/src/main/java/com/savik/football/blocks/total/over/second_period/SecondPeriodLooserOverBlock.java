@@ -12,11 +12,11 @@ public class SecondPeriodLooserOverBlock extends GeneralBetContainer {
 
     public SecondPeriodLooserOverBlock() {
         super(Arrays.asList(
-                new SecondPeriodLooserOverSingleBlock(0),
-                new SecondPeriodLooserOverSingleBlock(1),
-                new SecondPeriodLooserOverSingleBlock(2),
-                new SecondPeriodLooserOverSingleBlock(3),
-                new SecondPeriodLooserOverSingleBlock(4)
+                new SecondPeriodLooserOverSingleBlock(0.5),
+                new SecondPeriodLooserOverSingleBlock(1.5),
+                new SecondPeriodLooserOverSingleBlock(2.5),
+                new SecondPeriodLooserOverSingleBlock(3.5),
+                new SecondPeriodLooserOverSingleBlock(4.5)
         ));
     }
 

@@ -12,9 +12,9 @@ public class FirstPeriodFavoriteHandicapBlock extends GeneralBetContainer {
 
     public FirstPeriodFavoriteHandicapBlock() {
         super(Arrays.asList(
-                new FirstPeriodFavoriteHandicapSingleBlock(1),
-                new FirstPeriodFavoriteHandicapSingleBlock(2),
-                new FirstPeriodFavoriteHandicapSingleBlock(3)
+                new FirstPeriodFavoriteHandicapSingleBlock(1.5),
+                new FirstPeriodFavoriteHandicapSingleBlock(2.5),
+                new FirstPeriodFavoriteHandicapSingleBlock(3.5)
         ));
     }
 

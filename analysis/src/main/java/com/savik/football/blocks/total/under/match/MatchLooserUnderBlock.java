@@ -12,11 +12,11 @@ public class MatchLooserUnderBlock extends GeneralBetContainer {
 
     public MatchLooserUnderBlock() {
         super(Arrays.asList(
-                new MatchLooserUnderSingleBlock(0),
-                new MatchLooserUnderSingleBlock(1),
-                new MatchLooserUnderSingleBlock(2),
-                new MatchLooserUnderSingleBlock(3),
-                new MatchLooserUnderSingleBlock(4)
+                new MatchLooserUnderSingleBlock(0.5),
+                new MatchLooserUnderSingleBlock(1.5),
+                new MatchLooserUnderSingleBlock(2.5),
+                new MatchLooserUnderSingleBlock(3.5),
+                new MatchLooserUnderSingleBlock(4.5)
         ));
     }
 

@@ -12,11 +12,11 @@ public class SecondPeriodHomeUnderBlock extends GeneralBetContainer {
 
     public SecondPeriodHomeUnderBlock() {
         super(Arrays.asList(
-                new SecondPeriodHomeUnderSingleBlock(0),
-                new SecondPeriodHomeUnderSingleBlock(1),
-                new SecondPeriodHomeUnderSingleBlock(2),
-                new SecondPeriodHomeUnderSingleBlock(3),
-                new SecondPeriodHomeUnderSingleBlock(4)
+                new SecondPeriodHomeUnderSingleBlock(0.5),
+                new SecondPeriodHomeUnderSingleBlock(1.5),
+                new SecondPeriodHomeUnderSingleBlock(2.5),
+                new SecondPeriodHomeUnderSingleBlock(3.5),
+                new SecondPeriodHomeUnderSingleBlock(4.5)
         ));
     }
 

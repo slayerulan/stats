@@ -13,9 +13,8 @@ public class EveryPeriodOverBlock extends GeneralBetContainer {
 
     public EveryPeriodOverBlock() {
         super(Arrays.asList(
-                new EveryPeriodOverSingleBlock(0),
-                new EveryPeriodOverSingleBlock(1),
-                new EveryPeriodOverSingleBlock(2)
+                new EveryPeriodOverSingleBlock(0.5),
+                new EveryPeriodOverSingleBlock(1.5)
         ));
     }
 

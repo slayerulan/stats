@@ -7,12 +7,12 @@ import com.savik.football.model.Match;
 
 public class EveryPeriodOver extends GeneralBet {
 
-    private int amount;
+    private double amount;
 
     private FirstPeriodOver firstPeriodOver;
     private SecondPeriodOver secondPeriodOver;
 
-    public EveryPeriodOver(int amount) {
+    public EveryPeriodOver(double amount) {
         this.amount = amount;
         this.firstPeriodOver = new FirstPeriodOver(amount);
         this.secondPeriodOver = new SecondPeriodOver(amount);

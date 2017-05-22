@@ -12,11 +12,11 @@ public class SecondPeriodGuestOverBlock extends GeneralBetContainer {
 
     public SecondPeriodGuestOverBlock() {
         super(Arrays.asList(
-                new SecondPeriodGuestOverSingleBlock(0),
-                new SecondPeriodGuestOverSingleBlock(1),
-                new SecondPeriodGuestOverSingleBlock(2),
-                new SecondPeriodGuestOverSingleBlock(3),
-                new SecondPeriodGuestOverSingleBlock(4)
+                new SecondPeriodGuestOverSingleBlock(0.5),
+                new SecondPeriodGuestOverSingleBlock(1.5),
+                new SecondPeriodGuestOverSingleBlock(2.5),
+                new SecondPeriodGuestOverSingleBlock(3.5),
+                new SecondPeriodGuestOverSingleBlock(4.5)
         ));
     }
 

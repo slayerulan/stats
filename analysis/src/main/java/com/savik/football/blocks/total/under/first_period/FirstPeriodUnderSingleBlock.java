@@ -9,7 +9,7 @@ import com.savik.football.blocks.GeneralBetContainer;
  */
 public class FirstPeriodUnderSingleBlock extends GeneralBetContainer {
 
-    public FirstPeriodUnderSingleBlock(int amount) {
+    public FirstPeriodUnderSingleBlock(double amount) {
         super(new FirstPeriodUnder(amount));
     }
 

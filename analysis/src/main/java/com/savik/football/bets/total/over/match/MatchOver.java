@@ -4,9 +4,9 @@ import com.savik.football.bets.GeneralBet;
 import com.savik.football.model.Match;
 
 public class MatchOver extends GeneralBet {
-    private int amount;
+    private double amount;
 
-    public MatchOver(int amount) {
+    public MatchOver(double amount) {
         this.amount = amount;
     }
 

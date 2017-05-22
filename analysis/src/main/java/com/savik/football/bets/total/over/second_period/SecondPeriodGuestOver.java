@@ -4,9 +4,9 @@ import com.savik.football.bets.GeneralBet;
 import com.savik.football.model.Match;
 
 public class SecondPeriodGuestOver extends GeneralBet {
-    private int amount;
+    private double amount;
 
-    public SecondPeriodGuestOver(int amount) {
+    public SecondPeriodGuestOver(double amount) {
         this.amount = amount;
     }
 

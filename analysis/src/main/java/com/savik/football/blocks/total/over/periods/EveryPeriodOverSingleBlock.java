@@ -10,7 +10,7 @@ import com.savik.football.blocks.GeneralBetContainer;
  */
 public class EveryPeriodOverSingleBlock extends GeneralBetContainer {
 
-    public EveryPeriodOverSingleBlock(int amount) {
+    public EveryPeriodOverSingleBlock(double amount) {
         super(new EveryPeriodOver(amount));
     }
 

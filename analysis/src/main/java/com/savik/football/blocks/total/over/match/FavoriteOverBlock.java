@@ -12,11 +12,11 @@ public class FavoriteOverBlock extends GeneralBetContainer {
 
     public FavoriteOverBlock() {
         super(Arrays.asList(
-                new FavoriteOverSingleBlock(0),
-                new FavoriteOverSingleBlock(1),
-                new FavoriteOverSingleBlock(2),
-                new FavoriteOverSingleBlock(3),
-                new FavoriteOverSingleBlock(4)
+                new FavoriteOverSingleBlock(0.5),
+                new FavoriteOverSingleBlock(1.5),
+                new FavoriteOverSingleBlock(2.5),
+                new FavoriteOverSingleBlock(3.5),
+                new FavoriteOverSingleBlock(4.5)
         ));
     }
 

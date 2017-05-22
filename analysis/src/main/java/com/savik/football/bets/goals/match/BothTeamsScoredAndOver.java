@@ -10,7 +10,7 @@ public class BothTeamsScoredAndOver extends GeneralBet {
 
     private MatchOver matchOver;
 
-    public BothTeamsScoredAndOver(int amount) {
+    public BothTeamsScoredAndOver(double amount) {
         bothTeamsScored = new BothTeamsScored();
         matchOver = new MatchOver(amount);
     }

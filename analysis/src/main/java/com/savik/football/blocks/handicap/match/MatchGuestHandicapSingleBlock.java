@@ -9,7 +9,7 @@ import com.savik.football.blocks.GeneralBetContainer;
  */
 public class MatchGuestHandicapSingleBlock extends GeneralBetContainer {
 
-    public MatchGuestHandicapSingleBlock(int amount) {
+    public MatchGuestHandicapSingleBlock(double amount) {
         super(new MatchGuestHandicap(amount));
     }
 

@@ -12,11 +12,11 @@ public class FirstPeriodOverBlock extends GeneralBetContainer {
 
     public FirstPeriodOverBlock() {
         super(Arrays.asList(
-                new FirstPeriodOverSingleBlock(0),
-                new FirstPeriodOverSingleBlock(1),
-                new FirstPeriodOverSingleBlock(2),
-                new FirstPeriodOverSingleBlock(3),
-                new FirstPeriodOverSingleBlock(4)
+                new FirstPeriodOverSingleBlock(0.5),
+                new FirstPeriodOverSingleBlock(1.5),
+                new FirstPeriodOverSingleBlock(2.5),
+                new FirstPeriodOverSingleBlock(3.5),
+                new FirstPeriodOverSingleBlock(4.5)
         ));
     }
 

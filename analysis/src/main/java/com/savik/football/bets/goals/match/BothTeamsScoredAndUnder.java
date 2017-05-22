@@ -11,7 +11,7 @@ public class BothTeamsScoredAndUnder extends GeneralBet {
 
     private MatchUnder matchUnder;
 
-    public BothTeamsScoredAndUnder(int amount) {
+    public BothTeamsScoredAndUnder(double amount) {
         bothTeamsScored = new BothTeamsScored();
         matchUnder = new MatchUnder(amount);
     }

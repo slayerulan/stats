@@ -12,11 +12,11 @@ public class FirstPeriodLooserUnderBlock extends GeneralBetContainer {
 
     public FirstPeriodLooserUnderBlock() {
         super(Arrays.asList(
-                new FirstPeriodLooserUnderSingleBlock(0),
-                new FirstPeriodLooserUnderSingleBlock(1),
-                new FirstPeriodLooserUnderSingleBlock(2),
-                new FirstPeriodLooserUnderSingleBlock(3),
-                new FirstPeriodLooserUnderSingleBlock(4)
+                new FirstPeriodLooserUnderSingleBlock(0.5),
+                new FirstPeriodLooserUnderSingleBlock(1.5),
+                new FirstPeriodLooserUnderSingleBlock(2.5),
+                new FirstPeriodLooserUnderSingleBlock(3.5),
+                new FirstPeriodLooserUnderSingleBlock(4.5)
         ));
     }
 

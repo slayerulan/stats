@@ -11,9 +11,9 @@ import com.savik.football.model.Who;
  */
 public class MatchLoserHandicap extends GeneralBet {
 
-    private int amount;
+    private double amount;
 
-    public MatchLoserHandicap(int amount) {
+    public MatchLoserHandicap(double amount) {
         this.amount = amount;
     }
 

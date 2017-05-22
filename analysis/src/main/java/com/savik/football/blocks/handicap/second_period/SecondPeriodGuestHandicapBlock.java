@@ -12,9 +12,9 @@ public class SecondPeriodGuestHandicapBlock extends GeneralBetContainer {
 
     public SecondPeriodGuestHandicapBlock() {
         super(Arrays.asList(
-                new SecondPeriodGuestHandicapSingleBlock(1),
-                new SecondPeriodGuestHandicapSingleBlock(2),
-                new SecondPeriodGuestHandicapSingleBlock(3)
+                new SecondPeriodGuestHandicapSingleBlock(1.5),
+                new SecondPeriodGuestHandicapSingleBlock(2.5),
+                new SecondPeriodGuestHandicapSingleBlock(3.5)
         ));
     }
 

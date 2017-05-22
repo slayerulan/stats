@@ -6,9 +6,9 @@ import com.savik.football.model.Who;
 
 public class SecondPeriodLoserOver extends GeneralBet {
 
-    private int amount;
+    private double amount;
 
-    public SecondPeriodLoserOver(int amount) {
+    public SecondPeriodLoserOver(double amount) {
         this.amount = amount;
     }
 

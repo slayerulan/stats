@@ -9,7 +9,7 @@ import com.savik.football.blocks.GeneralBetContainer;
  */
 public class FavoriteOverSingleBlock extends GeneralBetContainer {
 
-    public FavoriteOverSingleBlock(int amount) {
+    public FavoriteOverSingleBlock(double amount) {
         super(new MatchFavoriteOver(amount));
     }
 

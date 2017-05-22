@@ -12,9 +12,9 @@ public class MatchLoserHandicapBlock extends GeneralBetContainer {
 
     public MatchLoserHandicapBlock() {
         super(Arrays.asList(
-                new MatchLoserHandicapSingleBlock(1),
-                new MatchLoserHandicapSingleBlock(2),
-                new MatchLoserHandicapSingleBlock(3)
+                new MatchLoserHandicapSingleBlock(1.5),
+                new MatchLoserHandicapSingleBlock(2.5),
+                new MatchLoserHandicapSingleBlock(3.5)
         ));
     }
 

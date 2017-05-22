@@ -10,7 +10,7 @@ import com.savik.football.blocks.GeneralBetContainer;
  */
 public class FirstGoalTimeBeforeSingleBlock extends GeneralBetContainer {
 
-    public FirstGoalTimeBeforeSingleBlock(int amount) {
+    public FirstGoalTimeBeforeSingleBlock(double amount) {
         super(new FirstGoalTimeBefore(amount));
     }
 

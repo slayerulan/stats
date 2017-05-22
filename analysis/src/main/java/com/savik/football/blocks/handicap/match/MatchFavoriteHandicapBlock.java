@@ -12,9 +12,9 @@ public class MatchFavoriteHandicapBlock extends GeneralBetContainer {
 
     public MatchFavoriteHandicapBlock() {
         super(Arrays.asList(
-                new MatchFavoriteHandicapSingleBlock(1),
-                new MatchFavoriteHandicapSingleBlock(2),
-                new MatchFavoriteHandicapSingleBlock(3)
+                new MatchFavoriteHandicapSingleBlock(1.5),
+                new MatchFavoriteHandicapSingleBlock(2.5),
+                new MatchFavoriteHandicapSingleBlock(3.5)
         ));
     }
 

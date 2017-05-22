@@ -5,9 +5,9 @@ import com.savik.football.model.Match;
 
 public class LastGoalTimeAfter extends GeneralBet {
 
-    int amount;
+    double amount;
 
-    public LastGoalTimeAfter(int amount) {
+    public LastGoalTimeAfter(double amount) {
         this.amount = amount;
     }
 

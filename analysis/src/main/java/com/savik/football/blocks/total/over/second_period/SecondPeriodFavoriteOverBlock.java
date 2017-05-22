@@ -12,11 +12,11 @@ public class SecondPeriodFavoriteOverBlock extends GeneralBetContainer {
 
     public SecondPeriodFavoriteOverBlock() {
         super(Arrays.asList(
-                new SecondPeriodFavoriteOverSingleBlock(0),
-                new SecondPeriodFavoriteOverSingleBlock(1),
-                new SecondPeriodFavoriteOverSingleBlock(2),
-                new SecondPeriodFavoriteOverSingleBlock(3),
-                new SecondPeriodFavoriteOverSingleBlock(4)
+                new SecondPeriodFavoriteOverSingleBlock(0.5),
+                new SecondPeriodFavoriteOverSingleBlock(1.5),
+                new SecondPeriodFavoriteOverSingleBlock(2.5),
+                new SecondPeriodFavoriteOverSingleBlock(3.5),
+                new SecondPeriodFavoriteOverSingleBlock(4.5)
         ));
     }
 

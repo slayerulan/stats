@@ -6,9 +6,9 @@ import com.savik.football.model.Who;
 
 public class SecondPeriodFavoriteOver extends GeneralBet {
 
-    private int amount;
+    private double amount;
 
-    public SecondPeriodFavoriteOver(int amount) {
+    public SecondPeriodFavoriteOver(double amount) {
         this.amount = amount;
     }
 

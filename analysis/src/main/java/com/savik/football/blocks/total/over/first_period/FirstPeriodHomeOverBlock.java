@@ -12,11 +12,11 @@ public class FirstPeriodHomeOverBlock extends GeneralBetContainer {
 
     public FirstPeriodHomeOverBlock() {
         super(Arrays.asList(
-                new FirstPeriodHomeOverSingleBlock(0),
-                new FirstPeriodHomeOverSingleBlock(1),
-                new FirstPeriodHomeOverSingleBlock(2),
-                new FirstPeriodHomeOverSingleBlock(3),
-                new FirstPeriodHomeOverSingleBlock(4)
+                new FirstPeriodHomeOverSingleBlock(0.5),
+                new FirstPeriodHomeOverSingleBlock(1.5),
+                new FirstPeriodHomeOverSingleBlock(2.5),
+                new FirstPeriodHomeOverSingleBlock(3.5),
+                new FirstPeriodHomeOverSingleBlock(4.5)
         ));
     }
 

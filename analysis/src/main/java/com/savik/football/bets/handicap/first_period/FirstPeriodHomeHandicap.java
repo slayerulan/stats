@@ -10,9 +10,9 @@ import com.savik.football.model.Period;
  */
 public class FirstPeriodHomeHandicap extends GeneralBet {
 
-    private int amount;
+    private double amount;
 
-    public FirstPeriodHomeHandicap(int amount) {
+    public FirstPeriodHomeHandicap(double amount) {
         this.amount = amount;
     }
 
