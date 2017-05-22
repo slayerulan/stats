@@ -15,6 +15,8 @@ public abstract class GeneralBetContainer {
 
     private Boolean leaf;
 
+    private String type;
+
     private Integer analyzedMatchesAmount;
 
     private Integer skippedMatchesAmount;

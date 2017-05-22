@@ -12,6 +12,8 @@ public class MatchHomeHandicapBlock extends GeneralBetContainer {
 
     public MatchHomeHandicapBlock() {
         super(Arrays.asList(
+                new MatchHomeHandicapSingleBlock(-2),
+                new MatchHomeHandicapSingleBlock(-1),
                 new MatchHomeHandicapSingleBlock(1),
                 new MatchHomeHandicapSingleBlock(2),
                 new MatchHomeHandicapSingleBlock(3)

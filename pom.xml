@@ -13,6 +13,7 @@
         <module>infrastructure</module>
         <module>parser</module>
         <module>analysis</module>
+        <module>query</module>
     </modules>
 
     <parent>
