@@ -13,5 +13,7 @@ public class SecondPeriodHomeOverSingleBlock extends GeneralBetContainer {
         super(new SecondPeriodHomeOver(amount));
     }
 
-
+    public SecondPeriodHomeOverSingleBlock(double amount, String type) {
+        super(new SecondPeriodHomeOver(amount), type);
+    }
 }

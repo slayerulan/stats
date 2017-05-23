@@ -13,4 +13,8 @@ public class HomeOverSingleBlock extends GeneralBetContainer {
         super(new MatchHomeOver(amount));
     }
 
+    public HomeOverSingleBlock(double amount, String type) {
+        super(new MatchHomeOver(amount), type);
+    }
+
 }
