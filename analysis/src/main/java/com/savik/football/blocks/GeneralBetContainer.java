@@ -2,9 +2,10 @@ package com.savik.football.blocks;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.savik.football.bets.GeneralBet;
 import com.savik.football.model.Match;
-import lombok.Getter;
+import lombok.*;
 
 @Getter
 public abstract class GeneralBetContainer {
@@ -46,6 +47,13 @@ public abstract class GeneralBetContainer {
         this.type = type;
     }
 
+    @JsonProperty("percentage")
+    public Integer getPercentage() {
+        if (!leaf || analyzedMatchesAmount == 0) {
+            return null;
+        }
+        return (successfullyMatchesAmount * 100) / analyzedMatchesAmount;
+    }
 
     public void check(Match match) {
         if (leaf) {

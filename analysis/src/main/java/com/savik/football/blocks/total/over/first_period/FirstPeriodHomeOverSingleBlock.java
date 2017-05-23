@@ -10,7 +10,7 @@ import com.savik.football.blocks.GeneralBetContainer;
 public class FirstPeriodHomeOverSingleBlock extends GeneralBetContainer {
 
     public FirstPeriodHomeOverSingleBlock(double amount) {
-        super(new FirstPeriodHomeOver(amount), "Команда забьет в 1 тайме");
+        super(new FirstPeriodHomeOver(amount));
     }
 
 
