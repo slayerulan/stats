@@ -2,7 +2,9 @@ package com.savik.football.bets.goals.match;
 
 import com.savik.football.bets.GeneralBet;
 import com.savik.football.model.Match;
+import lombok.*;
 
+@Getter
 public class GoalBetweenTime extends GeneralBet {
 
     int from, before;

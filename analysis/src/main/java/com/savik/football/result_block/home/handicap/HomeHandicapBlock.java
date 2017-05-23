@@ -18,6 +18,6 @@ public class HomeHandicapBlock extends GeneralBetContainer {
                 new MatchHomeHandicapBlock(),
                 new FirstPeriodHomeHandicapBlock(),
                 new SecondPeriodHomeHandicapBlock()
-        ));
+        ), "Форы при игре дома");
     }
 }

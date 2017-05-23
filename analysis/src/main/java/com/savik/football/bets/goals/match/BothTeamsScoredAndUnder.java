@@ -4,7 +4,9 @@ import com.savik.football.bets.GeneralBet;
 import com.savik.football.bets.total.over.match.MatchOver;
 import com.savik.football.bets.total.under.match.MatchUnder;
 import com.savik.football.model.Match;
+import lombok.*;
 
+@Getter
 public class BothTeamsScoredAndUnder extends GeneralBet {
 
     private BothTeamsScored bothTeamsScored;

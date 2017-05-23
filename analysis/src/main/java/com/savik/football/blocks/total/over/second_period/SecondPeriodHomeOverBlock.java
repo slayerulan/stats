@@ -17,7 +17,7 @@ public class SecondPeriodHomeOverBlock extends GeneralBetContainer {
                 new SecondPeriodHomeOverSingleBlock(2.5),
                 new SecondPeriodHomeOverSingleBlock(3.5),
                 new SecondPeriodHomeOverSingleBlock(4.5)
-        ));
+        ), "Тотал команды во 2 тайме при игре дома");
     }
 
 

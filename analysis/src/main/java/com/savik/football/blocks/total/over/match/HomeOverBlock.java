@@ -17,7 +17,7 @@ public class HomeOverBlock extends GeneralBetContainer {
                 new HomeOverSingleBlock(2.5),
                 new HomeOverSingleBlock(3.5),
                 new HomeOverSingleBlock(4.5)
-        ));
+        ), "Тотал команды в матче при игре дома");
     }
 
 

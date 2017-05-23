@@ -2,7 +2,9 @@ package com.savik.football.bets.total.periods;
 
 import com.savik.football.bets.GeneralBet;
 import com.savik.football.model.Match;
+import lombok.*;
 
+@Getter
 public class FirstPeriodMostGoals extends GeneralBet {
 
 

@@ -4,7 +4,9 @@ import com.savik.football.bets.GeneralBet;
 import com.savik.football.bets.total.over.first_period.FirstPeriodFavoriteOver;
 import com.savik.football.bets.total.over.second_period.SecondPeriodFavoriteOver;
 import com.savik.football.model.Match;
+import lombok.*;
 
+@Getter
 public class FavoriteScoredBothPeriods extends GeneralBet {
 
     private FirstPeriodFavoriteOver firstPeriodFavoriteOver;

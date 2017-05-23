@@ -6,7 +6,9 @@ import com.savik.football.bets.total.over.match.MatchGuestOver;
 import com.savik.football.bets.total.over.match.MatchHomeOver;
 import com.savik.football.bets.total.over.second_period.SecondPeriodHomeOver;
 import com.savik.football.model.Match;
+import lombok.*;
 
+@Getter
 public class BothTeamsScored extends GeneralBet {
 
     private MatchHomeOver matchHomeOver;
@@ -14,8 +16,8 @@ public class BothTeamsScored extends GeneralBet {
     private MatchGuestOver matchGuestOver;
 
     public BothTeamsScored() {
-        matchHomeOver = new MatchHomeOver(0);
-        matchGuestOver = new MatchGuestOver(0);
+        matchHomeOver = new MatchHomeOver(0.5);
+        matchGuestOver = new MatchGuestOver(0.5);
     }
 
     @Override

@@ -4,7 +4,9 @@ import java.util.Objects;
 
 import com.savik.football.bets.GeneralBet;
 import com.savik.football.model.Match;
+import lombok.*;
 
+@Getter
 public class DrawInPeriodsGoals extends GeneralBet {
 
 

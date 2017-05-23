@@ -2,7 +2,9 @@ package com.savik.football.bets.result.first_period;
 
 import com.savik.football.bets.GeneralBet;
 import com.savik.football.model.Match;
+import lombok.*;
 
+@Getter
 public class FirstPeriodDraw extends GeneralBet {
 
     public FirstPeriodDraw() {

@@ -16,7 +16,7 @@ public class SecondPeriodHomeHandicapBlock extends GeneralBetContainer {
                 new SecondPeriodHomeHandicapSingleBlock(-1.5),
                 new SecondPeriodHomeHandicapSingleBlock(1.5),
                 new SecondPeriodHomeHandicapSingleBlock(2.5)
-        ));
+        ), "Фора во 2 тайме при игре дома");
     }
 
 

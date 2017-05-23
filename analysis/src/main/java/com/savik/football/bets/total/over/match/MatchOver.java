@@ -2,7 +2,9 @@ package com.savik.football.bets.total.over.match;
 
 import com.savik.football.bets.GeneralBet;
 import com.savik.football.model.Match;
+import lombok.*;
 
+@Getter
 public class MatchOver extends GeneralBet {
     private double amount;
 

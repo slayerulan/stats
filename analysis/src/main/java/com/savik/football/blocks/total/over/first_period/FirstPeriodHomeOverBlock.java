@@ -17,7 +17,7 @@ public class FirstPeriodHomeOverBlock extends GeneralBetContainer {
                 new FirstPeriodHomeOverSingleBlock(2.5),
                 new FirstPeriodHomeOverSingleBlock(3.5),
                 new FirstPeriodHomeOverSingleBlock(4.5)
-        ));
+        ), "Тотал команды в 1 тайме при игре дома");
     }
 
 

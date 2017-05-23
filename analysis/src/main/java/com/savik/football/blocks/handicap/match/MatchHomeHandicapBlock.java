@@ -17,7 +17,7 @@ public class MatchHomeHandicapBlock extends GeneralBetContainer {
                 new MatchHomeHandicapSingleBlock(1.5),
                 new MatchHomeHandicapSingleBlock(2.5),
                 new MatchHomeHandicapSingleBlock(3.5)
-        ));
+        ), "Фора в матче при игре дома");
     }
 
 

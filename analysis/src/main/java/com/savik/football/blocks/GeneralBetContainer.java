@@ -28,12 +28,22 @@ public abstract class GeneralBetContainer {
         this.leaf = false;
     }
 
+    public GeneralBetContainer(List<GeneralBetContainer> childrenBetBlocks, String type) {
+        this(childrenBetBlocks);
+        this.type = type;
+    }
+
     public GeneralBetContainer(GeneralBet bet) {
         this.bet = bet;
         this.leaf = true;
         this.analyzedMatchesAmount = 0;
         this.skippedMatchesAmount = 0;
         this.successfullyMatchesAmount = 0;
+    }
+
+    public GeneralBetContainer(GeneralBet bet, String type) {
+        this(bet);
+        this.type = type;
     }
 
 

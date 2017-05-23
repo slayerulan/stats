@@ -4,7 +4,9 @@ import com.savik.football.bets.GeneralBet;
 import com.savik.football.bets.total.over.first_period.FirstPeriodLoserOver;
 import com.savik.football.bets.total.over.second_period.SecondPeriodLoserOver;
 import com.savik.football.model.Match;
+import lombok.*;
 
+@Getter
 public class LoserScoredBothPeriods extends GeneralBet {
 
     private FirstPeriodLoserOver firstPeriodLoserOver;

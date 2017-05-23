@@ -3,7 +3,9 @@ package com.savik.football.bets.total.under.match;
 import com.savik.football.bets.GeneralBet;
 import com.savik.football.model.Match;
 import com.savik.football.model.Who;
+import lombok.*;
 
+@Getter
 public class MatchFavoriteUnder extends GeneralBet {
 
     private double amount;

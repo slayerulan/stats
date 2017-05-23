@@ -4,11 +4,13 @@ import com.savik.football.bets.GeneralBet;
 import com.savik.football.model.Match;
 import com.savik.football.model.Period;
 import com.savik.football.model.Who;
+import lombok.*;
 
 /**
  * @author Savushkin Yauheni
  * @since 17.05.2017
  */
+@Getter
 public class FirstPeriodLoserHandicap extends GeneralBet {
 
     private double amount;
