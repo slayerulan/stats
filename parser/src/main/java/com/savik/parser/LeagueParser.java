@@ -12,6 +12,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StreamUtils;
+import org.springframework.util.StringUtils;
 
 /**
  * @author Savushkin Yauheni
@@ -35,6 +37,11 @@ public class LeagueParser {
         }
         allMatchesHtml.append(matchesData.toString());
 
+        Element seasonData = document.getElementById("tournament-page-season-results");
+        if (seasonData == null || StringUtils.isEmpty(seasonData.text())) {
+            throw new ParseException("tournament-page-season-results is empty, league url = " + resultPageUrl);
+        }
+
         Element currentTournament = document.select("ul.submenu li.active-tournament").first();
         if (currentTournament == null) {
             throw new ParseException("active-tournament element not found, league url = " + resultPageUrl);
@@ -44,7 +51,7 @@ public class LeagueParser {
         }
         String moreMatchesUrlPattern = new StringBuilder("http://d.myscore.ru/x/feed/tr_")
                 .append(currentTournament.attr("data-mt"))
-                .append("_167_%s_3_ru_1").toString();
+                .append("_" + seasonData.text() + "_%s_3_ru_1").toString();
         int counter = 1;
         while (true) {
             String moreMatchesUrl = String.format(moreMatchesUrlPattern, counter);

@@ -5,5 +5,6 @@ package com.savik.football.model;
  * @since 10.04.2017
  */
 public enum  Championship  {
-    LA
+    LA,
+    SERIE_A
 }
