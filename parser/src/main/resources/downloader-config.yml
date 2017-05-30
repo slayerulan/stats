@@ -4,3 +4,4 @@ url:
   statsinfo: http://d.myscore.ru/x/feed/d_st_%s_ru_1
   summary: http://www.myscore.ru/match/%s/#match-summary
   odds: http://d.myscore.com.ua/x/feed/d_od_%s_ru_1_eu
+  matches: http://d.myscore.com.ua/x/feed/f_1_%s_3_ru_1

@@ -1,13 +1,8 @@
 package com.savik.parser;
 
-import javax.annotation.PostConstruct;
-
-import lombok.*;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 /**
@@ -15,9 +10,6 @@ import org.springframework.stereotype.Component;
  * @since 13.04.2017
  */
 @Component
-//@EnableConfigurationProperties
-//@PropertySource("classpath:downloader-config.yml")
-//@ConfigurationProperties("url")
 @Configuration
 @Getter
 public class DownloaderConfiguration {
@@ -33,6 +25,9 @@ public class DownloaderConfiguration {
 
     @Value("${url.odds}")
     private String oddsUrlTemplate;
+
+    @Value("${url.matches}")
+    private String matchesScheduleTemplate;
 
     @Value("${fsign}")
     private String fsign;

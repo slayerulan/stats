@@ -1,12 +1,16 @@
 package com.savik.parser;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Service
 public class FutureMatchesParser {
 
 
@@ -15,11 +19,17 @@ public class FutureMatchesParser {
     public static final String JS_INDEX = "÷";
     public static final String LEAGUE_INDEX = "ZA";
     public static final String EVENT_INDEX = "AA";
+    public static final String HOME_INDEX = "CX";
+    public static final String GUEST_INDEX = "AF";
+    public static final String TOURNAMENT_INDEX = "ZEE";
 
 
-    public static void main(String[] args) {
+    @Autowired
+    Downloader downloader;
 
-        String response = "";
+    public void parse() {
+
+        String response = downloader.downloadMatchesSchedule(1).body().html();
 
         List<String> rows = Arrays.asList(response.split(JS_ROW_END));
         for (String s : rows) {
@@ -34,25 +44,36 @@ public class FutureMatchesParser {
                 indexValue = index.get(1);
             }
 
+            LeagueItem league;
             if (LEAGUE_INDEX.equalsIgnoreCase(indexName)) {
                 Map<String, String> tmp = new HashMap<>();
                 for (int i = 0; i < row.size(); i++) {
                     List<String> rowParts = Arrays.asList(row.get(i).split(JS_INDEX));
-                    if(rowParts.size() == 2) {
+                    if (rowParts.size() == 2) {
                         tmp.put(rowParts.get(0), rowParts.get(1));
                     }
                 }
+                league = LeagueItem.builder()
+                        .leagueId(tmp.get(TOURNAMENT_INDEX))
+                        .build();
                 // convert to league entity
             } else if (EVENT_INDEX.equalsIgnoreCase(indexName)) {
 
                 Map<String, String> tmp = new HashMap<>();
                 for (int i = 1; i < row.size(); i++) {
                     List<String> rowParts = Arrays.asList(row.get(i).split(JS_INDEX));
-                    if(rowParts.size() == 2) {
+                    if (rowParts.size() == 2) {
                         tmp.put(rowParts.get(0), rowParts.get(1));
                     }
                 }
                 // CX - Домашнаяя, AF - гости, AA - id
+
+                EventItem event = EventItem.builder()
+                        .homeName(tmp.get(HOME_INDEX))
+                        .guestName(tmp.get(GUEST_INDEX))
+                        .eventId(tmp.get(EVENT_INDEX))
+                        .eventDate(LocalDateTime.parse())
+                        .build();
 
             }
 
