@@ -3,6 +3,8 @@ logging:
     org:
       hibernate: trace
 
+server:
+    port: 9999
 
 spring:
     datasource:

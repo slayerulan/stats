@@ -23,6 +23,6 @@ public class Parser {
 
     @PostConstruct
     public void parse() {
-        futureMatchesParser.parse();
+        futureMatchesParser.parse(1);
     }
 }

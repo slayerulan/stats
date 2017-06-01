@@ -1,15 +1,20 @@
 package com.savik.parser;
 
-import lombok.Builder;
-import lombok.Getter;
-
 import java.time.LocalDateTime;
+
+import lombok.*;
 
 @Getter
 @Builder
 public class EventItem {
+
     String eventId;
+
     String homeName;
+
     String guestName;
+
+    String leagueId;
+
     LocalDateTime eventDate;
 }

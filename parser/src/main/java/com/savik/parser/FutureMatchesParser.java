@@ -1,50 +1,53 @@
 package com.savik.parser;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 @Service
 public class FutureMatchesParser {
 
+    private static final String JS_ROW_END = "~";
 
-    public static final String JS_ROW_END = "~";
-    public static final String JS_CELL_END = "¬";
-    public static final String JS_INDEX = "÷";
-    public static final String LEAGUE_INDEX = "ZA";
-    public static final String EVENT_INDEX = "AA";
-    public static final String HOME_INDEX = "CX";
-    public static final String GUEST_INDEX = "AF";
-    public static final String TOURNAMENT_INDEX = "ZEE";
+    private static final String JS_CELL_END = "¬";
 
+    private static final String JS_INDEX = "÷";
+
+    private static final String LEAGUE_INDEX = "ZA";
+
+    private static final String EVENT_INDEX = "AA";
+
+    private static final String HOME_INDEX = "CX";
+
+    private static final String GUEST_INDEX = "AF";
+
+    private static final String TOURNAMENT_INDEX = "ZEE";
+
+    private static final String DATE_INDEX = "AD";
 
     @Autowired
     Downloader downloader;
 
-    public void parse() {
+    public List<EventItem> parse(int offsetDays) {
 
-        String response = downloader.downloadMatchesSchedule(1).body().html();
+        String response = downloader.downloadMatchesSchedule(offsetDays).body().html();
 
         List<String> rows = Arrays.asList(response.split(JS_ROW_END));
+        String leagueId = null;
+        List<EventItem> eventItems = new ArrayList<>();
         for (String s : rows) {
             List<String> row = Arrays.asList(s.split(JS_CELL_END));
             List<String> index = Arrays.asList(row.get(0).split(JS_INDEX));
             String indexName = null;
-            String indexValue = null;
             if (!index.isEmpty() && StringUtils.hasLength(index.get(0))) {
                 indexName = index.get(0);
             }
-            if (index.size() > 2 && StringUtils.hasLength(index.get(1))) {
-                indexValue = index.get(1);
-            }
 
-            LeagueItem league;
             if (LEAGUE_INDEX.equalsIgnoreCase(indexName)) {
                 Map<String, String> tmp = new HashMap<>();
                 for (int i = 0; i < row.size(); i++) {
@@ -53,14 +56,11 @@ public class FutureMatchesParser {
                         tmp.put(rowParts.get(0), rowParts.get(1));
                     }
                 }
-                league = LeagueItem.builder()
-                        .leagueId(tmp.get(TOURNAMENT_INDEX))
-                        .build();
-                // convert to league entity
+                leagueId = tmp.get(TOURNAMENT_INDEX);
             } else if (EVENT_INDEX.equalsIgnoreCase(indexName)) {
 
                 Map<String, String> tmp = new HashMap<>();
-                for (int i = 1; i < row.size(); i++) {
+                for (int i = 0; i < row.size(); i++) {
                     List<String> rowParts = Arrays.asList(row.get(i).split(JS_INDEX));
                     if (rowParts.size() == 2) {
                         tmp.put(rowParts.get(0), rowParts.get(1));
@@ -68,18 +68,23 @@ public class FutureMatchesParser {
                 }
                 // CX - Домашнаяя, AF - гости, AA - id
 
-                EventItem event = EventItem.builder()
+                EventItem event = EventItem
+                        .builder()
                         .homeName(tmp.get(HOME_INDEX))
                         .guestName(tmp.get(GUEST_INDEX))
                         .eventId(tmp.get(EVENT_INDEX))
-                        .eventDate(LocalDateTime.parse())
+                        .leagueId(leagueId)
+                        .eventDate(LocalDateTime.ofInstant(
+                                Instant.ofEpochSecond(Long.valueOf(tmp.get(DATE_INDEX))),
+                                ZoneId.systemDefault()
+                        ))
                         .build();
+                eventItems.add(event);
 
             }
 
         }
-
-
+        return eventItems;
     }
 }
 
