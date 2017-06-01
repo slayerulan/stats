@@ -1,8 +1,7 @@
 package com.savik.football.bets.total.over.match;
 
 import com.savik.football.bets.GeneralBet;
-import com.savik.football.model.Match;
-import com.savik.football.model.Who;
+import com.savik.football.model.FootballMatch;
 import lombok.*;
 
 @Getter
@@ -15,13 +14,15 @@ public class MatchLoserOver extends GeneralBet {
     }
 
     @Override
-    public boolean canAnalyze(Match match) {
-        return match.getBookieStats().hasFavorite() &&
-               match.getMatchInfo().getMatch().getLoserScore(match.getBookieStats().getFavorite()) != null;
+    public boolean canAnalyze(FootballMatch footballMatch) {
+        return footballMatch.getBookieStats().hasFavorite() &&
+               footballMatch
+                       .getMatchInfo().getMatch().getLoserScore(footballMatch.getBookieStats().getFavorite()) != null;
     }
 
     @Override
-    public boolean check(Match match) {
-        return match.getMatchInfo().getMatch().getLoserScore(match.getBookieStats().getFavorite()) > amount;
+    public boolean check(FootballMatch footballMatch) {
+        return footballMatch
+                       .getMatchInfo().getMatch().getLoserScore(footballMatch.getBookieStats().getFavorite()) > amount;
     }
 }

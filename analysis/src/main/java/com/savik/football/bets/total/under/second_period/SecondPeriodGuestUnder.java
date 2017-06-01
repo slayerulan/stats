@@ -1,7 +1,7 @@
 package com.savik.football.bets.total.under.second_period;
 
 import com.savik.football.bets.GeneralBet;
-import com.savik.football.model.Match;
+import com.savik.football.model.FootballMatch;
 import lombok.*;
 
 @Getter
@@ -13,12 +13,12 @@ public class SecondPeriodGuestUnder extends GeneralBet {
     }
 
     @Override
-    public boolean canAnalyze(Match match) {
-        return match.getMatchInfo().getSecondPeriod().getGuestScore() != null;
+    public boolean canAnalyze(FootballMatch footballMatch) {
+        return footballMatch.getMatchInfo().getSecondPeriod().getGuestScore() != null;
     }
 
     @Override
-    public boolean check(Match match) {
-        return match.getMatchInfo().getSecondPeriod().getGuestScore() < amount;
+    public boolean check(FootballMatch footballMatch) {
+        return footballMatch.getMatchInfo().getSecondPeriod().getGuestScore() < amount;
     }
 }

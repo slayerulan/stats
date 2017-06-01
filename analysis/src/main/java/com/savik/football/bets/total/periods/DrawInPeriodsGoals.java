@@ -3,7 +3,7 @@ package com.savik.football.bets.total.periods;
 import java.util.Objects;
 
 import com.savik.football.bets.GeneralBet;
-import com.savik.football.model.Match;
+import com.savik.football.model.FootballMatch;
 import lombok.*;
 
 @Getter
@@ -14,16 +14,16 @@ public class DrawInPeriodsGoals extends GeneralBet {
     }
 
     @Override
-    public boolean canAnalyze(Match match) {
-        return match.getMatchInfo().getFirstPeriod().getTotalScore() != null &&
-               match.getMatchInfo().getSecondPeriod().getTotalScore() != null;
+    public boolean canAnalyze(FootballMatch footballMatch) {
+        return footballMatch.getMatchInfo().getFirstPeriod().getTotalScore() != null &&
+               footballMatch.getMatchInfo().getSecondPeriod().getTotalScore() != null;
     }
 
     @Override
-    public boolean check(Match match) {
+    public boolean check(FootballMatch footballMatch) {
         return Objects.equals(
-                match.getMatchInfo().getSecondPeriod().getTotalScore(),
-                match.getMatchInfo().getFirstPeriod().getTotalScore()
+                footballMatch.getMatchInfo().getSecondPeriod().getTotalScore(),
+                footballMatch.getMatchInfo().getFirstPeriod().getTotalScore()
         );
     }
 }

@@ -1,7 +1,7 @@
 package com.savik.football.bets.total.over.first_period;
 
 import com.savik.football.bets.GeneralBet;
-import com.savik.football.model.Match;
+import com.savik.football.model.FootballMatch;
 import lombok.*;
 
 @Getter
@@ -14,13 +14,17 @@ public class FirstPeriodFavoriteOver extends GeneralBet {
     }
 
     @Override
-    public boolean canAnalyze(Match match) {
-        return match.getBookieStats().hasFavorite() &&
-               match.getMatchInfo().getFirstPeriod().getFavoriteScore(match.getBookieStats().getFavorite()) != null;
+    public boolean canAnalyze(FootballMatch footballMatch) {
+        return footballMatch.getBookieStats().hasFavorite() &&
+               footballMatch
+                       .getMatchInfo().getFirstPeriod().getFavoriteScore(footballMatch
+                       .getBookieStats().getFavorite()) != null;
     }
 
     @Override
-    public boolean check(Match match) {
-        return match.getMatchInfo().getFirstPeriod().getFavoriteScore(match.getBookieStats().getFavorite()) > amount;
+    public boolean check(FootballMatch footballMatch) {
+        return footballMatch
+                       .getMatchInfo().getFirstPeriod().getFavoriteScore(footballMatch
+                        .getBookieStats().getFavorite()) > amount;
     }
 }

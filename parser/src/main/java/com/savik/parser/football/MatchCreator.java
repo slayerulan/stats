@@ -24,11 +24,11 @@ public class MatchCreator {
 
     MatchInfoParser.StatsInfoDto secondPeriodStatsInfoDto;
 
-    Team homeTeam;
+    FootballTeam homeTeam;
 
-    Team guestTeam;
+    FootballTeam guestTeam;
 
-    Championship championship;
+    FootballChampionship championship;
 
     Season season;
 
@@ -36,22 +36,22 @@ public class MatchCreator {
 
     String myscoreCode;
 
-    BookieStats bookieStats;
+    FootballBookieStats bookieStats;
 
-    public Match createMatch() {
-        return Match.builder()
-                .myscoreCode(myscoreCode)
-                .season(season)
-                .championship(championship)
-                .date(date)
-                .matchInfo(createMatchInfo())
-                .homeTeam(homeTeam)
-                .guestTeam(guestTeam)
-                .bookieStats(bookieStats)
-                .build();
+    public FootballMatch createMatch() {
+        return FootballMatch.builder()
+                            .myscoreCode(myscoreCode)
+                            .season(season)
+                            .championship(championship)
+                            .date(date)
+                            .matchInfo(createMatchInfo())
+                            .homeTeam(homeTeam)
+                            .guestTeam(guestTeam)
+                            .bookieStats(bookieStats)
+                            .build();
     }
 
-    private MatchInfo createMatchInfo() {
+    private FootballMatchInfo createMatchInfo() {
         Period firstPeriod = createPeriod(
                 firstPeriodGeneralInfoDto,
                 firstPeriodStatsInfoDto,
@@ -63,11 +63,11 @@ public class MatchCreator {
                 Period.PeriodStatus.SECOND
         );
         Period match = createPeriod(matchGeneralInfoDto, matchStatsInfoDto, Period.PeriodStatus.MATCH);
-        return MatchInfo.builder()
-                .firstPeriod(firstPeriod)
-                .secondPeriod(secondPeriod)
-                .match(match)
-                .build();
+        return FootballMatchInfo.builder()
+                                .firstPeriod(firstPeriod)
+                                .secondPeriod(secondPeriod)
+                                .match(match)
+                                .build();
     }
 
     private Period createPeriod(
@@ -80,28 +80,28 @@ public class MatchCreator {
             Update.from(statsDto).to(period);
         }
 
-        Set<Card> cards = null;
-        Set<Goal> goals = null;
+        Set<FootballCard> footballCards = null;
+        Set<FootballGoal> footballGoals = null;
         if (periodStatus != Period.PeriodStatus.MATCH) {
-            cards = infoDto
-                    .getCards()
+            footballCards = infoDto
+                    .getFootballCards()
                     .stream()
                     .map(c -> c.toBuilder().team(c.getWho() == Who.HOME ? homeTeam : guestTeam).build())
                     .collect(Collectors.toSet());
 
-            goals = infoDto
-                    .getGoals()
+            footballGoals = infoDto
+                    .getFootballGoals()
                     .stream()
                     .map(c -> c.toBuilder().team(c.getWhoScored() == Who.HOME ? homeTeam : guestTeam).build())
                     .collect(Collectors.toSet());
         }
 
 
-        Integer homeScore = (int) infoDto.getGoals().stream().filter(g -> g.getWhoScored() == Who.HOME).count();
-        Integer guestScore = (int) infoDto.getGoals().stream().filter(g -> g.getWhoScored() == Who.GUEST).count();
+        Integer homeScore = (int) infoDto.getFootballGoals().stream().filter(g -> g.getWhoScored() == Who.HOME).count();
+        Integer guestScore = (int) infoDto.getFootballGoals().stream().filter(g -> g.getWhoScored() == Who.GUEST).count();
         return period.toBuilder()
-                .goals(goals)
-                .cards(cards)
+                .goals(footballGoals)
+                .cards(footballCards)
                 .homeScore(homeScore)
                 .guestScore(guestScore)
                 .totalScore(homeScore + guestScore)

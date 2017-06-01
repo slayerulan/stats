@@ -1,6 +1,6 @@
 package com.savik.football.repository;
 
-import com.savik.football.model.Goal;
+import com.savik.football.model.FootballCard;
 import org.springframework.stereotype.Repository;
 import com.savik.repository.JpaEntryRepository;
 
@@ -10,5 +10,5 @@ import com.savik.repository.JpaEntryRepository;
  */
 
 @Repository
-public interface GoalRepository extends JpaEntryRepository<Goal> {
+public interface FootballCardRepository extends JpaEntryRepository<FootballCard> {
 }

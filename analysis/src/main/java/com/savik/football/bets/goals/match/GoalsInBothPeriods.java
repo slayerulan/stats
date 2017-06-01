@@ -3,7 +3,7 @@ package com.savik.football.bets.goals.match;
 import com.savik.football.bets.GeneralBet;
 import com.savik.football.bets.total.over.first_period.FirstPeriodOver;
 import com.savik.football.bets.total.over.second_period.SecondPeriodOver;
-import com.savik.football.model.Match;
+import com.savik.football.model.FootballMatch;
 import lombok.*;
 
 @Getter
@@ -19,12 +19,12 @@ public class GoalsInBothPeriods extends GeneralBet {
     }
 
     @Override
-    public boolean canAnalyze(Match match) {
-        return firstPeriodOver.canAnalyze(match) && secondPeriodOver.canAnalyze(match);
+    public boolean canAnalyze(FootballMatch footballMatch) {
+        return firstPeriodOver.canAnalyze(footballMatch) && secondPeriodOver.canAnalyze(footballMatch);
     }
 
     @Override
-    public boolean check(Match match) {
-        return firstPeriodOver.check(match) && secondPeriodOver.check(match);
+    public boolean check(FootballMatch footballMatch) {
+        return firstPeriodOver.check(footballMatch) && secondPeriodOver.check(footballMatch);
     }
 }

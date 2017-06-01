@@ -25,8 +25,8 @@ public class Parser {
 
 
 
-    @PostConstruct
+    /*@PostConstruct
     public void parse() {
         footballFutureMatchesParser.parse();
-    }
+    }*/
 }

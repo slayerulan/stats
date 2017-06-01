@@ -1,7 +1,7 @@
 package com.savik.parser.football;
 
-import static com.savik.football.model.Card.Type.RED;
-import static com.savik.football.model.Card.Type.YELLOW;
+import static com.savik.football.model.FootballCard.Type.RED;
+import static com.savik.football.model.FootballCard.Type.YELLOW;
 import static org.junit.Assert.*;
 
 import java.time.LocalDateTime;
@@ -10,8 +10,8 @@ import java.util.HashSet;
 
 import com.savik.Application;
 import com.savik.football.model.*;
-import com.savik.football.repository.MatchRepository;
-import com.savik.football.repository.TeamRepository;
+import com.savik.football.repository.FootballMatchRepository;
+import com.savik.football.repository.FootballTeamRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,28 +24,28 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = Application.class)
-public class MatchParserTest {
+public class FootballMatchParserTest {
 
     @Autowired
     MatchParser matchParser;
 
     @Autowired
-    TeamRepository teamRepository;
+    FootballTeamRepository footballTeamRepository;
 
     @Autowired
-    MatchRepository matchRepository;
+    FootballMatchRepository footballMatchRepository;
 
     @Test
     public void testMatchWithoutFirstTimeStats() {
-        Match match = matchParser.parse("v9xniz5h", Championship.LA, Season.S2016);
-        match = matchRepository.save(match);
+        FootballMatch match = matchParser.parse("v9xniz5h", FootballChampionship.LA, Season.S2016);
+        match = footballMatchRepository.save(match);
 
-        Team home = teamRepository.findOneByNameAndChampionship("Эспаньол", Championship.LA);
-        Team guest = teamRepository.findOneByNameAndChampionship("Бетис", Championship.LA);
+        FootballTeam home = footballTeamRepository.findOneByNameAndChampionship("Эспаньол", FootballChampionship.LA);
+        FootballTeam guest = footballTeamRepository.findOneByNameAndChampionship("Бетис", FootballChampionship.LA);
 
         assertEquals(match.getSeason(), Season.S2016);
         assertEquals(match.getMyscoreCode(), "v9xniz5h");
-        assertEquals(match.getChampionship(), Championship.LA);
+        assertEquals(match.getChampionship(), FootballChampionship.LA);
         assertEquals(match.getHomeTeam(), home);
         assertEquals(match.getGuestTeam(), guest);
         assertEquals(match.getBookieStats().getHomeRate(), Double.valueOf(2.2));
@@ -54,12 +54,12 @@ public class MatchParserTest {
         assertEquals(match.getDate(), LocalDateTime.of(2017, 3, 31, 21, 45));
 
 
-        MatchInfo matchInfo = match.getMatchInfo();
+        FootballMatchInfo footballMatchInfo = match.getMatchInfo();
 
         /*
          1 тайм 0-0, без карточек и нет статистики
         * */
-        Period firstPeriod = matchInfo.getFirstPeriod();
+        Period firstPeriod = footballMatchInfo.getFirstPeriod();
         assertEquals(firstPeriod.getHomeScore().intValue(), 0);
         assertEquals(firstPeriod.getGuestScore().intValue(), 0);
         assertEquals(firstPeriod.getTotalScore().intValue(), 0);
@@ -82,7 +82,7 @@ public class MatchParserTest {
         /*
          2 тайм 2-1, 5 желтых карточек
         * */
-        Period secondPeriod = matchInfo.getSecondPeriod();
+        Period secondPeriod = footballMatchInfo.getSecondPeriod();
 
         assertEquals(secondPeriod.getHomeScore().intValue(), 2);
         assertEquals(secondPeriod.getGuestScore().intValue(), 1);
@@ -91,17 +91,17 @@ public class MatchParserTest {
         assertEquals(secondPeriod.getPeriodStatus(), Period.PeriodStatus.SECOND);
         assertEquals(secondPeriod.getGoals().size(), 3);
         assertTrue(secondPeriod.getGoals().containsAll(new HashSet<>(Arrays.asList(
-                Goal.builder().minute(78).whoScored(Who.GUEST).team(guest).build(),
-                Goal.builder().minute(87).whoScored(Who.HOME).team(home).build(),
-                Goal.builder().minute(90).whoScored(Who.HOME).team(home).build()
+                FootballGoal.builder().minute(78).whoScored(Who.GUEST).team(guest).build(),
+                FootballGoal.builder().minute(87).whoScored(Who.HOME).team(home).build(),
+                FootballGoal.builder().minute(90).whoScored(Who.HOME).team(home).build()
         ))));
         assertEquals(secondPeriod.getCards().size(), 5);
         assertTrue(secondPeriod.getCards().containsAll(new HashSet<>(Arrays.asList(
-                Card.builder().minute(76).who(Who.HOME).team(home).type(YELLOW).build(),
-                Card.builder().minute(82).who(Who.HOME).team(home).type(YELLOW).build(),
-                Card.builder().minute(87).who(Who.GUEST).team(guest).type(YELLOW).build(),
-                Card.builder().minute(88).who(Who.HOME).team(home).type(YELLOW).build(),
-                Card.builder().minute(90).who(Who.GUEST).team(guest).type(YELLOW).build()
+                FootballCard.builder().minute(76).who(Who.HOME).team(home).type(YELLOW).build(),
+                FootballCard.builder().minute(82).who(Who.HOME).team(home).type(YELLOW).build(),
+                FootballCard.builder().minute(87).who(Who.GUEST).team(guest).type(YELLOW).build(),
+                FootballCard.builder().minute(88).who(Who.HOME).team(home).type(YELLOW).build(),
+                FootballCard.builder().minute(90).who(Who.GUEST).team(guest).type(YELLOW).build()
         ))));
         assertEquals(secondPeriod.getHomeCorners().intValue(), 4);
         assertEquals(secondPeriod.getGuestCorners().intValue(), 4);
@@ -121,7 +121,7 @@ public class MatchParserTest {
          /*
           матч
         * */
-        Period matchPeriod = matchInfo.getMatch();
+        Period matchPeriod = footballMatchInfo.getMatch();
 
         assertEquals(matchPeriod.getHomeScore().intValue(), 2);
         assertEquals(matchPeriod.getGuestScore().intValue(), 1);
@@ -147,28 +147,28 @@ public class MatchParserTest {
 
     @Test
     public void testMatchWithoutTimesStats() {
-        Match match = matchParser.parse("bcLlhGkn", Championship.LA, Season.S2016);
-        match = matchRepository.save(match);
+        FootballMatch footballMatch = matchParser.parse("bcLlhGkn", FootballChampionship.LA, Season.S2016);
+        footballMatch = footballMatchRepository.save(footballMatch);
 
-        Team home = teamRepository.findOneByNameAndChampionship("Вильярреал", Championship.LA);
-        Team guest = teamRepository.findOneByNameAndChampionship("Эйбар", Championship.LA);
+        FootballTeam home = footballTeamRepository.findOneByNameAndChampionship("Вильярреал", FootballChampionship.LA);
+        FootballTeam guest = footballTeamRepository.findOneByNameAndChampionship("Эйбар", FootballChampionship.LA);
 
-        assertEquals(match.getSeason(), Season.S2016);
-        assertEquals(match.getMyscoreCode(), "bcLlhGkn");
-        assertEquals(match.getChampionship(), Championship.LA);
-        assertEquals(match.getHomeTeam(), home);
-        assertEquals(match.getGuestTeam(), guest);
-        assertEquals(match.getBookieStats().getHomeRate(), Double.valueOf(1.91));
-        assertEquals(match.getBookieStats().getDrawRate(), Double.valueOf(3.5));
-        assertEquals(match.getBookieStats().getGuestRate(), Double.valueOf(4.2));
-        assertEquals(match.getDate(), LocalDateTime.of(2017, 4, 1, 14, 0));
+        assertEquals(footballMatch.getSeason(), Season.S2016);
+        assertEquals(footballMatch.getMyscoreCode(), "bcLlhGkn");
+        assertEquals(footballMatch.getChampionship(), FootballChampionship.LA);
+        assertEquals(footballMatch.getHomeTeam(), home);
+        assertEquals(footballMatch.getGuestTeam(), guest);
+        assertEquals(footballMatch.getBookieStats().getHomeRate(), Double.valueOf(1.91));
+        assertEquals(footballMatch.getBookieStats().getDrawRate(), Double.valueOf(3.5));
+        assertEquals(footballMatch.getBookieStats().getGuestRate(), Double.valueOf(4.2));
+        assertEquals(footballMatch.getDate(), LocalDateTime.of(2017, 4, 1, 14, 0));
 
-        MatchInfo matchInfo = match.getMatchInfo();
+        FootballMatchInfo footballMatchInfo = footballMatch.getMatchInfo();
 
         /*
          1 тайм 1-0, 3 карт. и нет статистики
         * */
-        Period firstPeriod = matchInfo.getFirstPeriod();
+        Period firstPeriod = footballMatchInfo.getFirstPeriod();
         assertEquals(firstPeriod.getHomeScore().intValue(), 1);
         assertEquals(firstPeriod.getGuestScore().intValue(), 0);
         assertEquals(firstPeriod.getTotalScore().intValue(), 1);
@@ -176,13 +176,13 @@ public class MatchParserTest {
         assertEquals(firstPeriod.getPeriodStatus(), Period.PeriodStatus.FIRST);
         assertEquals(firstPeriod.getGoals().size(), 1);
         assertTrue(firstPeriod.getGoals().containsAll(new HashSet<>(Arrays.asList(
-                Goal.builder().minute(18).whoScored(Who.HOME).team(home).build()
+                FootballGoal.builder().minute(18).whoScored(Who.HOME).team(home).build()
         ))));
         assertEquals(firstPeriod.getCards().size(), 3);
         assertTrue(firstPeriod.getCards().containsAll(new HashSet<>(Arrays.asList(
-                Card.builder().minute(10).who(Who.HOME).team(home).type(YELLOW).build(),
-                Card.builder().minute(39).who(Who.HOME).team(home).type(YELLOW).build(),
-                Card.builder().minute(43).who(Who.GUEST).team(guest).type(YELLOW).build()
+                FootballCard.builder().minute(10).who(Who.HOME).team(home).type(YELLOW).build(),
+                FootballCard.builder().minute(39).who(Who.HOME).team(home).type(YELLOW).build(),
+                FootballCard.builder().minute(43).who(Who.GUEST).team(guest).type(YELLOW).build()
         ))));
         assertNull(firstPeriod.getHomeCorners());
         assertNull(firstPeriod.getGuestCorners());
@@ -201,7 +201,7 @@ public class MatchParserTest {
         /*
          2 тайм 1-3, 4 желтых карточек
         * */
-        Period secondPeriod = matchInfo.getSecondPeriod();
+        Period secondPeriod = footballMatchInfo.getSecondPeriod();
 
         assertEquals(secondPeriod.getHomeScore().intValue(), 1);
         assertEquals(secondPeriod.getGuestScore().intValue(), 3);
@@ -210,17 +210,17 @@ public class MatchParserTest {
         assertEquals(secondPeriod.getPeriodStatus(), Period.PeriodStatus.SECOND);
         assertEquals(secondPeriod.getGoals().size(), 4);
         assertTrue(secondPeriod.getGoals().containsAll(new HashSet<>(Arrays.asList(
-                Goal.builder().minute(48).whoScored(Who.GUEST).team(guest).build(),
-                Goal.builder().minute(54).whoScored(Who.GUEST).team(guest).build(),
-                Goal.builder().minute(77).whoScored(Who.GUEST).team(guest).build(),
-                Goal.builder().minute(89).whoScored(Who.HOME).team(home).build()
+                FootballGoal.builder().minute(48).whoScored(Who.GUEST).team(guest).build(),
+                FootballGoal.builder().minute(54).whoScored(Who.GUEST).team(guest).build(),
+                FootballGoal.builder().minute(77).whoScored(Who.GUEST).team(guest).build(),
+                FootballGoal.builder().minute(89).whoScored(Who.HOME).team(home).build()
         ))));
         assertEquals(secondPeriod.getCards().size(), 4);
         assertTrue(secondPeriod.getCards().containsAll(new HashSet<>(Arrays.asList(
-                Card.builder().minute(62).who(Who.GUEST).team(guest).type(YELLOW).build(),
-                Card.builder().minute(66).who(Who.HOME).team(home).type(YELLOW).build(),
-                Card.builder().minute(68).who(Who.GUEST).team(guest).type(YELLOW).build(),
-                Card.builder().minute(91).who(Who.HOME).team(home).type(YELLOW).build()
+                FootballCard.builder().minute(62).who(Who.GUEST).team(guest).type(YELLOW).build(),
+                FootballCard.builder().minute(66).who(Who.HOME).team(home).type(YELLOW).build(),
+                FootballCard.builder().minute(68).who(Who.GUEST).team(guest).type(YELLOW).build(),
+                FootballCard.builder().minute(91).who(Who.HOME).team(home).type(YELLOW).build()
         ))));
         assertNull(firstPeriod.getHomeCorners());
         assertNull(firstPeriod.getGuestCorners());
@@ -238,7 +238,7 @@ public class MatchParserTest {
          /*
           матч
         * */
-        Period matchPeriod = matchInfo.getMatch();
+        Period matchPeriod = footballMatchInfo.getMatch();
 
         assertEquals(matchPeriod.getHomeScore().intValue(), 2);
         assertEquals(matchPeriod.getGuestScore().intValue(), 3);
@@ -263,28 +263,28 @@ public class MatchParserTest {
 
     @Test
     public void testGeneralMatchWithStats() {
-        Match match = matchParser.parse("8O2GJGpD", Championship.LA, Season.S2016);
-        match = matchRepository.save(match);
+        FootballMatch footballMatch = matchParser.parse("8O2GJGpD", FootballChampionship.LA, Season.S2016);
+        footballMatch = footballMatchRepository.save(footballMatch);
 
-        Team home = teamRepository.findOneByNameAndChampionship("Реал Мадрид", Championship.LA);
-        Team guest = teamRepository.findOneByNameAndChampionship("Барселона", Championship.LA);
+        FootballTeam home = footballTeamRepository.findOneByNameAndChampionship("Реал Мадрид", FootballChampionship.LA);
+        FootballTeam guest = footballTeamRepository.findOneByNameAndChampionship("Барселона", FootballChampionship.LA);
 
-        assertEquals(match.getSeason(), Season.S2016);
-        assertEquals(match.getMyscoreCode(), "8O2GJGpD");
-        assertEquals(match.getChampionship(), Championship.LA);
-        assertEquals(match.getHomeTeam(), home);
-        assertEquals(match.getGuestTeam(), guest);
-        assertEquals(match.getBookieStats().getHomeRate(), Double.valueOf(1.91));
-        assertEquals(match.getBookieStats().getDrawRate(), Double.valueOf(4.2));
-        assertEquals(match.getBookieStats().getGuestRate(), Double.valueOf(3.5));
-        assertEquals(match.getDate(), LocalDateTime.of(2017, 4, 23, 21, 45));
+        assertEquals(footballMatch.getSeason(), Season.S2016);
+        assertEquals(footballMatch.getMyscoreCode(), "8O2GJGpD");
+        assertEquals(footballMatch.getChampionship(), FootballChampionship.LA);
+        assertEquals(footballMatch.getHomeTeam(), home);
+        assertEquals(footballMatch.getGuestTeam(), guest);
+        assertEquals(footballMatch.getBookieStats().getHomeRate(), Double.valueOf(1.91));
+        assertEquals(footballMatch.getBookieStats().getDrawRate(), Double.valueOf(4.2));
+        assertEquals(footballMatch.getBookieStats().getGuestRate(), Double.valueOf(3.5));
+        assertEquals(footballMatch.getDate(), LocalDateTime.of(2017, 4, 23, 21, 45));
 
-        MatchInfo matchInfo = match.getMatchInfo();
+        FootballMatchInfo footballMatchInfo = footballMatch.getMatchInfo();
 
         /*
          1 тайм 1-1, 2 yellow карточек
         * */
-        Period firstPeriod = matchInfo.getFirstPeriod();
+        Period firstPeriod = footballMatchInfo.getFirstPeriod();
         assertEquals(firstPeriod.getHomeScore().intValue(), 1);
         assertEquals(firstPeriod.getGuestScore().intValue(), 1);
         assertEquals(firstPeriod.getTotalScore().intValue(), 2);
@@ -292,13 +292,13 @@ public class MatchParserTest {
         assertEquals(firstPeriod.getPeriodStatus(), Period.PeriodStatus.FIRST);
         assertEquals(firstPeriod.getGoals().size(), 2);
         assertTrue(firstPeriod.getGoals().containsAll(new HashSet<>(Arrays.asList(
-                Goal.builder().minute(28).whoScored(Who.HOME).team(home).build(),
-                Goal.builder().minute(33).whoScored(Who.GUEST).team(guest).build()
+                FootballGoal.builder().minute(28).whoScored(Who.HOME).team(home).build(),
+                FootballGoal.builder().minute(33).whoScored(Who.GUEST).team(guest).build()
         ))));
         assertEquals(firstPeriod.getCards().size(), 2);
         assertTrue(firstPeriod.getCards().containsAll(new HashSet<>(Arrays.asList(
-                Card.builder().minute(12).who(Who.HOME).team(home).type(YELLOW).build(),
-                Card.builder().minute(39).who(Who.GUEST).team(guest).type(YELLOW).build()
+                FootballCard.builder().minute(12).who(Who.HOME).team(home).type(YELLOW).build(),
+                FootballCard.builder().minute(39).who(Who.GUEST).team(guest).type(YELLOW).build()
         ))));
         assertEquals(firstPeriod.getHomeCorners().intValue(), 1);
         assertEquals(firstPeriod.getGuestCorners().intValue(), 1);
@@ -317,7 +317,7 @@ public class MatchParserTest {
         /*
          2 тайм 1-2, 3 желтых карточек, 1 red
         * */
-        Period secondPeriod = matchInfo.getSecondPeriod();
+        Period secondPeriod = footballMatchInfo.getSecondPeriod();
 
         assertEquals(secondPeriod.getHomeScore().intValue(), 1);
         assertEquals(secondPeriod.getGuestScore().intValue(), 2);
@@ -326,16 +326,16 @@ public class MatchParserTest {
         assertEquals(secondPeriod.getPeriodStatus(), Period.PeriodStatus.SECOND);
         assertEquals(secondPeriod.getGoals().size(), 3);
         assertTrue(secondPeriod.getGoals().containsAll(new HashSet<>(Arrays.asList(
-                Goal.builder().minute(73).whoScored(Who.GUEST).team(guest).build(),
-                Goal.builder().minute(85).whoScored(Who.HOME).team(home).build(),
-                Goal.builder().minute(92).whoScored(Who.GUEST).team(guest).build()
+                FootballGoal.builder().minute(73).whoScored(Who.GUEST).team(guest).build(),
+                FootballGoal.builder().minute(85).whoScored(Who.HOME).team(home).build(),
+                FootballGoal.builder().minute(92).whoScored(Who.GUEST).team(guest).build()
         ))));
         assertEquals(secondPeriod.getCards().size(), 4);
         assertTrue(secondPeriod.getCards().containsAll(new HashSet<>(Arrays.asList(
-                Card.builder().minute(77).who(Who.HOME).team(home).type(YELLOW).build(),
-                Card.builder().minute(77).who(Who.HOME).team(home).type(RED).build(),
-                Card.builder().minute(81).who(Who.HOME).team(home).type(YELLOW).build(),
-                Card.builder().minute(93).who(Who.GUEST).team(guest).type(YELLOW).build()
+                FootballCard.builder().minute(77).who(Who.HOME).team(home).type(YELLOW).build(),
+                FootballCard.builder().minute(77).who(Who.HOME).team(home).type(RED).build(),
+                FootballCard.builder().minute(81).who(Who.HOME).team(home).type(YELLOW).build(),
+                FootballCard.builder().minute(93).who(Who.GUEST).team(guest).type(YELLOW).build()
         ))));
         assertEquals(secondPeriod.getHomeCorners().intValue(), 6);
         assertEquals(secondPeriod.getGuestCorners().intValue(), 3);
@@ -353,7 +353,7 @@ public class MatchParserTest {
          /*
           матч
         * */
-        Period matchPeriod = matchInfo.getMatch();
+        Period matchPeriod = footballMatchInfo.getMatch();
 
         assertEquals(matchPeriod.getHomeScore().intValue(), 2);
         assertEquals(matchPeriod.getGuestScore().intValue(), 3);

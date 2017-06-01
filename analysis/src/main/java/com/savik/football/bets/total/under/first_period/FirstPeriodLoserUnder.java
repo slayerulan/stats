@@ -1,7 +1,7 @@
 package com.savik.football.bets.total.under.first_period;
 
 import com.savik.football.bets.GeneralBet;
-import com.savik.football.model.Match;
+import com.savik.football.model.FootballMatch;
 import com.savik.football.model.Who;
 import lombok.*;
 
@@ -15,29 +15,29 @@ public class FirstPeriodLoserUnder extends GeneralBet {
     }
 
     @Override
-    public boolean canAnalyze(Match match) {
-        Who favorite = match.getBookieStats().getFavorite();
+    public boolean canAnalyze(FootballMatch footballMatch) {
+        Who favorite = footballMatch.getBookieStats().getFavorite();
         if (favorite == Who.UNKNOWN) {
             return false;
         }
         if (favorite == Who.HOME) {
-            return match.getMatchInfo().getFirstPeriod().getGuestScore() != null;
+            return footballMatch.getMatchInfo().getFirstPeriod().getGuestScore() != null;
         }
         if (favorite == Who.GUEST) {
-            return match.getMatchInfo().getFirstPeriod().getHomeScore() != null;
+            return footballMatch.getMatchInfo().getFirstPeriod().getHomeScore() != null;
         }
         throw new IllegalArgumentException("Unknown favorite value = " + favorite);
     }
 
     @Override
-    public boolean check(Match match) {
-        Who favorite = match.getBookieStats().getFavorite();
+    public boolean check(FootballMatch footballMatch) {
+        Who favorite = footballMatch.getBookieStats().getFavorite();
         if (favorite == Who.HOME) {
-            return match.getMatchInfo().getFirstPeriod().getGuestScore() < amount;
+            return footballMatch.getMatchInfo().getFirstPeriod().getGuestScore() < amount;
         }
         if (favorite == Who.GUEST) {
-            return match.getMatchInfo().getFirstPeriod().getHomeScore() < amount;
+            return footballMatch.getMatchInfo().getFirstPeriod().getHomeScore() < amount;
         }
-        throw new IllegalArgumentException("Match doesn't have favorite, check id = " + match.getId());
+        throw new IllegalArgumentException("FootballMatch doesn't have favorite, check id = " + footballMatch.getId());
     }
 }

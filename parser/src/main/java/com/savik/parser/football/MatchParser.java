@@ -4,12 +4,10 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
-import java.util.function.ToDoubleFunction;
-import java.util.stream.Collectors;
 
 import com.savik.football.model.*;
-import com.savik.football.repository.MatchRepository;
-import com.savik.football.repository.TeamRepository;
+import com.savik.football.repository.FootballMatchRepository;
+import com.savik.football.repository.FootballTeamRepository;
 import com.savik.parser.Downloader;
 import com.savik.parser.LeagueParser;
 import org.jsoup.nodes.Document;
@@ -27,10 +25,10 @@ import org.springframework.util.CollectionUtils;
 public class MatchParser {
 
     @Autowired
-    TeamRepository teamRepository;
+    FootballTeamRepository footballTeamRepository;
 
     @Autowired
-    MatchRepository matchRepository;
+    FootballMatchRepository footballMatchRepository;
 
     @Autowired
     Downloader downloader;
@@ -38,7 +36,7 @@ public class MatchParser {
     @Autowired
     LeagueParser leagueParser;
 
-    public Match parse(String matchId, Championship championship, Season season) {
+    public FootballMatch parse(String matchId, FootballChampionship footballChampionship, Season season) {
 
         Document generalInfo = downloader.downloadGeneralInfo(matchId);
         Document statsInfo = downloader.downloadStatsInfo(matchId);
@@ -57,8 +55,8 @@ public class MatchParser {
 
         LocalDateTime dateTime = Instant.ofEpochSecond(epoch).atZone(ZoneId.systemDefault()).toLocalDateTime();
 
-        Team home = teamRepository.findOneByNameAndChampionship(homeTeam, championship);
-        Team guest = teamRepository.findOneByNameAndChampionship(guestTeam, championship);
+        FootballTeam home = footballTeamRepository.findOneByNameAndChampionship(homeTeam, footballChampionship);
+        FootballTeam guest = footballTeamRepository.findOneByNameAndChampionship(guestTeam, footballChampionship);
 
         Elements allRows = generalInfo.getElementById("parts").select("tr");
         int secondTimeIndex = generalInfo.getElementById("parts").select("tr .h-part").get(1).parent().siblingIndex();
@@ -111,34 +109,34 @@ public class MatchParser {
                                 .select("tr.odd,tr.even"));
 
 
-        BookieStats bookieStats = null;
+        FootballBookieStats footballBookieStats = null;
         Elements odds = oddsInfo.select("#block-1x2 tr.odd");
         if (!odds.isEmpty()) {
             List<Element> rates = odds.get(0).select("td > span");
-            bookieStats = BookieStats.builder()
-                    .homeRate(Double.valueOf(rates.get(0).text()))
-                    .drawRate(Double.valueOf(rates.get(1).text()))
-                    .guestRate(Double.valueOf(rates.get(2).text()))
-                    .build();
+            footballBookieStats = FootballBookieStats.builder()
+                                                     .homeRate(Double.valueOf(rates.get(0).text()))
+                                                     .drawRate(Double.valueOf(rates.get(1).text()))
+                                                     .guestRate(Double.valueOf(rates.get(2).text()))
+                                                     .build();
         }
 
-        Match match = MatchCreator.builder()
-                .matchGeneralInfoDto(matchPeriodInfo)
-                .firstPeriodGeneralInfoDto(firstPeriodInfo)
-                .secondPeriodGeneralInfoDto(secondPeriodInfo)
-                .matchStatsInfoDto(matchStats)
-                .firstPeriodStatsInfoDto(firstPeriodStats)
-                .secondPeriodStatsInfoDto(secondPeriodStats)
-                .homeTeam(home)
-                .guestTeam(guest)
-                .date(dateTime)
-                .championship(championship)
-                .season(season)
-                .myscoreCode(matchId)
-                .bookieStats(bookieStats)
-                .build()
-                .createMatch();
+        FootballMatch footballMatch = MatchCreator.builder()
+                                                  .matchGeneralInfoDto(matchPeriodInfo)
+                                                  .firstPeriodGeneralInfoDto(firstPeriodInfo)
+                                                  .secondPeriodGeneralInfoDto(secondPeriodInfo)
+                                                  .matchStatsInfoDto(matchStats)
+                                                  .firstPeriodStatsInfoDto(firstPeriodStats)
+                                                  .secondPeriodStatsInfoDto(secondPeriodStats)
+                                                  .homeTeam(home)
+                                                  .guestTeam(guest)
+                                                  .date(dateTime)
+                                                  .championship(footballChampionship)
+                                                  .season(season)
+                                                  .myscoreCode(matchId)
+                                                  .bookieStats(footballBookieStats)
+                                                  .build()
+                                                  .createMatch();
 
-        return match;
+        return footballMatch;
     }
 }

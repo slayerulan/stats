@@ -1,11 +1,9 @@
 package com.savik.football.bets.goals.match;
 
 import com.savik.football.bets.GeneralBet;
-import com.savik.football.bets.total.over.first_period.FirstPeriodHomeOver;
 import com.savik.football.bets.total.over.match.MatchGuestOver;
 import com.savik.football.bets.total.over.match.MatchHomeOver;
-import com.savik.football.bets.total.over.second_period.SecondPeriodHomeOver;
-import com.savik.football.model.Match;
+import com.savik.football.model.FootballMatch;
 import lombok.*;
 
 @Getter
@@ -21,12 +19,12 @@ public class BothTeamsScored extends GeneralBet {
     }
 
     @Override
-    public boolean canAnalyze(Match match) {
-        return matchHomeOver.canAnalyze(match) && matchGuestOver.canAnalyze(match);
+    public boolean canAnalyze(FootballMatch footballMatch) {
+        return matchHomeOver.canAnalyze(footballMatch) && matchGuestOver.canAnalyze(footballMatch);
     }
 
     @Override
-    public boolean check(Match match) {
-        return matchHomeOver.check(match) && matchGuestOver.check(match);
+    public boolean check(FootballMatch footballMatch) {
+        return matchHomeOver.check(footballMatch) && matchGuestOver.check(footballMatch);
     }
 }

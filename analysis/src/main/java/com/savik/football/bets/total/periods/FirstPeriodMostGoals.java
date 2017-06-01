@@ -1,7 +1,7 @@
 package com.savik.football.bets.total.periods;
 
 import com.savik.football.bets.GeneralBet;
-import com.savik.football.model.Match;
+import com.savik.football.model.FootballMatch;
 import lombok.*;
 
 @Getter
@@ -12,14 +12,14 @@ public class FirstPeriodMostGoals extends GeneralBet {
     }
 
     @Override
-    public boolean canAnalyze(Match match) {
-        return match.getMatchInfo().getFirstPeriod().getTotalScore() != null &&
-               match.getMatchInfo().getSecondPeriod().getTotalScore() != null;
+    public boolean canAnalyze(FootballMatch footballMatch) {
+        return footballMatch.getMatchInfo().getFirstPeriod().getTotalScore() != null &&
+               footballMatch.getMatchInfo().getSecondPeriod().getTotalScore() != null;
     }
 
     @Override
-    public boolean check(Match match) {
-        return match.getMatchInfo().getFirstPeriod().getTotalScore() >
-               match.getMatchInfo().getSecondPeriod().getTotalScore();
+    public boolean check(FootballMatch footballMatch) {
+        return footballMatch.getMatchInfo().getFirstPeriod().getTotalScore() >
+               footballMatch.getMatchInfo().getSecondPeriod().getTotalScore();
     }
 }

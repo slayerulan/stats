@@ -47,11 +47,11 @@ public class Period extends Identifiable {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @CollectionProperty(optionality = Optionality.OPTIONAL)
-    Set<Goal> goals;
+    Set<FootballGoal> goals;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @CollectionProperty(optionality = Optionality.OPTIONAL)
-    Set<Card> cards;
+    Set<FootballCard> cards;
 
     Integer homeCorners;
 
@@ -102,13 +102,13 @@ public class Period extends Identifiable {
     }
 
     public Integer getFirstGoalTime() {
-        Optional<Goal> firstGoal = getGoal(GoalOrder.FIRST);
-        return firstGoal.map(Goal::getMinute).orElse(null);
+        Optional<FootballGoal> firstGoal = getGoal(GoalOrder.FIRST);
+        return firstGoal.map(FootballGoal::getMinute).orElse(null);
     }
 
     public Integer getLastGoalTime() {
-        Optional<Goal> firstGoal = getGoal(GoalOrder.LAST);
-        return firstGoal.map(Goal::getMinute).orElse(null);
+        Optional<FootballGoal> firstGoal = getGoal(GoalOrder.LAST);
+        return firstGoal.map(FootballGoal::getMinute).orElse(null);
     }
 
     public boolean hasGoalBetween(int from, int before) {
@@ -118,22 +118,22 @@ public class Period extends Identifiable {
         return goals.stream().anyMatch(g -> g.getMinute() > from && g.getMinute() < before);
     }
 
-    private Optional<Goal> getGoal(GoalOrder goalOrder) {
-        if (CollectionUtils.isEmpty(goals)) {
+    private Optional<FootballGoal> getGoal(GoalOrder goalOrder) {
+        if (CollectionUtils.isEmpty(this.goals)) {
             return null;
         }
-        List<Goal> goals = this.goals
+        List<FootballGoal> footballGoals = this.goals
                 .stream()
-                .sorted(Comparator.comparingInt(Goal::getMinute))
+                .sorted(Comparator.comparingInt(FootballGoal::getMinute))
                 .collect(Collectors.toList());
 
         if (goalOrder == GoalOrder.LAST) {
-            return Optional.of(goals.get(goals.size() - 1));
+            return Optional.of(footballGoals.get(footballGoals.size() - 1));
         }
-        if(goalOrder.getOrder() > goals.size()) {
+        if(goalOrder.getOrder() > footballGoals.size()) {
             return Optional.ofNullable(null);
         }
-        return Optional.of(goals.get(goalOrder.getOrder() - 1));
+        return Optional.of(footballGoals.get(goalOrder.getOrder() - 1));
 
     }
 

@@ -17,14 +17,14 @@ import lombok.*;
 @Builder(toBuilder = true)
 @SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "card_id_generator")
 @EqualsAndHashCode
-public class Card extends Identifiable {
+public class FootballCard extends Identifiable {
 
     @NotNull
     Integer minute;
 
     @NotNull
     @OneToOne
-    Team team;
+    FootballTeam team;
 
     @NotNull
     @Enumerated(EnumType.STRING)

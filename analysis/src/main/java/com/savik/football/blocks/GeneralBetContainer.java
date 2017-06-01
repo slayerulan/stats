@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.savik.football.bets.GeneralBet;
-import com.savik.football.model.Match;
+import com.savik.football.model.FootballMatch;
 import lombok.*;
 
 @Getter
@@ -55,11 +55,11 @@ public abstract class GeneralBetContainer {
         return (successfullyMatchesAmount * 100) / analyzedMatchesAmount;
     }
 
-    public void check(Match match) {
+    public void check(FootballMatch footballMatch) {
         if (leaf) {
-            if (bet.canAnalyze(match)) {
+            if (bet.canAnalyze(footballMatch)) {
                 analyzedMatchesAmount++;
-                boolean success = bet.check(match);
+                boolean success = bet.check(footballMatch);
                 if (success) {
                     successfullyMatchesAmount++;
                 }
@@ -67,7 +67,7 @@ public abstract class GeneralBetContainer {
                 skippedMatchesAmount++;
             }
         } else {
-            childrenBetBlocks.forEach(b -> b.check(match));
+            childrenBetBlocks.forEach(b -> b.check(footballMatch));
         }
     }
 }

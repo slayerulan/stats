@@ -1,7 +1,7 @@
 package com.savik.football.bets.handicap.match;
 
 import com.savik.football.bets.GeneralBet;
-import com.savik.football.model.Match;
+import com.savik.football.model.FootballMatch;
 import com.savik.football.model.Period;
 import lombok.*;
 
@@ -19,14 +19,14 @@ public class MatchGuestHandicap extends GeneralBet {
     }
 
     @Override
-    public boolean canAnalyze(Match match) {
-        return match.getMatchInfo().getMatch().getHomeScore() != null &&
-               match.getMatchInfo().getMatch().getGuestScore() != null;
+    public boolean canAnalyze(FootballMatch footballMatch) {
+        return footballMatch.getMatchInfo().getMatch().getHomeScore() != null &&
+               footballMatch.getMatchInfo().getMatch().getGuestScore() != null;
     }
 
     @Override
-    public boolean check(Match match) {
-        Period matchInfo = match.getMatchInfo().getMatch();
+    public boolean check(FootballMatch footballMatch) {
+        Period matchInfo = footballMatch.getMatchInfo().getMatch();
         if (amount <= 0) {
             return matchInfo.getGuestScore() - matchInfo.getHomeScore() > Math.abs(amount);
         }

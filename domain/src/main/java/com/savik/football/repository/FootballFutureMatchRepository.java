@@ -1,6 +1,6 @@
 package com.savik.football.repository;
 
-import com.savik.football.model.FutureMatch;
+import com.savik.football.model.FootballFutureMatch;
 import com.savik.repository.JpaEntryRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
  */
 
 @Repository
-public interface FutureMatchRepository extends JpaEntryRepository<FutureMatch> {
+public interface FootballFutureMatchRepository extends JpaEntryRepository<FootballFutureMatch> {
 
 }

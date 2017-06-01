@@ -17,19 +17,19 @@ import lombok.*;
 )
 @SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "future_match_id_generator")
 @Data
-public class FutureMatch extends Identifiable {
+public class FootballFutureMatch extends Identifiable {
 
     @NotNull
     @OneToOne
-    Team homeTeam;
+    FootballTeam homeTeam;
 
     @NotNull
     @OneToOne
-    Team guestTeam;
+    FootballTeam guestTeam;
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    Championship championship;
+    FootballChampionship championship;
 
     @NotNull
     @Enumerated(EnumType.STRING)

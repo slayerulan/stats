@@ -3,7 +3,7 @@ package com.savik.football.bets.total.under.periods;
 import com.savik.football.bets.GeneralBet;
 import com.savik.football.bets.total.under.first_period.FirstPeriodUnder;
 import com.savik.football.bets.total.under.second_period.SecondPeriodUnder;
-import com.savik.football.model.Match;
+import com.savik.football.model.FootballMatch;
 import lombok.*;
 
 @Getter
@@ -21,12 +21,12 @@ public class EveryPeriodUnder extends GeneralBet {
     }
 
     @Override
-    public boolean canAnalyze(Match match) {
-        return this.firstPeriodUnder.canAnalyze(match) && this.secondPeriodUnder.canAnalyze(match);
+    public boolean canAnalyze(FootballMatch footballMatch) {
+        return this.firstPeriodUnder.canAnalyze(footballMatch) && this.secondPeriodUnder.canAnalyze(footballMatch);
     }
 
     @Override
-    public boolean check(Match match) {
-        return this.firstPeriodUnder.check(match) && this.secondPeriodUnder.check(match);
+    public boolean check(FootballMatch footballMatch) {
+        return this.firstPeriodUnder.check(footballMatch) && this.secondPeriodUnder.check(footballMatch);
     }
 }

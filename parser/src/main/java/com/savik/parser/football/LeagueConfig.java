@@ -1,6 +1,7 @@
 package com.savik.parser.football;
 
-import com.savik.football.model.Championship;
+import com.savik.football.model.FootballChampionship;
+import com.savik.football.model.FootballChampionship;
 import com.savik.football.model.Season;
 
 import java.util.AbstractMap;
@@ -13,10 +14,10 @@ import java.util.stream.Stream;
 
 public class LeagueConfig {
 
-    Map<Championship, Map<Season, String>> map = new HashMap<Championship, Map<Season, String>>() {
+    Map<FootballChampionship, Map<Season, String>> map = new HashMap<FootballChampionship, Map<Season, String>>() {
         {
-            put(Championship.LA, LA_MAP);
-            put(Championship.SERIE_A, SERIE_A_MAP);
+            put(FootballChampionship.LA, LA_MAP);
+            put(FootballChampionship.SERIE_A, SERIE_A_MAP);
         }
     };
 

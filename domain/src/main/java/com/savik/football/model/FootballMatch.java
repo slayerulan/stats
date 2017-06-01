@@ -17,27 +17,27 @@ import lombok.*;
 )
 @SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "match_id_generator")
 @Data
-public class Match extends Identifiable {
+public class FootballMatch extends Identifiable {
 
     @NotNull
     @OneToOne(cascade = CascadeType.ALL)
-    MatchInfo matchInfo;
+    FootballMatchInfo matchInfo;
 
     @NotNull
     @OneToOne(cascade = CascadeType.ALL)
-    BookieStats bookieStats;
+    FootballBookieStats bookieStats;
 
     @NotNull
     @OneToOne
-    Team homeTeam;
+    FootballTeam homeTeam;
 
     @NotNull
     @OneToOne
-    Team guestTeam;
+    FootballTeam guestTeam;
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    Championship championship;
+    FootballChampionship championship;
 
     @NotNull
     @Enumerated(EnumType.STRING)

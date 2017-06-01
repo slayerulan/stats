@@ -19,7 +19,7 @@ import lombok.*;
 @Builder
 @SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "match_info_id_generator")
 @Getter
-public class MatchInfo extends Identifiable {
+public class FootballMatchInfo extends Identifiable {
 
     @NotNull
     @OneToOne(cascade = CascadeType.ALL)

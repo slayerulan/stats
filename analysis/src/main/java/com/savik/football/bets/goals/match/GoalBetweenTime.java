@@ -1,7 +1,7 @@
 package com.savik.football.bets.goals.match;
 
 import com.savik.football.bets.GeneralBet;
-import com.savik.football.model.Match;
+import com.savik.football.model.FootballMatch;
 import lombok.*;
 
 @Getter
@@ -15,12 +15,12 @@ public class GoalBetweenTime extends GeneralBet {
     }
 
     @Override
-    public boolean canAnalyze(Match match) {
-        return match.getMatchInfo().getMatch().getGoals() != null;
+    public boolean canAnalyze(FootballMatch footballMatch) {
+        return footballMatch.getMatchInfo().getMatch().getGoals() != null;
     }
 
     @Override
-    public boolean check(Match match) {
-        return match.getMatchInfo().getMatch().hasGoalBetween(from, before);
+    public boolean check(FootballMatch footballMatch) {
+        return footballMatch.getMatchInfo().getMatch().hasGoalBetween(from, before);
     }
 }

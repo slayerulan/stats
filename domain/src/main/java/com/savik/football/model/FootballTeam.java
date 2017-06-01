@@ -19,11 +19,11 @@ import lombok.*;
 @Builder
 @SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "team_id_generator")
 @EqualsAndHashCode
-public class Team extends Identifiable {
+public class FootballTeam extends Identifiable {
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    Championship championship;
+    FootballChampionship championship;
 
     @NotNull
     String name;

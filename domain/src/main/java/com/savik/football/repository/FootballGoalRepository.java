@@ -1,6 +1,6 @@
 package com.savik.football.repository;
 
-import com.savik.football.model.Period;
+import com.savik.football.model.FootballGoal;
 import org.springframework.stereotype.Repository;
 import com.savik.repository.JpaEntryRepository;
 
@@ -10,5 +10,5 @@ import com.savik.repository.JpaEntryRepository;
  */
 
 @Repository
-public interface PeriodRepository extends JpaEntryRepository<Period> {
+public interface FootballGoalRepository extends JpaEntryRepository<FootballGoal> {
 }

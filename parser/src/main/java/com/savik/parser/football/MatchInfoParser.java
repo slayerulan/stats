@@ -3,8 +3,8 @@ package com.savik.parser.football;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.savik.football.model.Card;
-import com.savik.football.model.Goal;
+import com.savik.football.model.FootballCard;
+import com.savik.football.model.FootballGoal;
 import com.savik.football.model.Who;
 import lombok.*;
 import org.jsoup.nodes.Element;
@@ -63,13 +63,13 @@ public class MatchInfoParser {
                                                                    .replaceAll("\\D+", ""));
     }
 
-    static List<Goal> parseGoals(Elements goalsDivs) {
+    static List<FootballGoal> parseGoals(Elements goalsDivs) {
         return goalsDivs
                 .stream()
-                .map(d -> Goal.builder()
-                              .minute(calculateTime(d))
-                              .whoScored(d.parent().parent().hasClass("fl") ? Who.HOME : Who.GUEST)
-                              .build())
+                .map(d -> FootballGoal.builder()
+                                      .minute(calculateTime(d))
+                                      .whoScored(d.parent().parent().hasClass("fl") ? Who.HOME : Who.GUEST)
+                                      .build())
                 .collect(Collectors.toList());
     }
 
@@ -79,16 +79,16 @@ public class MatchInfoParser {
         return minute > 90 ? (minute / 10 + minute % 10) : minute;
     }
 
-    static List<Card> parseCards(Elements goalsDivs) {
+    static List<FootballCard> parseCards(Elements goalsDivs) {
         return goalsDivs
                 .stream()
-                .map(d -> Card
+                .map(d -> FootballCard
                         .builder()
                         .who(d.parent().parent().hasClass("fl") ? Who.HOME : Who.GUEST)
                         .minute(calculateTime(d))
-                        .type(d.hasClass("y-card") ? Card.Type.YELLOW :
-                                d.hasClass("r-card") ? Card.Type.RED :
-                                        d.hasClass("yr-card") ? Card.Type.YELLOW_RED : null
+                        .type(d.hasClass("y-card") ? FootballCard.Type.YELLOW :
+                                d.hasClass("r-card") ? FootballCard.Type.RED :
+                                        d.hasClass("yr-card") ? FootballCard.Type.YELLOW_RED : null
                         )
                         .build())
                 .collect(Collectors.toList());
@@ -98,9 +98,9 @@ public class MatchInfoParser {
     @Getter
     public static class GeneralInfoDto {
 
-        List<Goal> goals;
+        List<FootballGoal> footballGoals;
 
-        List<Card> cards;
+        List<FootballCard> footballCards;
     }
 
     @Getter

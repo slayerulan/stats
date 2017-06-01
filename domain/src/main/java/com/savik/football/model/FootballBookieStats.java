@@ -16,7 +16,7 @@ import lombok.*;
 @Builder(toBuilder = true)
 @SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "bookie_id_generator")
 @EqualsAndHashCode
-public class BookieStats extends Identifiable {
+public class FootballBookieStats extends Identifiable {
 
     @Enumerated(EnumType.STRING)
     @Transient
