@@ -2,6 +2,7 @@ package com.savik.parser;
 
 import javax.annotation.PostConstruct;
 
+import com.savik.parser.football.FootballFutureMatchesParser;
 import com.savik.parser.football.FootballParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,10 +20,13 @@ public class Parser {
     @Autowired
     FutureMatchesParser futureMatchesParser;
 
+    @Autowired
+    FootballFutureMatchesParser footballFutureMatchesParser;
+
 
 
     @PostConstruct
     public void parse() {
-        futureMatchesParser.parse(1);
+        footballFutureMatchesParser.parse();
     }
 }

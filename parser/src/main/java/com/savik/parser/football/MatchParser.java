@@ -58,15 +58,7 @@ public class MatchParser {
         LocalDateTime dateTime = Instant.ofEpochSecond(epoch).atZone(ZoneId.systemDefault()).toLocalDateTime();
 
         Team home = teamRepository.findOneByNameAndChampionship(homeTeam, championship);
-        if (home == null) {
-            home = teamRepository.save(Team.builder().name(homeTeam).championship(championship).build());
-        }
-
         Team guest = teamRepository.findOneByNameAndChampionship(guestTeam, championship);
-        if (guest == null) {
-            guest = teamRepository.save(Team.builder().name(guestTeam).championship(championship).build());
-        }
-
 
         Elements allRows = generalInfo.getElementById("parts").select("tr");
         int secondTimeIndex = generalInfo.getElementById("parts").select("tr .h-part").get(1).parent().siblingIndex();
