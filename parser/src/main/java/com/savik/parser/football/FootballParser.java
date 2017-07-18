@@ -7,6 +7,7 @@ import com.savik.football.model.FootballMatch;
 import com.savik.football.model.Season;
 import com.savik.football.repository.FootballMatchRepository;
 import com.savik.parser.LeagueParser;
+import lombok.extern.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
  * @since 12.04.2017
  */
 @Service
+@Slf4j
 public class FootballParser {
 
     @Autowired
@@ -45,9 +47,10 @@ public class FootballParser {
         List<String> allMatches = leagueParser.findAllMatches("http://www.myscore.ru/football/spain/laliga/results/");
         for (String matchId : allMatches) {
             try {
-               if(footballMatchRepository.findByMyscoreCode(matchId) == null) {
-                    FootballMatch footballMatch = matchParser.parse(matchId, FootballChampionship.LA, Season.S2016);
-                    footballMatchRepository.save(footballMatch);
+                if (footballMatchRepository.findByMyscoreCode(matchId) == null) {
+                    FootballMatch match = matchParser.parse(matchId, FootballChampionship.LA, Season.S2016);
+                    footballMatchRepository.save(match);
+                    log.debug("match saved = {}", match);
                     Thread.sleep(1000);
                 }
             } catch (Exception ex) {
