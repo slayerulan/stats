@@ -1,16 +1,16 @@
 package com.savik.football.blocks.result.first_period;
 
-import com.savik.football.bets.result.first_period.FirstPeriodDraw;
-import com.savik.football.blocks.GeneralBetContainer;
+import com.savik.football.bets.result.PeriodDraw;
+import com.savik.football.blocks.FirstPeriodBetContainer;
 
 /**
  * @author Savushkin Yauheni
  * @since 16.05.2017
  */
-public class FirstPeriodDrawBlock extends GeneralBetContainer {
+public class FirstPeriodDrawBlock extends FirstPeriodBetContainer {
 
     public FirstPeriodDrawBlock() {
-        super(new FirstPeriodDraw());
+        super(new PeriodDraw());
     }
 
 
