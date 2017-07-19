@@ -1,6 +1,5 @@
 package com.savik.football.blocks.total.over.periods;
 
-import com.savik.football.bets.total.over.match.MatchFavoriteOver;
 import com.savik.football.bets.total.over.periods.EveryPeriodOver;
 import com.savik.football.blocks.GeneralBetContainer;
 

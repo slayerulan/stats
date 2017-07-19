@@ -2,13 +2,13 @@ package com.savik.football.blocks.total.over.match;
 
 import java.util.Arrays;
 
-import com.savik.football.blocks.GeneralBetContainer;
+import com.savik.football.blocks.MatchPeriodBetContainer;
 
 /**
  * @author Savushkin Yauheni
  * @since 16.05.2017
  */
-public class GuestOverBlock extends GeneralBetContainer {
+public class GuestOverBlock extends MatchPeriodBetContainer {
 
     public GuestOverBlock() {
         super(Arrays.asList(

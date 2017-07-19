@@ -2,13 +2,13 @@ package com.savik.football.blocks.total.over.first_period;
 
 import java.util.Arrays;
 
-import com.savik.football.blocks.GeneralBetContainer;
+import com.savik.football.blocks.FirstPeriodBetContainer;
 
 /**
  * @author Savushkin Yauheni
  * @since 16.05.2017
  */
-public class FirstPeriodHomeOverBlock extends GeneralBetContainer {
+public class FirstPeriodHomeOverBlock extends FirstPeriodBetContainer {
 
     public FirstPeriodHomeOverBlock() {
         super(Arrays.asList(
@@ -17,7 +17,7 @@ public class FirstPeriodHomeOverBlock extends GeneralBetContainer {
                 new FirstPeriodHomeOverSingleBlock(2.5),
                 new FirstPeriodHomeOverSingleBlock(3.5),
                 new FirstPeriodHomeOverSingleBlock(4.5)
-        ), "Тотал команды в 1 тайме при игре дома");
+        ));
     }
 
 

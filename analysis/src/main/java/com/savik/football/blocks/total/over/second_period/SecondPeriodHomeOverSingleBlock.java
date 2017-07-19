@@ -1,19 +1,16 @@
 package com.savik.football.blocks.total.over.second_period;
 
-import com.savik.football.bets.total.over.second_period.SecondPeriodHomeOver;
-import com.savik.football.blocks.GeneralBetContainer;
+import com.savik.football.bets.total.over.PeriodHomeOver;
+import com.savik.football.blocks.SecondPeriodBetContainer;
 
 /**
  * @author Savushkin Yauheni
  * @since 16.05.2017
  */
-public class SecondPeriodHomeOverSingleBlock extends GeneralBetContainer {
+public class SecondPeriodHomeOverSingleBlock extends SecondPeriodBetContainer {
 
     public SecondPeriodHomeOverSingleBlock(double amount) {
-        super(new SecondPeriodHomeOver(amount));
+        super(new PeriodHomeOver(amount));
     }
 
-    public SecondPeriodHomeOverSingleBlock(double amount, String type) {
-        super(new SecondPeriodHomeOver(amount), type);
-    }
 }

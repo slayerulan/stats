@@ -1,16 +1,16 @@
 package com.savik.football.blocks.total.over.first_period;
 
-import com.savik.football.bets.total.over.first_period.FirstPeriodLoserOver;
-import com.savik.football.blocks.GeneralBetContainer;
+import com.savik.football.bets.total.over.PeriodLoserOver;
+import com.savik.football.blocks.FirstPeriodFavoriteBetContainer;
 
 /**
  * @author Savushkin Yauheni
  * @since 16.05.2017
  */
-public class FirstPeriodLooserOverSingleBlock extends GeneralBetContainer {
+public class FirstPeriodLooserOverSingleBlock extends FirstPeriodFavoriteBetContainer {
 
     public FirstPeriodLooserOverSingleBlock(double amount) {
-        super(new FirstPeriodLoserOver(amount));
+        super(new PeriodLoserOver(amount));
     }
 
 

@@ -2,13 +2,13 @@ package com.savik.football.blocks.total.over.second_period;
 
 import java.util.Arrays;
 
-import com.savik.football.blocks.GeneralBetContainer;
+import com.savik.football.blocks.SecondPeriodBetContainer;
 
 /**
  * @author Savushkin Yauheni
  * @since 16.05.2017
  */
-public class SecondPeriodHomeOverBlock extends GeneralBetContainer {
+public class SecondPeriodHomeOverBlock extends SecondPeriodBetContainer {
 
     public SecondPeriodHomeOverBlock() {
         super(Arrays.asList(
@@ -17,7 +17,7 @@ public class SecondPeriodHomeOverBlock extends GeneralBetContainer {
                 new SecondPeriodHomeOverSingleBlock(2.5),
                 new SecondPeriodHomeOverSingleBlock(3.5),
                 new SecondPeriodHomeOverSingleBlock(4.5)
-        ), "Тотал команды во 2 тайме при игре дома");
+        ));
     }
 
 

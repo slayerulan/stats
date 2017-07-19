@@ -1,20 +1,17 @@
 package com.savik.football.blocks.total.over.match;
 
-import com.savik.football.bets.total.over.match.MatchHomeOver;
-import com.savik.football.blocks.GeneralBetContainer;
+import com.savik.football.bets.total.over.PeriodHomeOver;
+import com.savik.football.blocks.MatchPeriodBetContainer;
 
 /**
  * @author Savushkin Yauheni
  * @since 16.05.2017
  */
-public class HomeOverSingleBlock extends GeneralBetContainer {
+public class HomeOverSingleBlock extends MatchPeriodBetContainer {
 
     public HomeOverSingleBlock(double amount) {
-        super(new MatchHomeOver(amount));
+        super(new PeriodHomeOver(amount));
     }
 
-    public HomeOverSingleBlock(double amount, String type) {
-        super(new MatchHomeOver(amount), type);
-    }
 
 }

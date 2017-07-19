@@ -2,13 +2,13 @@ package com.savik.football.blocks.total.over.second_period;
 
 import java.util.Arrays;
 
-import com.savik.football.blocks.GeneralBetContainer;
+import com.savik.football.blocks.SecondPeriodFavoriteBetContainer;
 
 /**
  * @author Savushkin Yauheni
  * @since 16.05.2017
  */
-public class SecondPeriodLooserOverBlock extends GeneralBetContainer {
+public class SecondPeriodLooserOverBlock extends SecondPeriodFavoriteBetContainer {
 
     public SecondPeriodLooserOverBlock() {
         super(Arrays.asList(
