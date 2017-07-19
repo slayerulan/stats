@@ -2,13 +2,14 @@ package com.savik.football.blocks.handicap.first_period;
 
 import java.util.Arrays;
 
-import com.savik.football.blocks.GeneralBetContainer;
+import com.savik.football.blocks.FirstPeriodBetContainer;
+import com.savik.football.blocks.SecondPeriodBetContainer;
 
 /**
  * @author Savushkin Yauheni
  * @since 16.05.2017
  */
-public class FirstPeriodHomeHandicapBlock extends GeneralBetContainer {
+public class FirstPeriodHomeHandicapBlock extends FirstPeriodBetContainer {
 
     public FirstPeriodHomeHandicapBlock() {
         super(Arrays.asList(
@@ -16,7 +17,7 @@ public class FirstPeriodHomeHandicapBlock extends GeneralBetContainer {
                 new FirstPeriodHomeHandicapSingleBlock(-1.5),
                 new FirstPeriodHomeHandicapSingleBlock(1.5),
                 new FirstPeriodHomeHandicapSingleBlock(2.5)
-        ), "Фора в 1 тайме при игре дома");
+        ));
     }
 
 

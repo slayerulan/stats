@@ -1,16 +1,17 @@
 package com.savik.football.blocks.handicap.first_period;
 
-import com.savik.football.bets.handicap.first_period.FirstPeriodGuestHandicap;
-import com.savik.football.blocks.GeneralBetContainer;
+import com.savik.football.bets.handicap.PeriodGuestHandicap;
+import com.savik.football.blocks.FirstPeriodBetContainer;
+import com.savik.football.blocks.SecondPeriodBetContainer;
 
 /**
  * @author Savushkin Yauheni
  * @since 16.05.2017
  */
-public class FirstPeriodGuestHandicapSingleBlock extends GeneralBetContainer {
+public class FirstPeriodGuestHandicapSingleBlock extends FirstPeriodBetContainer {
 
     public FirstPeriodGuestHandicapSingleBlock(double amount) {
-        super(new FirstPeriodGuestHandicap(amount));
+        super(new PeriodGuestHandicap(amount));
     }
 
 

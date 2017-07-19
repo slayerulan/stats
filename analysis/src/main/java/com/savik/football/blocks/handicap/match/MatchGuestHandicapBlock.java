@@ -2,13 +2,14 @@ package com.savik.football.blocks.handicap.match;
 
 import java.util.Arrays;
 
-import com.savik.football.blocks.GeneralBetContainer;
+import com.savik.football.blocks.MatchPeriodBetContainer;
+import com.savik.football.blocks.SecondPeriodBetContainer;
 
 /**
  * @author Savushkin Yauheni
  * @since 16.05.2017
  */
-public class MatchGuestHandicapBlock extends GeneralBetContainer {
+public class MatchGuestHandicapBlock extends MatchPeriodBetContainer {
 
     public MatchGuestHandicapBlock() {
         super(Arrays.asList(
