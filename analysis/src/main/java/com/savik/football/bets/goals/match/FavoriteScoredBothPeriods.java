@@ -1,30 +1,34 @@
 package com.savik.football.bets.goals.match;
 
 import com.savik.football.bets.GeneralBet;
-import com.savik.football.bets.total.over.first_period.FirstPeriodFavoriteOver;
-import com.savik.football.bets.total.over.second_period.SecondPeriodFavoriteOver;
+import com.savik.football.bets.total.over.PeriodFavoriteOver;
 import com.savik.football.model.FootballMatch;
+import com.savik.football.model.FootballMatchInfo;
+import com.savik.football.model.Who;
 import lombok.*;
 
 @Getter
 public class FavoriteScoredBothPeriods extends GeneralBet {
 
-    private FirstPeriodFavoriteOver firstPeriodFavoriteOver;
-
-    private SecondPeriodFavoriteOver secondPeriodFavoriteOver;
+    private PeriodFavoriteOver periodFavoriteOver;
 
     public FavoriteScoredBothPeriods() {
-        firstPeriodFavoriteOver = new FirstPeriodFavoriteOver(0);
-        secondPeriodFavoriteOver = new SecondPeriodFavoriteOver(0);
+        periodFavoriteOver = new PeriodFavoriteOver(0);
     }
 
     @Override
     public boolean canAnalyze(FootballMatch footballMatch) {
-        return firstPeriodFavoriteOver.canAnalyze(footballMatch) && secondPeriodFavoriteOver.canAnalyze(footballMatch);
+        Who favorite = footballMatch.getBookieStats().getFavorite();
+        FootballMatchInfo matchInfo = footballMatch.getMatchInfo();
+        return periodFavoriteOver.canAnalyze(favorite, matchInfo.getFirstPeriod()) &&
+               periodFavoriteOver.canAnalyze(favorite, matchInfo.getSecondPeriod());
     }
 
     @Override
     public boolean check(FootballMatch footballMatch) {
-        return firstPeriodFavoriteOver.check(footballMatch) && secondPeriodFavoriteOver.check(footballMatch);
+        Who favorite = footballMatch.getBookieStats().getFavorite();
+        FootballMatchInfo matchInfo = footballMatch.getMatchInfo();
+        return periodFavoriteOver.check(favorite, matchInfo.getFirstPeriod()) &&
+               periodFavoriteOver.check(favorite, matchInfo.getSecondPeriod());
     }
 }
