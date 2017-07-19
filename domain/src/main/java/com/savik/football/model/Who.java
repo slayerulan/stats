@@ -7,5 +7,9 @@ package com.savik.football.model;
 public enum Who {
     HOME,
     GUEST,
-    UNKNOWN
+    UNKNOWN;
+
+    public boolean isTeam() {
+        return this.equals(HOME) || this.equals(GUEST);
+    }
 }
