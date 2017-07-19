@@ -1,6 +1,7 @@
 package com.savik.football.blocks;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.savik.football.model.FootballMatch;
@@ -39,6 +40,25 @@ public abstract class BetContainer {
         this.successfullyMatchesAmount = 0;
     }
 
-    public abstract void check(FootballMatch footballMatch);
+    public void check(FootballMatch footballMatch) {
+        if (leaf) {
+            if (canAnalyze(footballMatch)) {
+                analyzedMatchesAmount++;
+                boolean success = checkMatch(footballMatch);
+                if (success) {
+                    successfullyMatchesAmount++;
+                }
+            } else {
+                skippedMatchesAmount++;
+            }
+        } else {
+            Consumer<BetContainer> checkMatch = betContainer -> betContainer.check(footballMatch);
+            childrenBetBlocks.forEach(checkMatch);
+        }
+    }
+
+    protected abstract boolean canAnalyze(FootballMatch footballMatch);
+
+    protected abstract boolean checkMatch(FootballMatch footballMatch);
 
 }

@@ -1,7 +1,6 @@
 package com.savik.football.blocks;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 import com.savik.football.bets.PeriodBet;
 import com.savik.football.model.FootballMatch;
@@ -22,23 +21,16 @@ public abstract class PeriodBetContainer extends BetContainer {
         this.bet = bet;
     }
 
+    @Override
+    public boolean canAnalyze(FootballMatch footballMatch) {
+        Period period = getPeriod(footballMatch);
+        return bet.canAnalyze(period);
+    }
 
-    public void check(FootballMatch footballMatch) {
-        if (leaf) {
-            Period period = getPeriod(footballMatch);
-            if (bet.canAnalyze(period)) {
-                analyzedMatchesAmount++;
-                boolean success = bet.check(period);
-                if (success) {
-                    successfullyMatchesAmount++;
-                }
-            } else {
-                skippedMatchesAmount++;
-            }
-        } else {
-            Consumer<BetContainer> checkMatch = betContainer -> betContainer.check(footballMatch);
-            childrenBetBlocks.forEach(checkMatch);
-        }
+    @Override
+    public boolean checkMatch(FootballMatch footballMatch) {
+        Period period = getPeriod(footballMatch);
+        return bet.check(period);
     }
 
     public abstract Period getPeriod(FootballMatch footballMatch);

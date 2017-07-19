@@ -26,20 +26,13 @@ public abstract class GeneralBetContainer extends BetContainer {
         this(bet);
     }
 
-    public void check(FootballMatch footballMatch) {
-        if (leaf) {
-            if (bet.canAnalyze(footballMatch)) {
-                analyzedMatchesAmount++;
-                boolean success = bet.check(footballMatch);
-                if (success) {
-                    successfullyMatchesAmount++;
-                }
-            } else {
-                skippedMatchesAmount++;
-            }
-        } else {
-            Consumer<BetContainer> checkMatch = betContainer -> betContainer.check(footballMatch);
-            childrenBetBlocks.forEach(checkMatch);
-        }
+    @Override
+    public boolean canAnalyze(FootballMatch footballMatch) {
+        return bet.canAnalyze(footballMatch);
+    }
+
+    @Override
+    public boolean checkMatch(FootballMatch footballMatch) {
+        return bet.check(footballMatch);
     }
 }
