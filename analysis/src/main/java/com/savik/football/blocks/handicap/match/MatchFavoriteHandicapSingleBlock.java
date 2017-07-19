@@ -1,16 +1,16 @@
 package com.savik.football.blocks.handicap.match;
 
-import com.savik.football.bets.handicap.match.MatchFavoriteHandicap;
-import com.savik.football.blocks.GeneralBetContainer;
+import com.savik.football.bets.handicap.PeriodFavoriteHandicap;
+import com.savik.football.blocks.MatchPeriodFavoriteBetContainer;
 
 /**
  * @author Savushkin Yauheni
  * @since 16.05.2017
  */
-public class MatchFavoriteHandicapSingleBlock extends GeneralBetContainer {
+public class MatchFavoriteHandicapSingleBlock extends MatchPeriodFavoriteBetContainer {
 
     public MatchFavoriteHandicapSingleBlock(double amount) {
-        super(new MatchFavoriteHandicap(amount));
+        super(new PeriodFavoriteHandicap(amount));
     }
 
 

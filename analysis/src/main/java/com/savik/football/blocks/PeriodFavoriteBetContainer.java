@@ -2,17 +2,18 @@ package com.savik.football.blocks;
 
 import java.util.List;
 
-import com.savik.football.bets.PeriodBet;
+import com.savik.football.bets.PeriodFavoriteBet;
 import com.savik.football.model.FootballMatch;
 import com.savik.football.model.Period;
+import com.savik.football.model.Who;
 import lombok.*;
 
 @Getter
-public abstract class PeriodBetContainer {
+public abstract class PeriodFavoriteBetContainer {
 
-    private List<PeriodBetContainer> childrenBetBlocks;
+    private List<PeriodFavoriteBetContainer> childrenBetBlocks;
 
-    private PeriodBet bet;
+    private PeriodFavoriteBet bet;
 
     private Boolean leaf;
 
@@ -22,12 +23,12 @@ public abstract class PeriodBetContainer {
 
     private Integer successfullyMatchesAmount;
 
-    public PeriodBetContainer(List<PeriodBetContainer> childrenBetBlocks) {
+    public PeriodFavoriteBetContainer(List<PeriodFavoriteBetContainer> childrenBetBlocks) {
         this.childrenBetBlocks = childrenBetBlocks;
         this.leaf = false;
     }
 
-    public PeriodBetContainer(PeriodBet bet) {
+    public PeriodFavoriteBetContainer(PeriodFavoriteBet bet) {
         this.bet = bet;
         this.leaf = true;
         this.analyzedMatchesAmount = 0;
@@ -37,10 +38,11 @@ public abstract class PeriodBetContainer {
 
     public void check(FootballMatch footballMatch) {
         if (leaf) {
+            Who favorite = footballMatch.getBookieStats().getFavorite();
             Period period = getPeriod(footballMatch);
-            if (bet.canAnalyze(period)) {
+            if (bet.canAnalyze(favorite, period)) {
                 analyzedMatchesAmount++;
-                boolean success = bet.check(period);
+                boolean success = bet.check(favorite, period);
                 if (success) {
                     successfullyMatchesAmount++;
                 }

@@ -2,13 +2,13 @@ package com.savik.football.blocks.handicap.match;
 
 import java.util.Arrays;
 
-import com.savik.football.blocks.GeneralBetContainer;
+import com.savik.football.blocks.MatchPeriodFavoriteBetContainer;
 
 /**
  * @author Savushkin Yauheni
  * @since 16.05.2017
  */
-public class MatchLoserHandicapBlock extends GeneralBetContainer {
+public class MatchLoserHandicapBlock extends MatchPeriodFavoriteBetContainer {
 
     public MatchLoserHandicapBlock() {
         super(Arrays.asList(
