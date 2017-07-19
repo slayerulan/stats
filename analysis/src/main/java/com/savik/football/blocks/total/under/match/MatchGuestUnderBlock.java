@@ -2,13 +2,13 @@ package com.savik.football.blocks.total.under.match;
 
 import java.util.Arrays;
 
-import com.savik.football.blocks.GeneralBetContainer;
+import com.savik.football.blocks.MatchPeriodBetContainer;
 
 /**
  * @author Savushkin Yauheni
  * @since 16.05.2017
  */
-public class MatchGuestUnderBlock extends GeneralBetContainer {
+public class MatchGuestUnderBlock extends MatchPeriodBetContainer {
 
     public MatchGuestUnderBlock() {
         super(Arrays.asList(

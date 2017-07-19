@@ -1,16 +1,16 @@
 package com.savik.football.blocks.total.under.match;
 
-import com.savik.football.bets.total.under.match.MatchUnder;
-import com.savik.football.blocks.GeneralBetContainer;
+import com.savik.football.bets.total.under.PeriodUnder;
+import com.savik.football.blocks.MatchPeriodBetContainer;
 
 /**
  * @author Savushkin Yauheni
  * @since 16.05.2017
  */
-public class MatchUnderSingleBlock extends GeneralBetContainer {
+public class MatchUnderSingleBlock extends MatchPeriodBetContainer {
 
     public MatchUnderSingleBlock(double amount) {
-        super(new MatchUnder(amount));
+        super(new PeriodUnder(amount));
     }
 
 

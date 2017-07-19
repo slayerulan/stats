@@ -10,25 +10,22 @@ public class EveryPeriodOver extends GeneralBet {
 
     private double amount;
 
-    private PeriodOver firstPeriodOver;
-
-    private PeriodOver secondPeriodOver;
+    private PeriodOver periodOver;
 
     public EveryPeriodOver(double amount) {
         this.amount = amount;
-        this.firstPeriodOver = new PeriodOver(amount);
-        this.secondPeriodOver = new PeriodOver(amount);
+        this.periodOver = new PeriodOver(amount);
     }
 
     @Override
     public boolean canAnalyze(FootballMatch footballMatch) {
-        return this.firstPeriodOver.canAnalyze(footballMatch.getMatchInfo().getFirstPeriod())
-               && this.secondPeriodOver.canAnalyze(footballMatch.getMatchInfo().getSecondPeriod());
+        return periodOver.canAnalyze(footballMatch.getMatchInfo().getFirstPeriod())
+               && periodOver.canAnalyze(footballMatch.getMatchInfo().getSecondPeriod());
     }
 
     @Override
     public boolean check(FootballMatch footballMatch) {
-        return this.firstPeriodOver.check(footballMatch.getMatchInfo().getFirstPeriod())
-               && this.secondPeriodOver.check(footballMatch.getMatchInfo().getSecondPeriod());
+        return periodOver.check(footballMatch.getMatchInfo().getFirstPeriod())
+               && periodOver.check(footballMatch.getMatchInfo().getSecondPeriod());
     }
 }

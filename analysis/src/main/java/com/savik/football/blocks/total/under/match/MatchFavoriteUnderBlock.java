@@ -2,13 +2,13 @@ package com.savik.football.blocks.total.under.match;
 
 import java.util.Arrays;
 
-import com.savik.football.blocks.GeneralBetContainer;
+import com.savik.football.blocks.MatchPeriodFavoriteBetContainer;
 
 /**
  * @author Savushkin Yauheni
  * @since 16.05.2017
  */
-public class MatchFavoriteUnderBlock extends GeneralBetContainer {
+public class MatchFavoriteUnderBlock extends MatchPeriodFavoriteBetContainer {
 
     public MatchFavoriteUnderBlock() {
         super(Arrays.asList(

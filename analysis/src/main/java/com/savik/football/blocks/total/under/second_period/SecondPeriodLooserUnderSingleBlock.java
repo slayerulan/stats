@@ -1,16 +1,16 @@
 package com.savik.football.blocks.total.under.second_period;
 
-import com.savik.football.bets.total.under.second_period.SecondPeriodLoserUnder;
-import com.savik.football.blocks.GeneralBetContainer;
+import com.savik.football.bets.total.under.PeriodLoserUnder;
+import com.savik.football.blocks.SecondPeriodFavoriteBetContainer;
 
 /**
  * @author Savushkin Yauheni
  * @since 16.05.2017
  */
-public class SecondPeriodLooserUnderSingleBlock extends GeneralBetContainer {
+public class SecondPeriodLooserUnderSingleBlock extends SecondPeriodFavoriteBetContainer {
 
     public SecondPeriodLooserUnderSingleBlock(double amount) {
-        super(new SecondPeriodLoserUnder(amount));
+        super(new PeriodLoserUnder(amount));
     }
 
 

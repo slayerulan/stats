@@ -1,8 +1,7 @@
 package com.savik.football.bets.total.under.periods;
 
 import com.savik.football.bets.GeneralBet;
-import com.savik.football.bets.total.under.first_period.FirstPeriodUnder;
-import com.savik.football.bets.total.under.second_period.SecondPeriodUnder;
+import com.savik.football.bets.total.under.PeriodUnder;
 import com.savik.football.model.FootballMatch;
 import lombok.*;
 
@@ -11,22 +10,22 @@ public class EveryPeriodUnder extends GeneralBet {
 
     private double amount;
 
-    private FirstPeriodUnder firstPeriodUnder;
-    private SecondPeriodUnder secondPeriodUnder;
+    private PeriodUnder periodUnder;
 
     public EveryPeriodUnder(double amount) {
         this.amount = amount;
-        this.firstPeriodUnder = new FirstPeriodUnder(amount);
-        this.secondPeriodUnder = new SecondPeriodUnder(amount);
+        this.periodUnder = new PeriodUnder(amount);
     }
 
     @Override
     public boolean canAnalyze(FootballMatch footballMatch) {
-        return this.firstPeriodUnder.canAnalyze(footballMatch) && this.secondPeriodUnder.canAnalyze(footballMatch);
+        return periodUnder.canAnalyze(footballMatch.getMatchInfo().getFirstPeriod())
+               && periodUnder.canAnalyze(footballMatch.getMatchInfo().getSecondPeriod());
     }
 
     @Override
     public boolean check(FootballMatch footballMatch) {
-        return this.firstPeriodUnder.check(footballMatch) && this.secondPeriodUnder.check(footballMatch);
+        return periodUnder.check(footballMatch.getMatchInfo().getFirstPeriod()) &&
+               periodUnder.check(footballMatch.getMatchInfo().getSecondPeriod());
     }
 }

@@ -1,16 +1,16 @@
 package com.savik.football.blocks.total.under.second_period;
 
-import com.savik.football.bets.total.under.second_period.SecondPeriodFavoriteUnder;
-import com.savik.football.blocks.GeneralBetContainer;
+import com.savik.football.bets.total.under.PeriodFavoriteUnder;
+import com.savik.football.blocks.SecondPeriodFavoriteBetContainer;
 
 /**
  * @author Savushkin Yauheni
  * @since 16.05.2017
  */
-public class SecondPeriodFavoriteUnderSingleBlock extends GeneralBetContainer {
+public class SecondPeriodFavoriteUnderSingleBlock extends SecondPeriodFavoriteBetContainer {
 
     public SecondPeriodFavoriteUnderSingleBlock(double amount) {
-        super(new SecondPeriodFavoriteUnder(amount));
+        super(new PeriodFavoriteUnder(amount));
     }
 
 
