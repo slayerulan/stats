@@ -17,13 +17,13 @@ public class HomeGoalsBlock extends GeneralBetContainer {
     public HomeGoalsBlock() {
         super(Arrays.asList(
                 // команда забьет в матче
-                new HomeOverSingleBlock(0.5, "Команда забьет в матче"),
+                new HomeOverSingleBlock(0.5),
                 // команда забьет в 1 тайме
-                new FirstPeriodHomeOverSingleBlock(0.5, "Команда забьет в 1 тайме"),
+                new FirstPeriodHomeOverSingleBlock(0.5),
                 // команда забьет в 1 тайме
-                new SecondPeriodHomeOverSingleBlock(0.5, "Команда забьет во 2 тайме"),
+                new SecondPeriodHomeOverSingleBlock(0.5),
                 // обе команды забьют
                 new BothTeamsScoredBlock()
-        ), "Голы при игре дома");
+        ));
     }
 }

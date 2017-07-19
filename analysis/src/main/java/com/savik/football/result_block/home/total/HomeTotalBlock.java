@@ -18,6 +18,6 @@ public class HomeTotalBlock extends GeneralBetContainer {
                 new HomeOverBlock(),
                 new FirstPeriodHomeOverBlock(),
                 new SecondPeriodHomeOverBlock()
-        ), "Тоталы при игре дома");
+        ));
     }
 }

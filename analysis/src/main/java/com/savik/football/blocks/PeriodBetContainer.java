@@ -1,6 +1,7 @@
 package com.savik.football.blocks;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 import com.savik.football.bets.PeriodBet;
 import com.savik.football.model.FootballMatch;
@@ -8,32 +9,19 @@ import com.savik.football.model.Period;
 import lombok.*;
 
 @Getter
-public abstract class PeriodBetContainer {
-
-    private List<PeriodBetContainer> childrenBetBlocks;
+public abstract class PeriodBetContainer extends BetContainer {
 
     private PeriodBet bet;
 
-    private Boolean leaf;
-
-    private Integer analyzedMatchesAmount;
-
-    private Integer skippedMatchesAmount;
-
-    private Integer successfullyMatchesAmount;
-
-    public PeriodBetContainer(List<PeriodBetContainer> childrenBetBlocks) {
-        this.childrenBetBlocks = childrenBetBlocks;
-        this.leaf = false;
+    public PeriodBetContainer(List<? extends BetContainer> childrenBetBlocks) {
+        super(childrenBetBlocks);
     }
 
     public PeriodBetContainer(PeriodBet bet) {
+        super();
         this.bet = bet;
-        this.leaf = true;
-        this.analyzedMatchesAmount = 0;
-        this.skippedMatchesAmount = 0;
-        this.successfullyMatchesAmount = 0;
     }
+
 
     public void check(FootballMatch footballMatch) {
         if (leaf) {
@@ -48,7 +36,8 @@ public abstract class PeriodBetContainer {
                 skippedMatchesAmount++;
             }
         } else {
-            childrenBetBlocks.forEach(b -> b.check(footballMatch));
+            Consumer<BetContainer> checkMatch = betContainer -> betContainer.check(footballMatch);
+            childrenBetBlocks.forEach(checkMatch);
         }
     }
 
