@@ -15,7 +15,7 @@ public class PeriodGuestHandicap extends PeriodBet {
 
     @Override
     public boolean canAnalyze(Period period) {
-        return period.getGuestScore() != null && period.getHomeScore() != null;
+        return period.hasScores();
     }
 
     @Override

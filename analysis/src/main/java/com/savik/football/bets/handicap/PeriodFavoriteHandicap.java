@@ -20,9 +20,7 @@ public class PeriodFavoriteHandicap extends PeriodFavoriteBet {
 
     @Override
     public boolean canAnalyze(Who favorite, Period period) {
-        return favorite.isTeam() &&
-               period.getHomeScore() != null &&
-               period.getGuestScore() != null;
+        return favorite.isTeam() && period.hasScores();
     }
 
     @Override

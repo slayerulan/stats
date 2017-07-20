@@ -118,6 +118,10 @@ public class Period extends Identifiable {
         return goals.stream().anyMatch(g -> g.getMinute() > from && g.getMinute() < before);
     }
 
+    public boolean hasScores() {
+        return getGuestScore() != null && getHomeScore() != null;
+    }
+
     private Optional<FootballGoal> getGoal(GoalOrder goalOrder) {
         if (CollectionUtils.isEmpty(this.goals)) {
             return null;
