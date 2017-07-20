@@ -1,11 +1,11 @@
 package com.savik.parser.football.bets.handicap;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import com.savik.football.bets.handicap.PeriodFavoriteHandicap;
 import com.savik.football.model.Who;
 import com.savik.parser.football.bets.AbstractBetTest;
-import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -14,20 +14,63 @@ import org.junit.Test;
  */
 public class PeriodFavoriteHandicapTest extends AbstractBetTest {
 
-    public static final Double HANDICAP = -1.5;
+    private static final Double WINNING_HANDICAP = -1.5;
 
-    private PeriodFavoriteHandicap periodFavoriteHandicap;
+    private static final Double LOOSING_HANDICAP = 1.5;
 
-    @Before
-    public void createRule() {
-        periodFavoriteHandicap = new PeriodFavoriteHandicap(HANDICAP);
+    @Test
+    public void testSuccessfulFavoriteWinningHandicap() {
+        PeriodFavoriteHandicap periodFavoriteHandicap = new PeriodFavoriteHandicap(WINNING_HANDICAP);
+        assertTrue(periodFavoriteHandicap.check(
+                Who.HOME,
+                createPeriodHomeWonWithDifference(Math.abs(WINNING_HANDICAP.intValue()) + 1)
+        ));
     }
 
     @Test
-    public void testSuccessfulChecking() throws Exception {
+    public void testUnsuccessfulFavoriteWinningHandicap() {
+        PeriodFavoriteHandicap periodFavoriteHandicap = new PeriodFavoriteHandicap(WINNING_HANDICAP);
+        assertFalse(periodFavoriteHandicap.check(
+                Who.HOME,
+                createPeriodHomeWonWithDifference(Math.abs(WINNING_HANDICAP.intValue()))
+        ));
+    }
+
+    @Test
+    public void testSuccessfulFavoriteLoosingHandicap() {
+        PeriodFavoriteHandicap periodFavoriteHandicap = new PeriodFavoriteHandicap(LOOSING_HANDICAP);
         assertTrue(periodFavoriteHandicap.check(
                 Who.HOME,
-                createPeriodHomeWonWithDifference(Math.abs(HANDICAP.intValue()) + 1)
+                createPeriodGuestWonWithDifference(Math.abs(LOOSING_HANDICAP.intValue()))
+        ));
+    }
+
+    @Test
+    public void testUnsuccessfulFavoriteLoosingHandicap() {
+        PeriodFavoriteHandicap periodFavoriteHandicap = new PeriodFavoriteHandicap(LOOSING_HANDICAP);
+        assertFalse(periodFavoriteHandicap.check(
+                Who.HOME,
+                createPeriodGuestWonWithDifference(Math.abs(LOOSING_HANDICAP.intValue()) + 1)
+        ));
+    }
+
+    @Test
+    public void shouldCanAnalyzeReturnTrueIfFavoriteIsTeamAndHomeAndGuestScoreExist() {
+        PeriodFavoriteHandicap periodFavoriteHandicap = new PeriodFavoriteHandicap(LOOSING_HANDICAP);
+        Who favorite = Who.HOME;
+        assertTrue(periodFavoriteHandicap.canAnalyze(
+                favorite,
+                createPeriodWithAnyGuestAndHomeScore()
+        ));
+    }
+
+    @Test
+    public void shouldCanAnalyzeReturnFalseIfFavoriteUnknown() {
+        PeriodFavoriteHandicap periodFavoriteHandicap = new PeriodFavoriteHandicap(LOOSING_HANDICAP);
+        Who unknownFavorite = Who.UNKNOWN;
+        assertFalse(periodFavoriteHandicap.canAnalyze(
+                unknownFavorite,
+                createPeriodWithAnyGuestAndHomeScore()
         ));
     }
 }

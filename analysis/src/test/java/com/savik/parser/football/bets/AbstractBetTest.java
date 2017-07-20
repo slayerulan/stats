@@ -36,4 +36,11 @@ public abstract class AbstractBetTest {
                      .build();
     }
 
+    public Period createPeriodWithAnyGuestAndHomeScore() {
+        return Period.builder()
+                     .guestScore(RANDOM_GOAL_AMOUNT)
+                     .homeScore(RANDOM_GOAL_AMOUNT)
+                     .build();
+    }
+
 }
