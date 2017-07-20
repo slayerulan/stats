@@ -1,6 +1,6 @@
 package com.savik.football.blocks.handicap.first_period;
 
-import com.savik.football.bets.handicap.PeriodLoserHandicap;
+import com.savik.football.bets.handicap.PeriodLooserHandicap;
 import com.savik.football.blocks.FirstPeriodFavoriteBetContainer;
 
 /**
@@ -10,7 +10,7 @@ import com.savik.football.blocks.FirstPeriodFavoriteBetContainer;
 public class FirstPeriodLoserHandicapSingleBlock extends FirstPeriodFavoriteBetContainer {
 
     public FirstPeriodLoserHandicapSingleBlock(double amount) {
-        super(new PeriodLoserHandicap(amount));
+        super(new PeriodLooserHandicap(amount));
     }
 
 
