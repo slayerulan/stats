@@ -8,10 +8,6 @@ import com.savik.football.model.Who;
 import com.savik.parser.football.bets.AbstractBetTest;
 import org.junit.Test;
 
-/**
- * @author Savushkin Yauheni
- * @since 19.07.2017
- */
 public class PeriodFavoriteHandicapTest extends AbstractBetTest {
 
     private static final Double WINNING_HANDICAP = -1.5;
