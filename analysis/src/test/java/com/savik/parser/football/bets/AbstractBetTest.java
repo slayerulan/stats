@@ -2,6 +2,8 @@ package com.savik.parser.football.bets;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+import com.savik.football.model.FootballMatch;
+import com.savik.football.model.FootballMatchInfo;
 import com.savik.football.model.Period;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -93,6 +95,17 @@ public abstract class AbstractBetTest {
         return Period.builder()
                      .totalScore(score)
                      .build();
+    }
+
+    public FootballMatch createFootballMatch(Period first, Period second) {
+        return FootballMatch.builder()
+                .matchInfo(
+                        FootballMatchInfo.builder()
+                        .firstPeriod(first)
+                        .secondPeriod(second)
+                        .build()
+                )
+                .build();
     }
 
 }
