@@ -43,6 +43,12 @@ public abstract class AbstractBetTest {
                      .build();
     }
 
+    public Period createPeriodWithAnyTotalScore() {
+        return Period.builder()
+                     .totalScore(RANDOM_GOAL_AMOUNT)
+                     .build();
+    }
+
     public Period createPeriodWhereOnlyHomeScored() {
         return Period.builder()
                      .guestScore(0)
@@ -80,6 +86,12 @@ public abstract class AbstractBetTest {
         return Period.builder()
                      .homeScore(RANDOM_GOAL_AMOUNT)
                      .guestScore(score)
+                     .build();
+    }
+
+    public Period createPeriodWithTotalScore(int score) {
+        return Period.builder()
+                     .totalScore(score)
                      .build();
     }
 
