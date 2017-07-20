@@ -1,6 +1,6 @@
 package com.savik.football.blocks.total.over.first_period;
 
-import com.savik.football.bets.total.over.PeriodLoserOver;
+import com.savik.football.bets.total.over.PeriodLooserOver;
 import com.savik.football.blocks.FirstPeriodFavoriteBetContainer;
 
 /**
@@ -10,7 +10,7 @@ import com.savik.football.blocks.FirstPeriodFavoriteBetContainer;
 public class FirstPeriodLooserOverSingleBlock extends FirstPeriodFavoriteBetContainer {
 
     public FirstPeriodLooserOverSingleBlock(double amount) {
-        super(new PeriodLoserOver(amount));
+        super(new PeriodLooserOver(amount));
     }
 
 

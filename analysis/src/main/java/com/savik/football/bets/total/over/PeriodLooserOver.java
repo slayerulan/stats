@@ -6,17 +6,17 @@ import com.savik.football.model.Who;
 import lombok.*;
 
 @Getter
-public class PeriodLoserOver extends PeriodFavoriteBet {
+public class PeriodLooserOver extends PeriodFavoriteBet {
 
     private double amount;
 
-    public PeriodLoserOver(double amount) {
+    public PeriodLooserOver(double amount) {
         this.amount = amount;
     }
 
     @Override
     public boolean canAnalyze(Who favorite, Period period) {
-        return favorite.isTeam() && period.getFavoriteScore(favorite) != null;
+        return favorite.isTeam() && period.getLoserScore(favorite) != null;
     }
 
     @Override
