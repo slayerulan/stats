@@ -119,12 +119,12 @@ public class Period extends Identifiable {
     }
 
     public boolean hasScores() {
-        return getGuestScore() != null && getHomeScore() != null;
+        return guestScore != null && homeScore != null;
     }
 
     private Optional<FootballGoal> getGoal(GoalOrder goalOrder) {
         if (CollectionUtils.isEmpty(this.goals)) {
-            return null;
+            return Optional.empty();
         }
         List<FootballGoal> footballGoals = this.goals
                 .stream()
@@ -135,7 +135,7 @@ public class Period extends Identifiable {
             return Optional.of(footballGoals.get(footballGoals.size() - 1));
         }
         if(goalOrder.getOrder() > footballGoals.size()) {
-            return Optional.ofNullable(null);
+            return Optional.empty();
         }
         return Optional.of(footballGoals.get(goalOrder.getOrder() - 1));
 
