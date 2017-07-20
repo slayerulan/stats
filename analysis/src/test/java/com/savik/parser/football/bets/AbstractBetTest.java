@@ -15,7 +15,7 @@ public abstract class AbstractBetTest {
 
     private static final Integer MAX_GOALS = 10;
 
-    private static final Integer RANDOM_GOAL_AMOUNT = RANDOM.nextInt(0, MAX_GOALS);
+    private static final Integer RANDOM_GOAL_AMOUNT = RANDOM.nextInt(1, MAX_GOALS);
 
     @Before
     public void init() {
@@ -40,6 +40,20 @@ public abstract class AbstractBetTest {
         return Period.builder()
                      .guestScore(RANDOM_GOAL_AMOUNT)
                      .homeScore(RANDOM_GOAL_AMOUNT)
+                     .build();
+    }
+
+    public Period createPeriodWhereOnlyHomeScored() {
+        return Period.builder()
+                     .guestScore(0)
+                     .homeScore(RANDOM_GOAL_AMOUNT)
+                     .build();
+    }
+
+    public Period createPeriodWhereOnlyGuestScored() {
+        return Period.builder()
+                     .guestScore(RANDOM_GOAL_AMOUNT)
+                     .homeScore(0)
                      .build();
     }
 
