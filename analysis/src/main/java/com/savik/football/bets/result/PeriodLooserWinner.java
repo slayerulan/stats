@@ -10,7 +10,7 @@ public class PeriodLooserWinner extends PeriodFavoriteBet {
 
     @Override
     public boolean canAnalyze(Who favorite, Period period) {
-        return favorite.isTeam() && period.getFavoriteScore(favorite) != null && period.getLoserScore(favorite) != null;
+        return favorite.isTeam() && period.hasScores();
     }
 
     @Override
