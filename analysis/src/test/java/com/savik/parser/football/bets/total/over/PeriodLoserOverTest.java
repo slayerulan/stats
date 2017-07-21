@@ -13,7 +13,7 @@ public class PeriodLoserOverTest extends AbstractBetTest {
     private static final Double TOTAL_MORE = 1.5;
 
     @Test
-    public void shouldReturnTrueIfFavoriteScoredMore1() {
+    public void shouldReturnTrueIfLoserScoredMore1() {
         PeriodLoserOver periodLoserOver = new PeriodLoserOver(TOTAL_MORE);
         assertTrue(periodLoserOver.check(
                 Who.HOME,
@@ -22,7 +22,7 @@ public class PeriodLoserOverTest extends AbstractBetTest {
     }
 
     @Test
-    public void shouldReturnFalseIfFavoriteScoredLess2() {
+    public void shouldReturnFalseIfLoserScoredLess2() {
         PeriodLoserOver periodLoserOver = new PeriodLoserOver(TOTAL_MORE);
         assertFalse(periodLoserOver.check(
                 Who.HOME,
@@ -32,7 +32,7 @@ public class PeriodLoserOverTest extends AbstractBetTest {
     
 
     @Test
-    public void shouldCanAnalyzeReturnTrueIfFavoriteScoreExists() {
+    public void shouldCanAnalyzeReturnTrueIfLoserScoreExists() {
         PeriodLoserOver periodLoserOver = new PeriodLoserOver(TOTAL_MORE);
         assertTrue(periodLoserOver.canAnalyze(
                 Who.HOME,
@@ -41,7 +41,7 @@ public class PeriodLoserOverTest extends AbstractBetTest {
     }
 
     @Test
-    public void shouldCanAnalyzeReturnFalseIfFavoriteScoreNotExists() {
+    public void shouldCanAnalyzeReturnFalseIfLoserScoreNotExists() {
         PeriodLoserOver periodLoserOver = new PeriodLoserOver(TOTAL_MORE);
         assertFalse(periodLoserOver.canAnalyze(
                 Who.HOME,
