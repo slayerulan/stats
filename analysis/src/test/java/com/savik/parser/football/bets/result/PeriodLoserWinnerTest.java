@@ -3,17 +3,17 @@ package com.savik.parser.football.bets.result;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import com.savik.football.bets.result.PeriodLooserWinner;
+import com.savik.football.bets.result.PeriodLoserWinner;
 import com.savik.football.model.Who;
 import com.savik.parser.football.bets.AbstractBetTest;
 import org.junit.Test;
 
-public class PeriodLooserWinnerTest extends AbstractBetTest {
+public class PeriodLoserWinnerTest extends AbstractBetTest {
 
     @Test
     public void shouldReturnTrueIfHomeLooserAndWonPeriod() {
-        PeriodLooserWinner periodLooserWinner = new PeriodLooserWinner();
-        assertTrue(periodLooserWinner.check(
+        PeriodLoserWinner periodLoserWinner = new PeriodLoserWinner();
+        assertTrue(periodLoserWinner.check(
                 Who.GUEST,
                 createPeriodHomeWonWithDifference(1)
         ));
@@ -21,8 +21,8 @@ public class PeriodLooserWinnerTest extends AbstractBetTest {
 
     @Test
     public void shouldReturnFalseIfPeriodResultIsDraw() {
-        PeriodLooserWinner periodLooserWinner = new PeriodLooserWinner();
-        assertFalse(periodLooserWinner.check(
+        PeriodLoserWinner periodLoserWinner = new PeriodLoserWinner();
+        assertFalse(periodLoserWinner.check(
                 Who.HOME,
                 createPeriodHomeWonWithDifference(0)
         ));
@@ -30,8 +30,8 @@ public class PeriodLooserWinnerTest extends AbstractBetTest {
 
     @Test
     public void shouldReturnFalseIfHomeFavoriteAndHomeWonPeriod() {
-        PeriodLooserWinner periodLooserWinner = new PeriodLooserWinner();
-        assertFalse(periodLooserWinner.check(
+        PeriodLoserWinner periodLoserWinner = new PeriodLoserWinner();
+        assertFalse(periodLoserWinner.check(
                 Who.HOME,
                 createPeriodHomeWonWithDifference(1)
         ));
@@ -39,8 +39,8 @@ public class PeriodLooserWinnerTest extends AbstractBetTest {
 
     @Test
     public void shouldCanAnalyzeReturnTrueIfHomeAndGuestScoreExist() {
-        PeriodLooserWinner periodLooserWinner = new PeriodLooserWinner();
-        assertTrue(periodLooserWinner.canAnalyze(
+        PeriodLoserWinner periodLoserWinner = new PeriodLoserWinner();
+        assertTrue(periodLoserWinner.canAnalyze(
                 Who.HOME,
                 createPeriodWithAnyGuestAndHomeScore()
         ));
@@ -48,8 +48,8 @@ public class PeriodLooserWinnerTest extends AbstractBetTest {
 
     @Test
     public void shouldCanAnalyzeReturnFalseIfHomeScoreNotExists() {
-        PeriodLooserWinner periodLooserWinner = new PeriodLooserWinner();
-        assertFalse(periodLooserWinner.canAnalyze(
+        PeriodLoserWinner periodLoserWinner = new PeriodLoserWinner();
+        assertFalse(periodLoserWinner.canAnalyze(
                 Who.HOME,
                 createPeriodWithoutHomeScore()
         ));
@@ -57,8 +57,8 @@ public class PeriodLooserWinnerTest extends AbstractBetTest {
 
     @Test
     public void shouldCanAnalyzeReturnFalseIfGuestScoreNotExists() {
-        PeriodLooserWinner periodLooserWinner = new PeriodLooserWinner();
-        assertFalse(periodLooserWinner.canAnalyze(
+        PeriodLoserWinner periodLoserWinner = new PeriodLoserWinner();
+        assertFalse(periodLoserWinner.canAnalyze(
                 Who.HOME,
                 createPeriodWithoutGuestScore()
         ));

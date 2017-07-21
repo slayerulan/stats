@@ -6,7 +6,7 @@ import com.savik.football.model.Who;
 import lombok.*;
 
 @Getter
-public class PeriodLooserWinner extends PeriodFavoriteBet {
+public class PeriodLoserWinner extends PeriodFavoriteBet {
 
     @Override
     public boolean canAnalyze(Who favorite, Period period) {

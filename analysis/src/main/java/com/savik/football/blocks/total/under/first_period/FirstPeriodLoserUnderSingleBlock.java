@@ -7,9 +7,9 @@ import com.savik.football.blocks.FirstPeriodFavoriteBetContainer;
  * @author Savushkin Yauheni
  * @since 16.05.2017
  */
-public class FirstPeriodLooserUnderSingleBlock extends FirstPeriodFavoriteBetContainer {
+public class FirstPeriodLoserUnderSingleBlock extends FirstPeriodFavoriteBetContainer {
 
-    public FirstPeriodLooserUnderSingleBlock(double amount) {
+    public FirstPeriodLoserUnderSingleBlock(double amount) {
         super(new PeriodLoserUnder(amount));
     }
 

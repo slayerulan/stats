@@ -10,11 +10,11 @@ import lombok.*;
  * @since 17.05.2017
  */
 @Getter
-public class PeriodLooserHandicap extends PeriodFavoriteBet {
+public class PeriodLoserHandicap extends PeriodFavoriteBet {
 
     private double amount;
 
-    public PeriodLooserHandicap(double amount) {
+    public PeriodLoserHandicap(double amount) {
         this.amount = amount;
     }
 

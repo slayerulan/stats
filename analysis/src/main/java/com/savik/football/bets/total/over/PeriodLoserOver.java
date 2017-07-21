@@ -6,11 +6,11 @@ import com.savik.football.model.Who;
 import lombok.*;
 
 @Getter
-public class PeriodLooserOver extends PeriodFavoriteBet {
+public class PeriodLoserOver extends PeriodFavoriteBet {
 
     private double amount;
 
-    public PeriodLooserOver(double amount) {
+    public PeriodLoserOver(double amount) {
         this.amount = amount;
     }
 

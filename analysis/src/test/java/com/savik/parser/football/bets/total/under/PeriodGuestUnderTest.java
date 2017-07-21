@@ -9,11 +9,11 @@ import org.junit.Test;
 
 public class PeriodGuestUnderTest extends AbstractBetTest {
 
-    private static final Double TOTAL_MORE = 1.5;
+    private static final Double TOTAL_LESS = 1.5;
 
     @Test
     public void shouldReturnTrueIfGuestScoredLess2() {
-        PeriodGuestUnder periodGuestUnder = new PeriodGuestUnder(TOTAL_MORE);
+        PeriodGuestUnder periodGuestUnder = new PeriodGuestUnder(TOTAL_LESS);
         assertTrue(periodGuestUnder.check(
                 createPeriodWithGuestScore(1)
         ));
@@ -21,7 +21,7 @@ public class PeriodGuestUnderTest extends AbstractBetTest {
 
     @Test
     public void shouldReturnFalseIfGuestScoredMore1() {
-        PeriodGuestUnder periodGuestUnder = new PeriodGuestUnder(TOTAL_MORE);
+        PeriodGuestUnder periodGuestUnder = new PeriodGuestUnder(TOTAL_LESS);
         assertFalse(periodGuestUnder.check(
                 createPeriodWithGuestScore(2)
         ));
@@ -29,7 +29,7 @@ public class PeriodGuestUnderTest extends AbstractBetTest {
 
     @Test
     public void shouldCanAnalyzeReturnTrueIfGuestScoreExists() {
-        PeriodGuestUnder periodGuestUnder = new PeriodGuestUnder(TOTAL_MORE);
+        PeriodGuestUnder periodGuestUnder = new PeriodGuestUnder(TOTAL_LESS);
         assertTrue(periodGuestUnder.canAnalyze(
                 createPeriodWhereOnlyGuestScored()
         ));
@@ -37,7 +37,7 @@ public class PeriodGuestUnderTest extends AbstractBetTest {
 
     @Test
     public void shouldCanAnalyzeReturnFalseIfGuestScoreNotExists() {
-        PeriodGuestUnder periodGuestUnder = new PeriodGuestUnder(TOTAL_MORE);
+        PeriodGuestUnder periodGuestUnder = new PeriodGuestUnder(TOTAL_LESS);
         assertFalse(periodGuestUnder.canAnalyze(
                 createPeriodWithoutGuestScore()
         ));

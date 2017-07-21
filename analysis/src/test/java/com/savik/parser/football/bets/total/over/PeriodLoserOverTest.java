@@ -3,19 +3,19 @@ package com.savik.parser.football.bets.total.over;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import com.savik.football.bets.total.over.PeriodLooserOver;
+import com.savik.football.bets.total.over.PeriodLoserOver;
 import com.savik.football.model.Who;
 import com.savik.parser.football.bets.AbstractBetTest;
 import org.junit.Test;
 
-public class PeriodLooserOverTest extends AbstractBetTest {
+public class PeriodLoserOverTest extends AbstractBetTest {
 
     private static final Double TOTAL_MORE = 1.5;
 
     @Test
     public void shouldReturnTrueIfFavoriteScoredMore1() {
-        PeriodLooserOver periodLooserOver = new PeriodLooserOver(TOTAL_MORE);
-        assertTrue(periodLooserOver.check(
+        PeriodLoserOver periodLoserOver = new PeriodLoserOver(TOTAL_MORE);
+        assertTrue(periodLoserOver.check(
                 Who.HOME,
                 createPeriodWithGuestScore(2)
         ));
@@ -23,8 +23,8 @@ public class PeriodLooserOverTest extends AbstractBetTest {
 
     @Test
     public void shouldReturnFalseIfFavoriteScoredLess2() {
-        PeriodLooserOver periodLooserOver = new PeriodLooserOver(TOTAL_MORE);
-        assertFalse(periodLooserOver.check(
+        PeriodLoserOver periodLoserOver = new PeriodLoserOver(TOTAL_MORE);
+        assertFalse(periodLoserOver.check(
                 Who.HOME,
                 createPeriodWithGuestScore(1)
         ));
@@ -33,8 +33,8 @@ public class PeriodLooserOverTest extends AbstractBetTest {
 
     @Test
     public void shouldCanAnalyzeReturnTrueIfFavoriteScoreExists() {
-        PeriodLooserOver periodLooserOver = new PeriodLooserOver(TOTAL_MORE);
-        assertTrue(periodLooserOver.canAnalyze(
+        PeriodLoserOver periodLoserOver = new PeriodLoserOver(TOTAL_MORE);
+        assertTrue(periodLoserOver.canAnalyze(
                 Who.HOME,
                 createPeriodWithoutHomeScore()
         ));
@@ -42,8 +42,8 @@ public class PeriodLooserOverTest extends AbstractBetTest {
 
     @Test
     public void shouldCanAnalyzeReturnFalseIfFavoriteScoreNotExists() {
-        PeriodLooserOver periodLooserOver = new PeriodLooserOver(TOTAL_MORE);
-        assertFalse(periodLooserOver.canAnalyze(
+        PeriodLoserOver periodLoserOver = new PeriodLoserOver(TOTAL_MORE);
+        assertFalse(periodLoserOver.canAnalyze(
                 Who.HOME,
                 createPeriodWithoutGuestScore()
         ));
