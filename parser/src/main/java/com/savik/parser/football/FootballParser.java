@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.savik.football.model.FootballChampionship;
 import com.savik.football.model.FootballMatch;
-import com.savik.football.model.Season;
+import com.savik.Season;
 import com.savik.football.repository.FootballMatchRepository;
 import com.savik.parser.LeagueParser;
 import lombok.extern.slf4j.*;

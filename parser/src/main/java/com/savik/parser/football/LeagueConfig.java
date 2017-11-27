@@ -1,8 +1,7 @@
 package com.savik.parser.football;
 
 import com.savik.football.model.FootballChampionship;
-import com.savik.football.model.FootballChampionship;
-import com.savik.football.model.Season;
+import com.savik.Season;
 
 import java.util.AbstractMap;
 import java.util.Collections;

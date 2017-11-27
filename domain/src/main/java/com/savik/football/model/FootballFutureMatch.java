@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import com.savik.Season;
 import com.savik.domain.Identifiable;
 import lombok.*;
 

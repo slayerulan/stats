@@ -1,4 +1,4 @@
-package com.savik.football.model;
+package com.savik;
 
 /**
  * @author Savushkin Yauheni

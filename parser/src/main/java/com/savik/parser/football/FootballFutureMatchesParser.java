@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.savik.football.model.FootballChampionship;
 import com.savik.football.model.FootballFutureMatch;
-import com.savik.football.model.Season;
+import com.savik.Season;
 import com.savik.football.repository.FootballFutureMatchRepository;
 import com.savik.football.repository.FootballTeamRepository;
 import com.savik.parser.EventItem;
