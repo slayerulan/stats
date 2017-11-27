@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.savik.football.bets.PeriodFavoriteBet;
 import com.savik.football.model.FootballMatch;
-import com.savik.football.model.Period;
+import com.savik.football.model.FootballPeriod;
 
 /**
  * @author Savushkin Yauheni
@@ -21,7 +21,7 @@ public class FirstPeriodFavoriteBetContainer extends PeriodFavoriteBetContainer 
     }
 
     @Override
-    public Period getPeriod(FootballMatch footballMatch) {
+    public FootballPeriod getPeriod(FootballMatch footballMatch) {
         return footballMatch.getMatchInfo().getFirstPeriod();
     }
 }

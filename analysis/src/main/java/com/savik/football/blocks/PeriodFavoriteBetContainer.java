@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.savik.football.bets.PeriodFavoriteBet;
 import com.savik.football.model.FootballMatch;
-import com.savik.football.model.Period;
+import com.savik.football.model.FootballPeriod;
 import com.savik.football.model.Who;
 import lombok.*;
 
@@ -25,16 +25,16 @@ public abstract class PeriodFavoriteBetContainer extends BetContainer {
     @Override
     public boolean canAnalyze(FootballMatch footballMatch) {
         Who favorite = footballMatch.getBookieStats().getFavorite();
-        Period period = getPeriod(footballMatch);
+        FootballPeriod period = getPeriod(footballMatch);
         return bet.canAnalyze(favorite, period);
     }
 
     @Override
     public boolean checkMatch(FootballMatch footballMatch) {
         Who favorite = footballMatch.getBookieStats().getFavorite();
-        Period period = getPeriod(footballMatch);
+        FootballPeriod period = getPeriod(footballMatch);
         return bet.check(favorite, period);
     }
 
-    public abstract Period getPeriod(FootballMatch footballMatch);
+    public abstract FootballPeriod getPeriod(FootballMatch footballMatch);
 }

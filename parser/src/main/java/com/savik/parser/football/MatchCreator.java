@@ -52,17 +52,17 @@ public class MatchCreator {
     }
 
     private FootballMatchInfo createMatchInfo() {
-        Period firstPeriod = createPeriod(
+        FootballPeriod firstPeriod = createPeriod(
                 firstPeriodGeneralInfoDto,
                 firstPeriodStatsInfoDto,
-                Period.PeriodStatus.FIRST
+                FootballPeriod.PeriodStatus.FIRST
         );
-        Period secondPeriod = createPeriod(
+        FootballPeriod secondPeriod = createPeriod(
                 secondPeriodGeneralInfoDto,
                 secondPeriodStatsInfoDto,
-                Period.PeriodStatus.SECOND
+                FootballPeriod.PeriodStatus.SECOND
         );
-        Period match = createPeriod(matchGeneralInfoDto, matchStatsInfoDto, Period.PeriodStatus.MATCH);
+        FootballPeriod match = createPeriod(matchGeneralInfoDto, matchStatsInfoDto, FootballPeriod.PeriodStatus.MATCH);
         return FootballMatchInfo.builder()
                                 .firstPeriod(firstPeriod)
                                 .secondPeriod(secondPeriod)
@@ -70,19 +70,19 @@ public class MatchCreator {
                                 .build();
     }
 
-    private Period createPeriod(
+    private FootballPeriod createPeriod(
             MatchInfoParser.GeneralInfoDto infoDto,
             MatchInfoParser.StatsInfoDto statsDto,
-            Period.PeriodStatus periodStatus
+            FootballPeriod.PeriodStatus periodStatus
     ) {
-        Period period = new Period();
+        FootballPeriod period = new FootballPeriod();
         if (statsDto != null) {
             Update.from(statsDto).to(period);
         }
 
         Set<FootballCard> footballCards = null;
         Set<FootballGoal> footballGoals = null;
-        if (periodStatus != Period.PeriodStatus.MATCH) {
+        if (periodStatus != FootballPeriod.PeriodStatus.MATCH) {
             footballCards = infoDto
                     .getFootballCards()
                     .stream()

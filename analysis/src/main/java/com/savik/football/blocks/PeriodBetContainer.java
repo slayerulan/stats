@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.savik.football.bets.PeriodBet;
 import com.savik.football.model.FootballMatch;
-import com.savik.football.model.Period;
+import com.savik.football.model.FootballPeriod;
 import lombok.*;
 
 @Getter
@@ -23,15 +23,15 @@ public abstract class PeriodBetContainer extends BetContainer {
 
     @Override
     public boolean canAnalyze(FootballMatch footballMatch) {
-        Period period = getPeriod(footballMatch);
+        FootballPeriod period = getPeriod(footballMatch);
         return bet.canAnalyze(period);
     }
 
     @Override
     public boolean checkMatch(FootballMatch footballMatch) {
-        Period period = getPeriod(footballMatch);
+        FootballPeriod period = getPeriod(footballMatch);
         return bet.check(period);
     }
 
-    public abstract Period getPeriod(FootballMatch footballMatch);
+    public abstract FootballPeriod getPeriod(FootballMatch footballMatch);
 }

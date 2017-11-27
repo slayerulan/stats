@@ -25,7 +25,7 @@ import org.springframework.util.CollectionUtils;
 @AllArgsConstructor
 @Builder(toBuilder = true)
 @SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "period_id_generator")
-public class Period extends Identifiable {
+public class FootballPeriod extends Identifiable {
 
     @NotNull
     @Enumerated(EnumType.STRING)

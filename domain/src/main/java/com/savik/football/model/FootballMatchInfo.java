@@ -23,12 +23,12 @@ public class FootballMatchInfo extends Identifiable {
 
     @NotNull
     @OneToOne(cascade = CascadeType.ALL)
-    Period match;
+    FootballPeriod match;
 
     @OneToOne(cascade = CascadeType.ALL)
-    Period firstPeriod;
+    FootballPeriod firstPeriod;
 
     @OneToOne(cascade = CascadeType.ALL)
-    Period secondPeriod;
+    FootballPeriod secondPeriod;
 
 }

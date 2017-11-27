@@ -4,7 +4,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import com.savik.football.model.FootballMatch;
 import com.savik.football.model.FootballMatchInfo;
-import com.savik.football.model.Period;
+import com.savik.football.model.FootballPeriod;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -24,80 +24,80 @@ public abstract class AbstractBetTest {
 
     }
 
-    public Period createPeriodHomeWonWithDifference(int diff) {
-        return Period.builder()
+    public FootballPeriod createPeriodHomeWonWithDifference(int diff) {
+        return FootballPeriod.builder()
                      .guestScore(RANDOM_GOAL_AMOUNT)
                      .homeScore(RANDOM_GOAL_AMOUNT + diff)
                      .build();
     }
 
-    public Period createPeriodGuestWonWithDifference(int diff) {
-        return Period.builder()
+    public FootballPeriod createPeriodGuestWonWithDifference(int diff) {
+        return FootballPeriod.builder()
                      .guestScore(RANDOM_GOAL_AMOUNT + diff)
                      .homeScore(RANDOM_GOAL_AMOUNT)
                      .build();
     }
 
-    public Period createPeriodWithAnyGuestAndHomeScore() {
-        return Period.builder()
+    public FootballPeriod createPeriodWithAnyGuestAndHomeScore() {
+        return FootballPeriod.builder()
                      .guestScore(RANDOM_GOAL_AMOUNT)
                      .homeScore(RANDOM_GOAL_AMOUNT)
                      .build();
     }
 
-    public Period createPeriodWithAnyTotalScore() {
-        return Period.builder()
+    public FootballPeriod createPeriodWithAnyTotalScore() {
+        return FootballPeriod.builder()
                      .totalScore(RANDOM_GOAL_AMOUNT)
                      .build();
     }
 
-    public Period createPeriodWhereOnlyHomeScored() {
-        return Period.builder()
+    public FootballPeriod createPeriodWhereOnlyHomeScored() {
+        return FootballPeriod.builder()
                      .guestScore(0)
                      .homeScore(RANDOM_GOAL_AMOUNT)
                      .build();
     }
 
-    public Period createPeriodWhereOnlyGuestScored() {
-        return Period.builder()
+    public FootballPeriod createPeriodWhereOnlyGuestScored() {
+        return FootballPeriod.builder()
                      .guestScore(RANDOM_GOAL_AMOUNT)
                      .homeScore(0)
                      .build();
     }
 
-    public Period createPeriodWithoutGuestScore() {
-        return Period.builder()
+    public FootballPeriod createPeriodWithoutGuestScore() {
+        return FootballPeriod.builder()
                      .homeScore(RANDOM_GOAL_AMOUNT)
                      .build();
     }
 
-    public Period createPeriodWithoutHomeScore() {
-        return Period.builder()
+    public FootballPeriod createPeriodWithoutHomeScore() {
+        return FootballPeriod.builder()
                      .guestScore(RANDOM_GOAL_AMOUNT)
                      .build();
     }
 
-    public Period createPeriodWithHomeScore(int score) {
-        return Period.builder()
+    public FootballPeriod createPeriodWithHomeScore(int score) {
+        return FootballPeriod.builder()
                      .guestScore(RANDOM_GOAL_AMOUNT)
                      .homeScore(score)
                      .build();
     }
 
-    public Period createPeriodWithGuestScore(int score) {
-        return Period.builder()
+    public FootballPeriod createPeriodWithGuestScore(int score) {
+        return FootballPeriod.builder()
                      .homeScore(RANDOM_GOAL_AMOUNT)
                      .guestScore(score)
                      .build();
     }
 
-    public Period createPeriodWithTotalScore(int score) {
-        return Period.builder()
+    public FootballPeriod createPeriodWithTotalScore(int score) {
+        return FootballPeriod.builder()
                      .totalScore(score)
                      .build();
     }
 
-    public FootballMatch createFootballMatch(Period first, Period second) {
+    public FootballMatch createFootballMatch(FootballPeriod first, FootballPeriod second) {
         return FootballMatch.builder()
                 .matchInfo(
                         FootballMatchInfo.builder()

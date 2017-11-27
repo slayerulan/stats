@@ -1,7 +1,7 @@
 package com.savik.football.bets.handicap;
 
 import com.savik.football.bets.PeriodBet;
-import com.savik.football.model.Period;
+import com.savik.football.model.FootballPeriod;
 import lombok.*;
 
 @Getter
@@ -14,12 +14,12 @@ public class PeriodGuestHandicap extends PeriodBet {
     }
 
     @Override
-    public boolean canAnalyze(Period period) {
+    public boolean canAnalyze(FootballPeriod period) {
         return period.hasScores();
     }
 
     @Override
-    public boolean check(Period period) {
+    public boolean check(FootballPeriod period) {
         if (amount <= 0) {
             return period.getGuestScore() - period.getHomeScore() > Math.abs(amount);
         }

@@ -59,12 +59,12 @@ public class FootballMatchParserTest {
         /*
          1 тайм 0-0, без карточек и нет статистики
         * */
-        Period firstPeriod = footballMatchInfo.getFirstPeriod();
+        FootballPeriod firstPeriod = footballMatchInfo.getFirstPeriod();
         assertEquals(firstPeriod.getHomeScore().intValue(), 0);
         assertEquals(firstPeriod.getGuestScore().intValue(), 0);
         assertEquals(firstPeriod.getTotalScore().intValue(), 0);
         assertEquals(firstPeriod.getWinner(), Winner.DRAW);
-        assertEquals(firstPeriod.getPeriodStatus(), Period.PeriodStatus.FIRST);
+        assertEquals(firstPeriod.getPeriodStatus(), FootballPeriod.PeriodStatus.FIRST);
         assertEquals(firstPeriod.getGoals().size(), 0);
         assertEquals(firstPeriod.getCards().size(), 0);
         assertNull(firstPeriod.getHomeCorners());
@@ -82,13 +82,13 @@ public class FootballMatchParserTest {
         /*
          2 тайм 2-1, 5 желтых карточек
         * */
-        Period secondPeriod = footballMatchInfo.getSecondPeriod();
+        FootballPeriod secondPeriod = footballMatchInfo.getSecondPeriod();
 
         assertEquals(secondPeriod.getHomeScore().intValue(), 2);
         assertEquals(secondPeriod.getGuestScore().intValue(), 1);
         assertEquals(secondPeriod.getTotalScore().intValue(), 3);
         assertEquals(secondPeriod.getWinner(), Winner.HOME);
-        assertEquals(secondPeriod.getPeriodStatus(), Period.PeriodStatus.SECOND);
+        assertEquals(secondPeriod.getPeriodStatus(), FootballPeriod.PeriodStatus.SECOND);
         assertEquals(secondPeriod.getGoals().size(), 3);
         assertTrue(secondPeriod.getGoals().containsAll(new HashSet<>(Arrays.asList(
                 FootballGoal.builder().minute(78).whoScored(Who.GUEST).team(guest).build(),
@@ -121,13 +121,13 @@ public class FootballMatchParserTest {
          /*
           матч
         * */
-        Period matchPeriod = footballMatchInfo.getMatch();
+        FootballPeriod matchPeriod = footballMatchInfo.getMatch();
 
         assertEquals(matchPeriod.getHomeScore().intValue(), 2);
         assertEquals(matchPeriod.getGuestScore().intValue(), 1);
         assertEquals(matchPeriod.getTotalScore().intValue(), 3);
         assertEquals(matchPeriod.getWinner(), Winner.HOME);
-        assertEquals(matchPeriod.getPeriodStatus(), Period.PeriodStatus.MATCH);
+        assertEquals(matchPeriod.getPeriodStatus(), FootballPeriod.PeriodStatus.MATCH);
         assertNull(matchPeriod.getGoals());
         assertNull(matchPeriod.getCards());
         assertEquals(matchPeriod.getHomeCorners().intValue(), 4);
@@ -168,12 +168,12 @@ public class FootballMatchParserTest {
         /*
          1 тайм 1-0, 3 карт. и нет статистики
         * */
-        Period firstPeriod = footballMatchInfo.getFirstPeriod();
+        FootballPeriod firstPeriod = footballMatchInfo.getFirstPeriod();
         assertEquals(firstPeriod.getHomeScore().intValue(), 1);
         assertEquals(firstPeriod.getGuestScore().intValue(), 0);
         assertEquals(firstPeriod.getTotalScore().intValue(), 1);
         assertEquals(firstPeriod.getWinner(), Winner.HOME);
-        assertEquals(firstPeriod.getPeriodStatus(), Period.PeriodStatus.FIRST);
+        assertEquals(firstPeriod.getPeriodStatus(), FootballPeriod.PeriodStatus.FIRST);
         assertEquals(firstPeriod.getGoals().size(), 1);
         assertTrue(firstPeriod.getGoals().containsAll(new HashSet<>(Arrays.asList(
                 FootballGoal.builder().minute(18).whoScored(Who.HOME).team(home).build()
@@ -201,13 +201,13 @@ public class FootballMatchParserTest {
         /*
          2 тайм 1-3, 4 желтых карточек
         * */
-        Period secondPeriod = footballMatchInfo.getSecondPeriod();
+        FootballPeriod secondPeriod = footballMatchInfo.getSecondPeriod();
 
         assertEquals(secondPeriod.getHomeScore().intValue(), 1);
         assertEquals(secondPeriod.getGuestScore().intValue(), 3);
         assertEquals(secondPeriod.getTotalScore().intValue(), 4);
         assertEquals(secondPeriod.getWinner(), Winner.GUEST);
-        assertEquals(secondPeriod.getPeriodStatus(), Period.PeriodStatus.SECOND);
+        assertEquals(secondPeriod.getPeriodStatus(), FootballPeriod.PeriodStatus.SECOND);
         assertEquals(secondPeriod.getGoals().size(), 4);
         assertTrue(secondPeriod.getGoals().containsAll(new HashSet<>(Arrays.asList(
                 FootballGoal.builder().minute(48).whoScored(Who.GUEST).team(guest).build(),
@@ -238,13 +238,13 @@ public class FootballMatchParserTest {
          /*
           матч
         * */
-        Period matchPeriod = footballMatchInfo.getMatch();
+        FootballPeriod matchPeriod = footballMatchInfo.getMatch();
 
         assertEquals(matchPeriod.getHomeScore().intValue(), 2);
         assertEquals(matchPeriod.getGuestScore().intValue(), 3);
         assertEquals(matchPeriod.getTotalScore().intValue(), 5);
         assertEquals(matchPeriod.getWinner(), Winner.GUEST);
-        assertEquals(matchPeriod.getPeriodStatus(), Period.PeriodStatus.MATCH);
+        assertEquals(matchPeriod.getPeriodStatus(), FootballPeriod.PeriodStatus.MATCH);
         assertNull(matchPeriod.getGoals());
         assertNull(matchPeriod.getCards());
         assertEquals(matchPeriod.getHomeCorners().intValue(), 11);
@@ -284,12 +284,12 @@ public class FootballMatchParserTest {
         /*
          1 тайм 1-1, 2 yellow карточек
         * */
-        Period firstPeriod = footballMatchInfo.getFirstPeriod();
+        FootballPeriod firstPeriod = footballMatchInfo.getFirstPeriod();
         assertEquals(firstPeriod.getHomeScore().intValue(), 1);
         assertEquals(firstPeriod.getGuestScore().intValue(), 1);
         assertEquals(firstPeriod.getTotalScore().intValue(), 2);
         assertEquals(firstPeriod.getWinner(), Winner.DRAW);
-        assertEquals(firstPeriod.getPeriodStatus(), Period.PeriodStatus.FIRST);
+        assertEquals(firstPeriod.getPeriodStatus(), FootballPeriod.PeriodStatus.FIRST);
         assertEquals(firstPeriod.getGoals().size(), 2);
         assertTrue(firstPeriod.getGoals().containsAll(new HashSet<>(Arrays.asList(
                 FootballGoal.builder().minute(28).whoScored(Who.HOME).team(home).build(),
@@ -317,13 +317,13 @@ public class FootballMatchParserTest {
         /*
          2 тайм 1-2, 3 желтых карточек, 1 red
         * */
-        Period secondPeriod = footballMatchInfo.getSecondPeriod();
+        FootballPeriod secondPeriod = footballMatchInfo.getSecondPeriod();
 
         assertEquals(secondPeriod.getHomeScore().intValue(), 1);
         assertEquals(secondPeriod.getGuestScore().intValue(), 2);
         assertEquals(secondPeriod.getTotalScore().intValue(), 3);
         assertEquals(secondPeriod.getWinner(), Winner.GUEST);
-        assertEquals(secondPeriod.getPeriodStatus(), Period.PeriodStatus.SECOND);
+        assertEquals(secondPeriod.getPeriodStatus(), FootballPeriod.PeriodStatus.SECOND);
         assertEquals(secondPeriod.getGoals().size(), 3);
         assertTrue(secondPeriod.getGoals().containsAll(new HashSet<>(Arrays.asList(
                 FootballGoal.builder().minute(73).whoScored(Who.GUEST).team(guest).build(),
@@ -353,13 +353,13 @@ public class FootballMatchParserTest {
          /*
           матч
         * */
-        Period matchPeriod = footballMatchInfo.getMatch();
+        FootballPeriod matchPeriod = footballMatchInfo.getMatch();
 
         assertEquals(matchPeriod.getHomeScore().intValue(), 2);
         assertEquals(matchPeriod.getGuestScore().intValue(), 3);
         assertEquals(matchPeriod.getTotalScore().intValue(), 5);
         assertEquals(matchPeriod.getWinner(), Winner.GUEST);
-        assertEquals(matchPeriod.getPeriodStatus(), Period.PeriodStatus.MATCH);
+        assertEquals(matchPeriod.getPeriodStatus(), FootballPeriod.PeriodStatus.MATCH);
         assertNull(matchPeriod.getGoals());
         assertNull(matchPeriod.getCards());
         assertEquals(matchPeriod.getHomeCorners().intValue(), 7);
