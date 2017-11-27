@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @EqualsAndHashCode
 @MappedSuperclass
-public class Goal extends Identifiable {
+public abstract class Goal extends Identifiable {
 
     @NotNull
     protected Integer minute;
