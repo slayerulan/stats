@@ -11,6 +11,8 @@ import javax.validation.constraints.NotNull;
 import com.codiform.moo.annotation.CollectionProperty;
 import com.codiform.moo.annotation.Optionality;
 import com.codiform.moo.annotation.Property;
+import com.savik.Who;
+import com.savik.Winner;
 import com.savik.domain.Identifiable;
 import lombok.*;
 import org.springframework.util.CollectionUtils;

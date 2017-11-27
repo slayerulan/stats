@@ -1,7 +1,7 @@
 package com.savik.football.bets;
 
 import com.savik.football.model.FootballPeriod;
-import com.savik.football.model.Who;
+import com.savik.Who;
 
 public abstract class PeriodFavoriteBet {
 

@@ -4,7 +4,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import com.savik.football.bets.result.PeriodLoserWinner;
-import com.savik.football.model.Who;
+import com.savik.Who;
 import com.savik.parser.football.bets.AbstractBetTest;
 import org.junit.Test;
 

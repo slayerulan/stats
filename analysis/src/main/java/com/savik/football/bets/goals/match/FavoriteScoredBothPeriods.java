@@ -4,7 +4,7 @@ import com.savik.football.bets.GeneralBet;
 import com.savik.football.bets.total.over.PeriodFavoriteOver;
 import com.savik.football.model.FootballMatch;
 import com.savik.football.model.FootballMatchInfo;
-import com.savik.football.model.Who;
+import com.savik.Who;
 import lombok.*;
 
 @Getter

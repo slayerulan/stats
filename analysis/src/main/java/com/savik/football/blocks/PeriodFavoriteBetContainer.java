@@ -5,7 +5,7 @@ import java.util.List;
 import com.savik.football.bets.PeriodFavoriteBet;
 import com.savik.football.model.FootballMatch;
 import com.savik.football.model.FootballPeriod;
-import com.savik.football.model.Who;
+import com.savik.Who;
 import lombok.*;
 
 @Getter

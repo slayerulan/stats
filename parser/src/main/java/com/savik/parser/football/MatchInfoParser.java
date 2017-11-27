@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 import com.savik.football.model.FootballCard;
 import com.savik.football.model.FootballGoal;
-import com.savik.football.model.Who;
+import com.savik.Who;
 import lombok.*;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;

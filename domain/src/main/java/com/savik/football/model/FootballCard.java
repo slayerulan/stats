@@ -3,6 +3,7 @@ package com.savik.football.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import com.savik.Who;
 import com.savik.domain.Identifiable;
 import lombok.*;
 

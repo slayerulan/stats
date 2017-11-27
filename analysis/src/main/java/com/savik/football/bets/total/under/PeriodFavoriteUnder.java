@@ -2,7 +2,7 @@ package com.savik.football.bets.total.under;
 
 import com.savik.football.bets.PeriodFavoriteBet;
 import com.savik.football.model.FootballPeriod;
-import com.savik.football.model.Who;
+import com.savik.Who;
 import lombok.*;
 
 @Getter
