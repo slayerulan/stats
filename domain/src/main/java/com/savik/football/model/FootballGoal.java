@@ -1,11 +1,13 @@
 package com.savik.football.model;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-
+import com.savik.Goal;
 import com.savik.Who;
-import com.savik.domain.Identifiable;
 import lombok.*;
+
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotNull;
 
 /**
  * @author Savushkin Yauheni
@@ -15,20 +17,17 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@Builder(toBuilder = true)
 @SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "football_goal_id_generator")
-@EqualsAndHashCode
-public class FootballGoal extends Identifiable {
-
-    @NotNull
-    Integer minute;
+@EqualsAndHashCode(callSuper = true)
+public class FootballGoal extends Goal {
 
     @NotNull
     @OneToOne
     FootballTeam team;
 
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    Who whoScored;
-
+    @Builder(toBuilder = true)
+    public FootballGoal(Integer minute, Who whoScored, FootballTeam team) {
+        super(minute, whoScored);
+        this.team = team;
+    }
 }

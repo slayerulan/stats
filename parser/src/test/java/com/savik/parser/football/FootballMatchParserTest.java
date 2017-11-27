@@ -1,13 +1,5 @@
 package com.savik.parser.football;
 
-import static com.savik.football.model.FootballCard.Type.RED;
-import static com.savik.football.model.FootballCard.Type.YELLOW;
-import static org.junit.Assert.*;
-
-import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.HashSet;
-
 import com.savik.Application;
 import com.savik.Season;
 import com.savik.Who;
@@ -18,15 +10,25 @@ import com.savik.football.repository.FootballTeamRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.HashSet;
+
+import static com.savik.football.model.FootballCard.Type.RED;
+import static com.savik.football.model.FootballCard.Type.YELLOW;
+import static org.junit.Assert.*;
 
 /**
  * @author Savushkin Yauheni
  * @since 05.05.2017
  */
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = Application.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK, classes = Application.class)
+@ActiveProfiles("test")
 public class FootballMatchParserTest {
 
     @Autowired
