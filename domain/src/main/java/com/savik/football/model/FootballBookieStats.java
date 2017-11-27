@@ -15,7 +15,7 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Builder(toBuilder = true)
-@SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "bookie_id_generator")
+@SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "football_bookie_id_generator")
 @EqualsAndHashCode
 public class FootballBookieStats extends Identifiable {
 

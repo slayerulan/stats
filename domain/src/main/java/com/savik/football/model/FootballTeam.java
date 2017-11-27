@@ -17,7 +17,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "team_id_generator")
+@SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "football_team_id_generator")
 @EqualsAndHashCode
 public class FootballTeam extends Identifiable {
 

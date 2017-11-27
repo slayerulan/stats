@@ -16,7 +16,7 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Builder(toBuilder = true)
-@SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "card_id_generator")
+@SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "football_card_id_generator")
 @EqualsAndHashCode
 public class FootballCard extends Identifiable {
 

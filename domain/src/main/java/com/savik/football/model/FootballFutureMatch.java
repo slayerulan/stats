@@ -16,7 +16,7 @@ import lombok.*;
         uniqueConstraints = @UniqueConstraint(columnNames = "myscoreCode"),
         indexes = @Index(columnList = "myscoreCode")
 )
-@SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "future_match_id_generator")
+@SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "football_future_match_id_generator")
 @Data
 public class FootballFutureMatch extends Identifiable {
 

@@ -17,7 +17,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "match_info_id_generator")
+@SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "football_match_info_id_generator")
 @Getter
 public class FootballMatchInfo extends Identifiable {
 

@@ -26,7 +26,7 @@ import org.springframework.util.CollectionUtils;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-@SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "period_id_generator")
+@SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "football_period_id_generator")
 public class FootballPeriod extends Identifiable {
 
     @NotNull
