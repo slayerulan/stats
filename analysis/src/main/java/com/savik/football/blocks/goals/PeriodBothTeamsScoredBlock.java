@@ -1,9 +1,9 @@
 package com.savik.football.blocks.goals;
 
-import com.savik.football.bets.goals.PeriodBothTeamsScored;
+import com.savik.Match;
+import com.savik.Period;
 import com.savik.PeriodBetContainer;
-import com.savik.football.model.FootballMatch;
-import com.savik.football.model.FootballPeriod;
+import com.savik.football.bets.goals.PeriodBothTeamsScored;
 
 import java.util.function.Function;
 
@@ -11,9 +11,9 @@ import java.util.function.Function;
  * @author Savushkin Yauheni
  * @since 16.05.2017
  */
-public class PeriodBothTeamsScoredBlock extends PeriodBetContainer {
+public class PeriodBothTeamsScoredBlock<T extends Match> extends PeriodBetContainer<T> {
 
-    public PeriodBothTeamsScoredBlock(Function<FootballMatch, FootballPeriod> function) {
+    public PeriodBothTeamsScoredBlock(Function<T, Period> function) {
         super(new PeriodBothTeamsScored(), function);
     }
 

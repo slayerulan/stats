@@ -1,8 +1,8 @@
 package com.savik.football.bets.total.over;
 
+import com.savik.Period;
 import com.savik.football.bets.PeriodBet;
-import com.savik.football.model.FootballPeriod;
-import lombok.*;
+import lombok.Getter;
 
 @Getter
 public class PeriodOver extends PeriodBet {
@@ -14,12 +14,12 @@ public class PeriodOver extends PeriodBet {
     }
 
     @Override
-    public boolean canAnalyze(FootballPeriod period) {
+    public boolean canAnalyze(Period period) {
         return period.getTotalScore() != null;
     }
 
     @Override
-    public boolean check(FootballPeriod period) {
+    public boolean check(Period period) {
         return period.getTotalScore() > amount;
     }
 }

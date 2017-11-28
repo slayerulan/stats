@@ -1,10 +1,10 @@
 package com.savik.football.bets;
 
-import com.savik.football.model.FootballPeriod;
+import com.savik.Period;
 
 public abstract class PeriodBet {
 
-    public abstract boolean canAnalyze(FootballPeriod period);
+    public abstract boolean canAnalyze(Period period);
 
-    public abstract boolean check(FootballPeriod period);
+    public abstract boolean check(Period period);
 }

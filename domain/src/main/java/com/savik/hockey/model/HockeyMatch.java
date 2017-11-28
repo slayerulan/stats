@@ -1,5 +1,6 @@
 package com.savik.hockey.model;
 
+import com.savik.Match;
 import com.savik.Season;
 import com.savik.domain.Identifiable;
 import com.savik.football.model.FootballBookieStats;
@@ -22,7 +23,7 @@ import java.time.LocalDateTime;
 )
 @SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "hockey_match_id_generator")
 @Data
-public class HockeyMatch extends Identifiable {
+public class HockeyMatch extends Match {
 
     @NotNull
     @OneToOne(cascade = CascadeType.ALL)

@@ -2,6 +2,7 @@ package com.savik.football.result_block.home.handicap;
 
 import com.savik.GeneralBetContainer;
 import com.savik.football.blocks.handicap.PeriodHomeHandicapBlock;
+import com.savik.football.model.FootballMatch;
 
 import java.util.Arrays;
 
@@ -13,9 +14,9 @@ public class HomeHandicapBlock extends GeneralBetContainer {
 
     public HomeHandicapBlock() {
         super(Arrays.asList(
-                new PeriodHomeHandicapBlock(footballMatch -> footballMatch.getMatchInfo().getMatch()),
-                new PeriodHomeHandicapBlock(footballMatch -> footballMatch.getMatchInfo().getFirstPeriod()),
-                new PeriodHomeHandicapBlock(footballMatch -> footballMatch.getMatchInfo().getSecondPeriod())
+                new PeriodHomeHandicapBlock<FootballMatch>(footballMatch -> footballMatch.getMatchInfo().getMatch()),
+                new PeriodHomeHandicapBlock<FootballMatch>(footballMatch -> footballMatch.getMatchInfo().getFirstPeriod()),
+                new PeriodHomeHandicapBlock<FootballMatch>(footballMatch -> footballMatch.getMatchInfo().getSecondPeriod())
         ));
     }
 }

@@ -1,5 +1,7 @@
 package com.savik.football.blocks.total.under;
 
+import com.savik.Match;
+import com.savik.Period;
 import com.savik.PeriodBetContainer;
 import com.savik.football.model.FootballMatch;
 import com.savik.football.model.FootballPeriod;
@@ -11,9 +13,9 @@ import java.util.function.Function;
  * @author Savushkin Yauheni
  * @since 16.05.2017
  */
-public class PeriodHomeUnderBlock extends PeriodBetContainer {
+public class PeriodHomeUnderBlock<T extends Match> extends PeriodBetContainer<T> {
 
-    public PeriodHomeUnderBlock(Function<FootballMatch, FootballPeriod> function) {
+    public PeriodHomeUnderBlock(Function<T, Period> function) {
         super(Arrays.asList(
                 new PeriodHomeUnderSingleBlock(0.5),
                 new PeriodHomeUnderSingleBlock(1.5),

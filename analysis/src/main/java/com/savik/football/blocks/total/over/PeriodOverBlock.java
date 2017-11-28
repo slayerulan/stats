@@ -1,5 +1,7 @@
 package com.savik.football.blocks.total.over;
 
+import com.savik.Match;
+import com.savik.Period;
 import com.savik.PeriodBetContainer;
 import com.savik.football.model.FootballMatch;
 import com.savik.football.model.FootballPeriod;
@@ -11,9 +13,9 @@ import java.util.function.Function;
  * @author Savushkin Yauheni
  * @since 16.05.2017
  */
-public class PeriodOverBlock extends PeriodBetContainer {
+public class PeriodOverBlock<T extends Match> extends PeriodBetContainer<T> {
 
-    public PeriodOverBlock(Function<FootballMatch, FootballPeriod> function) {
+    public PeriodOverBlock(Function<T, Period> function) {
         super(Arrays.asList(
                 new PeriodOverSingleBlock(0.5),
                 new PeriodOverSingleBlock(1.5),

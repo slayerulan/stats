@@ -1,26 +1,24 @@
 package com.savik;
 
 import com.savik.football.bets.PeriodBet;
-import com.savik.football.model.FootballMatch;
-import com.savik.football.model.FootballPeriod;
 import lombok.Getter;
 
 import java.util.List;
 import java.util.function.Function;
 
 @Getter
-public abstract class PeriodBetContainer extends BetContainer<FootballMatch> {
+public abstract class PeriodBetContainer<T extends Match> extends BetContainer<T> {
 
     private PeriodBet bet;
 
-    private Function<FootballMatch, FootballPeriod> function;
+    private Function<T, Period> function;
 
-    public PeriodBetContainer(List<? extends BetContainer> childrenBetBlocks, Function<FootballMatch, FootballPeriod> function) {
+    public PeriodBetContainer(List<? extends BetContainer> childrenBetBlocks, Function<T, Period> function) {
         super(childrenBetBlocks);
         this.function = function;
     }
 
-    public PeriodBetContainer(PeriodBet bet, Function<FootballMatch, FootballPeriod> function) {
+    public PeriodBetContainer(PeriodBet bet, Function<T, Period> function) {
         this(bet);
         this.function = function;
     }
@@ -31,14 +29,14 @@ public abstract class PeriodBetContainer extends BetContainer<FootballMatch> {
     }
 
     @Override
-    public boolean canAnalyze(FootballMatch footballMatch) {
-        FootballPeriod period = function.apply(footballMatch);
+    public boolean canAnalyze(T footballMatch) {
+        Period period = function.apply(footballMatch);
         return bet.canAnalyze(period);
     }
 
     @Override
-    public boolean checkMatch(FootballMatch footballMatch) {
-        FootballPeriod period = function.apply(footballMatch);
+    public boolean checkMatch(T footballMatch) {
+        Period period = function.apply(footballMatch);
         return bet.check(period);
     }
 

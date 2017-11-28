@@ -1,8 +1,8 @@
 package com.savik.football.bets.total.under;
 
+import com.savik.Period;
 import com.savik.football.bets.PeriodBet;
-import com.savik.football.model.FootballPeriod;
-import lombok.*;
+import lombok.Getter;
 
 @Getter
 public class PeriodHomeUnder extends PeriodBet {
@@ -14,12 +14,12 @@ public class PeriodHomeUnder extends PeriodBet {
     }
 
     @Override
-    public boolean canAnalyze(FootballPeriod period) {
+    public boolean canAnalyze(Period period) {
         return period.getHomeScore() != null;
     }
 
     @Override
-    public boolean check(FootballPeriod period) {
+    public boolean check(Period period) {
         return period.getHomeScore() < amount;
     }
 }

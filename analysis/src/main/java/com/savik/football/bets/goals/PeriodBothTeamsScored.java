@@ -1,10 +1,10 @@
 package com.savik.football.bets.goals;
 
+import com.savik.Period;
 import com.savik.football.bets.PeriodBet;
 import com.savik.football.bets.total.over.PeriodGuestOver;
 import com.savik.football.bets.total.over.PeriodHomeOver;
-import com.savik.football.model.FootballPeriod;
-import lombok.*;
+import lombok.Getter;
 
 @Getter
 public class PeriodBothTeamsScored extends PeriodBet {
@@ -19,14 +19,14 @@ public class PeriodBothTeamsScored extends PeriodBet {
     }
 
     @Override
-    public boolean canAnalyze(FootballPeriod period) {
+    public boolean canAnalyze(Period period) {
         return periodHomeOver.canAnalyze(period) &&
-               periodGuestOver.canAnalyze(period);
+                periodGuestOver.canAnalyze(period);
     }
 
     @Override
-    public boolean check(FootballPeriod period) {
+    public boolean check(Period period) {
         return periodHomeOver.check(period) &&
-               periodGuestOver.check(period);
+                periodGuestOver.check(period);
     }
 }
