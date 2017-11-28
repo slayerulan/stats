@@ -1,9 +1,8 @@
 package com.savik.football.blocks.total.over.periods;
 
-import java.util.Arrays;
-
 import com.savik.football.blocks.GeneralBetContainer;
-import com.savik.football.blocks.total.over.second_period.SecondPeriodFavoriteOverSingleBlock;
+
+import java.util.Arrays;
 
 /**
  * @author Savushkin Yauheni

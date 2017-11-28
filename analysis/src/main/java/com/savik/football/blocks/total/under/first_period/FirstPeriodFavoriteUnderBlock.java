@@ -1,8 +1,8 @@
 package com.savik.football.blocks.total.under.first_period;
 
-import java.util.Arrays;
-
 import com.savik.football.blocks.FirstPeriodFavoriteBetContainer;
+
+import java.util.Arrays;
 
 /**
  * @author Savushkin Yauheni

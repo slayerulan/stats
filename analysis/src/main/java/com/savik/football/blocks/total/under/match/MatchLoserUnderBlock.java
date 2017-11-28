@@ -1,8 +1,8 @@
 package com.savik.football.blocks.total.under.match;
 
-import java.util.Arrays;
-
 import com.savik.football.blocks.MatchPeriodFavoriteBetContainer;
+
+import java.util.Arrays;
 
 /**
  * @author Savushkin Yauheni

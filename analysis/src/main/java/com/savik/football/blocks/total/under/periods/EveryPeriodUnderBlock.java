@@ -1,8 +1,8 @@
 package com.savik.football.blocks.total.under.periods;
 
-import java.util.Arrays;
-
 import com.savik.football.blocks.GeneralBetContainer;
+
+import java.util.Arrays;
 
 /**
  * @author Savushkin Yauheni
