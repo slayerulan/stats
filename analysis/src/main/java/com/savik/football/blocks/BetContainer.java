@@ -1,14 +1,14 @@
 package com.savik.football.blocks;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.savik.Match;
+import lombok.Getter;
+
 import java.util.List;
 import java.util.function.Consumer;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.savik.football.model.FootballMatch;
-import lombok.*;
-
 @Getter
-public abstract class BetContainer {
+public abstract class BetContainer<T extends Match> {
 
     protected List<? extends BetContainer> childrenBetBlocks;
 
@@ -40,11 +40,11 @@ public abstract class BetContainer {
         this.successfullyMatchesAmount = 0;
     }
 
-    public void check(FootballMatch footballMatch) {
+    public void check(T match) {
         if (leaf) {
-            if (canAnalyze(footballMatch)) {
+            if (canAnalyze(match)) {
                 analyzedMatchesAmount++;
-                boolean success = checkMatch(footballMatch);
+                boolean success = checkMatch(match);
                 if (success) {
                     successfullyMatchesAmount++;
                 }
@@ -52,13 +52,13 @@ public abstract class BetContainer {
                 skippedMatchesAmount++;
             }
         } else {
-            Consumer<BetContainer> checkMatch = betContainer -> betContainer.check(footballMatch);
+            Consumer<BetContainer> checkMatch = betContainer -> betContainer.check(match);
             childrenBetBlocks.forEach(checkMatch);
         }
     }
 
-    protected abstract boolean canAnalyze(FootballMatch footballMatch);
+    protected abstract boolean canAnalyze(T match);
 
-    protected abstract boolean checkMatch(FootballMatch footballMatch);
+    protected abstract boolean checkMatch(T match);
 
 }

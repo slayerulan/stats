@@ -1,12 +1,15 @@
 package com.savik.football.model;
 
-import java.time.LocalDateTime;
+import com.savik.Match;
+import com.savik.Season;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-
-import com.savik.Season;
-import com.savik.domain.Identifiable;
-import lombok.*;
+import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor
@@ -18,7 +21,7 @@ import lombok.*;
 )
 @SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "football_match_id_generator")
 @Data
-public class FootballMatch extends Identifiable {
+public class FootballMatch extends Match {
 
     @NotNull
     @OneToOne(cascade = CascadeType.ALL)

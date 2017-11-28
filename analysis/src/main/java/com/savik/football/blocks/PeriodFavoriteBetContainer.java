@@ -1,15 +1,15 @@
 package com.savik.football.blocks;
 
-import java.util.List;
-
+import com.savik.Who;
 import com.savik.football.bets.PeriodFavoriteBet;
 import com.savik.football.model.FootballMatch;
 import com.savik.football.model.FootballPeriod;
-import com.savik.Who;
-import lombok.*;
+import lombok.Getter;
+
+import java.util.List;
 
 @Getter
-public abstract class PeriodFavoriteBetContainer extends BetContainer {
+public abstract class PeriodFavoriteBetContainer extends BetContainer<FootballMatch> {
 
     private PeriodFavoriteBet bet;
 

@@ -1,14 +1,14 @@
 package com.savik.football.blocks;
 
-import java.util.List;
-
 import com.savik.football.bets.PeriodBet;
 import com.savik.football.model.FootballMatch;
 import com.savik.football.model.FootballPeriod;
-import lombok.*;
+import lombok.Getter;
+
+import java.util.List;
 
 @Getter
-public abstract class PeriodBetContainer extends BetContainer {
+public abstract class PeriodBetContainer extends BetContainer<FootballMatch> {
 
     private PeriodBet bet;
 

@@ -1,15 +1,13 @@
 package com.savik.football.blocks;
 
-import java.util.List;
-import java.util.function.Consumer;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.savik.football.bets.GeneralBet;
 import com.savik.football.model.FootballMatch;
-import lombok.*;
+import lombok.Getter;
+
+import java.util.List;
 
 @Getter
-public abstract class GeneralBetContainer extends BetContainer {
+public abstract class GeneralBetContainer extends BetContainer<FootballMatch> {
 
     private GeneralBet bet;
 
