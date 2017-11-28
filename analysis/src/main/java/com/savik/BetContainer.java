@@ -1,7 +1,6 @@
-package com.savik.football.blocks;
+package com.savik;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.savik.Match;
 import lombok.Getter;
 
 import java.util.List;

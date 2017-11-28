@@ -1,7 +1,7 @@
 package com.savik.football.blocks.handicap;
 
 import com.savik.football.bets.handicap.PeriodLoserHandicap;
-import com.savik.football.blocks.PeriodFavoriteBetContainer;
+import com.savik.PeriodFavoriteBetContainer;
 
 /**
  * @author Savushkin Yauheni

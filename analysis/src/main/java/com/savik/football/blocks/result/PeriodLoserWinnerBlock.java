@@ -1,7 +1,7 @@
 package com.savik.football.blocks.result;
 
 import com.savik.football.bets.result.PeriodLoserWinner;
-import com.savik.football.blocks.PeriodFavoriteBetContainer;
+import com.savik.PeriodFavoriteBetContainer;
 import com.savik.football.model.FootballMatch;
 import com.savik.football.model.FootballPeriod;
 

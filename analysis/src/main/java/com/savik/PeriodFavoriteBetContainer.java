@@ -1,6 +1,5 @@
-package com.savik.football.blocks;
+package com.savik;
 
-import com.savik.Who;
 import com.savik.football.bets.PeriodFavoriteBet;
 import com.savik.football.model.FootballMatch;
 import com.savik.football.model.FootballPeriod;

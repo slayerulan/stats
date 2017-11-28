@@ -1,6 +1,6 @@
 package com.savik.football.result_block.home.handicap;
 
-import com.savik.football.blocks.GeneralBetContainer;
+import com.savik.GeneralBetContainer;
 import com.savik.football.blocks.handicap.PeriodHomeHandicapBlock;
 
 import java.util.Arrays;

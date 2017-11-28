@@ -2,7 +2,7 @@ package com.savik.rest;
 
 import java.util.List;
 
-import com.savik.football.blocks.GeneralBetContainer;
+import com.savik.GeneralBetContainer;
 import com.savik.football.model.FootballMatch;
 import com.savik.football.repository.FootballMatchRepository;
 import com.savik.football.result_block.home.HomeBlock;

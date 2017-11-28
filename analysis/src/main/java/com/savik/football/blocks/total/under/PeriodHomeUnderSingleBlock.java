@@ -1,7 +1,7 @@
 package com.savik.football.blocks.total.under;
 
 import com.savik.football.bets.total.under.PeriodHomeUnder;
-import com.savik.football.blocks.PeriodBetContainer;
+import com.savik.PeriodBetContainer;
 
 /**
  * @author Savushkin Yauheni

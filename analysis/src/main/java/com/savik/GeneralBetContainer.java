@@ -1,4 +1,4 @@
-package com.savik.football.blocks;
+package com.savik;
 
 import com.savik.football.bets.GeneralBet;
 import com.savik.football.model.FootballMatch;

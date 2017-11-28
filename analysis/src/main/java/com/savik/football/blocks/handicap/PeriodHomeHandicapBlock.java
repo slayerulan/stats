@@ -1,6 +1,6 @@
 package com.savik.football.blocks.handicap;
 
-import com.savik.football.blocks.PeriodBetContainer;
+import com.savik.PeriodBetContainer;
 import com.savik.football.model.FootballMatch;
 import com.savik.football.model.FootballPeriod;
 

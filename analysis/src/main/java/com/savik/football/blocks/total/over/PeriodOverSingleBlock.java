@@ -1,7 +1,7 @@
 package com.savik.football.blocks.total.over;
 
 import com.savik.football.bets.total.over.PeriodOver;
-import com.savik.football.blocks.PeriodBetContainer;
+import com.savik.PeriodBetContainer;
 
 /**
  * @author Savushkin Yauheni
