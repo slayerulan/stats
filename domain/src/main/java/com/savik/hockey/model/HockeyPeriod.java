@@ -21,7 +21,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "hockey_period_id_generator")
-public class HockeyPeriod extends Period {
+public class HockeyPeriod extends Period<HockeyGoal> {
 
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

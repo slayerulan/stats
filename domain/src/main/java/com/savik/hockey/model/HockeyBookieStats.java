@@ -15,10 +15,6 @@ import javax.persistence.*;
 @EqualsAndHashCode
 public class HockeyBookieStats extends Identifiable {
 
-    @Enumerated(EnumType.STRING)
-    @Transient
-    Who favorite;
-
     Double homeRate;
 
     Double drawRate;

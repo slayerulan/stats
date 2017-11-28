@@ -1,10 +1,8 @@
 package com.savik;
 
-/**
- * @author Savushkin Yauheni
- * @since 10.04.2017
- */
+
 public enum Season {
+    S2017,
     S2016,
     S2015
 }
