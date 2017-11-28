@@ -20,6 +20,11 @@ public abstract class PeriodBetContainer extends BetContainer<FootballMatch> {
         this.function = function;
     }
 
+    public PeriodBetContainer(PeriodBet bet, Function<FootballMatch, FootballPeriod> function) {
+        this(bet);
+        this.function = function;
+    }
+
     public PeriodBetContainer(PeriodBet bet) {
         super();
         this.bet = bet;
