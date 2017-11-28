@@ -7,7 +7,7 @@ import com.savik.football.model.FootballMatch;
 import lombok.*;
 
 @Getter
-public class AtLeastOneTeamNotScoredAndUnder extends GeneralBet {
+public class AtLeastOneTeamNotScoredAndUnder extends GeneralBet<FootballMatch> {
 
     private PeriodBothTeamsScored bothTeamsScored;
 

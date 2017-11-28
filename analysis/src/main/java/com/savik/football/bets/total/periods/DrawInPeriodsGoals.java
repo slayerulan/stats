@@ -7,7 +7,7 @@ import com.savik.football.model.FootballMatch;
 import lombok.*;
 
 @Getter
-public class DrawInPeriodsGoals extends GeneralBet {
+public class DrawInPeriodsGoals extends GeneralBet<FootballMatch> {
 
 
     public DrawInPeriodsGoals() {

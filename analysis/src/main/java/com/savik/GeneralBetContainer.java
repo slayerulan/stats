@@ -7,7 +7,7 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-public abstract class GeneralBetContainer extends BetContainer<FootballMatch> {
+public abstract class GeneralBetContainer<T extends Match> extends BetContainer<T> {
 
     private GeneralBet bet;
 
@@ -20,17 +20,13 @@ public abstract class GeneralBetContainer extends BetContainer<FootballMatch> {
         this.bet = bet;
     }
 
-    public GeneralBetContainer(GeneralBet bet, String type) {
-        this(bet);
-    }
-
     @Override
-    public boolean canAnalyze(FootballMatch footballMatch) {
+    public boolean canAnalyze(T footballMatch) {
         return bet.canAnalyze(footballMatch);
     }
 
     @Override
-    public boolean checkMatch(FootballMatch footballMatch) {
+    public boolean checkMatch(T footballMatch) {
         return bet.check(footballMatch);
     }
 }

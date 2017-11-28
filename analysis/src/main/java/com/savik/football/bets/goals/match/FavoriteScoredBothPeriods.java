@@ -8,7 +8,7 @@ import com.savik.Who;
 import lombok.*;
 
 @Getter
-public class FavoriteScoredBothPeriods extends GeneralBet {
+public class FavoriteScoredBothPeriods extends GeneralBet<FootballMatch> {
 
     private PeriodFavoriteOver periodFavoriteOver;
 

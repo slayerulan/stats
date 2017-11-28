@@ -5,7 +5,7 @@ import com.savik.football.model.FootballMatch;
 import lombok.*;
 
 @Getter
-public class FirstPeriodMostGoals extends GeneralBet {
+public class FirstPeriodMostGoals extends GeneralBet<FootballMatch> {
 
 
     public FirstPeriodMostGoals() {

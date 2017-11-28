@@ -7,21 +7,21 @@ import com.savik.football.model.FootballMatch;
 import lombok.*;
 
 @Getter
-public class LastGoalTimeAfter extends PeriodBet {
+public class PeriodFirstGoalTimeBefore extends PeriodBet {
 
     double amount;
 
-    public LastGoalTimeAfter(double amount) {
+    public PeriodFirstGoalTimeBefore(double amount) {
         this.amount = amount;
     }
 
     @Override
     public boolean canAnalyze(Period period) {
-        return period.getLastGoalTime() != null;
+        return period.getFirstGoalTime() != null;
     }
 
     @Override
     public boolean check(Period period) {
-        return period.getLastGoalTime() > amount;
+        return period.getFirstGoalTime() < amount;
     }
 }

@@ -7,7 +7,7 @@ import com.savik.football.model.FootballMatchInfo;
 import lombok.*;
 
 @Getter
-public class GoalsInBothPeriods extends GeneralBet {
+public class GoalsInBothPeriods extends GeneralBet<FootballMatch> {
 
     private PeriodOver periodOver;
 
