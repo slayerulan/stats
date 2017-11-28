@@ -1,11 +1,9 @@
 package com.savik.football.result_block.home.handicap;
 
-import java.util.Arrays;
-
 import com.savik.football.blocks.GeneralBetContainer;
-import com.savik.football.blocks.handicap.first_period.FirstPeriodHomeHandicapBlock;
-import com.savik.football.blocks.handicap.match.MatchHomeHandicapBlock;
-import com.savik.football.blocks.handicap.second_period.SecondPeriodHomeHandicapBlock;
+import com.savik.football.blocks.handicap.PeriodHomeHandicapBlock;
+
+import java.util.Arrays;
 
 /**
  * @author Savushkin Yauheni
@@ -15,9 +13,9 @@ public class HomeHandicapBlock extends GeneralBetContainer {
 
     public HomeHandicapBlock() {
         super(Arrays.asList(
-                new MatchHomeHandicapBlock(),
-                new FirstPeriodHomeHandicapBlock(),
-                new SecondPeriodHomeHandicapBlock()
+                new PeriodHomeHandicapBlock(footballMatch -> footballMatch.getMatchInfo().getMatch()),
+                new PeriodHomeHandicapBlock(footballMatch -> footballMatch.getMatchInfo().getFirstPeriod()),
+                new PeriodHomeHandicapBlock(footballMatch -> footballMatch.getMatchInfo().getSecondPeriod())
         ));
     }
 }
