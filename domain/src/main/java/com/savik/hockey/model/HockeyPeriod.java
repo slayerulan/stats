@@ -3,6 +3,7 @@ package com.savik.hockey.model;
 import com.codiform.moo.annotation.CollectionProperty;
 import com.codiform.moo.annotation.Optionality;
 import com.savik.Period;
+import com.savik.Winner;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,7 +20,6 @@ import java.util.Set;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder(toBuilder = true)
 @SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "hockey_period_id_generator")
 public class HockeyPeriod extends Period {
 
@@ -28,4 +28,9 @@ public class HockeyPeriod extends Period {
     @CollectionProperty(optionality = Optionality.OPTIONAL)
     Set<HockeyGoal> goals;
 
+    @Builder(toBuilder = true)
+    public HockeyPeriod(Integer homeScore, Integer guestScore, Integer totalScore, Winner winner, PeriodStatus periodStatus, Set<HockeyGoal> goals) {
+        super(homeScore, guestScore, totalScore, winner, periodStatus);
+        this.goals = goals;
+    }
 }

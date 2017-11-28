@@ -30,7 +30,7 @@ public class HockeyMatch extends Identifiable {
 
     @NotNull
     @OneToOne(cascade = CascadeType.ALL)
-    FootballBookieStats bookieStats;
+    HockeyBookieStats bookieStats;
 
     @NotNull
     @OneToOne

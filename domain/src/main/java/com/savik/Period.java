@@ -46,6 +46,7 @@ public abstract class  Period<T extends Goal> extends Identifiable {
     public enum PeriodStatus {
         FIRST,
         SECOND,
+        THIRD,
         MATCH
     }
 
