@@ -1,9 +1,9 @@
 package com.savik.football.bets.handicap;
 
-import com.savik.football.bets.PeriodFavoriteBet;
-import com.savik.football.model.FootballPeriod;
+import com.savik.Period;
 import com.savik.Who;
-import lombok.*;
+import com.savik.football.bets.PeriodFavoriteBet;
+import lombok.Getter;
 
 /**
  * @author Savushkin Yauheni
@@ -19,12 +19,12 @@ public class PeriodLoserHandicap extends PeriodFavoriteBet {
     }
 
     @Override
-    public boolean canAnalyze(Who favorite, FootballPeriod period) {
+    public boolean canAnalyze(Who favorite, Period period) {
         return favorite.isTeam() && period.hasScores();
     }
 
     @Override
-    public boolean check(Who favorite, FootballPeriod period) {
+    public boolean check(Who favorite, Period period) {
         if (amount <= 0) {
             return period.getLoserScore(favorite) - period.getFavoriteScore(favorite) > Math.abs(amount);
         }
