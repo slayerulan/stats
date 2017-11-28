@@ -1,7 +1,6 @@
 package com.savik.football.blocks.goals.match;
 
 import com.savik.football.bets.goals.match.BothTeamsScoredAndOver;
-import com.savik.football.bets.goals.match.GoalBetweenTime;
 import com.savik.football.blocks.GeneralBetContainer;
 
 /**

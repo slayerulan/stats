@@ -1,6 +1,5 @@
 package com.savik.football.blocks.goals.match;
 
-import com.savik.football.bets.goals.match.FirstGoalTimeBefore;
 import com.savik.football.bets.goals.match.LastGoalTimeAfter;
 import com.savik.football.blocks.GeneralBetContainer;
 
