@@ -1,15 +1,16 @@
-package com.savik.football.blocks.total.over.first_period;
+package com.savik.football.blocks.total.over;
 
 import com.savik.football.bets.total.over.PeriodGuestOver;
 import com.savik.football.blocks.FirstPeriodBetContainer;
+import com.savik.football.blocks.PeriodBetContainer;
 
 /**
  * @author Savushkin Yauheni
  * @since 16.05.2017
  */
-public class FirstPeriodGuestOverSingleBlock extends FirstPeriodBetContainer {
+public class PeriodGuestOverSingleBlock extends PeriodBetContainer {
 
-    public FirstPeriodGuestOverSingleBlock(double amount) {
+    public PeriodGuestOverSingleBlock(double amount) {
         super(new PeriodGuestOver(amount));
     }
 
