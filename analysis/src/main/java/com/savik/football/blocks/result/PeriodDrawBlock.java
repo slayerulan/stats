@@ -1,7 +1,6 @@
 package com.savik.football.blocks.result;
 
 import com.savik.football.bets.result.PeriodDraw;
-import com.savik.football.blocks.FirstPeriodBetContainer;
 import com.savik.football.blocks.PeriodBetContainer;
 import com.savik.football.model.FootballMatch;
 import com.savik.football.model.FootballPeriod;

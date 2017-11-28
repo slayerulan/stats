@@ -1,12 +1,10 @@
 package com.savik.football.result_block.home.goals;
 
-import java.util.Arrays;
-
 import com.savik.football.blocks.GeneralBetContainer;
-import com.savik.football.blocks.goals.match.BothTeamsScoredBlock;
+import com.savik.football.blocks.goals.PeriodBothTeamsScoredBlock;
 import com.savik.football.blocks.total.over.PeriodHomeOverSingleBlock;
-import com.savik.football.blocks.total.over.match.HomeOverSingleBlock;
-import com.savik.football.blocks.total.over.second_period.SecondPeriodHomeOverSingleBlock;
+
+import java.util.Arrays;
 
 /**
  * @author Savushkin Yauheni
@@ -17,13 +15,16 @@ public class HomeGoalsBlock extends GeneralBetContainer {
     public HomeGoalsBlock() {
         super(Arrays.asList(
                 // команда забьет в матче
-                new HomeOverSingleBlock(0.5),
+                new PeriodHomeOverSingleBlock(0.5, footballMatch -> footballMatch.getMatchInfo().getMatch()),
+
                 // команда забьет в 1 тайме
-                new PeriodHomeOverSingleBlock(0.5),
-                // команда забьет в 1 тайме
-                new SecondPeriodHomeOverSingleBlock(0.5),
+                new PeriodHomeOverSingleBlock(0.5, footballMatch -> footballMatch.getMatchInfo().getFirstPeriod()),
+
+                // команда забьет в 2 тайме
+                new PeriodHomeOverSingleBlock(0.5, footballMatch -> footballMatch.getMatchInfo().getSecondPeriod()),
+
                 // обе команды забьют
-                new BothTeamsScoredBlock()
+                new PeriodBothTeamsScoredBlock(footballMatch -> footballMatch.getMatchInfo().getMatch())
         ));
     }
 }

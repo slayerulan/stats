@@ -1,7 +1,6 @@
 package com.savik.football.blocks.total.over;
 
 import com.savik.football.bets.total.over.PeriodGuestOver;
-import com.savik.football.blocks.FirstPeriodBetContainer;
 import com.savik.football.blocks.PeriodBetContainer;
 
 /**
