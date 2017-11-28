@@ -14,4 +14,5 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public abstract class Match extends Identifiable {
 
+    public abstract BookieStats getBookieStats();
 }

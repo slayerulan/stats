@@ -1,10 +1,13 @@
 package com.savik.football.model;
 
-import javax.persistence.*;
+import com.savik.BookieStats;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-import com.savik.Who;
-import com.savik.domain.Identifiable;
-import lombok.*;
+import javax.persistence.Entity;
+import javax.persistence.SequenceGenerator;
 
 /**
  * @author Savushkin Yauheni
@@ -12,38 +15,10 @@ import lombok.*;
  */
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Builder(toBuilder = true)
 @SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "football_bookie_id_generator")
 @EqualsAndHashCode
-public class FootballBookieStats extends Identifiable {
+public class FootballBookieStats extends BookieStats {
 
-    @Enumerated(EnumType.STRING)
-    @Transient
-    Who favorite;
-
-    Double homeRate;
-
-    Double drawRate;
-
-    Double guestRate;
-
-    public Who getFavorite() {
-        if (homeRate == null || guestRate == null) {
-            return Who.UNKNOWN;
-        }
-        if ((homeRate * 2) < guestRate) {
-            return Who.HOME;
-        }
-        if ((guestRate * 2) < homeRate) {
-            return Who.GUEST;
-        }
-        return Who.UNKNOWN;
-    }
-
-    public boolean hasFavorite() {
-        Who favorite = getFavorite();
-        return favorite == Who.HOME || favorite == Who.GUEST;
-    }
 }

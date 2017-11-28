@@ -29,14 +29,14 @@ public abstract class PeriodBetContainer<T extends Match> extends BetContainer<T
     }
 
     @Override
-    public boolean canAnalyze(T footballMatch) {
-        Period period = function.apply(footballMatch);
+    public boolean canAnalyze(T match) {
+        Period period = function.apply(match);
         return bet.canAnalyze(period);
     }
 
     @Override
-    public boolean checkMatch(T footballMatch) {
-        Period period = function.apply(footballMatch);
+    public boolean checkMatch(T match) {
+        Period period = function.apply(match);
         return bet.check(period);
     }
 

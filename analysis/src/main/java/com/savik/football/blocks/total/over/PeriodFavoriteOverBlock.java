@@ -1,8 +1,8 @@
 package com.savik.football.blocks.total.over;
 
+import com.savik.Match;
+import com.savik.Period;
 import com.savik.PeriodFavoriteBetContainer;
-import com.savik.football.model.FootballMatch;
-import com.savik.football.model.FootballPeriod;
 
 import java.util.Arrays;
 import java.util.function.Function;
@@ -11,9 +11,9 @@ import java.util.function.Function;
  * @author Savushkin Yauheni
  * @since 16.05.2017
  */
-public class PeriodFavoriteOverBlock extends PeriodFavoriteBetContainer {
+public class PeriodFavoriteOverBlock<T extends Match> extends PeriodFavoriteBetContainer<T> {
 
-    public PeriodFavoriteOverBlock(Function<FootballMatch, FootballPeriod> function) {
+    public PeriodFavoriteOverBlock(Function<T, Period> function) {
         super(Arrays.asList(
                 new PeriodFavoriteOverSingleBlock(0.5),
                 new PeriodFavoriteOverSingleBlock(1.5),
