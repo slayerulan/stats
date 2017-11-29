@@ -1,6 +1,6 @@
 package com.savik.general.blocks.total.over.periods;
 
-import com.savik.general.bets.total.over.periods.EveryPeriodOver;
+import com.savik.bets.general.total.over.periods.EveryPeriodOver;
 import com.savik.GeneralBetContainer;
 
 /**

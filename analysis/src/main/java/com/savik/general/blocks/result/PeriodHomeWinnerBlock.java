@@ -2,7 +2,7 @@ package com.savik.general.blocks.result;
 
 import com.savik.Match;
 import com.savik.Period;
-import com.savik.general.bets.result.PeriodHomeWinner;
+import com.savik.bets.general.result.PeriodHomeWinner;
 import com.savik.PeriodBetContainer;
 
 import java.util.function.Function;

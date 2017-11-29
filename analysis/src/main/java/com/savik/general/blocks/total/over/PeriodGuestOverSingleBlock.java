@@ -2,9 +2,9 @@ package com.savik.general.blocks.total.over;
 
 import com.savik.Match;
 import com.savik.Period;
-import com.savik.general.bets.total.over.PeriodGuestOver;
+import com.savik.bets.general.total.over.PeriodGuestOver;
 import com.savik.PeriodBetContainer;
-import com.savik.general.bets.total.over.PeriodHomeOver;
+import com.savik.bets.general.total.over.PeriodHomeOver;
 
 import java.util.function.Function;
 

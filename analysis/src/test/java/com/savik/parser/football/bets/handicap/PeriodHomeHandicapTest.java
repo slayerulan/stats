@@ -3,7 +3,7 @@ package com.savik.parser.football.bets.handicap;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import com.savik.general.bets.handicap.PeriodHomeHandicap;
+import com.savik.bets.general.handicap.PeriodHomeHandicap;
 import com.savik.parser.football.bets.AbstractBetTest;
 import org.junit.Test;
 

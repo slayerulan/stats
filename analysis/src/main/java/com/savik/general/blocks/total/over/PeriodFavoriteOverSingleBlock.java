@@ -1,6 +1,6 @@
 package com.savik.general.blocks.total.over;
 
-import com.savik.general.bets.total.over.PeriodFavoriteOver;
+import com.savik.bets.general.total.over.PeriodFavoriteOver;
 import com.savik.PeriodFavoriteBetContainer;
 
 /**

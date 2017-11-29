@@ -1,6 +1,6 @@
 package com.savik.general.blocks.handicap;
 
-import com.savik.general.bets.handicap.PeriodLoserHandicap;
+import com.savik.bets.general.handicap.PeriodLoserHandicap;
 import com.savik.PeriodFavoriteBetContainer;
 
 /**

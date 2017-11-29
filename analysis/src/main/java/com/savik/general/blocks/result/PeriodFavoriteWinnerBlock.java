@@ -3,7 +3,7 @@ package com.savik.general.blocks.result;
 import com.savik.Match;
 import com.savik.Period;
 import com.savik.PeriodFavoriteBetContainer;
-import com.savik.general.bets.result.PeriodFavoriteWinner;
+import com.savik.bets.general.result.PeriodFavoriteWinner;
 
 import java.util.function.Function;
 
