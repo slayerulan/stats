@@ -10,7 +10,8 @@ public class GeneralTotalBlock extends GeneralBetContainer {
 
     public GeneralTotalBlock() {
         super(Arrays.asList(
-                new GeneralTotalOverBlock()
+                new GeneralTotalOverBlock(),
+                new GeneralTotalUnderBlock()
         ), ContainerType.TOTAL);
     }
 }

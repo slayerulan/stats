@@ -9,6 +9,7 @@ public enum ContainerType {
     TOTAL,
     OTHER,
     TOTAL_OVER,
+    TOTAL_UNDER,
     WIN_AND_TOTAL_OVER,
     WIN_AND_TOTAL_UNDER,
 }

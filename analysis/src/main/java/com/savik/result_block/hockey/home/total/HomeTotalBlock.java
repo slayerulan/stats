@@ -10,7 +10,8 @@ public class HomeTotalBlock extends GeneralBetContainer {
 
     public HomeTotalBlock() {
         super(Arrays.asList(
-                new HomeTotalOverBlock()
+                new HomeTotalOverBlock(),
+                new HomeTotalUnderBlock()
         ), ContainerType.TOTAL);
     }
 }
