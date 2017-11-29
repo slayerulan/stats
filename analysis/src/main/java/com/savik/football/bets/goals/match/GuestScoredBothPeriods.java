@@ -1,7 +1,7 @@
 package com.savik.football.bets.goals.match;
 
 import com.savik.GeneralBet;
-import com.savik.football.bets.total.over.PeriodGuestOver;
+import com.savik.general.bets.total.over.PeriodGuestOver;
 import com.savik.football.model.FootballMatch;
 import com.savik.football.model.FootballMatchInfo;
 import lombok.*;

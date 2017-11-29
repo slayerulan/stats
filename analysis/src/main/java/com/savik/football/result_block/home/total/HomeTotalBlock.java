@@ -1,8 +1,7 @@
 package com.savik.football.result_block.home.total;
 
 import com.savik.GeneralBetContainer;
-import com.savik.Match;
-import com.savik.football.blocks.total.over.PeriodHomeOverBlock;
+import com.savik.general.blocks.total.over.PeriodHomeOverBlock;
 import com.savik.football.model.FootballMatch;
 
 import java.util.Arrays;

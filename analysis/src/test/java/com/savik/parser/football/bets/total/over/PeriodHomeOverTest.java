@@ -3,7 +3,7 @@ package com.savik.parser.football.bets.total.over;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import com.savik.football.bets.total.over.PeriodHomeOver;
+import com.savik.general.bets.total.over.PeriodHomeOver;
 import com.savik.parser.football.bets.AbstractBetTest;
 import org.junit.Test;
 

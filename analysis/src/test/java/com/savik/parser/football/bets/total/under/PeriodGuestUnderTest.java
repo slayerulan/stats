@@ -3,7 +3,7 @@ package com.savik.parser.football.bets.total.under;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import com.savik.football.bets.total.under.PeriodGuestUnder;
+import com.savik.general.bets.total.under.PeriodGuestUnder;
 import com.savik.parser.football.bets.AbstractBetTest;
 import org.junit.Test;
 

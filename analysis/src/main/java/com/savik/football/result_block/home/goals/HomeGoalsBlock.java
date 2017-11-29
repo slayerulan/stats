@@ -1,10 +1,9 @@
 package com.savik.football.result_block.home.goals;
 
 import com.savik.GeneralBetContainer;
-import com.savik.football.blocks.goals.PeriodBothTeamsScoredBlock;
-import com.savik.football.blocks.total.over.PeriodHomeOverSingleBlock;
+import com.savik.general.blocks.goals.PeriodBothTeamsScoredBlock;
+import com.savik.general.blocks.total.over.PeriodHomeOverSingleBlock;
 import com.savik.football.model.FootballMatch;
-import com.savik.hockey.model.HockeyMatch;
 
 import java.util.Arrays;
 

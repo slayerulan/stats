@@ -1,0 +1,17 @@
+package com.savik.general.blocks.total.under;
+
+import com.savik.general.bets.total.under.PeriodFavoriteUnder;
+import com.savik.PeriodFavoriteBetContainer;
+
+/**
+ * @author Savushkin Yauheni
+ * @since 16.05.2017
+ */
+public class PeriodFavoriteUnderSingleBlock extends PeriodFavoriteBetContainer {
+
+    public PeriodFavoriteUnderSingleBlock(double amount) {
+        super(new PeriodFavoriteUnder(amount));
+    }
+
+
+}
