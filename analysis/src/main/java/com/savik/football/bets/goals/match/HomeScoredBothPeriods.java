@@ -1,6 +1,6 @@
 package com.savik.football.bets.goals.match;
 
-import com.savik.football.bets.GeneralBet;
+import com.savik.GeneralBet;
 import com.savik.football.bets.total.over.PeriodHomeOver;
 import com.savik.football.model.FootballMatch;
 import com.savik.football.model.FootballMatchInfo;

@@ -1,7 +1,7 @@
 package com.savik.football.bets.total.under;
 
 import com.savik.Period;
-import com.savik.football.bets.PeriodBet;
+import com.savik.PeriodBet;
 import lombok.Getter;
 
 @Getter

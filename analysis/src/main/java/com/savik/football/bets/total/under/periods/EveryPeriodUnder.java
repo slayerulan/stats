@@ -1,6 +1,6 @@
 package com.savik.football.bets.total.under.periods;
 
-import com.savik.football.bets.GeneralBet;
+import com.savik.GeneralBet;
 import com.savik.football.bets.total.under.PeriodUnder;
 import com.savik.football.model.FootballMatch;
 import lombok.*;

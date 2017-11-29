@@ -1,6 +1,5 @@
 package com.savik;
 
-import com.savik.football.bets.PeriodBet;
 import lombok.Getter;
 
 import java.util.List;

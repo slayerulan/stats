@@ -1,7 +1,7 @@
 package com.savik.football.bets.goals;
 
 import com.savik.Period;
-import com.savik.football.bets.PeriodBet;
+import com.savik.PeriodBet;
 import com.savik.football.bets.total.over.PeriodGuestOver;
 import com.savik.football.bets.total.over.PeriodHomeOver;
 import lombok.Getter;

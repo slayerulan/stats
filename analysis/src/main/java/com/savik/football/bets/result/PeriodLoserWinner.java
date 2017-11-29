@@ -2,7 +2,7 @@ package com.savik.football.bets.result;
 
 import com.savik.Period;
 import com.savik.Who;
-import com.savik.football.bets.PeriodFavoriteBet;
+import com.savik.PeriodFavoriteBet;
 import lombok.Getter;
 
 @Getter

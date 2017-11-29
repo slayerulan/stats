@@ -1,4 +1,4 @@
-package com.savik.football.bets;
+package com.savik;
 
 import com.savik.Period;
 
