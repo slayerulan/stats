@@ -10,7 +10,8 @@ public class GeneralOtherBlock extends GeneralBetContainer {
 
     public GeneralOtherBlock() {
         super(Arrays.asList(
-                new GeneralEvenScoreBlock()
+                new GeneralEvenScoreBlock(),
+                new GeneralTotalOverAllPeriodsBlock()
         ), ContainerType.OTHER);
     }
 }

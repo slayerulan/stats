@@ -1,4 +1,4 @@
-package com.savik.blocks.general.goals.match;
+package com.savik.blocks.football.goals.match;
 
 import com.savik.GeneralBetContainer;
 import com.savik.football.model.FootballMatch;

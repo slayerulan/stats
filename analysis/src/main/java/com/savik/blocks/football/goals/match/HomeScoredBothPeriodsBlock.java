@@ -1,4 +1,4 @@
-package com.savik.blocks.general.goals.match;
+package com.savik.blocks.football.goals.match;
 
 import com.savik.bets.football.goals.match.HomeScoredBothPeriods;
 import com.savik.GeneralBetContainer;

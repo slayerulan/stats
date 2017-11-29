@@ -23,10 +23,6 @@ public abstract class GeneralBetContainer<T extends Match> extends BetContainer<
         this(Arrays.asList(childBetBlock), type);
     }
 
-    public GeneralBetContainer(BetContainer childBetBlock) {
-        super(childBetBlock);
-    }
-
     public GeneralBetContainer(GeneralBet bet) {
         super();
         this.bet = bet;
