@@ -1,6 +1,6 @@
 package com.savik.blocks.general.total.periods;
 
-import com.savik.bets.general.total.periods.SecondPeriodMostGoals;
+import com.savik.bets.football.totals.periods.SecondPeriodMostGoals;
 import com.savik.GeneralBetContainer;
 
 /**
