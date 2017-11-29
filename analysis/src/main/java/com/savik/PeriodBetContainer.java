@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.function.Function;
 
 @Getter
-public abstract class PeriodBetContainer<T extends Match> extends BetContainer<T> {
+public class PeriodBetContainer<T extends Match> extends BetContainer<T> {
 
     private PeriodBet bet;
 

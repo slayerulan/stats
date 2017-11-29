@@ -3,6 +3,7 @@ package com.savik;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -30,6 +31,10 @@ public abstract class BetContainer<T extends Match> {
     public BetContainer(List<? extends BetContainer> childrenBetBlocks) {
         this.childrenBetBlocks = childrenBetBlocks;
         this.leaf = false;
+    }
+
+    public BetContainer(BetContainer childBetBlock) {
+        this(Arrays.asList(childBetBlock));
     }
 
     public BetContainer() {
