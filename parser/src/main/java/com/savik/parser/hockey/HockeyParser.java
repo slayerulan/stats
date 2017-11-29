@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 @Slf4j
@@ -29,20 +31,20 @@ public class HockeyParser {
         /*
         KvlMqOL3 - с овертаймом и буллитами
         * */
-        try {
+       /* try {
             HockeyMatch match = matchParser.parse("KvlMqOL3", HockeyChampionship.NHL, Season.S2016);
             hockeyMatchRepository.save(match);
             log.debug("match saved = {}", match);
             Thread.sleep(1000);
         } catch (Exception ex) {
             throw new RuntimeException(ex);
-        }
+        }*/
 
-        /*List<String> allMatches = leagueParser.findAllMatches("https://www.myscore.com.ua/hockey/usa/nhl/results/");
+        List<String> allMatches = leagueParser.findAllMatches("https://www.myscore.com.ua/hockey/usa/nhl/results/");
         for (String matchId : allMatches) {
             try {
                 if (hockeyMatchRepository.findByMyscoreCode(matchId) == null) {
-                    HockeyMatch match = matchParser.parse(matchId, HockeyChampionship.NHL, Season.S2016);
+                    HockeyMatch match = matchParser.parse(matchId, HockeyChampionship.NHL, Season.S2017);
                     hockeyMatchRepository.save(match);
                     log.debug("match saved = {}", match);
                     Thread.sleep(1000);
@@ -50,7 +52,7 @@ public class HockeyParser {
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }
-        }*/
+        }
 
     }
 }

@@ -16,9 +16,12 @@ import javax.persistence.SequenceGenerator;
 @Entity
 @NoArgsConstructor
 @Getter
-@Builder(toBuilder = true)
 @SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "football_bookie_id_generator")
 @EqualsAndHashCode
 public class FootballBookieStats extends BookieStats {
 
+    @Builder(toBuilder = true)
+    public FootballBookieStats(Double homeRate, Double drawRate, Double guestRate) {
+        super(homeRate, drawRate, guestRate);
+    }
 }
