@@ -1,7 +1,7 @@
 package com.savik.blocks.general.goals;
 
 import com.savik.PeriodBetContainer;
-import com.savik.bets.football.goals.match.PeriodFirstGoalTimeBefore;
+import com.savik.bets.general.goals.PeriodFirstGoalTimeBefore;
 
 /**
  * @author Savushkin Yauheni

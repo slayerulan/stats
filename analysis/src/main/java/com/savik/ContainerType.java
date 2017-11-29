@@ -9,6 +9,8 @@ public enum ContainerType {
     TOTAL,
     OTHER,
     EVEN,
+    FIRST_GOAL_BEFORE,
+    LAST_GOAL_AFTER,
     TOTAL_OVER,
     TOTAL_OVER_ALL_PERIODS,
     TOTAL_UNDER_ALL_PERIODS,

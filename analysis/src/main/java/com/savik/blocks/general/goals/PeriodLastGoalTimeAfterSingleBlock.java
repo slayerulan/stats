@@ -1,7 +1,7 @@
 package com.savik.blocks.general.goals;
 
 import com.savik.PeriodBetContainer;
-import com.savik.bets.football.goals.match.LastGoalTimeAfter;
+import com.savik.bets.general.goals.PeriodLastGoalTimeAfter;
 
 /**
  * @author Savushkin Yauheni
@@ -10,7 +10,7 @@ import com.savik.bets.football.goals.match.LastGoalTimeAfter;
 public class PeriodLastGoalTimeAfterSingleBlock extends PeriodBetContainer {
 
     public PeriodLastGoalTimeAfterSingleBlock(double amount) {
-        super(new LastGoalTimeAfter(amount));
+        super(new PeriodLastGoalTimeAfter(amount));
     }
 
 

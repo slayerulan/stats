@@ -14,7 +14,9 @@ public class GeneralOtherBlock extends GeneralBetContainer {
                 new GeneralTotalOverAllPeriodsBlock(),
                 new GeneralTotalUnderAllPeriodsBlock(),
                 new GeneralBothTeamsTotalOverBlock(),
-                new GeneralBothTeamsTotalUnderBlock()
+                new GeneralBothTeamsTotalUnderBlock(),
+                new GeneralFirstGoalBefore9Block(),
+                new GeneralLastGoalBefore56Block()
         ), ContainerType.OTHER);
     }
 }

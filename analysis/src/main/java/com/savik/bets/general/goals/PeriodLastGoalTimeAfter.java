@@ -1,25 +1,25 @@
-package com.savik.bets.football.goals.match;
+package com.savik.bets.general.goals;
 
 import com.savik.Period;
 import com.savik.PeriodBet;
 import lombok.*;
 
 @Getter
-public class PeriodFirstGoalTimeBefore extends PeriodBet {
+public class PeriodLastGoalTimeAfter extends PeriodBet {
 
     double amount;
 
-    public PeriodFirstGoalTimeBefore(double amount) {
+    public PeriodLastGoalTimeAfter(double amount) {
         this.amount = amount;
     }
 
     @Override
     public boolean canAnalyze(Period period) {
-        return period.getFirstGoalTime() != null;
+        return period.getLastGoalTime() != null;
     }
 
     @Override
     public boolean check(Period period) {
-        return period.getFirstGoalTime() < amount;
+        return period.getLastGoalTime() > amount;
     }
 }
