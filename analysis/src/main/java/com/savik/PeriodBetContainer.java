@@ -25,14 +25,18 @@ public class PeriodBetContainer<T extends Match> extends BetContainer<T> {
         this(childrenBetBlocks, function, null);
     }
 
-    public PeriodBetContainer(PeriodBet bet, Function<T, Period> function) {
-        this(bet);
+    public PeriodBetContainer(PeriodBet bet, Function<T, Period> function, ContainerType containerType) {
+        this.bet = bet;
         this.function = function;
+        this.type = containerType;
+    }
+
+    public PeriodBetContainer(PeriodBet bet, Function<T, Period> function) {
+        this(bet, function, null);
     }
 
     public PeriodBetContainer(PeriodBet bet) {
-        super();
-        this.bet = bet;
+        this(bet, null);
     }
 
     @Override

@@ -8,6 +8,7 @@ public enum ContainerType {
     GUEST,
     TOTAL,
     OTHER,
+    EVEN,
     TOTAL_OVER,
     TOTAL_UNDER,
     WIN_AND_TOTAL_OVER,
