@@ -11,6 +11,7 @@ public enum ContainerType {
     EVEN,
     TOTAL_OVER,
     TOTAL_OVER_ALL_PERIODS,
+    TOTAL_UNDER_ALL_PERIODS,
     TOTAL_UNDER,
     WIN_AND_TOTAL_OVER,
     WIN_AND_TOTAL_UNDER,
