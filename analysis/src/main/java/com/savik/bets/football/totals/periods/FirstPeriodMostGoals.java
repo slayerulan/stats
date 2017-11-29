@@ -1,16 +1,14 @@
-package com.savik.bets.general.total.periods;
-
-import java.util.Objects;
+package com.savik.bets.football.totals.periods;
 
 import com.savik.GeneralBet;
 import com.savik.football.model.FootballMatch;
 import lombok.*;
 
 @Getter
-public class DrawInPeriodsGoals extends GeneralBet<FootballMatch> {
+public class FirstPeriodMostGoals extends GeneralBet<FootballMatch> {
 
 
-    public DrawInPeriodsGoals() {
+    public FirstPeriodMostGoals() {
     }
 
     @Override
@@ -21,9 +19,7 @@ public class DrawInPeriodsGoals extends GeneralBet<FootballMatch> {
 
     @Override
     public boolean check(FootballMatch footballMatch) {
-        return Objects.equals(
-                footballMatch.getMatchInfo().getSecondPeriod().getTotalScore(),
-                footballMatch.getMatchInfo().getFirstPeriod().getTotalScore()
-        );
+        return footballMatch.getMatchInfo().getFirstPeriod().getTotalScore() >
+               footballMatch.getMatchInfo().getSecondPeriod().getTotalScore();
     }
 }

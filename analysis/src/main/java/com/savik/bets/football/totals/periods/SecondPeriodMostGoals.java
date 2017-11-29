@@ -1,4 +1,4 @@
-package com.savik.bets.general.total.periods;
+package com.savik.bets.football.totals.periods;
 
 import com.savik.GeneralBet;
 import com.savik.football.model.FootballMatch;
