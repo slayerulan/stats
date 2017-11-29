@@ -14,6 +14,8 @@ public abstract class BetContainer<T extends Match> {
 
     protected Boolean leaf;
 
+    protected ContainerType type;
+
     protected Integer analyzedMatchesAmount;
 
     protected Integer skippedMatchesAmount;
@@ -26,6 +28,11 @@ public abstract class BetContainer<T extends Match> {
             return null;
         }
         return (successfullyMatchesAmount * 100) / analyzedMatchesAmount;
+    }
+
+    public BetContainer(List<? extends BetContainer> childrenBetBlocks, ContainerType type) {
+        this(childrenBetBlocks);
+        this.type = type;
     }
 
     public BetContainer(List<? extends BetContainer> childrenBetBlocks) {

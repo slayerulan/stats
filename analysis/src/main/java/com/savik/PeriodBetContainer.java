@@ -1,7 +1,7 @@
 package com.savik;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -12,12 +12,17 @@ public class PeriodBetContainer<T extends Match> extends BetContainer<T> {
 
     private PeriodBet bet;
 
+    @JsonIgnore
     private Function<T, Period> function;
 
-    public PeriodBetContainer(List<? extends PeriodBetContainer> childrenBetBlocks, Function<T, Period> function) {
-        super(childrenBetBlocks);
+    public PeriodBetContainer(List<? extends PeriodBetContainer> childrenBetBlocks, Function<T, Period> function, ContainerType containerType) {
+        super(childrenBetBlocks, containerType);
         childrenBetBlocks.forEach((Consumer<PeriodBetContainer>) periodBetContainer ->
                 periodBetContainer.function = function);
+    }
+
+    public PeriodBetContainer(List<? extends PeriodBetContainer> childrenBetBlocks, Function<T, Period> function) {
+        this(childrenBetBlocks, function, null);
     }
 
     public PeriodBetContainer(PeriodBet bet, Function<T, Period> function) {

@@ -1,6 +1,7 @@
 package com.savik.hockey.model;
 
 import com.savik.Match;
+import com.savik.Period;
 import com.savik.Season;
 import com.savik.domain.Identifiable;
 import com.savik.football.model.FootballBookieStats;
@@ -12,6 +13,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.function.Function;
 
 @Entity
 @NoArgsConstructor
@@ -24,6 +26,9 @@ import java.time.LocalDateTime;
 @SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "hockey_match_id_generator")
 @Data
 public class HockeyMatch extends Match {
+
+    public static final Function<HockeyMatch, Period> MATCH = hockeyMatch -> hockeyMatch.getMatchInfo().getMatch();
+
 
     @NotNull
     @OneToOne(cascade = CascadeType.ALL)
