@@ -5,7 +5,9 @@ import java.util.List;
 import com.savik.GeneralBetContainer;
 import com.savik.football.model.FootballMatch;
 import com.savik.football.repository.FootballMatchRepository;
-import com.savik.result_block.football.home.HomeBlock;
+import com.savik.hockey.model.HockeyMatch;
+import com.savik.hockey.repository.HockeyMatchRepository;
+import com.savik.result_block.hockey.home.HomeBlock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,9 +20,13 @@ public class TestController {
     @Autowired
     FootballMatchRepository footballMatchRepository;
 
+
+    @Autowired
+    HockeyMatchRepository hockeyMatchRepository;
+
     @GetMapping
     public GeneralBetContainer getShortCard() {
-        List<FootballMatch> all = footballMatchRepository.findAll();
+        List<HockeyMatch> all = hockeyMatchRepository.findAll();
         HomeBlock homeBlock = new HomeBlock();
         all.forEach(homeBlock::check);
         return homeBlock;

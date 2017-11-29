@@ -29,7 +29,6 @@ public class HockeyMatch extends Match {
     @OneToOne(cascade = CascadeType.ALL)
     HockeyMatchInfo matchInfo;
 
-    @NotNull
     @OneToOne(cascade = CascadeType.ALL)
     HockeyBookieStats bookieStats;
 

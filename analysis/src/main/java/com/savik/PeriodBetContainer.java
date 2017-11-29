@@ -1,8 +1,10 @@
 package com.savik;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 @Getter
@@ -12,9 +14,10 @@ public class PeriodBetContainer<T extends Match> extends BetContainer<T> {
 
     private Function<T, Period> function;
 
-    public PeriodBetContainer(List<? extends BetContainer> childrenBetBlocks, Function<T, Period> function) {
+    public PeriodBetContainer(List<? extends PeriodBetContainer> childrenBetBlocks, Function<T, Period> function) {
         super(childrenBetBlocks);
-        this.function = function;
+        childrenBetBlocks.forEach((Consumer<PeriodBetContainer>) periodBetContainer ->
+                periodBetContainer.function = function);
     }
 
     public PeriodBetContainer(PeriodBet bet, Function<T, Period> function) {
