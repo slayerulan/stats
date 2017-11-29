@@ -2,10 +2,13 @@ package com.savik;
 
 
 public enum ContainerType {
+    ROOT,
+    GENERAL,
+    HOME,
+    GUEST,
     TOTAL,
     OTHER,
-    HOME,
-    HOME_TOTAL_OVER,
-    HOME_WIN_AND_TOTAL_OVER,
-    HOME_WIN_AND_TOTAL_UNDER,
+    TOTAL_OVER,
+    WIN_AND_TOTAL_OVER,
+    WIN_AND_TOTAL_UNDER,
 }

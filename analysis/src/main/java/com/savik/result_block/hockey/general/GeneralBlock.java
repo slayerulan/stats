@@ -1,7 +1,8 @@
 package com.savik.result_block.hockey.general;
 
+import com.savik.ContainerType;
 import com.savik.GeneralBetContainer;
-import com.savik.result_block.hockey.general.total.GeneralTotalOverBlock;
+import com.savik.result_block.hockey.general.total.GeneralTotalBlock;
 
 import java.util.Arrays;
 
@@ -13,7 +14,7 @@ public class GeneralBlock extends GeneralBetContainer {
 
     public GeneralBlock() {
         super(Arrays.asList(
-                new GeneralTotalOverBlock()
-        ));
+                new GeneralTotalBlock()
+        ), ContainerType.GENERAL);
     }
 }
