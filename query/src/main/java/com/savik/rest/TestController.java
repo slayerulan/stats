@@ -5,7 +5,7 @@ import java.util.List;
 import com.savik.GeneralBetContainer;
 import com.savik.football.model.FootballMatch;
 import com.savik.football.repository.FootballMatchRepository;
-import com.savik.football.result_block.home.HomeBlock;
+import com.savik.result_block.football.home.HomeBlock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
