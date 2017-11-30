@@ -28,9 +28,37 @@ public class HockeyPeriod extends Period<HockeyGoal> {
     @CollectionProperty(optionality = Optionality.OPTIONAL)
     Set<HockeyGoal> goals;
 
+    Integer homeShotsOnTarget;
+
+    Integer guestShotsOnTarget;
+
+    // в меньшинстве
+    Integer homeShotHandedGoals;
+
+    Integer guestShotHandedGoals;
+
+    // в большинстве
+    Integer homePowerplayGoals;
+
+    Integer guestPowerplayGoals;
+
+
+    Integer homePenaltiesTime;
+
+    Integer guestPenaltiesTime;
+
     @Builder(toBuilder = true)
-    public HockeyPeriod(Integer homeScore, Integer guestScore, Integer totalScore, Winner winner, PeriodStatus periodStatus, Set<HockeyGoal> goals) {
+
+    public HockeyPeriod(Integer homeScore, Integer guestScore, Integer totalScore, Winner winner, PeriodStatus periodStatus, Set<HockeyGoal> goals, Integer homeShotsOnTarget, Integer guestShotsOnTarget, Integer homeShotHandedGoals, Integer guestShotHandedGoals, Integer homePowerplayGoals, Integer guestPowerplayGoals, Integer homePenaltiesTime, Integer guestPenaltiesTime) {
         super(homeScore, guestScore, totalScore, winner, periodStatus);
         this.goals = goals;
+        this.homeShotsOnTarget = homeShotsOnTarget;
+        this.guestShotsOnTarget = guestShotsOnTarget;
+        this.homeShotHandedGoals = homeShotHandedGoals;
+        this.guestShotHandedGoals = guestShotHandedGoals;
+        this.homePowerplayGoals = homePowerplayGoals;
+        this.guestPowerplayGoals = guestPowerplayGoals;
+        this.homePenaltiesTime = homePenaltiesTime;
+        this.guestPenaltiesTime = guestPenaltiesTime;
     }
 }

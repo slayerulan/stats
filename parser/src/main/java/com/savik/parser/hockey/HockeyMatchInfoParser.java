@@ -29,8 +29,22 @@ public class HockeyMatchInfoParser {
     }
 
     public static StatsInfoDto parseStats(Elements elements) {
+        Elements shotsOnTarget = elements.select(".score.stats:containsOwn(Броски в створ ворот)");
+        Elements penaltiesTime = elements.select(".score.stats:containsOwn(Штрафное время)");
+        Elements shotHandedGoals = elements.select(".score.stats:containsOwn(Шайбы в меньшинстве)");
+        Elements powerplayGoals = elements.select(".score.stats:containsOwn(Шайбы в большинстве)");
+
+
         return StatsInfoDto
                 .builder()
+                .homeShotsOnTarget(getStat(shotsOnTarget, HOME))
+                .guestShotsOnTarget(getStat(shotsOnTarget, GUEST))
+                .homePenaltiesTime(getStat(penaltiesTime, HOME))
+                .guestPenaltiesTime(getStat(penaltiesTime, GUEST))
+                .homeShotHandedGoals(getStat(shotHandedGoals, HOME))
+                .guestShotHandedGoals(getStat(shotHandedGoals, GUEST))
+                .homePowerplayGoals(getStat(powerplayGoals, HOME))
+                .guestPowerplayGoals(getStat(powerplayGoals, GUEST))
                 .build();
     }
 
@@ -46,7 +60,8 @@ public class HockeyMatchInfoParser {
         return goalsDivs
                 .stream()
                 .map(d -> HockeyGoal.builder()
-                        .minute(period != null ? calculateTime(d) + 20 * (period - 1) : null)
+                        .minute(period != null ? (calculateTime(d) / 100) + 20 * (period - 1) : null)
+                        .seconds(period != null ? (calculateTime(d) % 100) : null)
                         .whoScored(d.parent().parent().hasClass("fl") ? Who.HOME : Who.GUEST)
                         .build())
                 .collect(Collectors.toList());
@@ -55,7 +70,7 @@ public class HockeyMatchInfoParser {
     static Integer calculateTime(Element element) {
         Integer minute =
                 Integer.valueOf(element.parent().select(".time-box,.time-box-wide").text().replaceAll("\\D+", ""));
-        return minute / 100;
+        return minute;
     }
 
     @AllArgsConstructor
@@ -69,5 +84,23 @@ public class HockeyMatchInfoParser {
     @Builder
     public static class StatsInfoDto {
 
+        Integer homeShotsOnTarget;
+
+        Integer guestShotsOnTarget;
+
+        // в меньшинстве
+        Integer homeShotHandedGoals;
+
+        Integer guestShotHandedGoals;
+
+        // в большинстве
+        Integer homePowerplayGoals;
+
+        Integer guestPowerplayGoals;
+
+
+        Integer homePenaltiesTime;
+
+        Integer guestPenaltiesTime;
     }
 }

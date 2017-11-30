@@ -21,9 +21,13 @@ public class HockeyGoal extends Goal {
     @OneToOne
     HockeyTeam team;
 
+    @NotNull
+    Integer seconds;
+
     @Builder(toBuilder = true)
-    public HockeyGoal(Integer minute, Who whoScored, HockeyTeam team) {
+    public HockeyGoal(Integer minute, Who whoScored, HockeyTeam team, Integer seconds) {
         super(minute, whoScored);
         this.team = team;
+        this.seconds = seconds;
     }
 }

@@ -6,7 +6,7 @@ logging:
 
 spring:
     datasource:
-        url: jdbc:h2:file:./stats2;AUTO_SERVER=TRUE;FILE_LOCK=SOCKET
+        url: jdbc:h2:file:./stats;AUTO_SERVER=TRUE;FILE_LOCK=SOCKET
         driver-class-name: org.h2.Driver
         user: sa
         password:

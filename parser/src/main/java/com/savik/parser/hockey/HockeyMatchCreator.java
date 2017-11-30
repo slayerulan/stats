@@ -1,5 +1,6 @@
 package com.savik.parser.hockey;
 
+import com.codiform.moo.curry.Update;
 import com.savik.Period;
 import com.savik.Season;
 import com.savik.Who;
@@ -91,9 +92,9 @@ public class HockeyMatchCreator {
             FootballPeriod.PeriodStatus periodStatus
     ) {
         HockeyPeriod period = new HockeyPeriod();
-        /*if (statsDto != null) {
+        if (statsDto != null) {
             Update.from(statsDto).to(period);
-        }*/
+        }
 
         Set<HockeyGoal> footballGoals = null;
         if (periodStatus != FootballPeriod.PeriodStatus.MATCH) {
@@ -108,6 +109,9 @@ public class HockeyMatchCreator {
 
         Integer homeScore = (int) infoDto.getHockeyGoals().stream().filter(g -> g.getWhoScored() == Who.HOME).count();
         Integer guestScore = (int) infoDto.getHockeyGoals().stream().filter(g -> g.getWhoScored() == Who.GUEST).count();
+        if(periodStatus != FootballPeriod.PeriodStatus.MATCH && footballGoals.size() != homeScore + guestScore) {
+            throw new RuntimeException("parsed goals size not equals total score");
+        }
         return period.toBuilder()
                 .goals(footballGoals)
                 .homeScore(homeScore)
