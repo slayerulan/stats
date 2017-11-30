@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Getter
-public abstract class GeneralBetContainer<T extends Match> extends BetContainer<T> {
+public class GeneralBetContainer<T extends Match> extends BetContainer<T> {
 
     private GeneralBet bet;
 

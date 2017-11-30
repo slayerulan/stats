@@ -44,6 +44,11 @@ public abstract class BetContainer<T extends Match> {
         this(Arrays.asList(childBetBlock));
     }
 
+    public BetContainer(ContainerType type) {
+        this();
+        this.type = type;
+    }
+
     public BetContainer() {
         this.leaf = true;
         this.analyzedMatchesAmount = 0;
