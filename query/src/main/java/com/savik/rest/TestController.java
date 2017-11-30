@@ -8,7 +8,7 @@ import com.savik.hockey.model.HockeyMatch;
 import com.savik.hockey.model.HockeyTeam;
 import com.savik.hockey.repository.HockeyMatchRepository;
 import com.savik.hockey.repository.HockeyTeamRepository;
-import com.savik.result_block.hockey.ResultBlock;
+import com.savik.result_block.hockey.match.ResultBlock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
