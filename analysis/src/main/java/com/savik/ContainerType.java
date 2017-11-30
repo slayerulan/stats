@@ -8,6 +8,7 @@ public enum ContainerType {
     GUEST,
     TOTAL,
     OTHER,
+    STATS,
     EVEN,
     FIRST_GOAL_BEFORE,
     LAST_GOAL_AFTER,
@@ -19,4 +20,7 @@ public enum ContainerType {
     BOTH_TEAMS_TOTAL_OVER,
     WIN_AND_TOTAL_OVER,
     WIN_AND_TOTAL_UNDER,
+    SHOTS_ON_TARGET_OVER,
+    PENALTIES_TIME_OVER,
+    POWERPLAY_GOALS_OVER,
 }
