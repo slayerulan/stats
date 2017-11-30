@@ -18,6 +18,6 @@ import javax.validation.constraints.NotNull;
 public abstract class Team extends Identifiable {
 
     @NotNull
-    String name;
+    protected String name;
 
 }

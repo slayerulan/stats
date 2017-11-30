@@ -19,7 +19,6 @@ import javax.validation.constraints.NotNull;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "football_team_id_generator")
 @EqualsAndHashCode
 public class FootballTeam extends Team {
@@ -28,4 +27,9 @@ public class FootballTeam extends Team {
     @Enumerated(EnumType.STRING)
     FootballChampionship championship;
 
+    @Builder(toBuilder = true)
+    public FootballTeam(String name, FootballChampionship championship) {
+        super(name);
+        this.championship = championship;
+    }
 }

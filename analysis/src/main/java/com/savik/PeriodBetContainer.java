@@ -17,7 +17,7 @@ public class PeriodBetContainer<T extends Match> extends BetContainer<T> {
 
     public PeriodBetContainer(List<? extends PeriodBetContainer> childrenBetBlocks, Function<T, Period> function, ContainerType containerType) {
         super(childrenBetBlocks, containerType);
-        childrenBetBlocks.forEach((Consumer<PeriodBetContainer>) periodBetContainer ->
+        childrenBetBlocks.forEach((PeriodBetContainer periodBetContainer) ->
                 periodBetContainer.function = function);
     }
 

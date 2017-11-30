@@ -15,4 +15,17 @@ import javax.persistence.MappedSuperclass;
 public abstract class Match extends Identifiable {
 
     public abstract BookieStats getBookieStats();
+
+    public abstract Team getHomeTeam();
+
+    public abstract Team getGuestTeam();
+
+    public Who getTeamStatus(Team team) {
+        if (team.equals(getHomeTeam())) {
+            return Who.HOME;
+        } else if (team.equals(getGuestTeam())) {
+            return Who.GUEST;
+        }
+        return Who.UNKNOWN;
+    }
 }
