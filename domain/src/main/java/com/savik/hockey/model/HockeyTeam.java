@@ -1,6 +1,6 @@
 package com.savik.hockey.model;
 
-import com.savik.domain.Identifiable;
+import com.savik.Team;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -22,13 +22,11 @@ import javax.validation.constraints.NotNull;
 @Builder
 @SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "hockey_team_id_generator")
 @EqualsAndHashCode
-public class HockeyTeam extends Identifiable {
+public class HockeyTeam extends Team {
 
     @NotNull
     @Enumerated(EnumType.STRING)
     HockeyChampionship championship;
 
-    @NotNull
-    String name;
 
 }
