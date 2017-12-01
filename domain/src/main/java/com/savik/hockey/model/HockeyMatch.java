@@ -28,6 +28,9 @@ import java.util.function.Function;
 public class HockeyMatch extends Match {
 
     public static final Function<HockeyMatch, Period> MATCH = hockeyMatch -> hockeyMatch.getMatchInfo().getMatch();
+    public static final Function<HockeyMatch, Period> FIRST_PERIOD = hockeyMatch -> hockeyMatch.getMatchInfo().getFirstPeriod();
+    public static final Function<HockeyMatch, Period> SECOND_PERIOD = hockeyMatch -> hockeyMatch.getMatchInfo().getSecondPeriod();
+    public static final Function<HockeyMatch, Period> THIRD_PERIOD = hockeyMatch -> hockeyMatch.getMatchInfo().getThirdPeriod();
 
 
     @NotNull

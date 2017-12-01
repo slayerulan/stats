@@ -10,13 +10,11 @@ public class GeneralOtherBlock extends GeneralBetContainer {
 
     public GeneralOtherBlock() {
         super(Arrays.asList(
-                new GeneralEvenScoreBlock(),
                 new GeneralTotalOverAllPeriodsBlock(),
                 new GeneralTotalUnderAllPeriodsBlock(),
-                new GeneralBothTeamsTotalOverBlock(),
-                new GeneralBothTeamsTotalUnderBlock(),
-                new GeneralFirstGoalBefore9Block(),
-                new GeneralLastGoalBefore56Block()
+                new GeneralAnyWinAndTotalOverBlock(),
+                new GeneralAnyWinAndTotalUnderBlock(),
+                new GeneralAnyWinAndDiffEqualsBlock()
         ), ContainerType.OTHER);
     }
 }

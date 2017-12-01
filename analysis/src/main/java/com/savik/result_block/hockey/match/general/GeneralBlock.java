@@ -17,8 +17,8 @@ public class GeneralBlock extends GeneralBetContainer {
 
     public GeneralBlock(MatchData matchData) {
         super(Arrays.asList(
-                new GeneralOtherBlock(),
                 new GeneralTotalBlock(matchData),
+                new GeneralOtherBlock(),
                 new GeneralStatsBlock()
         ), ContainerType.GENERAL);
     }

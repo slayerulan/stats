@@ -4,6 +4,7 @@ package com.savik;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 
@@ -28,6 +29,11 @@ public class PeriodTeamBetContainer<T extends Match> extends BetContainer<T> {
             periodBetContainer.function = function;
             periodBetContainer.matchData = matchData;
         });
+    }
+
+    public PeriodTeamBetContainer(PeriodTeamBetContainer childrenBetBlocks, Function<T, Period> function,
+                                  MatchData matchData, ContainerType containerType) {
+        this(Arrays.asList(childrenBetBlocks), function, matchData, containerType);
     }
 
     public PeriodTeamBetContainer(PeriodBet forHome, PeriodBet forGuest) {
