@@ -15,11 +15,11 @@ import java.util.Arrays;
  */
 public class GeneralBlock extends GeneralBetContainer {
 
-    public GeneralBlock(MatchData matchData) {
+    public GeneralBlock(ContainerType type, MatchData matchData) {
         super(Arrays.asList(
                 new GeneralTotalBlock(matchData),
                 new GeneralOtherBlock(),
                 new GeneralStatsBlock()
-        ), ContainerType.GENERAL);
+        ), type);
     }
 }

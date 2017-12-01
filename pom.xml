@@ -10,6 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>domain</module>
+        <module>domain-jpa</module>
         <module>infrastructure</module>
         <module>parser</module>
         <module>analysis</module>

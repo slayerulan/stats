@@ -5,10 +5,7 @@ import com.savik.Period;
 import com.savik.Season;
 import com.savik.domain.Identifiable;
 import com.savik.football.model.FootballBookieStats;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -24,7 +21,7 @@ import java.util.function.Function;
         indexes = @Index(columnList = "myscoreCode")
 )
 @SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "hockey_match_id_generator")
-@Data
+@Getter
 public class HockeyMatch extends Match {
 
     public static final Function<HockeyMatch, Period> MATCH = hockeyMatch -> hockeyMatch.getMatchInfo().getMatch();
@@ -61,4 +58,17 @@ public class HockeyMatch extends Match {
 
     @NotNull
     String myscoreCode;
+
+
+    @PostLoad
+    private void onPostLoad() {
+        String a = "";
+    }
+
+    @Override
+    public String toString() {
+        return "HockeyMatch{" +
+                "date=" + date +
+                ", myscoreCode='" + myscoreCode + '\'' + '}';
+    }
 }
