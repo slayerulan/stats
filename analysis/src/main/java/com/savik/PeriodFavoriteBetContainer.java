@@ -13,9 +13,10 @@ public abstract class PeriodFavoriteBetContainer<T extends Match> extends BetCon
     private Function<T, Period> function;
 
 
-    public PeriodFavoriteBetContainer(List<? extends BetContainer> childrenBetBlocks, Function<T, Period> function) {
+    public PeriodFavoriteBetContainer(List<? extends PeriodFavoriteBetContainer> childrenBetBlocks, Function<T, Period> function) {
         super(childrenBetBlocks);
-        this.function = function;
+        childrenBetBlocks.forEach((PeriodFavoriteBetContainer periodBetContainer) ->
+                periodBetContainer.function = function);
     }
 
     public PeriodFavoriteBetContainer(PeriodFavoriteBet bet, Function<T, Period> function) {
@@ -30,6 +31,9 @@ public abstract class PeriodFavoriteBetContainer<T extends Match> extends BetCon
 
     @Override
     public boolean canAnalyze(T match) {
+        if(match.getBookieStats() == null) {
+            return false;
+        }
         Who favorite = match.getBookieStats().getFavorite();
         Period period = function.apply(match);
         return bet.canAnalyze(favorite, period);

@@ -26,10 +26,10 @@ public class BookieStats extends Identifiable {
         if (homeRate == null || guestRate == null) {
             return Who.UNKNOWN;
         }
-        if ((homeRate * 2) < guestRate) {
+        if ((homeRate * 1.5) < guestRate) {
             return Who.HOME;
         }
-        if ((guestRate * 2) < homeRate) {
+        if ((guestRate * 1.5) < homeRate) {
             return Who.GUEST;
         }
         return Who.UNKNOWN;
