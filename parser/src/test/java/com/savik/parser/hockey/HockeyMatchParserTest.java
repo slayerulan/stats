@@ -212,7 +212,7 @@ public class HockeyMatchParserTest {
         assertEquals(secondPeriod.getGoals().size(), 3);
         assertTrue(secondPeriod.getGoals().containsAll(new HashSet<>(Arrays.asList(
                 HockeyGoal.builder().minute(32).whoScored(Who.GUEST).seconds(55).team(guest).build(),
-                HockeyGoal.builder().minute(39).whoScored(Who.GUEST).seconds(34).team(guest).build(),
+                HockeyGoal.builder().minute(39).whoScored(Who.GUEST).seconds(33).team(guest).build(),
                 HockeyGoal.builder().minute(39).whoScored(Who.GUEST).seconds(41).team(guest).build()
         ))));
         assertEquals(secondPeriod.getHomeShotsOnTarget().intValue(), 8);

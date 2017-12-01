@@ -3,13 +3,15 @@ package com.savik.hockey.model;
 import com.savik.Match;
 import com.savik.Period;
 import com.savik.Season;
-import com.savik.domain.Identifiable;
-import com.savik.football.model.FootballBookieStats;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.Set;
 import java.util.function.Function;
 
 @Entity
@@ -62,7 +64,10 @@ public class HockeyMatch extends Match {
 
     @PostLoad
     private void onPostLoad() {
-        String a = "";
+        Set<HockeyGoal> goals = matchInfo.getMatch().getGoals();
+        goals.addAll(matchInfo.getFirstPeriod().getGoals());
+        goals.addAll(matchInfo.getSecondPeriod().getGoals());
+        goals.addAll(matchInfo.getThirdPeriod().getGoals());
     }
 
     @Override
