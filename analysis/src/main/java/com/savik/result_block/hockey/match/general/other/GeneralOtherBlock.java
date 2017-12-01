@@ -14,7 +14,9 @@ public class GeneralOtherBlock extends GeneralBetContainer {
                 new GeneralTotalUnderAllPeriodsBlock(),
                 new GeneralAnyWinAndTotalOverBlock(),
                 new GeneralAnyWinAndTotalUnderBlock(),
-                new GeneralAnyWinAndDiffEqualsBlock()
+                new GeneralAnyWinAndDiffEqualsBlock(),
+                new GeneralFirstGoalBeforeBlock(),
+                new GeneralLastGoalBeforeBlock()
         ), ContainerType.OTHER);
     }
 }

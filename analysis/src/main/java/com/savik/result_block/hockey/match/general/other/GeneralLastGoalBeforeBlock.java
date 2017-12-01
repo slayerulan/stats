@@ -6,9 +6,9 @@ import com.savik.bets.general.goals.PeriodLastGoalTimeAfter;
 import com.savik.hockey.model.HockeyMatch;
 
 
-class GeneralLastGoalBefore56Block extends PeriodBetContainer {
+class GeneralLastGoalBeforeBlock extends PeriodBetContainer {
 
-    public GeneralLastGoalBefore56Block() {
+    public GeneralLastGoalBeforeBlock() {
         super(
                 new PeriodLastGoalTimeAfter(55), HockeyMatch.MATCH, ContainerType.LAST_GOAL_AFTER
         );
