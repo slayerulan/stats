@@ -27,6 +27,8 @@ import static org.junit.Assert.*;
         "classpath:db/matches_j5qIp46c.sql", "classpath:db/matches_rwPEPmCs.sql",
         "classpath:db/matches_Ai5wex7j.sql", "classpath:db/matches_QTEL7Fjd.sql",
         "classpath:db/matches_vJ50rp5f.sql", "classpath:db/matches_YVeCUxb9.sql",
+        "classpath:db/matches_I39zqxpU.sql", "classpath:db/matches_lAtkXvoI.sql",
+        "classpath:db/matches_xn1B4zMd.sql", "classpath:db/matches_YaFolFyG.sql",
 })
 public class HockeyMatchParserTest {
 
