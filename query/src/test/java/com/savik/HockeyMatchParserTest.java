@@ -22,8 +22,12 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK, classes = Application.class)
 @ActiveProfiles("test")
-@Sql(scripts = {"classpath:db/matches_AqombNzc.sql", "classpath:db/matches_CIGVL5B6.sql",
-        "classpath:db/matches_j5qIp46c.sql", "classpath:db/matches_rwPEPmCs.sql"})
+@Sql(scripts = {
+        "classpath:db/matches_AqombNzc.sql", "classpath:db/matches_CIGVL5B6.sql",
+        "classpath:db/matches_j5qIp46c.sql", "classpath:db/matches_rwPEPmCs.sql",
+        "classpath:db/matches_Ai5wex7j.sql", "classpath:db/matches_QTEL7Fjd.sql",
+        "classpath:db/matches_vJ50rp5f.sql", "classpath:db/matches_YVeCUxb9.sql",
+})
 public class HockeyMatchParserTest {
 
     @Autowired
@@ -35,7 +39,7 @@ public class HockeyMatchParserTest {
     @Test
     public void testMatchWithOvertimeAndBulletsAndStats() {
 
-        List<HockeyTeam> all = hockeyTeamRepository.findAll();
+        List<HockeyMatch> all = hockeyMatchRepository.findAll();
 
 
         assertEquals(1, 1);
