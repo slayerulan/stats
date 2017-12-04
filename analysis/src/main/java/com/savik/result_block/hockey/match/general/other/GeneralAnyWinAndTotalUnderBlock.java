@@ -7,7 +7,7 @@ import com.savik.hockey.model.HockeyMatch;
 
 import java.util.Arrays;
 
-import static com.savik.ContainerType.ANY_WIN_AND_DIFFERENCE_EQUALS;
+import static com.savik.ContainerType.ANY_WIN_AND_TOTAL_UNDER;
 
 
 class GeneralAnyWinAndTotalUnderBlock extends PeriodBetContainer {
@@ -17,7 +17,7 @@ class GeneralAnyWinAndTotalUnderBlock extends PeriodBetContainer {
                 Arrays.asList(
                         new PeriodWinAndUnderSingleBlock<HockeyMatch>(4.5, new PeriodAnyWinner()),
                         new PeriodWinAndUnderSingleBlock<HockeyMatch>(5.5, new PeriodAnyWinner())
-                ), HockeyMatch.MATCH, ANY_WIN_AND_DIFFERENCE_EQUALS
+                ), HockeyMatch.MATCH, ANY_WIN_AND_TOTAL_UNDER
         );
     }
 }
