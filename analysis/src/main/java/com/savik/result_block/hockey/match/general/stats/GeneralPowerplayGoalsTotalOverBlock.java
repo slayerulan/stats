@@ -13,8 +13,8 @@ class GeneralPowerplayGoalsTotalOverBlock extends PeriodBetContainer {
     public GeneralPowerplayGoalsTotalOverBlock() {
         super(
                 Arrays.asList(
-                        new PeriodPowerplayGoalsOverSingleBlock(0.5),
-                        new PeriodPowerplayGoalsOverSingleBlock(1.5)
+                        new PeriodPowerplayGoalsOverSingleBlock(0.5, ContainerType.OVER_0_5),
+                        new PeriodPowerplayGoalsOverSingleBlock(1.5, ContainerType.OVER_1_5)
                 ), HockeyMatch.MATCH, ContainerType.POWERPLAY_GOALS_OVER
         );
     }
