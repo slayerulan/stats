@@ -14,7 +14,8 @@ class GeneralPenaltiesTimeTotalOverBlock extends PeriodBetContainer {
         super(
                 Arrays.asList(
                         new PeriodPenaltiesTimeOverSingleBlock(14.5),
-                        new PeriodPenaltiesTimeOverSingleBlock(16.5)
+                        new PeriodPenaltiesTimeOverSingleBlock(16.5),
+                        new PeriodPenaltiesTimeOverSingleBlock(18.5)
                 ), HockeyMatch.MATCH, ContainerType.PENALTIES_TIME_OVER
         );
     }
