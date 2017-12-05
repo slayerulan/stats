@@ -25,7 +25,10 @@ public class GeneralOtherBlock extends GeneralBetContainer {
                 new GeneralPeriodAnyWinnerBlock(HockeyMatch.SECOND_PERIOD, SECOND_PERIOD_ANY_WINNER),
                 new GeneralPeriodAnyWinnerBlock(HockeyMatch.THIRD_PERIOD, THIRD_PERIOD_ANY_WINNER),
                 new GeneralTeamWinAndTotalOverBlock(matchData),
-                new GeneralTeamWinAndTotalUnderBlock(matchData)
+                new GeneralTeamWinAndTotalUnderBlock(matchData),
+                new GeneralTeamNotLoosePeriodBlock(matchData, HockeyMatch.FIRST_PERIOD, TEAM_NOT_LOOSE_FIRST_PERIOD),
+                new GeneralTeamNotLoosePeriodBlock(matchData, HockeyMatch.SECOND_PERIOD, TEAM_NOT_LOOSE_SECOND_PERIOD),
+                new GeneralTeamNotLoosePeriodBlock(matchData, HockeyMatch.THIRD_PERIOD, TEAM_NOT_LOOSE_THIRD_PERIOD)
         ), ContainerType.OTHER);
     }
 }

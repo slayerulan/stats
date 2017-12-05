@@ -531,6 +531,30 @@ public class HockeyGeneralBlockTest {
 
     }
 
+    @Test
+    public void testTeamNotLoosePeriods() {
+        GeneralBlock generalBlock = getGeneralBlock();
+
+        BetContainer firstPeriod = generalBlock.findByType(ContainerType.TEAM_NOT_LOOSE_FIRST_PERIOD);
+        assertEquals(12, firstPeriod.getAnalyzedMatchesAmount().intValue());
+        assertEquals(9, firstPeriod.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, firstPeriod.getSkippedMatchesAmount().intValue());
+        assertEquals(75, firstPeriod.getPercentage().intValue());
+
+
+        BetContainer secondPeriod = generalBlock.findByType(ContainerType.TEAM_NOT_LOOSE_SECOND_PERIOD);
+        assertEquals(12, secondPeriod.getAnalyzedMatchesAmount().intValue());
+        assertEquals(6, secondPeriod.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, secondPeriod.getSkippedMatchesAmount().intValue());
+        assertEquals(50, secondPeriod.getPercentage().intValue());
+
+        BetContainer thirdPeriod = generalBlock.findByType(ContainerType.TEAM_NOT_LOOSE_THIRD_PERIOD);
+        assertEquals(12, thirdPeriod.getAnalyzedMatchesAmount().intValue());
+        assertEquals(10, thirdPeriod.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, thirdPeriod.getSkippedMatchesAmount().intValue());
+        assertEquals(83, thirdPeriod.getPercentage().intValue());
+    }
+
 
     @Test
     public void testShotsOnTargetOver() {

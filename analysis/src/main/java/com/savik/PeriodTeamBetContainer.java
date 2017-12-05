@@ -36,10 +36,17 @@ public class PeriodTeamBetContainer<T extends Match> extends BetContainer<T> {
         this(Arrays.asList(childrenBetBlocks), function, matchData, containerType);
     }
 
-    public PeriodTeamBetContainer(PeriodBet forHome, PeriodBet forGuest, ContainerType type) {
+    public PeriodTeamBetContainer(PeriodBet forHome, PeriodBet forGuest, ContainerType type,
+                                  Function<T, Period> function, MatchData matchData) {
         super(type);
         this.forHome = forHome;
         this.forGuest = forGuest;
+        this.function = function;
+        this.matchData = matchData;
+    }
+
+    public PeriodTeamBetContainer(PeriodBet forHome, PeriodBet forGuest, ContainerType type) {
+        this(forHome, forGuest, type, null, null);
     }
 
     @Override
