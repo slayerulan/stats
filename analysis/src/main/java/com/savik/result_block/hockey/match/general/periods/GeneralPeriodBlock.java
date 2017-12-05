@@ -19,7 +19,8 @@ public class GeneralPeriodBlock extends GeneralBetContainer {
                 new GeneralPeriodAnyWinnerBlock(function, ANY_WIN),
                 new GeneralTeamNotLoosePeriodBlock(matchData, function, TEAM_NOT_LOOSE),
                 new GeneralPeriodTotalOverBlock(function, TOTAL_OVER),
-                new GeneralPeriodBothTeamsTotalOverBlock(function, BOTH_TEAMS_TOTAL_OVER)
+                new GeneralPeriodBothTeamsTotalOverBlock(function, BOTH_TEAMS_TOTAL_OVER),
+                new GeneralTeamTotalOverPeriodBlock(matchData, function, TEAM_TOTAL_OVER)
         ), type);
     }
 }

@@ -18,6 +18,8 @@ import javax.transaction.Transactional;
 import java.util.Comparator;
 import java.util.List;
 
+import static com.savik.ContainerType.TEAM_TOTAL_OVER;
+import static com.savik.ContainerType.TOTAL;
 import static com.savik.ContainerType.TOTAL_OVER;
 import static com.savik.hockey.specifications.HockeyMatchSpec.hasTeam;
 import static org.junit.Assert.assertEquals;
@@ -144,7 +146,8 @@ public class HockeyGeneralBlockTest {
     public void testSecondPeriodTotalOver() {
         GeneralBlock generalBlock = getGeneralBlock();
 
-        BetContainer secondPeriodTotalOver = generalBlock.findByType(ContainerType.SECOND_PERIOD).findByType(TOTAL_OVER);
+        BetContainer secondPeriodTotalOver = generalBlock.findByType(ContainerType.SECOND_PERIOD)
+                .findByType(TOTAL_OVER);
 
         BetContainer over0AndHalf = secondPeriodTotalOver.findByType(ContainerType.OVER_0_5);
         assertEquals(12, over0AndHalf.getAnalyzedMatchesAmount().intValue());
@@ -227,10 +230,74 @@ public class HockeyGeneralBlockTest {
 
 
     @Test
+    public void testFirstPeriodTeamTotalOver() {
+        GeneralBlock generalBlock = getGeneralBlock();
+
+        BetContainer firstPeriodTotalOver = generalBlock.findByType(ContainerType.FIRST_PERIOD)
+                .findByType(TEAM_TOTAL_OVER);
+
+        BetContainer over0AndHalf = firstPeriodTotalOver.findByType(ContainerType.OVER_0_5);
+        assertEquals(12, over0AndHalf.getAnalyzedMatchesAmount().intValue());
+        assertEquals(7, over0AndHalf.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, over0AndHalf.getSkippedMatchesAmount().intValue());
+        assertEquals(58, over0AndHalf.getPercentage().intValue());
+
+        BetContainer over1AndHalf = firstPeriodTotalOver.findByType(ContainerType.OVER_1_5);
+        assertEquals(12, over1AndHalf.getAnalyzedMatchesAmount().intValue());
+        assertEquals(4, over1AndHalf.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, over1AndHalf.getSkippedMatchesAmount().intValue());
+        assertEquals(33, over1AndHalf.getPercentage().intValue());
+
+    }
+
+    @Test
+    public void testSecondPeriodTeamTotalOver() {
+        GeneralBlock generalBlock = getGeneralBlock();
+
+        BetContainer secondPeriodTotalOver = generalBlock.findByType(ContainerType.SECOND_PERIOD)
+                .findByType(TEAM_TOTAL_OVER);
+
+        BetContainer over0AndHalf = secondPeriodTotalOver.findByType(ContainerType.OVER_0_5);
+        assertEquals(12, over0AndHalf.getAnalyzedMatchesAmount().intValue());
+        assertEquals(7, over0AndHalf.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, over0AndHalf.getSkippedMatchesAmount().intValue());
+        assertEquals(58, over0AndHalf.getPercentage().intValue());
+
+        BetContainer over1AndHalf = secondPeriodTotalOver.findByType(ContainerType.OVER_1_5);
+        assertEquals(12, over1AndHalf.getAnalyzedMatchesAmount().intValue());
+        assertEquals(5, over1AndHalf.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, over1AndHalf.getSkippedMatchesAmount().intValue());
+        assertEquals(41, over1AndHalf.getPercentage().intValue());
+
+    }
+
+    @Test
+    public void testThirdPeriodTeamTotalOver() {
+        GeneralBlock generalBlock = getGeneralBlock();
+
+        BetContainer thirdPeriodTotalOver = generalBlock.findByType(ContainerType.THIRD_PERIOD)
+                .findByType(TEAM_TOTAL_OVER);
+
+        BetContainer over0AndHalf = thirdPeriodTotalOver.findByType(ContainerType.OVER_0_5);
+        assertEquals(12, over0AndHalf.getAnalyzedMatchesAmount().intValue());
+        assertEquals(9, over0AndHalf.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, over0AndHalf.getSkippedMatchesAmount().intValue());
+        assertEquals(75, over0AndHalf.getPercentage().intValue());
+
+        BetContainer over1AndHalf = thirdPeriodTotalOver.findByType(ContainerType.OVER_1_5);
+        assertEquals(12, over1AndHalf.getAnalyzedMatchesAmount().intValue());
+        assertEquals(4, over1AndHalf.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, over1AndHalf.getSkippedMatchesAmount().intValue());
+        assertEquals(33, over1AndHalf.getPercentage().intValue());
+
+    }
+
+
+    @Test
     public void testTeamTotalOver() {
         GeneralBlock generalBlock = getGeneralBlock();
 
-        BetContainer totalOverBlock = generalBlock.findByType(ContainerType.TEAM_TOTAL_OVER);
+        BetContainer totalOverBlock = generalBlock.findByType(TOTAL).findByType(ContainerType.TEAM_TOTAL_OVER);
 
         BetContainer over1AndHalf = totalOverBlock.findByType(ContainerType.OVER_1_5);
         assertEquals(12, over1AndHalf.getAnalyzedMatchesAmount().intValue());
