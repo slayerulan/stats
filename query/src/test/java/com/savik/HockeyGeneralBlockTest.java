@@ -18,6 +18,7 @@ import javax.transaction.Transactional;
 import java.util.Comparator;
 import java.util.List;
 
+import static com.savik.ContainerType.TOTAL_OVER;
 import static com.savik.hockey.specifications.HockeyMatchSpec.hasTeam;
 import static org.junit.Assert.assertEquals;
 
@@ -60,7 +61,7 @@ public class HockeyGeneralBlockTest {
     public void testTotalOver() {
         GeneralBlock generalBlock = getGeneralBlock();
 
-        BetContainer totalOverBlock = generalBlock.findByType(ContainerType.TOTAL_OVER);
+        BetContainer totalOverBlock = generalBlock.findByType(TOTAL_OVER);
 
         BetContainer over4AndHalf = totalOverBlock.findByType(ContainerType.OVER_4_5);
         assertEquals(12, over4AndHalf.getAnalyzedMatchesAmount().intValue());
@@ -123,7 +124,7 @@ public class HockeyGeneralBlockTest {
     public void testFirstPeriodTotalOver() {
         GeneralBlock generalBlock = getGeneralBlock();
 
-        BetContainer firstPeriodTotalOver = generalBlock.findByType(ContainerType.FIRST_PERIOD_TOTAL_OVER);
+        BetContainer firstPeriodTotalOver = generalBlock.findByType(ContainerType.FIRST_PERIOD).findByType(TOTAL_OVER);
 
         BetContainer over0AndHalf = firstPeriodTotalOver.findByType(ContainerType.OVER_0_5);
         assertEquals(12, over0AndHalf.getAnalyzedMatchesAmount().intValue());
@@ -143,7 +144,7 @@ public class HockeyGeneralBlockTest {
     public void testSecondPeriodTotalOver() {
         GeneralBlock generalBlock = getGeneralBlock();
 
-        BetContainer secondPeriodTotalOver = generalBlock.findByType(ContainerType.SECOND_PERIOD_TOTAL_OVER);
+        BetContainer secondPeriodTotalOver = generalBlock.findByType(ContainerType.SECOND_PERIOD).findByType(TOTAL_OVER);
 
         BetContainer over0AndHalf = secondPeriodTotalOver.findByType(ContainerType.OVER_0_5);
         assertEquals(12, over0AndHalf.getAnalyzedMatchesAmount().intValue());
@@ -163,7 +164,7 @@ public class HockeyGeneralBlockTest {
     public void testThirdPeriodTotalOver() {
         GeneralBlock generalBlock = getGeneralBlock();
 
-        BetContainer thirdPeriodTotalOver = generalBlock.findByType(ContainerType.THIRD_PERIOD_TOTAL_OVER);
+        BetContainer thirdPeriodTotalOver = generalBlock.findByType(ContainerType.THIRD_PERIOD).findByType(TOTAL_OVER);
 
         BetContainer over0AndHalf = thirdPeriodTotalOver.findByType(ContainerType.OVER_0_5);
         assertEquals(12, over0AndHalf.getAnalyzedMatchesAmount().intValue());
@@ -183,7 +184,8 @@ public class HockeyGeneralBlockTest {
     public void testBothTeamsFirstPeriodTotalOver() {
         GeneralBlock generalBlock = getGeneralBlock();
 
-        BetContainer container = generalBlock.findByType(ContainerType.BOTH_TEAMS_TOTAL_OVER_FIRST_PERIOD);
+        BetContainer container = generalBlock.findByType(ContainerType.FIRST_PERIOD)
+                .findByType(ContainerType.BOTH_TEAMS_TOTAL_OVER);
 
         BetContainer over0AndHalf = container.findByType(ContainerType.OVER_0_5);
         assertEquals(12, over0AndHalf.getAnalyzedMatchesAmount().intValue());
@@ -197,7 +199,8 @@ public class HockeyGeneralBlockTest {
     public void testBothTeamsSecondPeriodTotalOver() {
         GeneralBlock generalBlock = getGeneralBlock();
 
-        BetContainer container = generalBlock.findByType(ContainerType.BOTH_TEAMS_TOTAL_OVER_SECOND_PERIOD);
+        BetContainer container = generalBlock.findByType(ContainerType.SECOND_PERIOD)
+                .findByType(ContainerType.BOTH_TEAMS_TOTAL_OVER);
 
         BetContainer over0AndHalf = container.findByType(ContainerType.OVER_0_5);
         assertEquals(12, over0AndHalf.getAnalyzedMatchesAmount().intValue());
@@ -211,7 +214,8 @@ public class HockeyGeneralBlockTest {
     public void testBothTeamsThirdPeriodTotalOver() {
         GeneralBlock generalBlock = getGeneralBlock();
 
-        BetContainer container = generalBlock.findByType(ContainerType.BOTH_TEAMS_TOTAL_OVER_THIRD_PERIOD);
+        BetContainer container = generalBlock.findByType(ContainerType.THIRD_PERIOD)
+                .findByType(ContainerType.BOTH_TEAMS_TOTAL_OVER);
 
         BetContainer over0AndHalf = container.findByType(ContainerType.OVER_0_5);
         assertEquals(12, over0AndHalf.getAnalyzedMatchesAmount().intValue());
@@ -462,7 +466,8 @@ public class HockeyGeneralBlockTest {
     public void testFirstPeriodAnyWinner() {
         GeneralBlock generalBlock = getGeneralBlock();
 
-        BetContainer block = generalBlock.findByType(ContainerType.FIRST_PERIOD_ANY_WINNER);
+        BetContainer block = generalBlock.findByType(ContainerType.FIRST_PERIOD);
+        block = block.findByType(ContainerType.ANY_WIN);
 
         assertEquals(12, block.getAnalyzedMatchesAmount().intValue());
         assertEquals(7, block.getSuccessfullyMatchesAmount().intValue());
@@ -475,7 +480,8 @@ public class HockeyGeneralBlockTest {
     public void testSecondPeriodAnyWinner() {
         GeneralBlock generalBlock = getGeneralBlock();
 
-        BetContainer block = generalBlock.findByType(ContainerType.SECOND_PERIOD_ANY_WINNER);
+        BetContainer block = generalBlock.findByType(ContainerType.SECOND_PERIOD);
+        block = block.findByType(ContainerType.ANY_WIN);
 
         assertEquals(12, block.getAnalyzedMatchesAmount().intValue());
         assertEquals(8, block.getSuccessfullyMatchesAmount().intValue());
@@ -488,7 +494,8 @@ public class HockeyGeneralBlockTest {
     public void testThirdPeriodAnyWinner() {
         GeneralBlock generalBlock = getGeneralBlock();
 
-        BetContainer block = generalBlock.findByType(ContainerType.THIRD_PERIOD_ANY_WINNER);
+        BetContainer block = generalBlock.findByType(ContainerType.THIRD_PERIOD);
+        block = block.findByType(ContainerType.ANY_WIN);
 
         assertEquals(12, block.getAnalyzedMatchesAmount().intValue());
         assertEquals(7, block.getSuccessfullyMatchesAmount().intValue());
@@ -535,20 +542,23 @@ public class HockeyGeneralBlockTest {
     public void testTeamNotLoosePeriods() {
         GeneralBlock generalBlock = getGeneralBlock();
 
-        BetContainer firstPeriod = generalBlock.findByType(ContainerType.TEAM_NOT_LOOSE_FIRST_PERIOD);
+        BetContainer firstPeriod = generalBlock.findByType(ContainerType.FIRST_PERIOD)
+                .findByType(ContainerType.TEAM_NOT_LOOSE);
         assertEquals(12, firstPeriod.getAnalyzedMatchesAmount().intValue());
         assertEquals(9, firstPeriod.getSuccessfullyMatchesAmount().intValue());
         assertEquals(0, firstPeriod.getSkippedMatchesAmount().intValue());
         assertEquals(75, firstPeriod.getPercentage().intValue());
 
 
-        BetContainer secondPeriod = generalBlock.findByType(ContainerType.TEAM_NOT_LOOSE_SECOND_PERIOD);
+        BetContainer secondPeriod = generalBlock.findByType(ContainerType.SECOND_PERIOD)
+                .findByType(ContainerType.TEAM_NOT_LOOSE);
         assertEquals(12, secondPeriod.getAnalyzedMatchesAmount().intValue());
         assertEquals(6, secondPeriod.getSuccessfullyMatchesAmount().intValue());
         assertEquals(0, secondPeriod.getSkippedMatchesAmount().intValue());
         assertEquals(50, secondPeriod.getPercentage().intValue());
 
-        BetContainer thirdPeriod = generalBlock.findByType(ContainerType.TEAM_NOT_LOOSE_THIRD_PERIOD);
+        BetContainer thirdPeriod = generalBlock.findByType(ContainerType.THIRD_PERIOD)
+                .findByType(ContainerType.TEAM_NOT_LOOSE);
         assertEquals(12, thirdPeriod.getAnalyzedMatchesAmount().intValue());
         assertEquals(10, thirdPeriod.getSuccessfullyMatchesAmount().intValue());
         assertEquals(0, thirdPeriod.getSkippedMatchesAmount().intValue());

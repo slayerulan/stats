@@ -1,4 +1,4 @@
-package com.savik.result_block.hockey.match.general.other;
+package com.savik.result_block.hockey.match.general.periods;
 
 import com.savik.ContainerType;
 import com.savik.Period;

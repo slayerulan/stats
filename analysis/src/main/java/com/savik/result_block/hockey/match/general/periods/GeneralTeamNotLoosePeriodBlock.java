@@ -1,14 +1,14 @@
-package com.savik.result_block.hockey.match.general.other;
+package com.savik.result_block.hockey.match.general.periods;
 
-import com.savik.*;
-import com.savik.bets.general.result.PeriodAnyWinner;
+import com.savik.ContainerType;
+import com.savik.MatchData;
+import com.savik.Period;
+import com.savik.PeriodTeamBetContainer;
 import com.savik.bets.general.result.PeriodGuestNotLoose;
 import com.savik.bets.general.result.PeriodHomeNotLoose;
 import com.savik.hockey.model.HockeyMatch;
 
 import java.util.function.Function;
-
-import static com.savik.ContainerType.TEAM_NOT_LOOSE_FIRST_PERIOD;
 
 
 class GeneralTeamNotLoosePeriodBlock extends PeriodTeamBetContainer {

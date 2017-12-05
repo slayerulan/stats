@@ -1,13 +1,11 @@
 package com.savik.result_block.hockey.match.general.other;
 
-import com.savik.ContainerType;
 import com.savik.GeneralBetContainer;
 import com.savik.MatchData;
-import com.savik.hockey.model.HockeyMatch;
 
 import java.util.Arrays;
 
-import static com.savik.ContainerType.*;
+import static com.savik.ContainerType.OTHER;
 
 
 public class GeneralOtherBlock extends GeneralBetContainer {
@@ -21,14 +19,8 @@ public class GeneralOtherBlock extends GeneralBetContainer {
                 new GeneralAnyWinAndDiffEqualsBlock(),
                 new GeneralFirstGoalBeforeBlock(),
                 new GeneralLastGoalAfterBlock(),
-                new GeneralPeriodAnyWinnerBlock(HockeyMatch.FIRST_PERIOD, FIRST_PERIOD_ANY_WINNER),
-                new GeneralPeriodAnyWinnerBlock(HockeyMatch.SECOND_PERIOD, SECOND_PERIOD_ANY_WINNER),
-                new GeneralPeriodAnyWinnerBlock(HockeyMatch.THIRD_PERIOD, THIRD_PERIOD_ANY_WINNER),
                 new GeneralTeamWinAndTotalOverBlock(matchData),
-                new GeneralTeamWinAndTotalUnderBlock(matchData),
-                new GeneralTeamNotLoosePeriodBlock(matchData, HockeyMatch.FIRST_PERIOD, TEAM_NOT_LOOSE_FIRST_PERIOD),
-                new GeneralTeamNotLoosePeriodBlock(matchData, HockeyMatch.SECOND_PERIOD, TEAM_NOT_LOOSE_SECOND_PERIOD),
-                new GeneralTeamNotLoosePeriodBlock(matchData, HockeyMatch.THIRD_PERIOD, TEAM_NOT_LOOSE_THIRD_PERIOD)
-        ), ContainerType.OTHER);
+                new GeneralTeamWinAndTotalUnderBlock(matchData)
+        ), OTHER);
     }
 }

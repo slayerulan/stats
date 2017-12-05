@@ -5,6 +5,7 @@ import com.savik.GeneralBetContainer;
 import com.savik.MatchData;
 import com.savik.hockey.model.HockeyMatch;
 import com.savik.result_block.hockey.match.general.other.GeneralOtherBlock;
+import com.savik.result_block.hockey.match.general.periods.GeneralPeriodsBlock;
 import com.savik.result_block.hockey.match.general.stats.GeneralStatsBlock;
 import com.savik.result_block.hockey.match.general.total.GeneralTotalBlock;
 
@@ -19,6 +20,7 @@ public class GeneralBlock extends GeneralBetContainer<HockeyMatch> {
     public GeneralBlock(ContainerType type, MatchData matchData) {
         super(Arrays.asList(
                 new GeneralTotalBlock(matchData),
+                new GeneralPeriodsBlock(matchData),
                 new GeneralOtherBlock(matchData),
                 new GeneralStatsBlock()
         ), type);
