@@ -68,6 +68,8 @@ public class HockeyMatchParserTest {
         GeneralBlock generalBlock = new GeneralBlock(ContainerType.GENERAL, matchData);
         matches.forEach(generalBlock::check);
 
+        BetContainer byType = generalBlock.findByType(ContainerType.TOTAL_OVER);
+
         String a = "";
     }
 

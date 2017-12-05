@@ -73,6 +73,21 @@ public abstract class BetContainer<T extends Match> {
         }
     }
 
+    public BetContainer<T> findByType(ContainerType type) {
+        if(this.type == type) {
+            return this;
+        }
+        if(!leaf) {
+            for (BetContainer childBlock : childrenBetBlocks) {
+                BetContainer byType = childBlock.findByType(type);
+                if (byType != null) {
+                    return byType;
+                }
+            }
+        }
+        return null;
+    }
+
     protected abstract boolean canAnalyze(T match);
 
     protected abstract boolean checkMatch(T match);
