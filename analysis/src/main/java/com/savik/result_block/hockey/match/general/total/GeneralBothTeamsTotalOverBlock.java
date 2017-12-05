@@ -9,13 +9,15 @@ import com.savik.hockey.model.HockeyMatch;
 import java.util.Arrays;
 import java.util.function.Function;
 
+import static com.savik.ContainerType.OVER_0_5;
+
 
 class GeneralBothTeamsTotalOverBlock extends PeriodBetContainer {
 
     GeneralBothTeamsTotalOverBlock(Function<HockeyMatch, Period> function, ContainerType type) {
         super(
                 Arrays.asList(
-                        new PeriodBothTeamsTotalOverSingleBlock(0.5)
+                        new PeriodBothTeamsTotalOverSingleBlock(0.5, OVER_0_5)
                 ), function, type
         );
     }

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 
 import java.util.List;
-import java.util.function.Consumer;
 import java.util.function.Function;
 
 @Getter
@@ -35,8 +34,12 @@ public class PeriodBetContainer<T extends Match> extends BetContainer<T> {
         this(bet, function, null);
     }
 
+    public PeriodBetContainer(PeriodBet bet, ContainerType type) {
+        this(bet, null, type);
+    }
+
     public PeriodBetContainer(PeriodBet bet) {
-        this(bet, null);
+        this(bet, null, null);
     }
 
     @Override

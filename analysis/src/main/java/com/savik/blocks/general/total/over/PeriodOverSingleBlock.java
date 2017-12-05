@@ -1,7 +1,8 @@
 package com.savik.blocks.general.total.over;
 
-import com.savik.bets.general.total.over.PeriodOver;
+import com.savik.ContainerType;
 import com.savik.PeriodBetContainer;
+import com.savik.bets.general.total.over.PeriodOver;
 
 /**
  * @author Savushkin Yauheni
@@ -9,8 +10,8 @@ import com.savik.PeriodBetContainer;
  */
 public class PeriodOverSingleBlock extends PeriodBetContainer {
 
-    public PeriodOverSingleBlock(double amount) {
-        super(new PeriodOver(amount));
+    public PeriodOverSingleBlock(double amount, ContainerType type) {
+        super(new PeriodOver(amount), type);
     }
 
 

@@ -7,17 +7,17 @@ import com.savik.hockey.model.HockeyMatch;
 
 import java.util.Arrays;
 
+import static com.savik.ContainerType.*;
+
 
 class GeneralTotalOverBlock extends PeriodBetContainer {
 
     public GeneralTotalOverBlock() {
         super(
                 Arrays.asList(
-                        new PeriodOverSingleBlock(3.5),
-                        new PeriodOverSingleBlock(4.5),
-                        new PeriodOverSingleBlock(5.5),
-                        new PeriodOverSingleBlock(6.5),
-                        new PeriodOverSingleBlock(7.5)
+                        new PeriodOverSingleBlock(4.5, OVER_4_5),
+                        new PeriodOverSingleBlock(5.5, OVER_5_5),
+                        new PeriodOverSingleBlock(6.5, OVER_6_5)
                 ), HockeyMatch.MATCH, ContainerType.TOTAL_OVER)
         ;
     }
