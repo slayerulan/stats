@@ -7,6 +7,8 @@ import com.savik.hockey.model.HockeyMatch;
 import java.util.Arrays;
 
 import static com.savik.ContainerType.ANY_WIN_AND_DIFFERENCE_EQUALS;
+import static com.savik.ContainerType.DIFF_1;
+import static com.savik.ContainerType.DIFF_2;
 
 
 class GeneralAnyWinAndDiffEqualsBlock extends PeriodBetContainer {
@@ -14,8 +16,8 @@ class GeneralAnyWinAndDiffEqualsBlock extends PeriodBetContainer {
     public GeneralAnyWinAndDiffEqualsBlock() {
         super(
                 Arrays.asList(
-                        new PeriodAnyWinAndDiffEqualsBlock<HockeyMatch>(1),
-                        new PeriodAnyWinAndDiffEqualsBlock<HockeyMatch>(2)
+                        new PeriodAnyWinAndDiffEqualsBlock<HockeyMatch>(1, DIFF_1),
+                        new PeriodAnyWinAndDiffEqualsBlock<HockeyMatch>(2, DIFF_2)
                 ), HockeyMatch.MATCH, ANY_WIN_AND_DIFFERENCE_EQUALS
         );
     }

@@ -1,5 +1,6 @@
 package com.savik.blocks.general.goals;
 
+import com.savik.ContainerType;
 import com.savik.PeriodBetContainer;
 import com.savik.bets.general.goals.PeriodLastGoalTimeAfter;
 
@@ -9,8 +10,8 @@ import com.savik.bets.general.goals.PeriodLastGoalTimeAfter;
  */
 public class PeriodLastGoalTimeAfterSingleBlock extends PeriodBetContainer {
 
-    public PeriodLastGoalTimeAfterSingleBlock(double amount) {
-        super(new PeriodLastGoalTimeAfter(amount));
+    public PeriodLastGoalTimeAfterSingleBlock(double amount, ContainerType type) {
+        super(new PeriodLastGoalTimeAfter(amount), type);
     }
 
 

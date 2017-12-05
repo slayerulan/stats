@@ -317,6 +317,86 @@ public class HockeyGeneralBlockTest {
 
     }
 
+    @Test
+    public void testAnyWinAndTotalOver() {
+        GeneralBlock generalBlock = getGeneralBlock();
+
+        BetContainer block = generalBlock.findByType(ContainerType.ANY_WIN_AND_TOTAL_OVER);
+
+        BetContainer over4AndHalf = block.findByType(ContainerType.OVER_4_5);
+        assertEquals(12, over4AndHalf.getAnalyzedMatchesAmount().intValue());
+        assertEquals(7, over4AndHalf.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, over4AndHalf.getSkippedMatchesAmount().intValue());
+        assertEquals(58, over4AndHalf.getPercentage().intValue());
+
+        BetContainer over5AndHalf = block.findByType(ContainerType.OVER_5_5);
+        assertEquals(12, over5AndHalf.getAnalyzedMatchesAmount().intValue());
+        assertEquals(6, over5AndHalf.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, over5AndHalf.getSkippedMatchesAmount().intValue());
+        assertEquals(50, over5AndHalf.getPercentage().intValue());
+
+    }
+
+    @Test
+    public void testAnyWinAndTotalUnder() {
+        GeneralBlock generalBlock = getGeneralBlock();
+
+        BetContainer block = generalBlock.findByType(ContainerType.ANY_WIN_AND_TOTAL_UNDER);
+
+        BetContainer under4AndHalf = block.findByType(ContainerType.UNDER_4_5);
+        assertEquals(12, under4AndHalf.getAnalyzedMatchesAmount().intValue());
+        assertEquals(1, under4AndHalf.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, under4AndHalf.getSkippedMatchesAmount().intValue());
+        assertEquals(8, under4AndHalf.getPercentage().intValue());
+
+        BetContainer under5AndHalf = block.findByType(ContainerType.UNDER_5_5);
+        assertEquals(12, under5AndHalf.getAnalyzedMatchesAmount().intValue());
+        assertEquals(2, under5AndHalf.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, under5AndHalf.getSkippedMatchesAmount().intValue());
+        assertEquals(16, under5AndHalf.getPercentage().intValue());
+
+    }
+
+    @Test
+    public void testAnyWinAndDiff() {
+        GeneralBlock generalBlock = getGeneralBlock();
+
+        BetContainer block = generalBlock.findByType(ContainerType.ANY_WIN_AND_DIFFERENCE_EQUALS);
+
+        BetContainer diff1 = block.findByType(ContainerType.DIFF_1);
+        assertEquals(12, diff1.getAnalyzedMatchesAmount().intValue());
+        assertEquals(1, diff1.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, diff1.getSkippedMatchesAmount().intValue());
+        assertEquals(8, diff1.getPercentage().intValue());
+
+        BetContainer diff2 = block.findByType(ContainerType.DIFF_2);
+        assertEquals(12, diff2.getAnalyzedMatchesAmount().intValue());
+        assertEquals(2, diff2.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, diff2.getSkippedMatchesAmount().intValue());
+        assertEquals(16, diff2.getPercentage().intValue());
+
+    }
+
+    @Test
+    public void testFirstGoalBefore() {
+        GeneralBlock generalBlock = getGeneralBlock();
+
+        BetContainer block = generalBlock.findByType(ContainerType.FIRST_GOAL_BEFORE);
+
+        BetContainer under9 = block.findByType(ContainerType.UNDER_9);
+        assertEquals(12, under9.getAnalyzedMatchesAmount().intValue());
+        assertEquals(6, under9.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, under9.getSkippedMatchesAmount().intValue());
+        assertEquals(50, under9.getPercentage().intValue());
+
+        BetContainer under10 = block.findByType(ContainerType.UNDER_10);
+        assertEquals(12, under10.getAnalyzedMatchesAmount().intValue());
+        assertEquals(6, under10.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, under10.getSkippedMatchesAmount().intValue());
+        assertEquals(50, under10.getPercentage().intValue());
+
+    }
+
 
 
     private GeneralBlock getGeneralBlock() {

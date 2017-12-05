@@ -7,14 +7,17 @@ import com.savik.hockey.model.HockeyMatch;
 
 import java.util.Arrays;
 
+import static com.savik.ContainerType.UNDER_10;
+import static com.savik.ContainerType.UNDER_9;
+
 
 class GeneralFirstGoalBeforeBlock extends PeriodBetContainer {
 
     public GeneralFirstGoalBeforeBlock() {
         super(
                 Arrays.asList(
-                        new PeriodFirstGoalTimeBeforeSingleBlock(9),
-                        new PeriodFirstGoalTimeBeforeSingleBlock(10)
+                        new PeriodFirstGoalTimeBeforeSingleBlock(9, UNDER_9),
+                        new PeriodFirstGoalTimeBeforeSingleBlock(10, UNDER_10)
                 ), HockeyMatch.MATCH, ContainerType.FIRST_GOAL_BEFORE
         );
     }

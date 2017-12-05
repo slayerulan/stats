@@ -21,7 +21,7 @@ public class GeneralOtherBlock extends GeneralBetContainer {
                 new GeneralAnyWinAndTotalUnderBlock(),
                 new GeneralAnyWinAndDiffEqualsBlock(),
                 new GeneralFirstGoalBeforeBlock(),
-                new GeneralLastGoalBeforeBlock(),
+                new GeneralLastGoalAfterBlock(),
                 new GeneralPeriodAnyWinnerBlock(HockeyMatch.FIRST_PERIOD, FIRST_PERIOD_ANY_WINNER),
                 new GeneralPeriodAnyWinnerBlock(HockeyMatch.SECOND_PERIOD, SECOND_PERIOD_ANY_WINNER),
                 new GeneralPeriodAnyWinnerBlock(HockeyMatch.THIRD_PERIOD, THIRD_PERIOD_ANY_WINNER)

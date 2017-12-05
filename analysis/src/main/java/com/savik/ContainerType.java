@@ -45,6 +45,7 @@ public enum ContainerType {
     OVER_5_5,
     OVER_6_5,
     OVER_7_5,
+    OVER_54,
     UNDER_0_5,
     UNDER_1_5,
     UNDER_2_5,
@@ -53,5 +54,9 @@ public enum ContainerType {
     UNDER_5_5,
     UNDER_6_5,
     UNDER_7_5,
+    UNDER_9,
+    UNDER_10,
+    DIFF_1,
+    DIFF_2,
 
 }

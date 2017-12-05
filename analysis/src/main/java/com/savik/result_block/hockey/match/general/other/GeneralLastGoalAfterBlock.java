@@ -7,12 +7,14 @@ import com.savik.hockey.model.HockeyMatch;
 
 import java.util.Arrays;
 
+import static com.savik.ContainerType.OVER_54;
 
-class GeneralLastGoalBeforeBlock extends PeriodBetContainer {
 
-    public GeneralLastGoalBeforeBlock() {
+class GeneralLastGoalAfterBlock extends PeriodBetContainer {
+
+    public GeneralLastGoalAfterBlock() {
         super(
-                Arrays.asList(new PeriodLastGoalTimeAfterSingleBlock(55)),
+                Arrays.asList(new PeriodLastGoalTimeAfterSingleBlock(54, OVER_54)),
                 HockeyMatch.MATCH, ContainerType.LAST_GOAL_AFTER
         );
     }
