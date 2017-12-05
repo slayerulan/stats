@@ -20,7 +20,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "hockey_team_id_generator")
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
 public class HockeyTeam extends Team {
 
     @NotNull

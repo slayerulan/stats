@@ -15,6 +15,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.transaction.Transactional;
+import java.util.Comparator;
 import java.util.List;
 
 import static com.savik.hockey.specifications.HockeyMatchSpec.hasTeam;
@@ -56,7 +57,7 @@ public class HockeyGeneralBlockTest {
 
 
     @Test
-    public void testTotalOverStats() {
+    public void testTotalOver() {
         GeneralBlock generalBlock = getGeneralBlock();
 
         BetContainer totalOverBlock = generalBlock.findByType(ContainerType.TOTAL_OVER);
@@ -83,7 +84,7 @@ public class HockeyGeneralBlockTest {
     }
 
     @Test
-    public void testTotalUnderStats() {
+    public void testTotalUnder() {
         GeneralBlock generalBlock = getGeneralBlock();
 
         BetContainer totalUnderBlock = generalBlock.findByType(ContainerType.TOTAL_UNDER);
@@ -220,10 +221,109 @@ public class HockeyGeneralBlockTest {
 
     }
 
+
+    @Test
+    public void testTotalOverForColoradoTeam() {
+        GeneralBlock generalBlock = getGeneralBlock();
+
+        BetContainer totalOverBlock = generalBlock.findByType(ContainerType.TOTAL_OVER_FOR_TEAM);
+
+        BetContainer over1AndHalf = totalOverBlock.findByType(ContainerType.OVER_1_5);
+        assertEquals(12, over1AndHalf.getAnalyzedMatchesAmount().intValue());
+        assertEquals(11, over1AndHalf.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, over1AndHalf.getSkippedMatchesAmount().intValue());
+        assertEquals(91, over1AndHalf.getPercentage().intValue());
+
+        BetContainer over2AndHalf = totalOverBlock.findByType(ContainerType.OVER_2_5);
+        assertEquals(12, over2AndHalf.getAnalyzedMatchesAmount().intValue());
+        assertEquals(7, over2AndHalf.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, over2AndHalf.getSkippedMatchesAmount().intValue());
+        assertEquals(58, over2AndHalf.getPercentage().intValue());
+
+
+        BetContainer over3AndHalf = totalOverBlock.findByType(ContainerType.OVER_3_5);
+        assertEquals(12, over3AndHalf.getAnalyzedMatchesAmount().intValue());
+        assertEquals(5, over3AndHalf.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, over3AndHalf.getSkippedMatchesAmount().intValue());
+        assertEquals(41, over3AndHalf.getPercentage().intValue());
+
+        BetContainer over4AndHalf = totalOverBlock.findByType(ContainerType.OVER_4_5);
+        assertEquals(12, over4AndHalf.getAnalyzedMatchesAmount().intValue());
+        assertEquals(3, over4AndHalf.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, over4AndHalf.getSkippedMatchesAmount().intValue());
+        assertEquals(25, over4AndHalf.getPercentage().intValue());
+
+    }
+
+    @Test
+    public void testTotalUnderForColoradoTeam() {
+        GeneralBlock generalBlock = getGeneralBlock();
+
+        BetContainer totalUnderBlock = generalBlock.findByType(ContainerType.TOTAL_UNDER_FOR_TEAM);
+
+        BetContainer under2AndHalf = totalUnderBlock.findByType(ContainerType.UNDER_2_5);
+        assertEquals(12, under2AndHalf.getAnalyzedMatchesAmount().intValue());
+        assertEquals(5, under2AndHalf.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, under2AndHalf.getSkippedMatchesAmount().intValue());
+        assertEquals(41, under2AndHalf.getPercentage().intValue());
+
+
+        BetContainer under3AndHalf = totalUnderBlock.findByType(ContainerType.UNDER_3_5);
+        assertEquals(12, under3AndHalf.getAnalyzedMatchesAmount().intValue());
+        assertEquals(7, under3AndHalf.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, under3AndHalf.getSkippedMatchesAmount().intValue());
+        assertEquals(58, under3AndHalf.getPercentage().intValue());
+
+
+        BetContainer under4AndHalf = totalUnderBlock.findByType(ContainerType.UNDER_4_5);
+        assertEquals(12, under4AndHalf.getAnalyzedMatchesAmount().intValue());
+        assertEquals(9, under4AndHalf.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, under4AndHalf.getSkippedMatchesAmount().intValue());
+        assertEquals(75, under4AndHalf.getPercentage().intValue());
+
+    }
+
+    @Test
+    public void testTotalOverInAllPeriods() {
+        GeneralBlock generalBlock = getGeneralBlock();
+
+        BetContainer totalOverBlock = generalBlock.findByType(ContainerType.TOTAL_OVER_ALL_PERIODS);
+
+        BetContainer over0AndHalf = totalOverBlock.findByType(ContainerType.OVER_0_5);
+        assertEquals(12, over0AndHalf.getAnalyzedMatchesAmount().intValue());
+        assertEquals(7, over0AndHalf.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, over0AndHalf.getSkippedMatchesAmount().intValue());
+        assertEquals(58, over0AndHalf.getPercentage().intValue());
+
+    }
+
+    @Test
+    public void testTotalUnderInAllPeriods() {
+        GeneralBlock generalBlock = getGeneralBlock();
+
+        BetContainer totalUnderBlock = generalBlock.findByType(ContainerType.TOTAL_UNDER_ALL_PERIODS);
+
+        BetContainer under2AndHalf = totalUnderBlock.findByType(ContainerType.UNDER_2_5);
+        assertEquals(12, under2AndHalf.getAnalyzedMatchesAmount().intValue());
+        assertEquals(2, under2AndHalf.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, under2AndHalf.getSkippedMatchesAmount().intValue());
+        assertEquals(16, under2AndHalf.getPercentage().intValue());
+
+        BetContainer under3AndHalf = totalUnderBlock.findByType(ContainerType.UNDER_3_5);
+        assertEquals(12, under3AndHalf.getAnalyzedMatchesAmount().intValue());
+        assertEquals(5, under3AndHalf.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, under3AndHalf.getSkippedMatchesAmount().intValue());
+        assertEquals(41, under3AndHalf.getPercentage().intValue());
+
+    }
+
+
+
     private GeneralBlock getGeneralBlock() {
         List<HockeyMatch> matches = hockeyMatchRepository.findAll(
                 hasTeam(COLORADO_TEAM_ID)
         );
+        matches.sort(Comparator.comparing(HockeyMatch::getDate));
         assertEquals(12, matches.size());
 
 
@@ -234,6 +334,9 @@ public class HockeyGeneralBlockTest {
         matches.forEach(generalBlock::check);
         return generalBlock;
     }
+
+
+
 
 
 }
