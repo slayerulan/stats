@@ -4,6 +4,7 @@ import javax.annotation.PostConstruct;
 
 import com.savik.parser.football.FootballFutureMatchesParser;
 import com.savik.parser.football.FootballParser;
+import com.savik.parser.hockey.HockeyParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,9 @@ public class Parser {
     FootballParser footballParser;
 
     @Autowired
+    HockeyParser hockeyParser;
+
+    @Autowired
     FutureMatchesParser futureMatchesParser;
 
     @Autowired
@@ -25,8 +29,9 @@ public class Parser {
 
 
 
-    /*@PostConstruct
+    @PostConstruct
     public void parse() {
-        footballFutureMatchesParser.parse();
-    }*/
+        //footballFutureMatchesParser.parse();
+       //hockeyParser.parse();
+    }
 }

@@ -48,6 +48,8 @@ public class HockeyParser {
                     hockeyMatchRepository.save(match);
                     log.debug("match saved = {}", match);
                     Thread.sleep(1000);
+                } else {
+                    System.out.println("parsed = " + matchId);
                 }
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
