@@ -1,5 +1,6 @@
 package com.savik.hockey.model;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.savik.Match;
 import com.savik.Period;
 import com.savik.Season;
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -70,10 +72,16 @@ public class HockeyMatch extends Match {
         goals.addAll(matchInfo.getThirdPeriod().getGoals());
     }
 
+
+    @JsonValue
     @Override
     public String toString() {
-        return "HockeyMatch{" +
-                "date=" + date +
-                ", myscoreCode='" + myscoreCode + '\'' + '}';
+        return "{" +
+                "home=" + homeTeam +
+                ", guest=" + guestTeam +
+                ", matchInfo=" + matchInfo +
+                ", date=" + date.format(DateTimeFormatter.ISO_LOCAL_DATE) +
+                ", myscoreCode='" + myscoreCode + '\'' +
+                '}';
     }
 }

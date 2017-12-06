@@ -14,8 +14,10 @@ public class PeriodTeamBetContainer<T extends Match> extends BetContainer<T> {
     @JsonIgnore
     private MatchData matchData;
 
+    @JsonIgnore
     private PeriodBet forHome;
 
+    @JsonIgnore
     private PeriodBet forGuest;
 
     @JsonIgnore
@@ -44,6 +46,16 @@ public class PeriodTeamBetContainer<T extends Match> extends BetContainer<T> {
         this.function = function;
         this.matchData = matchData;
     }
+
+    public PeriodTeamBetContainer(PeriodBet forHome, PeriodBet forGuest,
+                                  Function<T, Period> function, MatchData matchData) {
+        this.forHome = forHome;
+        this.forGuest = forGuest;
+        this.function = function;
+        this.matchData = matchData;
+    }
+
+
 
     public PeriodTeamBetContainer(PeriodBet forHome, PeriodBet forGuest, ContainerType type) {
         this(forHome, forGuest, type, null, null);

@@ -2,6 +2,7 @@ package com.savik.hockey.model;
 
 import com.codiform.moo.annotation.CollectionProperty;
 import com.codiform.moo.annotation.Optionality;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.savik.Period;
 import com.savik.Winner;
 import lombok.AllArgsConstructor;
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
 /**
@@ -50,7 +52,6 @@ public class HockeyPeriod extends Period<HockeyGoal> {
     Integer guestPenaltiesTime;
 
     @Builder(toBuilder = true)
-
     public HockeyPeriod(Integer homeScore, Integer guestScore, Integer totalScore, Winner winner, PeriodStatus periodStatus, Set<HockeyGoal> goals, Integer homeShotsOnTarget, Integer guestShotsOnTarget, Integer homeShotHandedGoals, Integer guestShotHandedGoals, Integer homePowerplayGoals, Integer guestPowerplayGoals, Integer homePenaltiesTime, Integer guestPenaltiesTime) {
         super(homeScore, guestScore, totalScore, winner, periodStatus);
         this.goals = goals;
@@ -62,5 +63,11 @@ public class HockeyPeriod extends Period<HockeyGoal> {
         this.guestPowerplayGoals = guestPowerplayGoals;
         this.homePenaltiesTime = homePenaltiesTime;
         this.guestPenaltiesTime = guestPenaltiesTime;
+    }
+
+    @Override
+    @JsonValue
+    public String toString() {
+        return "{" + homeScore + "-" + guestScore + '}';
     }
 }

@@ -1,5 +1,6 @@
 package com.savik.hockey.model;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.savik.domain.Identifiable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,4 +38,14 @@ public class HockeyMatchInfo extends Identifiable {
     @OneToOne(cascade = CascadeType.ALL)
     HockeyPeriod thirdPeriod;
 
+    @Override
+    @JsonValue
+    public String toString() {
+        return "{" +
+                "m=" + match +
+                ", " + firstPeriod +
+                ", " + secondPeriod +
+                ", " + thirdPeriod +
+                '}';
+    }
 }

@@ -3,6 +3,7 @@ package com.savik;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
@@ -21,6 +22,9 @@ public abstract class BetContainer<T extends Match> {
     protected Integer skippedMatchesAmount;
 
     protected Integer successfullyMatchesAmount;
+
+    List<T> successfullyMatches = new ArrayList<>();
+    List<T> unsuccessfullyMatches= new ArrayList<>();
 
     @JsonProperty("percentage")
     public Integer getPercentage() {
@@ -63,6 +67,9 @@ public abstract class BetContainer<T extends Match> {
                 boolean success = checkMatch(match);
                 if (success) {
                     successfullyMatchesAmount++;
+                    successfullyMatches.add(match);
+                } else {
+                    unsuccessfullyMatches.add(match);
                 }
             } else {
                 skippedMatchesAmount++;

@@ -18,6 +18,8 @@ public class HockeyMatchFilter implements Filter<HockeyMatch> {
 
     private Long homeId;
 
+    private Long guestId;
+
     public Specification<HockeyMatch> toSpecification() {
         return where(hasHomeTeam(homeId));
     }

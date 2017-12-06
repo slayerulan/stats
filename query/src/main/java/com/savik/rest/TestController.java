@@ -5,12 +5,11 @@ import com.savik.GeneralBetContainer;
 import com.savik.MatchData;
 import com.savik.football.repository.FootballMatchRepository;
 import com.savik.hockey.filters.HockeyMatchFilter;
-import com.savik.hockey.model.HockeyChampionship;
 import com.savik.hockey.model.HockeyMatch;
 import com.savik.hockey.model.HockeyTeam;
 import com.savik.hockey.repository.HockeyMatchRepository;
 import com.savik.hockey.repository.HockeyTeamRepository;
-import com.savik.hockey.specifications.HockeyMatchSpec;
+import com.savik.possible_bets.hockey.match.general.PossibleBetsBlock;
 import com.savik.result_block.hockey.match.general.GeneralBlock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,8 +36,8 @@ public class TestController {
     @Autowired
     HockeyTeamRepository hockeyTeamRepository;
 
-    @GetMapping
-    public GeneralBetContainer getShortCard(HockeyMatchFilter hockeyMatchFilter) {
+    @GetMapping("/match")
+    public GeneralBetContainer matchStats(HockeyMatchFilter hockeyMatchFilter) {
         HockeyTeam team = hockeyTeamRepository.findOne(hockeyMatchFilter.getHomeId());
         MatchData matchData = new MatchData(team);
 
@@ -60,5 +59,27 @@ public class TestController {
         return new GeneralBetContainer(
                 Arrays.asList(generalBlock, homeBlock), ContainerType.ROOT
         );
+    }
+
+    @GetMapping("/bets")
+    public PossibleBetsBlock possibleBets(HockeyMatchFilter hockeyMatchFilter) {
+        HockeyTeam homeTeam = hockeyTeamRepository.findOne(hockeyMatchFilter.getHomeId());
+        MatchData homeMatchData = new MatchData(homeTeam);
+        List<HockeyMatch> homeTeamMatches = hockeyMatchRepository.findAll(
+                hasTeam(hockeyMatchFilter.getHomeId())
+        );
+
+
+        HockeyTeam guestTeam = hockeyTeamRepository.findOne(hockeyMatchFilter.getGuestId());
+        MatchData guestMatchData = new MatchData(guestTeam);
+        List<HockeyMatch> guestTeamMatches = hockeyMatchRepository.findAll(
+                hasTeam(hockeyMatchFilter.getGuestId())
+        );
+
+        PossibleBetsBlock possibleBetsBlock = new PossibleBetsBlock(homeMatchData, guestMatchData);
+        possibleBetsBlock.check(homeTeamMatches, guestTeamMatches);
+
+        return possibleBetsBlock;
+
     }
 }
