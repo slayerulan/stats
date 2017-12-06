@@ -11,9 +11,9 @@ import java.util.Arrays;
 import static com.savik.ContainerType.*;
 
 
-class GeneralOtherTeamTotalOverBlock extends PeriodTeamBetContainer {
+class GeneralOpposingTeamTotalOverBlock extends PeriodTeamBetContainer {
 
-    public GeneralOtherTeamTotalOverBlock(MatchData matchData) {
+    public GeneralOpposingTeamTotalOverBlock(MatchData matchData) {
         super(
                 Arrays.asList(
                         new PeriodTeamBetContainer<HockeyMatch>(
@@ -36,7 +36,7 @@ class GeneralOtherTeamTotalOverBlock extends PeriodTeamBetContainer {
                                 new PeriodHomeOver(4.5),
                                 OVER_4_5
                         )
-                ), HockeyMatch.MATCH, matchData, OTHER_TEAM_TOTAL_OVER
+                ), HockeyMatch.MATCH, matchData, OPPOSING_TEAM_TOTAL_OVER
         );
 
     }

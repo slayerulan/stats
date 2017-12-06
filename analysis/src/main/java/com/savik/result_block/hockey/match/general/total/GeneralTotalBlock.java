@@ -16,8 +16,8 @@ public class GeneralTotalBlock extends GeneralBetContainer {
                 new GeneralTotalUnderBlock(),
                 new GeneralTeamTotalOverBlock(matchData),
                 new GeneralTeamTotalUnderBlock(matchData),
-                new GeneralOtherTeamTotalOverBlock(matchData),
-                new GeneralOtherTeamTotalUnderBlock(matchData)
+                new GeneralOpposingTeamTotalOverBlock(matchData),
+                new GeneralOpposingTeamTotalUnderBlock(matchData)
         ), TOTAL);
     }
 }
