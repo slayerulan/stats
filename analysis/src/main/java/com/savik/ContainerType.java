@@ -29,6 +29,7 @@ public enum ContainerType {
     BOTH_TEAMS_TOTAL_OVER,
     WIN_AND_TOTAL_OVER,
     TEAM_WIN_AND_TOTAL_OVER,
+    TEAM_WIN_AT_LEAST_N_PERIODS,
     OPPOSING_TEAM_WIN_AND_TOTAL_OVER,
     WIN_AND_TOTAL_UNDER,
     TEAM_WIN_AND_TOTAL_UNDER,
@@ -71,5 +72,7 @@ public enum ContainerType {
     UNDER_10,
     DIFF_1,
     DIFF_2,
+    NUMBER_1,
+    NUMBER_2,
 
 }
