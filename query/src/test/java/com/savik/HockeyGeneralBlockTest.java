@@ -773,6 +773,44 @@ public class HockeyGeneralBlockTest {
 
     }
 
+    @Test
+    public void testTeamShotsOnTargetOver() {
+        GeneralBlock generalBlock = getGeneralBlock();
+
+        BetContainer block = generalBlock.findByType(TEAM_SHOTS_ON_TARGET_OVER);
+
+        BetContainer over28AndHalf = block.findByType(OVER_28_5);
+        assertEquals(12, over28AndHalf.getAnalyzedMatchesAmount().intValue());
+        assertEquals(6, over28AndHalf.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, over28AndHalf.getSkippedMatchesAmount().intValue());
+        assertEquals(50, over28AndHalf.getPercentage().intValue());
+
+        BetContainer over30AndHalf = block.findByType(OVER_30_5);
+        assertEquals(12, over30AndHalf.getAnalyzedMatchesAmount().intValue());
+        assertEquals(5, over30AndHalf.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, over30AndHalf.getSkippedMatchesAmount().intValue());
+        assertEquals(41, over30AndHalf.getPercentage().intValue());
+    }
+
+    @Test
+    public void testOpposingTeamShotsOnTargetOver() {
+        GeneralBlock generalBlock = getGeneralBlock();
+
+        BetContainer block = generalBlock.findByType(OPPOSING_TEAM_SHOTS_ON_TARGET_OVER);
+
+        BetContainer over28AndHalf = block.findByType(OVER_28_5);
+        assertEquals(12, over28AndHalf.getAnalyzedMatchesAmount().intValue());
+        assertEquals(5, over28AndHalf.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, over28AndHalf.getSkippedMatchesAmount().intValue());
+        assertEquals(41, over28AndHalf.getPercentage().intValue());
+
+        BetContainer over30AndHalf = block.findByType(OVER_30_5);
+        assertEquals(12, over30AndHalf.getAnalyzedMatchesAmount().intValue());
+        assertEquals(4, over30AndHalf.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, over30AndHalf.getSkippedMatchesAmount().intValue());
+        assertEquals(33, over30AndHalf.getPercentage().intValue());
+    }
+
 
     private GeneralBlock getGeneralBlock() {
         List<HockeyMatch> matches = hockeyMatchRepository.findAll(

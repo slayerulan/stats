@@ -22,7 +22,7 @@ public class GeneralBlock extends GeneralBetContainer<HockeyMatch> {
                 new GeneralTotalBlock(matchData),
                 new GeneralPeriodsBlock(matchData),
                 new GeneralOtherBlock(matchData),
-                new GeneralStatsBlock()
+                new GeneralStatsBlock(matchData)
         ), type);
     }
 }
