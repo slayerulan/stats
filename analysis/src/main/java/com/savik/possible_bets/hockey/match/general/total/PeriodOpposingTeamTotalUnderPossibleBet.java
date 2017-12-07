@@ -14,8 +14,8 @@ public class PeriodOpposingTeamTotalUnderPossibleBet extends PossibleBet<HockeyM
     public PeriodOpposingTeamTotalUnderPossibleBet(MatchData homeMatchData, MatchData guestMatchData,
                                                    Function<HockeyMatch, Period> function, double amount) {
         super(
-                new PeriodOpposingTeamTotalUnderBlock<>(amount, function, guestMatchData),
-                new PeriodTeamTotalUnderBlock<>(amount, function, homeMatchData)
+                new PeriodOpposingTeamTotalUnderBlock<>(amount, function, homeMatchData),
+                new PeriodTeamTotalUnderBlock<>(amount, function, guestMatchData)
         );
     }
 }
