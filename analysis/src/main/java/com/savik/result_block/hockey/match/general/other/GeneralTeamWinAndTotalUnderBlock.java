@@ -6,6 +6,7 @@ import com.savik.PeriodTeamBetContainer;
 import com.savik.bets.general.result.PeriodGuestWinner;
 import com.savik.bets.general.result.PeriodHomeWinner;
 import com.savik.bets.general.total.under.PeriodUnder;
+import com.savik.blocks.general.result.PeriodTeamWinAndTotalUnderBlock;
 import com.savik.hockey.model.HockeyMatch;
 import com.savik.hockey.model.HockeyPeriod;
 
@@ -20,17 +21,7 @@ class GeneralTeamWinAndTotalUnderBlock extends PeriodTeamBetContainer {
     public GeneralTeamWinAndTotalUnderBlock(MatchData matchData) {
         super(
                 Arrays.asList(
-                        new PeriodTeamBetContainer<HockeyMatch>(
-                                new BiPeriodBet<HockeyPeriod>(
-                                        new PeriodHomeWinner(),
-                                        new PeriodUnder(5.5)
-                                ),
-                                new BiPeriodBet<HockeyPeriod>(
-                                        new PeriodGuestWinner(),
-                                        new PeriodUnder(5.5)
-                                ),
-                                UNDER_5_5
-                        )
+                        new PeriodTeamWinAndTotalUnderBlock(5.5, UNDER_5_5)
                 ), HockeyMatch.MATCH, matchData, TEAM_WIN_AND_TOTAL_UNDER
         );
     }
