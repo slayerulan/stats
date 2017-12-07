@@ -9,9 +9,13 @@ import com.savik.bets.general.total.over.PeriodHomeOver;
 import com.savik.bets.hockey.stats.PeriodGuestShotsOnTargetOver;
 import com.savik.bets.hockey.stats.PeriodHomeShotsOnTargetOver;
 import com.savik.blocks.hockey.stats.PeriodShotsOnTargetOverSingleBlock;
+import com.savik.blocks.hockey.stats.PeriodTeamShotsOnTargetOverSingleBlock;
 import com.savik.hockey.model.HockeyMatch;
 
 import java.util.Arrays;
+
+import static com.savik.ContainerType.OVER_28_5;
+import static com.savik.ContainerType.OVER_30_5;
 
 
 class GeneralTeamShotsOnTargetTotalOverBlock extends PeriodTeamBetContainer {
@@ -19,16 +23,8 @@ class GeneralTeamShotsOnTargetTotalOverBlock extends PeriodTeamBetContainer {
     public GeneralTeamShotsOnTargetTotalOverBlock(MatchData matchData) {
         super(
                 Arrays.asList(
-                        new PeriodTeamBetContainer(
-                                new PeriodHomeShotsOnTargetOver(28.5),
-                                new PeriodGuestShotsOnTargetOver(28.5),
-                                ContainerType.OVER_28_5
-                        ),
-                        new PeriodTeamBetContainer(
-                                new PeriodHomeShotsOnTargetOver(30.5),
-                                new PeriodGuestShotsOnTargetOver(30.5),
-                                ContainerType.OVER_30_5
-                        )
+                        new PeriodTeamShotsOnTargetOverSingleBlock(28.5, OVER_28_5),
+                        new PeriodTeamShotsOnTargetOverSingleBlock(30.5, OVER_30_5)
                 ),
                 HockeyMatch.MATCH,
                 matchData,
