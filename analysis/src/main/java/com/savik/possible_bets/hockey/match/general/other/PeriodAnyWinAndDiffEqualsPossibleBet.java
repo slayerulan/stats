@@ -1,4 +1,4 @@
-package com.savik.possible_bets.hockey.match.general.total;
+package com.savik.possible_bets.hockey.match.general.other;
 
 
 import com.savik.MatchData;
@@ -14,7 +14,7 @@ import java.util.function.Function;
 
 import static com.savik.ContainerType.DIFF_1;
 
-public class PeriodAnyWinAndDiffEqualsPossibleBet extends PossibleBet<HockeyMatch> {
+class PeriodAnyWinAndDiffEqualsPossibleBet extends PossibleBet<HockeyMatch> {
     public PeriodAnyWinAndDiffEqualsPossibleBet(Function<HockeyMatch, Period> function, int diff) {
         super(
                 new PeriodAnyWinAndDiffEqualsBlock<>(diff, function),
