@@ -10,11 +10,17 @@ import com.savik.hockey.model.HockeyMatch;
 import java.util.function.Function;
 
 
-public class PeriodAnyWinnerBlock<T extends Match> extends PeriodBetContainer {
+public class PeriodAnyWinnerBlock<T extends Match> extends PeriodBetContainer<T> {
 
-    public PeriodAnyWinnerBlock(Function<HockeyMatch, Period> function, ContainerType type) {
+    public PeriodAnyWinnerBlock(Function<T, Period> function, ContainerType type) {
         super(
                 new PeriodAnyWinner(), function, type
+        );
+    }
+
+    public PeriodAnyWinnerBlock(Function<T, Period> function) {
+        super(
+                new PeriodAnyWinner(), function
         );
     }
 
