@@ -2,18 +2,23 @@ package com.savik.possible_bets.hockey.match.general.total;
 
 
 import com.savik.ContainerType;
-import com.savik.MatchData;
-import com.savik.Period;
 import com.savik.PossibleBetContainer;
 import com.savik.hockey.model.HockeyMatch;
 
 import java.util.Arrays;
-import java.util.function.Function;
 
 public class PeriodTotalOverPossibleBetBlock extends PossibleBetContainer<HockeyMatch> {
-    public PeriodTotalOverPossibleBetBlock(Function<HockeyMatch, Period> function, double amount, ContainerType type) {
-        super(
-                new PeriodTotalOverPossibleBet(function, amount), type
+    public PeriodTotalOverPossibleBetBlock() {
+        super(Arrays.asList(
+                new PossibleBetContainer<>(
+                        new PeriodTotalOverPossibleBet(HockeyMatch.MATCH, 4.5),
+                        ContainerType.OVER_4_5
+                ),
+                new PossibleBetContainer<>(
+                        new PeriodTotalOverPossibleBet(HockeyMatch.MATCH, 5.5),
+                        ContainerType.OVER_5_5
+                )
+                ), ContainerType.TOTAL_OVER
         );
     }
 }

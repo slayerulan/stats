@@ -20,7 +20,7 @@ public class PeriodTeamTotalOverPossibleBetBlock extends PossibleBetContainer<Ho
                                 new PeriodTeamTotalOverPossibleBet(homeMatchData, guestMatchData, HockeyMatch.MATCH, 3.5),
                                 ContainerType.OVER_3_5
                         )
-                ), ContainerType.TOTAL_OVER
+                ), ContainerType.TEAM_TOTAL_OVER
         );
     }
 }

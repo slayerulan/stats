@@ -11,8 +11,7 @@ import java.util.Arrays;
 public class PossibleBetsTotalBlock extends PossibleBetContainer<HockeyMatch> {
     public PossibleBetsTotalBlock(MatchData homeMatchData, MatchData guestMatchData) {
         super(Arrays.asList(
-                new PeriodTotalOverPossibleBetBlock(HockeyMatch.MATCH, 4.5, ContainerType.OVER_4_5),
-                new PeriodTotalOverPossibleBetBlock(HockeyMatch.MATCH, 5.5, ContainerType.OVER_5_5),
+                new PeriodTotalOverPossibleBetBlock(),
                 new PeriodTeamTotalOverPossibleBetBlock(homeMatchData, guestMatchData)
         ), ContainerType.TOTAL);
     }
