@@ -12,6 +12,7 @@ public class PossibleBetsTotalBlock extends PossibleBetContainer<HockeyMatch> {
     public PossibleBetsTotalBlock(MatchData homeMatchData, MatchData guestMatchData) {
         super(Arrays.asList(
                 new PeriodTotalOverPossibleBetBlock(),
+                new PeriodTotalUnderPossibleBetBlock(),
                 new PeriodTeamTotalOverPossibleBetBlock(homeMatchData, guestMatchData)
         ), ContainerType.TOTAL);
     }
