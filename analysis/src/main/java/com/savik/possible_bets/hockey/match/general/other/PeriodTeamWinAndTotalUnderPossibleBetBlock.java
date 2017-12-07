@@ -7,13 +7,18 @@ import com.savik.Period;
 import com.savik.PossibleBetContainer;
 import com.savik.hockey.model.HockeyMatch;
 
+import java.util.Arrays;
 import java.util.function.Function;
 
 class PeriodTeamWinAndTotalUnderPossibleBetBlock extends PossibleBetContainer<HockeyMatch> {
-    public PeriodTeamWinAndTotalUnderPossibleBetBlock(MatchData homeMatchData, MatchData guestMatchData,
-                                                      Function<HockeyMatch, Period> function, double amount, ContainerType type) {
+    public PeriodTeamWinAndTotalUnderPossibleBetBlock(MatchData homeMatchData, MatchData guestMatchData) {
         super(
-                new PeriodTeamWinAndTotalUnderPossibleBet(homeMatchData, guestMatchData, function, amount), type
+                Arrays.asList(
+                        new PossibleBetContainer<>(
+                                new PeriodTeamWinAndTotalUnderPossibleBet(homeMatchData, guestMatchData, HockeyMatch.MATCH, 5.5),
+                                ContainerType.OVER_5_5
+                        )
+                ), ContainerType.TEAM_WIN_AND_TOTAL_UNDER
         );
     }
 }

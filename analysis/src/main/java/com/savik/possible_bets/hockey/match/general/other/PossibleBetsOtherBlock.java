@@ -11,12 +11,11 @@ import java.util.Arrays;
 public class PossibleBetsOtherBlock extends PossibleBetContainer<HockeyMatch> {
     public PossibleBetsOtherBlock(MatchData homeMatchData, MatchData guestMatchData) {
         super(Arrays.asList(
-                new PeriodAnyWinAndDiffEqualsPossibleBetBlock(HockeyMatch.MATCH, 1, ContainerType.DIFF_1),
-                new PeriodAnyWinAndDiffEqualsPossibleBetBlock(HockeyMatch.MATCH, 2, ContainerType.DIFF_2),
-                new PeriodAnyWinAndTotalOverPossibleBetBlock(HockeyMatch.MATCH, 5.5, ContainerType.ANY_WIN_AND_TOTAL_OVER),
-                new PeriodAnyWinAndTotalUnderPossibleBetBlock(HockeyMatch.MATCH, 5.5, ContainerType.ANY_WIN_AND_TOTAL_UNDER),
-                new PeriodTeamWinAndTotalOverPossibleBetBlock(homeMatchData, guestMatchData, HockeyMatch.MATCH, 5.5, ContainerType.TEAM_WIN_AND_TOTAL_OVER),
-                new PeriodTeamWinAndTotalUnderPossibleBetBlock(homeMatchData, guestMatchData, HockeyMatch.MATCH, 5.5, ContainerType.TEAM_WIN_AND_TOTAL_UNDER)
+                new PeriodAnyWinAndDiffEqualsPossibleBetBlock(),
+                new PeriodAnyWinAndTotalOverPossibleBetBlock(),
+                new PeriodAnyWinAndTotalUnderPossibleBetBlock(),
+                new PeriodTeamWinAndTotalOverPossibleBetBlock(homeMatchData, guestMatchData),
+                new PeriodTeamWinAndTotalUnderPossibleBetBlock(homeMatchData, guestMatchData)
         ), ContainerType.OTHER);
     }
 }

@@ -6,14 +6,20 @@ import com.savik.MatchData;
 import com.savik.Period;
 import com.savik.PossibleBetContainer;
 import com.savik.hockey.model.HockeyMatch;
+import com.savik.possible_bets.hockey.match.general.total.PeriodTeamTotalUnderPossibleBet;
 
+import java.util.Arrays;
 import java.util.function.Function;
 
 class PeriodTeamWinAndTotalOverPossibleBetBlock extends PossibleBetContainer<HockeyMatch> {
-    public PeriodTeamWinAndTotalOverPossibleBetBlock(MatchData homeMatchData, MatchData guestMatchData,
-                                                     Function<HockeyMatch, Period> function, double amount, ContainerType type) {
+    public PeriodTeamWinAndTotalOverPossibleBetBlock(MatchData homeMatchData, MatchData guestMatchData) {
         super(
-                new PeriodTeamWinAndTotalOverPossibleBet(homeMatchData, guestMatchData, function, amount), type
+                Arrays.asList(
+                        new PossibleBetContainer<>(
+                                new PeriodTeamWinAndTotalOverPossibleBet(homeMatchData, guestMatchData, HockeyMatch.MATCH, 5.5),
+                                ContainerType.OVER_5_5
+                        )
+                ), ContainerType.TEAM_WIN_AND_TOTAL_OVER
         );
     }
 }
