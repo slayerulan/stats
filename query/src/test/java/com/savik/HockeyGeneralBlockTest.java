@@ -452,6 +452,33 @@ public class HockeyGeneralBlockTest {
     }
 
     @Test
+    public void testThirdPeriodAnyWinner() {
+        GeneralBlock generalBlock = getGeneralBlock();
+
+        BetContainer block = generalBlock.findByType(THIRD_PERIOD);
+        block = block.findByType(ANY_WIN);
+
+        assertEquals(12, block.getAnalyzedMatchesAmount().intValue());
+        assertEquals(7, block.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, block.getSkippedMatchesAmount().intValue());
+        assertEquals(58, block.getPercentage().intValue());
+
+    }
+
+
+    @Test
+    public void testThirdPeriodTeamNotLoose() {
+        GeneralBlock generalBlock = getGeneralBlock();
+
+        BetContainer thirdPeriod = generalBlock.findByType(THIRD_PERIOD)
+                .findByType(TEAM_NOT_LOOSE);
+        assertEquals(12, thirdPeriod.getAnalyzedMatchesAmount().intValue());
+        assertEquals(10, thirdPeriod.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, thirdPeriod.getSkippedMatchesAmount().intValue());
+        assertEquals(83, thirdPeriod.getPercentage().intValue());
+    }
+
+    @Test
     public void testThirdPeriodTotalOver() {
         GeneralBlock generalBlock = getGeneralBlock();
 
@@ -485,7 +512,6 @@ public class HockeyGeneralBlockTest {
         assertEquals(58, over0AndHalf.getPercentage().intValue());
 
     }
-
 
 
     @Test
@@ -646,22 +672,6 @@ public class HockeyGeneralBlockTest {
 
     }
 
-
-
-    @Test
-    public void testThirdPeriodAnyWinner() {
-        GeneralBlock generalBlock = getGeneralBlock();
-
-        BetContainer block = generalBlock.findByType(THIRD_PERIOD);
-        block = block.findByType(ANY_WIN);
-
-        assertEquals(12, block.getAnalyzedMatchesAmount().intValue());
-        assertEquals(7, block.getSuccessfullyMatchesAmount().intValue());
-        assertEquals(0, block.getSkippedMatchesAmount().intValue());
-        assertEquals(58, block.getPercentage().intValue());
-
-    }
-
     @Test
     public void testTeamWinAndTotalOver() {
         GeneralBlock generalBlock = getGeneralBlock();
@@ -795,28 +805,6 @@ public class HockeyGeneralBlockTest {
         assertEquals(25, atLeast2.getPercentage().intValue());
 
     }
-
-    @Test
-    public void testTeamNotLoosePeriods() {
-        GeneralBlock generalBlock = getGeneralBlock();
-
-
-
-        BetContainer secondPeriod = generalBlock.findByType(SECOND_PERIOD)
-                .findByType(TEAM_NOT_LOOSE);
-        assertEquals(12, secondPeriod.getAnalyzedMatchesAmount().intValue());
-        assertEquals(6, secondPeriod.getSuccessfullyMatchesAmount().intValue());
-        assertEquals(0, secondPeriod.getSkippedMatchesAmount().intValue());
-        assertEquals(50, secondPeriod.getPercentage().intValue());
-
-        BetContainer thirdPeriod = generalBlock.findByType(THIRD_PERIOD)
-                .findByType(TEAM_NOT_LOOSE);
-        assertEquals(12, thirdPeriod.getAnalyzedMatchesAmount().intValue());
-        assertEquals(10, thirdPeriod.getSuccessfullyMatchesAmount().intValue());
-        assertEquals(0, thirdPeriod.getSkippedMatchesAmount().intValue());
-        assertEquals(83, thirdPeriod.getPercentage().intValue());
-    }
-
 
     @Test
     public void testShotsOnTargetOver() {
