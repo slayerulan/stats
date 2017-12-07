@@ -7,20 +7,20 @@ import com.savik.bets.general.other.PeriodHomeWinAndTotalUnder;
 import java.util.function.Function;
 
 
-public class PeriodTeamWinAndTotalUnderBlock<T extends Match> extends PeriodTeamBetContainer<T> {
+public class PeriodOpposingTeamWinAndTotalUnderBlock<T extends Match> extends PeriodTeamBetContainer<T> {
 
-    public PeriodTeamWinAndTotalUnderBlock(double total, ContainerType type) {
+    public PeriodOpposingTeamWinAndTotalUnderBlock(double total, ContainerType type) {
         super(
-                new PeriodHomeWinAndTotalUnder(total),
                 new PeriodGuestWinAndTotalUnder(total),
+                new PeriodHomeWinAndTotalUnder(total),
                 type
         );
     }
 
-    public PeriodTeamWinAndTotalUnderBlock(double total, MatchData matchData, Function<T, Period> function) {
+    public PeriodOpposingTeamWinAndTotalUnderBlock(double total, MatchData matchData, Function<T, Period> function) {
         super(
-                new PeriodHomeWinAndTotalUnder(total),
                 new PeriodGuestWinAndTotalUnder(total),
+                new PeriodHomeWinAndTotalUnder(total),
                 function, matchData
         );
     }
