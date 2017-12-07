@@ -7,6 +7,7 @@ public enum ContainerType {
     HOME,
     GUEST,
     TOTAL,
+    HANDICAP,
     OTHER,
     PERIODS,
     FIRST_PERIOD,
@@ -17,6 +18,7 @@ public enum ContainerType {
     FIRST_GOAL_BEFORE,
     LAST_GOAL_AFTER,
     TOTAL_OVER,
+    TEAM_HANDICAP,
     TEAM_NOT_LOOSE,
     TEAM_TOTAL_OVER,
     OPPOSING_TEAM_TOTAL_OVER,
@@ -78,5 +80,9 @@ public enum ContainerType {
     DIFF_2,
     NUMBER_1,
     NUMBER_2,
+    PLUS_1_5,
+    PLUS_2_5,
+    MINUS_1_5,
+    MINUS_2_5
 
 }
