@@ -38,6 +38,10 @@ public class GeneralTeamBetContainer<T extends Match> extends BetContainer<T> {
         this.matchData = matchData;
     }
 
+    public GeneralTeamBetContainer(GeneralBet forHome, GeneralBet forGuest, MatchData matchData) {
+        this(forHome, forGuest, null, matchData);
+    }
+
     public GeneralTeamBetContainer(GeneralBet forHome, GeneralBet forGuest, ContainerType type) {
         this(forHome, forGuest, type, null);
     }
