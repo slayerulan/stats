@@ -5,7 +5,7 @@ import com.savik.PeriodBet;
 import lombok.Getter;
 
 @Getter
-public class PeriodOver extends PeriodBet {
+public class PeriodOver<T extends Period> extends PeriodBet<T> {
 
     private double amount;
 

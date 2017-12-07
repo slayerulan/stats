@@ -55,10 +55,12 @@ public class PeriodTeamBetContainer<T extends Match> extends BetContainer<T> {
         this.matchData = matchData;
     }
 
-
-
     public PeriodTeamBetContainer(PeriodBet forHome, PeriodBet forGuest, ContainerType type) {
         this(forHome, forGuest, type, null, null);
+    }
+
+    public PeriodTeamBetContainer(PeriodBet forHome, PeriodBet forGuest) {
+        this(forHome, forGuest, null, null, null);
     }
 
     @Override

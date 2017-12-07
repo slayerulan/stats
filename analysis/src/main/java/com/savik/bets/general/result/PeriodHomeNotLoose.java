@@ -5,7 +5,7 @@ import com.savik.PeriodBet;
 import lombok.Getter;
 
 @Getter
-public class PeriodHomeNotLoose extends PeriodBet {
+public class PeriodHomeNotLoose<T extends Period> extends PeriodBet<T> {
 
     @Override
     public boolean canAnalyze(Period period) {
