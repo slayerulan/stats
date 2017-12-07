@@ -20,6 +20,10 @@ public class PossibleBetsPeriodBlock extends PossibleBetContainer<HockeyMatch> {
                         ContainerType.ANY_WIN
                 ),
                 new PossibleBetContainer<>(
+                        new PeriodDrawPossibleBet(function),
+                        ContainerType.DRAW
+                ),
+                new PossibleBetContainer<>(
                         new PeriodTeamNotLoosePossibleBet(homeMatchData, guestMatchData, function),
                         ContainerType.TEAM_NOT_LOOSE
                 )

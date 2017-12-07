@@ -6,6 +6,7 @@ public enum ContainerType {
     GENERAL,
     HOME,
     GUEST,
+    DRAW,
     TOTAL,
     HANDICAP,
     OTHER,
