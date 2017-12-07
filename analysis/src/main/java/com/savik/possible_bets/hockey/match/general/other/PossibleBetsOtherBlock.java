@@ -14,7 +14,8 @@ public class PossibleBetsOtherBlock extends PossibleBetContainer<HockeyMatch> {
                 new PeriodAnyWinAndDiffEqualsPossibleBetBlock(HockeyMatch.MATCH, 1, ContainerType.DIFF_1),
                 new PeriodAnyWinAndDiffEqualsPossibleBetBlock(HockeyMatch.MATCH, 2, ContainerType.DIFF_2),
                 new PeriodAnyWinAndTotalOverPossibleBetBlock(HockeyMatch.MATCH, 5.5, ContainerType.ANY_WIN_AND_TOTAL_OVER),
-                new PeriodAnyWinAndTotalUnderPossibleBetBlock(HockeyMatch.MATCH, 5.5, ContainerType.ANY_WIN_AND_TOTAL_UNDER)
+                new PeriodAnyWinAndTotalUnderPossibleBetBlock(HockeyMatch.MATCH, 5.5, ContainerType.ANY_WIN_AND_TOTAL_UNDER),
+                new PeriodTeamWinAndTotalOverPossibleBetBlock(homeMatchData, guestMatchData, HockeyMatch.MATCH, 5.5, ContainerType.TEAM_WIN_AND_TOTAL_OVER)
         ), ContainerType.OTHER);
     }
 }
