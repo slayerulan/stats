@@ -6,10 +6,15 @@ import com.savik.Period;
 import com.savik.PeriodTeamBetContainer;
 import com.savik.bets.general.total.over.PeriodGuestOver;
 import com.savik.bets.general.total.over.PeriodHomeOver;
+import com.savik.blocks.general.total.over.PeriodOpposingTeamTotalOverBlock;
+import com.savik.blocks.general.total.over.PeriodTeamTotalOverBlock;
 import com.savik.hockey.model.HockeyMatch;
 
 import java.util.Arrays;
 import java.util.function.Function;
+
+import static com.savik.ContainerType.OVER_0_5;
+import static com.savik.ContainerType.OVER_1_5;
 
 
 class GeneralOpposingTeamTotalOverPeriodBlock extends PeriodTeamBetContainer {
@@ -17,16 +22,8 @@ class GeneralOpposingTeamTotalOverPeriodBlock extends PeriodTeamBetContainer {
     public GeneralOpposingTeamTotalOverPeriodBlock(MatchData matchData, Function<HockeyMatch, Period> function, ContainerType type) {
         super(
                 Arrays.asList(
-                        new PeriodTeamBetContainer(
-                                new PeriodGuestOver(0.5),
-                                new PeriodHomeOver(0.5),
-                                ContainerType.OVER_0_5
-                        ),
-                        new PeriodTeamBetContainer(
-                                new PeriodGuestOver(1.5),
-                                new PeriodHomeOver(1.5),
-                                ContainerType.OVER_1_5
-                        )
+                        new PeriodOpposingTeamTotalOverBlock(0.5, OVER_0_5),
+                        new PeriodOpposingTeamTotalOverBlock(1.5, OVER_1_5)
                 ),
                 function,
                 matchData,
