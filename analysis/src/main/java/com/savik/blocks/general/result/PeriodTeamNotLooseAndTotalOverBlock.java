@@ -9,9 +9,9 @@ import com.savik.hockey.model.HockeyPeriod;
 import java.util.function.Function;
 
 
-public class PeriodTeamWinAndTotalOverBlock<T extends Match> extends PeriodTeamBetContainer<T> {
+public class PeriodTeamNotLooseAndTotalOverBlock<T extends Match> extends PeriodTeamBetContainer<T> {
 
-    public PeriodTeamWinAndTotalOverBlock(double total, ContainerType type) {
+    public PeriodTeamNotLooseAndTotalOverBlock(double total, ContainerType type) {
         super(
                 new BiPeriodBet<HockeyPeriod>(
                         new PeriodHomeNotLoose<>(),
