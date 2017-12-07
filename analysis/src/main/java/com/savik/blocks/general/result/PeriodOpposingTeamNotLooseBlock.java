@@ -7,22 +7,22 @@ import com.savik.bets.general.result.PeriodHomeNotLoose;
 import java.util.function.Function;
 
 
-public class PeriodTeamNotLooseBlock<T extends Match> extends PeriodTeamBetContainer<T> {
+public class PeriodOpposingTeamNotLooseBlock<T extends Match> extends PeriodTeamBetContainer<T> {
 
-    public PeriodTeamNotLooseBlock(MatchData matchData, Function<T, Period> function, ContainerType type) {
+    public PeriodOpposingTeamNotLooseBlock(MatchData matchData, Function<T, Period> function, ContainerType type) {
         super(
-                new PeriodHomeNotLoose(),
                 new PeriodGuestNotLoose(),
+                new PeriodHomeNotLoose(),
                 type,
                 function,
                 matchData
         );
     }
 
-    public PeriodTeamNotLooseBlock(MatchData matchData, Function<T, Period> function) {
+    public PeriodOpposingTeamNotLooseBlock(MatchData matchData, Function<T, Period> function) {
         super(
-                new PeriodHomeNotLoose(),
                 new PeriodGuestNotLoose(),
+                new PeriodHomeNotLoose(),
                 function,
                 matchData
         );

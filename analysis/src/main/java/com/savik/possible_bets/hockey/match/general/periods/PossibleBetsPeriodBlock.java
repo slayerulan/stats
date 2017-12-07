@@ -18,6 +18,10 @@ public class PossibleBetsPeriodBlock extends PossibleBetContainer<HockeyMatch> {
                 new PossibleBetContainer<>(
                         new PeriodAnyWinnerPossibleBet(function),
                         ContainerType.ANY_WIN
+                ),
+                new PossibleBetContainer<>(
+                        new PeriodTeamNotLoosePossibleBet(homeMatchData, guestMatchData, function),
+                        ContainerType.TEAM_NOT_LOOSE
                 )
         ), type);
     }
