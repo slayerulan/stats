@@ -6,6 +6,7 @@ import com.savik.MatchData;
 import com.savik.Period;
 import com.savik.PossibleBetContainer;
 import com.savik.hockey.model.HockeyMatch;
+import com.savik.possible_bets.hockey.match.general.total.PeriodBothTeamTotalOverPossibleBet;
 import com.savik.possible_bets.hockey.match.general.total.PeriodOpposingTeamTotalOverPossibleBet;
 import com.savik.possible_bets.hockey.match.general.total.PeriodTeamTotalOverPossibleBet;
 import com.savik.possible_bets.hockey.match.general.total.PeriodTotalOverPossibleBet;
@@ -55,6 +56,15 @@ public class PossibleBetsPeriodBlock extends PossibleBetContainer<HockeyMatch> {
                                 )
                         ),
                         ContainerType.OPPOSING_TEAM_TOTAL_OVER
+                ),
+                new PossibleBetContainer<>(
+                        Arrays.asList(
+                                new PossibleBetContainer<>(
+                                        new PeriodBothTeamTotalOverPossibleBet(function, 0.5),
+                                        ContainerType.OVER_0_5
+                                )
+                        ),
+                        ContainerType.BOTH_TEAMS_TOTAL_OVER
                 )
         ), type);
     }
