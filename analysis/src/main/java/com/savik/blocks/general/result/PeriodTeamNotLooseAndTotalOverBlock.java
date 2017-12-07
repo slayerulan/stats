@@ -1,6 +1,8 @@
 package com.savik.blocks.general.result;
 
 import com.savik.*;
+import com.savik.bets.general.other.PeriodGuestNotLooseAndTotalOver;
+import com.savik.bets.general.other.PeriodHomeNotLooseAndTotalOver;
 import com.savik.bets.general.result.PeriodGuestNotLoose;
 import com.savik.bets.general.result.PeriodHomeNotLoose;
 import com.savik.bets.general.total.over.PeriodOver;
@@ -13,14 +15,8 @@ public class PeriodTeamNotLooseAndTotalOverBlock<T extends Match> extends Period
 
     public PeriodTeamNotLooseAndTotalOverBlock(double total, ContainerType type) {
         super(
-                new BiPeriodBet<HockeyPeriod>(
-                        new PeriodHomeNotLoose<>(),
-                        new PeriodOver<>(total)
-                ),
-                new BiPeriodBet<HockeyPeriod>(
-                        new PeriodGuestNotLoose<>(),
-                        new PeriodOver<>(total)
-                ),
+                new PeriodHomeNotLooseAndTotalOver(total),
+                new PeriodGuestNotLooseAndTotalOver(total),
                 type
         );
     }

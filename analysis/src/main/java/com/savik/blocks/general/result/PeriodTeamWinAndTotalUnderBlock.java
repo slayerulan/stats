@@ -4,6 +4,8 @@ import com.savik.BiPeriodBet;
 import com.savik.ContainerType;
 import com.savik.Match;
 import com.savik.PeriodTeamBetContainer;
+import com.savik.bets.general.other.PeriodGuestWinAndTotalUnder;
+import com.savik.bets.general.other.PeriodHomeWinAndTotalUnder;
 import com.savik.bets.general.result.PeriodGuestWinner;
 import com.savik.bets.general.result.PeriodHomeWinner;
 import com.savik.bets.general.total.over.PeriodOver;
@@ -15,14 +17,8 @@ public class PeriodTeamWinAndTotalUnderBlock<T extends Match> extends PeriodTeam
 
     public PeriodTeamWinAndTotalUnderBlock(double total, ContainerType type) {
         super(
-                new BiPeriodBet<HockeyPeriod>(
-                        new PeriodHomeWinner<>(),
-                        new PeriodUnder(total)
-                ),
-                new BiPeriodBet<HockeyPeriod>(
-                        new PeriodGuestWinner<>(),
-                        new PeriodUnder<>(total)
-                ),
+                new PeriodHomeWinAndTotalUnder(total),
+                new PeriodGuestWinAndTotalUnder(total),
                 type
         );
     }
