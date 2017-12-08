@@ -13,6 +13,10 @@ class PeriodOpposingTeamWinAndTotalUnderPossibleBetBlock extends PossibleBetCont
         super(
                 Arrays.asList(
                         new PossibleBetContainer<>(
+                                new PeriodOpposingTeamWinAndTotalUnderPossibleBet(homeMatchData, guestMatchData, HockeyMatch.MATCH, 4.5),
+                                ContainerType.UNDER_4_5
+                        ),
+                        new PossibleBetContainer<>(
                                 new PeriodOpposingTeamWinAndTotalUnderPossibleBet(homeMatchData, guestMatchData, HockeyMatch.MATCH, 5.5),
                                 ContainerType.UNDER_5_5
                         )
