@@ -84,7 +84,7 @@ public abstract class  Period<T extends Goal> extends Identifiable {
         return guestScore != null && homeScore != null;
     }
 
-    protected Optional<Goal> getGoal(GoalOrder goalOrder) {
+    public Optional<Goal> getGoal(GoalOrder goalOrder) {
         Set<T> goals = getGoals();
         if (CollectionUtils.isEmpty(goals)) {
             return Optional.empty();
