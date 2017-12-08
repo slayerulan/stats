@@ -3,10 +3,6 @@ package com.savik.blocks.general.result;
 import com.savik.*;
 import com.savik.bets.general.other.PeriodGuestNotLooseAndTotalOver;
 import com.savik.bets.general.other.PeriodHomeNotLooseAndTotalOver;
-import com.savik.bets.general.result.PeriodGuestNotLoose;
-import com.savik.bets.general.result.PeriodHomeNotLoose;
-import com.savik.bets.general.total.over.PeriodOver;
-import com.savik.hockey.model.HockeyPeriod;
 
 import java.util.function.Function;
 
@@ -18,6 +14,14 @@ public class PeriodTeamNotLooseAndTotalOverBlock<T extends Match> extends Period
                 new PeriodHomeNotLooseAndTotalOver(total),
                 new PeriodGuestNotLooseAndTotalOver(total),
                 type
+        );
+    }
+
+    public PeriodTeamNotLooseAndTotalOverBlock(double total, MatchData matchData, Function<T, Period> function) {
+        super(
+                new PeriodHomeNotLooseAndTotalOver(total),
+                new PeriodGuestNotLooseAndTotalOver(total),
+                function, matchData
         );
     }
 

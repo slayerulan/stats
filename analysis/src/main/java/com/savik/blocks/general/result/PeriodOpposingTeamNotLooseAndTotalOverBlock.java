@@ -1,10 +1,10 @@
 package com.savik.blocks.general.result;
 
-import com.savik.ContainerType;
-import com.savik.Match;
-import com.savik.PeriodTeamBetContainer;
+import com.savik.*;
 import com.savik.bets.general.other.PeriodGuestNotLooseAndTotalOver;
 import com.savik.bets.general.other.PeriodHomeNotLooseAndTotalOver;
+
+import java.util.function.Function;
 
 
 public class PeriodOpposingTeamNotLooseAndTotalOverBlock<T extends Match> extends PeriodTeamBetContainer<T> {
@@ -14,6 +14,14 @@ public class PeriodOpposingTeamNotLooseAndTotalOverBlock<T extends Match> extend
                 new PeriodGuestNotLooseAndTotalOver(total),
                 new PeriodHomeNotLooseAndTotalOver(total),
                 type
+        );
+    }
+
+    public PeriodOpposingTeamNotLooseAndTotalOverBlock(double total, MatchData matchData, Function<T, Period> function) {
+        super(
+                new PeriodGuestNotLooseAndTotalOver(total),
+                new PeriodHomeNotLooseAndTotalOver(total),
+                function, matchData
         );
     }
 
