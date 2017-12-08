@@ -1,6 +1,5 @@
 package com.savik;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.util.List;
@@ -30,5 +29,15 @@ public class PossibleBet<T extends Match> {
 
     public int getSecondTeamPercentage() {
         return secondTeamContainer.getPercentage();
+    }
+
+    public PossibleBetStatus getPossibleBetStatus() {
+        Integer firstTeamContainerPercentage = firstTeamContainer.getPercentage();
+        Integer secondTeamContainerPercentage = secondTeamContainer.getPercentage();
+        int averagePercentage = (firstTeamContainerPercentage + secondTeamContainerPercentage) / 2;
+        if (averagePercentage < 25 || averagePercentage > 70) {
+            return PossibleBetStatus.GOOD;
+        }
+        return PossibleBetStatus.SO_SO;
     }
 }
