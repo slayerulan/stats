@@ -11,4 +11,8 @@ public class TotalOverInAllPeriodsSingleBlock extends GeneralBetContainer<Hockey
     public TotalOverInAllPeriodsSingleBlock(double amount, ContainerType type) {
         super(new TotalOverInAllPeriods(amount), type);
     }
+
+    public TotalOverInAllPeriodsSingleBlock(double amount) {
+        super(new TotalOverInAllPeriods(amount));
+    }
 }
