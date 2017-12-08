@@ -11,7 +11,7 @@ import java.util.Arrays;
 public class PossibleBetsHandicapBlock extends PossibleBetContainer<HockeyMatch> {
     public PossibleBetsHandicapBlock(MatchData homeMatchData, MatchData guestMatchData) {
         super(Arrays.asList(
-            //new PeriodTeamHandicapPossibleBetBlock(homeMatchData, guestMatchData),
+            new PeriodTeamHandicapPossibleBetBlock(homeMatchData, guestMatchData),
             new PeriodOpposingTeamHandicapPossibleBetBlock(homeMatchData, guestMatchData)
         ), ContainerType.HANDICAP);
     }
