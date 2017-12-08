@@ -2,7 +2,7 @@ package com.savik.blocks.hockey.goals.match;
 
 import com.savik.ContainerType;
 import com.savik.GeneralBetContainer;
-import com.savik.bets.hockey.goals.TotalUnderInAllPeriods;
+import com.savik.bets.hockey.goals.match.TotalUnderInAllPeriods;
 import com.savik.hockey.model.HockeyMatch;
 
 
