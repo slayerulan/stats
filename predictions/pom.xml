@@ -9,19 +9,14 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>query</artifactId>
-
+    <artifactId>predictions</artifactId>
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-            <version>1.5.2.RELEASE</version>
-        </dependency>
-        <dependency>
             <groupId>savik.domain</groupId>
-            <artifactId>domain-jpa</artifactId>
+            <artifactId>domain</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+
         <dependency>
             <groupId>savik.infrastructure</groupId>
             <artifactId>test-infrastructure</artifactId>
@@ -33,11 +28,7 @@
             <artifactId>analysis</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-        <dependency>
-            <groupId>savik</groupId>
-            <artifactId>predictions</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
+
     </dependencies>
 
 
