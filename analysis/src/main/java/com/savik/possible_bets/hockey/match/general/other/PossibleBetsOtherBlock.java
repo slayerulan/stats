@@ -16,7 +16,10 @@ public class PossibleBetsOtherBlock extends PossibleBetContainer<HockeyMatch> {
                 new PeriodAnyWinAndTotalUnderPossibleBetBlock(),
                 new PeriodTeamWinAndTotalOverPossibleBetBlock(homeMatchData, guestMatchData),
                 new PeriodTeamWinAndTotalUnderPossibleBetBlock(homeMatchData, guestMatchData),
-                new PeriodTeamTotalOverInAllPeriodsPossibleBetBlock(homeMatchData, guestMatchData)
+                new PeriodOpposingTeamWinAndTotalOverPossibleBetBlock(homeMatchData, guestMatchData),
+                new PeriodOpposingTeamWinAndTotalUnderPossibleBetBlock(homeMatchData, guestMatchData),
+                new PeriodTeamTotalOverInAllPeriodsPossibleBetBlock(homeMatchData, guestMatchData),
+                new PeriodOpposingTeamTotalOverInAllPeriodsPossibleBetBlock(homeMatchData, guestMatchData)
         ), ContainerType.OTHER);
     }
 }

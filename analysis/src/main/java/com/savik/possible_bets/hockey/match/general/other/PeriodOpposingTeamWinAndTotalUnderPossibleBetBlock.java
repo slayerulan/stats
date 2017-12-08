@@ -8,15 +8,15 @@ import com.savik.hockey.model.HockeyMatch;
 
 import java.util.Arrays;
 
-class PeriodTeamWinAndTotalUnderPossibleBetBlock extends PossibleBetContainer<HockeyMatch> {
-    public PeriodTeamWinAndTotalUnderPossibleBetBlock(MatchData homeMatchData, MatchData guestMatchData) {
+class PeriodOpposingTeamWinAndTotalUnderPossibleBetBlock extends PossibleBetContainer<HockeyMatch> {
+    public PeriodOpposingTeamWinAndTotalUnderPossibleBetBlock(MatchData homeMatchData, MatchData guestMatchData) {
         super(
                 Arrays.asList(
                         new PossibleBetContainer<>(
-                                new PeriodTeamWinAndTotalUnderPossibleBet(homeMatchData, guestMatchData, HockeyMatch.MATCH, 5.5),
+                                new PeriodOpposingTeamWinAndTotalUnderPossibleBet(homeMatchData, guestMatchData, HockeyMatch.MATCH, 5.5),
                                 ContainerType.UNDER_5_5
                         )
-                ), ContainerType.TEAM_WIN_AND_TOTAL_UNDER
+                ), ContainerType.OPPOSING_TEAM_WIN_AND_TOTAL_UNDER
         );
     }
 }
