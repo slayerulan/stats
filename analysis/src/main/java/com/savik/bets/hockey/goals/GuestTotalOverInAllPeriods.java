@@ -1,18 +1,18 @@
-package com.savik.bets.hockey.goals.match;
+package com.savik.bets.hockey.goals;
 
 import com.savik.GeneralBet;
-import com.savik.bets.general.total.over.PeriodOver;
+import com.savik.bets.general.total.over.PeriodGuestOver;
 import com.savik.hockey.model.HockeyMatch;
 import com.savik.hockey.model.HockeyMatchInfo;
 import lombok.Getter;
 
 @Getter
-public class TotalOverInAllPeriods extends GeneralBet<HockeyMatch> {
+public class GuestTotalOverInAllPeriods extends GeneralBet<HockeyMatch> {
 
-    private PeriodOver periodOver;
+    private PeriodGuestOver periodOver;
 
-    public TotalOverInAllPeriods(double amount) {
-        periodOver = new PeriodOver(amount);
+    public GuestTotalOverInAllPeriods(double amount) {
+        periodOver = new PeriodGuestOver(amount);
     }
 
     @Override

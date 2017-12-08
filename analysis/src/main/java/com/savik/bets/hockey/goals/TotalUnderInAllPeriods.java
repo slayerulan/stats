@@ -1,7 +1,6 @@
-package com.savik.bets.hockey.goals.match;
+package com.savik.bets.hockey.goals;
 
 import com.savik.GeneralBet;
-import com.savik.bets.general.total.over.PeriodOver;
 import com.savik.bets.general.total.under.PeriodUnder;
 import com.savik.hockey.model.HockeyMatch;
 import com.savik.hockey.model.HockeyMatchInfo;

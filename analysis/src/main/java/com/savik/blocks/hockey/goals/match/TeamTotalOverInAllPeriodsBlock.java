@@ -4,8 +4,8 @@ import com.savik.ContainerType;
 import com.savik.GeneralTeamBetContainer;
 import com.savik.Match;
 import com.savik.MatchData;
-import com.savik.bets.hockey.goals.match.GuestTotalOverInAllPeriods;
-import com.savik.bets.hockey.goals.match.HomeTotalOverInAllPeriods;
+import com.savik.bets.hockey.goals.GuestTotalOverInAllPeriods;
+import com.savik.bets.hockey.goals.HomeTotalOverInAllPeriods;
 
 
 public class TeamTotalOverInAllPeriodsBlock<T extends Match> extends GeneralTeamBetContainer<T> {
