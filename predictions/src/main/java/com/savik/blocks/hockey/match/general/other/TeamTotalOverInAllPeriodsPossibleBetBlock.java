@@ -9,8 +9,8 @@ import com.savik.hockey.model.HockeyMatch;
 
 import java.util.Arrays;
 
-class PeriodTeamTotalOverInAllPeriodsPossibleBetBlock extends PossibleBetContainer<HockeyMatch> {
-    public PeriodTeamTotalOverInAllPeriodsPossibleBetBlock(MatchData homeMatchData, MatchData guestMatchData) {
+class TeamTotalOverInAllPeriodsPossibleBetBlock extends PossibleBetContainer<HockeyMatch> {
+    public TeamTotalOverInAllPeriodsPossibleBetBlock(MatchData homeMatchData, MatchData guestMatchData) {
         super(
                 Arrays.asList(
                         new PossibleBetContainer<>(

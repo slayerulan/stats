@@ -11,4 +11,8 @@ public class TotalUnderInAllPeriodsSingleBlock extends GeneralBetContainer<Hocke
     public TotalUnderInAllPeriodsSingleBlock(double amount, ContainerType type) {
         super(new TotalUnderInAllPeriods(amount), type);
     }
+
+    public TotalUnderInAllPeriodsSingleBlock(double amount) {
+        super(new TotalUnderInAllPeriods(amount));
+    }
 }
