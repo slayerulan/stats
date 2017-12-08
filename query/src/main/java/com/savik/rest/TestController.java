@@ -3,13 +3,14 @@ package com.savik.rest;
 import com.savik.ContainerType;
 import com.savik.GeneralBetContainer;
 import com.savik.MatchData;
+import com.savik.PossibleBetContainer;
+import com.savik.blocks.hockey.match.general.other.PossibleBetsOtherBlock;
 import com.savik.football.repository.FootballMatchRepository;
 import com.savik.hockey.filters.HockeyMatchFilter;
 import com.savik.hockey.model.HockeyMatch;
 import com.savik.hockey.model.HockeyTeam;
 import com.savik.hockey.repository.HockeyMatchRepository;
 import com.savik.hockey.repository.HockeyTeamRepository;
-import com.savik.possible_bets.hockey.match.general.PossibleBetsBlock;
 import com.savik.result_block.hockey.match.general.GeneralBlock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -62,7 +63,7 @@ public class TestController {
     }
 
     @GetMapping("/bets")
-    public PossibleBetsBlock possibleBets(HockeyMatchFilter hockeyMatchFilter) {
+    public PossibleBetContainer possibleBets(HockeyMatchFilter hockeyMatchFilter) {
         HockeyTeam homeTeam = hockeyTeamRepository.findOne(hockeyMatchFilter.getHomeId());
         MatchData homeMatchData = new MatchData(homeTeam);
         List<HockeyMatch> homeTeamMatches = hockeyMatchRepository.findAll(
@@ -76,7 +77,11 @@ public class TestController {
                 hasTeam(hockeyMatchFilter.getGuestId())
         );
 
-        PossibleBetsBlock possibleBetsBlock = new PossibleBetsBlock(homeMatchData, guestMatchData);
+        //PossibleBetsHandicapBlock possibleBetsBlock = new PossibleBetsHandicapBlock(homeMatchData, guestMatchData);
+        //PossibleBetsBlock possibleBetsBlock = new PossibleBetsBlock(homeMatchData, guestMatchData);
+        //PossibleBetsPeriodsBlock possibleBetsBlock = new PossibleBetsPeriodsBlock(homeMatchData, guestMatchData);
+        PossibleBetsOtherBlock possibleBetsBlock = new PossibleBetsOtherBlock(homeMatchData, guestMatchData);
+        //PossibleBetsTotalBlock possibleBetsBlock = new PossibleBetsTotalBlock(homeMatchData, guestMatchData);
         possibleBetsBlock.check(homeTeamMatches, guestTeamMatches);
 
         return possibleBetsBlock;
