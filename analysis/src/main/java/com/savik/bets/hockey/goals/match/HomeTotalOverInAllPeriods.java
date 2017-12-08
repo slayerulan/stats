@@ -1,4 +1,4 @@
-package com.savik.bets.hockey.goals;
+package com.savik.bets.hockey.goals.match;
 
 import com.savik.GeneralBet;
 import com.savik.bets.general.total.over.PeriodHomeOver;
