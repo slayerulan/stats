@@ -14,7 +14,7 @@ class PeriodOpposingTeamTotalOverInAllPeriodsPossibleBetBlock extends PossibleBe
         super(
                 Arrays.asList(
                         new PossibleBetContainer<>(
-                                new PeriodOpposingTeamTotalOverInAllPeriodsPossibleBet(homeMatchData, guestMatchData, 0.5),
+                                new PeriodOpposingTeamTotalOverInAllPeriodsPossibleBet<>(homeMatchData, guestMatchData, 0.5),
                                 ContainerType.OVER_0_5
                         )
                 ), ContainerType.OPPOSING_TEAM_TOTAL_OVER_ALL_PERIODS

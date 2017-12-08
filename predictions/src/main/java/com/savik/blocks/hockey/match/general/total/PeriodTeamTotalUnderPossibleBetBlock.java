@@ -14,11 +14,11 @@ public class PeriodTeamTotalUnderPossibleBetBlock extends PossibleBetContainer<H
         super(
                 Arrays.asList(
                         new PossibleBetContainer<>(
-                                new PeriodTeamTotalUnderPossibleBet(homeMatchData, guestMatchData, HockeyMatch.MATCH, 2.5),
+                                new PeriodTeamTotalUnderPossibleBet<>(homeMatchData, guestMatchData, HockeyMatch.MATCH, 2.5),
                                 ContainerType.UNDER_2_5
                         ),
                         new PossibleBetContainer<>(
-                                new PeriodTeamTotalUnderPossibleBet(homeMatchData, guestMatchData, HockeyMatch.MATCH, 3.5),
+                                new PeriodTeamTotalUnderPossibleBet<>(homeMatchData, guestMatchData, HockeyMatch.MATCH, 3.5),
                                 ContainerType.UNDER_3_5
                         )
                 ), ContainerType.TEAM_TOTAL_UNDER

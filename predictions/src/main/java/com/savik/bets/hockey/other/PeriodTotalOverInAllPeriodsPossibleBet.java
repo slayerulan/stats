@@ -1,4 +1,4 @@
-package com.savik.bets.general.other;
+package com.savik.bets.hockey.other;
 
 
 import com.savik.PossibleBet;

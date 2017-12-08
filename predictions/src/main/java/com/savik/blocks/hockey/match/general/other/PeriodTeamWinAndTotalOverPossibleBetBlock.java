@@ -14,11 +14,11 @@ class PeriodTeamWinAndTotalOverPossibleBetBlock extends PossibleBetContainer<Hoc
         super(
                 Arrays.asList(
                         new PossibleBetContainer<>(
-                                new PeriodTeamWinAndTotalOverPossibleBet(homeMatchData, guestMatchData, HockeyMatch.MATCH, 4.5),
+                                new PeriodTeamWinAndTotalOverPossibleBet<>(homeMatchData, guestMatchData, HockeyMatch.MATCH, 4.5),
                                 ContainerType.OVER_4_5
                         ),
                         new PossibleBetContainer<>(
-                                new PeriodTeamWinAndTotalOverPossibleBet(homeMatchData, guestMatchData, HockeyMatch.MATCH, 5.5),
+                                new PeriodTeamWinAndTotalOverPossibleBet<>(homeMatchData, guestMatchData, HockeyMatch.MATCH, 5.5),
                                 ContainerType.OVER_5_5
                         )
                 ), ContainerType.TEAM_WIN_AND_TOTAL_OVER

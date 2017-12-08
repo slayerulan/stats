@@ -12,7 +12,7 @@ class PeriodAnyWinAndTotalUnderPossibleBetBlock extends PossibleBetContainer<Hoc
     public PeriodAnyWinAndTotalUnderPossibleBetBlock() {
         super(Arrays.asList(
                 new PossibleBetContainer<>(
-                        new PeriodAnyWinAndTotalUnderPossibleBet(HockeyMatch.MATCH, 5.5),
+                        new PeriodAnyWinAndTotalUnderPossibleBet<>(HockeyMatch.MATCH, 5.5),
                         ContainerType.UNDER_5_5
                 )), ContainerType.ANY_WIN_AND_TOTAL_UNDER
         );

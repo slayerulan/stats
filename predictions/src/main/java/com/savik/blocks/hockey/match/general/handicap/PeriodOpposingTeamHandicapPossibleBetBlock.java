@@ -14,19 +14,19 @@ public class PeriodOpposingTeamHandicapPossibleBetBlock extends PossibleBetConta
         super(
                 Arrays.asList(
                         new PossibleBetContainer<>(
-                                new PeriodOpposingTeamHandicapPossibleBet(homeMatchData, guestMatchData, HockeyMatch.MATCH, -2.5),
+                                new PeriodOpposingTeamHandicapPossibleBet<>(homeMatchData, guestMatchData, HockeyMatch.MATCH, -2.5),
                                 ContainerType.MINUS_2_5
                         ),
                         new PossibleBetContainer<>(
-                                new PeriodOpposingTeamHandicapPossibleBet(homeMatchData, guestMatchData, HockeyMatch.MATCH, -1.5),
+                                new PeriodOpposingTeamHandicapPossibleBet<>(homeMatchData, guestMatchData, HockeyMatch.MATCH, -1.5),
                                 ContainerType.MINUS_1_5
                         ),
                         new PossibleBetContainer<>(
-                                new PeriodOpposingTeamHandicapPossibleBet(homeMatchData, guestMatchData, HockeyMatch.MATCH, 1.5),
+                                new PeriodOpposingTeamHandicapPossibleBet<>(homeMatchData, guestMatchData, HockeyMatch.MATCH, 1.5),
                                 ContainerType.PLUS_1_5
                         ),
                         new PossibleBetContainer<>(
-                                new PeriodOpposingTeamHandicapPossibleBet(homeMatchData, guestMatchData, HockeyMatch.MATCH, 2.5),
+                                new PeriodOpposingTeamHandicapPossibleBet<>(homeMatchData, guestMatchData, HockeyMatch.MATCH, 2.5),
                                 ContainerType.PLUS_2_5
                         )
                 ), ContainerType.OPPOSING_TEAM_HANDICAP
