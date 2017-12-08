@@ -15,4 +15,8 @@ public class DrawAtLeastNPeriodsBlock<T extends Match> extends GeneralBetContain
         );
     }
 
+    public DrawAtLeastNPeriodsBlock(int n) {
+        super(new DrawAtLeastNPeriods(n));
+    }
+
 }
