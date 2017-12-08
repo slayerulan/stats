@@ -85,6 +85,7 @@ public enum ContainerType {
     UNDER_10,
     DIFF_1,
     DIFF_2,
+    DIFF_3_OR_MORE,
     NUMBER_1,
     NUMBER_2,
     PLUS_1_5,

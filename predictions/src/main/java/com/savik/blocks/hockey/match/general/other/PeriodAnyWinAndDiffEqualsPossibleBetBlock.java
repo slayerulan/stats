@@ -3,6 +3,7 @@ package com.savik.blocks.hockey.match.general.other;
 
 import com.savik.ContainerType;
 import com.savik.PossibleBetContainer;
+import com.savik.bets.general.other.PeriodAnyWinAndDiffEqualsOrMorePossibleBet;
 import com.savik.bets.general.other.PeriodAnyWinAndDiffEqualsPossibleBet;
 import com.savik.hockey.model.HockeyMatch;
 
@@ -18,6 +19,10 @@ class PeriodAnyWinAndDiffEqualsPossibleBetBlock extends PossibleBetContainer<Hoc
                 new PossibleBetContainer<>(
                         new PeriodAnyWinAndDiffEqualsPossibleBet<>(HockeyMatch.MATCH, 2),
                         ContainerType.DIFF_2
+                ),
+                new PossibleBetContainer<>(
+                        new PeriodAnyWinAndDiffEqualsOrMorePossibleBet<>(HockeyMatch.MATCH, 3),
+                        ContainerType.DIFF_3_OR_MORE
                 )
                 ), ContainerType.ANY_WIN_AND_DIFFERENCE_EQUALS
         );
