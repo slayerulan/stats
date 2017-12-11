@@ -14,7 +14,9 @@ public class CoeffTotalBlock extends CoeffContainer {
                 new CoeffBothTeamTotalOverBlock(),
                 new CoeffBothTeamTotalUnderBlock(),
                 new CoeffTeamTotalOverBlock(),
-                new CoeffTeamTotalUnderBlock()
+                new CoeffTeamTotalUnderBlock(),
+                new CoeffOpposingTeamTotalOverBlock(),
+                new CoeffOpposingTeamTotalUnderBlock()
         ), ContainerType.TOTAL);
     }
 }

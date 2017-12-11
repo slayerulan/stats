@@ -66,6 +66,8 @@ public class HockeyCoeffsMatchParser {
         fillBothTeamsTotalUnderBlock(element, totalContainer.findByType(ContainerType.BOTH_TEAMS_TOTAL_UNDER));
         fillTeamTotalOverBlock(element, totalContainer.findByType(ContainerType.TEAM_TOTAL_OVER), match.getHomeTeam());
         fillTeamTotalUnderBlock(element, totalContainer.findByType(ContainerType.TEAM_TOTAL_UNDER), match.getHomeTeam());
+        fillTeamTotalOverBlock(element, totalContainer.findByType(ContainerType.OPPOSING_TEAM_TOTAL_OVER), match.getGuestTeam());
+        fillTeamTotalUnderBlock(element, totalContainer.findByType(ContainerType.OPPOSING_TEAM_TOTAL_UNDER), match.getGuestTeam());
     }
 
     private void fillTotalOverBlock(Element element, CoeffContainer totalOverContainer) {
