@@ -1,13 +1,13 @@
 package com.savik.parser;
 
-import java.io.IOException;
-
 import com.savik.parser.exception.ParseException;
-import lombok.*;
+import lombok.AllArgsConstructor;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.io.IOException;
 
 /**
  * @author Savushkin Yauheni
@@ -36,8 +36,12 @@ public class Downloader {
         return download(String.format(configuration.getOddsUrlTemplate(), matchId));
     }
 
-    public Document downloadMatchesSchedule(Integer day) {
-        return download(String.format(configuration.getMatchesScheduleTemplate(), day));
+    public Document downloadFootballMatchesSchedule(Integer day) {
+        return download(String.format(configuration.getFootballMatchesScheduleTemplate(), day));
+    }
+
+    public Document downloadHockeyMatchesSchedule(Integer day) {
+        return download(String.format(configuration.getHockeyMatchesScheduleTemplate(), day));
     }
 
     public Document download(String url) {

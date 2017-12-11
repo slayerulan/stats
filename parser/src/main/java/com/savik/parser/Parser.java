@@ -1,12 +1,13 @@
 package com.savik.parser;
 
-import javax.annotation.PostConstruct;
-
 import com.savik.parser.football.FootballFutureMatchesParser;
 import com.savik.parser.football.FootballParser;
+import com.savik.parser.hockey.HockeyFutureMatchesParser;
 import com.savik.parser.hockey.HockeyParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
 
 /**
  * @author Savushkin Yauheni
@@ -28,10 +29,14 @@ public class Parser {
     FootballFutureMatchesParser footballFutureMatchesParser;
 
 
+    @Autowired
+    HockeyFutureMatchesParser hockeyFutureMatchesParser;
+
+
 
     @PostConstruct
     public void parse() {
-        //footballFutureMatchesParser.parse();
+        hockeyFutureMatchesParser.parse();
        //hockeyParser.parse();
     }
 }

@@ -1,13 +1,13 @@
 package com.savik.parser;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 @Service
 public class FutureMatchesParser {
@@ -35,7 +35,7 @@ public class FutureMatchesParser {
 
     public List<EventItem> parse(int offsetDays) {
 
-        String response = downloader.downloadMatchesSchedule(offsetDays).body().html();
+        String response = downloader.downloadHockeyMatchesSchedule(offsetDays).body().html();
 
         List<String> rows = Arrays.asList(response.split(JS_ROW_END));
         String leagueId = null;

@@ -26,8 +26,11 @@ public class DownloaderConfiguration {
     @Value("${url.odds}")
     private String oddsUrlTemplate;
 
-    @Value("${url.matches}")
-    private String matchesScheduleTemplate;
+    @Value("${url.footballMatches}")
+    private String footballMatchesScheduleTemplate;
+
+    @Value("${url.hockeyMatches}")
+    private String hockeyMatchesScheduleTemplate;
 
     @Value("${fsign}")
     private String fsign;
