@@ -1,10 +1,13 @@
 package com.savik.parser.hockey;
 
-import com.savik.*;
-import com.savik.football.model.*;
+import com.savik.Application;
+import com.savik.Season;
+import com.savik.Who;
+import com.savik.Winner;
 import com.savik.hockey.model.*;
 import com.savik.hockey.repository.HockeyMatchRepository;
 import com.savik.hockey.repository.HockeyTeamRepository;
+import com.savik.parser.hockey.matches.HockeySingleMatchParser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +19,6 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashSet;
 
-import static com.savik.football.model.FootballCard.Type.RED;
-import static com.savik.football.model.FootballCard.Type.YELLOW;
 import static org.junit.Assert.*;
 
 /**

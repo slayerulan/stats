@@ -1,11 +1,11 @@
-package com.savik.parser.hockey;
+package com.savik.parser.hockey.matches;
 
 import com.codiform.moo.curry.Update;
 import com.savik.Period;
 import com.savik.Season;
 import com.savik.Who;
 import com.savik.Winner;
-import com.savik.football.model.*;
+import com.savik.football.model.FootballPeriod;
 import com.savik.hockey.model.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,4 +1,4 @@
-package com.savik.parser.hockey;
+package com.savik.parser.hockey.matches;
 
 
 public class HockeyLeagueIds {

@@ -1,4 +1,4 @@
-package com.savik.parser.hockey;
+package com.savik.parser.hockey.matches;
 
 import com.savik.Season;
 import com.savik.hockey.model.HockeyChampionship;
