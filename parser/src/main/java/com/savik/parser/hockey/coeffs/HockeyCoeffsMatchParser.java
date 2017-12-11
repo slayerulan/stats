@@ -2,6 +2,7 @@ package com.savik.parser.hockey.coeffs;
 
 import com.savik.CoeffContainer;
 import com.savik.ContainerType;
+import com.savik.Team;
 import com.savik.coeffs.hockey.CoeffBlock;
 import com.savik.hockey.model.HockeyFutureMatch;
 import com.savik.hockey.model.HockeyTeam;
@@ -52,16 +53,19 @@ public class HockeyCoeffsMatchParser {
         Element matchTbodyTag = tempHref.parent().parent().parent();
         Element matchCoeffsTbodyTag = matchTbodyTag.nextElementSibling();
 
-        fillTotalBlock(matchCoeffsTbodyTag, coeffBlock.findByType(ContainerType.TOTAL));
+        fillTotalBlock(matchCoeffsTbodyTag, coeffBlock.findByType(ContainerType.TOTAL), hockeyFutureMatch);
         String a = "";
 
 
     }
 
-    private void fillTotalBlock(Element element, CoeffContainer totalContainer) {
+    private void fillTotalBlock(Element element, CoeffContainer totalContainer, HockeyFutureMatch match) {
         fillTotalOverBlock(element, totalContainer.findByType(ContainerType.TOTAL_OVER));
         fillTotalUnderBlock(element, totalContainer.findByType(ContainerType.TOTAL_UNDER));
         fillBothTeamsTotalOverBlock(element, totalContainer.findByType(ContainerType.BOTH_TEAMS_TOTAL_OVER));
+        fillBothTeamsTotalUnderBlock(element, totalContainer.findByType(ContainerType.BOTH_TEAMS_TOTAL_UNDER));
+        fillTeamTotalOverBlock(element, totalContainer.findByType(ContainerType.TEAM_TOTAL_OVER), match.getHomeTeam());
+        fillTeamTotalUnderBlock(element, totalContainer.findByType(ContainerType.TEAM_TOTAL_UNDER), match.getHomeTeam());
     }
 
     private void fillTotalOverBlock(Element element, CoeffContainer totalOverContainer) {
@@ -165,6 +169,61 @@ public class HockeyCoeffsMatchParser {
                 Double.valueOf(under3AndHalfNegativeElement.text())
         );
 
+    }
 
+    private void fillTeamTotalOverBlock(Element element, CoeffContainer totalOverContainer, Team homeTeam) {
+
+        Element totalElementBlock = element.select("th:containsOwn(Дополнительные тоталы:)")
+                .first().parent().nextElementSibling();
+
+        Element temp = totalElementBlock.select("i:containsOwn(" + homeTeam.getName() + ")").first();
+        Element teamTotalBlock = temp.parent().nextElementSibling();
+        List<Node> childNodes = teamTotalBlock.childNodes();
+        CoeffContainer over2AndHalf = totalOverContainer.findByType(ContainerType.OVER_2_5);
+        CoeffContainer over3AndHalf = totalOverContainer.findByType(ContainerType.OVER_3_5);
+        for (int i = 0; i < childNodes.size(); i++) {
+            Node child = childNodes.get(i);
+            if (!(child instanceof TextNode)) {
+                continue;
+            }
+            String text = ((TextNode) child).text();
+            if (text.contains("(2.5) больше")) {
+                String totalOver2AndHalfCoeff = childNodes.get(i + 1).childNode(0).childNode(0).outerHtml();
+                over2AndHalf.getCoeff().setValue(Double.valueOf(totalOver2AndHalfCoeff));
+            }
+
+            if (text.contains("(3.5) больше")) {
+                String totalOver3AndHalfCoeff = childNodes.get(i + 1).childNode(0).childNode(0).outerHtml();
+                over3AndHalf.getCoeff().setValue(Double.valueOf(totalOver3AndHalfCoeff));
+            }
+        }
+    }
+
+    private void fillTeamTotalUnderBlock(Element element, CoeffContainer totalOverContainer, Team homeTeam) {
+
+        Element totalElementBlock = element.select("th:containsOwn(Дополнительные тоталы:)")
+                .first().parent().nextElementSibling();
+
+        Element temp = totalElementBlock.select("i:containsOwn(" + homeTeam.getName() + ")").first();
+        Element teamTotalBlock = temp.parent().nextElementSibling();
+        List<Node> childNodes = teamTotalBlock.childNodes();
+        CoeffContainer under2AndHalf = totalOverContainer.findByType(ContainerType.UNDER_2_5);
+        CoeffContainer under3AndHalf = totalOverContainer.findByType(ContainerType.UNDER_3_5);
+        for (int i = 0; i < childNodes.size(); i++) {
+            Node child = childNodes.get(i);
+            if (!(child instanceof TextNode)) {
+                continue;
+            }
+            String text = ((TextNode) child).text();
+            if (text.contains("(2.5) больше")) {
+                String underOver2AndHalfCoeff = childNodes.get(i + 3).childNode(0).childNode(0).outerHtml();
+                under2AndHalf.getCoeff().setValue(Double.valueOf(underOver2AndHalfCoeff));
+            }
+
+            if (text.contains("(3.5) больше")) {
+                String underOver3AndHalfCoeff = childNodes.get(i + 3).childNode(0).childNode(0).outerHtml();
+                under3AndHalf.getCoeff().setValue(Double.valueOf(underOver3AndHalfCoeff));
+            }
+        }
     }
 }

@@ -11,7 +11,10 @@ public class CoeffTotalBlock extends CoeffContainer {
         super(Arrays.asList(
                 new CoeffTotalOverBlock(),
                 new CoeffTotalUnderBlock(),
-                new CoeffBothTeamTotalOverBlock()
+                new CoeffBothTeamTotalOverBlock(),
+                new CoeffBothTeamTotalUnderBlock(),
+                new CoeffTeamTotalOverBlock(),
+                new CoeffTeamTotalUnderBlock()
         ), ContainerType.TOTAL);
     }
 }
