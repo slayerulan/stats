@@ -38,10 +38,14 @@ public class HockeyCoeffsMatchParser {
     @Autowired
     HockeyDownloaderConfiguration hockeyDownloaderConfiguration;
 
-    public void parse(HockeyFutureMatch hockeyFutureMatch) throws URISyntaxException {
+    public CoeffBlock parse(HockeyFutureMatch hockeyFutureMatch)  {
 
-        Path path = Paths.get(getClass().getClassLoader()
-                .getResource("parimatch-nhl-example.html").toURI());
+        Path path = null;
+        try {
+            path = Paths.get(getClass().getClassLoader()
+                    .getResource("parimatch-nhl-example.html").toURI());
+        } catch (URISyntaxException e) {
+        }
         Document html = downloader.downloadFile(new File(path.toUri()));
         //Document html = downloader.download(hockeyDownloaderConfiguration.getNhlUr());
 
@@ -54,9 +58,7 @@ public class HockeyCoeffsMatchParser {
         Element matchCoeffsTbodyTag = matchTbodyTag.nextElementSibling();
 
         fillTotalBlock(matchCoeffsTbodyTag, coeffBlock.findByType(ContainerType.TOTAL), hockeyFutureMatch);
-        String a = "";
-
-
+        return coeffBlock;
     }
 
     private void fillTotalBlock(Element element, CoeffContainer totalContainer, HockeyFutureMatch match) {
