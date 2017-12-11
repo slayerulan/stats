@@ -13,6 +13,10 @@ public class CoeffTotalOverBlock extends CoeffContainer {
                 new CoeffContainer(
                         new Coeff(),
                         ContainerType.OVER_4_5
+                ),
+                new CoeffContainer(
+                        new Coeff(),
+                        ContainerType.OVER_5_5
                 )
         ), ContainerType.TOTAL_OVER);
     }

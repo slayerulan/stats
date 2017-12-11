@@ -27,4 +27,19 @@ public class CoeffContainer {
         this.type = type;
         this.leaf = true;
     }
+
+    public CoeffContainer findByType(ContainerType type) {
+        if (this.type == type) {
+            return this;
+        }
+        if (!leaf) {
+            for (CoeffContainer childBlock : childrenBlocks) {
+                CoeffContainer byType = childBlock.findByType(type);
+                if (byType != null) {
+                    return byType;
+                }
+            }
+        }
+        return null;
+    }
 }
