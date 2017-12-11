@@ -81,12 +81,16 @@ public class HockeyCoeffsMatchParser {
         CoeffContainer over5AndHalf = totalOverContainer.findByType(ContainerType.OVER_5_5);
         for (int i = 0; i < childNodes.size(); i++) {
             Node child = childNodes.get(i);
-            if (child instanceof TextNode && "(4.5) больше ".equals(((TextNode) child).text())) {
+            if (!(child instanceof TextNode)) {
+                continue;
+            }
+            String text = ((TextNode) child).text();
+            if (text.contains("(4.5) больше ")) {
                 String totalOver4AndHalfCoeff = childNodes.get(i + 1).childNode(0).childNode(0).outerHtml();
                 over4AndHalf.getCoeff().setValue(Double.valueOf(totalOver4AndHalfCoeff));
             }
 
-            if (child instanceof TextNode && "(5.5) больше ".equals(((TextNode) child).text())) {
+            if (text.contains("(5.5) больше ")) {
                 String totalOver5AndHalfCoeff = childNodes.get(i + 1).childNode(0).childNode(0).outerHtml();
                 over5AndHalf.getCoeff().setValue(Double.valueOf(totalOver5AndHalfCoeff));
             }
@@ -104,12 +108,16 @@ public class HockeyCoeffsMatchParser {
         CoeffContainer under6AndHalf = totalUnderContainer.findByType(ContainerType.UNDER_6_5);
         for (int i = 0; i < childNodes.size(); i++) {
             Node child = childNodes.get(i);
-            if (child instanceof TextNode && "(5.5) больше ".equals(((TextNode) child).text())) {
+            if (!(child instanceof TextNode)) {
+                continue;
+            }
+            String text = ((TextNode) child).text();
+            if (text.contains("(5.5) больше ")) {
                 String totalUnder5AndHalfCoeff = childNodes.get(i + 3).childNode(0).childNode(0).outerHtml();
                 under5AndHalf.getCoeff().setValue(Double.valueOf(totalUnder5AndHalfCoeff));
             }
 
-            if (child instanceof TextNode && "(6.5) больше ".equals(((TextNode) child).text())) {
+            if (text.contains("(6.5) больше ")) {
                 String totalUnder6AndHalfCoeff = childNodes.get(i + 3).childNode(0).childNode(0).outerHtml();
                 under6AndHalf.getCoeff().setValue(Double.valueOf(totalUnder6AndHalfCoeff));
             }
