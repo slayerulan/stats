@@ -5,6 +5,7 @@ import com.savik.hockey.repository.HockeyFutureMatchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.net.URISyntaxException;
 import java.util.List;
 
 
@@ -18,7 +19,7 @@ public class HockeyCoeffsMatchTest {
     HockeyCoeffsMatchParser hockeyCoeffsMatchParser;
 
 
-    public void parse() {
+    public void parse() throws URISyntaxException {
         List<HockeyFutureMatch> all = hockeyFutureMatchRepository.findAll();
         hockeyCoeffsMatchParser.parse(all.get(0));
         String a = "";

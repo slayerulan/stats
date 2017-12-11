@@ -9,7 +9,8 @@ import java.util.Arrays;
 public class CoeffTotalBlock extends CoeffContainer {
     public CoeffTotalBlock() {
         super(Arrays.asList(
-                new CoeffTotalOverBlock()
+                new CoeffTotalOverBlock(),
+                new CoeffTotalUnderBlock()
         ), ContainerType.TOTAL);
     }
 }

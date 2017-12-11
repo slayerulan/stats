@@ -7,6 +7,7 @@ import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -47,6 +48,14 @@ public class Downloader {
     public Document download(String url) {
         try {
             return Jsoup.connect(url).header("X-Fsign", configuration.getFsign()).get();
+        } catch (IOException e) {
+            throw new ParseException(e);
+        }
+    }
+
+    public Document downloadFile(File file) {
+        try {
+            return Jsoup.parse(file, "UTF-8");
         } catch (IOException e) {
             throw new ParseException(e);
         }
