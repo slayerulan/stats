@@ -13,7 +13,10 @@ public class Config {
     public static PropertySourcesPlaceholderConfigurer properties() {
         PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer = new PropertySourcesPlaceholderConfigurer();
         YamlPropertiesFactoryBean yaml = new YamlPropertiesFactoryBean();
-        yaml.setResources(new ClassPathResource("downloader-config.yml"));
+        yaml.setResources(
+                new ClassPathResource("downloader-config.yml"),
+                new ClassPathResource("hockey-coeffs-config.yml")
+        );
         propertySourcesPlaceholderConfigurer.setProperties(yaml.getObject());
         return propertySourcesPlaceholderConfigurer;
     }
