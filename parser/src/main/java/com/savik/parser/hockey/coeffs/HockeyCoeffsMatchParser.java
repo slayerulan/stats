@@ -13,6 +13,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -58,6 +59,8 @@ public class HockeyCoeffsMatchParser {
         Element matchCoeffsTbodyTag = matchTbodyTag.nextElementSibling();
 
         fillTotalBlock(matchCoeffsTbodyTag, coeffBlock.findByType(ContainerType.TOTAL), hockeyFutureMatch);
+        fillOtherBlock(matchCoeffsTbodyTag, coeffBlock.findByType(ContainerType.OTHER), hockeyFutureMatch);
+
         return coeffBlock;
     }
 
@@ -238,4 +241,222 @@ public class HockeyCoeffsMatchParser {
             }
         }
     }
+
+
+    private void fillOtherBlock(Element element, CoeffContainer otherContainer, HockeyFutureMatch match) {
+        fillPeriodAnyWinAndDiffEqualsBlock(element, otherContainer.findByType(ContainerType.ANY_WIN_AND_DIFFERENCE_EQUALS));
+
+        fillTeamWinAndTotalOverBlock(element, otherContainer.findByType(ContainerType.TEAM_WIN_AND_TOTAL_OVER), match.getHomeTeam());
+        fillTeamWinAndTotalUnderBlock(element, otherContainer.findByType(ContainerType.TEAM_WIN_AND_TOTAL_UNDER), match.getHomeTeam());
+        fillTeamNotLooseAndTotalOverBlock(element, otherContainer.findByType(ContainerType.TEAM_NOT_LOOSE_AND_TOTAL_OVER), match.getHomeTeam());
+        fillTeamNotLooseAndTotalUnderBlock(element, otherContainer.findByType(ContainerType.TEAM_NOT_LOOSE_AND_TOTAL_UNDER), match.getHomeTeam());
+
+        fillTeamWinAndTotalOverBlock(element, otherContainer.findByType(ContainerType.OPPOSING_TEAM_WIN_AND_TOTAL_OVER), match.getGuestTeam());
+        fillTeamWinAndTotalUnderBlock(element, otherContainer.findByType(ContainerType.OPPOSING_TEAM_WIN_AND_TOTAL_UNDER), match.getGuestTeam());
+        fillTeamNotLooseAndTotalOverBlock(element, otherContainer.findByType(ContainerType.OPPOSING_TEAM_NOT_LOOSE_AND_TOTAL_OVER), match.getGuestTeam());
+        fillTeamNotLooseAndTotalUnderBlock(element, otherContainer.findByType(ContainerType.OPPOSING_TEAM_NOT_LOOSE_AND_TOTAL_UNDER), match.getGuestTeam());
+    }
+
+
+    private void fillPeriodAnyWinAndDiffEqualsBlock(Element element, CoeffContainer container) {
+
+        Element diff1Block = element.select("i:containsOwn(победа любой команды в 1 шайбу)")
+                .first();
+        Element diff1PositiveElement = diff1Block.nextElementSibling().child(0).child(0);
+        Element diff1Negativelement = diff1Block.nextElementSibling()
+                .nextElementSibling().child(0).child(0);
+
+        CoeffContainer diff1Container = container.findByType(ContainerType.DIFF_1);
+        diff1Container.getCoeff().set(
+                Double.valueOf(diff1PositiveElement.text()),
+                Double.valueOf(diff1Negativelement.text())
+        );
+
+        Element diff2ElementBlock = element.select("i:containsOwn(победа любой команды в 2 шайбы)")
+                .first();
+        Element diff2PositiveElement = diff2ElementBlock.nextElementSibling().child(0).child(0);
+        Element diff2NegativeElement = diff2ElementBlock.nextElementSibling()
+                .nextElementSibling().child(0).child(0);
+
+        CoeffContainer diff2Container = container.findByType(ContainerType.DIFF_2);
+        diff2Container.getCoeff().set(
+                Double.valueOf(diff2PositiveElement.text()),
+                Double.valueOf(diff2NegativeElement.text())
+        );
+
+
+        Element diff3OrMoeElementBlock = element.select("i:containsOwn(победа любой команды в 3 или более шайбы)")
+                .first();
+        Element diff3OrMorePositiveElement = diff3OrMoeElementBlock.nextElementSibling().child(0).child(0);
+        Element diff3OrMoreNegativeElement = diff3OrMoeElementBlock.nextElementSibling()
+                .nextElementSibling().child(0).child(0);
+
+        CoeffContainer diff3Container = container.findByType(ContainerType.DIFF_3_OR_MORE);
+        diff3Container.getCoeff().set(
+                Double.valueOf(diff3OrMorePositiveElement.text()),
+                Double.valueOf(diff3OrMoreNegativeElement.text())
+        );
+    }
+
+    private void fillTeamWinAndTotalOverBlock(Element element, CoeffContainer container, Team homeTeam) {
+
+        Elements elements = element.select("i:containsOwn(победит и тотал больше 4.5)");
+
+        for (int i = 0; i < elements.size(); i++) {
+            Element child = elements.get(i);
+            if(child.text().contains(homeTeam.getName())) {
+                Element over1AndHalfPositiveElement = child.nextElementSibling().child(0).child(0);
+                Element over1AndHalfNegativelement = child.nextElementSibling()
+                        .nextElementSibling().child(0).child(0);
+
+                CoeffContainer over4AndHalfContainer = container.findByType(ContainerType.OVER_4_5);
+                over4AndHalfContainer.getCoeff().set(
+                        Double.valueOf(over1AndHalfPositiveElement.text()),
+                        Double.valueOf(over1AndHalfNegativelement.text())
+                );
+            }
+
+        }
+
+        elements = element.select("i:containsOwn(победит и тотал больше 5.5)");
+
+        for (int i = 0; i < elements.size(); i++) {
+            Element child = elements.get(i);
+            if(child.text().contains(homeTeam.getName())) {
+                Element over1AndHalfPositiveElement = child.nextElementSibling().child(0).child(0);
+                Element over1AndHalfNegativelement = child.nextElementSibling()
+                        .nextElementSibling().child(0).child(0);
+
+                CoeffContainer over5AndHalfContainer = container.findByType(ContainerType.OVER_5_5);
+                over5AndHalfContainer.getCoeff().set(
+                        Double.valueOf(over1AndHalfPositiveElement.text()),
+                        Double.valueOf(over1AndHalfNegativelement.text())
+                );
+            }
+
+        }
+
+    }
+
+
+    private void fillTeamWinAndTotalUnderBlock(Element element, CoeffContainer container, Team homeTeam) {
+
+        Elements elements = element.select("i:containsOwn(победит и тотал меньше 4.5)");
+
+        for (int i = 0; i < elements.size(); i++) {
+            Element child = elements.get(i);
+            if(child.text().contains(homeTeam.getName())) {
+                Element over1AndHalfPositiveElement = child.nextElementSibling().child(0).child(0);
+                Element over1AndHalfNegativelement = child.nextElementSibling()
+                        .nextElementSibling().child(0).child(0);
+
+                CoeffContainer over4AndHalfContainer = container.findByType(ContainerType.UNDER_4_5);
+                over4AndHalfContainer.getCoeff().set(
+                        Double.valueOf(over1AndHalfPositiveElement.text()),
+                        Double.valueOf(over1AndHalfNegativelement.text())
+                );
+            }
+
+        }
+
+        elements = element.select("i:containsOwn(победит и тотал меньше 5.5)");
+
+        for (int i = 0; i < elements.size(); i++) {
+            Element child = elements.get(i);
+            if(child.text().contains(homeTeam.getName())) {
+                Element over1AndHalfPositiveElement = child.nextElementSibling().child(0).child(0);
+                Element over1AndHalfNegativelement = child.nextElementSibling()
+                        .nextElementSibling().child(0).child(0);
+
+                CoeffContainer over5AndHalfContainer = container.findByType(ContainerType.UNDER_5_5);
+                over5AndHalfContainer.getCoeff().set(
+                        Double.valueOf(over1AndHalfPositiveElement.text()),
+                        Double.valueOf(over1AndHalfNegativelement.text())
+                );
+            }
+
+        }
+
+    }
+
+    private void fillTeamNotLooseAndTotalOverBlock(Element element, CoeffContainer container, Team homeTeam) {
+
+        Elements elements = element.select("i:containsOwn(не проиграет и тотал больше 4.5)");
+
+        for (int i = 0; i < elements.size(); i++) {
+            Element child = elements.get(i);
+            if(child.text().contains(homeTeam.getName())) {
+                Element over1AndHalfPositiveElement = child.nextElementSibling().child(0).child(0);
+                Element over1AndHalfNegativelement = child.nextElementSibling()
+                        .nextElementSibling().child(0).child(0);
+
+                CoeffContainer over4AndHalfContainer = container.findByType(ContainerType.OVER_4_5);
+                over4AndHalfContainer.getCoeff().set(
+                        Double.valueOf(over1AndHalfPositiveElement.text()),
+                        Double.valueOf(over1AndHalfNegativelement.text())
+                );
+            }
+
+        }
+
+        elements = element.select("i:containsOwn(не проиграет и тотал больше 5.5)");
+
+        for (int i = 0; i < elements.size(); i++) {
+            Element child = elements.get(i);
+            if(child.text().contains(homeTeam.getName())) {
+                Element over1AndHalfPositiveElement = child.nextElementSibling().child(0).child(0);
+                Element over1AndHalfNegativelement = child.nextElementSibling()
+                        .nextElementSibling().child(0).child(0);
+
+                CoeffContainer over5AndHalfContainer = container.findByType(ContainerType.OVER_5_5);
+                over5AndHalfContainer.getCoeff().set(
+                        Double.valueOf(over1AndHalfPositiveElement.text()),
+                        Double.valueOf(over1AndHalfNegativelement.text())
+                );
+            }
+
+        }
+
+    }
+
+    private void fillTeamNotLooseAndTotalUnderBlock(Element element, CoeffContainer container, Team homeTeam) {
+
+        Elements elements = element.select("i:containsOwn(не проиграет и тотал меньше 4.5)");
+
+        for (int i = 0; i < elements.size(); i++) {
+            Element child = elements.get(i);
+            if(child.text().contains(homeTeam.getName())) {
+                Element over1AndHalfPositiveElement = child.nextElementSibling().child(0).child(0);
+                Element over1AndHalfNegativelement = child.nextElementSibling()
+                        .nextElementSibling().child(0).child(0);
+
+                CoeffContainer over4AndHalfContainer = container.findByType(ContainerType.UNDER_4_5);
+                over4AndHalfContainer.getCoeff().set(
+                        Double.valueOf(over1AndHalfPositiveElement.text()),
+                        Double.valueOf(over1AndHalfNegativelement.text())
+                );
+            }
+
+        }
+
+        elements = element.select("i:containsOwn(не проиграет и тотал меньше 5.5)");
+
+        for (int i = 0; i < elements.size(); i++) {
+            Element child = elements.get(i);
+            if(child.text().contains(homeTeam.getName())) {
+                Element over1AndHalfPositiveElement = child.nextElementSibling().child(0).child(0);
+                Element over1AndHalfNegativelement = child.nextElementSibling()
+                        .nextElementSibling().child(0).child(0);
+
+                CoeffContainer over5AndHalfContainer = container.findByType(ContainerType.UNDER_5_5);
+                over5AndHalfContainer.getCoeff().set(
+                        Double.valueOf(over1AndHalfPositiveElement.text()),
+                        Double.valueOf(over1AndHalfNegativelement.text())
+                );
+            }
+
+        }
+
+    }
 }
+
