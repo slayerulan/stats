@@ -42,4 +42,18 @@ public class CoeffContainer {
         }
         return null;
     }
+
+    public CoeffContainer findByTypeInFirstLevel(ContainerType type) {
+        if (this.type == type) {
+            return this;
+        }
+        if (!leaf) {
+            for (CoeffContainer childBlock : childrenBlocks) {
+                if (childBlock.getType() == type) {
+                    return childBlock;
+                }
+            }
+        }
+        return null;
+    }
 }

@@ -93,22 +93,19 @@ public class CoefficientsAnalyzer {
     }
 
     private static PossibleBetResultContainer handleContainer(CoeffContainer coeffContainer, PossibleBetContainer betContainer) {
-        List<? extends CoeffContainer> coeffContainerChildrenBlocks = coeffContainer.getChildrenBlocks();
         List<PossibleBetContainer> possibleBetContainerBlocks = betContainer.getChildrenBetBlocks();
         // TODO: remove
             /*if (coeffContainerChildrenBlocks.size() != possibleBetContainerBlocks.size()) {
                 throw new IllegalArgumentException("coeffContainer is incompatible with betContainer");
             }*/
         List<PossibleBetResultContainer> childBlocks = new ArrayList<>();
-        for (int i = 0; i < coeffContainerChildrenBlocks.size(); i++) {
+        for (int i = 0; i < possibleBetContainerBlocks.size(); i++) {
             PossibleBetContainer childPossibleBetContainer = possibleBetContainerBlocks.get(i);
-            CoeffContainer childCoeffContainer = coeffContainerChildrenBlocks.get(i);
-            if (childPossibleBetContainer.getType() != childCoeffContainer.getType()) {
-                throw new IllegalArgumentException("childPossibleBetContainer type = " + childPossibleBetContainer.getType() + "," +
-                        " childCoeffContainer type = " + childCoeffContainer.getType());
+            CoeffContainer childCoeffContainer = coeffContainer.findByTypeInFirstLevel(childPossibleBetContainer.getType());
+            if(childCoeffContainer != null) {
+                PossibleBetResultContainer childResult = analyze(childCoeffContainer, childPossibleBetContainer);
+                childBlocks.add(childResult);
             }
-            PossibleBetResultContainer childResult = analyze(childCoeffContainer, childPossibleBetContainer);
-            childBlocks.add(childResult);
         }
 
         return new PossibleBetResultContainer(

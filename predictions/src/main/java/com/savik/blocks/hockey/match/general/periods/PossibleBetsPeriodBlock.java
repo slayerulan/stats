@@ -7,11 +7,9 @@ import com.savik.Period;
 import com.savik.PossibleBetContainer;
 import com.savik.bets.general.periods.PeriodAnyWinnerPossibleBet;
 import com.savik.bets.general.periods.PeriodDrawPossibleBet;
+import com.savik.bets.general.periods.PeriodOpposingTeamNotLoosePossibleBet;
 import com.savik.bets.general.periods.PeriodTeamNotLoosePossibleBet;
-import com.savik.bets.general.total.PeriodBothTeamTotalOverPossibleBet;
-import com.savik.bets.general.total.PeriodOpposingTeamTotalOverPossibleBet;
-import com.savik.bets.general.total.PeriodTeamTotalOverPossibleBet;
-import com.savik.bets.general.total.PeriodTotalOverPossibleBet;
+import com.savik.bets.general.total.*;
 import com.savik.hockey.model.HockeyMatch;
 
 import java.util.Arrays;
@@ -34,13 +32,34 @@ public class PossibleBetsPeriodBlock extends PossibleBetContainer<HockeyMatch> {
                         ContainerType.TEAM_NOT_LOOSE
                 ),
                 new PossibleBetContainer<>(
+                        new PeriodOpposingTeamNotLoosePossibleBet<>(homeMatchData, guestMatchData, function),
+                        ContainerType.OPPOSING_TEAM_NOT_LOOSE
+                ),
+                new PossibleBetContainer<>(
                         Arrays.asList(
+                                new PossibleBetContainer<>(
+                                        new PeriodTotalOverPossibleBet<>(function, 0.5),
+                                        ContainerType.OVER_0_5
+                                ),
                                 new PossibleBetContainer<>(
                                         new PeriodTotalOverPossibleBet<>(function, 1.5),
                                         ContainerType.OVER_1_5
                                 )
                         ),
                         ContainerType.TOTAL_OVER
+                ),
+                new PossibleBetContainer<>(
+                        Arrays.asList(
+                                new PossibleBetContainer<>(
+                                        new PeriodTotalUnderPossibleBet<>(function, 1.5),
+                                        ContainerType.UNDER_1_5
+                                ),
+                                new PossibleBetContainer<>(
+                                        new PeriodTotalUnderPossibleBet<>(function, 2.5),
+                                        ContainerType.UNDER_2_5
+                                )
+                        ),
+                        ContainerType.TOTAL_UNDER
                 ),
                 new PossibleBetContainer<>(
                         Arrays.asList(
