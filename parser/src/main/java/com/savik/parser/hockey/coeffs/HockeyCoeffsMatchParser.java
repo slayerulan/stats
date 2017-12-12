@@ -222,6 +222,7 @@ public class HockeyCoeffsMatchParser {
         fillTeamNotLooseAndTotalOverBlock(element, otherContainer.findByType(ContainerType.OPPOSING_TEAM_NOT_LOOSE_AND_TOTAL_OVER), match.getGuestTeam());
         fillTeamNotLooseAndTotalUnderBlock(element, otherContainer.findByType(ContainerType.OPPOSING_TEAM_NOT_LOOSE_AND_TOTAL_UNDER), match.getGuestTeam());
 
+        fillTotalOverInAllPeriodsBlock(element, otherContainer.findByType(ContainerType.TOTAL_OVER_ALL_PERIODS));
         fillTeamTotalOverInAllPeriodsBlock(element, otherContainer.findByType(ContainerType.TEAM_TOTAL_OVER_ALL_PERIODS), match.getHomeTeam());
         fillTeamTotalOverInAllPeriodsBlock(element, otherContainer.findByType(ContainerType.OPPOSING_TEAM_TOTAL_OVER_ALL_PERIODS), match.getGuestTeam());
 
@@ -231,7 +232,10 @@ public class HockeyCoeffsMatchParser {
         fillTeamWinAtLeastNPeriodsBlock(element, otherContainer.findByType(ContainerType.OPPOSING_TEAM_WIN_AT_LEAST_N_PERIODS), match.getGuestTeam());
 
         fillDrawAtLeastNPeriodsBlock(element, otherContainer.findByType(ContainerType.DRAW_AT_LEAST_N_PERIODS));
+        fillMostEffectivePeriodTotalOverBlock(element, otherContainer.findByType(ContainerType.MOST_EFFECTIVE_PERIOD_TOTAL_OVER));
 
+        fillTeamFirstScoredAndWinBlock(element, otherContainer.findByType(ContainerType.TEAM_FIRST_SCORED_AND_WIN), match.getHomeTeam());
+        fillTeamFirstScoredAndWinBlock(element, otherContainer.findByType(ContainerType.OPPOSING_TEAM_FIRST_SCORED_AND_WIN), match.getGuestTeam());
 
     }
 
@@ -288,6 +292,16 @@ public class HockeyCoeffsMatchParser {
         );
     }
 
+    private void fillTotalOverInAllPeriodsBlock(Element element, CoeffContainer container) {
+
+        fillBetWithSinglePossibleOption(
+                element, container,
+                Arrays.asList(
+                        new BetEntry("Тотал самого нерезультативного периода больше 0,5", ContainerType.OVER_0_5)
+                )
+        );
+
+    }
 
     private void fillTeamTotalOverInAllPeriodsBlock(Element element, CoeffContainer container, Team team) {
 
@@ -331,6 +345,27 @@ public class HockeyCoeffsMatchParser {
                 )
         );
 
+    }
+
+    private void fillMostEffectivePeriodTotalOverBlock(Element element, CoeffContainer container) {
+
+        fillBetWithSinglePossibleOption(
+                element, container,
+                Arrays.asList(
+                        new BetEntry("Тотал самого результативного периода больше 2,5", ContainerType.OVER_2_5),
+                        new BetEntry("Тотал самого результативного периода больше 3,5", ContainerType.OVER_3_5)
+                )
+        );
+
+    }
+
+    private void fillTeamFirstScoredAndWinBlock(Element element, CoeffContainer container, Team team) {
+        fillBetWithPossibleOptionsForTeam(
+                element, container,
+                Arrays.asList(
+                        new BetEntry("забросит шайбу первой и выиграет", ContainerType.TEAM_FIRST_SCORED_AND_WIN)
+                ), team
+        );
     }
 
     private void fillBetWithPossibleOptionsForTeam(Element element, CoeffContainer container, List<BetEntry> betEntries, Team team) {
