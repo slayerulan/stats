@@ -7,13 +7,13 @@ import com.savik.ContainerType;
 
 import java.util.Arrays;
 
-public class CoeffTeamTotalOverInAllPeriodsBlock extends CoeffContainer {
-    public CoeffTeamTotalOverInAllPeriodsBlock() {
+public class CoeffOpposingTeamTotalOverInAllPeriodsBlock extends CoeffContainer {
+    public CoeffOpposingTeamTotalOverInAllPeriodsBlock() {
         super(Arrays.asList(
                 new CoeffContainer(
-                        new Coeff(),
+                        new Coeff(1.6),
                         ContainerType.OVER_0_5
                 )
-        ), ContainerType.TEAM_TOTAL_OVER_ALL_PERIODS);
+        ), ContainerType.OPPOSING_TEAM_TOTAL_OVER_ALL_PERIODS);
     }
 }

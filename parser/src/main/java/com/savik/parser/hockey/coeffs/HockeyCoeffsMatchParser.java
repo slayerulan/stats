@@ -223,6 +223,9 @@ public class HockeyCoeffsMatchParser {
         fillTeamNotLooseAndTotalUnderBlock(element, otherContainer.findByType(ContainerType.OPPOSING_TEAM_NOT_LOOSE_AND_TOTAL_UNDER), match.getGuestTeam());
 
         fillTeamTotalOverInAllPeriodsBlock(element, otherContainer.findByType(ContainerType.TEAM_TOTAL_OVER_ALL_PERIODS), match.getHomeTeam());
+        fillTeamTotalOverInAllPeriodsBlock(element, otherContainer.findByType(ContainerType.OPPOSING_TEAM_TOTAL_OVER_ALL_PERIODS), match.getGuestTeam());
+
+        fillTotalUnderInAllPeriodsBlock(element, otherContainer.findByType(ContainerType.TOTAL_UNDER_ALL_PERIODS));
 
 
     }
@@ -286,6 +289,18 @@ public class HockeyCoeffsMatchParser {
         fillBetWithPossibleOptionsForTeam(
                 element, container,
                 Arrays.asList(new BetEntry("забьет в каждом периоде:", ContainerType.OVER_0_5)), team
+        );
+
+    }
+
+    private void fillTotalUnderInAllPeriodsBlock(Element element, CoeffContainer container) {
+
+        fillBetWithSinglePossibleOption(
+                element, container,
+                Arrays.asList(
+                        new BetEntry("каждый период меньше 2,5", ContainerType.UNDER_2_5),
+                        new BetEntry("каждый период меньше 3,5", ContainerType.UNDER_3_5)
+                )
         );
 
     }
