@@ -33,6 +33,7 @@ public class CoeffOtherBlock extends CoeffContainer {
                 new CoeffOpposingTeamWinAtLeastNPeriodsBlock(),
 
                 new CoeffDrawAtLeastNPeriodsBlock(),
+                new CoeffMostEffectivePeriodTotalOverBlock(),
 
                 new CoeffTeamFirstScoredAndWinBlock(),
                 new CoeffOpposingTeamFirstScoredAndWinBlock()

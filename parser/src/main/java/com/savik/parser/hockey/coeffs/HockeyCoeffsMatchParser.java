@@ -234,8 +234,8 @@ public class HockeyCoeffsMatchParser {
         fillDrawAtLeastNPeriodsBlock(element, otherContainer.findByType(ContainerType.DRAW_AT_LEAST_N_PERIODS));
         fillMostEffectivePeriodTotalOverBlock(element, otherContainer.findByType(ContainerType.MOST_EFFECTIVE_PERIOD_TOTAL_OVER));
 
-        fillTeamFirstScoredAndWinBlock(element, otherContainer.findByType(ContainerType.TEAM_FIRST_SCORED_AND_WIN), match.getHomeTeam());
-        fillTeamFirstScoredAndWinBlock(element, otherContainer.findByType(ContainerType.OPPOSING_TEAM_FIRST_SCORED_AND_WIN), match.getGuestTeam());
+        fillTeamFirstScoredAndWinBlock(element, otherContainer.findByType(ContainerType.TEAM_FIRST_SCORED_AND_WIN), ContainerType.TEAM_FIRST_SCORED_AND_WIN, match.getHomeTeam());
+        fillTeamFirstScoredAndWinBlock(element, otherContainer.findByType(ContainerType.OPPOSING_TEAM_FIRST_SCORED_AND_WIN), ContainerType.OPPOSING_TEAM_FIRST_SCORED_AND_WIN, match.getGuestTeam());
 
     }
 
@@ -359,11 +359,11 @@ public class HockeyCoeffsMatchParser {
 
     }
 
-    private void fillTeamFirstScoredAndWinBlock(Element element, CoeffContainer container, Team team) {
+    private void fillTeamFirstScoredAndWinBlock(Element element, CoeffContainer container, ContainerType type, Team team) {
         fillBetWithPossibleOptionsForTeam(
                 element, container,
                 Arrays.asList(
-                        new BetEntry("забросит шайбу первой и выиграет", ContainerType.TEAM_FIRST_SCORED_AND_WIN)
+                        new BetEntry("забросит шайбу первой и выиграет", type)
                 ), team
         );
     }
