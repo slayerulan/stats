@@ -28,8 +28,11 @@ public class CoeffOtherBlock extends CoeffContainer {
                 new CoeffOpposingTeamTotalOverInAllPeriodsBlock(),
 
                 new CoeffTotalUnderInAllPeriodsBlock(),
+
                 new CoeffTeamWinAtLeastNPeriodsBlock(),
-                new CoeffOpposingTeamWinAtLeastNPeriodsBlock()
+                new CoeffOpposingTeamWinAtLeastNPeriodsBlock(),
+
+                new CoeffDrawAtLeastNPeriodsBlock()
         ), ContainerType.OTHER);
     }
 }
