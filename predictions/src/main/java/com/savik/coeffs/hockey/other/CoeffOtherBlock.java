@@ -21,7 +21,8 @@ public class CoeffOtherBlock extends CoeffContainer {
             new CoeffPeriodOpposingTeamWinAndTotalOverBlock(),
             new CoeffPeriodOpposingTeamWinAndTotalUnderBlock(),
             new CoeffPeriodOpposingTeamNotLooseAndTotalOverBlock(),
-            new CoeffPeriodOpposingTeamNotLooseAndTotalUnderBlock()
+            new CoeffPeriodOpposingTeamNotLooseAndTotalUnderBlock(),
+            new CoeffTotalOverInAllPeriodsBlock()
         ), ContainerType.OTHER);
     }
 }
