@@ -33,6 +33,9 @@ public class CoefficientsAnalyzer {
         Double secondTeamContainerPercentage = (double) possibleBet.getSecondTeamPercentage() / 100;
 
         possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.SO_SO);
+        possibleBetResultContainer.setFirstTeamPercentage(firstTeamContainerPercentage);
+        possibleBetResultContainer.setSecondTeamPercentage(secondTeamContainerPercentage);
+
         if (coeff.getStatus() == CoeffType.SINGLE) {
             handleSingleCoeff(
                     coeff, possibleBetResultContainer, firstTeamContainerPercentage, secondTeamContainerPercentage);

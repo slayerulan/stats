@@ -29,6 +29,10 @@ public class PossibleBetResultContainer {
 
     private double valueBet;
 
+    private Double firstTeamPercentage;
+
+    private Double secondTeamPercentage;
+
 
     public PossibleBetResultContainer(List<PossibleBetResultContainer> childrenBlocks, ContainerType type) {
         this.childrenBlocks = childrenBlocks;
