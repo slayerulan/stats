@@ -8,6 +8,7 @@ import java.util.List;
 public class CoefficientsAnalyzer {
 
     public static double LOW_VALUE_BORDER = 1.1;
+    public static double RISK_BET_LOW_VALUE_BORDER = 2.0;
 
     public static PossibleBetResultContainer analyze(CoeffContainer coeffContainer, PossibleBetContainer betContainer) {
         if (coeffContainer.getLeaf() && betContainer.getLeaf()) {
@@ -66,6 +67,12 @@ public class CoefficientsAnalyzer {
         possibleBetResultContainer.setValueBet(maxValue);
         if (maxValue > LOW_VALUE_BORDER) {
             possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD);
+
+            if ( (maxValue == firstTeamPositiveResult || maxValue == secondTeamPositiveResult) && positiveValue > RISK_BET_LOW_VALUE_BORDER) {
+                possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD_WITH_RISK);
+            } else if ( (maxValue == firstTeamNegativeResult || maxValue == secondTeamNegativeResult) && negativeValue > RISK_BET_LOW_VALUE_BORDER) {
+                possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD_WITH_RISK);
+            }
         }
 
         if (maxValue == firstTeamPositiveResult || maxValue == secondTeamPositiveResult) {
@@ -88,7 +95,11 @@ public class CoefficientsAnalyzer {
         }
 
         if (firstTeamResult > LOW_VALUE_BORDER || secondTeamResult > LOW_VALUE_BORDER) {
-            possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD);
+            if (value > RISK_BET_LOW_VALUE_BORDER) {
+                possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD_WITH_RISK);
+            } else {
+                possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD);
+            }
         }
     }
 
@@ -102,7 +113,7 @@ public class CoefficientsAnalyzer {
         for (int i = 0; i < possibleBetContainerBlocks.size(); i++) {
             PossibleBetContainer childPossibleBetContainer = possibleBetContainerBlocks.get(i);
             CoeffContainer childCoeffContainer = coeffContainer.findByTypeInFirstLevel(childPossibleBetContainer.getType());
-            if(childCoeffContainer != null) {
+            if (childCoeffContainer != null) {
                 PossibleBetResultContainer childResult = analyze(childCoeffContainer, childPossibleBetContainer);
                 childBlocks.add(childResult);
             }

@@ -1,3 +1,118 @@
-1. подумать что сделать со штрафным временем, т.к. паршу именно общее штрафное, а не кол-во малых нарушений.
+1. подумать что сделать со штрафным временем, т.к. паршу именно общее штрафное, а не кол-во малых нарушений. ( на майскоре вроде можно именно малые нарушения парсить )
 2. добавить новый интерфейс от PeriodBet, который будет использоваться везде, где нужно whoWon поле
 3. GeneralTeamTotalOverAllPeriodsBlock, OpposingTeamTotalOverInAllPeriodsBlock - добавить в тесты
+4. подумать как решить проблему :
+
+анализ ставки OPPOSING_TEAM_WIN_AND_TOTAL_UNDER 5.5 ( гостевая выиграет и тотал < 5.5)
+кэф на да 3.85 и домашнаяя команда так проигрывала в 35%, соо-но value = 3.85 * 0.35 = 1.34
+кэф на нет 1.23 и гости делали по итогу так ТОЛЬКО 1 раз из 35 матчей !!!!!! 3% !!!!!! , но value = 1.23 * 0.97 = 1.19
+пока мы выбираем 1 вариант, но это бред !
+{
+          "childrenBlocks": [
+            {
+              "type": "UNDER_5_5",
+              "leaf": true,
+              "coeff": {
+                "positiveValue": 3.85,
+                "negativeValue": 1.23,
+                "averageCoeff": false,
+                "status": "POSITIVE_NEGATIVE"
+              },
+              "firstTeamContainer": {
+                "leaf": true,
+                "analyzedMatchesAmount": 34,
+                "skippedMatchesAmount": 0,
+                "successfullyMatchesAmount": 12,
+                "successfullyMatches": [
+                  "{home=Баффало, guest=Тампа-Бэй, matchInfo={m={0-2}, {0-1}, {0-1}, {0-0}}, date=2017-11-29, myscoreCode='27iqlOfa'}",
+                  "{home=Монреаль, guest=Баффало, matchInfo={m={3-0}, {1-0}, {1-0}, {1-0}}, date=2017-11-26, myscoreCode='bZ2RNtap'}",
+                  "{home=Баффало, guest=Коламбус, matchInfo={m={2-3}, {0-0}, {0-1}, {2-2}}, date=2017-11-21, myscoreCode='KnbORzrS'}",
+                  "{home=Баффало, guest=Каролина, matchInfo={m={1-3}, {0-0}, {0-1}, {1-2}}, date=2017-11-19, myscoreCode='YVZtFcbM'}",
+                  "{home=Детройт, guest=Баффало, matchInfo={m={3-1}, {0-0}, {1-0}, {2-1}}, date=2017-11-18, myscoreCode='x4tYGJT9'}",
+                  "{home=Баффало, guest=Флорида, matchInfo={m={1-4}, {1-0}, {0-1}, {0-3}}, date=2017-11-11, myscoreCode='SbEtGOQP'}",
+                  "{home=Баффало, guest=Сан-Хосе, matchInfo={m={2-3}, {0-1}, {2-1}, {0-1}}, date=2017-10-28, myscoreCode='naL2j2ot'}",
+                  "{home=Баффало, guest=Айлендерс, matchInfo={m={1-3}, {0-1}, {1-1}, {0-1}}, date=2017-09-30, myscoreCode='IPWPxOZd'}",
+                  "{home=Сан-Хосе, guest=Баффало, matchInfo={m={3-2}, {2-1}, {1-1}, {0-0}}, date=2017-10-13, myscoreCode='0dl2c1us'}",
+                  "{home=Баффало, guest=Торонто, matchInfo={m={1-3}, {0-1}, {1-0}, {0-2}}, date=2017-09-24, myscoreCode='rX5pMpce'}",
+                  "{home=Торонто, guest=Баффало, matchInfo={m={3-0}, {0-0}, {1-0}, {2-0}}, date=2017-09-23, myscoreCode='4t7tNQsk'}",
+                  "{home=Баффало, guest=Питтсбург, matchInfo={m={0-4}, {0-3}, {0-1}, {0-0}}, date=2017-12-02, myscoreCode='fyoRbu9H'}"
+                ],
+                "unsuccessfullyMatches": [
+                  "{home=Баффало, guest=Эдмонтон, matchInfo={m={3-1}, {0-0}, {1-0}, {2-1}}, date=2017-11-25, myscoreCode='bBKvXpxb'}",
+                  "{home=Баффало, guest=Миннесота, matchInfo={m={4-5}, {1-3}, {2-2}, {1-0}}, date=2017-11-23, myscoreCode='YgvaLYKe'}",
+                  "{home=Питтсбург, guest=Баффало, matchInfo={m={4-4}, {1-2}, {2-2}, {1-0}}, date=2017-11-15, myscoreCode='vDleLJ25'}",
+                  "{home=Монреаль, guest=Баффало, matchInfo={m={1-1}, {0-1}, {0-0}, {1-0}}, date=2017-11-12, myscoreCode='4xsMl1pH'}",
+                  "{home=Баффало, guest=Вашингтон, matchInfo={m={3-1}, {0-0}, {1-1}, {2-0}}, date=2017-11-08, myscoreCode='2iie4RRD'}",
+                  "{home=Даллас, guest=Баффало, matchInfo={m={5-1}, {4-0}, {1-1}, {0-0}}, date=2017-11-05, myscoreCode='jk5F3fy3'}",
+                  "{home=Аризона, guest=Баффало, matchInfo={m={4-5}, {1-1}, {0-2}, {3-2}}, date=2017-11-03, myscoreCode='WpYlmZjM'}",
+                  "{home=Коламбус, guest=Баффало, matchInfo={m={5-1}, {1-0}, {3-0}, {1-1}}, date=2017-10-26, myscoreCode='O2ePxqHt'}",
+                  "{home=Баффало, guest=Детройт, matchInfo={m={1-0}, {0-0}, {1-0}, {0-0}}, date=2017-10-25, myscoreCode='WAmcZ9Al'}",
+                  "{home=Бостон, guest=Баффало, matchInfo={m={4-4}, {2-0}, {2-2}, {0-2}}, date=2017-10-22, myscoreCode='jaSLUW6T'}",
+                  "{home=Баффало, guest=Ванкувер, matchInfo={m={2-4}, {2-1}, {0-2}, {0-1}}, date=2017-10-21, myscoreCode='S0ZTopaI'}",
+                  "{home=Вегас, guest=Баффало, matchInfo={m={4-4}, {1-1}, {2-0}, {1-3}}, date=2017-10-18, myscoreCode='z9azJZ7H'}",
+                  "{home=Анахайм, guest=Баффало, matchInfo={m={1-3}, {0-1}, {1-1}, {0-1}}, date=2017-10-16, myscoreCode='dIv14zgO'}",
+                  "{home=Лос-Анджелес, guest=Баффало, matchInfo={m={4-2}, {0-1}, {1-0}, {3-1}}, date=2017-10-15, myscoreCode='6Tol7x95'}",
+                  "{home=Баффало, guest=Нью-Джерси, matchInfo={m={2-6}, {0-2}, {1-4}, {1-0}}, date=2017-10-09, myscoreCode='UkVet94k'}",
+                  "{home=Айлендерс, guest=Баффало, matchInfo={m={6-3}, {1-0}, {3-2}, {2-1}}, date=2017-10-08, myscoreCode='rZ6ETVKq'}",
+                  "{home=Баффало, guest=Монреаль, matchInfo={m={2-2}, {1-1}, {1-0}, {0-1}}, date=2017-10-06, myscoreCode='zkFSQN5e'}",
+                  "{home=Питтсбург, guest=Баффало, matchInfo={m={5-4}, {1-1}, {2-1}, {2-2}}, date=2017-09-28, myscoreCode='UoX397Dk'}",
+                  "{home=Баффало, guest=Питтсбург, matchInfo={m={3-3}, {1-0}, {1-1}, {1-2}}, date=2017-09-20, myscoreCode='A1jXETkS'}",
+                  "{home=Баффало, guest=Каролина, matchInfo={m={2-2}, {1-1}, {1-1}, {0-0}}, date=2017-09-19, myscoreCode='IPC2HkKm'}",
+                  "{home=Питтсбург, guest=Баффало, matchInfo={m={5-1}, {1-0}, {2-0}, {2-1}}, date=2017-12-03, myscoreCode='nV94CbwH'}",
+                  "{home=Колорадо, guest=Баффало, matchInfo={m={2-4}, {0-0}, {1-2}, {1-2}}, date=2017-12-06, myscoreCode='p6TBCJfE'}"
+                ],
+                "percentage": 35
+              },
+              "secondTeamContainer": {
+                "leaf": true,
+                "analyzedMatchesAmount": 33,
+                "skippedMatchesAmount": 0,
+                "successfullyMatchesAmount": 1,
+                "successfullyMatches": [
+                  "{home=Оттава, guest=Детройт, matchInfo={m={3-1}, {1-0}, {1-0}, {1-1}}, date=2017-11-03, myscoreCode='6LqSv5ae'}"
+                ],
+                "unsuccessfullyMatches": [
+                  "{home=Монреаль, guest=Оттава, matchInfo={m={2-1}, {0-1}, {2-0}, {0-0}}, date=2017-11-30, myscoreCode='dtc5Zwbd'}",
+                  "{home=Оттава, guest=Айлендерс, matchInfo={m={1-2}, {0-0}, {0-1}, {1-1}}, date=2017-11-26, myscoreCode='A96VM0Ej'}",
+                  "{home=Коламбус, guest=Оттава, matchInfo={m={5-2}, {1-1}, {1-1}, {3-0}}, date=2017-11-25, myscoreCode='6yOnVO6A'}",
+                  "{home=Вашингтон, guest=Оттава, matchInfo={m={5-2}, {2-0}, {2-1}, {1-1}}, date=2017-11-23, myscoreCode='j1VFSVpC'}",
+                  "{home=Рейнджерс, guest=Оттава, matchInfo={m={3-0}, {0-0}, {1-0}, {2-0}}, date=2017-11-20, myscoreCode='rNnZFh16'}",
+                  "{home=Оттава, guest=Аризона, matchInfo={m={2-2}, {1-1}, {1-0}, {0-1}}, date=2017-11-18, myscoreCode='EseIJz2s'}",
+                  "{home=Оттава, guest=Питтсбург, matchInfo={m={1-3}, {0-0}, {0-2}, {1-1}}, date=2017-11-17, myscoreCode='r1Bb3FH0'}",
+                  "{home=Оттава, guest=Колорадо, matchInfo={m={4-3}, {0-1}, {2-2}, {2-0}}, date=2017-11-11, myscoreCode='IuoQmLaN'}",
+                  "{home=Колорадо, guest=Оттава, matchInfo={m={3-3}, {1-2}, {1-1}, {1-0}}, date=2017-11-10, myscoreCode='CMSChqoh'}",
+                  "{home=Оттава, guest=Вегас, matchInfo={m={4-5}, {0-1}, {2-2}, {2-2}}, date=2017-11-04, myscoreCode='27TUbQjR'}",
+                  "{home=Оттава, guest=Монреаль, matchInfo={m={3-8}, {2-4}, {1-2}, {0-2}}, date=2017-10-31, myscoreCode='6L7zkkN2'}",
+                  "{home=Нью-Джерси, guest=Оттава, matchInfo={m={4-4}, {1-2}, {2-0}, {1-2}}, date=2017-10-28, myscoreCode='2RP8zj89'}",
+                  "{home=Оттава, guest=Филадельфия, matchInfo={m={5-4}, {3-0}, {1-2}, {1-2}}, date=2017-10-27, myscoreCode='hdrIDS0d'}",
+                  "{home=Оттава, guest=Лос-Анджелес, matchInfo={m={2-2}, {1-1}, {0-0}, {1-1}}, date=2017-10-25, myscoreCode='KW5Qza2h'}",
+                  "{home=Оттава, guest=Торонто, matchInfo={m={6-3}, {1-0}, {2-0}, {3-3}}, date=2017-10-22, myscoreCode='vu3n4REn'}",
+                  "{home=Оттава, guest=Нью-Джерси, matchInfo={m={4-4}, {1-2}, {3-0}, {0-2}}, date=2017-10-20, myscoreCode='xCtHlnFa'}",
+                  "{home=Оттава, guest=Ванкувер, matchInfo={m={0-3}, {0-1}, {0-1}, {0-1}}, date=2017-10-18, myscoreCode='6X5nZ6FC'}",
+                  "{home=Монреаль, guest=Оттава, matchInfo={m={9-2}, {3-1}, {1-0}, {5-1}}, date=2017-10-01, myscoreCode='no04d9Wn'}",
+                  "{home=Эдмонтон, guest=Оттава, matchInfo={m={1-6}, {0-2}, {0-1}, {1-3}}, date=2017-10-15, myscoreCode='pIHwyTp0'}",
+                  "{home=Калгари, guest=Оттава, matchInfo={m={0-6}, {0-1}, {0-1}, {0-4}}, date=2017-10-14, myscoreCode='vHxarBhQ'}",
+                  "{home=Ванкувер, guest=Оттава, matchInfo={m={2-2}, {1-1}, {1-0}, {0-1}}, date=2017-10-11, myscoreCode='lS96xL47'}",
+                  "{home=Оттава, guest=Детройт, matchInfo={m={1-1}, {0-0}, {0-0}, {1-1}}, date=2017-10-08, myscoreCode='8fJBmoD8'}",
+                  "{home=Оттава, guest=Вашингтон, matchInfo={m={4-4}, {1-1}, {1-0}, {2-3}}, date=2017-10-06, myscoreCode='G0WPPsL1'}",
+                  "{home=Виннипег, guest=Оттава, matchInfo={m={5-3}, {1-1}, {1-2}, {3-0}}, date=2017-09-28, myscoreCode='4MAackHt'}",
+                  "{home=Оттава, guest=Нью-Джерси, matchInfo={m={1-8}, {0-5}, {1-2}, {0-1}}, date=2017-09-26, myscoreCode='4UnCzJjp'}",
+                  "{home=Оттава, guest=Монреаль, matchInfo={m={5-1}, {2-0}, {2-1}, {1-0}}, date=2017-09-24, myscoreCode='2DOX1V8P'}",
+                  "{home=Торонто, guest=Оттава, matchInfo={m={2-5}, {2-1}, {0-1}, {0-3}}, date=2017-09-20, myscoreCode='EcVkwnWO'}",
+                  "{home=Оттава, guest=Торонто, matchInfo={m={6-2}, {4-1}, {2-0}, {0-1}}, date=2017-09-19, myscoreCode='z7WovSGI'}",
+                  "{home=Виннипег, guest=Оттава, matchInfo={m={5-0}, {2-0}, {3-0}, {0-0}}, date=2017-12-04, myscoreCode='KE4VA0K2'}",
+                  "{home=Айлендерс, guest=Оттава, matchInfo={m={5-6}, {2-3}, {3-2}, {0-1}}, date=2017-12-02, myscoreCode='hSt8gakS'}",
+                  "{home=Лос-Анджелес, guest=Оттава, matchInfo={m={3-3}, {1-1}, {1-1}, {1-1}}, date=2017-12-08, myscoreCode='Ma6NxPR2'}",
+                  "{home=Анахайм, guest=Оттава, matchInfo={m={3-0}, {0-0}, {2-0}, {1-0}}, date=2017-12-07, myscoreCode='bRKSGs5q'}"
+                ],
+                "percentage": 3
+              },
+              "possibleBetStatus": "GOOD_WITH_RISK",
+              "coeffType": "POSITIVE",
+              "valueBet": 1.3475
+            }
+          ],
+          "type": "OPPOSING_TEAM_WIN_AND_TOTAL_UNDER",
+          "leaf": false,
+          "valueBet": 0
+        }

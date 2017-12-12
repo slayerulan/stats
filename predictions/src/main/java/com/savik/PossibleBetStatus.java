@@ -6,5 +6,6 @@ package com.savik;
  */
 public enum PossibleBetStatus {
     GOOD,
+    GOOD_WITH_RISK,
     SO_SO
 }

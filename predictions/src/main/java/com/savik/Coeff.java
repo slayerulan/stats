@@ -13,7 +13,7 @@ public class Coeff {
 
     public Coeff() {
         // TODO: remove
-        this.value = 2.0;
+        this.value = 1.1;
         this.averageCoeff = true;
     }
 
