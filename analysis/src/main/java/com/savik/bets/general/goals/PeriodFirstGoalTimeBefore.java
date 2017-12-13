@@ -2,14 +2,14 @@ package com.savik.bets.general.goals;
 
 import com.savik.Period;
 import com.savik.PeriodBet;
-import lombok.*;
+import lombok.Getter;
 
 @Getter
 public class PeriodFirstGoalTimeBefore extends PeriodBet {
 
-    double amount;
+    int amount;
 
-    public PeriodFirstGoalTimeBefore(double amount) {
+    public PeriodFirstGoalTimeBefore(int amount) {
         this.amount = amount;
     }
 

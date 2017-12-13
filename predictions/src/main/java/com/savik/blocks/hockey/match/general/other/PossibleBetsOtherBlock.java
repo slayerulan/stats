@@ -16,6 +16,8 @@ public class PossibleBetsOtherBlock extends PossibleBetContainer<HockeyMatch> {
                 new PeriodAnyWinAndTotalOverPossibleBetBlock(),
                 new PeriodAnyWinAndTotalUnderPossibleBetBlock(),
                 new PeriodAnyWinAndDiffEqualsPossibleBetBlock(),
+                new PeriodFirstGoalBeforePossibleBetBlock(),
+                new PeriodLastGoalAfterPossibleBetBlock(),
 
 
 

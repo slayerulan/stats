@@ -258,6 +258,40 @@ public class HockeyPossibleBetBlockTest {
         assertEquals(60, diff3OrMore.getSecondTeamPercentage());
 
     }
+
+
+    @Test
+    public void testFirstGoalBefore() {
+        PossibleBetContainer PossibleBetContainer = getPossibleBetsBlock();
+
+        PossibleBetContainer block = PossibleBetContainer.findByType(FIRST_GOAL_BEFORE);
+
+        PossibleBetContainer under9 = block.findByType(UNDER_9);
+        assertEquals(40, under9.getFirstTeamPercentage());
+        assertEquals(60, under9.getSecondTeamPercentage());
+
+        PossibleBetContainer under10 = block.findByType(UNDER_10);
+        assertEquals(40, under10.getFirstTeamPercentage());
+        assertEquals(60, under10.getSecondTeamPercentage());
+
+    }
+
+
+    @Test
+    public void testLastGoalAfter() {
+        PossibleBetContainer PossibleBetContainer = getPossibleBetsBlock();
+
+        PossibleBetContainer block = PossibleBetContainer.findByType(LAST_GOAL_AFTER);
+
+        PossibleBetContainer after54 = block.findByType(OVER_54);
+        assertEquals(20, after54.getFirstTeamPercentage());
+        assertEquals(100, after54.getSecondTeamPercentage());
+
+        PossibleBetContainer after55 = block.findByType(OVER_55);
+        assertEquals(20, after55.getFirstTeamPercentage());
+        assertEquals(80, after55.getSecondTeamPercentage());
+
+    }
 /*  
 
 
@@ -584,39 +618,9 @@ public class HockeyPossibleBetBlockTest {
 
     }
 
-    @Test
-    public void testFirstGoalBefore() {
-        PossibleBetContainer PossibleBetContainer = getPossibleBetsBlock();
 
-        PossibleBetContainer block = PossibleBetContainer.findByType(FIRST_GOAL_BEFORE);
 
-        PossibleBetContainer under9 = block.findByType(UNDER_9);
-        assertEquals(12, under9.getAnalyzedMatchesAmount().intValue());
-        assertEquals(6, under9.getSuccessfullyMatchesAmount().intValue());
-        assertEquals(0, under9.getSkippedMatchesAmount().intValue());
-        assertEquals(50, under9.getPercentage().intValue());
 
-        PossibleBetContainer under10 = block.findByType(UNDER_10);
-        assertEquals(12, under10.getAnalyzedMatchesAmount().intValue());
-        assertEquals(6, under10.getSuccessfullyMatchesAmount().intValue());
-        assertEquals(0, under10.getSkippedMatchesAmount().intValue());
-        assertEquals(50, under10.getPercentage().intValue());
-
-    }
-
-    @Test
-    public void testLastGoalAfter() {
-        PossibleBetContainer PossibleBetContainer = getPossibleBetsBlock();
-
-        PossibleBetContainer block = PossibleBetContainer.findByType(LAST_GOAL_AFTER);
-
-        PossibleBetContainer after54 = block.findByType(OVER_54);
-        assertEquals(12, after54.getAnalyzedMatchesAmount().intValue());
-        assertEquals(6, after54.getSuccessfullyMatchesAmount().intValue());
-        assertEquals(0, after54.getSkippedMatchesAmount().intValue());
-        assertEquals(50, after54.getPercentage().intValue());
-
-    }
 
     @Test
     public void testTeamWinAndTotalOver() {

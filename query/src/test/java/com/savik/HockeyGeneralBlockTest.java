@@ -728,6 +728,12 @@ public class HockeyGeneralBlockTest {
         assertEquals(0, after54.getSkippedMatchesAmount().intValue());
         assertEquals(50, after54.getPercentage().intValue());
 
+        BetContainer after55 = block.findByType(OVER_55);
+        assertEquals(12, after55.getAnalyzedMatchesAmount().intValue());
+        assertEquals(5, after55.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, after55.getSkippedMatchesAmount().intValue());
+        assertEquals(41, after55.getPercentage().intValue());
+
     }
 
     @Test
