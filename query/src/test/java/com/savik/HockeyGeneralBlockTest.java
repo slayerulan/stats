@@ -822,6 +822,12 @@ public class HockeyGeneralBlockTest {
 
         BetContainer block = generalBlock.findByType(TEAM_WIN_AND_TOTAL_UNDER);
 
+        BetContainer under4AndHalf = block.findByType(UNDER_4_5);
+        assertEquals(12, under4AndHalf.getAnalyzedMatchesAmount().intValue());
+        assertEquals(1, under4AndHalf.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, under4AndHalf.getSkippedMatchesAmount().intValue());
+        assertEquals(8, under4AndHalf.getPercentage().intValue());
+
         BetContainer under5AndHalf = block.findByType(UNDER_5_5);
         assertEquals(12, under5AndHalf.getAnalyzedMatchesAmount().intValue());
         assertEquals(1, under5AndHalf.getSuccessfullyMatchesAmount().intValue());
