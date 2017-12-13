@@ -30,11 +30,13 @@ import static org.junit.Assert.assertEquals;
 @Sql(scripts = {
         "classpath:db/possible_bets/matches_AqombNzc.sql", "classpath:db/possible_bets/matches_CIGVL5B6.sql",
         "classpath:db/possible_bets/matches_j5qIp46c.sql", "classpath:db/possible_bets/matches_rwPEPmCs.sql",
+        "classpath:db/possible_bets/matches_xn1B4zMd.sql",
 
 
         // real matches but Colorado replaced by Buffalo
         "classpath:db/possible_bets/matches_Ai5wex7j.sql", "classpath:db/possible_bets/matches_QTEL7Fjd.sql",
-        "classpath:db/possible_bets/matches_vJ50rp5f.sql", "classpath:db/possible_bets/matches_YVeCUxb9.sql"
+        "classpath:db/possible_bets/matches_vJ50rp5f.sql", "classpath:db/possible_bets/matches_YVeCUxb9.sql",
+        "classpath:db/possible_bets/matches_I39zqxpU.sql"
 })
 public class HockeyPossibleBetBlockTest {
 
@@ -55,14 +57,13 @@ public class HockeyPossibleBetBlockTest {
         PossibleBetContainer totalOverBlock = PossibleBetContainer.findByType(TOTAL).findByType(TOTAL_OVER);
 
         PossibleBetContainer over4AndHalf = totalOverBlock.findByType(OVER_4_5);
-        assertEquals(25, over4AndHalf.getFirstTeamPercentage());
+        assertEquals(40, over4AndHalf.getFirstTeamPercentage());
         assertEquals(100, over4AndHalf.getSecondTeamPercentage());
 
 
         PossibleBetContainer over5AndHalf = totalOverBlock.findByType(OVER_5_5);
-        assertEquals(0, over5AndHalf.getFirstTeamPercentage());
+        assertEquals(20, over5AndHalf.getFirstTeamPercentage());
         assertEquals(100, over5AndHalf.getSecondTeamPercentage());
-
 
     }
 
@@ -73,13 +74,46 @@ public class HockeyPossibleBetBlockTest {
         PossibleBetContainer totalUnderBlock = PossibleBetContainer.findByType(TOTAL).findByType(TOTAL_UNDER);
 
         PossibleBetContainer under5AndHalf = totalUnderBlock.findByType(UNDER_5_5);
-        assertEquals(100, under5AndHalf.getFirstTeamPercentage());
+        assertEquals(80, under5AndHalf.getFirstTeamPercentage());
         assertEquals(0, under5AndHalf.getSecondTeamPercentage());
 
 
         PossibleBetContainer under6AndHalf = totalUnderBlock.findByType(UNDER_6_5);
-        assertEquals(100, under6AndHalf.getFirstTeamPercentage());
-        assertEquals(25, under6AndHalf.getSecondTeamPercentage());
+        assertEquals(80, under6AndHalf.getFirstTeamPercentage());
+        assertEquals(20, under6AndHalf.getSecondTeamPercentage());
+    }
+
+    @Test
+    public void testBothTeamsTotalOver() {
+        PossibleBetContainer PossibleBetContainer = getPossibleBetsBlock();
+
+        PossibleBetContainer totalOverBlock = PossibleBetContainer.findByType(TOTAL).findByType(BOTH_TEAMS_TOTAL_OVER);
+
+        PossibleBetContainer over1AndHalf = totalOverBlock.findByType(OVER_1_5);
+        assertEquals(80, over1AndHalf.getFirstTeamPercentage());
+        assertEquals(100, over1AndHalf.getSecondTeamPercentage());
+
+
+        PossibleBetContainer over2AndHalf = totalOverBlock.findByType(OVER_2_5);
+        assertEquals(20, over2AndHalf.getFirstTeamPercentage());
+        assertEquals(60, over2AndHalf.getSecondTeamPercentage());
+
+    }
+
+    @Test
+    public void testBothTeamsTotalUnder() {
+        PossibleBetContainer PossibleBetContainer = getPossibleBetsBlock();
+
+        PossibleBetContainer totalUnderBlock = PossibleBetContainer.findByType(TOTAL).findByType(BOTH_TEAMS_TOTAL_UNDER);
+
+        PossibleBetContainer under2AndHalf = totalUnderBlock.findByType(UNDER_2_5);
+        assertEquals(40, under2AndHalf.getFirstTeamPercentage());
+        assertEquals(0, under2AndHalf.getSecondTeamPercentage());
+
+
+        PossibleBetContainer under3AndHalf = totalUnderBlock.findByType(UNDER_3_5);
+        assertEquals(80, under3AndHalf.getFirstTeamPercentage());
+        assertEquals(20, under3AndHalf.getSecondTeamPercentage());
     }
 /*  
 
