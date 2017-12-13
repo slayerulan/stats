@@ -120,6 +120,44 @@ public class HockeyGeneralBlockTest {
     }
 
     @Test
+    public void testBothTeamTotalOver() {
+        GeneralBlock generalBlock = getGeneralBlock();
+
+        BetContainer totalOverBlock = generalBlock.findByType(TOTAL).findByType(BOTH_TEAMS_TOTAL_OVER);
+
+        BetContainer over1AndHalf = totalOverBlock.findByType(OVER_1_5);
+        assertEquals(12, over1AndHalf.getAnalyzedMatchesAmount().intValue());
+        assertEquals(10, over1AndHalf.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, over1AndHalf.getSkippedMatchesAmount().intValue());
+        assertEquals(83, over1AndHalf.getPercentage().intValue());
+
+        BetContainer over2AndHalf = totalOverBlock.findByType(OVER_2_5);
+        assertEquals(12, over2AndHalf.getAnalyzedMatchesAmount().intValue());
+        assertEquals(5, over2AndHalf.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, over2AndHalf.getSkippedMatchesAmount().intValue());
+        assertEquals(41, over2AndHalf.getPercentage().intValue());
+    }
+
+    @Test
+    public void testBothTeamTotalUnder() {
+        GeneralBlock generalBlock = getGeneralBlock();
+
+        BetContainer totalOverBlock = generalBlock.findByType(TOTAL).findByType(BOTH_TEAMS_TOTAL_UNDER);
+
+        BetContainer under2AndHalf = totalOverBlock.findByType(UNDER_2_5);
+        assertEquals(12, under2AndHalf.getAnalyzedMatchesAmount().intValue());
+        assertEquals(2, under2AndHalf.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, under2AndHalf.getSkippedMatchesAmount().intValue());
+        assertEquals(16, under2AndHalf.getPercentage().intValue());
+
+        BetContainer under3AndHalf = totalOverBlock.findByType(UNDER_3_5);
+        assertEquals(12, under3AndHalf.getAnalyzedMatchesAmount().intValue());
+        assertEquals(5, under3AndHalf.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, under3AndHalf.getSkippedMatchesAmount().intValue());
+        assertEquals(41, under3AndHalf.getPercentage().intValue());
+    }
+
+    @Test
     public void testTeamTotalOver() {
         GeneralBlock generalBlock = getGeneralBlock();
 

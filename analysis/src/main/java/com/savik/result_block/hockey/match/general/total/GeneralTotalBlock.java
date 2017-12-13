@@ -14,6 +14,8 @@ public class GeneralTotalBlock extends GeneralBetContainer {
         super(Arrays.asList(
                 new GeneralTotalOverBlock(),
                 new GeneralTotalUnderBlock(),
+                new GeneralBothTeamTotalOverBlock(),
+                new GeneralBothTeamTotalUnderBlock(),
                 new GeneralTeamTotalOverBlock(matchData),
                 new GeneralTeamTotalUnderBlock(matchData),
                 new GeneralOpposingTeamTotalOverBlock(matchData),
