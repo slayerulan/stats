@@ -32,13 +32,13 @@ import static org.junit.Assert.assertEquals;
 @Transactional
 @Rollback
 @Sql(scripts = {
-        "classpath:db/matches_AqombNzc.sql", "classpath:db/matches_CIGVL5B6.sql",
-        "classpath:db/matches_j5qIp46c.sql", "classpath:db/matches_rwPEPmCs.sql",
-        "classpath:db/matches_Ai5wex7j.sql", "classpath:db/matches_QTEL7Fjd.sql",
-        "classpath:db/matches_vJ50rp5f.sql", "classpath:db/matches_YVeCUxb9.sql",
-        "classpath:db/matches_I39zqxpU.sql", "classpath:db/matches_lAtkXvoI.sql",
-        "classpath:db/matches_xn1B4zMd.sql", "classpath:db/matches_YaFolFyG.sql",
-        "classpath:db/matches_WAmcZ9Al.sql"
+        "classpath:db/general_block/matches_AqombNzc.sql", "classpath:db/general_block/matches_CIGVL5B6.sql",
+        "classpath:db/general_block/matches_j5qIp46c.sql", "classpath:db/general_block/matches_rwPEPmCs.sql",
+        "classpath:db/general_block/matches_Ai5wex7j.sql", "classpath:db/general_block/matches_QTEL7Fjd.sql",
+        "classpath:db/general_block/matches_vJ50rp5f.sql", "classpath:db/general_block/matches_YVeCUxb9.sql",
+        "classpath:db/general_block/matches_I39zqxpU.sql", "classpath:db/general_block/matches_lAtkXvoI.sql",
+        "classpath:db/general_block/matches_xn1B4zMd.sql", "classpath:db/general_block/matches_YaFolFyG.sql",
+        "classpath:db/general_block/matches_WAmcZ9Al.sql"
 })
 public class HockeyGeneralBlockTest {
 
