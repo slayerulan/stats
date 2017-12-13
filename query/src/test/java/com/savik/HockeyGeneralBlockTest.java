@@ -857,6 +857,26 @@ public class HockeyGeneralBlockTest {
     }
 
     @Test
+    public void testOpposingTeamNotLooseAndTotalUnder() {
+        GeneralBlock generalBlock = getGeneralBlock();
+
+        BetContainer block = generalBlock.findByType(OPPOSING_TEAM_NOT_LOOSE_AND_TOTAL_UNDER);
+
+        BetContainer under4AndHalf = block.findByType(UNDER_4_5);
+        assertEquals(12, under4AndHalf.getAnalyzedMatchesAmount().intValue());
+        assertEquals(2, under4AndHalf.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, under4AndHalf.getSkippedMatchesAmount().intValue());
+        assertEquals(16, under4AndHalf.getPercentage().intValue());
+
+        BetContainer under5AndHalf = block.findByType(UNDER_5_5);
+        assertEquals(12, under5AndHalf.getAnalyzedMatchesAmount().intValue());
+        assertEquals(3, under5AndHalf.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, under5AndHalf.getSkippedMatchesAmount().intValue());
+        assertEquals(25, under5AndHalf.getPercentage().intValue());
+
+    }
+
+    @Test
     public void testTeamWinAndTotalUnder() {
         GeneralBlock generalBlock = getGeneralBlock();
 

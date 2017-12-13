@@ -25,9 +25,10 @@ public class GeneralOtherBlock extends GeneralBetContainer {
                 new GeneralTeamNotLooseAndTotalUnderBlock(matchData),
                 new GeneralOpposingTeamWinAndTotalOverBlock(matchData),
                 new GeneralOpposingTeamWinAndTotalUnderBlock(matchData),
-
-
                 new GeneralOpposingTeamNotLooseAndTotalOverBlock(matchData),
+                new GeneralOpposingTeamNotLooseAndTotalUnderBlock(matchData),
+
+
                 new GeneralTeamWinAtLeastNPeriodsBlock(matchData),
                 new GeneralOpposingTeamWinAtLeastNPeriodsBlock(matchData),
                 new GeneralDrawInAtLeastNPeriodsBlock(),

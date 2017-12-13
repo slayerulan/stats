@@ -24,10 +24,10 @@ public class PossibleBetsOtherBlock extends PossibleBetContainer<HockeyMatch> {
                 new PeriodTeamNotLooseAndTotalUnderPossibleBetBlock(homeMatchData, guestMatchData),
                 new PeriodOpposingTeamWinAndTotalOverPossibleBetBlock(homeMatchData, guestMatchData),
                 new PeriodOpposingTeamWinAndTotalUnderPossibleBetBlock(homeMatchData, guestMatchData),
-
-
                 new PeriodOpposingTeamNotLooseAndTotalOverPossibleBetBlock(homeMatchData, guestMatchData),
                 new PeriodOpposingTeamNotLooseAndTotalUnderPossibleBetBlock(homeMatchData, guestMatchData),
+
+
                 new TeamTotalOverInAllPeriodsPossibleBetBlock(homeMatchData, guestMatchData),
                 new OpposingTeamTotalOverInAllPeriodsPossibleBetBlock(homeMatchData, guestMatchData),
                 new TeamWinAtLeastNPeriodsPossibleBetBlock(homeMatchData, guestMatchData),
