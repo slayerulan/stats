@@ -7,6 +7,7 @@ import com.savik.PossibleBetContainer;
 import com.savik.blocks.hockey.match.general.handicap.PossibleBetsHandicapBlock;
 import com.savik.blocks.hockey.match.general.other.PossibleBetsOtherBlock;
 import com.savik.blocks.hockey.match.general.periods.PossibleBetsPeriodsBlock;
+import com.savik.blocks.hockey.match.general.stats.PossibleBetsStatsBlock;
 import com.savik.blocks.hockey.match.general.total.PossibleBetsTotalBlock;
 import com.savik.hockey.model.HockeyMatch;
 
@@ -18,7 +19,8 @@ public class PossibleBetsBlock extends PossibleBetContainer<HockeyMatch> {
                 new PossibleBetsTotalBlock(homeMatchData, guestMatchData),
                 new PossibleBetsOtherBlock(homeMatchData, guestMatchData),
                 new PossibleBetsHandicapBlock(homeMatchData, guestMatchData),
-                new PossibleBetsPeriodsBlock(homeMatchData, guestMatchData)
+                new PossibleBetsPeriodsBlock(homeMatchData, guestMatchData),
+                new PossibleBetsStatsBlock(homeMatchData, guestMatchData)
         ), ContainerType.ROOT);
     }
 }
