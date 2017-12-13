@@ -688,6 +688,12 @@ public class HockeyGeneralBlockTest {
         assertEquals(0, diff2.getSkippedMatchesAmount().intValue());
         assertEquals(16, diff2.getPercentage().intValue());
 
+        BetContainer diff3OrMore = block.findByType(DIFF_3_OR_MORE);
+        assertEquals(12, diff3OrMore.getAnalyzedMatchesAmount().intValue());
+        assertEquals(5, diff3OrMore.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, diff3OrMore.getSkippedMatchesAmount().intValue());
+        assertEquals(41, diff3OrMore.getPercentage().intValue());
+
     }
 
     @Test

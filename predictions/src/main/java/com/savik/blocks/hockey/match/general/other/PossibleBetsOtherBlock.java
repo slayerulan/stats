@@ -11,9 +11,14 @@ import java.util.Arrays;
 public class PossibleBetsOtherBlock extends PossibleBetContainer<HockeyMatch> {
     public PossibleBetsOtherBlock(MatchData homeMatchData, MatchData guestMatchData) {
         super(Arrays.asList(
-                new PeriodAnyWinAndDiffEqualsPossibleBetBlock(),
+                new TotalOverInAllPeriodsPossibleBetBlock(),
+                new TotalUnderInAllPeriodsPossibleBetBlock(),
                 new PeriodAnyWinAndTotalOverPossibleBetBlock(),
                 new PeriodAnyWinAndTotalUnderPossibleBetBlock(),
+                new PeriodAnyWinAndDiffEqualsPossibleBetBlock(),
+
+
+
                 new PeriodTeamWinAndTotalOverPossibleBetBlock(homeMatchData, guestMatchData),
                 new PeriodTeamWinAndTotalUnderPossibleBetBlock(homeMatchData, guestMatchData),
                 new PeriodTeamNotLooseAndTotalOverPossibleBetBlock(homeMatchData, guestMatchData),
@@ -22,10 +27,8 @@ public class PossibleBetsOtherBlock extends PossibleBetContainer<HockeyMatch> {
                 new PeriodOpposingTeamWinAndTotalUnderPossibleBetBlock(homeMatchData, guestMatchData),
                 new PeriodOpposingTeamNotLooseAndTotalOverPossibleBetBlock(homeMatchData, guestMatchData),
                 new PeriodOpposingTeamNotLooseAndTotalUnderPossibleBetBlock(homeMatchData, guestMatchData),
-                new TotalOverInAllPeriodsPossibleBetBlock(),
                 new TeamTotalOverInAllPeriodsPossibleBetBlock(homeMatchData, guestMatchData),
                 new OpposingTeamTotalOverInAllPeriodsPossibleBetBlock(homeMatchData, guestMatchData),
-                new TotalUnderInAllPeriodsPossibleBetBlock(),
                 new TeamWinAtLeastNPeriodsPossibleBetBlock(homeMatchData, guestMatchData),
                 new OpposingTeamWinAtLeastNPeriodsPossibleBetBlock(homeMatchData, guestMatchData),
                 new DrawAtLeastNPeriodsPossibleBetBlock(),
