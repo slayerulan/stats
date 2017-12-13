@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.net.URISyntaxException;
-import java.util.List;
 
 
 @Service
@@ -20,8 +19,8 @@ public class HockeyCoeffsMatchTest {
 
 
     public void parse() throws URISyntaxException {
-        List<HockeyFutureMatch> all = hockeyFutureMatchRepository.findAll();
-        hockeyCoeffsMatchParser.parse(all.get(0));
+        HockeyFutureMatch futureMatch = hockeyFutureMatchRepository.findByMyscoreCode("fgjNPNVN");
+        hockeyCoeffsMatchParser.parse(futureMatch);
         String a = "";
     }
 }

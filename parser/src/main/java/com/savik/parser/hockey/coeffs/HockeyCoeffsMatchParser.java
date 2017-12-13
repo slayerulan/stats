@@ -95,12 +95,12 @@ public class HockeyCoeffsMatchParser {
             String text = ((TextNode) child).text();
             if (text.contains("(4.5) больше ")) {
                 String totalOver4AndHalfCoeff = childNodes.get(i + 1).childNode(0).childNode(0).outerHtml();
-                over4AndHalf.getCoeff().setValue(Double.valueOf(totalOver4AndHalfCoeff));
+                over4AndHalf.getCoeff().set(Double.valueOf(totalOver4AndHalfCoeff));
             }
 
             if (text.contains("(5.5) больше ")) {
                 String totalOver5AndHalfCoeff = childNodes.get(i + 1).childNode(0).childNode(0).outerHtml();
-                over5AndHalf.getCoeff().setValue(Double.valueOf(totalOver5AndHalfCoeff));
+                over5AndHalf.getCoeff().set(Double.valueOf(totalOver5AndHalfCoeff));
             }
         }
     }
@@ -122,12 +122,12 @@ public class HockeyCoeffsMatchParser {
             String text = ((TextNode) child).text();
             if (text.contains("(5.5) больше ")) {
                 String totalUnder5AndHalfCoeff = childNodes.get(i + 3).childNode(0).childNode(0).outerHtml();
-                under5AndHalf.getCoeff().setValue(Double.valueOf(totalUnder5AndHalfCoeff));
+                under5AndHalf.getCoeff().set(Double.valueOf(totalUnder5AndHalfCoeff));
             }
 
             if (text.contains("(6.5) больше ")) {
                 String totalUnder6AndHalfCoeff = childNodes.get(i + 3).childNode(0).childNode(0).outerHtml();
-                under6AndHalf.getCoeff().setValue(Double.valueOf(totalUnder6AndHalfCoeff));
+                under6AndHalf.getCoeff().set(Double.valueOf(totalUnder6AndHalfCoeff));
             }
         }
     }
@@ -170,12 +170,12 @@ public class HockeyCoeffsMatchParser {
             String text = ((TextNode) child).text();
             if (text.contains("(2.5) больше")) {
                 String totalOver2AndHalfCoeff = childNodes.get(i + 1).childNode(0).childNode(0).outerHtml();
-                over2AndHalf.getCoeff().setValue(Double.valueOf(totalOver2AndHalfCoeff));
+                over2AndHalf.getCoeff().set(Double.valueOf(totalOver2AndHalfCoeff));
             }
 
             if (text.contains("(3.5) больше")) {
                 String totalOver3AndHalfCoeff = childNodes.get(i + 1).childNode(0).childNode(0).outerHtml();
-                over3AndHalf.getCoeff().setValue(Double.valueOf(totalOver3AndHalfCoeff));
+                over3AndHalf.getCoeff().set(Double.valueOf(totalOver3AndHalfCoeff));
             }
         }
     }
@@ -198,12 +198,12 @@ public class HockeyCoeffsMatchParser {
             String text = ((TextNode) child).text();
             if (text.contains("(2.5) больше")) {
                 String underOver2AndHalfCoeff = childNodes.get(i + 3).childNode(0).childNode(0).outerHtml();
-                under2AndHalf.getCoeff().setValue(Double.valueOf(underOver2AndHalfCoeff));
+                under2AndHalf.getCoeff().set(Double.valueOf(underOver2AndHalfCoeff));
             }
 
             if (text.contains("(3.5) больше")) {
                 String underOver3AndHalfCoeff = childNodes.get(i + 3).childNode(0).childNode(0).outerHtml();
-                under3AndHalf.getCoeff().setValue(Double.valueOf(underOver3AndHalfCoeff));
+                under3AndHalf.getCoeff().set(Double.valueOf(underOver3AndHalfCoeff));
             }
         }
     }

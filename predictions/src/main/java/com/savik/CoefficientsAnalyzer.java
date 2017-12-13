@@ -7,7 +7,7 @@ import java.util.List;
 
 public class CoefficientsAnalyzer {
 
-    public static double LOW_VALUE_BORDER = 1.1;
+    public static double LOW_VALUE_BORDER = 1.15;
     public static double RISK_BET_LOW_VALUE_BORDER = 2.0;
 
     public static PossibleBetResultContainer analyze(CoeffContainer coeffContainer, PossibleBetContainer betContainer) {
@@ -15,7 +15,6 @@ public class CoefficientsAnalyzer {
             return handleLeaf(coeffContainer, betContainer);
         } else {
             return handleContainer(coeffContainer, betContainer);
-
         }
     }
 
