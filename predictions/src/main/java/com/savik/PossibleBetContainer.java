@@ -33,6 +33,15 @@ public class PossibleBetContainer<T extends Match> {
         this(possibleBet, null);
     }
 
+    public int getFirstTeamPercentage() {
+        return possibleBet.getFirstTeamPercentage();
+    }
+
+    public int getSecondTeamPercentage() {
+        return possibleBet.getSecondTeamPercentage();
+    }
+
+
     public void check(List<T> firstTeamMatches, List<T> secondTeamMatches) {
         if (leaf) {
             possibleBet.check(firstTeamMatches, secondTeamMatches);
@@ -43,5 +52,20 @@ public class PossibleBetContainer<T extends Match> {
             }
         }
 
+    }
+
+    public PossibleBetContainer<T> findByType(ContainerType type) {
+        if(this.type == type) {
+            return this;
+        }
+        if(!leaf) {
+            for (PossibleBetContainer childBlock : childrenBetBlocks) {
+                PossibleBetContainer byType = childBlock.findByType(type);
+                if (byType != null) {
+                    return byType;
+                }
+            }
+        }
+        return null;
     }
 }
