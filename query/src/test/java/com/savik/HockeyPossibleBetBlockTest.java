@@ -512,6 +512,24 @@ public class HockeyPossibleBetBlockTest {
         assertEquals(80, over3AndHalf.getSecondTeamPercentage());
 
     }
+
+    @Test
+    public void testTeamFirstScoredAndWin() {
+        PossibleBetContainer possibleBetsBlock = getPossibleBetsBlock();
+
+        PossibleBetContainer block = possibleBetsBlock.findByType(TEAM_FIRST_SCORED_AND_WIN);
+        assertEquals(20, block.getFirstTeamPercentage());
+        assertEquals(40, block.getSecondTeamPercentage());
+    }
+
+    @Test
+    public void testOpposingTeamFirstScoredAndWin() {
+        PossibleBetContainer possibleBetsBlock = getPossibleBetsBlock();
+
+        PossibleBetContainer block = possibleBetsBlock.findByType(OPPOSING_TEAM_FIRST_SCORED_AND_WIN);
+        assertEquals(20, block.getFirstTeamPercentage());
+        assertEquals(40, block.getSecondTeamPercentage());
+    }
 /*  
 
 

@@ -1005,6 +1005,32 @@ public class HockeyGeneralBlockTest {
     }
 
     @Test
+    public void testTeamFirstScoredAndWin() {
+        GeneralBlock generalBlock = getGeneralBlock();
+
+        BetContainer block = generalBlock.findByType(TEAM_FIRST_SCORED_AND_WIN);
+
+        assertEquals(12, block.getAnalyzedMatchesAmount().intValue());
+        assertEquals(3, block.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, block.getSkippedMatchesAmount().intValue());
+        assertEquals(25, block.getPercentage().intValue());
+    }
+
+    @Test
+    public void testOpposingTeamFirstScoredAndWin() {
+        GeneralBlock generalBlock = getGeneralBlock();
+
+        BetContainer block = generalBlock.findByType(OPPOSING_TEAM_FIRST_SCORED_AND_WIN);
+
+        assertEquals(12, block.getAnalyzedMatchesAmount().intValue());
+        assertEquals(4, block.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, block.getSkippedMatchesAmount().intValue());
+        assertEquals(33, block.getPercentage().intValue());
+    }
+
+
+
+    @Test
     public void testShotsOnTargetOver() {
         GeneralBlock generalBlock = getGeneralBlock();
 
