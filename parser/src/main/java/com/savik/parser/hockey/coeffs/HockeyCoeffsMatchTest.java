@@ -19,7 +19,7 @@ public class HockeyCoeffsMatchTest {
 
 
     public void parse() throws URISyntaxException {
-        HockeyFutureMatch futureMatch = hockeyFutureMatchRepository.findByMyscoreCode("fgjNPNVN");
+        HockeyFutureMatch futureMatch = hockeyFutureMatchRepository.findByMyscoreCode("O2kusvJl");
         hockeyCoeffsMatchParser.parse(futureMatch);
         String a = "";
     }
