@@ -68,13 +68,25 @@ public class CoefficientsAnalyzer {
 
         possibleBetResultContainer.setValueBet(maxValue);
         if (maxValue > LOW_VALUE_BORDER) {
-            possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD);
 
-            if ( (maxValue == firstTeamPositiveResult || maxValue == secondTeamPositiveResult) && positiveValue > RISK_BET_LOW_VALUE_BORDER) {
-                possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD_WITH_RISK);
-            } else if ( (maxValue == firstTeamNegativeResult || maxValue == secondTeamNegativeResult) && negativeValue > RISK_BET_LOW_VALUE_BORDER) {
-                possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD_WITH_RISK);
+
+            if(firstTeamContainerPercentage < 0.15 || firstTeamContainerPercentage > 0.85 ||
+                    secondTeamContainerPercentage < 0.15 || secondTeamContainerPercentage > 0.85) {
+                possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD_PERCENTAGES);
+            } else {
+
+
+                possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD);
+
+                if ( (maxValue == firstTeamPositiveResult || maxValue == secondTeamPositiveResult) && positiveValue > RISK_BET_LOW_VALUE_BORDER) {
+                    possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD_WITH_RISK);
+                } else if ( (maxValue == firstTeamNegativeResult || maxValue == secondTeamNegativeResult) && negativeValue > RISK_BET_LOW_VALUE_BORDER) {
+                    possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD_WITH_RISK);
+                }
+
             }
+
+
         }
 
         if (maxValue == firstTeamPositiveResult || maxValue == secondTeamPositiveResult) {
@@ -97,7 +109,10 @@ public class CoefficientsAnalyzer {
         }
 
         if (firstTeamResult > LOW_VALUE_BORDER || secondTeamResult > LOW_VALUE_BORDER) {
-            if (value > RISK_BET_LOW_VALUE_BORDER) {
+            if(firstTeamContainerPercentage < 0.15 || firstTeamContainerPercentage > 0.85 ||
+                    secondTeamContainerPercentage < 0.15 || secondTeamContainerPercentage > 0.85) {
+                possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD_PERCENTAGES);
+            } else if (value > RISK_BET_LOW_VALUE_BORDER) {
                 possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD_WITH_RISK);
             } else {
                 possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD);
