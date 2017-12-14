@@ -31,7 +31,8 @@ public class GeneralOtherBlock extends GeneralBetContainer {
                 new GeneralOpposingTeamTotalOverAllPeriodsBlock(matchData),
                 new GeneralTeamWinAtLeastNPeriodsBlock(matchData),
                 new GeneralOpposingTeamWinAtLeastNPeriodsBlock(matchData),
-                new GeneralDrawInAtLeastNPeriodsBlock()
+                new GeneralDrawInAtLeastNPeriodsBlock(),
+                new GeneralMostEffectivePeriodTotalOverBlock()
 
 
         ), OTHER);

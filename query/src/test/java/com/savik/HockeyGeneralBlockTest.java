@@ -985,6 +985,26 @@ public class HockeyGeneralBlockTest {
     }
 
     @Test
+    public void testMostEffectivePeriodTotalOver() {
+        GeneralBlock generalBlock = getGeneralBlock();
+
+        BetContainer block = generalBlock.findByType(MOST_EFFECTIVE_PERIOD_TOTAL_OVER);
+
+        BetContainer over2AndHalf = block.findByType(OVER_2_5);
+        assertEquals(12, over2AndHalf.getAnalyzedMatchesAmount().intValue());
+        assertEquals(10, over2AndHalf.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, over2AndHalf.getSkippedMatchesAmount().intValue());
+        assertEquals(83, over2AndHalf.getPercentage().intValue());
+
+        BetContainer over3AndHalf = block.findByType(OVER_3_5);
+        assertEquals(12, over3AndHalf.getAnalyzedMatchesAmount().intValue());
+        assertEquals(7, over3AndHalf.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, over3AndHalf.getSkippedMatchesAmount().intValue());
+        assertEquals(58, over3AndHalf.getPercentage().intValue());
+
+    }
+
+    @Test
     public void testShotsOnTargetOver() {
         GeneralBlock generalBlock = getGeneralBlock();
 

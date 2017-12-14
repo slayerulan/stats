@@ -483,9 +483,9 @@ public class HockeyPossibleBetBlockTest {
 
     @Test
     public void testDrawAtLeastNPeriods() {
-        PossibleBetContainer PossibleBetContainer = getPossibleBetsBlock();
+        PossibleBetContainer possibleBetsBlock = getPossibleBetsBlock();
 
-        PossibleBetContainer block = PossibleBetContainer.findByType(DRAW_AT_LEAST_N_PERIODS);
+        PossibleBetContainer block = possibleBetsBlock.findByType(DRAW_AT_LEAST_N_PERIODS);
 
         PossibleBetContainer atLeast1 = block.findByType(NUMBER_1);
         assertEquals(80, atLeast1.getFirstTeamPercentage());
@@ -494,6 +494,22 @@ public class HockeyPossibleBetBlockTest {
         PossibleBetContainer atLeast2 = block.findByType(NUMBER_2);
         assertEquals(20, atLeast2.getFirstTeamPercentage());
         assertEquals(20, atLeast2.getSecondTeamPercentage());
+
+    }
+
+    @Test
+    public void testMostEffectivePeriodTotalOver() {
+        PossibleBetContainer possibleBetsBlock = getPossibleBetsBlock();
+
+        PossibleBetContainer block = possibleBetsBlock.findByType(MOST_EFFECTIVE_PERIOD_TOTAL_OVER);
+
+        PossibleBetContainer over2AndHalf = block.findByType(OVER_2_5);
+        assertEquals(60, over2AndHalf.getFirstTeamPercentage());
+        assertEquals(100, over2AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer over3AndHalf = block.findByType(OVER_3_5);
+        assertEquals(20, over3AndHalf.getFirstTeamPercentage());
+        assertEquals(80, over3AndHalf.getSecondTeamPercentage());
 
     }
 /*  
