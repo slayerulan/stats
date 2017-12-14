@@ -13,10 +13,10 @@ spring:
         user: sa
         password:
     jpa:
-        generate-ddl: true
         properties:
               hibernate:
                     dialect: org.hibernate.dialect.H2Dialect
         hibernate:
-            ddl-auto: update
+            ddl-auto: none
             use-new-id-generator-mappings: true
+        show-sql: true

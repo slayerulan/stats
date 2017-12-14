@@ -63,7 +63,11 @@ public class HockeySingleMatchParser {
         int finalPeriodIndex = allRows.size();
         if(parts.select("tr .h-part").size() > 3) {
             finalPeriodIndex = parts.select("tr .h-part").get(3).parent().siblingIndex();
-            overtimeIndex = parts.select("tr .h-part").get(4).parent().siblingIndex();
+            if(parts.select("tr .h-part").size() > 4) {
+                overtimeIndex = parts.select("tr .h-part").get(4).parent().siblingIndex();
+            } else {
+                overtimeIndex = allRows.size();
+            }
         }
 
         List<Element> firstPeriodRows = allRows.subList(0, secondTimeIndex);
