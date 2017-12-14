@@ -2,9 +2,7 @@ package com.savik.parser.hockey.matches;
 
 import com.savik.Who;
 import com.savik.hockey.model.HockeyGoal;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
@@ -24,7 +22,9 @@ public class HockeyMatchInfoParser {
     public static GeneralInfoDto parseGeneralInfo(Elements elements, Integer period) {
 
         return new GeneralInfoDto(
-                parseGoals(elements.select("div.hockey-ball"), period)
+                parseGoals(elements.select("div.hockey-ball"), period),
+                parseMinorPenalties(elements.select("td.fl div.hockey-penalty-2")),
+                parseMinorPenalties(elements.select("td.fr div.hockey-penalty-2"))
         );
     }
 
@@ -67,6 +67,17 @@ public class HockeyMatchInfoParser {
                 .collect(Collectors.toList());
     }
 
+    static int parseMinorPenalties(Elements penaltiesDivs) {
+        int amount = 0;
+        for (int i = 0; i < penaltiesDivs.size(); i++) {
+            Element element = penaltiesDivs.get(i);
+            if(element.parent().select("div.hockey-penalty-2").size() == 1) {
+                amount++;
+            }
+        }
+        return amount;
+    }
+
     static Integer calculateTime(Element element) {
         Integer minute =
                 Integer.valueOf(element.parent().select(".time-box,.time-box-wide").text().replaceAll("\\D+", ""));
@@ -74,13 +85,16 @@ public class HockeyMatchInfoParser {
     }
 
     @AllArgsConstructor
+    @NoArgsConstructor
     @Getter
     public static class GeneralInfoDto {
         List<HockeyGoal> hockeyGoals;
-
+        int homeMinorPenaltiesAmount;
+        int guestMinorPenaltiesAmount;
     }
 
     @Getter
+    @Setter
     @Builder
     public static class StatsInfoDto {
 

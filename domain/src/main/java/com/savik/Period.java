@@ -47,6 +47,7 @@ public abstract class  Period<T extends Goal> extends Identifiable {
         FIRST,
         SECOND,
         THIRD,
+        OVERTIME,
         MATCH
     }
 

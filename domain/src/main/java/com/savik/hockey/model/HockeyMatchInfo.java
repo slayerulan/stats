@@ -38,6 +38,9 @@ public class HockeyMatchInfo extends Identifiable {
     @OneToOne(cascade = CascadeType.ALL)
     HockeyPeriod thirdPeriod;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    HockeyPeriod overtime;
+
     @Override
     @JsonValue
     public String toString() {

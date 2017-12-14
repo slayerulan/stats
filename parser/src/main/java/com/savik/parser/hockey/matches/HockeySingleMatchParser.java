@@ -59,22 +59,32 @@ public class HockeySingleMatchParser {
         Elements allRows = parts.select("tr");
         int secondTimeIndex = parts.select("tr .h-part").get(1).parent().siblingIndex();
         int thirdTimeIndex = parts.select("tr .h-part").get(2).parent().siblingIndex();
+        Integer overtimeIndex = null;
         int finalPeriodIndex = allRows.size();
         if(parts.select("tr .h-part").size() > 3) {
             finalPeriodIndex = parts.select("tr .h-part").get(3).parent().siblingIndex();
+            overtimeIndex = parts.select("tr .h-part").get(4).parent().siblingIndex();
         }
 
         List<Element> firstPeriodRows = allRows.subList(0, secondTimeIndex);
         List<Element> secondPeriodRows = allRows.subList(secondTimeIndex, thirdTimeIndex);
         List<Element> thirdPeriodRows = allRows.subList(thirdTimeIndex, finalPeriodIndex);
+        List<Element> overtimeRows  =  overtimeIndex == null ? null : allRows.subList(finalPeriodIndex, overtimeIndex);
 
-        HockeyMatchInfoParser.GeneralInfoDto matchPeriodInfo = HockeyMatchInfoParser.parseGeneralInfo(new Elements(allRows.subList(0, finalPeriodIndex)), null);
+        HockeyMatchInfoParser.GeneralInfoDto matchPeriodInfo = HockeyMatchInfoParser.parseGeneralInfo(
+                new Elements(allRows.subList(0,  overtimeIndex == null ? finalPeriodIndex : overtimeIndex)), null
+        );
         HockeyMatchInfoParser.GeneralInfoDto firstPeriodInfo =
                 HockeyMatchInfoParser.parseGeneralInfo(new Elements(firstPeriodRows), 1);
         HockeyMatchInfoParser.GeneralInfoDto secondPeriodInfo =
                 HockeyMatchInfoParser.parseGeneralInfo(new Elements(secondPeriodRows), 2);
         HockeyMatchInfoParser.GeneralInfoDto thirdPeriodInfo =
                 HockeyMatchInfoParser.parseGeneralInfo(new Elements(thirdPeriodRows), 3);
+
+        HockeyMatchInfoParser.GeneralInfoDto overtimeInfo = null;
+        if(overtimeIndex != null) {
+            overtimeInfo = HockeyMatchInfoParser.parseGeneralInfo(new Elements(overtimeRows), 4);
+        }
 
 
         String matchPeriodStatsSelector = statsInfo.select(".ifmenu li[id$=\"statistic\"] a:containsOwn(Матч)").isEmpty() ?
@@ -88,6 +98,9 @@ public class HockeySingleMatchParser {
 
         String thirdPeriodStatsSelector = statsInfo.select(".ifmenu li[id$=\"statistic\"] a:containsOwn(3-й период)").isEmpty() ?
                 null : statsInfo.select(".ifmenu li[id$=\"statistic\"] a:containsOwn(3-й период)").get(0).parent().parent().attr("id");
+
+        String overtimeStatsSelector = statsInfo.select(".ifmenu li[id$=\"statistic\"] a:containsOwn(Овертайм)").isEmpty() ?
+                null : statsInfo.select(".ifmenu li[id$=\"statistic\"] a:containsOwn(Овертайм)").get(0).parent().parent().attr("id");
 
 
         HockeyMatchInfoParser.StatsInfoDto matchStats =
@@ -124,6 +137,13 @@ public class HockeySingleMatchParser {
                                 .select("#tab-" + thirdPeriodStatsSelector + " .parts")
                                 .select("tr.odd,tr.even"));
 
+        HockeyMatchInfoParser.StatsInfoDto overtimeStats =
+                overtimeStatsSelector == null ?
+                        null :
+                        HockeyMatchInfoParser.parseStats(statsInfo
+                                .select("#tab-" + overtimeStatsSelector + " .parts")
+                                .select("tr.odd,tr.even"));
+
 
         HockeyBookieStats hockeyBookieStats = null;
         Elements odds = oddsInfo.select("#block-1x2 tr.odd");
@@ -141,10 +161,12 @@ public class HockeySingleMatchParser {
                 .firstPeriodGeneralInfoDto(firstPeriodInfo)
                 .secondPeriodGeneralInfoDto(secondPeriodInfo)
                 .thirdPeriodGeneralInfoDto(thirdPeriodInfo)
+                .overtimeGeneralInfoDto(overtimeInfo)
                 .matchStatsInfoDto(matchStats)
                 .firstPeriodStatsInfoDto(firstPeriodStats)
                 .secondPeriodStatsInfoDto(secondPeriodStats)
                 .thirdPeriodStatsInfoDto(thirdPeriodStats)
+                .overtimeStatsInfoDto(overtimeStats)
                 .homeTeam(home)
                 .guestTeam(guest)
                 .date(dateTime)

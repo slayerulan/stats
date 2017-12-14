@@ -2,17 +2,13 @@ package com.savik.hockey.model;
 
 import com.codiform.moo.annotation.CollectionProperty;
 import com.codiform.moo.annotation.Optionality;
+import com.codiform.moo.annotation.Property;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.savik.Period;
 import com.savik.Winner;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
-import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
 /**
@@ -51,8 +47,18 @@ public class HockeyPeriod extends Period<HockeyGoal> {
 
     Integer guestPenaltiesTime;
 
+    @Property(optionality=Optionality.OPTIONAL)
+    Integer homeMinorPenaltiesAmount;
+
+    @Property(optionality=Optionality.OPTIONAL)
+    Integer guestMinorPenaltiesAmount;
+
     @Builder(toBuilder = true)
-    public HockeyPeriod(Integer homeScore, Integer guestScore, Integer totalScore, Winner winner, PeriodStatus periodStatus, Set<HockeyGoal> goals, Integer homeShotsOnTarget, Integer guestShotsOnTarget, Integer homeShotHandedGoals, Integer guestShotHandedGoals, Integer homePowerplayGoals, Integer guestPowerplayGoals, Integer homePenaltiesTime, Integer guestPenaltiesTime) {
+    public HockeyPeriod(Integer homeScore, Integer guestScore, Integer totalScore, Winner winner,
+                        PeriodStatus periodStatus, Set<HockeyGoal> goals, Integer homeShotsOnTarget,
+                        Integer guestShotsOnTarget, Integer homeShotHandedGoals, Integer guestShotHandedGoals,
+                        Integer homePowerplayGoals, Integer guestPowerplayGoals, Integer homePenaltiesTime,
+                        Integer guestPenaltiesTime, Integer homeMinorPenaltiesAmount, Integer guestMinorPenaltiesAmount) {
         super(homeScore, guestScore, totalScore, winner, periodStatus);
         this.goals = goals;
         this.homeShotsOnTarget = homeShotsOnTarget;
@@ -63,6 +69,8 @@ public class HockeyPeriod extends Period<HockeyGoal> {
         this.guestPowerplayGoals = guestPowerplayGoals;
         this.homePenaltiesTime = homePenaltiesTime;
         this.guestPenaltiesTime = guestPenaltiesTime;
+        this.homeMinorPenaltiesAmount = homeMinorPenaltiesAmount;
+        this.guestMinorPenaltiesAmount = guestMinorPenaltiesAmount;
     }
 
     @Override

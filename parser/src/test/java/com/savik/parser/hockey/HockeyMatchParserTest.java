@@ -17,9 +17,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Savushkin Yauheni
@@ -42,20 +44,21 @@ public class HockeyMatchParserTest {
     @Test
     public void testMatchWithOvertimeAndBulletsAndStats() {
         HockeyMatch match = matchParser.parse("KvlMqOL3", HockeyChampionship.NHL, Season.S2017);
-        match = hockeyMatchRepository.save(match);
+        hockeyMatchRepository.save(match);
+        match = hockeyMatchRepository.findByMyscoreCode("KvlMqOL3");
 
         HockeyTeam home = hockeyTeamRepository.findOneByNameAndChampionship("Рейнджерс", HockeyChampionship.NHL);
         HockeyTeam guest = hockeyTeamRepository.findOneByNameAndChampionship("Ванкувер", HockeyChampionship.NHL);
 
-        assertEquals(match.getSeason(), Season.S2017);
-        assertEquals(match.getMyscoreCode(), "KvlMqOL3");
-        assertEquals(match.getChampionship(), HockeyChampionship.NHL);
+        assertEquals(Season.S2017, match.getSeason());
+        assertEquals("KvlMqOL3", match.getMyscoreCode());
+        assertEquals(HockeyChampionship.NHL, match.getChampionship());
         assertEquals(match.getHomeTeam(), home);
         assertEquals(match.getGuestTeam(), guest);
-        assertEquals(match.getBookieStats().getHomeRate(), Double.valueOf(2.05));
-        assertEquals(match.getBookieStats().getDrawRate(), Double.valueOf(4.00));
-        assertEquals(match.getBookieStats().getGuestRate(), Double.valueOf(3.1));
-        assertEquals(match.getDate(), LocalDateTime.of(2017, 11, 26, 22, 00));
+        assertEquals(Double.valueOf(2.05), match.getBookieStats().getHomeRate());
+        assertEquals(Double.valueOf(4.00), match.getBookieStats().getDrawRate());
+        assertEquals(Double.valueOf(3.1), match.getBookieStats().getGuestRate());
+        assertEquals(LocalDateTime.of(2017, 11, 26, 22, 0), match.getDate());
 
 
         HockeyMatchInfo hockeyMatchInfo = match.getMatchInfo();
@@ -64,23 +67,25 @@ public class HockeyMatchParserTest {
          1 период 0-1
         * */
         HockeyPeriod firstPeriod = hockeyMatchInfo.getFirstPeriod();
-        assertEquals(firstPeriod.getHomeScore().intValue(), 0);
-        assertEquals(firstPeriod.getGuestScore().intValue(), 1);
-        assertEquals(firstPeriod.getTotalScore().intValue(), 1);
-        assertEquals(firstPeriod.getWinner(), Winner.GUEST);
-        assertEquals(firstPeriod.getPeriodStatus(), HockeyPeriod.PeriodStatus.FIRST);
-        assertEquals(firstPeriod.getGoals().size(), 1);
-        assertTrue(firstPeriod.getGoals().containsAll(new HashSet<>(Arrays.asList(
+        assertEquals(0, firstPeriod.getHomeScore().intValue());
+        assertEquals(1, firstPeriod.getGuestScore().intValue());
+        assertEquals(1, firstPeriod.getTotalScore().intValue());
+        assertEquals(Winner.GUEST, firstPeriod.getWinner());
+        assertEquals(HockeyPeriod.PeriodStatus.FIRST, firstPeriod.getPeriodStatus());
+        assertEquals(1, firstPeriod.getGoals().size());
+        assertTrue(firstPeriod.getGoals().containsAll(new HashSet<>(Collections.singletonList(
                 HockeyGoal.builder().minute(7).whoScored(Who.GUEST).seconds(54).team(guest).build()
         ))));
-        assertEquals(firstPeriod.getHomeShotsOnTarget().intValue(), 4);
-        assertEquals(firstPeriod.getGuestShotsOnTarget().intValue(), 11);
-        assertEquals(firstPeriod.getHomePenaltiesTime().intValue(), 2);
-        assertEquals(firstPeriod.getGuestPenaltiesTime().intValue(), 2);
-        assertEquals(firstPeriod.getHomeShotHandedGoals().intValue(), 0);
-        assertEquals(firstPeriod.getGuestShotHandedGoals().intValue(), 0);
-        assertEquals(firstPeriod.getHomePowerplayGoals().intValue(), 0);
-        assertEquals(firstPeriod.getGuestPowerplayGoals().intValue(), 0);
+        assertEquals(1, firstPeriod.getHomeMinorPenaltiesAmount().intValue());
+        assertEquals(1, firstPeriod.getGuestMinorPenaltiesAmount().intValue());
+        assertEquals(4, firstPeriod.getHomeShotsOnTarget().intValue());
+        assertEquals(11, firstPeriod.getGuestShotsOnTarget().intValue());
+        assertEquals(2, firstPeriod.getHomePenaltiesTime().intValue());
+        assertEquals(2, firstPeriod.getGuestPenaltiesTime().intValue());
+        assertEquals(0, firstPeriod.getHomeShotHandedGoals().intValue());
+        assertEquals(0, firstPeriod.getGuestShotHandedGoals().intValue());
+        assertEquals(0, firstPeriod.getHomePowerplayGoals().intValue());
+        assertEquals(0, firstPeriod.getGuestPowerplayGoals().intValue());
 
 
 
@@ -89,24 +94,26 @@ public class HockeyMatchParserTest {
         * */
         HockeyPeriod secondPeriod = hockeyMatchInfo.getSecondPeriod();
 
-        assertEquals(secondPeriod.getHomeScore().intValue(), 1);
-        assertEquals(secondPeriod.getGuestScore().intValue(), 1);
-        assertEquals(secondPeriod.getTotalScore().intValue(), 2);
-        assertEquals(secondPeriod.getWinner(), Winner.DRAW);
-        assertEquals(secondPeriod.getPeriodStatus(), HockeyPeriod.PeriodStatus.SECOND);
-        assertEquals(secondPeriod.getGoals().size(), 2);
+        assertEquals(1, secondPeriod.getHomeScore().intValue());
+        assertEquals(1, secondPeriod.getGuestScore().intValue());
+        assertEquals(2, secondPeriod.getTotalScore().intValue());
+        assertEquals(Winner.DRAW, secondPeriod.getWinner());
+        assertEquals(HockeyPeriod.PeriodStatus.SECOND, secondPeriod.getPeriodStatus());
+        assertEquals(2, secondPeriod.getGoals().size());
         assertTrue(secondPeriod.getGoals().containsAll(new HashSet<>(Arrays.asList(
                 HockeyGoal.builder().minute(27).whoScored(Who.GUEST).seconds(21).team(guest).build(),
                 HockeyGoal.builder().minute(37).whoScored(Who.HOME).seconds(40).team(home).build()
         ))));
-        assertEquals(secondPeriod.getHomeShotsOnTarget().intValue(), 7);
-        assertEquals(secondPeriod.getGuestShotsOnTarget().intValue(), 7);
-        assertEquals(secondPeriod.getHomePenaltiesTime().intValue(), 0);
-        assertEquals(secondPeriod.getGuestPenaltiesTime().intValue(), 2);
-        assertEquals(secondPeriod.getHomeShotHandedGoals().intValue(), 0);
-        assertEquals(secondPeriod.getGuestShotHandedGoals().intValue(), 0);
-        assertEquals(secondPeriod.getHomePowerplayGoals().intValue(), 0);
-        assertEquals(secondPeriod.getGuestPowerplayGoals().intValue(), 0);
+        assertEquals(0, secondPeriod.getHomeMinorPenaltiesAmount().intValue());
+        assertEquals(1, secondPeriod.getGuestMinorPenaltiesAmount().intValue());
+        assertEquals(7, secondPeriod.getHomeShotsOnTarget().intValue());
+        assertEquals(7, secondPeriod.getGuestShotsOnTarget().intValue());
+        assertEquals(0, secondPeriod.getHomePenaltiesTime().intValue());
+        assertEquals(2, secondPeriod.getGuestPenaltiesTime().intValue());
+        assertEquals(0, secondPeriod.getHomeShotHandedGoals().intValue());
+        assertEquals(0, secondPeriod.getGuestShotHandedGoals().intValue());
+        assertEquals(0, secondPeriod.getHomePowerplayGoals().intValue());
+        assertEquals(0, secondPeriod.getGuestPowerplayGoals().intValue());
 
 
         /*
@@ -114,25 +121,49 @@ public class HockeyMatchParserTest {
         * */
         HockeyPeriod thirdPeriod = hockeyMatchInfo.getThirdPeriod();
 
-        assertEquals(thirdPeriod.getHomeScore().intValue(), 2);
-        assertEquals(thirdPeriod.getGuestScore().intValue(), 1);
-        assertEquals(thirdPeriod.getTotalScore().intValue(), 3);
-        assertEquals(thirdPeriod.getWinner(), Winner.HOME);
-        assertEquals(thirdPeriod.getPeriodStatus(), HockeyPeriod.PeriodStatus.THIRD);
-        assertEquals(thirdPeriod.getGoals().size(), 3);
+        assertEquals(2, thirdPeriod.getHomeScore().intValue());
+        assertEquals(1, thirdPeriod.getGuestScore().intValue());
+        assertEquals(3, thirdPeriod.getTotalScore().intValue());
+        assertEquals(Winner.HOME, thirdPeriod.getWinner());
+        assertEquals(HockeyPeriod.PeriodStatus.THIRD, thirdPeriod.getPeriodStatus());
+        assertEquals(3, thirdPeriod.getGoals().size());
         assertTrue(thirdPeriod.getGoals().containsAll(new HashSet<>(Arrays.asList(
                 HockeyGoal.builder().minute(40).whoScored(Who.HOME).seconds(19).team(home).build(),
                 HockeyGoal.builder().minute(41).whoScored(Who.GUEST).seconds(0).team(guest).build(),
                 HockeyGoal.builder().minute(45).whoScored(Who.HOME).seconds(5).team(home).build()
         ))));
-        assertEquals(thirdPeriod.getHomeShotsOnTarget().intValue(), 9);
-        assertEquals(thirdPeriod.getGuestShotsOnTarget().intValue(), 11);
-        assertEquals(thirdPeriod.getHomePenaltiesTime().intValue(), 0);
-        assertEquals(thirdPeriod.getGuestPenaltiesTime().intValue(), 0);
-        assertEquals(thirdPeriod.getHomeShotHandedGoals().intValue(), 0);
-        assertEquals(thirdPeriod.getGuestShotHandedGoals().intValue(), 0);
-        assertEquals(thirdPeriod.getHomePowerplayGoals().intValue(), 0);
-        assertEquals(thirdPeriod.getGuestPowerplayGoals().intValue(), 0);
+        assertEquals(0, thirdPeriod.getHomeMinorPenaltiesAmount().intValue());
+        assertEquals(0, thirdPeriod.getGuestMinorPenaltiesAmount().intValue());
+        assertEquals(9, thirdPeriod.getHomeShotsOnTarget().intValue());
+        assertEquals(11, thirdPeriod.getGuestShotsOnTarget().intValue());
+        assertEquals(0, thirdPeriod.getHomePenaltiesTime().intValue());
+        assertEquals(0, thirdPeriod.getGuestPenaltiesTime().intValue());
+        assertEquals(0, thirdPeriod.getHomeShotHandedGoals().intValue());
+        assertEquals(0, thirdPeriod.getGuestShotHandedGoals().intValue());
+        assertEquals(0, thirdPeriod.getHomePowerplayGoals().intValue());
+        assertEquals(0, thirdPeriod.getGuestPowerplayGoals().intValue());
+
+                /*
+         Овертайм 0-0
+        * */
+        HockeyPeriod overtime = hockeyMatchInfo.getOvertime();
+
+        assertEquals(0, overtime.getHomeScore().intValue());
+        assertEquals(0, overtime.getGuestScore().intValue());
+        assertEquals(0, overtime.getTotalScore().intValue());
+        assertEquals(Winner.DRAW, overtime.getWinner());
+        assertEquals(HockeyPeriod.PeriodStatus.OVERTIME, overtime.getPeriodStatus());
+        assertEquals(0, overtime.getGoals().size());
+        assertEquals(0, overtime.getHomeMinorPenaltiesAmount().intValue());
+        assertEquals(0, overtime.getGuestMinorPenaltiesAmount().intValue());
+        assertEquals(0, overtime.getHomeShotsOnTarget().intValue());
+        assertEquals(3, overtime.getGuestShotsOnTarget().intValue());
+        assertEquals(0, overtime.getHomePenaltiesTime().intValue());
+        assertEquals(0, overtime.getGuestPenaltiesTime().intValue());
+        assertEquals(0, overtime.getHomeShotHandedGoals().intValue());
+        assertEquals(0, overtime.getGuestShotHandedGoals().intValue());
+        assertEquals(0, overtime.getHomePowerplayGoals().intValue());
+        assertEquals(0, overtime.getGuestPowerplayGoals().intValue());
 
 
          /*
@@ -140,20 +171,29 @@ public class HockeyMatchParserTest {
         * */
         HockeyPeriod matchPeriod = hockeyMatchInfo.getMatch();
 
-        assertEquals(matchPeriod.getHomeScore().intValue(), 3);
-        assertEquals(matchPeriod.getGuestScore().intValue(), 3);
-        assertEquals(matchPeriod.getTotalScore().intValue(), 6);
-        assertEquals(matchPeriod.getWinner(), Winner.DRAW);
-        assertEquals(matchPeriod.getPeriodStatus(), HockeyPeriod.PeriodStatus.MATCH);
-        assertNull(matchPeriod.getGoals());
-        assertEquals(matchPeriod.getHomeShotsOnTarget().intValue(), 20);
-        assertEquals(matchPeriod.getGuestShotsOnTarget().intValue(), 32);
-        assertEquals(matchPeriod.getHomePenaltiesTime().intValue(), 2);
-        assertEquals(matchPeriod.getGuestPenaltiesTime().intValue(), 4);
-        assertEquals(matchPeriod.getHomeShotHandedGoals().intValue(), 0);
-        assertEquals(matchPeriod.getGuestShotHandedGoals().intValue(), 0);
-        assertEquals(matchPeriod.getHomePowerplayGoals().intValue(), 0);
-        assertEquals(matchPeriod.getGuestPowerplayGoals().intValue(), 0);
+        assertEquals(3, matchPeriod.getHomeScore().intValue());
+        assertEquals(3, matchPeriod.getGuestScore().intValue());
+        assertEquals(6, matchPeriod.getTotalScore().intValue());
+        assertEquals(Winner.DRAW, matchPeriod.getWinner());
+        assertEquals(HockeyPeriod.PeriodStatus.MATCH, matchPeriod.getPeriodStatus());
+        assertTrue(matchPeriod.getGoals().containsAll(new HashSet<>(Arrays.asList(
+                HockeyGoal.builder().minute(7).whoScored(Who.GUEST).seconds(54).team(guest).build(),
+                HockeyGoal.builder().minute(27).whoScored(Who.GUEST).seconds(21).team(guest).build(),
+                HockeyGoal.builder().minute(37).whoScored(Who.HOME).seconds(40).team(home).build(),
+                HockeyGoal.builder().minute(40).whoScored(Who.HOME).seconds(19).team(home).build(),
+                HockeyGoal.builder().minute(41).whoScored(Who.GUEST).seconds(0).team(guest).build(),
+                HockeyGoal.builder().minute(45).whoScored(Who.HOME).seconds(5).team(home).build()
+        ))));
+        assertEquals(1, matchPeriod.getHomeMinorPenaltiesAmount().intValue());
+        assertEquals(2, matchPeriod.getGuestMinorPenaltiesAmount().intValue());
+        assertEquals(20, matchPeriod.getHomeShotsOnTarget().intValue());
+        assertEquals(32, matchPeriod.getGuestShotsOnTarget().intValue());
+        assertEquals(2, matchPeriod.getHomePenaltiesTime().intValue());
+        assertEquals(4, matchPeriod.getGuestPenaltiesTime().intValue());
+        assertEquals(0, matchPeriod.getHomeShotHandedGoals().intValue());
+        assertEquals(0, matchPeriod.getGuestShotHandedGoals().intValue());
+        assertEquals(0, matchPeriod.getHomePowerplayGoals().intValue());
+        assertEquals(0, matchPeriod.getGuestPowerplayGoals().intValue());
 
     }
 
@@ -161,20 +201,21 @@ public class HockeyMatchParserTest {
     @Test
     public void testMatchWithGoalsOnSameMinute() {
         HockeyMatch match = matchParser.parse("6gw94qut", HockeyChampionship.NHL, Season.S2017);
-        match = hockeyMatchRepository.save(match);
+        hockeyMatchRepository.save(match);
+        match = hockeyMatchRepository.findByMyscoreCode("6gw94qut");
 
         HockeyTeam home = hockeyTeamRepository.findOneByNameAndChampionship("Вегас", HockeyChampionship.NHL);
         HockeyTeam guest = hockeyTeamRepository.findOneByNameAndChampionship("Даллас", HockeyChampionship.NHL);
 
-        assertEquals(match.getSeason(), Season.S2017);
-        assertEquals(match.getMyscoreCode(), "6gw94qut");
-        assertEquals(match.getChampionship(), HockeyChampionship.NHL);
+        assertEquals(Season.S2017, match.getSeason());
+        assertEquals("6gw94qut", match.getMyscoreCode());
+        assertEquals(HockeyChampionship.NHL, match.getChampionship());
         assertEquals(match.getHomeTeam(), home);
         assertEquals(match.getGuestTeam(), guest);
-        assertEquals(match.getBookieStats().getHomeRate(), Double.valueOf(2.40));
-        assertEquals(match.getBookieStats().getDrawRate(), Double.valueOf(4.00));
-        assertEquals(match.getBookieStats().getGuestRate(), Double.valueOf(2.55));
-        assertEquals(match.getDate(), LocalDateTime.of(2017, 11, 29, 06, 00));
+        assertEquals(Double.valueOf(2.40), match.getBookieStats().getHomeRate());
+        assertEquals(Double.valueOf(4.00), match.getBookieStats().getDrawRate());
+        assertEquals(Double.valueOf(2.55), match.getBookieStats().getGuestRate());
+        assertEquals(LocalDateTime.of(2017, 11, 29, 6, 0), match.getDate());
 
 
         HockeyMatchInfo hockeyMatchInfo = match.getMatchInfo();
@@ -183,20 +224,22 @@ public class HockeyMatchParserTest {
          1 период 0-1
         * */
         HockeyPeriod firstPeriod = hockeyMatchInfo.getFirstPeriod();
-        assertEquals(firstPeriod.getHomeScore().intValue(), 0);
-        assertEquals(firstPeriod.getGuestScore().intValue(), 0);
-        assertEquals(firstPeriod.getTotalScore().intValue(), 0);
-        assertEquals(firstPeriod.getWinner(), Winner.DRAW);
-        assertEquals(firstPeriod.getPeriodStatus(), HockeyPeriod.PeriodStatus.FIRST);
-        assertEquals(firstPeriod.getGoals().size(), 0);
-        assertEquals(firstPeriod.getHomeShotsOnTarget().intValue(), 15);
-        assertEquals(firstPeriod.getGuestShotsOnTarget().intValue(), 10);
-        assertEquals(firstPeriod.getHomePenaltiesTime().intValue(), 2);
-        assertEquals(firstPeriod.getGuestPenaltiesTime().intValue(), 2);
-        assertEquals(firstPeriod.getHomeShotHandedGoals().intValue(), 0);
-        assertEquals(firstPeriod.getGuestShotHandedGoals().intValue(), 0);
-        assertEquals(firstPeriod.getHomePowerplayGoals().intValue(), 0);
-        assertEquals(firstPeriod.getGuestPowerplayGoals().intValue(), 0);
+        assertEquals(0, firstPeriod.getHomeScore().intValue());
+        assertEquals(0, firstPeriod.getGuestScore().intValue());
+        assertEquals(0, firstPeriod.getTotalScore().intValue());
+        assertEquals(Winner.DRAW, firstPeriod.getWinner());
+        assertEquals(HockeyPeriod.PeriodStatus.FIRST, firstPeriod.getPeriodStatus());
+        assertEquals(0, firstPeriod.getGoals().size());
+        assertEquals(1, firstPeriod.getHomeMinorPenaltiesAmount().intValue());
+        assertEquals(1, firstPeriod.getGuestMinorPenaltiesAmount().intValue());
+        assertEquals(15, firstPeriod.getHomeShotsOnTarget().intValue());
+        assertEquals(10, firstPeriod.getGuestShotsOnTarget().intValue());
+        assertEquals(2, firstPeriod.getHomePenaltiesTime().intValue());
+        assertEquals(2, firstPeriod.getGuestPenaltiesTime().intValue());
+        assertEquals(0, firstPeriod.getHomeShotHandedGoals().intValue());
+        assertEquals(0, firstPeriod.getGuestShotHandedGoals().intValue());
+        assertEquals(0, firstPeriod.getHomePowerplayGoals().intValue());
+        assertEquals(0, firstPeriod.getGuestPowerplayGoals().intValue());
 
 
 
@@ -205,25 +248,27 @@ public class HockeyMatchParserTest {
         * */
         HockeyPeriod secondPeriod = hockeyMatchInfo.getSecondPeriod();
 
-        assertEquals(secondPeriod.getHomeScore().intValue(), 0);
-        assertEquals(secondPeriod.getGuestScore().intValue(), 3);
-        assertEquals(secondPeriod.getTotalScore().intValue(), 3);
-        assertEquals(secondPeriod.getWinner(), Winner.GUEST);
-        assertEquals(secondPeriod.getPeriodStatus(), HockeyPeriod.PeriodStatus.SECOND);
-        assertEquals(secondPeriod.getGoals().size(), 3);
+        assertEquals(0, secondPeriod.getHomeScore().intValue());
+        assertEquals(3, secondPeriod.getGuestScore().intValue());
+        assertEquals(3, secondPeriod.getTotalScore().intValue());
+        assertEquals(Winner.GUEST, secondPeriod.getWinner());
+        assertEquals(HockeyPeriod.PeriodStatus.SECOND, secondPeriod.getPeriodStatus());
+        assertEquals(3, secondPeriod.getGoals().size());
         assertTrue(secondPeriod.getGoals().containsAll(new HashSet<>(Arrays.asList(
                 HockeyGoal.builder().minute(32).whoScored(Who.GUEST).seconds(55).team(guest).build(),
                 HockeyGoal.builder().minute(39).whoScored(Who.GUEST).seconds(33).team(guest).build(),
                 HockeyGoal.builder().minute(39).whoScored(Who.GUEST).seconds(41).team(guest).build()
         ))));
-        assertEquals(secondPeriod.getHomeShotsOnTarget().intValue(), 8);
-        assertEquals(secondPeriod.getGuestShotsOnTarget().intValue(), 11);
-        assertEquals(secondPeriod.getHomePenaltiesTime().intValue(), 4);
-        assertEquals(secondPeriod.getGuestPenaltiesTime().intValue(), 2);
-        assertEquals(secondPeriod.getHomeShotHandedGoals().intValue(), 0);
-        assertEquals(secondPeriod.getGuestShotHandedGoals().intValue(), 0);
-        assertEquals(secondPeriod.getHomePowerplayGoals().intValue(), 0);
-        assertEquals(secondPeriod.getGuestPowerplayGoals().intValue(), 0);
+        assertEquals(2, secondPeriod.getHomeMinorPenaltiesAmount().intValue());
+        assertEquals(1, secondPeriod.getGuestMinorPenaltiesAmount().intValue());
+        assertEquals(8, secondPeriod.getHomeShotsOnTarget().intValue());
+        assertEquals(11, secondPeriod.getGuestShotsOnTarget().intValue());
+        assertEquals(4, secondPeriod.getHomePenaltiesTime().intValue());
+        assertEquals(2, secondPeriod.getGuestPenaltiesTime().intValue());
+        assertEquals(0, secondPeriod.getHomeShotHandedGoals().intValue());
+        assertEquals(0, secondPeriod.getGuestShotHandedGoals().intValue());
+        assertEquals(0, secondPeriod.getHomePowerplayGoals().intValue());
+        assertEquals(0, secondPeriod.getGuestPowerplayGoals().intValue());
 
 
         /*
@@ -231,20 +276,22 @@ public class HockeyMatchParserTest {
         * */
         HockeyPeriod thirdPeriod = hockeyMatchInfo.getThirdPeriod();
 
-        assertEquals(thirdPeriod.getHomeScore().intValue(), 0);
-        assertEquals(thirdPeriod.getGuestScore().intValue(), 0);
-        assertEquals(thirdPeriod.getTotalScore().intValue(), 0);
-        assertEquals(thirdPeriod.getWinner(), Winner.DRAW);
-        assertEquals(thirdPeriod.getPeriodStatus(), HockeyPeriod.PeriodStatus.THIRD);
-        assertEquals(thirdPeriod.getGoals().size(), 0);
-        assertEquals(thirdPeriod.getHomeShotsOnTarget().intValue(), 11);
-        assertEquals(thirdPeriod.getGuestShotsOnTarget().intValue(), 9);
-        assertEquals(thirdPeriod.getHomePenaltiesTime().intValue(), 2);
-        assertEquals(thirdPeriod.getGuestPenaltiesTime().intValue(), 2);
-        assertEquals(thirdPeriod.getHomeShotHandedGoals().intValue(), 0);
-        assertEquals(thirdPeriod.getGuestShotHandedGoals().intValue(), 0);
-        assertEquals(thirdPeriod.getHomePowerplayGoals().intValue(), 0);
-        assertEquals(thirdPeriod.getGuestPowerplayGoals().intValue(), 0);
+        assertEquals(0, thirdPeriod.getHomeScore().intValue());
+        assertEquals(0, thirdPeriod.getGuestScore().intValue());
+        assertEquals(0, thirdPeriod.getTotalScore().intValue());
+        assertEquals(Winner.DRAW, thirdPeriod.getWinner());
+        assertEquals(HockeyPeriod.PeriodStatus.THIRD, thirdPeriod.getPeriodStatus());
+        assertEquals(0, thirdPeriod.getGoals().size());
+        assertEquals(1, thirdPeriod.getHomeMinorPenaltiesAmount().intValue());
+        assertEquals(1, thirdPeriod.getGuestMinorPenaltiesAmount().intValue());
+        assertEquals(11, thirdPeriod.getHomeShotsOnTarget().intValue());
+        assertEquals(9, thirdPeriod.getGuestShotsOnTarget().intValue());
+        assertEquals(2, thirdPeriod.getHomePenaltiesTime().intValue());
+        assertEquals(2, thirdPeriod.getGuestPenaltiesTime().intValue());
+        assertEquals(0, thirdPeriod.getHomeShotHandedGoals().intValue());
+        assertEquals(0, thirdPeriod.getGuestShotHandedGoals().intValue());
+        assertEquals(0, thirdPeriod.getHomePowerplayGoals().intValue());
+        assertEquals(0, thirdPeriod.getGuestPowerplayGoals().intValue());
 
 
          /*
@@ -252,20 +299,179 @@ public class HockeyMatchParserTest {
         * */
         HockeyPeriod matchPeriod = hockeyMatchInfo.getMatch();
 
-        assertEquals(matchPeriod.getHomeScore().intValue(), 0);
-        assertEquals(matchPeriod.getGuestScore().intValue(), 3);
-        assertEquals(matchPeriod.getTotalScore().intValue(), 3);
-        assertEquals(matchPeriod.getWinner(), Winner.GUEST);
-        assertEquals(matchPeriod.getPeriodStatus(), HockeyPeriod.PeriodStatus.MATCH);
-        assertNull(matchPeriod.getGoals());
-        assertEquals(matchPeriod.getHomeShotsOnTarget().intValue(), 34);
-        assertEquals(matchPeriod.getGuestShotsOnTarget().intValue(), 30);
-        assertEquals(matchPeriod.getHomePenaltiesTime().intValue(), 8);
-        assertEquals(matchPeriod.getGuestPenaltiesTime().intValue(), 6);
-        assertEquals(matchPeriod.getHomeShotHandedGoals().intValue(), 0);
-        assertEquals(matchPeriod.getGuestShotHandedGoals().intValue(), 0);
-        assertEquals(matchPeriod.getHomePowerplayGoals().intValue(), 0);
-        assertEquals(matchPeriod.getGuestPowerplayGoals().intValue(), 0);
+        assertEquals(0, matchPeriod.getHomeScore().intValue());
+        assertEquals(3, matchPeriod.getGuestScore().intValue());
+        assertEquals(3, matchPeriod.getTotalScore().intValue());
+        assertEquals(Winner.GUEST, matchPeriod.getWinner());
+        assertEquals(HockeyPeriod.PeriodStatus.MATCH, matchPeriod.getPeriodStatus());
+        assertEquals(4, matchPeriod.getHomeMinorPenaltiesAmount().intValue());
+        assertEquals(3, matchPeriod.getGuestMinorPenaltiesAmount().intValue());
+        assertTrue(matchPeriod.getGoals().containsAll(new HashSet<>(Arrays.asList(
+                HockeyGoal.builder().minute(32).whoScored(Who.GUEST).seconds(55).team(guest).build(),
+                HockeyGoal.builder().minute(39).whoScored(Who.GUEST).seconds(33).team(guest).build(),
+                HockeyGoal.builder().minute(39).whoScored(Who.GUEST).seconds(41).team(guest).build()
+        ))));
+        assertEquals(34, matchPeriod.getHomeShotsOnTarget().intValue());
+        assertEquals(30, matchPeriod.getGuestShotsOnTarget().intValue());
+        assertEquals(8, matchPeriod.getHomePenaltiesTime().intValue());
+        assertEquals(6, matchPeriod.getGuestPenaltiesTime().intValue());
+        assertEquals(0, matchPeriod.getHomeShotHandedGoals().intValue());
+        assertEquals(0, matchPeriod.getGuestShotHandedGoals().intValue());
+        assertEquals(0, matchPeriod.getHomePowerplayGoals().intValue());
+        assertEquals(0, matchPeriod.getGuestPowerplayGoals().intValue());
+
+    }
+
+
+
+
+    @Test
+    public void testMinorPenaltiesParsing() {
+        HockeyMatch match = matchParser.parse("lfdn7IJR", HockeyChampionship.NHL, Season.S2017);
+        hockeyMatchRepository.save(match);
+        match = hockeyMatchRepository.findByMyscoreCode("lfdn7IJR");
+
+        HockeyTeam home = hockeyTeamRepository.findOneByNameAndChampionship("Вегас", HockeyChampionship.NHL);
+        HockeyTeam guest = hockeyTeamRepository.findOneByNameAndChampionship("Анахайм", HockeyChampionship.NHL);
+
+
+
+        HockeyMatchInfo hockeyMatchInfo = match.getMatchInfo();
+
+        /*
+         1 период 2-0
+        * */
+        HockeyPeriod firstPeriod = hockeyMatchInfo.getFirstPeriod();
+        assertEquals(2, firstPeriod.getHomeScore().intValue());
+        assertEquals(0, firstPeriod.getGuestScore().intValue());
+        assertEquals(2, firstPeriod.getTotalScore().intValue());
+        assertEquals(Winner.HOME, firstPeriod.getWinner());
+        assertEquals(HockeyPeriod.PeriodStatus.FIRST, firstPeriod.getPeriodStatus());
+        assertEquals(2, firstPeriod.getGoals().size());
+        assertTrue(firstPeriod.getGoals().containsAll(new HashSet<>(Arrays.asList(
+                HockeyGoal.builder().minute(18).whoScored(Who.HOME).seconds(34).team(home).build(),
+                HockeyGoal.builder().minute(18).whoScored(Who.HOME).seconds(50).team(home).build()
+        ))));
+        assertEquals(0, firstPeriod.getHomeMinorPenaltiesAmount().intValue());
+        assertEquals(0, firstPeriod.getGuestMinorPenaltiesAmount().intValue());
+        assertEquals(19, firstPeriod.getHomeShotsOnTarget().intValue());
+        assertEquals(7, firstPeriod.getGuestShotsOnTarget().intValue());
+        assertEquals(0, firstPeriod.getHomePenaltiesTime().intValue());
+        assertEquals(4, firstPeriod.getGuestPenaltiesTime().intValue());
+        assertEquals(0, firstPeriod.getHomeShotHandedGoals().intValue());
+        assertEquals(0, firstPeriod.getGuestShotHandedGoals().intValue());
+        assertEquals(0, firstPeriod.getHomePowerplayGoals().intValue());
+        assertEquals(0, firstPeriod.getGuestPowerplayGoals().intValue());
+
+
+
+        /*
+         2 период 0-3
+        * */
+        HockeyPeriod secondPeriod = hockeyMatchInfo.getSecondPeriod();
+
+        assertEquals(0, secondPeriod.getHomeScore().intValue());
+        assertEquals(3, secondPeriod.getGuestScore().intValue());
+        assertEquals(3, secondPeriod.getTotalScore().intValue());
+        assertEquals(Winner.GUEST, secondPeriod.getWinner());
+        assertEquals(HockeyPeriod.PeriodStatus.SECOND, secondPeriod.getPeriodStatus());
+        assertEquals(3, secondPeriod.getGoals().size());
+        assertTrue(secondPeriod.getGoals().containsAll(new HashSet<>(Arrays.asList(
+                HockeyGoal.builder().minute(21).whoScored(Who.GUEST).seconds(3).team(guest).build(),
+                HockeyGoal.builder().minute(25).whoScored(Who.GUEST).seconds(2).team(guest).build(),
+                HockeyGoal.builder().minute(36).whoScored(Who.GUEST).seconds(14).team(guest).build()
+        ))));
+        assertEquals(0, secondPeriod.getHomeMinorPenaltiesAmount().intValue());
+        assertEquals(0, secondPeriod.getGuestMinorPenaltiesAmount().intValue());
+        assertEquals(5, secondPeriod.getHomeShotsOnTarget().intValue());
+        assertEquals(8, secondPeriod.getGuestShotsOnTarget().intValue());
+        assertEquals(4, secondPeriod.getHomePenaltiesTime().intValue());
+        assertEquals(0, secondPeriod.getGuestPenaltiesTime().intValue());
+        assertEquals(0, secondPeriod.getHomeShotHandedGoals().intValue());
+        assertEquals(0, secondPeriod.getGuestShotHandedGoals().intValue());
+        assertEquals(0, secondPeriod.getHomePowerplayGoals().intValue());
+        assertEquals(1, secondPeriod.getGuestPowerplayGoals().intValue());
+
+
+        /*
+         3 период 1-0
+        * */
+        HockeyPeriod thirdPeriod = hockeyMatchInfo.getThirdPeriod();
+
+        assertEquals(1, thirdPeriod.getHomeScore().intValue());
+        assertEquals(0, thirdPeriod.getGuestScore().intValue());
+        assertEquals(1, thirdPeriod.getTotalScore().intValue());
+        assertEquals(Winner.HOME, thirdPeriod.getWinner());
+        assertEquals(HockeyPeriod.PeriodStatus.THIRD, thirdPeriod.getPeriodStatus());
+        assertEquals(1, thirdPeriod.getGoals().size());
+        assertTrue(thirdPeriod.getGoals().containsAll(new HashSet<>(Collections.singletonList(
+                HockeyGoal.builder().minute(55).whoScored(Who.HOME).seconds(38).team(home).build()
+        ))));
+        assertEquals(0, thirdPeriod.getHomeMinorPenaltiesAmount().intValue());
+        assertEquals(1, thirdPeriod.getGuestMinorPenaltiesAmount().intValue());
+        assertEquals(12, thirdPeriod.getHomeShotsOnTarget().intValue());
+        assertEquals(10, thirdPeriod.getGuestShotsOnTarget().intValue());
+        assertEquals(0, thirdPeriod.getHomePenaltiesTime().intValue());
+        assertEquals(2, thirdPeriod.getGuestPenaltiesTime().intValue());
+        assertEquals(0, thirdPeriod.getHomeShotHandedGoals().intValue());
+        assertEquals(0, thirdPeriod.getGuestShotHandedGoals().intValue());
+        assertEquals(0, thirdPeriod.getHomePowerplayGoals().intValue());
+        assertEquals(0, thirdPeriod.getGuestPowerplayGoals().intValue());
+
+
+        /*
+         Овертайм 0-0
+        * */
+        HockeyPeriod overtime = hockeyMatchInfo.getOvertime();
+
+        assertEquals(0, overtime.getHomeScore().intValue());
+        assertEquals(0, overtime.getGuestScore().intValue());
+        assertEquals(0, overtime.getTotalScore().intValue());
+        assertEquals(Winner.DRAW, overtime.getWinner());
+        assertEquals(HockeyPeriod.PeriodStatus.OVERTIME, overtime.getPeriodStatus());
+        assertEquals(0, overtime.getGoals().size());
+        assertEquals(1, overtime.getHomeMinorPenaltiesAmount().intValue());
+        assertEquals(2, overtime.getGuestMinorPenaltiesAmount().intValue());
+        assertEquals(7, overtime.getHomeShotsOnTarget().intValue());
+        assertEquals(4, overtime.getGuestShotsOnTarget().intValue());
+        assertEquals(2, overtime.getHomePenaltiesTime().intValue());
+        assertEquals(4, overtime.getGuestPenaltiesTime().intValue());
+        assertEquals(0, overtime.getHomeShotHandedGoals().intValue());
+        assertEquals(0, overtime.getGuestShotHandedGoals().intValue());
+        assertEquals(0, overtime.getHomePowerplayGoals().intValue());
+        assertEquals(0, overtime.getGuestPowerplayGoals().intValue());
+
+         /*
+          матч
+        * */
+        HockeyPeriod matchPeriod = hockeyMatchInfo.getMatch();
+
+        assertEquals(3, matchPeriod.getHomeScore().intValue());
+        assertEquals(3, matchPeriod.getGuestScore().intValue());
+        assertEquals(6, matchPeriod.getTotalScore().intValue());
+        assertEquals(Winner.DRAW, matchPeriod.getWinner());
+        assertEquals(HockeyPeriod.PeriodStatus.MATCH, matchPeriod.getPeriodStatus());
+        assertEquals(1, matchPeriod.getHomeMinorPenaltiesAmount().intValue());
+        assertEquals(3, matchPeriod.getGuestMinorPenaltiesAmount().intValue());
+        assertTrue(matchPeriod.getGoals().containsAll(new HashSet<>(Arrays.asList(
+                HockeyGoal.builder().minute(18).whoScored(Who.HOME).seconds(34).team(home).build(),
+                HockeyGoal.builder().minute(18).whoScored(Who.HOME).seconds(50).team(home).build(),
+                HockeyGoal.builder().minute(21).whoScored(Who.GUEST).seconds(3).team(guest).build(),
+                HockeyGoal.builder().minute(25).whoScored(Who.GUEST).seconds(2).team(guest).build(),
+                HockeyGoal.builder().minute(36).whoScored(Who.GUEST).seconds(14).team(guest).build(),
+                HockeyGoal.builder().minute(55).whoScored(Who.HOME).seconds(38).team(home).build()
+        ))));
+        assertEquals(43, matchPeriod.getHomeShotsOnTarget().intValue());
+        assertEquals(29, matchPeriod.getGuestShotsOnTarget().intValue());
+        assertEquals(6, matchPeriod.getHomePenaltiesTime().intValue());
+        assertEquals(10, matchPeriod.getGuestPenaltiesTime().intValue());
+        assertEquals(0, matchPeriod.getHomeShotHandedGoals().intValue());
+        assertEquals(0, matchPeriod.getGuestShotHandedGoals().intValue());
+        assertEquals(0, matchPeriod.getHomePowerplayGoals().intValue());
+        assertEquals(1, matchPeriod.getGuestPowerplayGoals().intValue());
+
+
+
 
     }
 

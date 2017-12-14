@@ -26,6 +26,8 @@ public class HockeyMatchCreator {
 
     HockeyMatchInfoParser.GeneralInfoDto thirdPeriodGeneralInfoDto;
 
+    HockeyMatchInfoParser.GeneralInfoDto overtimeGeneralInfoDto;
+
     HockeyMatchInfoParser.StatsInfoDto matchStatsInfoDto;
 
     HockeyMatchInfoParser.StatsInfoDto firstPeriodStatsInfoDto;
@@ -33,6 +35,8 @@ public class HockeyMatchCreator {
     HockeyMatchInfoParser.StatsInfoDto secondPeriodStatsInfoDto;
 
     HockeyMatchInfoParser.StatsInfoDto thirdPeriodStatsInfoDto;
+
+    HockeyMatchInfoParser.StatsInfoDto overtimeStatsInfoDto;
 
     HockeyTeam homeTeam;
 
@@ -77,11 +81,21 @@ public class HockeyMatchCreator {
                 thirdPeriodStatsInfoDto,
                 Period.PeriodStatus.THIRD
         );
+        HockeyPeriod overtime = null;
+        if(overtimeGeneralInfoDto != null && overtimeStatsInfoDto != null) {
+            overtime = createPeriod(
+                    overtimeGeneralInfoDto,
+                    overtimeStatsInfoDto,
+                    Period.PeriodStatus.OVERTIME
+            );
+
+        }
         HockeyPeriod match = createPeriod(matchGeneralInfoDto, matchStatsInfoDto, FootballPeriod.PeriodStatus.MATCH);
         return HockeyMatchInfo.builder()
                                 .firstPeriod(firstPeriod)
                                 .secondPeriod(secondPeriod)
                                 .thirdPeriod(thirdPeriod)
+                                .overtime(overtime)
                                 .match(match)
                                 .build();
     }
@@ -119,6 +133,8 @@ public class HockeyMatchCreator {
                 .totalScore(homeScore + guestScore)
                 .winner(homeScore > guestScore ? Winner.HOME : homeScore < guestScore ? Winner.GUEST : Winner.DRAW)
                 .periodStatus(periodStatus)
+                .homeMinorPenaltiesAmount(infoDto.getHomeMinorPenaltiesAmount())
+                .guestMinorPenaltiesAmount(infoDto.getGuestMinorPenaltiesAmount())
                 .build();
     }
 }
