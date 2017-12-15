@@ -11,7 +11,17 @@ public class CoeffStatsBlock extends CoeffContainer {
         super(Arrays.asList(
                 new CoeffShotsOnTargetTotalOverBlock(),
                 new CoeffTeamShotsOnTargetTotalOverBlock(),
-                new CoeffOpposingTeamShotsOnTargetTotalOverBlock()
+                new CoeffOpposingTeamShotsOnTargetTotalOverBlock(),
+                new CoeffTeamShotsOnTargetHandicapBlock(),
+                new CoeffOpposingTeamShotsOnTargetHandicapBlock(),
+                new CoeffTeamShotsOnTargetWinBlock(),
+                new CoeffOpposingTeamShotsOnTargetWinBlock(),
+                new CoeffPenaltiesTimeTotalOverBlock(),
+                new CoeffTeamPenaltiesTimeTotalOverBlock(),
+                new CoeffOpposingTeamPenaltiesTimeTotalOverBlock(),
+                new CoeffTeamPenaltiesTimeWinBlock(),
+                new CoeffOpposingTeamPenaltiesTimeWinBlock(),
+                new CoeffPowerplayGoalsTotalOverBlock()
         ), ContainerType.STATS);
     }
 }
