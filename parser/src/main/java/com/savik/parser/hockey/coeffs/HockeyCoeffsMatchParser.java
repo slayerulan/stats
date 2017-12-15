@@ -72,18 +72,22 @@ public class HockeyCoeffsMatchParser {
         fillPeriodsBlock(matchCoeffsTbodyTag, coeffBlock.findByType(ContainerType.PERIODS), hockeyFutureMatch);
 
 
-        Document shotsHtml = downloader.downloadFile(new File(shotsPath.toUri()));
-        tempHref = shotsHtml.select("a.om:contains(" + homeTeam.getName() + ")").get(0);
-        fillShotsSpecialBets(tempHref.parent().parent(), coeffBlock.findByType(ContainerType.STATS));
-        fillShotsBets(
-                tempHref.parent().parent().parent().nextElementSibling(),
-                coeffBlock.findByType(ContainerType.STATS), hockeyFutureMatch
-        );
 
+        Document shotsHtml = downloader.downloadFile(new File(shotsPath.toUri()));
+        if(!shotsHtml.select("a.om:contains(" + homeTeam.getName() + ")").isEmpty()) {
+            tempHref = shotsHtml.select("a.om:contains(" + homeTeam.getName() + ")").get(0);
+            fillShotsSpecialBets(tempHref.parent().parent(), coeffBlock.findByType(ContainerType.STATS));
+            fillShotsBets(
+                    tempHref.parent().parent().parent().nextElementSibling(),
+                    coeffBlock.findByType(ContainerType.STATS), hockeyFutureMatch
+            );
+        }
 
         Document penaltiesHtml = downloader.downloadFile(new File(penaltiesPath.toUri()));
-        tempHref = penaltiesHtml.select("td:contains(" + homeTeam.getName() + ")").get(0);
-        fillPenaltiesSpecialBets(tempHref.parent().parent(), coeffBlock.findByType(ContainerType.STATS));
+        if(!penaltiesHtml.select("td:contains(" + homeTeam.getName() + ")").isEmpty()) {
+            tempHref = penaltiesHtml.select("td:contains(" + homeTeam.getName() + ")").get(0);
+            fillPenaltiesSpecialBets(tempHref.parent().parent(), coeffBlock.findByType(ContainerType.STATS));
+        }
 
 
         return coeffBlock;
@@ -270,7 +274,7 @@ public class HockeyCoeffsMatchParser {
         if (tds.get(14) != null) {
             String totalText = tds.get(14).select("b").first().text();
             String totalOverCoeff = tds.get(15).select("u a").first().text();
-            String totalUnderCoeff = tds.get(7).select("u a").first().text();
+            String totalUnderCoeff = tds.get(16).select("u a").first().text();
             CoeffContainer teamTotalOverContainer = container.findByType(ContainerType.TEAM_SHOTS_ON_TARGET_OVER);
             CoeffContainer over28AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_28_5);
             CoeffContainer over30AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_30_5);
@@ -293,7 +297,7 @@ public class HockeyCoeffsMatchParser {
         if (tds.get(14) != null) {
             String totalText = tds.get(14).select("b").get(1).text();
             String totalOverCoeff = tds.get(15).select("u a").get(1).text();
-            String totalUnderCoeff = tds.get(7).select("u a").first().text();
+            String totalUnderCoeff = tds.get(16).select("u a").get(1).text();
             CoeffContainer teamTotalOverContainer = container.findByType(ContainerType.OPPOSING_TEAM_SHOTS_ON_TARGET_OVER);
             CoeffContainer over28AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_28_5);
             CoeffContainer over30AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_30_5);
@@ -481,7 +485,7 @@ public class HockeyCoeffsMatchParser {
         if (tds.get(14) != null) {
             String totalText = tds.get(14).select("b").get(1).text();
             String totalOverCoeff = tds.get(15).select("u a").get(1).text();
-            String totalUnderCoeff = tds.get(16).select("u a").first().text();
+            String totalUnderCoeff = tds.get(16).select("u a").get(1).text();
             CoeffContainer teamTotalOverContainer = container.findByType(ContainerType.OPPOSING_TEAM_PENALTIES_TIME_OVER);
             CoeffContainer over6AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_6_5);
             CoeffContainer over7AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_7_5);
