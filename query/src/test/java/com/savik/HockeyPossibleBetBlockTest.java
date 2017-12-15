@@ -530,6 +530,40 @@ public class HockeyPossibleBetBlockTest {
         assertEquals(20, block.getFirstTeamPercentage());
         assertEquals(40, block.getSecondTeamPercentage());
     }
+
+
+
+    /*
+    * STATS
+    * */
+
+    @Test
+    public void testShotsOnTargetOver() {
+        PossibleBetContainer possibleBetsBlock = getPossibleBetsBlock();
+
+        PossibleBetContainer block = possibleBetsBlock.findByType(SHOTS_ON_TARGET_OVER);
+
+        PossibleBetContainer over59AndHalf = block.findByType(OVER_59_5);
+        assertEquals(40, over59AndHalf.getFirstTeamPercentage());
+        assertEquals(60, over59AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer over60AndHalf = block.findByType(OVER_60_5);
+        assertEquals(20, over60AndHalf.getFirstTeamPercentage());
+        assertEquals(60, over60AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer over61AndHalf = block.findByType(OVER_61_5);
+        assertEquals(20, over61AndHalf.getFirstTeamPercentage());
+        assertEquals(40, over61AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer over62AndHalf = block.findByType(OVER_62_5);
+        assertEquals(20, over62AndHalf.getFirstTeamPercentage());
+        assertEquals(40, over62AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer over63AndHalf = block.findByType(OVER_63_5);
+        assertEquals(20, over63AndHalf.getFirstTeamPercentage());
+        assertEquals(20, over63AndHalf.getSecondTeamPercentage());
+
+    }
 /*  
 
 

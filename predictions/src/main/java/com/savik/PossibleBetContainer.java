@@ -1,5 +1,6 @@
 package com.savik;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -33,10 +34,12 @@ public class PossibleBetContainer<T extends Match> {
         this(possibleBet, null);
     }
 
+    @JsonIgnore
     public int getFirstTeamPercentage() {
         return possibleBet.getFirstTeamPercentage();
     }
 
+    @JsonIgnore
     public int getSecondTeamPercentage() {
         return possibleBet.getSecondTeamPercentage();
     }
@@ -55,10 +58,10 @@ public class PossibleBetContainer<T extends Match> {
     }
 
     public PossibleBetContainer<T> findByType(ContainerType type) {
-        if(this.type == type) {
+        if (this.type == type) {
             return this;
         }
-        if(!leaf) {
+        if (!leaf) {
             for (PossibleBetContainer childBlock : childrenBetBlocks) {
                 PossibleBetContainer byType = childBlock.findByType(type);
                 if (byType != null) {

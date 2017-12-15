@@ -12,6 +12,10 @@ public class ShotsOnTargetTotalOverPossibleBetBlock extends PossibleBetContainer
     public ShotsOnTargetTotalOverPossibleBetBlock() {
         super(Arrays.asList(
                 new PossibleBetContainer<>(
+                        new ShotsOnTargetTotalOverPossibleBet(HockeyMatch.MATCH, 59.5),
+                        ContainerType.OVER_59_5
+                ),
+                new PossibleBetContainer<>(
                         new ShotsOnTargetTotalOverPossibleBet(HockeyMatch.MATCH, 60.5),
                         ContainerType.OVER_60_5
                 ),

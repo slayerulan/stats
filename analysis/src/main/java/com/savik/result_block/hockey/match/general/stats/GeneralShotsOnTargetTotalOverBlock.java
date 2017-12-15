@@ -13,6 +13,7 @@ class GeneralShotsOnTargetTotalOverBlock extends PeriodBetContainer {
     public GeneralShotsOnTargetTotalOverBlock() {
         super(
                 Arrays.asList(
+                        new PeriodShotsOnTargetOverSingleBlock(59.5, ContainerType.OVER_59_5),
                         new PeriodShotsOnTargetOverSingleBlock(60.5, ContainerType.OVER_60_5),
                         new PeriodShotsOnTargetOverSingleBlock(61.5, ContainerType.OVER_61_5),
                         new PeriodShotsOnTargetOverSingleBlock(62.5, ContainerType.OVER_62_5),

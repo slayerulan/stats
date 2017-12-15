@@ -1029,12 +1029,17 @@ public class HockeyGeneralBlockTest {
     }
 
 
-
     @Test
     public void testShotsOnTargetOver() {
         GeneralBlock generalBlock = getGeneralBlock();
 
         BetContainer block = generalBlock.findByType(SHOTS_ON_TARGET_OVER);
+
+        BetContainer over59AndHalf = block.findByType(OVER_59_5);
+        assertEquals(12, over59AndHalf.getAnalyzedMatchesAmount().intValue());
+        assertEquals(6, over59AndHalf.getSuccessfullyMatchesAmount().intValue());
+        assertEquals(0, over59AndHalf.getSkippedMatchesAmount().intValue());
+        assertEquals(50, over59AndHalf.getPercentage().intValue());
 
         BetContainer over60AndHalf = block.findByType(OVER_60_5);
         assertEquals(12, over60AndHalf.getAnalyzedMatchesAmount().intValue());

@@ -55,8 +55,11 @@ public enum ContainerType {
     ANY_WIN_AND_TOTAL_UNDER,
     ANY_WIN_AND_DIFFERENCE_EQUALS,
     SHOTS_ON_TARGET_OVER,
+    SHOTS_ON_TARGET_UNDER,
     TEAM_SHOTS_ON_TARGET_OVER,
+    TEAM_SHOTS_ON_TARGET_HANDICAP,
     OPPOSING_TEAM_SHOTS_ON_TARGET_OVER,
+    OPPOSING_TEAM_SHOTS_ON_TARGET_HANDICAP,
     PENALTIES_TIME_OVER,
     POWERPLAY_GOALS_OVER,
     OVER_0_5,
@@ -75,6 +78,7 @@ public enum ContainerType {
     OVER_28_5,
     OVER_30_5,
     OVER_32_5,
+    OVER_59_5,
     OVER_60_5,
     OVER_61_5,
     OVER_62_5,
@@ -89,6 +93,10 @@ public enum ContainerType {
     UNDER_7_5,
     UNDER_9,
     UNDER_10,
+    UNDER_60_5,
+    UNDER_61_5,
+    UNDER_62_5,
+    UNDER_63_5,
     DIFF_1,
     DIFF_2,
     DIFF_3_OR_MORE,
@@ -96,7 +104,9 @@ public enum ContainerType {
     NUMBER_2,
     PLUS_1_5,
     PLUS_2_5,
+    PLUS_3_5,
     MINUS_1_5,
-    MINUS_2_5
+    MINUS_2_5,
+    MINUS_3_5
 
 }

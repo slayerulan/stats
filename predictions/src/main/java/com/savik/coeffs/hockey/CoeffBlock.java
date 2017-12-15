@@ -5,6 +5,7 @@ import com.savik.CoeffContainer;
 import com.savik.ContainerType;
 import com.savik.coeffs.hockey.other.CoeffOtherBlock;
 import com.savik.coeffs.hockey.periods.CoeffPeriodsBlock;
+import com.savik.coeffs.hockey.stats.CoeffStatsBlock;
 import com.savik.coeffs.hockey.total.CoeffTotalBlock;
 
 import java.util.Arrays;
@@ -14,7 +15,8 @@ public class CoeffBlock extends CoeffContainer {
         super(Arrays.asList(
                 new CoeffTotalBlock(),
                 new CoeffOtherBlock(),
-                new CoeffPeriodsBlock()
+                new CoeffPeriodsBlock(),
+                new CoeffStatsBlock()
         ), ContainerType.ROOT);
     }
 }
