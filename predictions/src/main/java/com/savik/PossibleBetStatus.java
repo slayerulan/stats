@@ -7,6 +7,6 @@ package com.savik;
 public enum PossibleBetStatus {
     GOOD,
     GOOD_PERCENTAGES,
-    GOOD_WITH_RISK,
+    RISK,
     SO_SO
 }

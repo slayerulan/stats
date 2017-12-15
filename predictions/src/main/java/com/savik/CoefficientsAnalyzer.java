@@ -9,6 +9,8 @@ public class CoefficientsAnalyzer {
 
     public static double LOW_VALUE_BORDER = 1.15;
     public static double RISK_BET_LOW_VALUE_BORDER = 2.0;
+    public static double MIN_PERCENTAGE = 0.15;
+    public static double MAX_PERCENTAGE = 0.85;
 
     public static PossibleBetResultContainer analyze(CoeffContainer coeffContainer, PossibleBetContainer betContainer) {
         if (coeffContainer.getLeaf() && betContainer.getLeaf()) {
@@ -65,34 +67,54 @@ public class CoefficientsAnalyzer {
                 firstTeamNegativeResult, secondTeamNegativeResult};
 
         double maxValue = Arrays.stream(values).max().getAsDouble();
-
         possibleBetResultContainer.setValueBet(maxValue);
-        if (maxValue > LOW_VALUE_BORDER) {
 
 
-            if(firstTeamContainerPercentage < 0.15 || firstTeamContainerPercentage > 0.85 ||
-                    secondTeamContainerPercentage < 0.15 || secondTeamContainerPercentage > 0.85) {
-                possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD_PERCENTAGES);
-            } else {
+        boolean firstTeamHasGoodPositiveChances = firstTeamContainerPercentage > MAX_PERCENTAGE;
+        boolean secondTeamHasGoodPositiveChanges = secondTeamContainerPercentage > MAX_PERCENTAGE;
 
+        boolean firstTeamHasGoodNegativeChances = firstTeamContainerPercentage < MIN_PERCENTAGE;
+        boolean secondTeamHasGoodNegativeChanges = secondTeamContainerPercentage < MIN_PERCENTAGE;
 
-                possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD);
+        if (firstTeamHasGoodPositiveChances && secondTeamHasGoodPositiveChanges) {
+            possibleBetResultContainer.setValueBet(Math.max(firstTeamPositiveResult, secondTeamPositiveResult));
+            possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD_PERCENTAGES);
+            possibleBetResultContainer.setCoeffType(CoeffType.POSITIVE);
+        } else if (firstTeamHasGoodPositiveChances) {
+            possibleBetResultContainer.setValueBet(firstTeamPositiveResult);
+            possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD_PERCENTAGES);
+            possibleBetResultContainer.setCoeffType(CoeffType.POSITIVE);
+        } else if (secondTeamHasGoodPositiveChanges) {
+            possibleBetResultContainer.setValueBet(secondTeamPositiveResult);
+            possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD_PERCENTAGES);
+            possibleBetResultContainer.setCoeffType(CoeffType.POSITIVE);
+        } else if (firstTeamHasGoodNegativeChances && secondTeamHasGoodNegativeChanges) {
+            possibleBetResultContainer.setValueBet(Math.max(firstTeamNegativeResult, secondTeamNegativeResult));
+            possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD_PERCENTAGES);
+            possibleBetResultContainer.setCoeffType(CoeffType.NEGATIVE);
+        } else if (firstTeamHasGoodNegativeChances) {
+            possibleBetResultContainer.setValueBet(firstTeamNegativeResult);
+            possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD_PERCENTAGES);
+            possibleBetResultContainer.setCoeffType(CoeffType.NEGATIVE);
+        } else if (secondTeamHasGoodNegativeChanges) {
+            possibleBetResultContainer.setValueBet(secondTeamNegativeResult);
+            possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD_PERCENTAGES);
+            possibleBetResultContainer.setCoeffType(CoeffType.NEGATIVE);
+        } else if (maxValue > LOW_VALUE_BORDER) {
+            possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD);
 
-                if ( (maxValue == firstTeamPositiveResult || maxValue == secondTeamPositiveResult) && positiveValue > RISK_BET_LOW_VALUE_BORDER) {
-                    possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD_WITH_RISK);
-                } else if ( (maxValue == firstTeamNegativeResult || maxValue == secondTeamNegativeResult) && negativeValue > RISK_BET_LOW_VALUE_BORDER) {
-                    possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD_WITH_RISK);
-                }
-
+            if ((maxValue == firstTeamPositiveResult || maxValue == secondTeamPositiveResult) && positiveValue > RISK_BET_LOW_VALUE_BORDER) {
+                possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.RISK);
+            } else if ((maxValue == firstTeamNegativeResult || maxValue == secondTeamNegativeResult) && negativeValue > RISK_BET_LOW_VALUE_BORDER) {
+                possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.RISK);
             }
 
+            if (maxValue == firstTeamPositiveResult || maxValue == secondTeamPositiveResult) {
+                possibleBetResultContainer.setCoeffType(CoeffType.POSITIVE);
+            } else {
+                possibleBetResultContainer.setCoeffType(CoeffType.NEGATIVE);
+            }
 
-        }
-
-        if (maxValue == firstTeamPositiveResult || maxValue == secondTeamPositiveResult) {
-            possibleBetResultContainer.setCoeffType(CoeffType.POSITIVE);
-        } else {
-            possibleBetResultContainer.setCoeffType(CoeffType.NEGATIVE);
         }
     }
 
@@ -102,18 +124,33 @@ public class CoefficientsAnalyzer {
         Double value = coeff.getValue();
         double firstTeamResult = value * firstTeamContainerPercentage;
         double secondTeamResult = value * secondTeamContainerPercentage;
+
         if (firstTeamResult > secondTeamResult) {
             possibleBetResultContainer.setValueBet(firstTeamResult);
         } else {
             possibleBetResultContainer.setValueBet(secondTeamResult);
         }
 
-        if (firstTeamResult > LOW_VALUE_BORDER || secondTeamResult > LOW_VALUE_BORDER) {
-            if(firstTeamContainerPercentage < 0.15 || firstTeamContainerPercentage > 0.85 ||
-                    secondTeamContainerPercentage < 0.15 || secondTeamContainerPercentage > 0.85) {
-                possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD_PERCENTAGES);
-            } else if (value > RISK_BET_LOW_VALUE_BORDER) {
-                possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD_WITH_RISK);
+        boolean firstTeamHasGoodChances = firstTeamContainerPercentage < MIN_PERCENTAGE || firstTeamContainerPercentage > MAX_PERCENTAGE;
+        boolean secondTeamHasGoodChanges = secondTeamContainerPercentage < MIN_PERCENTAGE || secondTeamContainerPercentage > MAX_PERCENTAGE;
+
+        if (firstTeamHasGoodChances && secondTeamHasGoodChanges) {
+
+            possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD_PERCENTAGES);
+
+        } else if (firstTeamHasGoodChances) {
+
+            possibleBetResultContainer.setValueBet(firstTeamResult);
+            possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD_PERCENTAGES);
+
+        } else if (secondTeamHasGoodChanges) {
+            possibleBetResultContainer.setValueBet(secondTeamResult);
+            possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD_PERCENTAGES);
+
+        } else if (firstTeamResult > LOW_VALUE_BORDER || secondTeamResult > LOW_VALUE_BORDER) {
+
+            if (value > RISK_BET_LOW_VALUE_BORDER) {
+                possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.RISK);
             } else {
                 possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD);
             }
@@ -122,10 +159,6 @@ public class CoefficientsAnalyzer {
 
     private static PossibleBetResultContainer handleContainer(CoeffContainer coeffContainer, PossibleBetContainer betContainer) {
         List<PossibleBetContainer> possibleBetContainerBlocks = betContainer.getChildrenBetBlocks();
-        // TODO: remove
-            /*if (coeffContainerChildrenBlocks.size() != possibleBetContainerBlocks.size()) {
-                throw new IllegalArgumentException("coeffContainer is incompatible with betContainer");
-            }*/
         List<PossibleBetResultContainer> childBlocks = new ArrayList<>();
         for (int i = 0; i < possibleBetContainerBlocks.size(); i++) {
             PossibleBetContainer childPossibleBetContainer = possibleBetContainerBlocks.get(i);
