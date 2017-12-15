@@ -74,6 +74,7 @@ public enum ContainerType {
     OVER_18_5,
     OVER_28_5,
     OVER_30_5,
+    OVER_32_5,
     OVER_60_5,
     OVER_61_5,
     OVER_62_5,
