@@ -1,0 +1,563 @@
+<html>
+<body class="main" id="p_sport">
+<div id="z_container">
+
+    <!-- header -->
+    <a name="top"></a>
+    <!-- ND 2012 header -->
+
+    <div class="layout-header">
+        <div class="header-top">
+
+            <div id="timeHeader" class="time" data-tzserver="2" data-timeforserver="1513341207">
+                <a href="/timezone.html">15.12 15:33</a>
+            </div>
+
+            <script>timeHeader();</script>
+            <script>timeZoneHeader();</script>
+
+            <div class="personalArea">
+
+
+                <div class="header-user">
+                    <div class="user">
+                        <a class="header_reg"> Евгений Савушкин</a>
+                    </div>
+                    <button id="balance-button">Баланс <i class="fa fa-angle-down" aria-hidden="true"></i></button>
+                </div>
+                <div class="exit"><form action="/sport/khokkejj/nhl-statistika-matcha-shtrafnoe-vremja?logoff=1" method="post" name="navAuth" id="auth">
+                    <noindex><a class="logout" href="/sport/khokkejj/nhl-statistika-matcha-shtrafnoe-vremja?logoff=1" onclick="document.navAuth.submit(); return false;" rel="nofollow">Выход <i class="fa-exit"></i></a></noindex>
+                </form></div>
+
+            </div>
+            <div class="header-top-menu">
+                <ul>
+
+
+                    <li><noindex><a href="/history.html">История счета</a></noindex></li>
+                    <li><noindex><a href="/setup.html ">Настройка счета</a></noindex></li>
+                    <li><noindex><a href="/payments.html ">Ввод/вывод средств</a></noindex></li>
+
+                    <ul>
+                    </ul></ul></div>
+
+        </div>
+
+
+
+        <div class="header-bottom">
+            <div class="logo">
+
+                <noindex><a href="/" rel="nofollow"></a></noindex>
+            </div>
+
+            <div class="header-bottom-menu">
+                <ul>
+                    <li id="tbSport" class="active"><a href="/">СПОРТ</a></li>
+                    <li id="tbLive"><a href="/live.html">LIVE</a></li>
+                    <li id="tbBetGames"><a href="/bgtv">BETGAMES</a></li>
+                    <li id="tbMobile"><a href="/mobile">MOBILE</a></li>
+                    <li id="tbAbout"><a target="_blank" href="http://retail.parimatch.by">НАШИ АДРЕСА</a></li>
+
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- /ND 2012 header --><!-- /header -->
+
+    <!-- right -->
+    <!-- /right -->
+
+    <!-- left -->
+    <!-- ND 2012 left -->
+
+
+    <script language="javascript" type="text/javascript" src="/static/jss/jquery.ui.datepicker-ru.js"></script>
+    <script language="JavaScript" type="text/javascript" src="./jss/swfobject.js"></script>
+
+    <div id="z_left_column" class="grid_3 layout-left">
+        <div class="z_mnu">
+            <form name="sports" id="sports" action="/bet.html">
+
+                <div class="site_block_1 leftmenu" id="leftmenuBetGames">
+                    <h2 class="header_1">BetGames</h2>
+                    <ul>
+                        <li><a href="/bgtv/">Live игры</a></li>
+                        <li><a href="/bgtv/?poker">BetOnPoker</a></li>
+                    </ul>
+                </div>
+
+                <div class="leftmenu" id="qtStats" style="display: none;">
+                    <ul>
+                        <li><a href="/stats.html">Стандартная версия</a></li>
+                        <li><a href="#Статистика" onclick="openBR('http://parimatch.stats.betradar.com/s4/?clientid=188','brStats')">Расширенная версия</a></li>
+                    </ul>
+                </div>
+                <div class="leftmenu" id="qtLiveResults" style="display: none;">
+                    <ul>
+                        <li><a href="/liveres.html">Стандартная версия</a></li>
+                        <li><a href="#Результаты_Live" onclick="openBR('https://ls.sir.sportradar.com/parimatch','brScores')">Расширенная версия</a></li>
+                    </ul>
+                </div>
+
+                <!--<a class='bets_live' href='/live.html'></a>-->
+
+
+                <div id="live_logo">
+                    <a href="/live.html"> <img src="/img/2012/live_new.png"></a>
+                </div>
+
+                <span class="dynamic">
+
+	<div id="lobbyLeftHolder" class="site_block_1 leftmenu">
+        <h2 class="header_1">Виды спорта</h2>
+        <div id="buttons">
+            <button class="btn_gray" type="button" onclick="clearSportSelection();">Очистить</button>
+            <button class="btn_gray" type="button" onclick="openSelectedSports();">Показать</button>
+        </div>
+        <ul>
+
+            <li><a id="spFilter" href="#Filter" onclick="showGr('#spFilter','#filterItems');">Фильтр</a>
+                <ul class="hidden" id="filterItems">
+                <li><a href="#today" onclick="loadFilter('today');">Сегодня</a></li>
+                    <li><a href="#all" onclick="loadFilter('all');">Не важно когда</a></li>
+                    <li><a href="#hour" onclick="loadFilter('hour');">Ближайший час</a></li>
+                    <li><a href="#3hours" onclick="loadFilter('3hours');">Ближайшие 3 часа</a></li>
+                    <li><a href="#6hours" onclick="loadFilter('6hours');">Ближайшие 6 часов</a></li>
+                    <li><a href="#12hours" onclick="loadFilter('12hours');">Ближайшие 12 часов</a></li>
+                </ul>
+            </li>
+            <li><a id="spArchive" href="#Archive" onclick="showGr('#spArchive','#archItems');">Архив линий</a>
+                <ul class="hidden" id="archItems">
+                  <li>Дата линии<span><input id="datePicker" class="hasDatePicker hasDatepicker" type="text"><a onclick="loadArch();" title="Загрузить архивную линию">&gt;&gt;</a></span></li>
+                </ul>
+            </li>
+
+
+
+
+            <li><a id="spLive" href="/live.html">Ставки <img src="/img/2012/live_ic.png"> <b class="count">1220</b></a></li>
+			<div id="lobbySportsHolder">
+
+<li><a href="#Футбол" onclick="clickSport(this);">Футбол<em onclick="checkSport(event, this);"></em></a><ul class="hidden groups"><li><a href="/sport/futbol/sravnenie-po-individualnomu-totalu" hd="8281166">Сравнение по индивидуальному тоталу<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/specialnye-predlozhenija" hd="8280704">Специальные предложения<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/chempionat-mira-2018" hd="8281918">Чемпионат мира 2018<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/sbornye-kubok-vostochnojj-azii" hd="8281929">Сборные. Кубок Восточной Азии<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/sbornye-tovarishheskie-matchi" hd="8279948">Сборные. Товарищеские матчи<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/sbornye-u-23-tovarishheskie-matchi" hd="8279969">Сборные U-23. Товарищеские матчи<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/ipiranga-cup-u-20" hd="8282081">Ipiranga Cup. U-20<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/chempionat-mira-sredi-klubov-oaeh" hd="8281831">Чемпионат мира среди клубов. ОАЭ<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/liga-chempionov-uefa" hd="8280156">Лига чемпионов УЕФА<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/liga-evropy-uefa" hd="8280143">Лига Европы УЕФА<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/kluby-tovarishheskie-matchi" hd="8280769">Клубы. Товарищеские матчи<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/tovarishheskie-matchi" hd="8280440">Товарищеские матчи<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/anglija-premer-liga" hd="8281007">Англия. Премьер-лига<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/anglija-chempionship" hd="8280517">Англия. Чемпионшип<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/anglija-chempionship-statistika" hd="8281119">Англия. Чемпионшип. Статистика<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/anglija-kubok" hd="8279698">Англия. Кубок<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/anglija-kubok-ligi" hd="8280578">Англия. Кубок лиги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/anglija-fa-trophy" hd="8279691">Англия. FA Trophy<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/anglija-liga-1" hd="8279601">Англия. Лига 1<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/anglija-liga-2" hd="8279602">Англия. Лига 2<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/anglija-premer-liga-2-divizion-1" hd="8280580">Англия. Премьер-лига 2. Дивизион 1<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/anglija-juzhnaja-konferencija" hd="8280364">Англия. Южная конференция<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/anglija-severnaja-konferencija" hd="8280391">Англия. Северная конференция<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/anglija-severnaja-premer-liga" hd="8279643">Англия. Северная Премьер-лига<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/anglija-juzhnaja-premer-liga" hd="8279644">Англия. Южная Премьер-лига<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/anglija-rajjman-liga-premer-divizion" hd="8279646">Англия. Райман лига. Премьер-дивизион<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/ispanija-primera" hd="8281039">Испания. Примера<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/ispanija-primera-statistika" hd="8281176">Испания. Примера. Статистика<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/ispanija-segunda" hd="8281109">Испания. Сегунда<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/ispanija-segunda-v-gruppa-1" hd="8279941">Испания. Сегунда В. Группа 1<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/ispanija-segunda-v-gruppa-2" hd="8279942">Испания. Сегунда В. Группа 2<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/ispanija-segunda-v-gruppa-3" hd="8279943">Испания. Сегунда В. Группа 3<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/ispanija-segunda-v-gruppa-4" hd="8279944">Испания. Сегунда В. Группа 4<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/ispanija-tersera" hd="8279861">Испания. Терсера<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/germanija-bundesliga" hd="8279594">Германия. Бундеслига<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/germanija-bundesliga-statistika" hd="8279857">Германия. Бундеслига. Статистика<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/germanija-bundesliga-2" hd="8279833">Германия. Бундеслига 2<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/germanija-bundesliga-2-statistika" hd="8280471">Германия. Бундеслига 2. Статистика<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/germanija-liga-3" hd="8279581">Германия. Лига 3<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/germanija-regionalnaja-liga-sever" hd="8279577">Германия. Региональная лига. Север<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/germanija-regionalnaja-liga-severo-vostok" hd="8279590">Германия. Региональная лига. Северо-восток<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/germanija-regionalnaja-liga-zapad" hd="8279591">Германия. Региональная лига. Запад<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/germanija-oberliga-severo-vostoksever" hd="8281104">Германия. Оберлига. Северо-Восток/Север<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/germanija-u-19" hd="8281143">Германия U-19<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/germanija-kubok" hd="8279834">Германия. Кубок<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/italija-serija-a" hd="8280553">Италия. Серия А<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/italija-kubok" hd="8279489">Италия. Кубок<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/italija-serija-v" hd="8280113">Италия. Серия В<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/italija-liga-pro-gruppa-a" hd="8280365">Италия. Лига-Про. Группа А<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/italija-liga-pro-gruppa-b" hd="8280366">Италия. Лига-Про. Группа B<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/italija-liga-pro-gruppa-s" hd="8280367">Италия. Лига-Про. Группа С<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/italija-serija-d" hd="8279883">Италия. Серия D<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/italija-primavera" hd="8279634">Италия. Примавера<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/italija-primavera-2" hd="8281991">Италия. Примавера 2<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/francija-liga-1" hd="8280537">Франция. Лига 1<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/francija-liga-1-statistika" hd="8280540">Франция. Лига 1. Статистика<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/francija-liga-2" hd="8280538">Франция. Лига 2<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/francija-nacionalnyjj-divizion" hd="8279606">Франция. Национальный дивизион<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/ukraina-premer-liga" hd="8281027">Украина. Премьер-лига<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/rossija-premer-liga" hd="8281030">Россия. Премьер-лига<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/rossija-kubok" hd="8279565">Россия. Кубок<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/avstrija-bundesliga" hd="8280160">Австрия. Бундеслига<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/belgija-pervyjj-divizion-a" hd="8280158">Бельгия. Первый дивизион А<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/belgija-pervyjj-divizion-a-statistika" hd="8280673">Бельгия. Первый дивизион А. Статистика<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/belgija-pervyjj-divizion-v" hd="8280576">Бельгия. Первый дивизион В<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/niderlandy-eredivisie" hd="8281052">Нидерланды. Eredivisie<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/niderlandy-pervyjj-divizion" hd="8279605">Нидерланды. Первый дивизион<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/niderlandy-kubok" hd="8279759">Нидерланды. Кубок<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/grecija-superliga" hd="8279626">Греция. Суперлига<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/grecija-kubok" hd="8279656">Греция. Кубок<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/portugalija-primejjra-liga" hd="8279622">Португалия. Примейра-лига<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/portugalija-primejjra-liga-statistika" hd="8280821">Португалия. Примейра-лига. Статистика<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/portugalija-segunda" hd="8281118">Португалия. Сегунда<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/portugalija-u-19" hd="8279625">Португалия U-19<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/turcija-superliga" hd="8279785">Турция. Суперлига<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/turcija-superliga-statistika" hd="8280226">Турция. Суперлига. Статистика<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/turcija-liga-1" hd="8279623">Турция. Лига 1<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/shvejjcarija-superliga" hd="8279574">Швейцария. Суперлига<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/shotlandija-premer-liga" hd="8280146">Шотландия. Премьер-лига<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/shotlandija-chempionship" hd="8279604">Шотландия. Чемпионшип<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/shotlandija-liga-1" hd="8279631">Шотландия. Лига 1<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/shotlandija-liga-2" hd="8279655">Шотландия. Лига 2<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/severnaja-irlandija-premer-liga" hd="8280007">Северная Ирландия. Премьер-лига<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/uehls-premer-liga" hd="8280192">Уэльс. Премьер-лига<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/bolgarija-kubok" hd="8279658">Болгария. Кубок<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/kipr-pervyjj-divizion" hd="8279639">Кипр. Первый дивизион<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/polsha-ekstraklasa" hd="8279595">Польша. Ekstraklasa<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/rumynija-liga-1" hd="8279596">Румыния. Лига 1<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/khorvatija-liga-1" hd="8279571">Хорватия. Лига 1<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/azerbajjdzhan-kubok" hd="8279686">Азербайджан. Кубок<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/bangladesh-premer-liga" hd="8279821">Бангладеш. Премьер-лига<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/indija-i-liga" hd="8279662">Индия. I-Лига<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/indija-superliga" hd="8280254">Индия. Суперлига<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/iran-kubok" hd="8279741">Иран. Кубок<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/iordanija-kubok" hd="8279846">Иордания. Кубок<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/izrail-premer-liga" hd="8279635">Израиль. Премьер-лига<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/izrail-nacionalnaja-liga" hd="8279651">Израиль. Национальная лига<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/oaeh-arabian-gulf-cup" hd="8281544">ОАЭ. Arabian Gulf Cup<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/oaeh-divizion-1" hd="8280403">ОАЭ. Дивизион 1<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/oman-kubok" hd="8280224">Оман. Кубок<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/saudovskaja-aravija-pro-liga" hd="8279640">Саудовская Аравия. Про-лига<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/alzhir-liga-1" hd="8279950">Алжир. Лига 1<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/alzhir-liga-2" hd="8279667">Алжир. Лига 2<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/egipet-premer-liga" hd="8279555">Египет. Премьер-лига<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/marokko-botola" hd="8279974">Марокко. Botola<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/tunis-liga-1" hd="8279876">Тунис. Лига 1<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/tunis-liga-2" hd="8279982">Тунис. Лига 2<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/juar-psl" hd="8279654">ЮАР. PSL<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/juar-divizion-1" hd="8279694">ЮАР. Дивизион 1<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/kolumbija-primera-a" hd="8279499">Колумбия. Примера А<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/paragvajj-primera-divizion" hd="8279598">Парагвай. Примера дивизион<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/urugvajj-primera-divizion-rezervnaja-liga" hd="8280320">Уругвай. Примера дивизион. Резервная лига<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/venesuehla-primera-divizion" hd="8279657">Венесуэла. Примера дивизион<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/kosta-rika-primera-divizion" hd="8279621">Коста-Рика. Примера дивизион<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/filippiny-pfl" hd="8281040">Филиппины. PFL<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/avstralija-a-liga" hd="8279672">Австралия. А-Лига<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/avstralija-a-liga-statistika" hd="8280778">Австралия. А-Лига. Статистика<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/novaja-zelandija-premer-liga" hd="8279959">Новая Зеландия. Премьер-лига<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/zhenshhiny-germanija-bundesliga" hd="8279683">Женщины. Германия. Бундеслига<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/zhenshhiny-ispanija-superliga" hd="8279676">Женщины. Испания. Суперлига<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/zhenshhiny-francija-divizion-1" hd="8279726">Женщины. Франция. Дивизион 1<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/zhenshhiny-belgija-superliga" hd="8280212">Женщины. Бельгия. Суперлига<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbol/zhenshhiny-niderlandy-eredivisie" hd="8280195">Женщины. Нидерланды. Eredivisie<em onclick="checkGroup(event, this);"></em></a></li></ul></li>
+<li><a href="#Теннис" onclick="clickSport(this);">Теннис<em onclick="checkSport(event, this);"></em></a><ul class="hidden groups"><li><a href="/sport/tennis/australian-open-2018-itogi-turnira" hd="8281085">Australian Open 2018. Итоги турнира<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/tennis/tennic-mubadala-world-tennis-championship-abu-dabi-khard" hd="8282010">Тенниc. Mubadala World Tennis Championship. Абу-Даби. Хард<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/tennis/zhenshhiny-australian-open-2018-itogi-turnira" hd="8281098">Женщины. Australian Open 2018. Итоги турнира<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/tennis/zhenshhiny-australian-open-2018-wildcard" hd="8281840">Женщины. Australian Open 2018. Wildcard<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/tennis/itf-pary-khammamet" hd="8281261">ITF. Пары. Хаммамет<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/tennis/itf-santo-domingo-ehste" hd="8281802">ITF. Санто-Доминго Эсте<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/tennis/itf-pary-santo-domingo-ehste" hd="8281803">ITF. Пары. Санто-Доминго Эсте<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/tennis/itf-khuakhin" hd="8281806">ITF. Хуахин<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/tennis/itf-islamabad" hd="8281880">ITF. Исламабад<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/tennis/itf-pary-islamabad" hd="8281881">ITF. Пары. Исламабад<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/tennis/itf-pary-dokha" hd="8281883">ITF. Пары. Доха<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/tennis/itf-sadzhur" hd="8281994">ITF. Саджур<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/tennis/itf-lima" hd="8281996">ITF. Лима<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/tennis/itf-pary-lima" hd="8281997">ITF. Пары. Лима<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/tennis/itf-zhenshhiny-dubajj" hd="8281998">ITF. Женщины. Дубай<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/tennis/itf-zhenshhiny-pary-khammamet" hd="8281263">ITF. Женщины. Пары. Хаммамет<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/tennis/itf-zhenshhiny-antalja" hd="8280760">ITF. Женщины. Анталья<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/tennis/itf-zhenshhiny-santa-krus" hd="8282002">ITF. Женщины. Санта Крус<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/tennis/itf-zhenshhiny-pary-santa-krus" hd="8282003">ITF. Женщины. Пары. Санта Крус<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/tennis/itf-zhenshhiny-puna" hd="8282000">ITF. Женщины. Пуна<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/tennis/itf-zhenshhiny-kordenons" hd="8282004">ITF. Женщины. Корденонс<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/tennis/itf-zhenshhiny-pary-kordenons" hd="8282005">ITF. Женщины. Пары. Корденонс<em onclick="checkGroup(event, this);"></em></a></li></ul></li>
+<li><a href="#Баскетбол" onclick="clickSport(this);">Баскетбол<em onclick="checkSport(event, this);"></em></a><ul class="hidden groups"><li><a href="/sport/basketbol/nba-itogi" hd="8281404">NBA. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/nba" hd="8281584">NBA<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/nba-mvp-reguljarnogo-sezona" hd="8281407">NBA. MVP Регулярного сезона<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/nba-igroki" hd="8281588">NBA. Игроки<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/ssha-ncaa" hd="8281709">США. NCAA<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/evroliga-201718-itogi" hd="8281037">Евролига 2017/18. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/evrokubok-20172018-itogi" hd="8281398">Еврокубок 2017/2018. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/ispanija-liga-acb-201718-itogi" hd="8281153">Испания. Лига ACB 2017/18. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/edinaja-liga-vtb-itogi" hd="8281403">Единая лига ВТБ. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/italija-serija-a-201718-itogi" hd="8281154">Италия. Серия A 2017/18. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/germanija-bbl-20172018-itogi" hd="8281397">Германия. BBL 2017/2018. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/grecija-liga a1-20172018-itogi" hd="8281395">Греция. Лига&nbsp;A1 2017/2018. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/turcija-bsl-20172018-itogi" hd="8281388">Турция. BSL 2017/2018. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/francija-pro-a-201718-itogi" hd="8281396">Франция. Про A 2017/18. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/evroliga" hd="8281539">Евролига<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/evroliga-statistika" hd="8281577">Евролига. Статистика<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/adriaticheskaja-liga-1" hd="8281386">Адриатическая лига 1<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/edinaja-liga-vtb" hd="8281480">Единая лига ВТБ<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/avstrija-abl" hd="8280650">Австрия. ABL<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/belgija-blb" hd="8281416">Бельгия. BLB<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/bolgarija-nbl" hd="8280666">Болгария. НБЛ<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/velikobritanija-bbl" hd="8281464">Великобритания. BBL<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/germanija-bbl" hd="8281421">Германия. BBL<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/vengrija-divizion-a" hd="8280658">Венгрия. Дивизион А<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/grecija-liga-a1" hd="8280618">Греция. Лига A1<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/ispanija-liga-acb" hd="8281414">Испания. Лига ACB<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/ispanija-leb-oro" hd="8281415">Испания. LEB Oro<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/italija-serija-a" hd="8280634">Италия. Серия A<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/italija-serija a2" hd="8281481">Италия. Серия&nbsp;A2<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/litva-lkl" hd="8280626">Литва. LKL<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/polsha-plk" hd="8281422">Польша. PLK<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/rossija-superliga-1" hd="8281569">Россия. Суперлига 1<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/rumynija-divizion-a" hd="8281540">Румыния. Дивизион A<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/serbija-kls" hd="8281419">Сербия. KLS<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/turcija-bsl" hd="8281484">Турция. BSL<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/ukraina-superliga" hd="8281461">Украина. Суперлига<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/francija-pro-a" hd="8280623">Франция. Про A<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/francija-pro-b" hd="8280624">Франция. Про B<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/finljandija-korisliiga" hd="8280649">Финляндия. Korisliiga<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/khorvatija-liga-a-1" hd="8279868">Хорватия. Лига A-1<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/chekhija-nbl" hd="8281434">Чехия. NBL<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/shvecija-ligan" hd="8280235">Швеция. Ligan<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/ehstonija-kml" hd="8280647">Эстония. KML<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/japonija-b-liga" hd="8280627">Япония. B-Лига<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/respublika-koreja-kbl" hd="8281585">Республика Корея. KBL<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/avstralija-nbl" hd="8280648">Австралия. NBL<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/argentina-lnb" hd="8280921">Аргентина. LNB<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/urugvajj-lub" hd="8280635">Уругвай. LUB<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/brazilija-nbb" hd="8280711">Бразилия. NBB<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/meksika-lnbp" hd="8280664">Мексика. LNBP<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/alzhir" hd="8280991">Алжир<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/livan" hd="8280459">Ливан<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/zhenshhiny-avstralija-wnbl" hd="8280652">Женщины. Австралия. WNBL<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/zhenshhiny-ispanija-lfb" hd="8281470">Женщины. Испания. LFB<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/zhenshhiny-polsha-blk" hd="8281401">Женщины. Польша. BLK<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/zhenshhiny-turcija-kbsl" hd="8280699">Женщины. Турция. KBSL<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/basketbol/zhenshhiny-francija-lfb" hd="8280655">Женщины. Франция. LFB<em onclick="checkGroup(event, this);"></em></a></li></ul></li>
+<li><a href="#Хоккей" onclick="clickSport(this);" class="active">Хоккей<em onclick="checkSport(event, this);"></em></a><ul class="hidden groups" style="display: block;"><li><a href="/sport/khokkejj/nhl-kubok-stehnli-itogi" hd="8280173">NHL. Кубок Стэнли. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/khokkejj/nhl-reguljarnyjj-sezon" hd="8280526">NHL. Регулярный сезон<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/khokkejj/nhl-statistika-matcha-broski-v-stvor-vorot" hd="8280448">NHL. Статистика матча. Броски в створ ворот<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/khokkejj/nhl-statistika-matcha-shtrafnoe-vremja" hd="8280449" class="checked">NHL. Статистика матча. Штрафное время<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/khokkejj/ahl-reguljarnyjj-sezon" hd="8280663">AHL. Регулярный сезон<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/khokkejj/chempionat-mira-2018-itogi" hd="8280971">Чемпионат мира 2018. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/khokkejj/chempionat-mira-u-20-divizion-1-gruppa-a-francija" hd="8281877">Чемпионат мира U-20. Дивизион 1. Группа A. Франция<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/khokkejj/chempionat-mira-u-20-divizion-1-gruppa-b-slovenija" hd="8281878">Чемпионат мира U-20. Дивизион 1. Группа B. Словения<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/khokkejj/sbornye" hd="8281657">Сборные<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/khokkejj/sbornye-kubok-pervogo-kanala" hd="8281791">Сборные. Кубок Первого Канала<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/khokkejj/sbornye-molodjozhnye-komandy-mirovojj-kubok-vyzova-kanada" hd="8282033">Сборные. Молодёжные команды. Мировой кубок вызова. Канада<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/khokkejj/zhenshhiny-sbornye-tovarishheskie-matchi" hd="8281702">Женщины. Сборные. Товарищеские матчи<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/khokkejj/kubok-shpenglera" hd="8282134">Кубок Шпенглера<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/khokkejj/kkhl" hd="8279584">КХЛ<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/khokkejj/vkhl" hd="8279585">ВХЛ<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/khokkejj/mkhl" hd="8281193">МХЛ<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/khokkejj/avstrija-erste-bank-liga" hd="8279649">Австрия. Erste Bank Liga<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/khokkejj/erste-liga" hd="8281644">Erste Liga<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/khokkejj/germanija-del" hd="8279586">Германия. DEL<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/khokkejj/germanija-bundesliga-2" hd="8281720">Германия. Бундеслига 2<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/khokkejj/danija-metal-ligaen" hd="8280497">Дания. Metal Ligaen<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/khokkejj/kazakhstan" hd="8281321">Казахстан<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/khokkejj/finljandija-liiga" hd="8280218">Финляндия. Liiga<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/khokkejj/finljandija-mestis" hd="8279648">Финляндия. Mestis<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/khokkejj/finljandija-u-20" hd="8281266">Финляндия U-20<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/khokkejj/shvecija-allsvenskan" hd="8280496">Швеция. Allsvenskan<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/khokkejj/shvejjcarija-nla" hd="8280501">Швейцария. NLA<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/khokkejj/velikobritanija-elite-league" hd="8280443">Великобритания. Elite League<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/khokkejj/ohl" hd="8281113">OHL<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/khokkejj/qmjhl" hd="8281114">QMJHL<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/khokkejj/whl" hd="8281115">WHL<em onclick="checkGroup(event, this);"></em></a></li></ul></li>
+<li><a href="#Авто-мотоспорт" onclick="clickSport(this);">Авто-мотоспорт<em onclick="checkSport(event, this);"></em></a><ul class="hidden groups"><li><a href="/sport/avto-motosport/formula-1-itogi-pobeditel-sezona-2018" hd="8280429">Формула 1. Итоги. Победитель сезона 2018<em onclick="checkGroup(event, this);"></em></a></li></ul></li>
+<li><a href="#Американский_футбол" onclick="clickSport(this);">Американский футбол<em onclick="checkSport(event, this);"></em></a><ul class="hidden groups"><li><a href="/sport/amerikanskijj-futbol/nfl" hd="8281138">NFL<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/amerikanskijj-futbol/ncaa" hd="8281210">NCAA<em onclick="checkGroup(event, this);"></em></a></li></ul></li>
+<li><a href="#Бадминтон" onclick="clickSport(this);">Бадминтон<em onclick="checkSport(event, this);"></em></a><ul class="hidden groups"><li><a href="/sport/badminton/super-series-finals-oaeh" hd="8282110">Super Series. Finals. ОАЭ<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/badminton/mikst-super-series-finals-oaeh" hd="8284864">Микст. Super Series. Finals. ОАЭ<em onclick="checkGroup(event, this);"></em></a></li></ul></li>
+<li><a href="#Биатлон" onclick="clickSport(this);">Биатлон<em onclick="checkSport(event, this);"></em></a><ul class="hidden groups"><li><a href="/sport/biatlon/kubok-mira-ansi-sprint-itogi" hd="8281890">Кубок мира. Анси. Спринт. Итоги.<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/biatlon/kubok-mira-ansi-sprint-kto-vyshe" hd="8281891">Кубок мира. Анси. Спринт. Кто выше<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/biatlon/kubok-mira-ansi-sprint-kto-sovershit-bolshe-promakhov" hd="8281892">Кубок мира. Анси. Спринт. Кто совершит больше промахов<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/biatlon/kubok-mira-ansi-sprint-lider-posle-1-jj-strelby" hd="8281893">Кубок мира. Анси. Спринт. Лидер после 1-й стрельбы<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/biatlon/luchshijj-predstavitel-norvegii-kubok-mira-ansi-sprint" hd="8282152">Лучший представитель Норвегии. Кубок мира. Анси. Спринт<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/biatlon/luchshijj-predstavitel-germanii-kubok-mira-ansi-sprint" hd="8282155">Лучший представитель Германии. Кубок мира. Анси. Спринт<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/biatlon/luchshijj-predstavitel-francii-kubok-mira-ansi-sprint" hd="8282158">Лучший представитель Франции. Кубок мира. Анси. Спринт<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/biatlon/luchshijj-predstavitel-rossii-kubok-mira-ansi-sprint" hd="8282159">Лучший представитель России. Кубок мира. Анси. Спринт<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/biatlon/zhenshhiny-kubok-mira-ansi-gonka-presledovanija-pobeditel" hd="8281904">Женщины. Кубок мира. Анси. Гонка преследования. Победитель<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/biatlon/zhenshhiny-kubok-mira-ansi-gonka-presledovanija-kto-vyshe" hd="8281905">Женщины. Кубок мира. Анси. Гонка преследования. Кто выше<em onclick="checkGroup(event, this);"></em></a></li></ul></li>
+<li><a href="#Бильярд" onclick="clickSport(this);">Бильярд<em onclick="checkSport(event, this);"></em></a><ul class="hidden groups"><li><a href="/sport/biljard/snuker-otkrytyjj-chempionat-shotlandii-glazgo-match-iz-9-i-frejjmov" hd="8280633">Снукер. Открытый чемпионат Шотландии. Глазго. Матч из 9-и фреймов<em onclick="checkGroup(event, this);"></em></a></li></ul></li>
+<li><a href="#Бокс/Единоборства" onclick="clickSport(this);">Бокс/Единоборства<em onclick="checkSport(event, this);"></em></a><ul class="hidden groups"><li><a href="/sport/boksedinoborstva/boks" hd="8279630">Бокс<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/boksedinoborstva/boks-world-boxing-super-series" hd="8281042">Бокс. World Boxing Super Series<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/boksedinoborstva/bamma" hd="8280842">BAMMA<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/boksedinoborstva/bellator" hd="8280737">Bellator<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/boksedinoborstva/bellator-world-grand-prix-2018-heavyweight-tournament" hd="8281810">Bellator. World Grand Prix 2018 Heavyweight Tournament<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/boksedinoborstva/fight-nights-global" hd="8280738">Fight Nights Global<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/boksedinoborstva/legacy-fighting-alliance" hd="8280807">Legacy Fighting Alliance<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/boksedinoborstva/titan-fighting-championship" hd="8280757">Titan Fighting Championship<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/boksedinoborstva/ufc" hd="8280736">UFC<em onclick="checkGroup(event, this);"></em></a></li></ul></li>
+<li><a href="#Велоспорт" onclick="clickSport(this);">Велоспорт<em onclick="checkSport(event, this);"></em></a><ul class="hidden groups"><li><a href="/sport/velosport/tur-de-frans-2018-obshhijj-zachet" hd="8281099">Тур де Франс 2018. Общий зачет<em onclick="checkGroup(event, this);"></em></a></li></ul></li>
+<li><a href="#Волейбол" onclick="clickSport(this);">Волейбол<em onclick="checkSport(event, this);"></em></a><ul class="hidden groups"><li><a href="/sport/volejjbol/liga-chempionov-201718-pobeditel" hd="8282072">Лига чемпионов 2017/18. Победитель<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/volejjbol/chempionat-mira-sredi-klubov-2017-pobeditel" hd="8282070">Чемпионат мира среди клубов 2017. Победитель<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/volejjbol/chempionat-mira-sredi-klubov-polsha" hd="8282052">Чемпионат мира среди клубов. Польша<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/volejjbol/avstrija-bundesliga-1" hd="8280267">Австрия. Бундеслига 1<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/volejjbol/argentina-serija-a1" hd="8281675">Аргентина. Серия A1<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/volejjbol/bolgarija-superliga" hd="8280428">Болгария. Суперлига<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/volejjbol/brazilija-superliga" hd="8280692">Бразилия. Суперлига<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/volejjbol/grecija-a1" hd="8280678">Греция. A1<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/volejjbol/rossija-vysshaja-liga-a" hd="8281513">Россия. Высшая лига А<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/volejjbol/serbija-superliga" hd="8280665">Сербия. Суперлига<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/volejjbol/turcija-kubok-shanlyurfa" hd="8282161">Турция. Кубок. Шанлыурфа<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/volejjbol/francija-liga-a" hd="8280660">Франция. Лига A<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/volejjbol/zhenshhiny-brazilija-kubok" hd="8282149">Женщины. Бразилия. Кубок<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/volejjbol/zhenshhiny-polsha-liga-siatkowki" hd="8281576">Женщины. Польша. Liga Siatkowki<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/volejjbol/zhenshhiny-francija-liga-a" hd="8280679">Женщины. Франция. Лига А<em onclick="checkGroup(event, this);"></em></a></li></ul></li>
+<li><a href="#Гандбол" onclick="clickSport(this);">Гандбол<em onclick="checkSport(event, this);"></em></a><ul class="hidden groups"><li><a href="/sport/gandbol/avstrija-hla" hd="8281255">Австрия. HLA<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/gandbol/germanija-bundesliga-2" hd="8280609">Германия. Бундеслига 2<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/gandbol/danija-superliga" hd="8281207">Дания. Суперлига<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/gandbol/francija-kubok-116-finala" hd="8282166">Франция. Кубок. 1/16 финала<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/gandbol/shvecija-handbollsligan" hd="8281228">Швеция. Handbollsligan<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/gandbol/sbornye-chempionat-evropy-2018-itogi" hd="8281322">Сборные. Чемпионат Европы 2018. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/gandbol/zhenshhiny-chempionat-mira-2017-germanija" hd="8281813">Женщины. Чемпионат мира 2017. Германия<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/gandbol/zhenshhiny-chempionat-mira-2017-itogi" hd="8281031">Женщины. Чемпионат мира 2017. Итоги<em onclick="checkGroup(event, this);"></em></a></li></ul></li>
+<li><a href="#Дартс" onclick="clickSport(this);">Дартс<em onclick="checkSport(event, this);"></em></a><ul class="hidden groups"><li><a href="/sport/darts/pdc-world-championship" hd="8279843">PDC World Championship<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/darts/pdc-world-championship-predvaritelnyjj-raund" hd="8279829">PDC World Championship. Предварительный раунд<em onclick="checkGroup(event, this);"></em></a></li></ul></li>
+<li><a href="#Киберспорт" onclick="clickSport(this);">Киберспорт<em onclick="checkSport(event, this);"></em></a><ul class="hidden groups"><li><a href="/sport/kibersport/dota-2-the-summit" hd="8282123">Dota 2. The Summit<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/kibersport/dota-2-the-summit-duehl-igrokov-ubijjstva-karta-1" hd="8285186">Dota 2. The Summit. Дуэль игроков. Убийства. Карта 1<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/kibersport/dota-2-prodota-cup" hd="8281707">Dota 2. Prodota Cup<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/kibersport/dota-2-mid-tv-dota2" hd="8284962">Dota 2. MID. TV Dota2<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/kibersport/dota-2-joindota" hd="8280622">Dota 2. JoinDota<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/kibersport/dota-2-captains-draft-itogi" hd="8281889">Dota 2. Captain's Draft. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/kibersport/counter-strike-ecs-finals-itogi" hd="8281829">Counter-Strike. ECS Finals. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/kibersport/counter-strike-ecs-finals-sravnenija" hd="8281919">Counter-Strike. ECS Finals. Сравнения<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/kibersport/counter-strike-ecs-finals-gruppa-pobeditel" hd="8282084">Counter-Strike. ECS Finals. Группа-Победитель<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/kibersport/counter-strike-ecs-finals-gruppa-a-itogi" hd="8281920">Counter-Strike. ECS Finals. Группа А. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/kibersport/counter-strike-ecs-finals-gruppa-v-itogi" hd="8281921">Counter-Strike. ECS Finals. Группа В. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/kibersport/counter-strike-ecs-finals-naibolee-igraemaja-karta" hd="8282082">Counter-Strike. ECS Finals. Наиболее Играемая Карта<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/kibersport/counter-strike-ecs-finals-naimenee-igraema-karta" hd="8282083">Counter-Strike. ECS Finals. Наименее Играема Карта<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/kibersport/counter-strike-ecs-finals" hd="8281922">Counter-Strike. ECS Finals<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/kibersport/counter-strike-esea-itogi" hd="8282085">Counter-Strike. ESEA. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/kibersport/counter-strike-lootbet-cup" hd="8282087">Counter-Strike. LOOTBET Cup<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/kibersport/counter-strike-nee-cup" hd="8282088">Counter-Strike. NEE Cup<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/kibersport/counter-strike-aoc" hd="8285059">Counter-Strike. AOC<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/kibersport/counter-strike-dust2-us" hd="8285057">Counter-Strike. Dust2. us<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/kibersport/counter-strike-mother-russia" hd="8281949">Counter-Strike. Mother Russia<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/kibersport/liga-legend-lvp" hd="8281954">Лига Легенд. LVP<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/kibersport/hearthstone-sl-series" hd="8282124">Hearthstone. SL Series<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/kibersport/overwatch-owl-itogi" hd="8282086">Overwatch. OWL. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/kibersport/world-of-tanks-wgl" hd="8284996">World of Tanks. WGL<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/kibersport/starcraft-2-basetradetv" hd="8282141">Starcraft 2. BaseTradeTV<em onclick="checkGroup(event, this);"></em></a></li></ul></li>
+<li><a href="#Крикет" onclick="clickSport(this);">Крикет<em onclick="checkSport(event, this);"></em></a><ul class="hidden groups"><li><a href="/sport/kriket/avstralija-tventi20-big-bash-liga" hd="8281747">Австралия. Твенти20. Биг Баш лига<em onclick="checkGroup(event, this);"></em></a></li></ul></li>
+<li><a href="#Лотерея" onclick="clickSport(this);">Лотерея<em onclick="checkSport(event, this);"></em></a><ul class="hidden groups"><li><a href="/sport/lotereja/ukraina-keno-20-iz-80" hd="8279717">Украина. КЕНО. 20 из 80<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/lotereja/ukraina-super-loto-6-iz-52" hd="8279720">Украина. СУПЕР ЛОТО. 6 из 52<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/lotereja/ukraina-loto-maksima-5-iz-45" hd="8279719">Украина. ЛОТО МАКСИМА. 5 из 45<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/lotereja/ukraina-loto-trojjka-3-iz-10" hd="8279718">Украина. ЛОТО ТРОЙКА. 3 из 10<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/lotereja/novaja-zelandija-keno-20-iz-80" hd="8280179">Новая Зеландия. Keno. 20 из 80<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/lotereja/ssha-nju-jjork-pick-10-20-iz-80" hd="8280343">США. Нью-Йорк. Pick 10. 20 из 80<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/lotereja/germanija-keno-20-iz-70" hd="8280350">Германия. KENO. 20 из 70<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/lotereja/francija-keno-20-iz-70" hd="8280444">Франция. KENO. 20 из 70<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/lotereja/belarus-sportloto-6-iz-49" hd="8280351">Беларусь. Спортлото. 6 из 49<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/lotereja/velikobritanija-49s-6-iz-49" hd="8280352">Великобритания. 49's. 6 из 49<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/lotereja/germanija-lotto-6-iz-49" hd="8280169">Германия. LOTTO. 6 из 49<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/lotereja/gonkong-mark-6-6-iz-49" hd="8280353">Гонконг. Mark 6. 6 из 49<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/lotereja/grecija-opap-6-iz-49" hd="8280170">Греция. OPAP. 6 из 49<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/lotereja/ispanija-la-primitiva-6-iz-49" hd="8280354">Испания. La Primitiva. 6 из 49<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/lotereja/kanada-bc-49-6-iz-49" hd="8280171">Канада. BC 49. 6 из 49<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/lotereja/kanada-lotto-649-6-iz-49" hd="8280172">Канада. LOTTO 649. 6 из 49<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/lotereja/rossija-sportloto-6-iz-49" hd="8280272">Россия. Спортлото 6 из 49<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/lotereja/avstralija-monday-lotto-6-iz-45" hd="8280166">Австралия. Monday Lotto. 6 из 45<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/lotereja/avstralija-wednesday-lotto-6-iz-45" hd="8280167">Австралия. Wednesday Lotto. 6 из 45<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/lotereja/avstralija-saturday-lotto-6-iz-45" hd="8280168">Австралия. Saturday Lotto. 6 из 45<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/lotereja/avstrija-lotto-6-iz-45" hd="8280363">Австрия. Lotto. 6 из 45<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/lotereja/kanada-ontario-lottario-6-iz-45" hd="8280178">Канада. Онтарио. LOTTARIO. 6 из 45<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/lotereja/kolumbija-baloto-6-iz-45" hd="8280784">Колумбия. Baloto. 6 из 45<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/lotereja/evropa-evromilliony-5-iz-50" hd="8280328">Европа. ЕвроМиллионы. 5 из 50<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/lotereja/evropa-evrodzhekpot-5-iz-50" hd="8280165">Европа. ЕвроДжекпот. 5 из 50<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/lotereja/rossija-gosloto-5-iz-36" hd="8280163">Россия. ГОСЛОТО. 5 из 36<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/lotereja/ssha-florida-fantasy-5-5-iz-36" hd="8280355">США. Флорида. FANTASY 5. 5 из 36<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/lotereja/ssha-kalifornija-daily-4-4-iz-10" hd="8280356">США. Калифорния. Daily 4. 4 из 10<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/lotereja/ssha-nju-jjork-win-4-4-iz-10" hd="8280357">США. Нью-Йорк. WIN 4. 4 из 10<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/lotereja/ssha-florida-play-4-4-iz-10" hd="8280358">США. Флорида. Play 4. 4 из 10<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/lotereja/belgija-pick-3-3-iz-10" hd="8280359">Бельгия. PICK 3. 3 из 10<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/lotereja/novaja-zelandija-play-3-3-iz-10" hd="8280348">Новая Зеландия. Play 3. 3 из 10<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/lotereja/ssha-kalifornija-daily-3-3-iz-10" hd="8280349">США. Калифорния. Daily 3. 3 из 10<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/lotereja/ssha-florida-cah-3-iz-10" hd="8280176">США. Флорида. CA$H. 3 из 10<em onclick="checkGroup(event, this);"></em></a></li></ul></li>
+<li><a href="#Настольный_теннис" onclick="clickSport(this);">Настольный теннис<em onclick="checkSport(event, this);"></em></a><ul class="hidden groups"><li><a href="/sport/nastolnyjj-tennis/ittf-world-tour-kazakhstan" hd="8282136">ITTF World Tour. Казахстан<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/nastolnyjj-tennis/zhenshhiny-ittf-world-tour-kazakhstan" hd="8282138">Женщины. ITTF World Tour. Казахстан<em onclick="checkGroup(event, this);"></em></a></li></ul></li>
+<li style="display: none;"><a href="#Политика" onclick="clickSport(this);">Политика<em onclick="checkSport(event, this);"></em></a><ul class="hidden groups"><li><a href="/sport/politika/ssha" hd="8280925">США<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/politika/velikobritanija" hd="8280763">Великобритания<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/politika/evrosojuz" hd="8280764">Евросоюз<em onclick="checkGroup(event, this);"></em></a></li></ul></li>
+<li><a href="#Развлечения" onclick="clickSport(this);">Развлечения<em onclick="checkSport(event, this);"></em></a><ul class="hidden groups"><li style="display: none;"><a href="/sport/razvlechenija/youtube" hd="8281307">YouTube<em onclick="checkGroup(event, this);"></em></a></li><li style="display: none;"><a href="/sport/razvlechenija/kvn" hd="8281070">КВН<em onclick="checkGroup(event, this);"></em></a></li><li style="display: none;"><a href="/sport/razvlechenija/rehp-batl" hd="8281377">Рэп-батл<em onclick="checkGroup(event, this);"></em></a></li><li style="display: none;"><a href="/sport/razvlechenija/dzhejjms-bond" hd="8281300">Джеймс Бонд<em onclick="checkGroup(event, this);"></em></a></li><li style="display: none;"><a href="/sport/razvlechenija/oskar" hd="8281332">Оскар<em onclick="checkGroup(event, this);"></em></a></li><li style="display: none;"><a href="/sport/razvlechenija/sportsmen-goda-po-versii-vvs" hd="8281290">Спортсмен года по версии ВВС<em onclick="checkGroup(event, this);"></em></a></li><li style="display: none;"><a href="/sport/razvlechenija/igra-prestolov" hd="8281268">Игра престолов<em onclick="checkGroup(event, this);"></em></a></li><li style="display: none;"><a href="/sport/razvlechenija/chto-gde-kogda" hd="8279772">Что? Где? Когда?<em onclick="checkGroup(event, this);"></em></a></li></ul></li>
+<li><a href="#Регби" onclick="clickSport(this);">Регби<em onclick="checkSport(event, this);"></em></a><ul class="hidden groups"><li><a href="/sport/regbi/-regbi-sojuz-kubok-evropejjskikh-chempionov" hd="8281448"> Регби-союз. Кубок Европейских чемпионов<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/regbi/-regbi-sojuz-evropejjskijj-kubok-vyzova" hd="8281449"> Регби-союз. Европейский кубок вызова<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/regbi/-regbi-sojuz-francija-pro-d2" hd="8280591"> Регби-союз. Франция. Про Д2<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/regbi/-regbi-sojuz-pro14-itogi" hd="8281302"> Регби-союз. Про14. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/regbi/-regbi-sojuz-anglija-premer-liga-itogi" hd="8281303"> Регби-союз. Англия. Премьер-лига. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/regbi/-regbi-sojuz-francija-top-14-itogi" hd="8281304"> Регби-союз. Франция. Топ-14. Итоги<em onclick="checkGroup(event, this);"></em></a></li></ul></li>
+<li><a href="#Футбол/Итоги" onclick="clickSport(this);">Футбол/Итоги<em onclick="checkSport(event, this);"></em></a><ul class="hidden groups"><li><a href="/sport/futbolitogi/futbol-sbornye-chempionat-mira-2018-pobeditel" hd="8279971">Футбол. Сборные. Чемпионат мира 2018. Победитель<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbolitogi/futbol-chempionat-mira-2018-gruppa-a" hd="8281923">Футбол. Чемпионат мира 2018. Группа A<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbolitogi/futbol-chempionat-mira-2018-gruppa-b" hd="8281924">Футбол. Чемпионат мира 2018. Группа B<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbolitogi/futbol-chempionat-mira-2018-gruppa-c" hd="8281925">Футбол. Чемпионат мира 2018. Группа C<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbolitogi/futbol-chempionat-mira-2018-gruppa-d" hd="8281926">Футбол. Чемпионат мира 2018. Группа D<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbolitogi/futbol-chempionat-mira-2018-gruppa-e" hd="8281927">Футбол. Чемпионат мира 2018. Группа E<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbolitogi/futbol-chempionat-mira-2018-gruppa-f" hd="8281928">Футбол. Чемпионат мира 2018. Группа F<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbolitogi/futbol-chempionat-mira-2018-gruppa-g" hd="8281930">Футбол. Чемпионат мира 2018. Группа G<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbolitogi/futbol-chempionat-mira-2018-gruppa-h" hd="8281931">Футбол. Чемпионат мира 2018. Группа H<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbolitogi/futbol-sbornye-chempionat-evropy-2020-pobeditel" hd="8280554">Футбол. Сборные. Чемпионат Европы 2020. Победитель<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbolitogi/futbol-liga-chempionov-uefa-itogi" hd="8280455">Футбол. Лига чемпионов УЕФА. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbolitogi/futbol-liga-evropy-uefa-itogi" hd="8281003">Футбол. Лига Европы УЕФА. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbolitogi/futbol-anglija-premer-liga-itogi" hd="8280126">Футбол. Англия. Премьер-лига. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbolitogi/futbol-anglija-premer-liga-itogi-bez-uchjota-manchester-siti" hd="8282107">Футбол. Англия. Премьер-лига. Итоги без учёта Манчестер Сити<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbolitogi/futbol-anglija-chempionship-itogi" hd="8281000">Футбол. Англия. Чемпионшип. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbolitogi/futbol-anglija-liga-2-itogi" hd="8281005">Футбол. Англия. Лига 2. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbolitogi/futbol-anglija-nacionalnaja-konferencija-itogi" hd="8280520">Футбол. Англия. Национальная конференция. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbolitogi/futbol-anglija-kubok-itogi" hd="8280530">Футбол. Англия. Кубок. Итоги <em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbolitogi/futbol-anglija-kubok-ligi-itogi" hd="8280531">Футбол. Англия. Кубок лиги. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbolitogi/futbol-ispanija-primera-itogi" hd="8280999">Футбол. Испания. Примера. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbolitogi/futbol-ispanija-primera-itogi-bez-uchjota-barselony-i-reala-madrid" hd="8281074">Футбол. Испания. Примера. Итоги без учёта Барселоны и Реала Мадрид<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbolitogi/futbol-ispanija-kubok-korolja-itogi" hd="8281059">Футбол. Испания. Кубок Короля. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbolitogi/futbol-germanija-bundesliga-itogi" hd="8280493">Футбол. Германия. Бундеслига. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbolitogi/futbol-germanija-bundesliga-2-itogi" hd="8280528">Футбол. Германия. Бундеслига 2. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbolitogi/futbol-germanija-kubok-itogi" hd="8280151">Футбол. Германия. Кубок. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbolitogi/futbol-italija-serija-a-itogi" hd="8280521">Футбол. Италия. Серия А. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbolitogi/futbol-italija-kubok-itogi" hd="8280770">Футбол. Италия. Кубок. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbolitogi/futbol-francija-liga-1-itogi" hd="8281002">Футбол. Франция. Лига 1. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbolitogi/futbol-rossija-premer-liga-itogi" hd="8281034">Футбол. Россия. Премьер-лига. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbolitogi/futbol-rossija-kubok-itogi" hd="8285056">Футбол. Россия. Кубок. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbolitogi/futbol-ukraina-premer-liga-itogi" hd="8280535">Футбол. Украина. Премьер-лига. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbolitogi/futbol-ukraina-kubok-itogi" hd="8281334">Футбол. Украина. Кубок. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbolitogi/futbol-avstralija-a-liga-itogi" hd="8280824">Футбол. Австралия. А-Лига. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbolitogi/futbol-danija-superliga-itogi" hd="8280536">Футбол. Дания. Суперлига. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbolitogi/futbol-belgija-pervyjj-divizion-a-itogi" hd="8282117">Футбол. Бельгия. Первый дивизион А. Итоги<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futbolitogi/futbol-niderlandy-eredivisie-itogi" hd="8281051">Футбол. Нидерланды. Eredivisie. Итоги <em onclick="checkGroup(event, this);"></em></a></li></ul></li>
+<li><a href="#Футзал" onclick="clickSport(this);">Футзал<em onclick="checkSport(event, this);"></em></a><ul class="hidden groups"><li><a href="/sport/futzal/ispanija-primera-divizion" hd="8281258">Испания. Примера дивизион<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futzal/italija-serija-a" hd="8281394">Италия. Серия А<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/futzal/rossija-superliga" hd="8281267">Россия. Суперлига<em onclick="checkGroup(event, this);"></em></a></li></ul></li>
+<li><a href="#Хоккей_с_мячом" onclick="clickSport(this);">Хоккей с мячом<em onclick="checkSport(event, this);"></em></a><ul class="hidden groups"><li><a href="/sport/khokkejj-s-mjachom/shvecija-ehlitserija" hd="8281241">Швеция. Элитсерия<em onclick="checkGroup(event, this);"></em></a></li><li><a href="/sport/khokkejj-s-mjachom/finljandija-bendiliga" hd="8281243">Финляндия. Бендилига<em onclick="checkGroup(event, this);"></em></a></li></ul></li>
+            </div>
+        </ul>
+    </div>
+            </span>
+                <script>
+                    $('li#vfl').hide();
+                    $('a[href=#Разное]','#lobbySportsHolder').parent().hide();
+                    $('a[href=#Политика]','#lobbySportsHolder').parent().hide();
+                    //$('a[href=#Развлечения]','#lobbySportsHolder').parent().hide();
+
+                    $('a[href=#Развлечения]','#lobbySportsHolder').siblings('.groups').find('li a')
+                        .each(function(i, v){
+
+                            if(!~$(this).html().indexOf('Евровидение')){
+                                $(this).parent().hide();
+                            }
+                        });
+
+
+                    $('a[href=#AllEvents]','#lobbyLeftHolder').parent().remove();
+
+                    $("[hide]").remove();
+                    $("#lobbySportsHolder > li").each(function(i, e){
+                        if(!$(e).find("li").length){
+                            $(e).remove();
+                        }
+                    });
+
+                </script>
+
+                <div class="site_block_1 leftmenu">
+                    <h2 class="header_1">Меню</h2>
+                    <ul>
+                        <li><a id="spResults" href="/res.html">Результаты</a></li>
+                        <li><a id="spLiveResultsn">Результаты live</a></li>
+                        <li><a id="spStatsn" onclick="openBR('http://parimatch.stats.betradar.com/s4/?clientid=188','brStats')">Статистика</a></li>
+                        <li><a id="spRules" href="/rules.html">Правила</a></li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- /ND left -->
+    <!-- /left -->
+
+    <div id="z_contentw" class="bet-container">
+        <!-- body  -->
+
+
+
+
+
+        <script type="text/javascript" language="JavaScript">
+            function toggleToProcessing (element) {
+                element.disabled=true;
+            }
+        </script>
+
+
+        <div id="makeBet">
+            <table border="0" id="betSlip" cellspacing="4">
+                <caption class="orange"><span class="drag-switcher"></span>КУПОН</caption>
+                <tbody><tr>
+                    <td>
+                        <table width="100%" border="0" cellspacing="0">
+                            <tbody><tr>
+                                <td nowrap="">
+                                    <strong>Выбрано исходов:</strong>
+                                </td><td align="right" nowrap="">
+                                <span id="betsCount">0</span>
+                            </td></tr><tr>
+                                <td nowrap="">
+                                    <strong>Общий коэфф:</strong>
+                                </td><td align="right" nowrap="">
+                                <span id="betsCoeff">0</span>
+                            </td></tr></tbody></table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table width="100%" border="0" cellspacing="0">
+                            <tbody><tr>
+                                <td><a href="javascript:void(0)" onclick="CC();">Очистить</a>
+                                </td><td align="right"><button type="button" class="btn_orange" onclick="MS();" style="width:100%;">Сделать ставку</button>
+                            </td></tr></tbody></table>
+                    </td>
+                </tr>
+                </tbody></table>
+
+        </div>
+
+        <div id="oddsNote">
+
+
+
+
+            <form name="lineModeSwitcher" method="get">
+                <input type="hidden" name="filter" value="">
+                <input type="hidden" name="hd" value="8280449">
+                <input type="hidden" name="ltype" value="">
+
+                <input type="hidden" name="props" value="on">
+
+
+                <table id="oddsView" cellpadding="0" cellspacing="3"><tbody><tr>
+                    <td colspan="4">
+                        <blockquote class="note">
+
+                            <h2>Линия на 15.12.2017</h2>
+                            Для того чтобы выбрать исход, просто "кликните" по соответствующему коэффициенту. Сформируйте свою ставку, выбрав один или несколько исходов, нажмите любую из кнопок "Сделать ставку". В открывшемся окне завершите формирование ставки, указав ее тип и сумму.
+
+
+                        </blockquote>
+
+                    </td></tr><tr>
+                    <td nowrap="">Тип линии</td>
+                    <td nowrap=""><button style="width:auto;" type="button" class="btn_orange" disabled="" id="btRegular" onclick="switchRegular();">ОБЫЧНАЯ</button></td>
+                    <td nowrap=""><button type="button" id="btParlay" onclick="switchParlay();" style="background-color: transparent; border: none; padding: 0px; cursor: pointer; width: auto; display: none;"><img src="./img/express_button.jpg" style="vertical-align: middle;"> <!--ЭКСПРЕСС--></button></td>
+                    <!--            	    <td nowrap><button type=button class=btn_gray id=btParlay onClick="switchParlay();" > ЭКСПРЕСС</button></td>-->
+                    <td nowrap=""><button style="width:auto;" type="button" class="btn_gray" id="btProps" onclick="switchProps();"><span id="do_show">ДОП.ИСХОДЫ (+)</span><span id="do_hide" style="display:none">ДОП.ИСХОДЫ (-)</span></button></td>
+                </tr>
+
+                </tbody></table>
+            </form>
+
+
+
+        </div>
+        <div class="crumbs" xmlns:v="http://rdf.data-vocabulary.org/#"><span typeof="v:Breadcrumb"><a href="/sport/khokkejj" rel="v:url" property="v:title">Хоккей</a></span>&nbsp;/&nbsp;<span typeof="v:Breadcrumb"><a href="/sport/khokkejj/nhl-statistika-matcha-shtrafnoe-vremja" rel="v:url" property="v:title">NHL. Статистика матча. Штрафное время</a></span></div>
+
+
+
+        <div id="oddsList">
+
+            <form name="f1" id="f1">
+                <div class="container gray">
+                    <a name="8280449"></a><h3>Хоккей. NHL. Статистика матча. Штрафное время</h3><div class="wrapper">
+                    <table id="g8280449" class="dt" bordercolorlight="#DADADA" bordercolordark="#DADADA" frame="border" rules="groups">
+                        <colgroup span="1" width="2%"></colgroup><colgroup span="1" width="5%"></colgroup><colgroup span="1" width="23%"></colgroup><colgroup span="2" width="5%"></colgroup><colgroup span="3" width="5%"></colgroup><colgroup span="3" width="5%"></colgroup><colgroup span="3" width="5%"></colgroup><colgroup span="3" width="5%">
+                    </colgroup><tbody class="processed"><tr><th>№</th><th>Дата</th><th>Событие</th><th>Фора</th><th>КФ</th><th>Т</th><th>Б</th><th>М</th><th>П1</th><th>X</th><th>П2</th><th>1X</th><th>12</th><th>X2</th><th>iТ</th><th>Б</th><th>М</th></tr>
+                    </tbody><tbody class="row1 processed"><tr class="bk"><td><span class="no">5860</span></td><td>16/12<br>03:00</td><td class="l">штр.время Баффало Сейбрз<br><small>штр.время Каролина Харрикейнз</small></td><td><b>0</b><b>0</b></td><td><u><a id="r84_165_X.m9o15XccfLzKhClBx.">1.65</a></u><u><a id="r84_215_l17LU.axyCM6aC_KGJOf">2.15</a></u>
+                    </td><td><b>14.0</b></td><td><u><a id="r84_225_Hvy9855mSO68cLd39Eu^">2.25</a></u></td><td><u><a id="r84_160_8FvrHYeakk19dDe3YM.^">1.60</a></u>
+                    </td><td><u><a id="r84_195_Lrlodw20Yhfctuw58l4X">1.95</a></u></td><td><u><a id="r84_470_Qu0ty3nEDvgvEZxWmChq">4.70</a></u></td><td><u><a id="r84_248_^OHk.P_rKICUAKxGwBhv">2.48</a></u>
+                    </td><td><u><a id="r84_150_FYMB6FZZS_Z3CKMOfBta">1.50</a></u></td><td><u><a id="r84_117_eWNaNHYqjQtRCjEMfaUm">1.17</a></u></td><td><u><a id="r84_180_NsMaeDZqstRQCKMOfBta">1.80</a></u>
+                    </td><td><b>6.5</b><b>6.5</b></td><td><u><a id="r84_185_DYxJ4FqyaaEwhD.7XMeZ">1.85</a></u><u><a id="r84_235_Qd4cykk77GuegDNgZM^R">2.35</a></u></td><td><u><a id="r84_190_EYhN5FvlkaIndDe3YM.^">1.90</a></u><u><a id="r84_155_hGqbMXxDsd^BLHh3pAx^">1.55</a></u>
+                    </td></tr>
+
+                    </tbody><tbody class="spacer processed"><tr><td colspan="99"></td></tr></tbody>
+                        <tbody class="row2 processed"><tr class="bk"><td><span class="no">5863</span></td><td>16/12<br>03:00</td><td class="l"><small>штр.время Нью-Джерси Девилз</small><br>штр.время Даллас Старз</td><td><b>0</b><b>0</b></td><td><u><a id="r85_187_a0KSR_^2f2MfhD.7XMeZ">1.87</a></u><u><a id="r85_187_amORROZ3fa5oewV9sxFT">1.87</a></u>
+                        </td><td><b>14.0</b></td><td><u><a id="r85_187_C8YW3WMNXxNVAKxGwBhv">1.87</a></u></td><td><u><a id="r85_187_CHUT3nAMXtNVAKxGwBhv">1.87</a></u>
+                        </td><td><u><a id="r85_220_WtPEn2GtBjS1AKxGwBhv">2.20</a></u></td><td><u><a id="r85_450_Ms1xh4f5XxeZccd39Eu^">4.50</a></u></td><td><u><a id="r85_220_WhXGnRO_BKS1AKxGwBhv">2.20</a></u>
+                        </td><td><u><a id="r85_163_E99O5V.WPO.eMHx7oAhZ">1.63</a></u></td><td><u><a id="r85_118_e7JkNXtrjAYSCKMOfBta">1.18</a></u></td><td><u><a id="r85_163_JZA1q5Vp_u^BBKtKnBMf">1.63</a></u>
+                        </td><td><b>6.5</b><b>6.5</b></td><td><u><a id="r85_175_Aoh^1Gv5nkU0hwf5Xx6X">1.75</a></u><u><a id="r85_175_FpMB6FZpmaUm9lflcu6H">1.75</a></u></td><td><u><a id="r85_200_Kvt6rEJtxyp_bmGhJpWP">2.00</a></u><u><a id="r85_200_Hvxq8EqQ.yIWxmn5Hp7X">2.00</a></u>
+                        </td></tr>
+
+                        </tbody><tbody class="spacer processed"><tr><td colspan="99"></td></tr></tbody>
+                        <tbody class="row1 processed"><tr class="bk"><td><span class="no">5873</span></td><td>16/12<br>03:00</td><td class="l"><small>штр.время Нью-Йорк Рейнджерс</small><br><small>штр.время Лос-Анджелес Кингз</small></td><td><b>0</b><b>0</b></td><td><u><a id="r86_195_mmjsP_eqw2x.yCbGDJgv">1.95</a></u><u><a id="r86_180_tO0xx0lLYtJWBjUInaEw">1.80</a></u>
+                        </td><td><b>14.0</b></td><td><u><a id="r86_190_z8xZ0G9CshqsCKMOfBta">1.90</a></u></td><td><u><a id="r86_185_CXUT3nAMXtNVAjlEwa5o">1.85</a></u>
+                        </td><td><u><a id="r86_232_ZNz1v1WpOoCEAKxGwBhv">2.32</a></u></td><td><u><a id="r86_450_MK1xh4f5XxeZccd39Eu^">4.50</a></u></td><td><u><a id="r86_210_QL0ty3nEDvrjDJhSyCxe">2.10</a></u>
+                        </td><td><u><a id="r86_169_KJQ5r5Fx^uFDAKxGwBhv">1.69</a></u></td><td><u><a id="r86_118_enJkNXtrjAYSCKMOfBta">1.18</a></u></td><td><u><a id="r86_157_DppK4VeSQO68CKMOfBta">1.57</a></u>
+                        </td><td><b>6.5</b><b>6.5</b></td><td><u><a id="r86_187_EY5L5fankBtadDe3YM.^">1.87</a></u><u><a id="r86_172_FIAA66VvmRYk9lflcu6H">1.72</a></u></td><td><u><a id="r86_187_DppK4Vema2tadDe3YM.^">1.87</a></u><u><a id="r86_205_NKAye4VJoPlLvA_jOHOF">2.05</a></u>
+                        </td></tr>
+
+                        </tbody><tbody class="spacer processed"><tr><td colspan="99"></td></tr></tbody>
+                        <tbody class="row2 processed"><tr class="bk"><td><span class="no">5875</span></td><td>16/12<br>03:30</td><td class="l"><small>штр.время Детройт Ред Уингз</small><br><small>штр.время Торонто Мейпл Лифс</small></td><td><b>0</b><b>0</b></td><td><u><a id="r87_225_o2S5shFTbPUzaC_KGJOf">2.25</a></u><u><a id="r87_160_XeP5j1ET_cvOAjlEwa5o">1.60</a></u>
+                        </td><td><b>14.0</b></td><td><u><a id="r87_200_GIxJ4F9S_dqKZxTpgwDD">2.00</a></u></td><td><u><a id="r87_175_dnVwOoBhwRMf8EektL.N">1.75</a></u>
+                        </td><td><u><a id="r87_263_a03tQgwE4f0pArlEwa5o">2.63</a></u></td><td><u><a id="r87_480_UtHCfR_sCKG4OXMgvAtR">4.80</a></u></td><td><u><a id="r87_185_OKxvdDq2YtfcCKMOfBta">1.85</a></u>
+                        </td><td><u><a id="r87_190_LjUwgwBdZhBUzj5Alalu">1.90</a></u></td><td><u class=""><a id="r87_116_e72xM8l5oyytzKhClBx.">1.16</a></u></td><td><u><a id="r87_145_FY9O5V.WPOfdAKxGwBhv">1.45</a></u>
+                        </td><td><b>6.5</b><b>8.0</b></td><td><u><a id="r87_215_LKtfgDJMpm5Hxmn5Hp7X">2.15</a></u><u><a id="r87_225_55BAFqWzqw4H0GeCUN..">2.25</a></u></td><td><u class=""><a id="r87_165_C8yY0762fSU0gDNgZM^R">1.65</a></u><u><a id="r87_160_lQKCV^^BvzAE3GNOVN^a">1.60</a></u>
+                        </td></tr>
+
+                        </tbody><tbody class="spacer processed"><tr><td colspan="99"></td></tr></tbody>
+                        <tbody class="row1 processed"><tr class="bk"><td><span class="no">5877</span></td><td>16/12<br>06:00</td><td class="l"><small>штр.время Ванкувер Кэнакс</small><br>штр.время Сан-Хосе Шаркс</td><td><b>0</b><b>0</b></td><td><u><a id="r88_187_kzjsP_eqw2x.gDNgZM^R">1.87</a></u><u><a id="r88_187_k0nXPb29wBtadDe3YM.^">1.87</a></u>
+                        </td><td><b>14.5</b></td><td><u><a id="r88_185_LKYngTNumCE49E.ncLeJ">1.85</a></u></td><td><u><a id="r88_190_MKIkeT^oyCY39E.ncLeJ">1.90</a></u>
+                        </td><td><u><a id="r88_220_WxmIw27QAjkhBKtKnBMf">2.20</a></u></td><td><u><a id="r88_450_MjAye4V9sxNV_cLgqEcR">4.50</a></u></td><td><u><a id="r88_220_TMXGnRO_BKS1AKxGwBhv">2.20</a></u>
+                        </td><td><u><a id="r88_163_JJ9g9U.ncL.NAKxGwBhv">1.63</a></u></td><td><u><a id="r88_118_gGvjLXh3pA9sAKxGwBhv">1.18</a></u></td><td><u><a id="r88_163_Jv1h95flcu.NAKxGwBhv">1.63</a></u>
+                        </td><td><b>8.0</b><b>8.0</b></td><td><u><a id="r88_210_1TNRBKsSeUHWrENb^L^B">2.10</a></u><u><a id="r88_210_6UeNEJjO9THGgDNgZM^R">2.10</a></u></td><td><u><a id="r88_169_v27dYxahl3xegwFhZxVP">1.69</a></u><u><a id="r88_169_j2n8Xx29w3xegwFhZxVP">1.69</a></u>
+                        </td></tr>
+
+                        </tbody></table></div></div><table class="buttons"><tbody><tr><td width="10%" align="center"><span class="ke">&nbsp;</span></td><td width="90%" align="right"><a onclick="CC();">Очистить</a><button type="button" class="btn_orange" onclick="MS();">Сделать ставку</button></td></tr></tbody></table><table class="seocont"><caption class="orange">Еще в виде спорта Хоккей</caption><tbody><tr><td><a href="/sport/khokkejj/nhl-kubok-stehnli-itogi">Хоккей. NHL. Кубок Стэнли. Итоги</a></td><td><a href="/sport/khokkejj/nhl-reguljarnyjj-sezon">Хоккей. NHL. Регулярный сезон</a></td></tr><tr><td><a href="/sport/khokkejj/nhl-statistika-matcha-broski-v-stvor-vorot">Хоккей. NHL. Статистика матча. Броски в створ ворот</a></td><td><a href="/sport/khokkejj/ahl-reguljarnyjj-sezon">Хоккей. AHL. Регулярный сезон</a></td></tr><tr><td><a href="/sport/khokkejj/chempionat-mira-2018-itogi">Хоккей. Чемпионат мира 2018. Итоги</a></td><td><a href="/sport/khokkejj/chempionat-mira-u-20-divizion-1-gruppa-a-francija">Хоккей. Чемпионат мира U-20. Дивизион 1. Группа A. Франция</a></td></tr><tr><td><a href="/sport/khokkejj/chempionat-mira-u-20-divizion-1-gruppa-b-slovenija">Хоккей. Чемпионат мира U-20. Дивизион 1. Группа B. Словения</a></td><td><a href="/sport/khokkejj/sbornye">Хоккей. Сборные</a></td></tr><tr><td><a href="/sport/khokkejj/sbornye-kubok-pervogo-kanala">Хоккей. Сборные. Кубок Первого Канала</a></td><td><a href="/sport/khokkejj/sbornye-molodjozhnye-komandy-mirovojj-kubok-vyzova-kanada">Хоккей. Сборные. Молодёжные команды. Мировой кубок вызова. Канада</a></td></tr><tr><td><a href="/sport/khokkejj/zhenshhiny-sbornye-tovarishheskie-matchi">Хоккей. Женщины. Сборные. Товарищеские матчи</a></td><td><a href="/sport/khokkejj/kubok-shpenglera">Хоккей. Кубок Шпенглера</a></td></tr><tr><td><a href="/sport/khokkejj/kkhl">Хоккей. КХЛ</a></td><td><a href="/sport/khokkejj/vkhl">Хоккей. ВХЛ</a></td></tr><tr><td><a href="/sport/khokkejj/mkhl">Хоккей. МХЛ</a></td><td><a href="/sport/khokkejj/avstrija-erste-bank-liga">Хоккей. Австрия. Erste Bank Liga</a></td></tr><tr><td><a href="/sport/khokkejj/erste-liga">Хоккей. Erste Liga</a></td><td><a href="/sport/khokkejj/germanija-del">Хоккей. Германия. DEL</a></td></tr><tr><td><a href="/sport/khokkejj/germanija-bundesliga-2">Хоккей. Германия. Бундеслига 2</a></td><td><a href="/sport/khokkejj/danija-metal-ligaen">Хоккей. Дания. Metal Ligaen</a></td></tr><tr><td><a href="/sport/khokkejj/kazakhstan">Хоккей. Казахстан</a></td><td><a href="/sport/khokkejj/finljandija-liiga">Хоккей. Финляндия. Liiga</a></td></tr><tr><td><a href="/sport/khokkejj/finljandija-mestis">Хоккей. Финляндия. Mestis</a></td><td><a href="/sport/khokkejj/finljandija-u-20">Хоккей. Финляндия U-20</a></td></tr><tr><td><a href="/sport/khokkejj/shvecija-allsvenskan">Хоккей. Швеция. Allsvenskan</a></td><td><a href="/sport/khokkejj/shvejjcarija-nla">Хоккей. Швейцария. NLA</a></td></tr><tr><td><a href="/sport/khokkejj/velikobritanija-elite-league">Хоккей. Великобритания. Elite League</a></td><td><a href="/sport/khokkejj/ohl">Хоккей. OHL</a></td></tr><tr><td><a href="/sport/khokkejj/qmjhl">Хоккей. QMJHL</a></td><td><a href="/sport/khokkejj/whl">Хоккей. WHL</a></td></tr></tbody></table>
+
+
+                <a name="bt"></a>
+
+
+
+
+
+            </form>
+
+        </div>
+
+        <!-- /body  -->
+        <script language="JavaScript" type="text/javascript">
+            function __bindOdds()
+            {
+                if ($)
+                {
+                    BindOddHandlers('#z_contentw table.dt tbody:visible');
+                    BindOddHandlers('#z_contentw table.dtyn');
+                }
+                else
+                {
+                    setTimeout('__bindOdds();',500);
+                }
+            };
+            __bindOdds();
+
+            $('#btParlay').hide();
+
+            //	top10AnchorLookup();
+        </script>
+    </div><div style="clear: both"></div>
+</div>
+
+<!-- footer -->
+<!-- ND -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#toTop").bind('click',function() {
+            $("html, body").animate({ scrollTop: 0 }, "slow");
+            return false;
+        });
+    });
+</script>
+
+<div class="footer">
+    <div class="foot_inn">
+        <a id="toTop"></a>
+        <ul class="foot_inn">
+            <li class="ft2"><a target="_blank" href="http://info.parimatch.by/">Помощь</a></li>
+            <li class="ft1"><noindex><a href="/" rel="nofollow">Ставки на спорт</a></noindex></li>
+            <li class="ft3"><noindex><a href="/" rel="nofollow">Сервисы</a></noindex></li>
+            <li class="ft5"><a target="_blank" href="http://parimatch.by/about.html">Пари-Матч</a></li>
+        </ul>
+        <div class="foot_inn1">
+            <noindex>
+                <ul>
+                    <li><a rel="nofollow" target="_blank" href="http://info.parimatch.by/ru/main/articles/38_Kak-sdelat-stavku/">Ваша первая ставка</a></li>
+                    <li><a rel="nofollow" target="_blank" href="/payments.html">Депозиты</a></li>
+                    <li><a rel="nofollow" target="_blank" href="/payments.html">Выплаты</a></li>
+                    <li><a rel="nofollow" target="_blank" href="http://retail.parimatch.by">Пункты приема ставок</a></li>
+                    <li><a rel="nofollow" target="_blank" href="http://info.parimatch.by/ru/faq">FAQ</a></li>
+                    <li><a rel="nofollow" target="_blank" href="http://info.parimatch.by/ru/support">Служба поддержки</a></li>
+                </ul>
+            </noindex>
+            <ul>
+                <li><a href="/live.html">Ставки Live</a></li>
+                <!--<li><a target=_blank href="http://news.parimatch.by">Новости Спорта</a></li>-->
+                <li><a target="_blank" href="/mobile">Мобильный беттинг</a></li>
+                <li><a target="_blank" href="http://info.parimatch.by/ru/main/articles/33_Shkola-bukmekerstva">Школа букмекерства</a></li>
+                <!--		<li><a href="/sitemap/sitemap.html">Карта сайта</a></li>-->
+            </ul>
+            <ul>
+                <li><a href="/">Ставки на спорт</a></li>
+            </ul>
+            <noindex>
+                <ul>
+                    <li><a rel="nofollow" target="_blank" href="/about.html">О компании</a></li>
+                    <li><a rel="nofollow" target="_blank" href="/job.html">Вакансии</a></li>
+                    <li><a rel="nofollow" target="_blank" href="/rules.html">Правила и Условия</a></li>
+                    <li><a rel="nofollow" target="_blank" href="/privacy.html" style="font-size:11px">Политика конфиденциальности</a></li>
+                    <li><a rel="nofollow" href="/for-press.html">Контакты для СМИ</a></li>
+
+                </ul>
+            </noindex>
+        </div>
+        <div class="foot_inn2">
+            <div class="pay_method">
+                <noindex>
+                    <a rel="nofollow" href="http://info.parimatch.by/index.php/ru/info/page/28-WebMoney-BY" target="_blank" class="webmoney"></a>
+                    <a rel="nofollow" href="http://info.parimatch.by/index.php/ru/info/page/29-EasyPay-BY" target="_blank" class="easypay"></a>
+                    <a rel="nofollow" href="http://info.parimatch.by/index.php/ru/info/page/111-Popolnenie-igrovogo-scheta-s-pomoschyu-IPay" target="_blank" class="ipay"></a>
+                    <a rel="nofollow" href="http://info.parimatch.by/index.php/ru/info/page/65-Popolnenie-igrovogo-scheta-s-pomoschyu-platezhnoy-sistemy-raschet" target="_blank" class="raschet"></a>
+                </noindex>
+            </div>
+            <div class="trust">
+
+                <noindex><a href="https://www.gamblingtherapy.org/ru" target="_blank" rel="nofollow"><img src="/img/footer/trust/gt_bigred1.png" alt="Gambling Therapy"></a></noindex>
+
+                <noindex id="liderIndustrii"><a href="http://info.parimatch.by/index.php/ru/info/page/80-Lider-industrii" target="_blank" rel="nofollow"><img src="/static/img/footer/trust/by_medal.png" alt="Lider Industrii"></a></noindex>
+
+
+            </div>
+        </div>
+        <div class="foot_inn3">
+            <div class="foot_inn_l">
+                <p>© 1994-2017 ООО «Статус Кво» - букмекерская контора онлайн</p>
+                <p>Все права защищены (с).</p>
+            </div>
+
+            <div class="foter_cener">
+                <div class="socialIcons">
+                    <a target="_blank" class="fsvk" href="https://vk.com/parimatch_by"></a>
+                </div>
+            </div>
+
+            <div class="foot_inn_r">
+                <p>Участие в азартных играх запрещено лицам, не достигшим 18 лет!</p>
+            </div>
+            <div class="foot_inn_c">
+                <noindex>
+                    <noindex>
+                        <!-- google -->
+                        <script>
+                            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                            ga('create', 'UA-1171079-6', 'parimatch.by');
+                            ga('send', 'pageview');
+
+                        </script>
+                        <!-- /google -->
+
+                        <!-- Yandex.Metrika counter -->
+                        <script type="text/javascript">
+                            (function (d, w, c) {
+                                (w[c] = w[c] || []).push(function() {
+                                    try {
+                                        w.yaCounter25983901 = new Ya.Metrika({id:25983901,
+                                            webvisor:true,
+                                            clickmap:true,
+                                            trackLinks:true,
+                                            accurateTrackBounce:true});
+                                    } catch(e) { }
+                                });
+
+                                var n = d.getElementsByTagName("script")[0],
+                                    s = d.createElement("script"),
+                                    f = function () { n.parentNode.insertBefore(s, n); };
+                                s.type = "text/javascript";
+                                s.async = true;
+                                s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+                                if (w.opera == "[object Opera]") {
+                                    d.addEventListener("DOMContentLoaded", f, false);
+                                } else { f(); }
+                            })(document, window, "yandex_metrika_callbacks");
+                        </script>
+                        <noscript>&lt;div&gt;&lt;img src="//mc.yandex.ru/watch/25983901" style="position:absolute; left:-9999px;" alt="" /&gt;&lt;/div&gt;</noscript>
+                        <!-- /Yandex.Metrika counter -->
+
+
+
+
+
+
+
+
+                        <!-- детектор ботов -->
+                        <script>
+                            !function(a,b,c,d,e){a.ddjskey=e;var f=b.createElement(c),g=b.getElementsByTagName(c)[0];
+                                f.async=1,f.src=d,g.parentNode.insertBefore(f,g)}
+                            (window,document,"script","https://js.datadome.co/tags.js","8C3B447B229E3576822D6D36561F42");
+                        </script>
+                        <!-- /детектор ботов -->
+
+
+
+
+
+
+
+                    </noindex>        </noindex>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div id="balance-holder" class="rc-3px" style="display: none; top: 43px; left: 1039.5px;">
+    <em></em>
+    <img id="wait" src="/img/2012/wait_ic.gif">
+    <div>
+        <ul>
+            <li>Баланс на счету <span id="ros"></span></li>
+            <li>Сумма нерасчитанных <span id="ronc"></span></li>
+            <li id="stp"><img src="/img/stavki_plus_s.png">
+                <table>
+                    <tbody><tr><td>ставки:<span>из 100</span><span id="cc"></span><hr>
+                        бонус:<span id="as"></span>
+                    </td></tr></tbody></table>
+            </li>
+
+        </ul>
+    </div>
+</div>
+<!-- /footer -->
+
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"05e7aed033","applicationID":"75333636","transactionName":"ZgZRY0pYCEFTVkJeDV9MZkVRFhRdR0FTGRJZEw==","queueTime":0,"applicationTime":396,"atts":"SkFSFQJCG08=","errorBeacon":"bam.nr-data.net","agent":""}</script>
+
+
+<div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all ui-helper-hidden-accessible"></div><div id="tooltip" style="display: none;"><h3></h3><div class="body"></div><div class="url"></div></div></body>
+</html>

@@ -44,26 +44,46 @@ public class HockeyCoeffsMatchParser {
 
     public CoeffBlock parse(HockeyFutureMatch hockeyFutureMatch) {
 
-        Path path = null;
+        Path statsPath = null, shotsPath = null, penaltiesPath = null;
         try {
-            path = Paths.get(getClass().getClassLoader()
+            statsPath = Paths.get(getClass().getClassLoader()
                     .getResource("parimatch-nhl-example.html").toURI());
+
+            shotsPath = Paths.get(getClass().getClassLoader()
+                    .getResource("parimatch-nhl-shots-example.html").toURI());
+
+            penaltiesPath = Paths.get(getClass().getClassLoader()
+                    .getResource("parimatch-nhl-penalties-example.html").toURI());
         } catch (URISyntaxException e) {
         }
-        Document html = downloader.downloadFile(new File(path.toUri()));
+        Document statsHtml = downloader.downloadFile(new File(statsPath.toUri()));
         //Document html = downloader.download(hockeyDownloaderConfiguration.getNhlUr());
 
         HockeyTeam homeTeam = hockeyFutureMatch.getHomeTeam();
 
         CoeffBlock coeffBlock = new CoeffBlock();
-
-        Element tempHref = html.select("a.om:containsOwn(" + homeTeam.getName() + ")").get(0);
+        Element tempHref = statsHtml.select("a.om:containsOwn(" + homeTeam.getName() + ")").get(0);
         Element matchTbodyTag = tempHref.parent().parent().parent();
         Element matchCoeffsTbodyTag = matchTbodyTag.nextElementSibling();
 
         fillSomeSpecialBets(tempHref.parent().parent(), coeffBlock);
         fillTotalBlock(matchCoeffsTbodyTag, coeffBlock.findByType(ContainerType.TOTAL), hockeyFutureMatch);
         fillOtherBlock(matchCoeffsTbodyTag, coeffBlock.findByType(ContainerType.OTHER), hockeyFutureMatch);
+
+
+        Document shotsHtml = downloader.downloadFile(new File(shotsPath.toUri()));
+        tempHref = shotsHtml.select("a.om:contains(" + homeTeam.getName() + ")").get(0);
+        fillShotsSpecialBets(tempHref.parent().parent(), coeffBlock.findByType(ContainerType.STATS));
+        fillShotsBets(
+                tempHref.parent().parent().parent().nextElementSibling(),
+                coeffBlock.findByType(ContainerType.STATS), hockeyFutureMatch
+        );
+
+
+        Document penaltiesHtml = downloader.downloadFile(new File(penaltiesPath.toUri()));
+        tempHref = penaltiesHtml.select("td:contains(" + homeTeam.getName() + ")").get(0);
+        fillPenaltiesSpecialBets(tempHref.parent().parent(), coeffBlock.findByType(ContainerType.STATS));
+
 
         return coeffBlock;
     }
@@ -72,7 +92,7 @@ public class HockeyCoeffsMatchParser {
     private void fillSomeSpecialBets(Element element, CoeffContainer container) {
         Elements tds = element.select("td");
         // total over
-        if(tds.get(5) != null) {
+        if (tds.get(5) != null) {
             String totalOverText = tds.get(5).select("b").text();
             String totalOverCoeff = tds.get(6).select("u a").text();
             String totalUnderCoeff = tds.get(7).select("u a").text();
@@ -93,7 +113,7 @@ public class HockeyCoeffsMatchParser {
                 under5AndHalf.getCoeff().set(Double.valueOf(totalUnderCoeff));
             }
         }
-        if(tds.get(15) != null) {
+        if (tds.get(15) != null) {
             String totalOverText = tds.get(14).select("b").first().text();
             String totalOverCoeff = tds.get(15).select("u a").first().text();
             String totalUnderCoeff = tds.get(16).select("u a").first().text();
@@ -115,7 +135,7 @@ public class HockeyCoeffsMatchParser {
             }
         }
 
-        if(tds.get(15) != null) {
+        if (tds.get(15) != null) {
             String totalOverText = tds.get(14).select("b").get(1).text();
             String totalOverCoeff = tds.get(15).select("u a").get(1).text();
             String totalUnderCoeff = tds.get(16).select("u a").get(1).text();
@@ -135,6 +155,349 @@ public class HockeyCoeffsMatchParser {
                 over3AndHalf.getCoeff().set(Double.valueOf(totalOverCoeff));
                 under3AndHalf.getCoeff().set(Double.valueOf(totalUnderCoeff));
             }
+        }
+    }
+
+    // which placed on parimatch main screen
+    private void fillShotsSpecialBets(Element element, CoeffContainer container) {
+        Elements tds = element.select("td");
+        if (tds.get(3) != null) {
+            String handicapText = tds.get(3).select("b").first().text();
+            String handicapCoeff = tds.get(4).select("u a").first().text();
+            CoeffContainer handicapBlock = container.findByType(ContainerType.TEAM_SHOTS_ON_TARGET_HANDICAP);
+            CoeffContainer plus1AndHalf = handicapBlock.findByType(ContainerType.PLUS_1_5);
+            CoeffContainer plus2AndHalf = handicapBlock.findByType(ContainerType.PLUS_2_5);
+            CoeffContainer plus3AndHalf = handicapBlock.findByType(ContainerType.PLUS_3_5);
+            CoeffContainer minus1AndHalf = handicapBlock.findByType(ContainerType.MINUS_1_5);
+            CoeffContainer minus2AndHalf = handicapBlock.findByType(ContainerType.MINUS_2_5);
+            CoeffContainer minus3AndHalf = handicapBlock.findByType(ContainerType.MINUS_3_5);
+
+            if (handicapText.contains("+1.5")) {
+                plus1AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
+            }
+            if (handicapText.contains("+2.5")) {
+                plus2AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
+            }
+            if (handicapText.contains("+3.5")) {
+                plus3AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
+            }
+            if (handicapText.contains("–1.5")) {
+                minus1AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
+            }
+            if (handicapText.contains("–2.5")) {
+                minus2AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
+            }
+            if (handicapText.contains("–3.5")) {
+                minus3AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
+            }
+        }
+
+        if (tds.get(3) != null) {
+            String handicapText = tds.get(3).select("b").get(1).text();
+            String handicapCoeff = tds.get(4).select("u a").get(1).text();
+            CoeffContainer handicapBlock = container.findByType(ContainerType.OPPOSING_TEAM_SHOTS_ON_TARGET_HANDICAP);
+            CoeffContainer plus1AndHalf = handicapBlock.findByType(ContainerType.PLUS_1_5);
+            CoeffContainer plus2AndHalf = handicapBlock.findByType(ContainerType.PLUS_2_5);
+            CoeffContainer plus3AndHalf = handicapBlock.findByType(ContainerType.PLUS_3_5);
+            CoeffContainer minus1AndHalf = handicapBlock.findByType(ContainerType.MINUS_1_5);
+            CoeffContainer minus2AndHalf = handicapBlock.findByType(ContainerType.MINUS_2_5);
+            CoeffContainer minus3AndHalf = handicapBlock.findByType(ContainerType.MINUS_3_5);
+
+            if (handicapText.contains("+1.5")) {
+                plus1AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
+            }
+            if (handicapText.contains("+2.5")) {
+                plus2AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
+            }
+            if (handicapText.contains("+3.5")) {
+                plus3AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
+            }
+            if (handicapText.contains("–1.5")) {
+                minus1AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
+            }
+            if (handicapText.contains("–2.5")) {
+                minus2AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
+            }
+            if (handicapText.contains("–3.5")) {
+                minus3AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
+            }
+        }
+
+        if (tds.get(5) != null) {
+            String totalText = tds.get(5).select("b").first().text();
+            String totalOverCoeff = tds.get(6).select("u a").first().text();
+            String totalUnderCoeff = tds.get(7).select("u a").first().text();
+            CoeffContainer teamTotalOverContainer = container.findByType(ContainerType.SHOTS_ON_TARGET_OVER);
+            CoeffContainer over59AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_59_5);
+            CoeffContainer over60AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_60_5);
+            CoeffContainer over61AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_61_5);
+            CoeffContainer over62AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_62_5);
+            CoeffContainer over63AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_63_5);
+
+            Double overValue = Double.valueOf(totalOverCoeff);
+            Double underValue = Double.valueOf(totalUnderCoeff);
+            if (totalText.contains("59.5")) {
+                over59AndHalf.getCoeff().set(overValue, underValue);
+            }
+            if (totalText.contains("60.5")) {
+                over60AndHalf.getCoeff().set(overValue, underValue);
+            }
+            if (totalText.contains("61.5")) {
+                over61AndHalf.getCoeff().set(overValue, underValue);
+            }
+            if (totalText.contains("62.5")) {
+                over62AndHalf.getCoeff().set(overValue, underValue);
+            }
+            if (totalText.contains("63.5")) {
+                over63AndHalf.getCoeff().set(overValue, underValue);
+            }
+
+        }
+
+        if (tds.get(8) != null) {
+            String coeff = tds.get(8).select("u a").first().text();
+            CoeffContainer winContainer = container.findByType(ContainerType.TEAM_SHOTS_ON_TARGET_WIN);
+            winContainer.getCoeff().set(Double.valueOf(coeff));
+        }
+        if (tds.get(10) != null) {
+            String coeff = tds.get(10).select("u a").first().text();
+            CoeffContainer winContainer = container.findByType(ContainerType.OPPOSING_TEAM_SHOTS_ON_TARGET_WIN);
+            winContainer.getCoeff().set(Double.valueOf(coeff));
+        }
+
+
+        if (tds.get(14) != null) {
+            String totalText = tds.get(14).select("b").first().text();
+            String totalOverCoeff = tds.get(15).select("u a").first().text();
+            String totalUnderCoeff = tds.get(7).select("u a").first().text();
+            CoeffContainer teamTotalOverContainer = container.findByType(ContainerType.TEAM_SHOTS_ON_TARGET_OVER);
+            CoeffContainer over28AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_28_5);
+            CoeffContainer over30AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_30_5);
+            CoeffContainer over32AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_32_5);
+
+            Double overValue = Double.valueOf(totalOverCoeff);
+            Double underValue = Double.valueOf(totalUnderCoeff);
+            if (totalText.contains("28.5") || totalText.contains("28.0") || totalText.contains("29.0")) {
+                over28AndHalf.getCoeff().set(overValue, underValue);
+            }
+            if (totalText.contains("30.5") || totalText.contains("30.0") || totalText.contains("31.0")) {
+                over30AndHalf.getCoeff().set(overValue, underValue);
+            }
+            if (totalText.contains("32.5") || totalText.contains("33.0") || totalText.contains("34.0")) {
+                over32AndHalf.getCoeff().set(overValue, underValue);
+            }
+
+        }
+
+        if (tds.get(14) != null) {
+            String totalText = tds.get(14).select("b").get(1).text();
+            String totalOverCoeff = tds.get(15).select("u a").get(1).text();
+            String totalUnderCoeff = tds.get(7).select("u a").first().text();
+            CoeffContainer teamTotalOverContainer = container.findByType(ContainerType.OPPOSING_TEAM_SHOTS_ON_TARGET_OVER);
+            CoeffContainer over28AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_28_5);
+            CoeffContainer over30AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_30_5);
+            CoeffContainer over32AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_32_5);
+
+            Double overValue = Double.valueOf(totalOverCoeff);
+            Double underValue = Double.valueOf(totalUnderCoeff);
+            if (totalText.contains("28.5") || totalText.contains("28.0") || totalText.contains("29.0")) {
+                over28AndHalf.getCoeff().set(overValue, underValue);
+            }
+            if (totalText.contains("30.5") || totalText.contains("30.0") || totalText.contains("31.0")) {
+                over30AndHalf.getCoeff().set(overValue, underValue);
+            }
+            if (totalText.contains("32.5") || totalText.contains("33.0") || totalText.contains("34.0")) {
+                over32AndHalf.getCoeff().set(overValue, underValue);
+            }
+
+        }
+    }
+
+    private void fillShotsBets(Element element, CoeffContainer container, HockeyFutureMatch match) {
+        fillShotsTotalOverBlock(element, container);
+        fillShotsHandicap(element, container, match.getHomeTeam(), ContainerType.TEAM_SHOTS_ON_TARGET_HANDICAP);
+        fillShotsHandicap(element, container, match.getGuestTeam(), ContainerType.OPPOSING_TEAM_SHOTS_ON_TARGET_HANDICAP);
+    }
+
+    private void fillShotsTotalOverBlock(Element element, CoeffContainer container) {
+        Element totalElementBlock = element.select("th:containsOwn(Дополнительные тоталы:)")
+                .first().parent().nextElementSibling();
+
+        Element generalTotalHtmlBlock = totalElementBlock.select("td:containsOwn(больше)").first();
+        List<Node> childNodes = generalTotalHtmlBlock.childNodes();
+        CoeffContainer teamTotalOverContainer = container.findByType(ContainerType.SHOTS_ON_TARGET_OVER);
+        CoeffContainer over59AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_59_5);
+        CoeffContainer over60AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_60_5);
+        CoeffContainer over61AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_61_5);
+        CoeffContainer over62AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_62_5);
+        CoeffContainer over63AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_63_5);
+
+        for (int i = 0; i < childNodes.size(); i++) {
+            Node child = childNodes.get(i);
+            if (!(child instanceof TextNode)) {
+                continue;
+            }
+            String text = ((TextNode) child).text();
+            Double overValue = null, underValue = null;
+            if (i < childNodes.size() - 4) {
+                String totalOverCoeff = childNodes.get(i + 1).childNode(0).childNode(0).outerHtml();
+                String totalunderCoeff = childNodes.get(i + 3).childNode(0).childNode(0).outerHtml();
+                overValue = Double.valueOf(totalOverCoeff);
+                underValue = Double.valueOf(totalunderCoeff);
+            }
+
+            if (text.contains("59.5")) {
+                over59AndHalf.getCoeff().set(overValue, underValue);
+            }
+            if (text.contains("60.5")) {
+                over60AndHalf.getCoeff().set(overValue, underValue);
+            }
+            if (text.contains("61.5")) {
+                over61AndHalf.getCoeff().set(overValue, underValue);
+            }
+            if (text.contains("62.5")) {
+                over62AndHalf.getCoeff().set(overValue, underValue);
+            }
+            if (text.contains("63.5")) {
+                over63AndHalf.getCoeff().set(overValue, underValue);
+            }
+        }
+    }
+
+    private void fillShotsHandicap(Element element, CoeffContainer container, HockeyTeam team, ContainerType type) {
+        Element totalElementBlock = element.select("th:containsOwn(Дополнительные форы:)")
+                .first().parent().nextElementSibling();
+
+
+        Element temp = totalElementBlock.select("i:contains(" + team.getName() + ")").first();
+        Element teamTotalBlock = temp.parent().nextElementSibling();
+        List<Node> childNodes = teamTotalBlock.childNodes();
+
+        CoeffContainer handicapBlock = container.findByType(type);
+        CoeffContainer plus1AndHalf = handicapBlock.findByType(ContainerType.PLUS_1_5);
+        CoeffContainer plus2AndHalf = handicapBlock.findByType(ContainerType.PLUS_2_5);
+        CoeffContainer plus3AndHalf = handicapBlock.findByType(ContainerType.PLUS_3_5);
+        CoeffContainer minus1AndHalf = handicapBlock.findByType(ContainerType.MINUS_1_5);
+        CoeffContainer minus2AndHalf = handicapBlock.findByType(ContainerType.MINUS_2_5);
+        CoeffContainer minus3AndHalf = handicapBlock.findByType(ContainerType.MINUS_3_5);
+
+
+        for (int i = 0; i < childNodes.size(); i++) {
+            Node child = childNodes.get(i);
+            if (!(child instanceof TextNode)) {
+                continue;
+            }
+            String handicapText = ((TextNode) child).text();
+            Double value = null;
+            if (i < childNodes.size() - 2) {
+                String handicapCoeff = childNodes.get(i + 1).childNode(0).childNode(0).outerHtml();
+                value = Double.valueOf(handicapCoeff);
+            }
+
+            if (handicapText.contains("+1.5")) {
+                plus1AndHalf.getCoeff().set(value);
+            }
+            if (handicapText.contains("+2.5")) {
+                plus2AndHalf.getCoeff().set(value);
+            }
+            if (handicapText.contains("+3.5")) {
+                plus3AndHalf.getCoeff().set(value);
+            }
+            if (handicapText.contains("–1.5")) {
+                minus1AndHalf.getCoeff().set(value);
+            }
+            if (handicapText.contains("–2.5")) {
+                minus2AndHalf.getCoeff().set(value);
+            }
+            if (handicapText.contains("–3.5")) {
+                minus3AndHalf.getCoeff().set(value);
+            }
+        }
+    }
+
+    // which placed on parimatch main screen
+    private void fillPenaltiesSpecialBets(Element element, CoeffContainer container) {
+        Elements tds = element.select("td");
+
+        if (tds.get(5) != null) {
+            String totalText = tds.get(5).select("b").first().text();
+            String totalOverCoeff = tds.get(6).select("u a").first().text();
+            String totalUnderCoeff = tds.get(7).select("u a").first().text();
+            CoeffContainer teamTotalOverContainer = container.findByType(ContainerType.PENALTIES_TIME_OVER);
+            CoeffContainer over13AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_13_5);
+            CoeffContainer over14AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_14_5);
+            CoeffContainer over15AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_15_5);
+
+            Double overValue = Double.valueOf(totalOverCoeff);
+            Double underValue = Double.valueOf(totalUnderCoeff);
+            if (totalText.contains("13.5") || totalText.contains("14.0")) {
+                over13AndHalf.getCoeff().set(overValue, underValue);
+            }
+            if (totalText.contains("14.5") || totalText.contains("15.0")) {
+                over14AndHalf.getCoeff().set(overValue, underValue);
+            }
+            if (totalText.contains("15.5") || totalText.contains("16.0")) {
+                over15AndHalf.getCoeff().set(overValue, underValue);
+            }
+
+        }
+
+        if (tds.get(8) != null) {
+            String coeff = tds.get(8).select("u a").first().text();
+            CoeffContainer winContainer = container.findByType(ContainerType.TEAM_PENALTIES_TIME_WIN);
+            winContainer.getCoeff().set(Double.valueOf(coeff));
+        }
+        if (tds.get(10) != null) {
+            String coeff = tds.get(10).select("u a").first().text();
+            CoeffContainer winContainer = container.findByType(ContainerType.OPPOSING_TEAM_PENALTIES_TIME_WIN);
+            winContainer.getCoeff().set(Double.valueOf(coeff));
+        }
+
+
+        if (tds.get(14) != null) {
+            String totalText = tds.get(14).select("b").first().text();
+            String totalOverCoeff = tds.get(15).select("u a").first().text();
+            String totalUnderCoeff = tds.get(16).select("u a").first().text();
+            CoeffContainer teamTotalOverContainer = container.findByType(ContainerType.TEAM_PENALTIES_TIME_OVER);
+            CoeffContainer over6AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_6_5);
+            CoeffContainer over7AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_7_5);
+            CoeffContainer over8AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_8_5);
+
+            Double overValue = Double.valueOf(totalOverCoeff);
+            Double underValue = Double.valueOf(totalUnderCoeff);
+            if (totalText.contains("6.5") || totalText.contains("7.0")) {
+                over6AndHalf.getCoeff().set(overValue, underValue);
+            }
+            if (totalText.contains("7.5") || totalText.contains("8.0")) {
+                over7AndHalf.getCoeff().set(overValue, underValue);
+            }
+            if (totalText.contains("8.5") || totalText.contains("9.0")) {
+                over8AndHalf.getCoeff().set(overValue, underValue);
+            }
+
+        }
+
+        if (tds.get(14) != null) {
+            String totalText = tds.get(14).select("b").get(1).text();
+            String totalOverCoeff = tds.get(15).select("u a").get(1).text();
+            String totalUnderCoeff = tds.get(16).select("u a").first().text();
+            CoeffContainer teamTotalOverContainer = container.findByType(ContainerType.OPPOSING_TEAM_PENALTIES_TIME_OVER);
+            CoeffContainer over6AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_6_5);
+            CoeffContainer over7AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_7_5);
+            CoeffContainer over8AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_8_5);
+
+            Double overValue = Double.valueOf(totalOverCoeff);
+            Double underValue = Double.valueOf(totalUnderCoeff);
+            if (totalText.contains("6.5") || totalText.contains("7.0")) {
+                over6AndHalf.getCoeff().set(overValue, underValue);
+            }
+            if (totalText.contains("7.5") || totalText.contains("8.0")) {
+                over7AndHalf.getCoeff().set(overValue, underValue);
+            }
+            if (totalText.contains("8.5") || totalText.contains("9.0")) {
+                over8AndHalf.getCoeff().set(overValue, underValue);
+            }
+
         }
     }
 
