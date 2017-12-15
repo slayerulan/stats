@@ -5,11 +5,11 @@ import com.savik.hockey.model.HockeyPeriod;
 import lombok.Getter;
 
 @Getter
-public class PeriodHomeShotsHandicapOver extends PeriodBet<HockeyPeriod> {
+public class PeriodGuestShotsHandicap extends PeriodBet<HockeyPeriod> {
 
     private double amount;
 
-    public PeriodHomeShotsHandicapOver(double amount) {
+    public PeriodGuestShotsHandicap(double amount) {
         this.amount = amount;
     }
 
@@ -21,8 +21,8 @@ public class PeriodHomeShotsHandicapOver extends PeriodBet<HockeyPeriod> {
     @Override
     public boolean check(HockeyPeriod period) {
         if (amount <= 0) {
-            return period.getHomeShotsOnTarget() - period.getGuestShotsOnTarget() > Math.abs(amount);
+            return period.getGuestShotsOnTarget() - period.getHomeShotsOnTarget() > Math.abs(amount);
         }
-        return period.getGuestShotsOnTarget() - period.getHomeShotsOnTarget() < amount;
+        return period.getHomeShotsOnTarget() - period.getGuestShotsOnTarget() < amount;
     }
 }

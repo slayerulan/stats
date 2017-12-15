@@ -4,8 +4,8 @@ import com.savik.ContainerType;
 import com.savik.MatchData;
 import com.savik.Period;
 import com.savik.PeriodTeamBetContainer;
-import com.savik.bets.hockey.stats.PeriodGuestShotsHandicapOver;
-import com.savik.bets.hockey.stats.PeriodHomeShotsHandicapOver;
+import com.savik.bets.hockey.stats.PeriodGuestShotsHandicap;
+import com.savik.bets.hockey.stats.PeriodHomeShotsHandicap;
 import com.savik.hockey.model.HockeyMatch;
 
 import java.util.function.Function;
@@ -14,16 +14,16 @@ public class PeriodTeamShotsOnTargetHandicapSingleBlock extends PeriodTeamBetCon
 
     public PeriodTeamShotsOnTargetHandicapSingleBlock(double amount, ContainerType type) {
         super(
-                new PeriodHomeShotsHandicapOver(amount),
-                new PeriodGuestShotsHandicapOver(amount),
+                new PeriodHomeShotsHandicap(amount),
+                new PeriodGuestShotsHandicap(amount),
                 type
         );
     }
 
     public PeriodTeamShotsOnTargetHandicapSingleBlock(double amount, Function<HockeyMatch, Period> function, MatchData matchData) {
         super(
-                new PeriodHomeShotsHandicapOver(amount),
-                new PeriodGuestShotsHandicapOver(amount),
+                new PeriodHomeShotsHandicap(amount),
+                new PeriodGuestShotsHandicap(amount),
                 function,
                 matchData
         );
