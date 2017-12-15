@@ -16,6 +16,8 @@ public class PossibleBetsStatsBlock extends PossibleBetContainer<HockeyMatch> {
                 new OpposingTeamShotsOnTargetTotalOverPossibleBetBlock(homeMatchData, guestMatchData),
                 new TeamShotsOnTargetHandicapPossibleBetBlock(homeMatchData, guestMatchData),
                 new OpposingTeamShotsOnTargetHandicapPossibleBetBlock(homeMatchData, guestMatchData),
+                new TeamShotsOnTargetWinPossibleBetBlock(homeMatchData, guestMatchData),
+                new OpposingTeamShotsOnTargetWinPossibleBetBlock(homeMatchData, guestMatchData),
                 new PowerplayGoalsTotalOverPossibleBetBlock()
         ), ContainerType.STATS);
     }

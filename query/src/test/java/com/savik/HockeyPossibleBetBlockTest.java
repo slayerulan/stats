@@ -668,6 +668,24 @@ public class HockeyPossibleBetBlockTest {
     }
 
     @Test
+    public void testTeamShotsOnTargetWin() {
+        PossibleBetContainer possibleBetsBlock = getPossibleBetsBlock();
+
+        PossibleBetContainer block = possibleBetsBlock.findByType(TEAM_SHOTS_ON_TARGET_WIN);
+        assertEquals(40, block.getFirstTeamPercentage());
+        assertEquals(40, block.getSecondTeamPercentage());
+    }
+
+    @Test
+    public void testOpposingTeamShotsOnTargetWin() {
+        PossibleBetContainer possibleBetsBlock = getPossibleBetsBlock();
+
+        PossibleBetContainer block = possibleBetsBlock.findByType(OPPOSING_TEAM_SHOTS_ON_TARGET_WIN);
+        assertEquals(60, block.getFirstTeamPercentage());
+        assertEquals(60, block.getSecondTeamPercentage());
+    }
+
+    @Test
     public void testPowerplayGoalsOver() {
         PossibleBetContainer possibleBetsBlock = getPossibleBetsBlock();
 
