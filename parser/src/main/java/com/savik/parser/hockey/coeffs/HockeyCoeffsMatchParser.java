@@ -671,6 +671,9 @@ public class HockeyCoeffsMatchParser {
         fillTeamFirstScoredAndWinBlock(element, otherContainer.findByType(ContainerType.TEAM_FIRST_SCORED_AND_WIN), ContainerType.TEAM_FIRST_SCORED_AND_WIN, match.getHomeTeam());
         fillTeamFirstScoredAndWinBlock(element, otherContainer.findByType(ContainerType.OPPOSING_TEAM_FIRST_SCORED_AND_WIN), ContainerType.OPPOSING_TEAM_FIRST_SCORED_AND_WIN, match.getGuestTeam());
 
+        fillAnyComebackMatchBlock(element, otherContainer.findByType(ContainerType.ANY_COMEBACK));
+
+
     }
 
 
@@ -801,6 +804,18 @@ public class HockeyCoeffsMatchParser {
                 ), team
         );
     }
+
+    private void fillAnyComebackMatchBlock(Element element, CoeffContainer container) {
+
+        fillBetWithSinglePossibleOption(
+                element, container,
+                Arrays.asList(
+                        new BetEntry("волевая победа в матче", ContainerType.ANY_COMEBACK)
+                )
+        );
+
+    }
+
 
     private void fillBetWithPossibleOptionsForTeam(Element element, CoeffContainer container, List<BetEntry> betEntries, Team team) {
         for (BetEntry betEntry : betEntries) {

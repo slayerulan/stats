@@ -531,6 +531,15 @@ public class HockeyPossibleBetBlockTest {
         assertEquals(40, block.getSecondTeamPercentage());
     }
 
+    @Test
+    public void testAnyComebackMatchPossible() {
+        PossibleBetContainer possibleBetsBlock = getPossibleBetsBlock();
+
+        PossibleBetContainer block = possibleBetsBlock.findByType(ANY_COMEBACK);
+        assertEquals(0, block.getFirstTeamPercentage());
+        assertEquals(0, block.getSecondTeamPercentage());
+    }
+
 
 
     /*
