@@ -12,6 +12,14 @@ public class CoeffOpposingTeamShotsOnTargetHandicapBlock extends CoeffContainer 
         super(Arrays.asList(
                 new CoeffContainer(
                         new Coeff(),
+                        ContainerType.MINUS_5_5
+                ),
+                new CoeffContainer(
+                        new Coeff(),
+                        ContainerType.MINUS_4_5
+                ),
+                new CoeffContainer(
+                        new Coeff(),
                         ContainerType.MINUS_3_5
                 ),
                 new CoeffContainer(
@@ -33,6 +41,14 @@ public class CoeffOpposingTeamShotsOnTargetHandicapBlock extends CoeffContainer 
                 new CoeffContainer(
                         new Coeff(),
                         ContainerType.PLUS_3_5
+                ),
+                new CoeffContainer(
+                        new Coeff(),
+                        ContainerType.PLUS_4_5
+                ),
+                new CoeffContainer(
+                        new Coeff(),
+                        ContainerType.PLUS_5_5
                 )
         ), ContainerType.OPPOSING_TEAM_SHOTS_ON_TARGET_HANDICAP);
     }

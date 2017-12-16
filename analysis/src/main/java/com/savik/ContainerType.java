@@ -115,8 +115,12 @@ public enum ContainerType {
     PLUS_1_5,
     PLUS_2_5,
     PLUS_3_5,
+    PLUS_4_5,
+    PLUS_5_5,
     MINUS_1_5,
     MINUS_2_5,
-    MINUS_3_5
+    MINUS_3_5,
+    MINUS_4_5,
+    MINUS_5_5
 
 }

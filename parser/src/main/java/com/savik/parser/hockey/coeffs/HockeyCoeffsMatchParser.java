@@ -173,9 +173,13 @@ public class HockeyCoeffsMatchParser {
             CoeffContainer plus1AndHalf = handicapBlock.findByType(ContainerType.PLUS_1_5);
             CoeffContainer plus2AndHalf = handicapBlock.findByType(ContainerType.PLUS_2_5);
             CoeffContainer plus3AndHalf = handicapBlock.findByType(ContainerType.PLUS_3_5);
+            CoeffContainer plus4AndHalf = handicapBlock.findByType(ContainerType.PLUS_4_5);
+            CoeffContainer plus5AndHalf = handicapBlock.findByType(ContainerType.PLUS_5_5);
             CoeffContainer minus1AndHalf = handicapBlock.findByType(ContainerType.MINUS_1_5);
             CoeffContainer minus2AndHalf = handicapBlock.findByType(ContainerType.MINUS_2_5);
             CoeffContainer minus3AndHalf = handicapBlock.findByType(ContainerType.MINUS_3_5);
+            CoeffContainer minus4AndHalf = handicapBlock.findByType(ContainerType.MINUS_4_5);
+            CoeffContainer minus5AndHalf = handicapBlock.findByType(ContainerType.MINUS_5_5);
 
             if (handicapText.contains("+1.5")) {
                 plus1AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
@@ -186,6 +190,12 @@ public class HockeyCoeffsMatchParser {
             if (handicapText.contains("+3.5")) {
                 plus3AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
             }
+            if (handicapText.contains("+4.5")) {
+                plus4AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
+            }
+            if (handicapText.contains("+5.5")) {
+                plus5AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
+            }
             if (handicapText.contains("–1.5")) {
                 minus1AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
             }
@@ -194,6 +204,12 @@ public class HockeyCoeffsMatchParser {
             }
             if (handicapText.contains("–3.5")) {
                 minus3AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
+            }
+            if (handicapText.contains("–4.5")) {
+                minus4AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
+            }
+            if (handicapText.contains("–5.5")) {
+                minus5AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
             }
         }
 
@@ -204,9 +220,13 @@ public class HockeyCoeffsMatchParser {
             CoeffContainer plus1AndHalf = handicapBlock.findByType(ContainerType.PLUS_1_5);
             CoeffContainer plus2AndHalf = handicapBlock.findByType(ContainerType.PLUS_2_5);
             CoeffContainer plus3AndHalf = handicapBlock.findByType(ContainerType.PLUS_3_5);
+            CoeffContainer plus4AndHalf = handicapBlock.findByType(ContainerType.PLUS_4_5);
+            CoeffContainer plus5AndHalf = handicapBlock.findByType(ContainerType.PLUS_5_5);
             CoeffContainer minus1AndHalf = handicapBlock.findByType(ContainerType.MINUS_1_5);
             CoeffContainer minus2AndHalf = handicapBlock.findByType(ContainerType.MINUS_2_5);
             CoeffContainer minus3AndHalf = handicapBlock.findByType(ContainerType.MINUS_3_5);
+            CoeffContainer minus4AndHalf = handicapBlock.findByType(ContainerType.MINUS_4_5);
+            CoeffContainer minus5AndHalf = handicapBlock.findByType(ContainerType.MINUS_5_5);
 
             if (handicapText.contains("+1.5")) {
                 plus1AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
@@ -217,6 +237,12 @@ public class HockeyCoeffsMatchParser {
             if (handicapText.contains("+3.5")) {
                 plus3AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
             }
+            if (handicapText.contains("+4.5")) {
+                plus4AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
+            }
+            if (handicapText.contains("+5.5")) {
+                plus5AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
+            }
             if (handicapText.contains("–1.5")) {
                 minus1AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
             }
@@ -225,6 +251,12 @@ public class HockeyCoeffsMatchParser {
             }
             if (handicapText.contains("–3.5")) {
                 minus3AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
+            }
+            if (handicapText.contains("–4.5")) {
+                minus4AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
+            }
+            if (handicapText.contains("–5.5")) {
+                minus5AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
             }
         }
 
@@ -288,7 +320,7 @@ public class HockeyCoeffsMatchParser {
             if (totalText.contains("30.5") || totalText.contains("30.0") || totalText.contains("31.0")) {
                 over30AndHalf.getCoeff().set(overValue, underValue);
             }
-            if (totalText.contains("32.5") || totalText.contains("33.0") || totalText.contains("34.0")) {
+            if (totalText.contains("32.5") || totalText.contains("32.0") || totalText.contains("33.0") || totalText.contains("34.0")) {
                 over32AndHalf.getCoeff().set(overValue, underValue);
             }
 
@@ -379,12 +411,18 @@ public class HockeyCoeffsMatchParser {
         List<Node> childNodes = teamTotalBlock.childNodes();
 
         CoeffContainer handicapBlock = container.findByType(type);
+
         CoeffContainer plus1AndHalf = handicapBlock.findByType(ContainerType.PLUS_1_5);
         CoeffContainer plus2AndHalf = handicapBlock.findByType(ContainerType.PLUS_2_5);
         CoeffContainer plus3AndHalf = handicapBlock.findByType(ContainerType.PLUS_3_5);
+        CoeffContainer plus4AndHalf = handicapBlock.findByType(ContainerType.PLUS_4_5);
+        CoeffContainer plus5AndHalf = handicapBlock.findByType(ContainerType.PLUS_5_5);
         CoeffContainer minus1AndHalf = handicapBlock.findByType(ContainerType.MINUS_1_5);
         CoeffContainer minus2AndHalf = handicapBlock.findByType(ContainerType.MINUS_2_5);
         CoeffContainer minus3AndHalf = handicapBlock.findByType(ContainerType.MINUS_3_5);
+        CoeffContainer minus4AndHalf = handicapBlock.findByType(ContainerType.MINUS_4_5);
+        CoeffContainer minus5AndHalf = handicapBlock.findByType(ContainerType.MINUS_5_5);
+
 
 
         for (int i = 0; i < childNodes.size(); i++) {
@@ -400,22 +438,34 @@ public class HockeyCoeffsMatchParser {
             }
 
             if (handicapText.contains("+1.5")) {
-                plus1AndHalf.getCoeff().set(value);
+                plus1AndHalf.getCoeff().set(Double.valueOf(value));
             }
             if (handicapText.contains("+2.5")) {
-                plus2AndHalf.getCoeff().set(value);
+                plus2AndHalf.getCoeff().set(Double.valueOf(value));
             }
             if (handicapText.contains("+3.5")) {
-                plus3AndHalf.getCoeff().set(value);
+                plus3AndHalf.getCoeff().set(Double.valueOf(value));
+            }
+            if (handicapText.contains("+4.5")) {
+                plus4AndHalf.getCoeff().set(Double.valueOf(value));
+            }
+            if (handicapText.contains("+5.5")) {
+                plus5AndHalf.getCoeff().set(Double.valueOf(value));
             }
             if (handicapText.contains("–1.5")) {
-                minus1AndHalf.getCoeff().set(value);
+                minus1AndHalf.getCoeff().set(Double.valueOf(value));
             }
             if (handicapText.contains("–2.5")) {
-                minus2AndHalf.getCoeff().set(value);
+                minus2AndHalf.getCoeff().set(Double.valueOf(value));
             }
             if (handicapText.contains("–3.5")) {
-                minus3AndHalf.getCoeff().set(value);
+                minus3AndHalf.getCoeff().set(Double.valueOf(value));
+            }
+            if (handicapText.contains("–4.5")) {
+                minus4AndHalf.getCoeff().set(Double.valueOf(value));
+            }
+            if (handicapText.contains("–5.5")) {
+                minus5AndHalf.getCoeff().set(Double.valueOf(value));
             }
         }
     }

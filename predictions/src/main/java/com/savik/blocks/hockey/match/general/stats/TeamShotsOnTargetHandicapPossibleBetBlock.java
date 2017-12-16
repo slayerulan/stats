@@ -15,6 +15,18 @@ public class TeamShotsOnTargetHandicapPossibleBetBlock extends PossibleBetContai
                 new PossibleBetContainer<>(
                         new TeamShotsOnTargetHandicapPossibleBet(
                                 homeMatchData, guestMatchData,
+                                HockeyMatch.MATCH, -5.5
+                        ), ContainerType.MINUS_5_5
+                ),
+                new PossibleBetContainer<>(
+                        new TeamShotsOnTargetHandicapPossibleBet(
+                                homeMatchData, guestMatchData,
+                                HockeyMatch.MATCH, -4.5
+                        ), ContainerType.MINUS_4_5
+                ),
+                new PossibleBetContainer<>(
+                        new TeamShotsOnTargetHandicapPossibleBet(
+                                homeMatchData, guestMatchData,
                                 HockeyMatch.MATCH, -3.5
                         ), ContainerType.MINUS_3_5
                 ),
@@ -47,6 +59,18 @@ public class TeamShotsOnTargetHandicapPossibleBetBlock extends PossibleBetContai
                                 homeMatchData, guestMatchData,
                                 HockeyMatch.MATCH, 3.5
                         ), ContainerType.PLUS_3_5
+                ),
+                new PossibleBetContainer<>(
+                        new TeamShotsOnTargetHandicapPossibleBet(
+                                homeMatchData, guestMatchData,
+                                HockeyMatch.MATCH, 4.5
+                        ), ContainerType.PLUS_4_5
+                ),
+                new PossibleBetContainer<>(
+                        new TeamShotsOnTargetHandicapPossibleBet(
+                                homeMatchData, guestMatchData,
+                                HockeyMatch.MATCH, 5.5
+                        ), ContainerType.PLUS_5_5
                 )
                 ), ContainerType.TEAM_SHOTS_ON_TARGET_HANDICAP
         );
