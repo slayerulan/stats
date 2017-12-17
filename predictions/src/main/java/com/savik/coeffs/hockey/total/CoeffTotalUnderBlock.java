@@ -12,6 +12,10 @@ public class CoeffTotalUnderBlock extends CoeffContainer {
         super(Arrays.asList(
                 new CoeffContainer(
                         new Coeff(),
+                        ContainerType.UNDER_4_5
+                ),
+                new CoeffContainer(
+                        new Coeff(),
                         ContainerType.UNDER_5_5
                 ),
                 new CoeffContainer(

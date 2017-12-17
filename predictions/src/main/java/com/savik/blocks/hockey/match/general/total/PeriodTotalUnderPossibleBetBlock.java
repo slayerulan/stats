@@ -12,6 +12,10 @@ public class PeriodTotalUnderPossibleBetBlock extends PossibleBetContainer<Hocke
     public PeriodTotalUnderPossibleBetBlock() {
         super(Arrays.asList(
                 new PossibleBetContainer<>(
+                        new PeriodTotalUnderPossibleBet<>(HockeyMatch.MATCH, 4.5),
+                        ContainerType.UNDER_4_5
+                ),
+                new PossibleBetContainer<>(
                         new PeriodTotalUnderPossibleBet<>(HockeyMatch.MATCH, 5.5),
                         ContainerType.UNDER_5_5
                 ),

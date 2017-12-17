@@ -40,11 +40,11 @@ public class HockeyParser {
             throw new RuntimeException(ex);
         }*/
 
-        List<String> allMatches = leagueParser.findAllMatches("https://www.myscore.com.ua/hockey/usa/nhl/results/");
+        List<String> allMatches = leagueParser.findAllMatches("https://www.myscore.com.ua/khl/results/");
         for (String matchId : allMatches) {
             try {
                 if (hockeyMatchRepository.findByMyscoreCode(matchId) == null) {
-                    HockeyMatch match = matchParser.parse(matchId, HockeyChampionship.NHL, Season.S2017);
+                    HockeyMatch match = matchParser.parse(matchId, HockeyChampionship.KHL, Season.S2017);
                     hockeyMatchRepository.save(match);
                     log.debug("match saved = {}", match);
                     Thread.sleep(1000);

@@ -60,6 +60,9 @@ public class HockeyFutureMatchesParser {
         if (HockeyLeagueIds.NHL.equals(myscoreLeagueId)) {
             return HockeyChampionship.NHL;
         }
+        if (HockeyLeagueIds.KHL.equals(myscoreLeagueId)) {
+            return HockeyChampionship.KHL;
+        }
         return null;
 
     }

@@ -1,5 +1,6 @@
 package com.savik.parser.hockey.coeffs;
 
+import com.savik.Coeff;
 import com.savik.CoeffContainer;
 import com.savik.ContainerType;
 import com.savik.Team;
@@ -60,9 +61,16 @@ public class HockeyCoeffsMatchParser {
         //Document html = downloader.download(hockeyDownloaderConfiguration.getNhlUr());
 
         HockeyTeam homeTeam = hockeyFutureMatch.getHomeTeam();
+        HockeyTeam guestTeam = hockeyFutureMatch.getGuestTeam();
 
         CoeffBlock coeffBlock = new CoeffBlock();
-        Element tempHref = statsHtml.select("a.om:containsOwn(" + homeTeam.getName() + ")").get(0);
+        Element tempHref = null;
+        if (!statsHtml.select("a.om:containsOwn(" + homeTeam.getName() + ")").isEmpty()) {
+            tempHref = statsHtml.select("a.om:containsOwn(" + homeTeam.getName() + ")").get(0);
+        }
+        if (tempHref == null && !statsHtml.select("a.om:containsOwn(" + guestTeam.getName() + ")").isEmpty()) {
+            tempHref = statsHtml.select("a.om:containsOwn(" + guestTeam.getName() + ")").get(0);
+        }
         Element matchTbodyTag = tempHref.parent().parent().parent();
         Element matchCoeffsTbodyTag = matchTbodyTag.nextElementSibling();
 
@@ -72,9 +80,8 @@ public class HockeyCoeffsMatchParser {
         fillPeriodsBlock(matchCoeffsTbodyTag, coeffBlock.findByType(ContainerType.PERIODS), hockeyFutureMatch);
 
 
-
         Document shotsHtml = downloader.downloadFile(new File(shotsPath.toUri()));
-        if(!shotsHtml.select("a.om:contains(" + homeTeam.getName() + ")").isEmpty()) {
+        if (!shotsHtml.select("a.om:contains(" + homeTeam.getName() + ")").isEmpty()) {
             tempHref = shotsHtml.select("a.om:contains(" + homeTeam.getName() + ")").get(0);
             fillShotsSpecialBets(tempHref.parent().parent(), coeffBlock.findByType(ContainerType.STATS));
             fillShotsBets(
@@ -84,7 +91,7 @@ public class HockeyCoeffsMatchParser {
         }
 
         Document penaltiesHtml = downloader.downloadFile(new File(penaltiesPath.toUri()));
-        if(!penaltiesHtml.select("td:contains(" + homeTeam.getName() + ")").isEmpty()) {
+        if (!penaltiesHtml.select("td:contains(" + homeTeam.getName() + ")").isEmpty()) {
             tempHref = penaltiesHtml.select("td:contains(" + homeTeam.getName() + ")").get(0);
             fillPenaltiesSpecialBets(tempHref.parent().parent(), coeffBlock.findByType(ContainerType.STATS));
         }
@@ -129,12 +136,12 @@ public class HockeyCoeffsMatchParser {
             CoeffContainer totalUnderContainer = totalContainer.findByType(ContainerType.TEAM_TOTAL_UNDER);
             CoeffContainer under2AndHalf = totalUnderContainer.findByType(ContainerType.UNDER_2_5);
             CoeffContainer under3AndHalf = totalUnderContainer.findByType(ContainerType.UNDER_3_5);
-            if (totalOverText.contains("2.5")) {
+            if (totalOverText.contains("2.5") || totalOverText.contains("2.0")) {
                 over2AndHalf.getCoeff().set(Double.valueOf(totalOverCoeff));
                 under2AndHalf.getCoeff().set(Double.valueOf(totalUnderCoeff));
             }
 
-            if (totalOverText.contains("3.5")) {
+            if (totalOverText.contains("3.5") || totalOverText.contains("3.0")) {
                 over3AndHalf.getCoeff().set(Double.valueOf(totalOverCoeff));
                 under3AndHalf.getCoeff().set(Double.valueOf(totalUnderCoeff));
             }
@@ -151,12 +158,12 @@ public class HockeyCoeffsMatchParser {
             CoeffContainer totalUnderContainer = totalContainer.findByType(ContainerType.OPPOSING_TEAM_TOTAL_UNDER);
             CoeffContainer under2AndHalf = totalUnderContainer.findByType(ContainerType.UNDER_2_5);
             CoeffContainer under3AndHalf = totalUnderContainer.findByType(ContainerType.UNDER_3_5);
-            if (totalOverText.contains("2.5")) {
+            if (totalOverText.contains("2.5") || totalOverText.contains("2.0")) {
                 over2AndHalf.getCoeff().set(Double.valueOf(totalOverCoeff));
                 under2AndHalf.getCoeff().set(Double.valueOf(totalUnderCoeff));
             }
 
-            if (totalOverText.contains("3.5")) {
+            if (totalOverText.contains("3.5") || totalOverText.contains("3.0")) {
                 over3AndHalf.getCoeff().set(Double.valueOf(totalOverCoeff));
                 under3AndHalf.getCoeff().set(Double.valueOf(totalUnderCoeff));
             }
@@ -424,7 +431,6 @@ public class HockeyCoeffsMatchParser {
         CoeffContainer minus5AndHalf = handicapBlock.findByType(ContainerType.MINUS_5_5);
 
 
-
         for (int i = 0; i < childNodes.size(); i++) {
             Node child = childNodes.get(i);
             if (!(child instanceof TextNode)) {
@@ -572,7 +578,7 @@ public class HockeyCoeffsMatchParser {
         Element totalElementBlock = element.select("th:containsOwn(Дополнительные тоталы:)")
                 .first().parent().nextElementSibling();
 
-        Element generalTotalHtmlBlock = totalElementBlock.select("td:containsOwn((4.5) больше )").first();
+        Element generalTotalHtmlBlock = totalElementBlock.select("td:containsOwn(больше )").first();
         List<Node> childNodes = generalTotalHtmlBlock.childNodes();
         CoeffContainer over4AndHalf = totalOverContainer.findByType(ContainerType.OVER_4_5);
         CoeffContainer over5AndHalf = totalOverContainer.findByType(ContainerType.OVER_5_5);
@@ -599,7 +605,7 @@ public class HockeyCoeffsMatchParser {
         Element totalElementBlock = element.select("th:containsOwn(Дополнительные тоталы:)")
                 .first().parent().nextElementSibling();
 
-        Element generalTotalHtmlBlock = totalElementBlock.select("td:containsOwn((4.5) больше )").first();
+        Element generalTotalHtmlBlock = totalElementBlock.select("td:containsOwn(больше )").first();
         List<Node> childNodes = generalTotalHtmlBlock.childNodes();
         CoeffContainer under5AndHalf = totalUnderContainer.findByType(ContainerType.UNDER_5_5);
         CoeffContainer under6AndHalf = totalUnderContainer.findByType(ContainerType.UNDER_6_5);
@@ -755,7 +761,6 @@ public class HockeyCoeffsMatchParser {
         );
 
 
-
         fillBetWithPossibleOptionsForTeamPeriodTotal(
                 element, periodsContainer.findByType(ContainerType.SECOND_PERIOD).findByType(ContainerType.TEAM_TOTAL_OVER),
                 Arrays.asList(
@@ -776,7 +781,6 @@ public class HockeyCoeffsMatchParser {
                         new BetEntry("обе команды забьют во втором периоде", ContainerType.OVER_0_5)
                 )
         );
-
 
 
         fillBetWithPossibleOptionsForTeamPeriodTotal(
@@ -951,13 +955,16 @@ public class HockeyCoeffsMatchParser {
                 Element child = elements.get(i);
                 if (child.text().contains(team.getName())) {
                     Element positiveElement = child.nextElementSibling().child(0).child(0);
-                    Element negativeElement = child.nextElementSibling()
-                            .nextElementSibling().child(0).child(0);
+                    Element negativeElement = null;
+                    if (child.nextElementSibling().nextElementSibling() != null) {
+                        negativeElement = child.nextElementSibling()
+                                .nextElementSibling().child(0).child(0);
+                    }
 
                     CoeffContainer coeffContainer = container.findByType(betEntry.getContainerType());
                     coeffContainer.getCoeff().set(
                             Double.valueOf(positiveElement.text()),
-                            Double.valueOf(negativeElement.text())
+                            negativeElement != null ? Double.valueOf(negativeElement.text()) : Coeff.UNKNOWN
                     );
                 }
             }

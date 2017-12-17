@@ -6,6 +6,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Coeff {
+
+    public static final Double UNKNOWN = 1.1;
     private Double value;
     private Double positiveValue;
     private Double negativeValue;
@@ -13,7 +15,7 @@ public class Coeff {
 
     public Coeff() {
         // TODO: remove
-        this.value = 1.1;
+        this.value = UNKNOWN;
         this.averageCoeff = true;
     }
 
