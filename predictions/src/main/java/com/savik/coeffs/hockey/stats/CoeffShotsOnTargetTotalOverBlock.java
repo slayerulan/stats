@@ -12,6 +12,10 @@ public class CoeffShotsOnTargetTotalOverBlock extends CoeffContainer {
         super(Arrays.asList(
                 new CoeffContainer(
                         new Coeff(),
+                        ContainerType.OVER_57_5
+                ),
+                new CoeffContainer(
+                        new Coeff(),
                         ContainerType.OVER_59_5
                 ),
                 new CoeffContainer(

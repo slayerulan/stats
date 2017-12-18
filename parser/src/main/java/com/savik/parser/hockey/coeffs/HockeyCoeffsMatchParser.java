@@ -218,6 +218,7 @@ public class HockeyCoeffsMatchParser {
             String totalOverCoeff = tds.get(6).select("u a").first().text();
             String totalUnderCoeff = tds.get(7).select("u a").first().text();
             CoeffContainer teamTotalOverContainer = container.findByType(SHOTS_ON_TARGET_OVER);
+            CoeffContainer over57AndHalf = teamTotalOverContainer.findByType(OVER_57_5);
             CoeffContainer over59AndHalf = teamTotalOverContainer.findByType(OVER_59_5);
             CoeffContainer over60AndHalf = teamTotalOverContainer.findByType(OVER_60_5);
             CoeffContainer over61AndHalf = teamTotalOverContainer.findByType(OVER_61_5);
@@ -227,6 +228,7 @@ public class HockeyCoeffsMatchParser {
             Double overValue = Double.valueOf(totalOverCoeff);
             Double underValue = Double.valueOf(totalUnderCoeff);
 
+            checkIfContainsAndSetPosAndNeg(totalText, over57AndHalf, "57.5", overValue, underValue);
             checkIfContainsAndSetPosAndNeg(totalText, over59AndHalf, "59.5", overValue, underValue);
             checkIfContainsAndSetPosAndNeg(totalText, over60AndHalf, "60.5", overValue, underValue);
             checkIfContainsAndSetPosAndNeg(totalText, over61AndHalf, "61.5", overValue, underValue);
@@ -273,8 +275,8 @@ public class HockeyCoeffsMatchParser {
         Double overValue = Double.valueOf(totalOverCoeff);
         Double underValue = Double.valueOf(totalUnderCoeff);
 
-        checkIfContainsAndSetPosAndNeg(totalText, over28AndHalf, asList("28.5", "28.0", "29.0"), overValue, underValue);
-        checkIfContainsAndSetPosAndNeg(totalText, over30AndHalf, asList("30.5", "30.0", "31.0"), overValue, underValue);
+        checkIfContainsAndSetPosAndNeg(totalText, over28AndHalf, asList("28.5", "28.0", "29.0", "29.5"), overValue, underValue);
+        checkIfContainsAndSetPosAndNeg(totalText, over30AndHalf, asList("30.5", "30.0", "31.0", "31.5"), overValue, underValue);
         checkIfContainsAndSetPosAndNeg(totalText, over32AndHalf, asList("32.5", "32.0", "33.0", "34.0"), overValue, underValue);
     }
 
@@ -316,6 +318,7 @@ public class HockeyCoeffsMatchParser {
         Element generalTotalHtmlBlock = totalElementBlock.select("td:containsOwn(больше)").first();
         List<Node> childNodes = generalTotalHtmlBlock.childNodes();
         CoeffContainer teamTotalOverContainer = container.findByType(SHOTS_ON_TARGET_OVER);
+        CoeffContainer over57AndHalf = teamTotalOverContainer.findByType(OVER_57_5);
         CoeffContainer over59AndHalf = teamTotalOverContainer.findByType(OVER_59_5);
         CoeffContainer over60AndHalf = teamTotalOverContainer.findByType(OVER_60_5);
         CoeffContainer over61AndHalf = teamTotalOverContainer.findByType(OVER_61_5);
@@ -337,6 +340,7 @@ public class HockeyCoeffsMatchParser {
                 underValue = Double.valueOf(totalunderCoeff);
             }
 
+            checkIfContainsAndSetPosAndNeg(text, over57AndHalf, "57.5", overValue, underValue);
             checkIfContainsAndSetPosAndNeg(text, over59AndHalf, "59.5", overValue, underValue);
             checkIfContainsAndSetPosAndNeg(text, over60AndHalf, "60.5", overValue, underValue);
             checkIfContainsAndSetPosAndNeg(text, over61AndHalf, "61.5", overValue, underValue);
