@@ -79,25 +79,25 @@ public class HockeyCoeffsMatchParser {
         Element matchCoeffsTbodyTag = matchTbodyTag.nextElementSibling();
 
         fillSomeSpecialBets(tempHref.parent().parent(), coeffBlock);
-        fillTotalBlock(matchCoeffsTbodyTag, coeffBlock.findByType(ContainerType.TOTAL), hockeyFutureMatch);
-        fillOtherBlock(matchCoeffsTbodyTag, coeffBlock.findByType(ContainerType.OTHER), hockeyFutureMatch);
-        fillPeriodsBlock(matchCoeffsTbodyTag, coeffBlock.findByType(ContainerType.PERIODS), hockeyFutureMatch);
+        fillTotalBlock(matchCoeffsTbodyTag, coeffBlock.findByType(TOTAL), hockeyFutureMatch);
+        fillOtherBlock(matchCoeffsTbodyTag, coeffBlock.findByType(OTHER), hockeyFutureMatch);
+        fillPeriodsBlock(matchCoeffsTbodyTag, coeffBlock.findByType(PERIODS), hockeyFutureMatch);
 
 
         Document shotsHtml = downloader.downloadFile(new File(shotsPath.toUri()));
         if (!shotsHtml.select(String.format("a.om:contains(%s)", homeTeam.getName())).isEmpty()) {
             tempHref = shotsHtml.select(String.format("a.om:contains(%s)", homeTeam.getName())).get(0);
-            fillShotsSpecialBets(tempHref.parent().parent(), coeffBlock.findByType(ContainerType.STATS));
+            fillShotsSpecialBets(tempHref.parent().parent(), coeffBlock.findByType(STATS));
             fillShotsBets(
                     tempHref.parent().parent().parent().nextElementSibling(),
-                    coeffBlock.findByType(ContainerType.STATS), hockeyFutureMatch
+                    coeffBlock.findByType(STATS), hockeyFutureMatch
             );
         }
 
         Document penaltiesHtml = downloader.downloadFile(new File(penaltiesPath.toUri()));
         if (!penaltiesHtml.select(String.format("td:contains(%s)", homeTeam.getName())).isEmpty()) {
             tempHref = penaltiesHtml.select(String.format("td:contains(%s)", homeTeam.getName())).get(0);
-            fillPenaltiesSpecialBets(tempHref.parent().parent(), coeffBlock.findByType(ContainerType.STATS));
+            fillPenaltiesSpecialBets(tempHref.parent().parent(), coeffBlock.findByType(STATS));
         }
 
 
@@ -112,13 +112,13 @@ public class HockeyCoeffsMatchParser {
             String totalOverText = tds.get(5).select("b").text();
             String totalOverCoeff = tds.get(6).select("u a").text();
             String totalUnderCoeff = tds.get(7).select("u a").text();
-            CoeffContainer totalContainer = container.findByType(ContainerType.TOTAL);
-            CoeffContainer totalOverContainer = totalContainer.findByType(ContainerType.TOTAL_OVER);
-            CoeffContainer over4AndHalf = totalOverContainer.findByType(ContainerType.OVER_4_5);
-            CoeffContainer over5AndHalf = totalOverContainer.findByType(ContainerType.OVER_5_5);
-            CoeffContainer totalUnderContainer = totalContainer.findByType(ContainerType.TOTAL_UNDER);
-            CoeffContainer under4AndHalf = totalUnderContainer.findByType(ContainerType.UNDER_4_5);
-            CoeffContainer under5AndHalf = totalUnderContainer.findByType(ContainerType.UNDER_5_5);
+            CoeffContainer totalContainer = container.findByType(TOTAL);
+            CoeffContainer totalOverContainer = totalContainer.findByType(TOTAL_OVER);
+            CoeffContainer over4AndHalf = totalOverContainer.findByType(OVER_4_5);
+            CoeffContainer over5AndHalf = totalOverContainer.findByType(OVER_5_5);
+            CoeffContainer totalUnderContainer = totalContainer.findByType(TOTAL_UNDER);
+            CoeffContainer under4AndHalf = totalUnderContainer.findByType(UNDER_4_5);
+            CoeffContainer under5AndHalf = totalUnderContainer.findByType(UNDER_5_5);
             checkIfContainsAndSetOverAndUnder(totalOverText, over4AndHalf, under4AndHalf, "4.5", Double.valueOf(totalOverCoeff), Double.valueOf(totalUnderCoeff));
             checkIfContainsAndSetOverAndUnder(totalOverText, over5AndHalf, under5AndHalf, "5.5", Double.valueOf(totalOverCoeff), Double.valueOf(totalUnderCoeff));
         }
@@ -127,13 +127,13 @@ public class HockeyCoeffsMatchParser {
             String totalOverText = tds.get(14).select("b").first().text();
             String totalOverCoeff = tds.get(15).select("u a").first().text();
             String totalUnderCoeff = tds.get(16).select("u a").first().text();
-            CoeffContainer totalContainer = container.findByType(ContainerType.TOTAL);
-            CoeffContainer teamTotalOverContainer = totalContainer.findByType(ContainerType.TEAM_TOTAL_OVER);
-            CoeffContainer over2AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_2_5);
-            CoeffContainer over3AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_3_5);
-            CoeffContainer totalUnderContainer = totalContainer.findByType(ContainerType.TEAM_TOTAL_UNDER);
-            CoeffContainer under2AndHalf = totalUnderContainer.findByType(ContainerType.UNDER_2_5);
-            CoeffContainer under3AndHalf = totalUnderContainer.findByType(ContainerType.UNDER_3_5);
+            CoeffContainer totalContainer = container.findByType(TOTAL);
+            CoeffContainer teamTotalOverContainer = totalContainer.findByType(TEAM_TOTAL_OVER);
+            CoeffContainer over2AndHalf = teamTotalOverContainer.findByType(OVER_2_5);
+            CoeffContainer over3AndHalf = teamTotalOverContainer.findByType(OVER_3_5);
+            CoeffContainer totalUnderContainer = totalContainer.findByType(TEAM_TOTAL_UNDER);
+            CoeffContainer under2AndHalf = totalUnderContainer.findByType(UNDER_2_5);
+            CoeffContainer under3AndHalf = totalUnderContainer.findByType(UNDER_3_5);
 
             checkIfContainsAndSetOverAndUnder(totalOverText, over2AndHalf, under2AndHalf, asList("2.5", "2.0"),
                     Double.valueOf(totalOverCoeff), Double.valueOf(totalUnderCoeff));
@@ -146,13 +146,13 @@ public class HockeyCoeffsMatchParser {
             String totalOverText = tds.get(14).select("b").get(1).text();
             String totalOverCoeff = tds.get(15).select("u a").get(1).text();
             String totalUnderCoeff = tds.get(16).select("u a").get(1).text();
-            CoeffContainer totalContainer = container.findByType(ContainerType.TOTAL);
-            CoeffContainer teamTotalOverContainer = totalContainer.findByType(ContainerType.OPPOSING_TEAM_TOTAL_OVER);
-            CoeffContainer over2AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_2_5);
-            CoeffContainer over3AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_3_5);
-            CoeffContainer totalUnderContainer = totalContainer.findByType(ContainerType.OPPOSING_TEAM_TOTAL_UNDER);
-            CoeffContainer under2AndHalf = totalUnderContainer.findByType(ContainerType.UNDER_2_5);
-            CoeffContainer under3AndHalf = totalUnderContainer.findByType(ContainerType.UNDER_3_5);
+            CoeffContainer totalContainer = container.findByType(TOTAL);
+            CoeffContainer teamTotalOverContainer = totalContainer.findByType(OPPOSING_TEAM_TOTAL_OVER);
+            CoeffContainer over2AndHalf = teamTotalOverContainer.findByType(OVER_2_5);
+            CoeffContainer over3AndHalf = teamTotalOverContainer.findByType(OVER_3_5);
+            CoeffContainer totalUnderContainer = totalContainer.findByType(OPPOSING_TEAM_TOTAL_UNDER);
+            CoeffContainer under2AndHalf = totalUnderContainer.findByType(UNDER_2_5);
+            CoeffContainer under3AndHalf = totalUnderContainer.findByType(UNDER_3_5);
 
             checkIfContainsAndSetOverAndUnder(totalOverText, over2AndHalf, under2AndHalf, asList("2.5", "2.0"),
                     Double.valueOf(totalOverCoeff), Double.valueOf(totalUnderCoeff));
@@ -203,12 +203,12 @@ public class HockeyCoeffsMatchParser {
         if (tds.get(3) != null) {
             String teamHandicapText = tds.get(3).select("b").first().text();
             String teamHandicapCoeff = tds.get(4).select("u a").first().text();
-            CoeffContainer teamHandicapBlock = container.findByType(ContainerType.TEAM_SHOTS_ON_TARGET_HANDICAP);
+            CoeffContainer teamHandicapBlock = container.findByType(TEAM_SHOTS_ON_TARGET_HANDICAP);
             fillShotsHandicap(teamHandicapText, Double.valueOf(teamHandicapCoeff), teamHandicapBlock);
 
             String oppTeamHandicapText = tds.get(3).select("b").get(1).text();
             String oppTeamHandicapCoeff = tds.get(4).select("u a").get(1).text();
-            CoeffContainer oppTeamHandicapBlock = container.findByType(ContainerType.OPPOSING_TEAM_SHOTS_ON_TARGET_HANDICAP);
+            CoeffContainer oppTeamHandicapBlock = container.findByType(OPPOSING_TEAM_SHOTS_ON_TARGET_HANDICAP);
             fillShotsHandicap(oppTeamHandicapText, Double.valueOf(oppTeamHandicapCoeff), oppTeamHandicapBlock);
         }
 
@@ -217,12 +217,12 @@ public class HockeyCoeffsMatchParser {
             String totalText = tds.get(5).select("b").first().text();
             String totalOverCoeff = tds.get(6).select("u a").first().text();
             String totalUnderCoeff = tds.get(7).select("u a").first().text();
-            CoeffContainer teamTotalOverContainer = container.findByType(ContainerType.SHOTS_ON_TARGET_OVER);
-            CoeffContainer over59AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_59_5);
-            CoeffContainer over60AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_60_5);
-            CoeffContainer over61AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_61_5);
-            CoeffContainer over62AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_62_5);
-            CoeffContainer over63AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_63_5);
+            CoeffContainer teamTotalOverContainer = container.findByType(SHOTS_ON_TARGET_OVER);
+            CoeffContainer over59AndHalf = teamTotalOverContainer.findByType(OVER_59_5);
+            CoeffContainer over60AndHalf = teamTotalOverContainer.findByType(OVER_60_5);
+            CoeffContainer over61AndHalf = teamTotalOverContainer.findByType(OVER_61_5);
+            CoeffContainer over62AndHalf = teamTotalOverContainer.findByType(OVER_62_5);
+            CoeffContainer over63AndHalf = teamTotalOverContainer.findByType(OVER_63_5);
 
             Double overValue = Double.valueOf(totalOverCoeff);
             Double underValue = Double.valueOf(totalUnderCoeff);
@@ -237,12 +237,12 @@ public class HockeyCoeffsMatchParser {
 
         if (tds.get(8) != null) {
             String coeff = tds.get(8).select("u a").first().text();
-            CoeffContainer winContainer = container.findByType(ContainerType.TEAM_SHOTS_ON_TARGET_WIN);
+            CoeffContainer winContainer = container.findByType(TEAM_SHOTS_ON_TARGET_WIN);
             winContainer.getCoeff().set(Double.valueOf(coeff));
         }
         if (tds.get(10) != null) {
             String coeff = tds.get(10).select("u a").first().text();
-            CoeffContainer winContainer = container.findByType(ContainerType.OPPOSING_TEAM_SHOTS_ON_TARGET_WIN);
+            CoeffContainer winContainer = container.findByType(OPPOSING_TEAM_SHOTS_ON_TARGET_WIN);
             winContainer.getCoeff().set(Double.valueOf(coeff));
         }
 
@@ -251,7 +251,7 @@ public class HockeyCoeffsMatchParser {
             String totalText = tds.get(14).select("b").first().text();
             String totalOverCoeff = tds.get(15).select("u a").first().text();
             String totalUnderCoeff = tds.get(16).select("u a").first().text();
-            CoeffContainer teamTotalOverContainer = container.findByType(ContainerType.TEAM_SHOTS_ON_TARGET_OVER);
+            CoeffContainer teamTotalOverContainer = container.findByType(TEAM_SHOTS_ON_TARGET_OVER);
             fillShotsTotalOver(totalText, totalOverCoeff, totalUnderCoeff, teamTotalOverContainer);
         }
 
@@ -259,16 +259,16 @@ public class HockeyCoeffsMatchParser {
             String totalText = tds.get(14).select("b").get(1).text();
             String totalOverCoeff = tds.get(15).select("u a").get(1).text();
             String totalUnderCoeff = tds.get(16).select("u a").get(1).text();
-            CoeffContainer teamTotalOverContainer = container.findByType(ContainerType.OPPOSING_TEAM_SHOTS_ON_TARGET_OVER);
+            CoeffContainer teamTotalOverContainer = container.findByType(OPPOSING_TEAM_SHOTS_ON_TARGET_OVER);
             fillShotsTotalOver(totalText, totalOverCoeff, totalUnderCoeff, teamTotalOverContainer);
 
         }
     }
 
     private void fillShotsTotalOver(String totalText, String totalOverCoeff, String totalUnderCoeff, CoeffContainer teamTotalOverContainer) {
-        CoeffContainer over28AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_28_5);
-        CoeffContainer over30AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_30_5);
-        CoeffContainer over32AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_32_5);
+        CoeffContainer over28AndHalf = teamTotalOverContainer.findByType(OVER_28_5);
+        CoeffContainer over30AndHalf = teamTotalOverContainer.findByType(OVER_30_5);
+        CoeffContainer over32AndHalf = teamTotalOverContainer.findByType(OVER_32_5);
 
         Double overValue = Double.valueOf(totalOverCoeff);
         Double underValue = Double.valueOf(totalUnderCoeff);
@@ -279,16 +279,16 @@ public class HockeyCoeffsMatchParser {
     }
 
     private void fillShotsHandicap(String handicapText, Double handicapCoeff, CoeffContainer handicapBlock) {
-        CoeffContainer plus1AndHalf = handicapBlock.findByType(ContainerType.PLUS_1_5);
-        CoeffContainer plus2AndHalf = handicapBlock.findByType(ContainerType.PLUS_2_5);
-        CoeffContainer plus3AndHalf = handicapBlock.findByType(ContainerType.PLUS_3_5);
-        CoeffContainer plus4AndHalf = handicapBlock.findByType(ContainerType.PLUS_4_5);
-        CoeffContainer plus5AndHalf = handicapBlock.findByType(ContainerType.PLUS_5_5);
-        CoeffContainer minus1AndHalf = handicapBlock.findByType(ContainerType.MINUS_1_5);
-        CoeffContainer minus2AndHalf = handicapBlock.findByType(ContainerType.MINUS_2_5);
-        CoeffContainer minus3AndHalf = handicapBlock.findByType(ContainerType.MINUS_3_5);
-        CoeffContainer minus4AndHalf = handicapBlock.findByType(ContainerType.MINUS_4_5);
-        CoeffContainer minus5AndHalf = handicapBlock.findByType(ContainerType.MINUS_5_5);
+        CoeffContainer plus1AndHalf = handicapBlock.findByType(PLUS_1_5);
+        CoeffContainer plus2AndHalf = handicapBlock.findByType(PLUS_2_5);
+        CoeffContainer plus3AndHalf = handicapBlock.findByType(PLUS_3_5);
+        CoeffContainer plus4AndHalf = handicapBlock.findByType(PLUS_4_5);
+        CoeffContainer plus5AndHalf = handicapBlock.findByType(PLUS_5_5);
+        CoeffContainer minus1AndHalf = handicapBlock.findByType(MINUS_1_5);
+        CoeffContainer minus2AndHalf = handicapBlock.findByType(MINUS_2_5);
+        CoeffContainer minus3AndHalf = handicapBlock.findByType(MINUS_3_5);
+        CoeffContainer minus4AndHalf = handicapBlock.findByType(MINUS_4_5);
+        CoeffContainer minus5AndHalf = handicapBlock.findByType(MINUS_5_5);
 
         checkIfContainsAndSetValue(handicapText, plus1AndHalf, "+1.5", handicapCoeff);
         checkIfContainsAndSetValue(handicapText, plus2AndHalf, "+2.5", handicapCoeff);
@@ -305,8 +305,8 @@ public class HockeyCoeffsMatchParser {
 
     private void fillShotsBets(Element element, CoeffContainer container, HockeyFutureMatch match) {
         fillShotsTotalOverBlock(element, container);
-        fillShotsHandicap(element, container, match.getHomeTeam(), ContainerType.TEAM_SHOTS_ON_TARGET_HANDICAP);
-        fillShotsHandicap(element, container, match.getGuestTeam(), ContainerType.OPPOSING_TEAM_SHOTS_ON_TARGET_HANDICAP);
+        fillShotsHandicap(element, container, match.getHomeTeam(), TEAM_SHOTS_ON_TARGET_HANDICAP);
+        fillShotsHandicap(element, container, match.getGuestTeam(), OPPOSING_TEAM_SHOTS_ON_TARGET_HANDICAP);
     }
 
     private void fillShotsTotalOverBlock(Element element, CoeffContainer container) {
@@ -315,12 +315,12 @@ public class HockeyCoeffsMatchParser {
 
         Element generalTotalHtmlBlock = totalElementBlock.select("td:containsOwn(больше)").first();
         List<Node> childNodes = generalTotalHtmlBlock.childNodes();
-        CoeffContainer teamTotalOverContainer = container.findByType(ContainerType.SHOTS_ON_TARGET_OVER);
-        CoeffContainer over59AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_59_5);
-        CoeffContainer over60AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_60_5);
-        CoeffContainer over61AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_61_5);
-        CoeffContainer over62AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_62_5);
-        CoeffContainer over63AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_63_5);
+        CoeffContainer teamTotalOverContainer = container.findByType(SHOTS_ON_TARGET_OVER);
+        CoeffContainer over59AndHalf = teamTotalOverContainer.findByType(OVER_59_5);
+        CoeffContainer over60AndHalf = teamTotalOverContainer.findByType(OVER_60_5);
+        CoeffContainer over61AndHalf = teamTotalOverContainer.findByType(OVER_61_5);
+        CoeffContainer over62AndHalf = teamTotalOverContainer.findByType(OVER_62_5);
+        CoeffContainer over63AndHalf = teamTotalOverContainer.findByType(OVER_63_5);
 
         for (int i = 0; i < childNodes.size(); i++) {
             Node child = childNodes.get(i);
@@ -380,10 +380,10 @@ public class HockeyCoeffsMatchParser {
             String totalText = tds.get(5).select("b").first().text();
             String totalOverCoeff = tds.get(6).select("u a").first().text();
             String totalUnderCoeff = tds.get(7).select("u a").first().text();
-            CoeffContainer teamTotalOverContainer = container.findByType(ContainerType.PENALTIES_TIME_OVER);
-            CoeffContainer over13AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_13_5);
-            CoeffContainer over14AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_14_5);
-            CoeffContainer over15AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_15_5);
+            CoeffContainer teamTotalOverContainer = container.findByType(PENALTIES_TIME_OVER);
+            CoeffContainer over13AndHalf = teamTotalOverContainer.findByType(OVER_13_5);
+            CoeffContainer over14AndHalf = teamTotalOverContainer.findByType(OVER_14_5);
+            CoeffContainer over15AndHalf = teamTotalOverContainer.findByType(OVER_15_5);
 
             Double overValue = Double.valueOf(totalOverCoeff);
             Double underValue = Double.valueOf(totalUnderCoeff);
@@ -395,12 +395,12 @@ public class HockeyCoeffsMatchParser {
 
         if (tds.get(8) != null) {
             String coeff = tds.get(8).select("u a").first().text();
-            CoeffContainer winContainer = container.findByType(ContainerType.TEAM_PENALTIES_TIME_WIN);
+            CoeffContainer winContainer = container.findByType(TEAM_PENALTIES_TIME_WIN);
             winContainer.getCoeff().set(Double.valueOf(coeff));
         }
         if (tds.get(10) != null) {
             String coeff = tds.get(10).select("u a").first().text();
-            CoeffContainer winContainer = container.findByType(ContainerType.OPPOSING_TEAM_PENALTIES_TIME_WIN);
+            CoeffContainer winContainer = container.findByType(OPPOSING_TEAM_PENALTIES_TIME_WIN);
             winContainer.getCoeff().set(Double.valueOf(coeff));
         }
 
@@ -409,10 +409,10 @@ public class HockeyCoeffsMatchParser {
             String totalText = tds.get(14).select("b").first().text();
             String totalOverCoeff = tds.get(15).select("u a").first().text();
             String totalUnderCoeff = tds.get(16).select("u a").first().text();
-            CoeffContainer teamTotalOverContainer = container.findByType(ContainerType.TEAM_PENALTIES_TIME_OVER);
-            CoeffContainer over6AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_6_5);
-            CoeffContainer over7AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_7_5);
-            CoeffContainer over8AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_8_5);
+            CoeffContainer teamTotalOverContainer = container.findByType(TEAM_PENALTIES_TIME_OVER);
+            CoeffContainer over6AndHalf = teamTotalOverContainer.findByType(OVER_6_5);
+            CoeffContainer over7AndHalf = teamTotalOverContainer.findByType(OVER_7_5);
+            CoeffContainer over8AndHalf = teamTotalOverContainer.findByType(OVER_8_5);
 
             Double overValue = Double.valueOf(totalOverCoeff);
             Double underValue = Double.valueOf(totalUnderCoeff);
@@ -426,10 +426,10 @@ public class HockeyCoeffsMatchParser {
             String totalText = tds.get(14).select("b").get(1).text();
             String totalOverCoeff = tds.get(15).select("u a").get(1).text();
             String totalUnderCoeff = tds.get(16).select("u a").get(1).text();
-            CoeffContainer teamTotalOverContainer = container.findByType(ContainerType.OPPOSING_TEAM_PENALTIES_TIME_OVER);
-            CoeffContainer over6AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_6_5);
-            CoeffContainer over7AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_7_5);
-            CoeffContainer over8AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_8_5);
+            CoeffContainer teamTotalOverContainer = container.findByType(OPPOSING_TEAM_PENALTIES_TIME_OVER);
+            CoeffContainer over6AndHalf = teamTotalOverContainer.findByType(OVER_6_5);
+            CoeffContainer over7AndHalf = teamTotalOverContainer.findByType(OVER_7_5);
+            CoeffContainer over8AndHalf = teamTotalOverContainer.findByType(OVER_8_5);
 
             Double overValue = Double.valueOf(totalOverCoeff);
             Double underValue = Double.valueOf(totalUnderCoeff);
@@ -441,14 +441,14 @@ public class HockeyCoeffsMatchParser {
     }
 
     private void fillTotalBlock(Element element, CoeffContainer totalContainer, HockeyFutureMatch match) {
-        fillTotalOverBlock(element, totalContainer.findByType(ContainerType.TOTAL_OVER));
-        fillTotalUnderBlock(element, totalContainer.findByType(ContainerType.TOTAL_UNDER));
-        fillBothTeamsTotalOverBlock(element, totalContainer.findByType(ContainerType.BOTH_TEAMS_TOTAL_OVER));
-        fillBothTeamsTotalUnderBlock(element, totalContainer.findByType(ContainerType.BOTH_TEAMS_TOTAL_UNDER));
-        fillTeamTotalOverBlock(element, totalContainer.findByType(ContainerType.TEAM_TOTAL_OVER), match.getHomeTeam());
-        fillTeamTotalUnderBlock(element, totalContainer.findByType(ContainerType.TEAM_TOTAL_UNDER), match.getHomeTeam());
-        fillTeamTotalOverBlock(element, totalContainer.findByType(ContainerType.OPPOSING_TEAM_TOTAL_OVER), match.getGuestTeam());
-        fillTeamTotalUnderBlock(element, totalContainer.findByType(ContainerType.OPPOSING_TEAM_TOTAL_UNDER), match.getGuestTeam());
+        fillTotalOverBlock(element, totalContainer.findByType(TOTAL_OVER));
+        fillTotalUnderBlock(element, totalContainer.findByType(TOTAL_UNDER));
+        fillBothTeamsTotalOverBlock(element, totalContainer.findByType(BOTH_TEAMS_TOTAL_OVER));
+        fillBothTeamsTotalUnderBlock(element, totalContainer.findByType(BOTH_TEAMS_TOTAL_UNDER));
+        fillTeamTotalOverBlock(element, totalContainer.findByType(TEAM_TOTAL_OVER), match.getHomeTeam());
+        fillTeamTotalUnderBlock(element, totalContainer.findByType(TEAM_TOTAL_UNDER), match.getHomeTeam());
+        fillTeamTotalOverBlock(element, totalContainer.findByType(OPPOSING_TEAM_TOTAL_OVER), match.getGuestTeam());
+        fillTeamTotalUnderBlock(element, totalContainer.findByType(OPPOSING_TEAM_TOTAL_UNDER), match.getGuestTeam());
     }
 
     private void fillTotalOverBlock(Element element, CoeffContainer totalOverContainer) {
@@ -458,8 +458,8 @@ public class HockeyCoeffsMatchParser {
 
         Element generalTotalHtmlBlock = totalElementBlock.select("td:containsOwn(больше )").first();
         List<Node> childNodes = generalTotalHtmlBlock.childNodes();
-        CoeffContainer over4AndHalf = totalOverContainer.findByType(ContainerType.OVER_4_5);
-        CoeffContainer over5AndHalf = totalOverContainer.findByType(ContainerType.OVER_5_5);
+        CoeffContainer over4AndHalf = totalOverContainer.findByType(OVER_4_5);
+        CoeffContainer over5AndHalf = totalOverContainer.findByType(OVER_5_5);
         for (int i = 0; i < childNodes.size(); i++) {
             Node child = childNodes.get(i);
             if (!(child instanceof TextNode)) {
@@ -483,8 +483,8 @@ public class HockeyCoeffsMatchParser {
 
         Element generalTotalHtmlBlock = totalElementBlock.select("td:containsOwn(больше )").first();
         List<Node> childNodes = generalTotalHtmlBlock.childNodes();
-        CoeffContainer under5AndHalf = totalUnderContainer.findByType(ContainerType.UNDER_5_5);
-        CoeffContainer under6AndHalf = totalUnderContainer.findByType(ContainerType.UNDER_6_5);
+        CoeffContainer under5AndHalf = totalUnderContainer.findByType(UNDER_5_5);
+        CoeffContainer under6AndHalf = totalUnderContainer.findByType(UNDER_6_5);
         for (int i = 0; i < childNodes.size(); i++) {
             Node child = childNodes.get(i);
             if (!(child instanceof TextNode)) {
@@ -506,7 +506,7 @@ public class HockeyCoeffsMatchParser {
                 element, container,
                 asList(
                         new BetEntry("каждая команда забьет больше 1,5", OVER_1_5),
-                        new BetEntry("каждая команда забьет больше 2,5", ContainerType.OVER_2_5)
+                        new BetEntry("каждая команда забьет больше 2,5", OVER_2_5)
                 )
         );
     }
@@ -515,8 +515,8 @@ public class HockeyCoeffsMatchParser {
         fillBetWithSinglePossibleOption(
                 element, container,
                 asList(
-                        new BetEntry("каждая команда забьет меньше 2,5", ContainerType.UNDER_2_5),
-                        new BetEntry("каждая команда забьет меньше 3,5", ContainerType.UNDER_3_5)
+                        new BetEntry("каждая команда забьет меньше 2,5", UNDER_2_5),
+                        new BetEntry("каждая команда забьет меньше 3,5", UNDER_3_5)
                 )
         );
     }
@@ -529,8 +529,8 @@ public class HockeyCoeffsMatchParser {
         Element temp = totalElementBlock.select(String.format("i:containsOwn(%s)", homeTeam.getName())).first();
         Element teamTotalBlock = temp.parent().nextElementSibling();
         List<Node> childNodes = teamTotalBlock.childNodes();
-        CoeffContainer over2AndHalf = totalOverContainer.findByType(ContainerType.OVER_2_5);
-        CoeffContainer over3AndHalf = totalOverContainer.findByType(ContainerType.OVER_3_5);
+        CoeffContainer over2AndHalf = totalOverContainer.findByType(OVER_2_5);
+        CoeffContainer over3AndHalf = totalOverContainer.findByType(OVER_3_5);
         for (int i = 0; i < childNodes.size(); i++) {
             Node child = childNodes.get(i);
             if (!(child instanceof TextNode)) {
@@ -555,8 +555,8 @@ public class HockeyCoeffsMatchParser {
         Element temp = totalElementBlock.select(String.format("i:containsOwn(%s)", homeTeam.getName())).first();
         Element teamTotalBlock = temp.parent().nextElementSibling();
         List<Node> childNodes = teamTotalBlock.childNodes();
-        CoeffContainer under2AndHalf = totalOverContainer.findByType(ContainerType.UNDER_2_5);
-        CoeffContainer under3AndHalf = totalOverContainer.findByType(ContainerType.UNDER_3_5);
+        CoeffContainer under2AndHalf = totalOverContainer.findByType(UNDER_2_5);
+        CoeffContainer under3AndHalf = totalOverContainer.findByType(UNDER_3_5);
         for (int i = 0; i < childNodes.size(); i++) {
             Node child = childNodes.get(i);
             if (!(child instanceof TextNode)) {
@@ -575,88 +575,88 @@ public class HockeyCoeffsMatchParser {
 
 
     private void fillOtherBlock(Element element, CoeffContainer otherContainer, HockeyFutureMatch match) {
-        fillTotalOverInAllPeriodsBlock(element, otherContainer.findByType(ContainerType.TOTAL_OVER_ALL_PERIODS));
-        fillTotalUnderInAllPeriodsBlock(element, otherContainer.findByType(ContainerType.TOTAL_UNDER_ALL_PERIODS));
+        fillTotalOverInAllPeriodsBlock(element, otherContainer.findByType(TOTAL_OVER_ALL_PERIODS));
+        fillTotalUnderInAllPeriodsBlock(element, otherContainer.findByType(TOTAL_UNDER_ALL_PERIODS));
 
-        fillPeriodAnyWinAndDiffEqualsBlock(element, otherContainer.findByType(ContainerType.ANY_WIN_AND_DIFFERENCE_EQUALS));
+        fillPeriodAnyWinAndDiffEqualsBlock(element, otherContainer.findByType(ANY_WIN_AND_DIFFERENCE_EQUALS));
         fillGoalsTimeBlock(element, otherContainer);
 
-        fillTeamWinAndTotalOverBlock(element, otherContainer.findByType(ContainerType.TEAM_WIN_AND_TOTAL_OVER), match.getHomeTeam());
-        fillTeamWinAndTotalUnderBlock(element, otherContainer.findByType(ContainerType.TEAM_WIN_AND_TOTAL_UNDER), match.getHomeTeam());
-        fillTeamNotLooseAndTotalOverBlock(element, otherContainer.findByType(ContainerType.TEAM_NOT_LOOSE_AND_TOTAL_OVER), match.getHomeTeam());
-        fillTeamNotLooseAndTotalUnderBlock(element, otherContainer.findByType(ContainerType.TEAM_NOT_LOOSE_AND_TOTAL_UNDER), match.getHomeTeam());
+        fillTeamWinAndTotalOverBlock(element, otherContainer.findByType(TEAM_WIN_AND_TOTAL_OVER), match.getHomeTeam());
+        fillTeamWinAndTotalUnderBlock(element, otherContainer.findByType(TEAM_WIN_AND_TOTAL_UNDER), match.getHomeTeam());
+        fillTeamNotLooseAndTotalOverBlock(element, otherContainer.findByType(TEAM_NOT_LOOSE_AND_TOTAL_OVER), match.getHomeTeam());
+        fillTeamNotLooseAndTotalUnderBlock(element, otherContainer.findByType(TEAM_NOT_LOOSE_AND_TOTAL_UNDER), match.getHomeTeam());
 
-        fillTeamWinAndTotalOverBlock(element, otherContainer.findByType(ContainerType.OPPOSING_TEAM_WIN_AND_TOTAL_OVER), match.getGuestTeam());
-        fillTeamWinAndTotalUnderBlock(element, otherContainer.findByType(ContainerType.OPPOSING_TEAM_WIN_AND_TOTAL_UNDER), match.getGuestTeam());
-        fillTeamNotLooseAndTotalOverBlock(element, otherContainer.findByType(ContainerType.OPPOSING_TEAM_NOT_LOOSE_AND_TOTAL_OVER), match.getGuestTeam());
-        fillTeamNotLooseAndTotalUnderBlock(element, otherContainer.findByType(ContainerType.OPPOSING_TEAM_NOT_LOOSE_AND_TOTAL_UNDER), match.getGuestTeam());
+        fillTeamWinAndTotalOverBlock(element, otherContainer.findByType(OPPOSING_TEAM_WIN_AND_TOTAL_OVER), match.getGuestTeam());
+        fillTeamWinAndTotalUnderBlock(element, otherContainer.findByType(OPPOSING_TEAM_WIN_AND_TOTAL_UNDER), match.getGuestTeam());
+        fillTeamNotLooseAndTotalOverBlock(element, otherContainer.findByType(OPPOSING_TEAM_NOT_LOOSE_AND_TOTAL_OVER), match.getGuestTeam());
+        fillTeamNotLooseAndTotalUnderBlock(element, otherContainer.findByType(OPPOSING_TEAM_NOT_LOOSE_AND_TOTAL_UNDER), match.getGuestTeam());
 
-        fillTeamTotalOverInAllPeriodsBlock(element, otherContainer.findByType(ContainerType.TEAM_TOTAL_OVER_ALL_PERIODS), match.getHomeTeam());
-        fillTeamTotalOverInAllPeriodsBlock(element, otherContainer.findByType(ContainerType.OPPOSING_TEAM_TOTAL_OVER_ALL_PERIODS), match.getGuestTeam());
+        fillTeamTotalOverInAllPeriodsBlock(element, otherContainer.findByType(TEAM_TOTAL_OVER_ALL_PERIODS), match.getHomeTeam());
+        fillTeamTotalOverInAllPeriodsBlock(element, otherContainer.findByType(OPPOSING_TEAM_TOTAL_OVER_ALL_PERIODS), match.getGuestTeam());
 
 
-        fillTeamWinAtLeastNPeriodsBlock(element, otherContainer.findByType(ContainerType.TEAM_WIN_AT_LEAST_N_PERIODS), match.getHomeTeam());
-        fillTeamWinAtLeastNPeriodsBlock(element, otherContainer.findByType(ContainerType.OPPOSING_TEAM_WIN_AT_LEAST_N_PERIODS), match.getGuestTeam());
-        fillDrawAtLeastNPeriodsBlock(element, otherContainer.findByType(ContainerType.DRAW_AT_LEAST_N_PERIODS));
+        fillTeamWinAtLeastNPeriodsBlock(element, otherContainer.findByType(TEAM_WIN_AT_LEAST_N_PERIODS), match.getHomeTeam());
+        fillTeamWinAtLeastNPeriodsBlock(element, otherContainer.findByType(OPPOSING_TEAM_WIN_AT_LEAST_N_PERIODS), match.getGuestTeam());
+        fillDrawAtLeastNPeriodsBlock(element, otherContainer.findByType(DRAW_AT_LEAST_N_PERIODS));
 
-        fillMostEffectivePeriodTotalOverBlock(element, otherContainer.findByType(ContainerType.MOST_EFFECTIVE_PERIOD_TOTAL_OVER));
-        fillTeamFirstScoredAndWinBlock(element, otherContainer.findByType(ContainerType.TEAM_FIRST_SCORED_AND_WIN), ContainerType.TEAM_FIRST_SCORED_AND_WIN, match.getHomeTeam());
-        fillTeamFirstScoredAndWinBlock(element, otherContainer.findByType(ContainerType.OPPOSING_TEAM_FIRST_SCORED_AND_WIN), ContainerType.OPPOSING_TEAM_FIRST_SCORED_AND_WIN, match.getGuestTeam());
-        fillAnyComebackMatchBlock(element, otherContainer.findByType(ContainerType.ANY_COMEBACK));
+        fillMostEffectivePeriodTotalOverBlock(element, otherContainer.findByType(MOST_EFFECTIVE_PERIOD_TOTAL_OVER));
+        fillTeamFirstScoredAndWinBlock(element, otherContainer.findByType(TEAM_FIRST_SCORED_AND_WIN), TEAM_FIRST_SCORED_AND_WIN, match.getHomeTeam());
+        fillTeamFirstScoredAndWinBlock(element, otherContainer.findByType(OPPOSING_TEAM_FIRST_SCORED_AND_WIN), OPPOSING_TEAM_FIRST_SCORED_AND_WIN, match.getGuestTeam());
+        fillAnyComebackMatchBlock(element, otherContainer.findByType(ANY_COMEBACK));
     }
 
     private void fillPeriodsBlock(Element element, CoeffContainer periodsContainer, HockeyFutureMatch match) {
 
         fillBetWithPossibleOptionsForTeamPeriodTotal(
-                element, periodsContainer.findByType(ContainerType.FIRST_PERIOD).findByType(ContainerType.TEAM_TOTAL_OVER),
+                element, periodsContainer.findByType(FIRST_PERIOD).findByType(TEAM_TOTAL_OVER),
                 "в первом периоде", match.getHomeTeam()
         );
 
         fillBetWithPossibleOptionsForTeamPeriodTotal(
-                element, periodsContainer.findByType(ContainerType.FIRST_PERIOD).findByType(ContainerType.OPPOSING_TEAM_TOTAL_OVER),
+                element, periodsContainer.findByType(FIRST_PERIOD).findByType(OPPOSING_TEAM_TOTAL_OVER),
                 "в первом периоде", match.getGuestTeam()
         );
 
         fillBetWithSinglePossibleOption(
-                element, periodsContainer.findByType(ContainerType.FIRST_PERIOD).findByType(ContainerType.BOTH_TEAMS_TOTAL_OVER),
+                element, periodsContainer.findByType(FIRST_PERIOD).findByType(BOTH_TEAMS_TOTAL_OVER),
                 asList(
-                        new BetEntry("обе команды забьют в первом периоде", ContainerType.OVER_0_5)
+                        new BetEntry("обе команды забьют в первом периоде", OVER_0_5)
                 )
         );
 
 
         fillBetWithPossibleOptionsForTeamPeriodTotal(
-                element, periodsContainer.findByType(ContainerType.SECOND_PERIOD).findByType(ContainerType.TEAM_TOTAL_OVER),
+                element, periodsContainer.findByType(SECOND_PERIOD).findByType(TEAM_TOTAL_OVER),
                 "во втором периоде", match.getHomeTeam()
         );
 
         fillBetWithPossibleOptionsForTeamPeriodTotal(
-                element, periodsContainer.findByType(ContainerType.SECOND_PERIOD).findByType(ContainerType.OPPOSING_TEAM_TOTAL_OVER),
+                element, periodsContainer.findByType(SECOND_PERIOD).findByType(OPPOSING_TEAM_TOTAL_OVER),
                 "во втором периоде", match.getGuestTeam()
         );
 
         fillBetWithSinglePossibleOption(
-                element, periodsContainer.findByType(ContainerType.SECOND_PERIOD).findByType(ContainerType.BOTH_TEAMS_TOTAL_OVER),
+                element, periodsContainer.findByType(SECOND_PERIOD).findByType(BOTH_TEAMS_TOTAL_OVER),
                 asList(
-                        new BetEntry("обе команды забьют во втором периоде", ContainerType.OVER_0_5)
+                        new BetEntry("обе команды забьют во втором периоде", OVER_0_5)
                 )
         );
 
 
         fillBetWithPossibleOptionsForTeamPeriodTotal(
-                element, periodsContainer.findByType(ContainerType.THIRD_PERIOD).findByType(ContainerType.TEAM_TOTAL_OVER),
+                element, periodsContainer.findByType(THIRD_PERIOD).findByType(TEAM_TOTAL_OVER),
                 "в третьем периоде", match.getHomeTeam()
         );
 
         fillBetWithPossibleOptionsForTeamPeriodTotal(
-                element, periodsContainer.findByType(ContainerType.THIRD_PERIOD).findByType(ContainerType.OPPOSING_TEAM_TOTAL_OVER),
+                element, periodsContainer.findByType(THIRD_PERIOD).findByType(OPPOSING_TEAM_TOTAL_OVER),
                 "в третьем периоде", match.getGuestTeam()
         );
 
         fillBetWithSinglePossibleOption(
-                element, periodsContainer.findByType(ContainerType.THIRD_PERIOD).findByType(ContainerType.BOTH_TEAMS_TOTAL_OVER),
+                element, periodsContainer.findByType(THIRD_PERIOD).findByType(BOTH_TEAMS_TOTAL_OVER),
                 asList(
-                        new BetEntry("обе команды забьют в третьем периоде", ContainerType.OVER_0_5)
+                        new BetEntry("обе команды забьют в третьем периоде", OVER_0_5)
                 )
         );
     }
@@ -666,9 +666,9 @@ public class HockeyCoeffsMatchParser {
         fillBetWithSinglePossibleOption(
                 element, container,
                 asList(
-                        new BetEntry("победа любой команды в 1 шайбу", ContainerType.DIFF_1),
-                        new BetEntry("победа любой команды в 2 шайбы", ContainerType.DIFF_2),
-                        new BetEntry("победа любой команды в 3 или более шайбы", ContainerType.DIFF_3_OR_MORE)
+                        new BetEntry("победа любой команды в 1 шайбу", DIFF_1),
+                        new BetEntry("победа любой команды в 2 шайбы", DIFF_2),
+                        new BetEntry("победа любой команды в 3 или более шайбы", DIFF_3_OR_MORE)
                 )
         );
     }
@@ -679,15 +679,15 @@ public class HockeyCoeffsMatchParser {
         Element td = goalsBlock.select("td>i:containsOwn(Обе забьют)").first().parent();
         List<Node> childNodes = td.childNodes();
 
-        CoeffContainer firstGoalBefore = container.findByType(ContainerType.FIRST_GOAL_BEFORE);
+        CoeffContainer firstGoalBefore = container.findByType(FIRST_GOAL_BEFORE);
         CoeffContainer under9 = firstGoalBefore.findByType(UNDER_9);
-        CoeffContainer under10 = firstGoalBefore.findByType(ContainerType.UNDER_10);
-        CoeffContainer under11 = firstGoalBefore.findByType(ContainerType.UNDER_11);
-        CoeffContainer under12 = firstGoalBefore.findByType(ContainerType.UNDER_12);
+        CoeffContainer under10 = firstGoalBefore.findByType(UNDER_10);
+        CoeffContainer under11 = firstGoalBefore.findByType(UNDER_11);
+        CoeffContainer under12 = firstGoalBefore.findByType(UNDER_12);
 
-        CoeffContainer lastGoalAfter = container.findByType(ContainerType.LAST_GOAL_AFTER);
+        CoeffContainer lastGoalAfter = container.findByType(LAST_GOAL_AFTER);
         CoeffContainer over54 = lastGoalAfter.findByType(OVER_54);
-        CoeffContainer over55 = lastGoalAfter.findByType(ContainerType.OVER_55);
+        CoeffContainer over55 = lastGoalAfter.findByType(OVER_55);
 
 
         for (int i = 1; i < childNodes.size(); i++) {
@@ -716,8 +716,8 @@ public class HockeyCoeffsMatchParser {
         fillBetWithPossibleOptionsForTeam(
                 element, container,
                 asList(
-                        new BetEntry("победит и тотал больше 4.5", ContainerType.OVER_4_5),
-                        new BetEntry("победит и тотал больше 5.5", ContainerType.OVER_5_5)
+                        new BetEntry("победит и тотал больше 4.5", OVER_4_5),
+                        new BetEntry("победит и тотал больше 5.5", OVER_5_5)
                 ), team
         );
     }
@@ -727,8 +727,8 @@ public class HockeyCoeffsMatchParser {
         fillBetWithPossibleOptionsForTeam(
                 element, container,
                 asList(
-                        new BetEntry("победит и тотал меньше 4.5", ContainerType.UNDER_4_5),
-                        new BetEntry("победит и тотал меньше 5.5", ContainerType.UNDER_5_5)
+                        new BetEntry("победит и тотал меньше 4.5", UNDER_4_5),
+                        new BetEntry("победит и тотал меньше 5.5", UNDER_5_5)
                 ), team
         );
     }
@@ -737,8 +737,8 @@ public class HockeyCoeffsMatchParser {
         fillBetWithPossibleOptionsForTeam(
                 element, container,
                 asList(
-                        new BetEntry("не проиграет и тотал больше 4.5", ContainerType.OVER_4_5),
-                        new BetEntry("не проиграет и тотал больше 5.5", ContainerType.OVER_5_5)
+                        new BetEntry("не проиграет и тотал больше 4.5", OVER_4_5),
+                        new BetEntry("не проиграет и тотал больше 5.5", OVER_5_5)
                 ), team
         );
     }
@@ -747,8 +747,8 @@ public class HockeyCoeffsMatchParser {
         fillBetWithPossibleOptionsForTeam(
                 element, container,
                 asList(
-                        new BetEntry("не проиграет и тотал меньше 4.5", ContainerType.UNDER_4_5),
-                        new BetEntry("не проиграет и тотал меньше 5.5", ContainerType.UNDER_5_5)
+                        new BetEntry("не проиграет и тотал меньше 4.5", UNDER_4_5),
+                        new BetEntry("не проиграет и тотал меньше 5.5", UNDER_5_5)
                 ), team
         );
     }
@@ -758,7 +758,7 @@ public class HockeyCoeffsMatchParser {
         fillBetWithSinglePossibleOption(
                 element, container,
                 asList(
-                        new BetEntry("Тотал самого нерезультативного периода больше 0,5", ContainerType.OVER_0_5)
+                        new BetEntry("Тотал самого нерезультативного периода больше 0,5", OVER_0_5)
                 )
         );
 
@@ -768,7 +768,7 @@ public class HockeyCoeffsMatchParser {
 
         fillBetWithPossibleOptionsForTeam(
                 element, container,
-                asList(new BetEntry("забьет в каждом периоде:", ContainerType.OVER_0_5)), team
+                asList(new BetEntry("забьет в каждом периоде:", OVER_0_5)), team
         );
 
     }
@@ -779,8 +779,8 @@ public class HockeyCoeffsMatchParser {
         fillBetWithSinglePossibleOption(
                 element, container,
                 asList(
-                        new BetEntry("каждый период меньше 2,5", ContainerType.UNDER_2_5),
-                        new BetEntry("каждый период меньше 3,5", ContainerType.UNDER_3_5)
+                        new BetEntry("каждый период меньше 2,5", UNDER_2_5),
+                        new BetEntry("каждый период меньше 3,5", UNDER_3_5)
                 )
         );
 
@@ -790,8 +790,8 @@ public class HockeyCoeffsMatchParser {
         fillBetWithPossibleOptionsForTeam(
                 element, container,
                 asList(
-                        new BetEntry("выиграет хотя бы один период", ContainerType.NUMBER_1),
-                        new BetEntry("выиграет хотя бы два периода", ContainerType.NUMBER_2)
+                        new BetEntry("выиграет хотя бы один период", NUMBER_1),
+                        new BetEntry("выиграет хотя бы два периода", NUMBER_2)
                 ), team
         );
     }
@@ -801,8 +801,8 @@ public class HockeyCoeffsMatchParser {
         fillBetWithSinglePossibleOption(
                 element, container,
                 asList(
-                        new BetEntry("Ничья хотя бы в одном периоде", ContainerType.NUMBER_1),
-                        new BetEntry("Ничья хотя бы в двух периодах", ContainerType.NUMBER_2)
+                        new BetEntry("Ничья хотя бы в одном периоде", NUMBER_1),
+                        new BetEntry("Ничья хотя бы в двух периодах", NUMBER_2)
                 )
         );
 
@@ -813,8 +813,8 @@ public class HockeyCoeffsMatchParser {
         fillBetWithSinglePossibleOption(
                 element, container,
                 asList(
-                        new BetEntry("Тотал самого результативного периода больше 2,5", ContainerType.OVER_2_5),
-                        new BetEntry("Тотал самого результативного периода больше 3,5", ContainerType.OVER_3_5)
+                        new BetEntry("Тотал самого результативного периода больше 2,5", OVER_2_5),
+                        new BetEntry("Тотал самого результативного периода больше 3,5", OVER_3_5)
                 )
         );
 
@@ -834,7 +834,7 @@ public class HockeyCoeffsMatchParser {
         fillBetWithSinglePossibleOption(
                 element, container,
                 asList(
-                        new BetEntry("волевая победа в матче", ContainerType.ANY_COMEBACK)
+                        new BetEntry("волевая победа в матче", ANY_COMEBACK)
                 )
         );
 
