@@ -24,8 +24,9 @@ import java.io.File;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.List;
+
+import static java.util.Arrays.asList;
 
 
 @Service
@@ -117,15 +118,8 @@ public class HockeyCoeffsMatchParser {
             CoeffContainer totalUnderContainer = totalContainer.findByType(ContainerType.TOTAL_UNDER);
             CoeffContainer under4AndHalf = totalUnderContainer.findByType(ContainerType.UNDER_4_5);
             CoeffContainer under5AndHalf = totalUnderContainer.findByType(ContainerType.UNDER_5_5);
-            if (totalOverText.contains("4.5")) {
-                over4AndHalf.getCoeff().set(Double.valueOf(totalOverCoeff));
-                under4AndHalf.getCoeff().set(Double.valueOf(totalUnderCoeff));
-            }
-
-            if (totalOverText.contains("5.5")) {
-                over5AndHalf.getCoeff().set(Double.valueOf(totalOverCoeff));
-                under5AndHalf.getCoeff().set(Double.valueOf(totalUnderCoeff));
-            }
+            checkIfContainsAndSetOverAndUnder(totalOverText, over4AndHalf, under4AndHalf, "4.5", Double.valueOf(totalOverCoeff), Double.valueOf(totalUnderCoeff));
+            checkIfContainsAndSetOverAndUnder(totalOverText, over5AndHalf, under5AndHalf, "5.5", Double.valueOf(totalOverCoeff), Double.valueOf(totalUnderCoeff));
         }
         if (tds.get(15) != null) {
             String totalOverText = tds.get(14).select("b").first().text();
@@ -138,15 +132,12 @@ public class HockeyCoeffsMatchParser {
             CoeffContainer totalUnderContainer = totalContainer.findByType(ContainerType.TEAM_TOTAL_UNDER);
             CoeffContainer under2AndHalf = totalUnderContainer.findByType(ContainerType.UNDER_2_5);
             CoeffContainer under3AndHalf = totalUnderContainer.findByType(ContainerType.UNDER_3_5);
-            if (totalOverText.contains("2.5") || totalOverText.contains("2.0")) {
-                over2AndHalf.getCoeff().set(Double.valueOf(totalOverCoeff));
-                under2AndHalf.getCoeff().set(Double.valueOf(totalUnderCoeff));
-            }
 
-            if (totalOverText.contains("3.5") || totalOverText.contains("3.0")) {
-                over3AndHalf.getCoeff().set(Double.valueOf(totalOverCoeff));
-                under3AndHalf.getCoeff().set(Double.valueOf(totalUnderCoeff));
-            }
+            checkIfContainsAndSetOverAndUnder(totalOverText, over2AndHalf, under2AndHalf, asList("2.5", "2.0"),
+                    Double.valueOf(totalOverCoeff), Double.valueOf(totalUnderCoeff));
+
+            checkIfContainsAndSetOverAndUnder(totalOverText, over3AndHalf, under3AndHalf, asList("3.5", "3.0"),
+                    Double.valueOf(totalOverCoeff), Double.valueOf(totalUnderCoeff));
         }
 
         if (tds.get(15) != null) {
@@ -160,17 +151,49 @@ public class HockeyCoeffsMatchParser {
             CoeffContainer totalUnderContainer = totalContainer.findByType(ContainerType.OPPOSING_TEAM_TOTAL_UNDER);
             CoeffContainer under2AndHalf = totalUnderContainer.findByType(ContainerType.UNDER_2_5);
             CoeffContainer under3AndHalf = totalUnderContainer.findByType(ContainerType.UNDER_3_5);
-            if (totalOverText.contains("2.5") || totalOverText.contains("2.0")) {
-                over2AndHalf.getCoeff().set(Double.valueOf(totalOverCoeff));
-                under2AndHalf.getCoeff().set(Double.valueOf(totalUnderCoeff));
-            }
 
-            if (totalOverText.contains("3.5") || totalOverText.contains("3.0")) {
-                over3AndHalf.getCoeff().set(Double.valueOf(totalOverCoeff));
-                under3AndHalf.getCoeff().set(Double.valueOf(totalUnderCoeff));
+            checkIfContainsAndSetOverAndUnder(totalOverText, over2AndHalf, under2AndHalf, asList("2.5", "2.0"),
+                    Double.valueOf(totalOverCoeff), Double.valueOf(totalUnderCoeff));
+            checkIfContainsAndSetOverAndUnder(totalOverText, over3AndHalf, under3AndHalf, asList("3.5", "3.0"),
+                    Double.valueOf(totalOverCoeff), Double.valueOf(totalUnderCoeff));
+        }
+    }
+
+    private void checkIfContainsAndSetOverAndUnder(String text, CoeffContainer overContainer,
+                                                   CoeffContainer underContainer, List<String> options, Double over, Double under) {
+        for (String option : options) {
+            checkIfContainsAndSetValue(text, overContainer, option, over);
+            checkIfContainsAndSetValue(text, underContainer, option, under);
+        }
+
+    }
+
+    private void checkIfContainsAndSetOverAndUnder(String text, CoeffContainer overContainer,
+                                                   CoeffContainer underContainer, String option, Double over, Double under) {
+        checkIfContainsAndSetOverAndUnder(text, overContainer, underContainer, asList(option), over, under);
+    }
+
+    private void checkIfContainsAndSetValue(String text, CoeffContainer container, String option, Double coeff) {
+        if (text.contains(option)) {
+            container.getCoeff().set(coeff);
+        }
+    }
+
+    private void checkIfContainsAndSetPosAndNeg(String text, CoeffContainer container,
+                                                String option, Double posCoeff, Double negCoeff) {
+        checkIfContainsAndSetPosAndNeg(text, container, asList(option), posCoeff, negCoeff);
+    }
+
+    private void checkIfContainsAndSetPosAndNeg(String text, CoeffContainer container,
+                                                List<String> options, Double posCoeff, Double negCoeff) {
+        for (String option : options) {
+            if (text.contains(option)) {
+                container.getCoeff().set(posCoeff, negCoeff);
             }
         }
     }
+
+
 
     // which placed on parimatch main screen
     private void fillShotsSpecialBets(Element element, CoeffContainer container) {
@@ -190,36 +213,18 @@ public class HockeyCoeffsMatchParser {
             CoeffContainer minus4AndHalf = handicapBlock.findByType(ContainerType.MINUS_4_5);
             CoeffContainer minus5AndHalf = handicapBlock.findByType(ContainerType.MINUS_5_5);
 
-            if (handicapText.contains("+1.5")) {
-                plus1AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
-            }
-            if (handicapText.contains("+2.5")) {
-                plus2AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
-            }
-            if (handicapText.contains("+3.5")) {
-                plus3AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
-            }
-            if (handicapText.contains("+4.5")) {
-                plus4AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
-            }
-            if (handicapText.contains("+5.5")) {
-                plus5AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
-            }
-            if (handicapText.contains("–1.5")) {
-                minus1AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
-            }
-            if (handicapText.contains("–2.5")) {
-                minus2AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
-            }
-            if (handicapText.contains("–3.5")) {
-                minus3AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
-            }
-            if (handicapText.contains("–4.5")) {
-                minus4AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
-            }
-            if (handicapText.contains("–5.5")) {
-                minus5AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
-            }
+            Double value = Double.valueOf(handicapCoeff);
+            checkIfContainsAndSetValue(handicapText, plus1AndHalf, "+1.5", value);
+            checkIfContainsAndSetValue(handicapText, plus2AndHalf, "+2.5", value);
+            checkIfContainsAndSetValue(handicapText, plus3AndHalf, "+3.5", value);
+            checkIfContainsAndSetValue(handicapText, plus4AndHalf, "+4.5", value);
+            checkIfContainsAndSetValue(handicapText, plus5AndHalf, "+5.5", value);
+
+            checkIfContainsAndSetValue(handicapText, minus1AndHalf, "-1.5", value);
+            checkIfContainsAndSetValue(handicapText, minus2AndHalf, "-2.5", value);
+            checkIfContainsAndSetValue(handicapText, minus3AndHalf, "-3.5", value);
+            checkIfContainsAndSetValue(handicapText, minus4AndHalf, "-4.5", value);
+            checkIfContainsAndSetValue(handicapText, minus5AndHalf, "-5.5", value);
         }
 
         if (tds.get(3) != null) {
@@ -237,36 +242,18 @@ public class HockeyCoeffsMatchParser {
             CoeffContainer minus4AndHalf = handicapBlock.findByType(ContainerType.MINUS_4_5);
             CoeffContainer minus5AndHalf = handicapBlock.findByType(ContainerType.MINUS_5_5);
 
-            if (handicapText.contains("+1.5")) {
-                plus1AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
-            }
-            if (handicapText.contains("+2.5")) {
-                plus2AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
-            }
-            if (handicapText.contains("+3.5")) {
-                plus3AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
-            }
-            if (handicapText.contains("+4.5")) {
-                plus4AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
-            }
-            if (handicapText.contains("+5.5")) {
-                plus5AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
-            }
-            if (handicapText.contains("–1.5")) {
-                minus1AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
-            }
-            if (handicapText.contains("–2.5")) {
-                minus2AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
-            }
-            if (handicapText.contains("–3.5")) {
-                minus3AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
-            }
-            if (handicapText.contains("–4.5")) {
-                minus4AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
-            }
-            if (handicapText.contains("–5.5")) {
-                minus5AndHalf.getCoeff().set(Double.valueOf(handicapCoeff));
-            }
+            Double value = Double.valueOf(handicapCoeff);
+            checkIfContainsAndSetValue(handicapText, plus1AndHalf, "+1.5", value);
+            checkIfContainsAndSetValue(handicapText, plus2AndHalf, "+2.5", value);
+            checkIfContainsAndSetValue(handicapText, plus3AndHalf, "+3.5", value);
+            checkIfContainsAndSetValue(handicapText, plus4AndHalf, "+4.5", value);
+            checkIfContainsAndSetValue(handicapText, plus5AndHalf, "+5.5", value);
+
+            checkIfContainsAndSetValue(handicapText, minus1AndHalf, "-1.5", value);
+            checkIfContainsAndSetValue(handicapText, minus2AndHalf, "-2.5", value);
+            checkIfContainsAndSetValue(handicapText, minus3AndHalf, "-3.5", value);
+            checkIfContainsAndSetValue(handicapText, minus4AndHalf, "-4.5", value);
+            checkIfContainsAndSetValue(handicapText, minus5AndHalf, "-5.5", value);
         }
 
         if (tds.get(5) != null) {
@@ -282,21 +269,12 @@ public class HockeyCoeffsMatchParser {
 
             Double overValue = Double.valueOf(totalOverCoeff);
             Double underValue = Double.valueOf(totalUnderCoeff);
-            if (totalText.contains("59.5")) {
-                over59AndHalf.getCoeff().set(overValue, underValue);
-            }
-            if (totalText.contains("60.5")) {
-                over60AndHalf.getCoeff().set(overValue, underValue);
-            }
-            if (totalText.contains("61.5")) {
-                over61AndHalf.getCoeff().set(overValue, underValue);
-            }
-            if (totalText.contains("62.5")) {
-                over62AndHalf.getCoeff().set(overValue, underValue);
-            }
-            if (totalText.contains("63.5")) {
-                over63AndHalf.getCoeff().set(overValue, underValue);
-            }
+
+            checkIfContainsAndSetPosAndNeg(totalText, over59AndHalf, "59.5", overValue, underValue);
+            checkIfContainsAndSetPosAndNeg(totalText, over60AndHalf, "60.5", overValue, underValue);
+            checkIfContainsAndSetPosAndNeg(totalText, over61AndHalf, "61.5", overValue, underValue);
+            checkIfContainsAndSetPosAndNeg(totalText, over62AndHalf, "62.5", overValue, underValue);
+            checkIfContainsAndSetPosAndNeg(totalText, over63AndHalf, "63.5", overValue, underValue);
 
         }
 
@@ -323,16 +301,10 @@ public class HockeyCoeffsMatchParser {
 
             Double overValue = Double.valueOf(totalOverCoeff);
             Double underValue = Double.valueOf(totalUnderCoeff);
-            if (totalText.contains("28.5") || totalText.contains("28.0") || totalText.contains("29.0")) {
-                over28AndHalf.getCoeff().set(overValue, underValue);
-            }
-            if (totalText.contains("30.5") || totalText.contains("30.0") || totalText.contains("31.0")) {
-                over30AndHalf.getCoeff().set(overValue, underValue);
-            }
-            if (totalText.contains("32.5") || totalText.contains("32.0") || totalText.contains("33.0") || totalText.contains("34.0")) {
-                over32AndHalf.getCoeff().set(overValue, underValue);
-            }
 
+            checkIfContainsAndSetPosAndNeg(totalText, over28AndHalf, asList("28.5", "28.0", "29.0"), overValue, underValue);
+            checkIfContainsAndSetPosAndNeg(totalText, over30AndHalf, asList("30.5", "30.0", "31.0"), overValue, underValue);
+            checkIfContainsAndSetPosAndNeg(totalText, over32AndHalf, asList("32.5", "32.0", "33.0", "34.0"), overValue, underValue);
         }
 
         if (tds.get(14) != null) {
@@ -346,15 +318,9 @@ public class HockeyCoeffsMatchParser {
 
             Double overValue = Double.valueOf(totalOverCoeff);
             Double underValue = Double.valueOf(totalUnderCoeff);
-            if (totalText.contains("28.5") || totalText.contains("28.0") || totalText.contains("29.0")) {
-                over28AndHalf.getCoeff().set(overValue, underValue);
-            }
-            if (totalText.contains("30.5") || totalText.contains("30.0") || totalText.contains("31.0")) {
-                over30AndHalf.getCoeff().set(overValue, underValue);
-            }
-            if (totalText.contains("32.5") || totalText.contains("33.0") || totalText.contains("34.0")) {
-                over32AndHalf.getCoeff().set(overValue, underValue);
-            }
+            checkIfContainsAndSetPosAndNeg(totalText, over28AndHalf, asList("28.5", "28.0", "29.0"), overValue, underValue);
+            checkIfContainsAndSetPosAndNeg(totalText, over30AndHalf, asList("30.5", "30.0", "31.0"), overValue, underValue);
+            checkIfContainsAndSetPosAndNeg(totalText, over32AndHalf, asList("32.5", "32.0", "33.0", "34.0"), overValue, underValue);
 
         }
     }
@@ -393,21 +359,11 @@ public class HockeyCoeffsMatchParser {
                 underValue = Double.valueOf(totalunderCoeff);
             }
 
-            if (text.contains("59.5")) {
-                over59AndHalf.getCoeff().set(overValue, underValue);
-            }
-            if (text.contains("60.5")) {
-                over60AndHalf.getCoeff().set(overValue, underValue);
-            }
-            if (text.contains("61.5")) {
-                over61AndHalf.getCoeff().set(overValue, underValue);
-            }
-            if (text.contains("62.5")) {
-                over62AndHalf.getCoeff().set(overValue, underValue);
-            }
-            if (text.contains("63.5")) {
-                over63AndHalf.getCoeff().set(overValue, underValue);
-            }
+            checkIfContainsAndSetPosAndNeg(text, over59AndHalf, "59.5", overValue, underValue);
+            checkIfContainsAndSetPosAndNeg(text, over60AndHalf, "60.5", overValue, underValue);
+            checkIfContainsAndSetPosAndNeg(text, over61AndHalf, "61.5", overValue, underValue);
+            checkIfContainsAndSetPosAndNeg(text, over62AndHalf, "62.5", overValue, underValue);
+            checkIfContainsAndSetPosAndNeg(text, over63AndHalf, "63.5", overValue, underValue);
         }
     }
 
@@ -446,36 +402,17 @@ public class HockeyCoeffsMatchParser {
                 value = Double.valueOf(handicapCoeff);
             }
 
-            if (handicapText.contains("+1.5")) {
-                plus1AndHalf.getCoeff().set(Double.valueOf(value));
-            }
-            if (handicapText.contains("+2.5")) {
-                plus2AndHalf.getCoeff().set(Double.valueOf(value));
-            }
-            if (handicapText.contains("+3.5")) {
-                plus3AndHalf.getCoeff().set(Double.valueOf(value));
-            }
-            if (handicapText.contains("+4.5")) {
-                plus4AndHalf.getCoeff().set(Double.valueOf(value));
-            }
-            if (handicapText.contains("+5.5")) {
-                plus5AndHalf.getCoeff().set(Double.valueOf(value));
-            }
-            if (handicapText.contains("–1.5")) {
-                minus1AndHalf.getCoeff().set(Double.valueOf(value));
-            }
-            if (handicapText.contains("–2.5")) {
-                minus2AndHalf.getCoeff().set(Double.valueOf(value));
-            }
-            if (handicapText.contains("–3.5")) {
-                minus3AndHalf.getCoeff().set(Double.valueOf(value));
-            }
-            if (handicapText.contains("–4.5")) {
-                minus4AndHalf.getCoeff().set(Double.valueOf(value));
-            }
-            if (handicapText.contains("–5.5")) {
-                minus5AndHalf.getCoeff().set(Double.valueOf(value));
-            }
+            checkIfContainsAndSetValue(handicapText, plus1AndHalf, "+1.5", value);
+            checkIfContainsAndSetValue(handicapText, plus2AndHalf, "+2.5", value);
+            checkIfContainsAndSetValue(handicapText, plus3AndHalf, "+3.5", value);
+            checkIfContainsAndSetValue(handicapText, plus4AndHalf, "+4.5", value);
+            checkIfContainsAndSetValue(handicapText, plus5AndHalf, "+5.5", value);
+
+            checkIfContainsAndSetValue(handicapText, minus1AndHalf, "-1.5", value);
+            checkIfContainsAndSetValue(handicapText, minus2AndHalf, "-2.5", value);
+            checkIfContainsAndSetValue(handicapText, minus3AndHalf, "-3.5", value);
+            checkIfContainsAndSetValue(handicapText, minus4AndHalf, "-4.5", value);
+            checkIfContainsAndSetValue(handicapText, minus5AndHalf, "-5.5", value);
         }
     }
 
@@ -494,16 +431,10 @@ public class HockeyCoeffsMatchParser {
 
             Double overValue = Double.valueOf(totalOverCoeff);
             Double underValue = Double.valueOf(totalUnderCoeff);
-            if (totalText.contains("13.5") || totalText.contains("14.0")) {
-                over13AndHalf.getCoeff().set(overValue, underValue);
-            }
-            if (totalText.contains("14.5") || totalText.contains("15.0")) {
-                over14AndHalf.getCoeff().set(overValue, underValue);
-            }
-            if (totalText.contains("15.5") || totalText.contains("16.0")) {
-                over15AndHalf.getCoeff().set(overValue, underValue);
-            }
 
+            checkIfContainsAndSetPosAndNeg(totalText, over13AndHalf, asList("13.5", "14.0"), overValue, underValue);
+            checkIfContainsAndSetPosAndNeg(totalText, over14AndHalf, asList("14.5", "15.0"), overValue, underValue);
+            checkIfContainsAndSetPosAndNeg(totalText, over15AndHalf, asList("15.5", "16.0"), overValue, underValue);
         }
 
         if (tds.get(8) != null) {
@@ -529,16 +460,10 @@ public class HockeyCoeffsMatchParser {
 
             Double overValue = Double.valueOf(totalOverCoeff);
             Double underValue = Double.valueOf(totalUnderCoeff);
-            if (totalText.contains("6.5") || totalText.contains("7.0")) {
-                over6AndHalf.getCoeff().set(overValue, underValue);
-            }
-            if (totalText.contains("7.5") || totalText.contains("8.0")) {
-                over7AndHalf.getCoeff().set(overValue, underValue);
-            }
-            if (totalText.contains("8.5") || totalText.contains("9.0")) {
-                over8AndHalf.getCoeff().set(overValue, underValue);
-            }
 
+            checkIfContainsAndSetPosAndNeg(totalText, over6AndHalf, asList("6.5", "7.0"), overValue, underValue);
+            checkIfContainsAndSetPosAndNeg(totalText, over7AndHalf, asList("7.5", "8.0"), overValue, underValue);
+            checkIfContainsAndSetPosAndNeg(totalText, over8AndHalf, asList("8.5", "9.0"), overValue, underValue);
         }
 
         if (tds.get(14) != null) {
@@ -552,15 +477,9 @@ public class HockeyCoeffsMatchParser {
 
             Double overValue = Double.valueOf(totalOverCoeff);
             Double underValue = Double.valueOf(totalUnderCoeff);
-            if (totalText.contains("6.5") || totalText.contains("7.0")) {
-                over6AndHalf.getCoeff().set(overValue, underValue);
-            }
-            if (totalText.contains("7.5") || totalText.contains("8.0")) {
-                over7AndHalf.getCoeff().set(overValue, underValue);
-            }
-            if (totalText.contains("8.5") || totalText.contains("9.0")) {
-                over8AndHalf.getCoeff().set(overValue, underValue);
-            }
+            checkIfContainsAndSetPosAndNeg(totalText, over6AndHalf, asList("6.5", "7.0"), overValue, underValue);
+            checkIfContainsAndSetPosAndNeg(totalText, over7AndHalf, asList("7.5", "8.0"), overValue, underValue);
+            checkIfContainsAndSetPosAndNeg(totalText, over8AndHalf, asList("8.5", "9.0"), overValue, underValue);
 
         }
     }
@@ -591,15 +510,10 @@ public class HockeyCoeffsMatchParser {
                 continue;
             }
             String text = ((TextNode) child).text();
-            if (text.contains("(4.5) больше ")) {
-                String totalOver4AndHalfCoeff = childNodes.get(i + 1).childNode(0).childNode(0).outerHtml();
-                over4AndHalf.getCoeff().set(Double.valueOf(totalOver4AndHalfCoeff));
-            }
+            Double value = Double.valueOf(childNodes.get(i + 1).childNode(0).childNode(0).outerHtml());
 
-            if (text.contains("(5.5) больше ")) {
-                String totalOver5AndHalfCoeff = childNodes.get(i + 1).childNode(0).childNode(0).outerHtml();
-                over5AndHalf.getCoeff().set(Double.valueOf(totalOver5AndHalfCoeff));
-            }
+            checkIfContainsAndSetValue(text, over4AndHalf, "(4.5) больше", value);
+            checkIfContainsAndSetValue(text, over5AndHalf, "(5.5) больше", value);
         }
     }
 
@@ -618,22 +532,17 @@ public class HockeyCoeffsMatchParser {
                 continue;
             }
             String text = ((TextNode) child).text();
-            if (text.contains("(5.5) больше ")) {
-                String totalUnder5AndHalfCoeff = childNodes.get(i + 3).childNode(0).childNode(0).outerHtml();
-                under5AndHalf.getCoeff().set(Double.valueOf(totalUnder5AndHalfCoeff));
-            }
+            Double value = Double.valueOf(childNodes.get(i + 3).childNode(0).childNode(0).outerHtml());
 
-            if (text.contains("(6.5) больше ")) {
-                String totalUnder6AndHalfCoeff = childNodes.get(i + 3).childNode(0).childNode(0).outerHtml();
-                under6AndHalf.getCoeff().set(Double.valueOf(totalUnder6AndHalfCoeff));
-            }
+            checkIfContainsAndSetValue(text, under5AndHalf, "(5.5) больше", value);
+            checkIfContainsAndSetValue(text, under6AndHalf, "(6.5) больше", value);
         }
     }
 
     private void fillBothTeamsTotalOverBlock(Element element, CoeffContainer container) {
         fillBetWithSinglePossibleOption(
                 element, container,
-                Arrays.asList(
+                asList(
                         new BetEntry("каждая команда забьет больше 1,5", ContainerType.OVER_1_5),
                         new BetEntry("каждая команда забьет больше 2,5", ContainerType.OVER_2_5)
                 )
@@ -643,7 +552,7 @@ public class HockeyCoeffsMatchParser {
     private void fillBothTeamsTotalUnderBlock(Element element, CoeffContainer container) {
         fillBetWithSinglePossibleOption(
                 element, container,
-                Arrays.asList(
+                asList(
                         new BetEntry("каждая команда забьет меньше 2,5", ContainerType.UNDER_2_5),
                         new BetEntry("каждая команда забьет меньше 3,5", ContainerType.UNDER_3_5)
                 )
@@ -666,15 +575,10 @@ public class HockeyCoeffsMatchParser {
                 continue;
             }
             String text = ((TextNode) child).text();
-            if (text.contains("(2.5) больше")) {
-                String totalOver2AndHalfCoeff = childNodes.get(i + 1).childNode(0).childNode(0).outerHtml();
-                over2AndHalf.getCoeff().set(Double.valueOf(totalOver2AndHalfCoeff));
-            }
+            Double value = Double.valueOf(childNodes.get(i + 1).childNode(0).childNode(0).outerHtml());
 
-            if (text.contains("(3.5) больше")) {
-                String totalOver3AndHalfCoeff = childNodes.get(i + 1).childNode(0).childNode(0).outerHtml();
-                over3AndHalf.getCoeff().set(Double.valueOf(totalOver3AndHalfCoeff));
-            }
+            checkIfContainsAndSetValue(text, over2AndHalf, "(2.5) больше", value);
+            checkIfContainsAndSetValue(text, over3AndHalf, "(3.5) больше", value);
         }
     }
 
@@ -694,15 +598,10 @@ public class HockeyCoeffsMatchParser {
                 continue;
             }
             String text = ((TextNode) child).text();
-            if (text.contains("(2.5) больше")) {
-                String underOver2AndHalfCoeff = childNodes.get(i + 3).childNode(0).childNode(0).outerHtml();
-                under2AndHalf.getCoeff().set(Double.valueOf(underOver2AndHalfCoeff));
-            }
+            Double value = Double.valueOf(childNodes.get(i + 3).childNode(0).childNode(0).outerHtml());
 
-            if (text.contains("(3.5) больше")) {
-                String underOver3AndHalfCoeff = childNodes.get(i + 3).childNode(0).childNode(0).outerHtml();
-                under3AndHalf.getCoeff().set(Double.valueOf(underOver3AndHalfCoeff));
-            }
+            checkIfContainsAndSetValue(text, under2AndHalf, "(2.5) больше", value);
+            checkIfContainsAndSetValue(text, under3AndHalf, "(3.5) больше", value);
         }
     }
 
@@ -744,21 +643,21 @@ public class HockeyCoeffsMatchParser {
 
         fillBetWithPossibleOptionsForTeamPeriodTotal(
                 element, periodsContainer.findByType(ContainerType.FIRST_PERIOD).findByType(ContainerType.TEAM_TOTAL_OVER),
-                Arrays.asList(
+                asList(
                         new BetEntry("в первом периоде", ContainerType.OVER_0_5)
                 ), match.getHomeTeam()
         );
 
         fillBetWithPossibleOptionsForTeamPeriodTotal(
                 element, periodsContainer.findByType(ContainerType.FIRST_PERIOD).findByType(ContainerType.OPPOSING_TEAM_TOTAL_OVER),
-                Arrays.asList(
+                asList(
                         new BetEntry("в первом периоде", ContainerType.OVER_0_5)
                 ), match.getGuestTeam()
         );
 
         fillBetWithSinglePossibleOption(
                 element, periodsContainer.findByType(ContainerType.FIRST_PERIOD).findByType(ContainerType.BOTH_TEAMS_TOTAL_OVER),
-                Arrays.asList(
+                asList(
                         new BetEntry("обе команды забьют в первом периоде", ContainerType.OVER_0_5)
                 )
         );
@@ -766,21 +665,21 @@ public class HockeyCoeffsMatchParser {
 
         fillBetWithPossibleOptionsForTeamPeriodTotal(
                 element, periodsContainer.findByType(ContainerType.SECOND_PERIOD).findByType(ContainerType.TEAM_TOTAL_OVER),
-                Arrays.asList(
+                asList(
                         new BetEntry("во втором периоде", ContainerType.OVER_0_5)
                 ), match.getHomeTeam()
         );
 
         fillBetWithPossibleOptionsForTeamPeriodTotal(
                 element, periodsContainer.findByType(ContainerType.SECOND_PERIOD).findByType(ContainerType.OPPOSING_TEAM_TOTAL_OVER),
-                Arrays.asList(
+                asList(
                         new BetEntry("во втором периоде", ContainerType.OVER_0_5)
                 ), match.getGuestTeam()
         );
 
         fillBetWithSinglePossibleOption(
                 element, periodsContainer.findByType(ContainerType.SECOND_PERIOD).findByType(ContainerType.BOTH_TEAMS_TOTAL_OVER),
-                Arrays.asList(
+                asList(
                         new BetEntry("обе команды забьют во втором периоде", ContainerType.OVER_0_5)
                 )
         );
@@ -788,21 +687,21 @@ public class HockeyCoeffsMatchParser {
 
         fillBetWithPossibleOptionsForTeamPeriodTotal(
                 element, periodsContainer.findByType(ContainerType.THIRD_PERIOD).findByType(ContainerType.TEAM_TOTAL_OVER),
-                Arrays.asList(
+                asList(
                         new BetEntry("в третьем периоде", ContainerType.OVER_0_5)
                 ), match.getHomeTeam()
         );
 
         fillBetWithPossibleOptionsForTeamPeriodTotal(
                 element, periodsContainer.findByType(ContainerType.THIRD_PERIOD).findByType(ContainerType.OPPOSING_TEAM_TOTAL_OVER),
-                Arrays.asList(
+                asList(
                         new BetEntry("в третьем периоде", ContainerType.OVER_0_5)
                 ), match.getGuestTeam()
         );
 
         fillBetWithSinglePossibleOption(
                 element, periodsContainer.findByType(ContainerType.THIRD_PERIOD).findByType(ContainerType.BOTH_TEAMS_TOTAL_OVER),
-                Arrays.asList(
+                asList(
                         new BetEntry("обе команды забьют в третьем периоде", ContainerType.OVER_0_5)
                 )
         );
@@ -812,7 +711,7 @@ public class HockeyCoeffsMatchParser {
     private void fillPeriodAnyWinAndDiffEqualsBlock(Element element, CoeffContainer container) {
         fillBetWithSinglePossibleOption(
                 element, container,
-                Arrays.asList(
+                asList(
                         new BetEntry("победа любой команды в 1 шайбу", ContainerType.DIFF_1),
                         new BetEntry("победа любой команды в 2 шайбы", ContainerType.DIFF_2),
                         new BetEntry("победа любой команды в 3 или более шайбы", ContainerType.DIFF_3_OR_MORE)
@@ -823,7 +722,7 @@ public class HockeyCoeffsMatchParser {
     private void fillTeamWinAndTotalOverBlock(Element element, CoeffContainer container, Team team) {
         fillBetWithPossibleOptionsForTeam(
                 element, container,
-                Arrays.asList(
+                asList(
                         new BetEntry("победит и тотал больше 4.5", ContainerType.OVER_4_5),
                         new BetEntry("победит и тотал больше 5.5", ContainerType.OVER_5_5)
                 ), team
@@ -834,7 +733,7 @@ public class HockeyCoeffsMatchParser {
     private void fillTeamWinAndTotalUnderBlock(Element element, CoeffContainer container, Team team) {
         fillBetWithPossibleOptionsForTeam(
                 element, container,
-                Arrays.asList(
+                asList(
                         new BetEntry("победит и тотал меньше 4.5", ContainerType.UNDER_4_5),
                         new BetEntry("победит и тотал меньше 5.5", ContainerType.UNDER_5_5)
                 ), team
@@ -844,7 +743,7 @@ public class HockeyCoeffsMatchParser {
     private void fillTeamNotLooseAndTotalOverBlock(Element element, CoeffContainer container, Team team) {
         fillBetWithPossibleOptionsForTeam(
                 element, container,
-                Arrays.asList(
+                asList(
                         new BetEntry("не проиграет и тотал больше 4.5", ContainerType.OVER_4_5),
                         new BetEntry("не проиграет и тотал больше 5.5", ContainerType.OVER_5_5)
                 ), team
@@ -854,7 +753,7 @@ public class HockeyCoeffsMatchParser {
     private void fillTeamNotLooseAndTotalUnderBlock(Element element, CoeffContainer container, Team team) {
         fillBetWithPossibleOptionsForTeam(
                 element, container,
-                Arrays.asList(
+                asList(
                         new BetEntry("не проиграет и тотал меньше 4.5", ContainerType.UNDER_4_5),
                         new BetEntry("не проиграет и тотал меньше 5.5", ContainerType.UNDER_5_5)
                 ), team
@@ -865,7 +764,7 @@ public class HockeyCoeffsMatchParser {
 
         fillBetWithSinglePossibleOption(
                 element, container,
-                Arrays.asList(
+                asList(
                         new BetEntry("Тотал самого нерезультативного периода больше 0,5", ContainerType.OVER_0_5)
                 )
         );
@@ -876,7 +775,7 @@ public class HockeyCoeffsMatchParser {
 
         fillBetWithPossibleOptionsForTeam(
                 element, container,
-                Arrays.asList(new BetEntry("забьет в каждом периоде:", ContainerType.OVER_0_5)), team
+                asList(new BetEntry("забьет в каждом периоде:", ContainerType.OVER_0_5)), team
         );
 
     }
@@ -886,7 +785,7 @@ public class HockeyCoeffsMatchParser {
 
         fillBetWithSinglePossibleOption(
                 element, container,
-                Arrays.asList(
+                asList(
                         new BetEntry("каждый период меньше 2,5", ContainerType.UNDER_2_5),
                         new BetEntry("каждый период меньше 3,5", ContainerType.UNDER_3_5)
                 )
@@ -897,7 +796,7 @@ public class HockeyCoeffsMatchParser {
     private void fillTeamWinAtLeastNPeriodsBlock(Element element, CoeffContainer container, Team team) {
         fillBetWithPossibleOptionsForTeam(
                 element, container,
-                Arrays.asList(
+                asList(
                         new BetEntry("выиграет хотя бы один период", ContainerType.NUMBER_1),
                         new BetEntry("выиграет хотя бы два периода", ContainerType.NUMBER_2)
                 ), team
@@ -908,7 +807,7 @@ public class HockeyCoeffsMatchParser {
 
         fillBetWithSinglePossibleOption(
                 element, container,
-                Arrays.asList(
+                asList(
                         new BetEntry("Ничья хотя бы в одном периоде", ContainerType.NUMBER_1),
                         new BetEntry("Ничья хотя бы в двух периодах", ContainerType.NUMBER_2)
                 )
@@ -920,7 +819,7 @@ public class HockeyCoeffsMatchParser {
 
         fillBetWithSinglePossibleOption(
                 element, container,
-                Arrays.asList(
+                asList(
                         new BetEntry("Тотал самого результативного периода больше 2,5", ContainerType.OVER_2_5),
                         new BetEntry("Тотал самого результативного периода больше 3,5", ContainerType.OVER_3_5)
                 )
@@ -931,7 +830,7 @@ public class HockeyCoeffsMatchParser {
     private void fillTeamFirstScoredAndWinBlock(Element element, CoeffContainer container, ContainerType type, Team team) {
         fillBetWithPossibleOptionsForTeam(
                 element, container,
-                Arrays.asList(
+                asList(
                         new BetEntry("забросит шайбу первой и выиграет", type)
                 ), team
         );
@@ -941,7 +840,7 @@ public class HockeyCoeffsMatchParser {
 
         fillBetWithSinglePossibleOption(
                 element, container,
-                Arrays.asList(
+                asList(
                         new BetEntry("волевая победа в матче", ContainerType.ANY_COMEBACK)
                 )
         );
