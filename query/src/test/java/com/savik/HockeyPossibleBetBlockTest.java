@@ -569,6 +569,58 @@ public class HockeyPossibleBetBlockTest {
     }
 
 
+    /*
+    * Handicap
+    * */
+
+
+    @Test
+    public void testTeamHandicap() {
+        PossibleBetContainer possibleBetsBlock = getPossibleBetsBlock();
+
+        PossibleBetContainer block = possibleBetsBlock.findByType(TEAM_HANDICAP);
+
+        PossibleBetContainer minus2AndHalf = block.findByType(MINUS_2_5);
+        assertEquals(20, minus2AndHalf.getFirstTeamPercentage());
+        assertEquals(20, minus2AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer minus1AndHalf = block.findByType(MINUS_1_5);
+        assertEquals(20, minus1AndHalf.getFirstTeamPercentage());
+        assertEquals(40, minus1AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer plus1AndHalf = block.findByType(PLUS_1_5);
+        assertEquals(100, plus1AndHalf.getFirstTeamPercentage());
+        assertEquals(60, plus1AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer plus2AndHalf = block.findByType(PLUS_2_5);
+        assertEquals(100, plus2AndHalf.getFirstTeamPercentage());
+        assertEquals(60, plus2AndHalf.getSecondTeamPercentage());
+    }
+
+
+    @Test
+    public void testOpposingTeamHandicap() {
+        PossibleBetContainer possibleBetsBlock = getPossibleBetsBlock();
+
+        PossibleBetContainer block = possibleBetsBlock.findByType(OPPOSING_TEAM_HANDICAP);
+
+        PossibleBetContainer minus2AndHalf = block.findByType(MINUS_2_5);
+        assertEquals(0, minus2AndHalf.getFirstTeamPercentage());
+        assertEquals(40, minus2AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer minus1AndHalf = block.findByType(MINUS_1_5);
+        assertEquals(0, minus1AndHalf.getFirstTeamPercentage());
+        assertEquals(40, minus1AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer plus1AndHalf = block.findByType(PLUS_1_5);
+        assertEquals(80, plus1AndHalf.getFirstTeamPercentage());
+        assertEquals(60, plus1AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer plus2AndHalf = block.findByType(PLUS_2_5);
+        assertEquals(80, plus2AndHalf.getFirstTeamPercentage());
+        assertEquals(80, plus2AndHalf.getSecondTeamPercentage());
+    }
+
 
     /*
     * STATS

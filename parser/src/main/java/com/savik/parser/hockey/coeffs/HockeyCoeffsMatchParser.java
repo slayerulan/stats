@@ -81,6 +81,7 @@ public class HockeyCoeffsMatchParser {
         fillSomeSpecialBets(tempHref.parent().parent(), coeffBlock);
         fillTotalBlock(matchCoeffsTbodyTag, coeffBlock.findByType(TOTAL), hockeyFutureMatch);
         fillOtherBlock(matchCoeffsTbodyTag, coeffBlock.findByType(OTHER), hockeyFutureMatch);
+        fillHandicapBlock(matchCoeffsTbodyTag, coeffBlock.findByType(HANDICAP), hockeyFutureMatch);
         fillPeriodsBlock(matchCoeffsTbodyTag, coeffBlock.findByType(PERIODS), hockeyFutureMatch);
 
 
@@ -309,11 +310,11 @@ public class HockeyCoeffsMatchParser {
         checkIfContainsAndSetValue(handicapText, plus4AndHalf, "+4.5", handicapCoeff);
         checkIfContainsAndSetValue(handicapText, plus5AndHalf, "+5.5", handicapCoeff);
 
-        checkIfContainsAndSetValue(handicapText, minus1AndHalf, "-1.5", handicapCoeff);
-        checkIfContainsAndSetValue(handicapText, minus2AndHalf, "-2.5", handicapCoeff);
-        checkIfContainsAndSetValue(handicapText, minus3AndHalf, "-3.5", handicapCoeff);
-        checkIfContainsAndSetValue(handicapText, minus4AndHalf, "-4.5", handicapCoeff);
-        checkIfContainsAndSetValue(handicapText, minus5AndHalf, "-5.5", handicapCoeff);
+        checkIfContainsAndSetValue(handicapText, minus1AndHalf, "–1.5", handicapCoeff);
+        checkIfContainsAndSetValue(handicapText, minus2AndHalf, "–2.5", handicapCoeff);
+        checkIfContainsAndSetValue(handicapText, minus3AndHalf, "–3.5", handicapCoeff);
+        checkIfContainsAndSetValue(handicapText, minus4AndHalf, "–4.5", handicapCoeff);
+        checkIfContainsAndSetValue(handicapText, minus5AndHalf, "–5.5", handicapCoeff);
     }
 
     private void fillShotsBets(Element element, CoeffContainer container, HockeyFutureMatch match) {
@@ -452,6 +453,36 @@ public class HockeyCoeffsMatchParser {
             checkIfContainsAndSetPosAndNeg(totalText, over7AndHalf, asList("7.5", "8.0"), overValue, underValue);
             checkIfContainsAndSetPosAndNeg(totalText, over8AndHalf, asList("8.5", "9.0"), overValue, underValue);
 
+        }
+    }
+
+    private void fillHandicapBlock(Element element, CoeffContainer handicapContainer, HockeyFutureMatch match) {
+        fillMatchesHandicap(element, handicapContainer.findByType(TEAM_HANDICAP), match.getHomeTeam());
+        fillMatchesHandicap(element, handicapContainer.findByType(OPPOSING_TEAM_HANDICAP), match.getGuestTeam());
+    }
+
+
+    private void fillMatchesHandicap(Element element, CoeffContainer container, HockeyTeam team) {
+        Element totalElementBlock = element.select("th:containsOwn(Дополнительные форы:)")
+                .first().parent().nextElementSibling();
+
+        Element temp = totalElementBlock.select(String.format("i:contains(%s)", team.getName())).first();
+        Element teamTotalBlock = temp.parent().nextElementSibling();
+        List<Node> childNodes = teamTotalBlock.childNodes();
+
+        for (int i = 0; i < childNodes.size(); i++) {
+            Node child = childNodes.get(i);
+            if (!(child instanceof TextNode)) {
+                continue;
+            }
+            String handicapText = ((TextNode) child).text();
+            Double value = null;
+            if (i < childNodes.size() - 2) {
+                String handicapCoeff = childNodes.get(i + 1).childNode(0).childNode(0).outerHtml();
+                value = Double.valueOf(handicapCoeff);
+            }
+
+            fillShotsHandicap(handicapText, value, container);
         }
     }
 
