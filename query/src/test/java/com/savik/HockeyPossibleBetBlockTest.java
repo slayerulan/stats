@@ -294,6 +294,14 @@ public class HockeyPossibleBetBlockTest {
         assertEquals(40, under10.getFirstTeamPercentage());
         assertEquals(60, under10.getSecondTeamPercentage());
 
+        PossibleBetContainer under11 = block.findByType(UNDER_11);
+        assertEquals(40, under11.getFirstTeamPercentage());
+        assertEquals(60, under11.getSecondTeamPercentage());
+
+        PossibleBetContainer under12 = block.findByType(UNDER_12);
+        assertEquals(40, under12.getFirstTeamPercentage());
+        assertEquals(60, under12.getSecondTeamPercentage());
+
     }
 
 
