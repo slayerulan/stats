@@ -103,6 +103,8 @@ public enum ContainerType {
     UNDER_7_5,
     UNDER_9,
     UNDER_10,
+    UNDER_11,
+    UNDER_12,
     UNDER_60_5,
     UNDER_61_5,
     UNDER_62_5,

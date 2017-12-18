@@ -9,9 +9,16 @@ import java.util.Arrays;
 public class CoeffOtherBlock extends CoeffContainer {
     public CoeffOtherBlock() {
         super(Arrays.asList(
-                new CoeffPeriodAnyWinAndDiffEqualsBlock(),
+                new CoeffTotalOverInAllPeriodsBlock(),
+                new CoeffTotalUnderInAllPeriodsBlock(),
+
+
                 new CoeffPeriodAnyWinAndTotalOverBlock(),
                 new CoeffPeriodAnyWinAndTotalUnderBlock(),
+                new CoeffPeriodAnyWinAndDiffEqualsBlock(),
+
+                new CoeffPeriodFirstGoalBeforeBlock(),
+                new CoeffPeriodLastGoalAfterBlock(),
 
                 new CoeffPeriodTeamWinAndTotalOverBlock(),
                 new CoeffPeriodTeamWinAndTotalUnderBlock(),
@@ -23,21 +30,16 @@ public class CoeffOtherBlock extends CoeffContainer {
                 new CoeffPeriodOpposingTeamNotLooseAndTotalOverBlock(),
                 new CoeffPeriodOpposingTeamNotLooseAndTotalUnderBlock(),
 
-                new CoeffTotalOverInAllPeriodsBlock(),
                 new CoeffTeamTotalOverInAllPeriodsBlock(),
                 new CoeffOpposingTeamTotalOverInAllPeriodsBlock(),
 
-                new CoeffTotalUnderInAllPeriodsBlock(),
-
                 new CoeffTeamWinAtLeastNPeriodsBlock(),
                 new CoeffOpposingTeamWinAtLeastNPeriodsBlock(),
-
                 new CoeffDrawAtLeastNPeriodsBlock(),
-                new CoeffMostEffectivePeriodTotalOverBlock(),
 
+                new CoeffMostEffectivePeriodTotalOverBlock(),
                 new CoeffTeamFirstScoredAndWinBlock(),
                 new CoeffOpposingTeamFirstScoredAndWinBlock(),
-
                 new CoeffAnyComebackMatchBlock()
         ), ContainerType.OTHER);
     }

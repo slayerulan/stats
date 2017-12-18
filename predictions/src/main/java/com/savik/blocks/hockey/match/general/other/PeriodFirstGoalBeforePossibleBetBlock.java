@@ -18,6 +18,14 @@ class PeriodFirstGoalBeforePossibleBetBlock extends PossibleBetContainer<HockeyM
                 new PossibleBetContainer<>(
                         new PeriodFirstGoalBeforePossibleBet<>(HockeyMatch.MATCH, 10),
                         ContainerType.UNDER_10
+                ),
+                new PossibleBetContainer<>(
+                        new PeriodFirstGoalBeforePossibleBet<>(HockeyMatch.MATCH, 11),
+                        ContainerType.UNDER_11
+                ),
+                new PossibleBetContainer<>(
+                        new PeriodFirstGoalBeforePossibleBet<>(HockeyMatch.MATCH, 12),
+                        ContainerType.UNDER_12
                 )
                 ), ContainerType.FIRST_GOAL_BEFORE
         );
