@@ -45,7 +45,9 @@ public class HockeyCoeffsMatchParser {
 
     public CoeffBlock parse(HockeyFutureMatch hockeyFutureMatch) {
 
-        Path statsPath = null, shotsPath = null, penaltiesPath = null;
+        Path statsPath = null;
+        Path shotsPath = null;
+        Path penaltiesPath = null;
         try {
             statsPath = Paths.get(getClass().getClassLoader()
                     .getResource("parimatch-nhl-example.html").toURI());
@@ -66,10 +68,10 @@ public class HockeyCoeffsMatchParser {
         CoeffBlock coeffBlock = new CoeffBlock();
         Element tempHref = null;
         if (!statsHtml.select("a.om:containsOwn(" + homeTeam.getName() + ")").isEmpty()) {
-            tempHref = statsHtml.select("a.om:containsOwn(" + homeTeam.getName() + ")").get(0);
+            tempHref = statsHtml.select(String.format("a.om:containsOwn(%s)", homeTeam.getName())).get(0);
         }
-        if (tempHref == null && !statsHtml.select("a.om:containsOwn(" + guestTeam.getName() + ")").isEmpty()) {
-            tempHref = statsHtml.select("a.om:containsOwn(" + guestTeam.getName() + ")").get(0);
+        if (tempHref == null && !statsHtml.select(String.format("a.om:containsOwn(%s)", guestTeam.getName())).isEmpty()) {
+            tempHref = statsHtml.select(String.format("a.om:containsOwn(%s)", guestTeam.getName())).get(0);
         }
         Element matchTbodyTag = tempHref.parent().parent().parent();
         Element matchCoeffsTbodyTag = matchTbodyTag.nextElementSibling();
@@ -81,8 +83,8 @@ public class HockeyCoeffsMatchParser {
 
 
         Document shotsHtml = downloader.downloadFile(new File(shotsPath.toUri()));
-        if (!shotsHtml.select("a.om:contains(" + homeTeam.getName() + ")").isEmpty()) {
-            tempHref = shotsHtml.select("a.om:contains(" + homeTeam.getName() + ")").get(0);
+        if (!shotsHtml.select(String.format("a.om:contains(%s)", homeTeam.getName())).isEmpty()) {
+            tempHref = shotsHtml.select(String.format("a.om:contains(%s)", homeTeam.getName())).get(0);
             fillShotsSpecialBets(tempHref.parent().parent(), coeffBlock.findByType(ContainerType.STATS));
             fillShotsBets(
                     tempHref.parent().parent().parent().nextElementSibling(),
@@ -91,8 +93,8 @@ public class HockeyCoeffsMatchParser {
         }
 
         Document penaltiesHtml = downloader.downloadFile(new File(penaltiesPath.toUri()));
-        if (!penaltiesHtml.select("td:contains(" + homeTeam.getName() + ")").isEmpty()) {
-            tempHref = penaltiesHtml.select("td:contains(" + homeTeam.getName() + ")").get(0);
+        if (!penaltiesHtml.select(String.format("td:contains(%s)", homeTeam.getName())).isEmpty()) {
+            tempHref = penaltiesHtml.select(String.format("td:contains(%s)", homeTeam.getName())).get(0);
             fillPenaltiesSpecialBets(tempHref.parent().parent(), coeffBlock.findByType(ContainerType.STATS));
         }
 
@@ -382,7 +384,8 @@ public class HockeyCoeffsMatchParser {
                 continue;
             }
             String text = ((TextNode) child).text();
-            Double overValue = null, underValue = null;
+            Double overValue = null;
+            Double underValue = null;
             if (i < childNodes.size() - 4) {
                 String totalOverCoeff = childNodes.get(i + 1).childNode(0).childNode(0).outerHtml();
                 String totalunderCoeff = childNodes.get(i + 3).childNode(0).childNode(0).outerHtml();
@@ -413,7 +416,7 @@ public class HockeyCoeffsMatchParser {
                 .first().parent().nextElementSibling();
 
 
-        Element temp = totalElementBlock.select("i:contains(" + team.getName() + ")").first();
+        Element temp = totalElementBlock.select(String.format("i:contains(%s)", team.getName())).first();
         Element teamTotalBlock = temp.parent().nextElementSibling();
         List<Node> childNodes = teamTotalBlock.childNodes();
 
@@ -652,7 +655,7 @@ public class HockeyCoeffsMatchParser {
         Element totalElementBlock = element.select("th:containsOwn(Дополнительные тоталы:)")
                 .first().parent().nextElementSibling();
 
-        Element temp = totalElementBlock.select("i:containsOwn(" + homeTeam.getName() + ")").first();
+        Element temp = totalElementBlock.select(String.format("i:containsOwn(%s)", homeTeam.getName())).first();
         Element teamTotalBlock = temp.parent().nextElementSibling();
         List<Node> childNodes = teamTotalBlock.childNodes();
         CoeffContainer over2AndHalf = totalOverContainer.findByType(ContainerType.OVER_2_5);
@@ -680,7 +683,7 @@ public class HockeyCoeffsMatchParser {
         Element totalElementBlock = element.select("th:containsOwn(Дополнительные тоталы:)")
                 .first().parent().nextElementSibling();
 
-        Element temp = totalElementBlock.select("i:containsOwn(" + homeTeam.getName() + ")").first();
+        Element temp = totalElementBlock.select(String.format("i:containsOwn(%s)", homeTeam.getName())).first();
         Element teamTotalBlock = temp.parent().nextElementSibling();
         List<Node> childNodes = teamTotalBlock.childNodes();
         CoeffContainer under2AndHalf = totalOverContainer.findByType(ContainerType.UNDER_2_5);
@@ -949,10 +952,9 @@ public class HockeyCoeffsMatchParser {
     private void fillBetWithPossibleOptionsForTeam(Element element, CoeffContainer container, List<BetEntry> betEntries, Team team) {
         for (BetEntry betEntry : betEntries) {
 
-            Elements elements = element.select("i:containsOwn(" + betEntry.getBetName() + ")");
+            Elements elements = element.select(String.format("i:containsOwn(%s)", betEntry.getBetName()));
 
-            for (int i = 0; i < elements.size(); i++) {
-                Element child = elements.get(i);
+            for (Element child : elements) {
                 if (child.text().contains(team.getName())) {
                     Element positiveElement = child.nextElementSibling().child(0).child(0);
                     Element negativeElement = null;
@@ -974,10 +976,9 @@ public class HockeyCoeffsMatchParser {
     private void fillBetWithPossibleOptionsForTeamPeriodTotal(Element element, CoeffContainer container, List<BetEntry> betEntries, Team team) {
         for (BetEntry betEntry : betEntries) {
 
-            Elements elements = element.select("i:containsOwn(" + betEntry.getBetName() + ")");
+            Elements elements = element.select(String.format("i:containsOwn(%s)", betEntry.getBetName()));
 
-            for (int i = 0; i < elements.size(); i++) {
-                Element child = elements.get(i);
+            for (Element child : elements) {
                 if (child.text().contains(team.getName())) {
                     Element positiveElement = child.nextElementSibling().nextElementSibling().child(0).child(0);
                     Element negativeElement = child.nextElementSibling().child(0).child(0);
@@ -995,7 +996,7 @@ public class HockeyCoeffsMatchParser {
     private void fillBetWithSinglePossibleOption(Element element, CoeffContainer container, List<BetEntry> betEntries) {
         for (BetEntry betEntry : betEntries) {
 
-            Element elementBlock = element.select("i:containsOwn(" + betEntry.getBetName() + ")")
+            Element elementBlock = element.select(String.format("i:containsOwn(%s)", betEntry.getBetName()))
                     .first();
             Element positiveElement = elementBlock.nextElementSibling().child(0).child(0);
             Element negativeElement = elementBlock.nextElementSibling()
@@ -1011,7 +1012,7 @@ public class HockeyCoeffsMatchParser {
 
     @AllArgsConstructor
     @Getter
-    class BetEntry {
+    private static class BetEntry {
         private String betName;
         private ContainerType containerType;
     }
