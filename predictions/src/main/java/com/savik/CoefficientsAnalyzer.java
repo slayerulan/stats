@@ -76,27 +76,29 @@ public class CoefficientsAnalyzer {
         boolean firstTeamHasGoodNegativeChances = firstTeamContainerPercentage < MIN_PERCENTAGE;
         boolean secondTeamHasGoodNegativeChanges = secondTeamContainerPercentage < MIN_PERCENTAGE;
 
-        if (firstTeamHasGoodPositiveChances && secondTeamHasGoodPositiveChanges) {
+        if (firstTeamHasGoodPositiveChances && secondTeamHasGoodPositiveChanges &&
+                Math.max(firstTeamPositiveResult, secondTeamPositiveResult) > LOW_VALUE_BORDER) {
             possibleBetResultContainer.setValueBet(Math.max(firstTeamPositiveResult, secondTeamPositiveResult));
             possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD_PERCENTAGES);
             possibleBetResultContainer.setCoeffType(CoeffType.POSITIVE);
-        } else if (firstTeamHasGoodPositiveChances) {
+        } else if (firstTeamHasGoodPositiveChances && firstTeamPositiveResult > LOW_VALUE_BORDER) {
             possibleBetResultContainer.setValueBet(firstTeamPositiveResult);
             possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD_PERCENTAGES);
             possibleBetResultContainer.setCoeffType(CoeffType.POSITIVE);
-        } else if (secondTeamHasGoodPositiveChanges) {
+        } else if (secondTeamHasGoodPositiveChanges && secondTeamPositiveResult > LOW_VALUE_BORDER) {
             possibleBetResultContainer.setValueBet(secondTeamPositiveResult);
             possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD_PERCENTAGES);
             possibleBetResultContainer.setCoeffType(CoeffType.POSITIVE);
-        } else if (firstTeamHasGoodNegativeChances && secondTeamHasGoodNegativeChanges) {
+        } else if (firstTeamHasGoodNegativeChances && secondTeamHasGoodNegativeChanges &&
+                Math.max(firstTeamNegativeResult, secondTeamNegativeResult) > LOW_VALUE_BORDER) {
             possibleBetResultContainer.setValueBet(Math.max(firstTeamNegativeResult, secondTeamNegativeResult));
             possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD_PERCENTAGES);
             possibleBetResultContainer.setCoeffType(CoeffType.NEGATIVE);
-        } else if (firstTeamHasGoodNegativeChances) {
+        } else if (firstTeamHasGoodNegativeChances && firstTeamNegativeResult > LOW_VALUE_BORDER) {
             possibleBetResultContainer.setValueBet(firstTeamNegativeResult);
             possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD_PERCENTAGES);
             possibleBetResultContainer.setCoeffType(CoeffType.NEGATIVE);
-        } else if (secondTeamHasGoodNegativeChanges) {
+        } else if (secondTeamHasGoodNegativeChanges && secondTeamNegativeResult > LOW_VALUE_BORDER) {
             possibleBetResultContainer.setValueBet(secondTeamNegativeResult);
             possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD_PERCENTAGES);
             possibleBetResultContainer.setCoeffType(CoeffType.NEGATIVE);
@@ -114,8 +116,8 @@ public class CoefficientsAnalyzer {
             } else {
                 possibleBetResultContainer.setCoeffType(CoeffType.NEGATIVE);
             }
-
         }
+
     }
 
     private static void handleSingleCoeff(Coeff coeff, PossibleBetResultContainer possibleBetResultContainer, Double firstTeamContainerPercentage, Double secondTeamContainerPercentage) {
@@ -134,22 +136,17 @@ public class CoefficientsAnalyzer {
         boolean firstTeamHasGoodChances = firstTeamContainerPercentage < MIN_PERCENTAGE || firstTeamContainerPercentage > MAX_PERCENTAGE;
         boolean secondTeamHasGoodChanges = secondTeamContainerPercentage < MIN_PERCENTAGE || secondTeamContainerPercentage > MAX_PERCENTAGE;
 
-        if (firstTeamHasGoodChances && secondTeamHasGoodChanges) {
+        if (firstTeamResult > LOW_VALUE_BORDER || secondTeamResult > LOW_VALUE_BORDER) {
 
-            possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD_PERCENTAGES);
-
-        } else if (firstTeamHasGoodChances) {
-
-            possibleBetResultContainer.setValueBet(firstTeamResult);
-            possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD_PERCENTAGES);
-
-        } else if (secondTeamHasGoodChanges) {
-            possibleBetResultContainer.setValueBet(secondTeamResult);
-            possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD_PERCENTAGES);
-
-        } else if (firstTeamResult > LOW_VALUE_BORDER || secondTeamResult > LOW_VALUE_BORDER) {
-
-            if (value > RISK_BET_LOW_VALUE_BORDER) {
+            if (firstTeamHasGoodChances && secondTeamHasGoodChanges) {
+                possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD_PERCENTAGES);
+            } else if (firstTeamHasGoodChances) {
+                possibleBetResultContainer.setValueBet(firstTeamResult);
+                possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD_PERCENTAGES);
+            } else if (secondTeamHasGoodChanges) {
+                possibleBetResultContainer.setValueBet(secondTeamResult);
+                possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD_PERCENTAGES);
+            } else if (value > RISK_BET_LOW_VALUE_BORDER) {
                 possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.RISK);
             } else {
                 possibleBetResultContainer.setPossibleBetStatus(PossibleBetStatus.GOOD);
