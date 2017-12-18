@@ -610,61 +610,83 @@ public class HockeyCoeffsMatchParser {
     }
 
     private void fillPeriodsBlock(Element element, CoeffContainer periodsContainer, HockeyFutureMatch match) {
+        fillPeriodTeamsTotal(element, periodsContainer.findByType(FIRST_PERIOD), match, "в первом периоде", "обе команды забьют в первом периоде");
+        fillPeriodTeamsTotal(element, periodsContainer.findByType(SECOND_PERIOD), match, "во втором периоде", "обе команды забьют во втором периоде");
+        fillPeriodTeamsTotal(element, periodsContainer.findByType(THIRD_PERIOD), match, "в третьем периоде", "обе команды забьют в третьем периоде");
 
+        Elements trs = element.select(">tr");
+        fillPeriodTotal(trs.subList(0, 3), periodsContainer.findByType(FIRST_PERIOD));
+        fillPeriodTotal(trs.subList(3, 6), periodsContainer.findByType(SECOND_PERIOD));
+        fillPeriodTotal(trs.subList(6, 8), periodsContainer.findByType(THIRD_PERIOD));
+    }
+
+    private void fillPeriodTeamsTotal(Element element, CoeffContainer container, HockeyFutureMatch match, String teamTotalString,
+                                      String bothTeamsTotalString) {
         fillBetWithPossibleOptionsForTeamPeriodTotal(
-                element, periodsContainer.findByType(FIRST_PERIOD).findByType(TEAM_TOTAL_OVER),
-                "в первом периоде", match.getHomeTeam()
+                element, container.findByType(TEAM_TOTAL_OVER),
+                teamTotalString, match.getHomeTeam()
         );
 
         fillBetWithPossibleOptionsForTeamPeriodTotal(
-                element, periodsContainer.findByType(FIRST_PERIOD).findByType(OPPOSING_TEAM_TOTAL_OVER),
-                "в первом периоде", match.getGuestTeam()
+                element, container.findByType(OPPOSING_TEAM_TOTAL_OVER),
+                teamTotalString, match.getGuestTeam()
         );
 
         fillBetWithSinglePossibleOption(
-                element, periodsContainer.findByType(FIRST_PERIOD).findByType(BOTH_TEAMS_TOTAL_OVER),
+                element, container.findByType(BOTH_TEAMS_TOTAL_OVER),
                 asList(
-                        new BetEntry("обе команды забьют в первом периоде", OVER_0_5)
-                )
-        );
-
-
-        fillBetWithPossibleOptionsForTeamPeriodTotal(
-                element, periodsContainer.findByType(SECOND_PERIOD).findByType(TEAM_TOTAL_OVER),
-                "во втором периоде", match.getHomeTeam()
-        );
-
-        fillBetWithPossibleOptionsForTeamPeriodTotal(
-                element, periodsContainer.findByType(SECOND_PERIOD).findByType(OPPOSING_TEAM_TOTAL_OVER),
-                "во втором периоде", match.getGuestTeam()
-        );
-
-        fillBetWithSinglePossibleOption(
-                element, periodsContainer.findByType(SECOND_PERIOD).findByType(BOTH_TEAMS_TOTAL_OVER),
-                asList(
-                        new BetEntry("обе команды забьют во втором периоде", OVER_0_5)
-                )
-        );
-
-
-        fillBetWithPossibleOptionsForTeamPeriodTotal(
-                element, periodsContainer.findByType(THIRD_PERIOD).findByType(TEAM_TOTAL_OVER),
-                "в третьем периоде", match.getHomeTeam()
-        );
-
-        fillBetWithPossibleOptionsForTeamPeriodTotal(
-                element, periodsContainer.findByType(THIRD_PERIOD).findByType(OPPOSING_TEAM_TOTAL_OVER),
-                "в третьем периоде", match.getGuestTeam()
-        );
-
-        fillBetWithSinglePossibleOption(
-                element, periodsContainer.findByType(THIRD_PERIOD).findByType(BOTH_TEAMS_TOTAL_OVER),
-                asList(
-                        new BetEntry("обе команды забьют в третьем периоде", OVER_0_5)
+                        new BetEntry(bothTeamsTotalString, OVER_0_5)
                 )
         );
     }
 
+    private void fillPeriodTotal(List<Element> trs, CoeffContainer container) {
+        for (Element tr : trs) {
+            Elements tds = tr.select("td");
+            if (tds.get(4) != null) {
+                String totalOverText = tds.get(4).select("b").text();
+                String totalOverCoeff = tds.get(5).select("u a").text();
+                String totalUnderCoeff = tds.get(6).select("u a").text();
+                CoeffContainer totalOverContainer = container.findByType(TOTAL_OVER);
+                CoeffContainer over0AndHalf = totalOverContainer.findByType(OVER_0_5);
+                CoeffContainer over1AndHalf = totalOverContainer.findByType(OVER_1_5);
+                CoeffContainer totalUnderContainer = container.findByType(TOTAL_UNDER);
+                CoeffContainer under1AndHalf = totalUnderContainer.findByType(UNDER_1_5);
+                CoeffContainer under2AndHalf = totalUnderContainer.findByType(UNDER_2_5);
+                checkIfContainsAndSetValue(totalOverText, over0AndHalf, "0.5", Double.valueOf(totalOverCoeff));
+                checkIfContainsAndSetOverAndUnder(totalOverText, over1AndHalf, under1AndHalf, "1.5", Double.valueOf(totalOverCoeff), Double.valueOf(totalUnderCoeff));
+                checkIfContainsAndSetValue(totalOverText, under2AndHalf, "2.5", Double.valueOf(totalUnderCoeff));
+
+            }
+            if (tds.size() > 10) {
+                if (tds.get(8) != null) {
+                    String coeff = tds.get(8).select("u a").first().text();
+                    CoeffContainer drawContainer = container.findByType(DRAW);
+                    drawContainer.getCoeff().set(Double.valueOf(coeff));
+                }
+            }
+            if (tds.size() > 12) {
+
+                if (tds.get(10) != null) {
+                    String coeff = tds.get(10).select("u a").first().text();
+                    CoeffContainer teamNotLooseContainer = container.findByType(TEAM_NOT_LOOSE);
+                    teamNotLooseContainer.getCoeff().set(Double.valueOf(coeff));
+                }
+                if (tds.get(11) != null) {
+                    String coeff = tds.get(11).select("u a").first().text();
+                    CoeffContainer anyWinContainer = container.findByType(ANY_WIN);
+                    anyWinContainer.getCoeff().set(Double.valueOf(coeff));
+                }
+                if (tds.get(12) != null) {
+                    String coeff = tds.get(12).select("u a").first().text();
+                    CoeffContainer teamNotLooseContainer = container.findByType(OPPOSING_TEAM_NOT_LOOSE);
+                    teamNotLooseContainer.getCoeff().set(Double.valueOf(coeff));
+                }
+            }
+
+        }
+
+    }
 
     private void fillPeriodAnyWinAndDiffEqualsBlock(Element element, CoeffContainer container) {
         fillBetWithSinglePossibleOption(
