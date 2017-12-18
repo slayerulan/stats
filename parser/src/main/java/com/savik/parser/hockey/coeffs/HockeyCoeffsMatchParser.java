@@ -106,7 +106,7 @@ public class HockeyCoeffsMatchParser {
     // which placed on parimatch main screen
     private void fillSomeSpecialBets(Element element, CoeffContainer container) {
         Elements tds = element.select("td");
-        // total over
+        // total over/under
         if (tds.get(5) != null) {
             String totalOverText = tds.get(5).select("b").text();
             String totalOverCoeff = tds.get(6).select("u a").text();
@@ -121,6 +121,7 @@ public class HockeyCoeffsMatchParser {
             checkIfContainsAndSetOverAndUnder(totalOverText, over4AndHalf, under4AndHalf, "4.5", Double.valueOf(totalOverCoeff), Double.valueOf(totalUnderCoeff));
             checkIfContainsAndSetOverAndUnder(totalOverText, over5AndHalf, under5AndHalf, "5.5", Double.valueOf(totalOverCoeff), Double.valueOf(totalUnderCoeff));
         }
+        // team total over/under
         if (tds.get(15) != null) {
             String totalOverText = tds.get(14).select("b").first().text();
             String totalOverCoeff = tds.get(15).select("u a").first().text();
@@ -139,7 +140,7 @@ public class HockeyCoeffsMatchParser {
             checkIfContainsAndSetOverAndUnder(totalOverText, over3AndHalf, under3AndHalf, asList("3.5", "3.0"),
                     Double.valueOf(totalOverCoeff), Double.valueOf(totalUnderCoeff));
         }
-
+        //  opposing team total over/under
         if (tds.get(15) != null) {
             String totalOverText = tds.get(14).select("b").get(1).text();
             String totalOverCoeff = tds.get(15).select("u a").get(1).text();
@@ -198,64 +199,20 @@ public class HockeyCoeffsMatchParser {
     // which placed on parimatch main screen
     private void fillShotsSpecialBets(Element element, CoeffContainer container) {
         Elements tds = element.select("td");
+        // shots on target handicap
         if (tds.get(3) != null) {
-            String handicapText = tds.get(3).select("b").first().text();
-            String handicapCoeff = tds.get(4).select("u a").first().text();
-            CoeffContainer handicapBlock = container.findByType(ContainerType.TEAM_SHOTS_ON_TARGET_HANDICAP);
-            CoeffContainer plus1AndHalf = handicapBlock.findByType(ContainerType.PLUS_1_5);
-            CoeffContainer plus2AndHalf = handicapBlock.findByType(ContainerType.PLUS_2_5);
-            CoeffContainer plus3AndHalf = handicapBlock.findByType(ContainerType.PLUS_3_5);
-            CoeffContainer plus4AndHalf = handicapBlock.findByType(ContainerType.PLUS_4_5);
-            CoeffContainer plus5AndHalf = handicapBlock.findByType(ContainerType.PLUS_5_5);
-            CoeffContainer minus1AndHalf = handicapBlock.findByType(ContainerType.MINUS_1_5);
-            CoeffContainer minus2AndHalf = handicapBlock.findByType(ContainerType.MINUS_2_5);
-            CoeffContainer minus3AndHalf = handicapBlock.findByType(ContainerType.MINUS_3_5);
-            CoeffContainer minus4AndHalf = handicapBlock.findByType(ContainerType.MINUS_4_5);
-            CoeffContainer minus5AndHalf = handicapBlock.findByType(ContainerType.MINUS_5_5);
+            String teamHandicapText = tds.get(3).select("b").first().text();
+            String teamHandicapCoeff = tds.get(4).select("u a").first().text();
+            CoeffContainer teamHandicapBlock = container.findByType(ContainerType.TEAM_SHOTS_ON_TARGET_HANDICAP);
+            fillShotsHandicap(teamHandicapText, Double.valueOf(teamHandicapCoeff), teamHandicapBlock);
 
-            Double value = Double.valueOf(handicapCoeff);
-            checkIfContainsAndSetValue(handicapText, plus1AndHalf, "+1.5", value);
-            checkIfContainsAndSetValue(handicapText, plus2AndHalf, "+2.5", value);
-            checkIfContainsAndSetValue(handicapText, plus3AndHalf, "+3.5", value);
-            checkIfContainsAndSetValue(handicapText, plus4AndHalf, "+4.5", value);
-            checkIfContainsAndSetValue(handicapText, plus5AndHalf, "+5.5", value);
-
-            checkIfContainsAndSetValue(handicapText, minus1AndHalf, "-1.5", value);
-            checkIfContainsAndSetValue(handicapText, minus2AndHalf, "-2.5", value);
-            checkIfContainsAndSetValue(handicapText, minus3AndHalf, "-3.5", value);
-            checkIfContainsAndSetValue(handicapText, minus4AndHalf, "-4.5", value);
-            checkIfContainsAndSetValue(handicapText, minus5AndHalf, "-5.5", value);
+            String oppTeamHandicapText = tds.get(3).select("b").get(1).text();
+            String oppTeamHandicapCoeff = tds.get(4).select("u a").get(1).text();
+            CoeffContainer oppTeamHandicapBlock = container.findByType(ContainerType.OPPOSING_TEAM_SHOTS_ON_TARGET_HANDICAP);
+            fillShotsHandicap(oppTeamHandicapText, Double.valueOf(oppTeamHandicapCoeff), oppTeamHandicapBlock);
         }
 
-        if (tds.get(3) != null) {
-            String handicapText = tds.get(3).select("b").get(1).text();
-            String handicapCoeff = tds.get(4).select("u a").get(1).text();
-            CoeffContainer handicapBlock = container.findByType(ContainerType.OPPOSING_TEAM_SHOTS_ON_TARGET_HANDICAP);
-            CoeffContainer plus1AndHalf = handicapBlock.findByType(ContainerType.PLUS_1_5);
-            CoeffContainer plus2AndHalf = handicapBlock.findByType(ContainerType.PLUS_2_5);
-            CoeffContainer plus3AndHalf = handicapBlock.findByType(ContainerType.PLUS_3_5);
-            CoeffContainer plus4AndHalf = handicapBlock.findByType(ContainerType.PLUS_4_5);
-            CoeffContainer plus5AndHalf = handicapBlock.findByType(ContainerType.PLUS_5_5);
-            CoeffContainer minus1AndHalf = handicapBlock.findByType(ContainerType.MINUS_1_5);
-            CoeffContainer minus2AndHalf = handicapBlock.findByType(ContainerType.MINUS_2_5);
-            CoeffContainer minus3AndHalf = handicapBlock.findByType(ContainerType.MINUS_3_5);
-            CoeffContainer minus4AndHalf = handicapBlock.findByType(ContainerType.MINUS_4_5);
-            CoeffContainer minus5AndHalf = handicapBlock.findByType(ContainerType.MINUS_5_5);
-
-            Double value = Double.valueOf(handicapCoeff);
-            checkIfContainsAndSetValue(handicapText, plus1AndHalf, "+1.5", value);
-            checkIfContainsAndSetValue(handicapText, plus2AndHalf, "+2.5", value);
-            checkIfContainsAndSetValue(handicapText, plus3AndHalf, "+3.5", value);
-            checkIfContainsAndSetValue(handicapText, plus4AndHalf, "+4.5", value);
-            checkIfContainsAndSetValue(handicapText, plus5AndHalf, "+5.5", value);
-
-            checkIfContainsAndSetValue(handicapText, minus1AndHalf, "-1.5", value);
-            checkIfContainsAndSetValue(handicapText, minus2AndHalf, "-2.5", value);
-            checkIfContainsAndSetValue(handicapText, minus3AndHalf, "-3.5", value);
-            checkIfContainsAndSetValue(handicapText, minus4AndHalf, "-4.5", value);
-            checkIfContainsAndSetValue(handicapText, minus5AndHalf, "-5.5", value);
-        }
-
+        // shots on target total over
         if (tds.get(5) != null) {
             String totalText = tds.get(5).select("b").first().text();
             String totalOverCoeff = tds.get(6).select("u a").first().text();
@@ -295,16 +252,7 @@ public class HockeyCoeffsMatchParser {
             String totalOverCoeff = tds.get(15).select("u a").first().text();
             String totalUnderCoeff = tds.get(16).select("u a").first().text();
             CoeffContainer teamTotalOverContainer = container.findByType(ContainerType.TEAM_SHOTS_ON_TARGET_OVER);
-            CoeffContainer over28AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_28_5);
-            CoeffContainer over30AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_30_5);
-            CoeffContainer over32AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_32_5);
-
-            Double overValue = Double.valueOf(totalOverCoeff);
-            Double underValue = Double.valueOf(totalUnderCoeff);
-
-            checkIfContainsAndSetPosAndNeg(totalText, over28AndHalf, asList("28.5", "28.0", "29.0"), overValue, underValue);
-            checkIfContainsAndSetPosAndNeg(totalText, over30AndHalf, asList("30.5", "30.0", "31.0"), overValue, underValue);
-            checkIfContainsAndSetPosAndNeg(totalText, over32AndHalf, asList("32.5", "32.0", "33.0", "34.0"), overValue, underValue);
+            fillShotsTotalOver(totalText, totalOverCoeff, totalUnderCoeff, teamTotalOverContainer);
         }
 
         if (tds.get(14) != null) {
@@ -312,17 +260,47 @@ public class HockeyCoeffsMatchParser {
             String totalOverCoeff = tds.get(15).select("u a").get(1).text();
             String totalUnderCoeff = tds.get(16).select("u a").get(1).text();
             CoeffContainer teamTotalOverContainer = container.findByType(ContainerType.OPPOSING_TEAM_SHOTS_ON_TARGET_OVER);
-            CoeffContainer over28AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_28_5);
-            CoeffContainer over30AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_30_5);
-            CoeffContainer over32AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_32_5);
-
-            Double overValue = Double.valueOf(totalOverCoeff);
-            Double underValue = Double.valueOf(totalUnderCoeff);
-            checkIfContainsAndSetPosAndNeg(totalText, over28AndHalf, asList("28.5", "28.0", "29.0"), overValue, underValue);
-            checkIfContainsAndSetPosAndNeg(totalText, over30AndHalf, asList("30.5", "30.0", "31.0"), overValue, underValue);
-            checkIfContainsAndSetPosAndNeg(totalText, over32AndHalf, asList("32.5", "32.0", "33.0", "34.0"), overValue, underValue);
+            fillShotsTotalOver(totalText, totalOverCoeff, totalUnderCoeff, teamTotalOverContainer);
 
         }
+    }
+
+    private void fillShotsTotalOver(String totalText, String totalOverCoeff, String totalUnderCoeff, CoeffContainer teamTotalOverContainer) {
+        CoeffContainer over28AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_28_5);
+        CoeffContainer over30AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_30_5);
+        CoeffContainer over32AndHalf = teamTotalOverContainer.findByType(ContainerType.OVER_32_5);
+
+        Double overValue = Double.valueOf(totalOverCoeff);
+        Double underValue = Double.valueOf(totalUnderCoeff);
+
+        checkIfContainsAndSetPosAndNeg(totalText, over28AndHalf, asList("28.5", "28.0", "29.0"), overValue, underValue);
+        checkIfContainsAndSetPosAndNeg(totalText, over30AndHalf, asList("30.5", "30.0", "31.0"), overValue, underValue);
+        checkIfContainsAndSetPosAndNeg(totalText, over32AndHalf, asList("32.5", "32.0", "33.0", "34.0"), overValue, underValue);
+    }
+
+    private void fillShotsHandicap(String handicapText, Double handicapCoeff, CoeffContainer handicapBlock) {
+        CoeffContainer plus1AndHalf = handicapBlock.findByType(ContainerType.PLUS_1_5);
+        CoeffContainer plus2AndHalf = handicapBlock.findByType(ContainerType.PLUS_2_5);
+        CoeffContainer plus3AndHalf = handicapBlock.findByType(ContainerType.PLUS_3_5);
+        CoeffContainer plus4AndHalf = handicapBlock.findByType(ContainerType.PLUS_4_5);
+        CoeffContainer plus5AndHalf = handicapBlock.findByType(ContainerType.PLUS_5_5);
+        CoeffContainer minus1AndHalf = handicapBlock.findByType(ContainerType.MINUS_1_5);
+        CoeffContainer minus2AndHalf = handicapBlock.findByType(ContainerType.MINUS_2_5);
+        CoeffContainer minus3AndHalf = handicapBlock.findByType(ContainerType.MINUS_3_5);
+        CoeffContainer minus4AndHalf = handicapBlock.findByType(ContainerType.MINUS_4_5);
+        CoeffContainer minus5AndHalf = handicapBlock.findByType(ContainerType.MINUS_5_5);
+
+        checkIfContainsAndSetValue(handicapText, plus1AndHalf, "+1.5", handicapCoeff);
+        checkIfContainsAndSetValue(handicapText, plus2AndHalf, "+2.5", handicapCoeff);
+        checkIfContainsAndSetValue(handicapText, plus3AndHalf, "+3.5", handicapCoeff);
+        checkIfContainsAndSetValue(handicapText, plus4AndHalf, "+4.5", handicapCoeff);
+        checkIfContainsAndSetValue(handicapText, plus5AndHalf, "+5.5", handicapCoeff);
+
+        checkIfContainsAndSetValue(handicapText, minus1AndHalf, "-1.5", handicapCoeff);
+        checkIfContainsAndSetValue(handicapText, minus2AndHalf, "-2.5", handicapCoeff);
+        checkIfContainsAndSetValue(handicapText, minus3AndHalf, "-3.5", handicapCoeff);
+        checkIfContainsAndSetValue(handicapText, minus4AndHalf, "-4.5", handicapCoeff);
+        checkIfContainsAndSetValue(handicapText, minus5AndHalf, "-5.5", handicapCoeff);
     }
 
     private void fillShotsBets(Element element, CoeffContainer container, HockeyFutureMatch match) {
@@ -375,19 +353,7 @@ public class HockeyCoeffsMatchParser {
         Element temp = totalElementBlock.select(String.format("i:contains(%s)", team.getName())).first();
         Element teamTotalBlock = temp.parent().nextElementSibling();
         List<Node> childNodes = teamTotalBlock.childNodes();
-
         CoeffContainer handicapBlock = container.findByType(type);
-
-        CoeffContainer plus1AndHalf = handicapBlock.findByType(ContainerType.PLUS_1_5);
-        CoeffContainer plus2AndHalf = handicapBlock.findByType(ContainerType.PLUS_2_5);
-        CoeffContainer plus3AndHalf = handicapBlock.findByType(ContainerType.PLUS_3_5);
-        CoeffContainer plus4AndHalf = handicapBlock.findByType(ContainerType.PLUS_4_5);
-        CoeffContainer plus5AndHalf = handicapBlock.findByType(ContainerType.PLUS_5_5);
-        CoeffContainer minus1AndHalf = handicapBlock.findByType(ContainerType.MINUS_1_5);
-        CoeffContainer minus2AndHalf = handicapBlock.findByType(ContainerType.MINUS_2_5);
-        CoeffContainer minus3AndHalf = handicapBlock.findByType(ContainerType.MINUS_3_5);
-        CoeffContainer minus4AndHalf = handicapBlock.findByType(ContainerType.MINUS_4_5);
-        CoeffContainer minus5AndHalf = handicapBlock.findByType(ContainerType.MINUS_5_5);
 
 
         for (int i = 0; i < childNodes.size(); i++) {
@@ -402,17 +368,7 @@ public class HockeyCoeffsMatchParser {
                 value = Double.valueOf(handicapCoeff);
             }
 
-            checkIfContainsAndSetValue(handicapText, plus1AndHalf, "+1.5", value);
-            checkIfContainsAndSetValue(handicapText, plus2AndHalf, "+2.5", value);
-            checkIfContainsAndSetValue(handicapText, plus3AndHalf, "+3.5", value);
-            checkIfContainsAndSetValue(handicapText, plus4AndHalf, "+4.5", value);
-            checkIfContainsAndSetValue(handicapText, plus5AndHalf, "+5.5", value);
-
-            checkIfContainsAndSetValue(handicapText, minus1AndHalf, "-1.5", value);
-            checkIfContainsAndSetValue(handicapText, minus2AndHalf, "-2.5", value);
-            checkIfContainsAndSetValue(handicapText, minus3AndHalf, "-3.5", value);
-            checkIfContainsAndSetValue(handicapText, minus4AndHalf, "-4.5", value);
-            checkIfContainsAndSetValue(handicapText, minus5AndHalf, "-5.5", value);
+            fillShotsHandicap(handicapText, value,handicapBlock);
         }
     }
 
