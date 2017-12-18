@@ -26,8 +26,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-import static com.savik.ContainerType.OVER_54;
-import static com.savik.ContainerType.UNDER_9;
+import static com.savik.ContainerType.*;
 import static java.util.Arrays.asList;
 
 
@@ -195,7 +194,6 @@ public class HockeyCoeffsMatchParser {
             }
         }
     }
-
 
 
     // which placed on parimatch main screen
@@ -370,7 +368,7 @@ public class HockeyCoeffsMatchParser {
                 value = Double.valueOf(handicapCoeff);
             }
 
-            fillShotsHandicap(handicapText, value,handicapBlock);
+            fillShotsHandicap(handicapText, value, handicapBlock);
         }
     }
 
@@ -469,7 +467,7 @@ public class HockeyCoeffsMatchParser {
             }
             String text = ((TextNode) child).text();
             Double value = null;
-            if(i < childNodes.size() - 4 && childNodes.get(i + 1).childNodeSize() > 0) {
+            if (i < childNodes.size() - 4 && childNodes.get(i + 1).childNodeSize() > 0) {
                 value = Double.valueOf(childNodes.get(i + 1).childNode(0).childNode(0).outerHtml());
             }
 
@@ -494,7 +492,7 @@ public class HockeyCoeffsMatchParser {
             }
             String text = ((TextNode) child).text();
             Double value = null;
-            if(i < childNodes.size() - 4 && childNodes.get(i + 3).childNodeSize() > 0) {
+            if (i < childNodes.size() - 4 && childNodes.get(i + 3).childNodeSize() > 0) {
                 value = Double.valueOf(childNodes.get(i + 3).childNode(0).childNode(0).outerHtml());
             }
 
@@ -507,7 +505,7 @@ public class HockeyCoeffsMatchParser {
         fillBetWithSinglePossibleOption(
                 element, container,
                 asList(
-                        new BetEntry("каждая команда забьет больше 1,5", ContainerType.OVER_1_5),
+                        new BetEntry("каждая команда забьет больше 1,5", OVER_1_5),
                         new BetEntry("каждая команда забьет больше 2,5", ContainerType.OVER_2_5)
                 )
         );
@@ -540,7 +538,7 @@ public class HockeyCoeffsMatchParser {
             }
             String text = ((TextNode) child).text();
             Double value = null;
-            if(i < childNodes.size() - 4 && childNodes.get(i + 1).childNodeSize() > 0) {
+            if (i < childNodes.size() - 4 && childNodes.get(i + 1).childNodeSize() > 0) {
                 value = Double.valueOf(childNodes.get(i + 1).childNode(0).childNode(0).outerHtml());
             }
 
@@ -566,7 +564,7 @@ public class HockeyCoeffsMatchParser {
             }
             String text = ((TextNode) child).text();
             Double value = null;
-            if(i < childNodes.size() - 4 && childNodes.get(i + 3).childNodeSize() > 0) {
+            if (i < childNodes.size() - 4 && childNodes.get(i + 3).childNodeSize() > 0) {
                 value = Double.valueOf(childNodes.get(i + 3).childNode(0).childNode(0).outerHtml());
             }
 
@@ -611,16 +609,12 @@ public class HockeyCoeffsMatchParser {
 
         fillBetWithPossibleOptionsForTeamPeriodTotal(
                 element, periodsContainer.findByType(ContainerType.FIRST_PERIOD).findByType(ContainerType.TEAM_TOTAL_OVER),
-                asList(
-                        new BetEntry("в первом периоде", ContainerType.OVER_0_5)
-                ), match.getHomeTeam()
+                "в первом периоде", match.getHomeTeam()
         );
 
         fillBetWithPossibleOptionsForTeamPeriodTotal(
                 element, periodsContainer.findByType(ContainerType.FIRST_PERIOD).findByType(ContainerType.OPPOSING_TEAM_TOTAL_OVER),
-                asList(
-                        new BetEntry("в первом периоде", ContainerType.OVER_0_5)
-                ), match.getGuestTeam()
+                "в первом периоде", match.getGuestTeam()
         );
 
         fillBetWithSinglePossibleOption(
@@ -633,16 +627,12 @@ public class HockeyCoeffsMatchParser {
 
         fillBetWithPossibleOptionsForTeamPeriodTotal(
                 element, periodsContainer.findByType(ContainerType.SECOND_PERIOD).findByType(ContainerType.TEAM_TOTAL_OVER),
-                asList(
-                        new BetEntry("во втором периоде", ContainerType.OVER_0_5)
-                ), match.getHomeTeam()
+                "во втором периоде", match.getHomeTeam()
         );
 
         fillBetWithPossibleOptionsForTeamPeriodTotal(
                 element, periodsContainer.findByType(ContainerType.SECOND_PERIOD).findByType(ContainerType.OPPOSING_TEAM_TOTAL_OVER),
-                asList(
-                        new BetEntry("во втором периоде", ContainerType.OVER_0_5)
-                ), match.getGuestTeam()
+                "во втором периоде", match.getGuestTeam()
         );
 
         fillBetWithSinglePossibleOption(
@@ -655,16 +645,12 @@ public class HockeyCoeffsMatchParser {
 
         fillBetWithPossibleOptionsForTeamPeriodTotal(
                 element, periodsContainer.findByType(ContainerType.THIRD_PERIOD).findByType(ContainerType.TEAM_TOTAL_OVER),
-                asList(
-                        new BetEntry("в третьем периоде", ContainerType.OVER_0_5)
-                ), match.getHomeTeam()
+                "в третьем периоде", match.getHomeTeam()
         );
 
         fillBetWithPossibleOptionsForTeamPeriodTotal(
                 element, periodsContainer.findByType(ContainerType.THIRD_PERIOD).findByType(ContainerType.OPPOSING_TEAM_TOTAL_OVER),
-                asList(
-                        new BetEntry("в третьем периоде", ContainerType.OVER_0_5)
-                ), match.getGuestTeam()
+                "в третьем периоде", match.getGuestTeam()
         );
 
         fillBetWithSinglePossibleOption(
@@ -879,24 +865,33 @@ public class HockeyCoeffsMatchParser {
         }
     }
 
-    private void fillBetWithPossibleOptionsForTeamPeriodTotal(Element element, CoeffContainer container, List<BetEntry> betEntries, Team team) {
-        for (BetEntry betEntry : betEntries) {
+    private void fillBetWithPossibleOptionsForTeamPeriodTotal(Element element, CoeffContainer container, String periodName, Team team) {
 
-            Elements elements = element.select(String.format("i:containsOwn(%s)", betEntry.getBetName()));
+        Elements elements = element.select(String.format("i:containsOwn(%s)", periodName));
 
-            for (Element child : elements) {
-                if (child.text().contains(team.getName())) {
-                    Element positiveElement = child.nextElementSibling().nextElementSibling().child(0).child(0);
-                    Element negativeElement = child.nextElementSibling().child(0).child(0);
+        for (Element child : elements) {
+            if (child.text().contains(team.getName())) {
+                Element tdParent = child.parent();
 
-                    CoeffContainer coeffContainer = container.findByType(betEntry.getContainerType());
-                    coeffContainer.getCoeff().set(
-                            Double.valueOf(positiveElement.text()),
-                            Double.valueOf(negativeElement.text())
-                    );
-                }
+                fillTeamPeriodTotal(container, tdParent, "0.5", OVER_0_5);
+                fillTeamPeriodTotal(container, tdParent, "1.5", OVER_1_5);
             }
         }
+    }
+
+    private void fillTeamPeriodTotal(CoeffContainer container, Element tdParent, String total, ContainerType type) {
+        Element underCoeff = tdParent.select(String.format("nobr:containsOwn(%s)", total)).first();
+        String underCoeffText = underCoeff.select("u a").first().text();
+
+        Element overCoeff = underCoeff.nextElementSibling();
+        String overCoeffText = overCoeff.select("u a").first().text();
+
+
+        CoeffContainer coeffContainer = container.findByType(type);
+        coeffContainer.getCoeff().set(
+                Double.valueOf(overCoeffText),
+                Double.valueOf(underCoeffText)
+        );
     }
 
     private void fillBetWithSinglePossibleOption(Element element, CoeffContainer container, List<BetEntry> betEntries) {

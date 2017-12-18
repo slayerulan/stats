@@ -66,6 +66,10 @@ public class PossibleBetsPeriodBlock extends PossibleBetContainer<HockeyMatch> {
                                 new PossibleBetContainer<>(
                                         new PeriodTeamTotalOverPossibleBet<>(homeMatchData, guestMatchData, function, 0.5),
                                         ContainerType.OVER_0_5
+                                ),
+                                new PossibleBetContainer<>(
+                                        new PeriodTeamTotalOverPossibleBet<>(homeMatchData, guestMatchData, function, 1.5),
+                                        ContainerType.OVER_1_5
                                 )
                         ),
                         ContainerType.TEAM_TOTAL_OVER
@@ -75,6 +79,10 @@ public class PossibleBetsPeriodBlock extends PossibleBetContainer<HockeyMatch> {
                                 new PossibleBetContainer<>(
                                         new PeriodOpposingTeamTotalOverPossibleBet<>(homeMatchData, guestMatchData, function, 0.5),
                                         ContainerType.OVER_0_5
+                                ),
+                                new PossibleBetContainer<>(
+                                        new PeriodOpposingTeamTotalOverPossibleBet<>(homeMatchData, guestMatchData, function, 1.5),
+                                        ContainerType.OVER_1_5
                                 )
                         ),
                         ContainerType.OPPOSING_TEAM_TOTAL_OVER
