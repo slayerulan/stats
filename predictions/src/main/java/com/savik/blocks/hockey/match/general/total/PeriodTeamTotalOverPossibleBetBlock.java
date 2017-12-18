@@ -14,6 +14,10 @@ public class PeriodTeamTotalOverPossibleBetBlock extends PossibleBetContainer<Ho
         super(
                 Arrays.asList(
                         new PossibleBetContainer<>(
+                                new PeriodTeamTotalOverPossibleBet<>(homeMatchData, guestMatchData, HockeyMatch.MATCH, 1.5),
+                                ContainerType.OVER_1_5
+                        ),
+                        new PossibleBetContainer<>(
                                 new PeriodTeamTotalOverPossibleBet<>(homeMatchData, guestMatchData, HockeyMatch.MATCH, 2.5),
                                 ContainerType.OVER_2_5
                         ),
