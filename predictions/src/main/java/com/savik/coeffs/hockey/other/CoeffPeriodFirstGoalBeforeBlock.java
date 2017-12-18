@@ -17,6 +17,14 @@ public class CoeffPeriodFirstGoalBeforeBlock extends CoeffContainer {
                 new CoeffContainer(
                         new Coeff(),
                         ContainerType.UNDER_10
+                ),
+                new CoeffContainer(
+                        new Coeff(),
+                        ContainerType.UNDER_11
+                ),
+                new CoeffContainer(
+                        new Coeff(),
+                        ContainerType.UNDER_12
                 )
         ), ContainerType.FIRST_GOAL_BEFORE);
     }

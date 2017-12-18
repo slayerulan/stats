@@ -26,6 +26,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+import static com.savik.ContainerType.OVER_54;
+import static com.savik.ContainerType.UNDER_9;
 import static java.util.Arrays.asList;
 
 
@@ -466,7 +468,10 @@ public class HockeyCoeffsMatchParser {
                 continue;
             }
             String text = ((TextNode) child).text();
-            Double value = Double.valueOf(childNodes.get(i + 1).childNode(0).childNode(0).outerHtml());
+            Double value = null;
+            if(i < childNodes.size() - 4 && childNodes.get(i + 1).childNodeSize() > 0) {
+                value = Double.valueOf(childNodes.get(i + 1).childNode(0).childNode(0).outerHtml());
+            }
 
             checkIfContainsAndSetValue(text, over4AndHalf, "(4.5) больше", value);
             checkIfContainsAndSetValue(text, over5AndHalf, "(5.5) больше", value);
@@ -488,7 +493,10 @@ public class HockeyCoeffsMatchParser {
                 continue;
             }
             String text = ((TextNode) child).text();
-            Double value = Double.valueOf(childNodes.get(i + 3).childNode(0).childNode(0).outerHtml());
+            Double value = null;
+            if(i < childNodes.size() - 4 && childNodes.get(i + 3).childNodeSize() > 0) {
+                value = Double.valueOf(childNodes.get(i + 3).childNode(0).childNode(0).outerHtml());
+            }
 
             checkIfContainsAndSetValue(text, under5AndHalf, "(5.5) больше", value);
             checkIfContainsAndSetValue(text, under6AndHalf, "(6.5) больше", value);
@@ -531,7 +539,10 @@ public class HockeyCoeffsMatchParser {
                 continue;
             }
             String text = ((TextNode) child).text();
-            Double value = Double.valueOf(childNodes.get(i + 1).childNode(0).childNode(0).outerHtml());
+            Double value = null;
+            if(i < childNodes.size() - 4 && childNodes.get(i + 1).childNodeSize() > 0) {
+                value = Double.valueOf(childNodes.get(i + 1).childNode(0).childNode(0).outerHtml());
+            }
 
             checkIfContainsAndSetValue(text, over2AndHalf, "(2.5) больше", value);
             checkIfContainsAndSetValue(text, over3AndHalf, "(3.5) больше", value);
@@ -554,7 +565,10 @@ public class HockeyCoeffsMatchParser {
                 continue;
             }
             String text = ((TextNode) child).text();
-            Double value = Double.valueOf(childNodes.get(i + 3).childNode(0).childNode(0).outerHtml());
+            Double value = null;
+            if(i < childNodes.size() - 4 && childNodes.get(i + 3).childNodeSize() > 0) {
+                value = Double.valueOf(childNodes.get(i + 3).childNode(0).childNode(0).outerHtml());
+            }
 
             checkIfContainsAndSetValue(text, under2AndHalf, "(2.5) больше", value);
             checkIfContainsAndSetValue(text, under3AndHalf, "(3.5) больше", value);
@@ -563,7 +577,11 @@ public class HockeyCoeffsMatchParser {
 
 
     private void fillOtherBlock(Element element, CoeffContainer otherContainer, HockeyFutureMatch match) {
+        fillTotalOverInAllPeriodsBlock(element, otherContainer.findByType(ContainerType.TOTAL_OVER_ALL_PERIODS));
+        fillTotalUnderInAllPeriodsBlock(element, otherContainer.findByType(ContainerType.TOTAL_UNDER_ALL_PERIODS));
+
         fillPeriodAnyWinAndDiffEqualsBlock(element, otherContainer.findByType(ContainerType.ANY_WIN_AND_DIFFERENCE_EQUALS));
+        fillGoalsTimeBlock(element, otherContainer);
 
         fillTeamWinAndTotalOverBlock(element, otherContainer.findByType(ContainerType.TEAM_WIN_AND_TOTAL_OVER), match.getHomeTeam());
         fillTeamWinAndTotalUnderBlock(element, otherContainer.findByType(ContainerType.TEAM_WIN_AND_TOTAL_UNDER), match.getHomeTeam());
@@ -575,24 +593,18 @@ public class HockeyCoeffsMatchParser {
         fillTeamNotLooseAndTotalOverBlock(element, otherContainer.findByType(ContainerType.OPPOSING_TEAM_NOT_LOOSE_AND_TOTAL_OVER), match.getGuestTeam());
         fillTeamNotLooseAndTotalUnderBlock(element, otherContainer.findByType(ContainerType.OPPOSING_TEAM_NOT_LOOSE_AND_TOTAL_UNDER), match.getGuestTeam());
 
-        fillTotalOverInAllPeriodsBlock(element, otherContainer.findByType(ContainerType.TOTAL_OVER_ALL_PERIODS));
         fillTeamTotalOverInAllPeriodsBlock(element, otherContainer.findByType(ContainerType.TEAM_TOTAL_OVER_ALL_PERIODS), match.getHomeTeam());
         fillTeamTotalOverInAllPeriodsBlock(element, otherContainer.findByType(ContainerType.OPPOSING_TEAM_TOTAL_OVER_ALL_PERIODS), match.getGuestTeam());
 
-        fillTotalUnderInAllPeriodsBlock(element, otherContainer.findByType(ContainerType.TOTAL_UNDER_ALL_PERIODS));
 
         fillTeamWinAtLeastNPeriodsBlock(element, otherContainer.findByType(ContainerType.TEAM_WIN_AT_LEAST_N_PERIODS), match.getHomeTeam());
         fillTeamWinAtLeastNPeriodsBlock(element, otherContainer.findByType(ContainerType.OPPOSING_TEAM_WIN_AT_LEAST_N_PERIODS), match.getGuestTeam());
-
         fillDrawAtLeastNPeriodsBlock(element, otherContainer.findByType(ContainerType.DRAW_AT_LEAST_N_PERIODS));
-        fillMostEffectivePeriodTotalOverBlock(element, otherContainer.findByType(ContainerType.MOST_EFFECTIVE_PERIOD_TOTAL_OVER));
 
+        fillMostEffectivePeriodTotalOverBlock(element, otherContainer.findByType(ContainerType.MOST_EFFECTIVE_PERIOD_TOTAL_OVER));
         fillTeamFirstScoredAndWinBlock(element, otherContainer.findByType(ContainerType.TEAM_FIRST_SCORED_AND_WIN), ContainerType.TEAM_FIRST_SCORED_AND_WIN, match.getHomeTeam());
         fillTeamFirstScoredAndWinBlock(element, otherContainer.findByType(ContainerType.OPPOSING_TEAM_FIRST_SCORED_AND_WIN), ContainerType.OPPOSING_TEAM_FIRST_SCORED_AND_WIN, match.getGuestTeam());
-
         fillAnyComebackMatchBlock(element, otherContainer.findByType(ContainerType.ANY_COMEBACK));
-
-
     }
 
     private void fillPeriodsBlock(Element element, CoeffContainer periodsContainer, HockeyFutureMatch match) {
@@ -673,6 +685,45 @@ public class HockeyCoeffsMatchParser {
                         new BetEntry("победа любой команды в 3 или более шайбы", ContainerType.DIFF_3_OR_MORE)
                 )
         );
+    }
+
+    private void fillGoalsTimeBlock(Element element, CoeffContainer container) {
+        Element elementBlock = element.select("th:containsOwn(Голы)").first();
+        Element goalsBlock = elementBlock.parent().nextElementSibling();
+        Element td = goalsBlock.select("td>i:containsOwn(Обе забьют)").first().parent();
+        List<Node> childNodes = td.childNodes();
+
+        CoeffContainer firstGoalBefore = container.findByType(ContainerType.FIRST_GOAL_BEFORE);
+        CoeffContainer under9 = firstGoalBefore.findByType(UNDER_9);
+        CoeffContainer under10 = firstGoalBefore.findByType(ContainerType.UNDER_10);
+        CoeffContainer under11 = firstGoalBefore.findByType(ContainerType.UNDER_11);
+        CoeffContainer under12 = firstGoalBefore.findByType(ContainerType.UNDER_12);
+
+        CoeffContainer lastGoalAfter = container.findByType(ContainerType.LAST_GOAL_AFTER);
+        CoeffContainer over54 = lastGoalAfter.findByType(OVER_54);
+        CoeffContainer over55 = lastGoalAfter.findByType(ContainerType.OVER_55);
+
+
+        for (int i = 1; i < childNodes.size(); i++) {
+            Node child = childNodes.get(i);
+            if (!(child instanceof TextNode)) {
+                continue;
+            }
+            String text = ((TextNode) child).text();
+            Double coeff = null;
+            if (i < childNodes.size() - 2 && childNodes.get(i + 1).childNodeSize() > 0 && childNodes.get(i + 1).childNode(0).childNodeSize() > 0) {
+                String coefText = childNodes.get(i + 1).childNode(0).childNode(0).outerHtml();
+                coeff = Double.valueOf(coefText);
+            }
+
+            checkIfContainsAndSetPosAndNeg(text, under9, "1 по 8 мин", coeff, coeff);
+            checkIfContainsAndSetPosAndNeg(text, under10, "1 по 9 мин", coeff, coeff);
+            checkIfContainsAndSetPosAndNeg(text, under11, "1 по 10 мин", coeff, coeff);
+            checkIfContainsAndSetPosAndNeg(text, under12, "1 по 11 мин", coeff, coeff);
+
+            checkIfContainsAndSetPosAndNeg(text, over54, "55 по 60 мин", coeff, coeff);
+            checkIfContainsAndSetPosAndNeg(text, over55, "56 по 60 мин", coeff, coeff);
+        }
     }
 
     private void fillTeamWinAndTotalOverBlock(Element element, CoeffContainer container, Team team) {
