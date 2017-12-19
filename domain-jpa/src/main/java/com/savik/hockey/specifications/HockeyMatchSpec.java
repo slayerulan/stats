@@ -20,6 +20,10 @@ public class HockeyMatchSpec {
         return equal(HockeyMatch_.homeTeam, id);
     }
 
+    public static Specification<HockeyMatch> hasGuestTeam(Long id) {
+        return equal(HockeyMatch_.guestTeam, id);
+    }
+
     public static Specification<HockeyMatch> hasTeam(HockeyTeam team) {
         return anyEquals(team, HockeyMatch_.homeTeam, HockeyMatch_.guestTeam);
     }

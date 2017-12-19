@@ -21,8 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.savik.hockey.specifications.HockeyMatchSpec.hasHomeTeam;
-import static com.savik.hockey.specifications.HockeyMatchSpec.hasTeam;
+import static com.savik.hockey.specifications.HockeyMatchSpec.*;
 
 @RestController
 @RequestMapping("/stats")
@@ -69,8 +68,8 @@ public class TestController {
         );
     }
 
-    @GetMapping("/bets")
-    public PossibleBetResultContainer possibleBets(HockeyMatchFilter hockeyMatchFilter) {
+    @GetMapping("/bets/all")
+    public PossibleBetResultContainer possibleBetsAll(HockeyMatchFilter hockeyMatchFilter) {
         HockeyFutureMatch futureMatch = hockeyFutureMatchRepository.findByMyscoreCode(hockeyMatchFilter.getMyscoreCode());
 
         HockeyTeam homeTeam = futureMatch.getHomeTeam();
@@ -84,6 +83,33 @@ public class TestController {
         MatchData guestMatchData = new MatchData(guestTeam);
         List<HockeyMatch> guestTeamMatches = hockeyMatchRepository.findAll(
                 hasTeam(guestTeam.getId())
+        );
+
+        PossibleBetsBlock possibleBetsBlock = new PossibleBetsBlock(homeMatchData, guestMatchData);
+        possibleBetsBlock.check(homeTeamMatches, guestTeamMatches);
+
+        CoeffBlock coeffBlock = hockeyCoeffsMatchParser.parse(futureMatch);
+
+        PossibleBetResultContainer resultContainer = CoefficientsAnalyzer.analyze(coeffBlock, possibleBetsBlock);
+
+        return resultContainer;
+    }
+
+    @GetMapping("/bets/home")
+    public PossibleBetResultContainer possibleBetsHome(HockeyMatchFilter hockeyMatchFilter) {
+        HockeyFutureMatch futureMatch = hockeyFutureMatchRepository.findByMyscoreCode(hockeyMatchFilter.getMyscoreCode());
+
+        HockeyTeam homeTeam = futureMatch.getHomeTeam();
+        MatchData homeMatchData = new MatchData(homeTeam);
+        List<HockeyMatch> homeTeamMatches = hockeyMatchRepository.findAll(
+                hasHomeTeam(homeTeam.getId())
+        );
+
+
+        HockeyTeam guestTeam = futureMatch.getGuestTeam();
+        MatchData guestMatchData = new MatchData(guestTeam);
+        List<HockeyMatch> guestTeamMatches = hockeyMatchRepository.findAll(
+                hasGuestTeam(guestTeam.getId())
         );
 
         PossibleBetsBlock possibleBetsBlock = new PossibleBetsBlock(homeMatchData, guestMatchData);

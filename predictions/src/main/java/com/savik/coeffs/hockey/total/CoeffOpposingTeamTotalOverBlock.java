@@ -12,6 +12,10 @@ public class CoeffOpposingTeamTotalOverBlock extends CoeffContainer {
         super(Arrays.asList(
                 new CoeffContainer(
                         new Coeff(),
+                        ContainerType.OVER_1_5
+                ),
+                new CoeffContainer(
+                        new Coeff(),
                         ContainerType.OVER_2_5
                 ),
                 new CoeffContainer(

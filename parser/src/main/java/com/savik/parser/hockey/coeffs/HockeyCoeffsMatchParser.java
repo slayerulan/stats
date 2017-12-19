@@ -153,11 +153,11 @@ public class HockeyCoeffsMatchParser {
             String totalOverCoeff = tds.get(15).select("u a").get(1).text();
             String totalUnderCoeff = tds.get(16).select("u a").get(1).text();
             CoeffContainer totalContainer = container.findByType(TOTAL);
-            CoeffContainer teamTotalOverContainer = totalContainer.findByType(TEAM_TOTAL_OVER);
+            CoeffContainer teamTotalOverContainer = totalContainer.findByType(OPPOSING_TEAM_TOTAL_OVER);
             CoeffContainer over1AndHalf = teamTotalOverContainer.findByType(OVER_1_5);
             CoeffContainer over2AndHalf = teamTotalOverContainer.findByType(OVER_2_5);
             CoeffContainer over3AndHalf = teamTotalOverContainer.findByType(OVER_3_5);
-            CoeffContainer totalUnderContainer = totalContainer.findByType(TEAM_TOTAL_UNDER);
+            CoeffContainer totalUnderContainer = totalContainer.findByType(OPPOSING_TEAM_TOTAL_UNDER);
             CoeffContainer under1AndHalf = totalUnderContainer.findByType(UNDER_1_5);
             CoeffContainer under2AndHalf = totalUnderContainer.findByType(UNDER_2_5);
             CoeffContainer under3AndHalf = totalUnderContainer.findByType(UNDER_3_5);
@@ -470,6 +470,13 @@ public class HockeyCoeffsMatchParser {
         Element teamTotalBlock = temp.parent().nextElementSibling();
         List<Node> childNodes = teamTotalBlock.childNodes();
 
+        CoeffContainer plus1AndHalf = container.findByType(PLUS_1_5);
+        CoeffContainer plus2AndHalf = container.findByType(PLUS_2_5);
+
+        CoeffContainer minus1AndHalf = container.findByType(MINUS_1_5);
+        CoeffContainer minus2AndHalf = container.findByType(MINUS_2_5);
+
+
         for (int i = 0; i < childNodes.size(); i++) {
             Node child = childNodes.get(i);
             if (!(child instanceof TextNode)) {
@@ -482,7 +489,11 @@ public class HockeyCoeffsMatchParser {
                 value = Double.valueOf(handicapCoeff);
             }
 
-            fillShotsHandicap(handicapText, value, container);
+            checkIfContainsAndSetValue(handicapText, plus1AndHalf, "+1.5", value);
+            checkIfContainsAndSetValue(handicapText, plus2AndHalf, "+2.5", value);
+
+            checkIfContainsAndSetValue(handicapText, minus1AndHalf, "–1.5", value);
+            checkIfContainsAndSetValue(handicapText, minus2AndHalf, "–2.5", value);
         }
     }
 
