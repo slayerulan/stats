@@ -1,0 +1,7 @@
+https://1xecu.xyz/LineFeed/GetChampZip?lng=ru&champ=30619&tf=3000000&afterDays=0&tz=0&sport=2&country=1&_=1513767583782 - nhl url
+https://1xecu.xyz/LineFeed/GetChampZip?lng=ru&champ=3355&tf=3000000&afterDays=0&tz=0&sport=2&country=1&_=1513767583785 - khl url
+
+
+https://1xecu.xyz/LineFeed/GetGameZip?id=148395649&lng=ru&cfview=0&isSubGames=true&GroupEvents=true&countevents=250&grMode=2&_=1513767583896 - nhl match
+
+https://1xecu.xyz/LineFeed/GetGameZip?id=19700863&lng=ru&cfview=0&isSubGames=true&GroupEvents=true&countevents=250&grMode=2

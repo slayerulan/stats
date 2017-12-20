@@ -53,6 +53,14 @@ public class Downloader {
         }
     }
 
+    public String getJson(String url) {
+        try {
+            return Jsoup.connect(url).ignoreContentType(true).execute().body();
+        } catch (IOException e) {
+            throw new ParseException(e);
+        }
+    }
+
     public Document downloadFile(File file) {
         try {
             return Jsoup.parse(file, "UTF-8");
