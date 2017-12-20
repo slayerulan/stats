@@ -125,6 +125,29 @@ public class TestController {
         return resultContainer;
     }
 
+    @GetMapping("/stats/home")
+    public PossibleBetsBlock statsHome(HockeyMatchFilter hockeyMatchFilter) {
+        HockeyFutureMatch futureMatch = hockeyFutureMatchRepository.findByMyscoreCode(hockeyMatchFilter.getMyscoreCode());
+
+        HockeyTeam homeTeam = futureMatch.getHomeTeam();
+        MatchData homeMatchData = new MatchData(homeTeam);
+        List<HockeyMatch> homeTeamMatches = hockeyMatchRepository.findAll(
+                hasHomeTeam(homeTeam.getId())
+        );
+
+
+        HockeyTeam guestTeam = futureMatch.getGuestTeam();
+        MatchData guestMatchData = new MatchData(guestTeam);
+        List<HockeyMatch> guestTeamMatches = hockeyMatchRepository.findAll(
+                hasGuestTeam(guestTeam.getId())
+        );
+
+        PossibleBetsBlock possibleBetsBlock = new PossibleBetsBlock(homeMatchData, guestMatchData);
+        possibleBetsBlock.check(homeTeamMatches, guestTeamMatches);
+
+        return possibleBetsBlock;
+    }
+
     @Autowired
     CoeffRepository coeffRepository;
 

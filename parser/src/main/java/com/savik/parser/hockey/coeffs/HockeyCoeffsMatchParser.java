@@ -639,7 +639,7 @@ public class HockeyCoeffsMatchParser {
         fillTotalOverInAllPeriodsBlock(element, otherContainer.findByType(TOTAL_OVER_ALL_PERIODS));
         fillTotalUnderInAllPeriodsBlock(element, otherContainer.findByType(TOTAL_UNDER_ALL_PERIODS));
 
-        fillPeriodAnyWinAndDiffEqualsBlock(element, otherContainer.findByType(ANY_WIN_AND_DIFFERENCE_EQUALS));
+        fillAnyWinAndDiffEqualsBlock(element, otherContainer.findByType(ANY_WIN_AND_DIFFERENCE_EQUALS));
         fillGoalsTimeBlock(element, otherContainer);
 
         fillTeamWinAndTotalOverBlock(element, otherContainer.findByType(TEAM_WIN_AND_TOTAL_OVER), match.getHomeTeam());
@@ -745,7 +745,7 @@ public class HockeyCoeffsMatchParser {
 
     }
 
-    private void fillPeriodAnyWinAndDiffEqualsBlock(Element element, CoeffContainer container) {
+    private void fillAnyWinAndDiffEqualsBlock(Element element, CoeffContainer container) {
         fillBetWithSinglePossibleOption(
                 element, container,
                 asList(
