@@ -1,9 +1,6 @@
 package com.savik.converter;
 
-/**
- * @author Savushkin Yauheni
- * @since 28.04.2017
- */
+
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 import java.sql.Timestamp;

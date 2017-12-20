@@ -3,20 +3,26 @@ package com.savik;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Embeddable;
+import javax.persistence.Transient;
+
 @Getter
 @Setter
+@Embeddable
 public class Coeff {
 
     public static final Double UNKNOWN = 1.1;
     private Double value;
     private Double positiveValue;
     private Double negativeValue;
+
+    @Transient
     private boolean averageCoeff;
 
     public Coeff() {
         // TODO: remove
         this.value = UNKNOWN;
-        this.averageCoeff = true;
+        this.averageCoeff = true; // todo: fix
     }
 
     public Coeff(Double value) {

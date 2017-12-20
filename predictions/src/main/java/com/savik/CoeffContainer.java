@@ -10,13 +10,13 @@ public class CoeffContainer {
 
     private ContainerType type;
 
-    private List<? extends CoeffContainer> childrenBlocks;
+    private List<CoeffContainer> childrenBlocks;
 
     private Coeff coeff;
 
     private Boolean leaf;
 
-    public CoeffContainer(List<? extends CoeffContainer> childrenBlocks, ContainerType type) {
+    public CoeffContainer(List<CoeffContainer> childrenBlocks, ContainerType type) {
         this.childrenBlocks = childrenBlocks;
         this.type = type;
         this.leaf = false;

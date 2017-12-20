@@ -1,21 +1,15 @@
 package com.savik.domain;
 
+import com.codiform.moo.annotation.Optionality;
+import com.codiform.moo.annotation.Property;
+import lombok.*;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
-import com.codiform.moo.annotation.Optionality;
-import com.codiform.moo.annotation.Property;
-import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
 
-/**
- * Identifiable - Суперкласс для всех сущностей справочников
- *
- * @author Калистратов Сергей Юрьевич (skalistratov)
- * @since 03.04.2017
- */
 @Getter
 @Setter
 @AllArgsConstructor
