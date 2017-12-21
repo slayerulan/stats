@@ -38,6 +38,26 @@ public class Book1xbetShortName {
     public static final String OPPOSING_TEAM_TOTAL_OVER_ALL_PERIODS_YES = "843";
     public static final String OPPOSING_TEAM_TOTAL_OVER_ALL_PERIODS_NO = "844";
 
+    public static final String ANY_WIN_AND_DIFFERENCE_EQUALS_YES = "1782";
+    public static final String ANY_WIN_AND_DIFFERENCE_EQUALS_NO = "1783";
+
+    public static final String ANY_WIN_AND_DIFFERENCE_EQUALS_OR_MORE_YES = "1721";
+    public static final String ANY_WIN_AND_DIFFERENCE_EQUALS_OR_MORE_NO = "1722";
+
+    public static final String TEAM_WIN_AT_LEAST_1_PERIODS_YES = "3090";
+    public static final String TEAM_WIN_AT_LEAST_1_PERIODS_NO = "3091";
+
+    public static final String OPPOSING_TEAM_WIN_AT_LEAST_1_PERIODS_YES = "3092";
+    public static final String OPPOSING_TEAM_WIN_AT_LEAST_1_PERIODS_NO = "3093";
+
+    public static final String MOST_EFFECTIVE_PERIOD_TOTAL_OVER_YES = "1238";
+    public static final String MOST_EFFECTIVE_PERIOD_TOTAL_OVER_NO = "1239";
+
+    public static final String FIRST_GOAL_BEFORE = "480";
+
+    public static final String POWERPLAY_GOALS_TOTAL_OVER_YES = "1045";
+    public static final String POWERPLAY_GOALS_TOTAL_OVER_NO = "1046";
+
 
 
 }
