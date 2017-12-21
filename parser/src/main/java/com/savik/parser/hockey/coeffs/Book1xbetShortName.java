@@ -2,17 +2,24 @@ package com.savik.parser.hockey.coeffs;
 
 
 public class Book1xbetShortName {
+    public static final String DRAW = "2";
+    public static final String TEAM_NOT_LOOSE = "4";
+    public static final String ANY_WIN = "5";
+    public static final String OPPOSING_TEAM_NOT_LOOSE = "6";
     public static final String TOTAL_OVER = "9";
     public static final String TOTAL_UNDER = "10";
     public static final String BOTH_TEAMS_TOTAL_OVER_YES = "1145";
-    public static final String BOTH_TEAMS_TOTAL_OVER_NO = "1144";
+    public static final String BOTH_TEAMS_TOTAL_OVER_NO = "1146";
     public static final String BOTH_TEAMS_TOTAL_UNDER_YES = "1143";
     public static final String BOTH_TEAMS_TOTAL_UNDER_NO = "1144";
     public static final String TEAM_TOTAL_OVER = "11";
     public static final String TEAM_TOTAL_UNDER = "12";
     public static final String OPPOSING_TEAM_TOTAL_OVER = "13";
     public static final String OPPOSING_TEAM_TOTAL_UNDER = "14";
-    public static final String TOTAL_OVER_ALL_PERIODS = "1241";
+    public static final String BOTH_TEAMS_SCORED_YES = "180";
+    public static final String BOTH_TEAMS_SCORED_NO = "181";
+    public static final String TOTAL_OVER_ALL_PERIODS_YES = "1241";
+    public static final String TOTAL_OVER_ALL_PERIODS_NO = "1240";
     public static final String TOTAL_UNDER_ALL_PERIODS_YES = "1223";
     public static final String TOTAL_UNDER_ALL_PERIODS_NO = "1224";
     public static final String TEAM_WIN_AND_TOTAL_OVER_YES = "197";
@@ -69,7 +76,7 @@ public class Book1xbetShortName {
     public static final String FIRST_GOAL_BEFORE_YES = "480";
     public static final String FIRST_GOAL_BEFORE_NO = "481";
     public static final String LAST_GOAL_AFTER_YES = "837";
-    public static final String LAST_GOAL_AFTER_NO = "836";
+    public static final String LAST_GOAL_AFTER_NO = "838";
 
     public static final String POWERPLAY_GOALS_TOTAL_OVER_YES = "1045";
     public static final String POWERPLAY_GOALS_TOTAL_OVER_NO = "1046";
