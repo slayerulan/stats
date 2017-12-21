@@ -12,6 +12,10 @@ class PeriodLastGoalAfterPossibleBetBlock extends PossibleBetContainer<HockeyMat
     public PeriodLastGoalAfterPossibleBetBlock() {
         super(Arrays.asList(
                 new PossibleBetContainer<>(
+                        new PeriodLastGoalAfterPossibleBet<>(HockeyMatch.MATCH, 50),
+                        ContainerType.OVER_50
+                ),
+                new PossibleBetContainer<>(
                         new PeriodLastGoalAfterPossibleBet<>(HockeyMatch.MATCH, 54),
                         ContainerType.OVER_54
                 ),

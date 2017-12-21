@@ -7,17 +7,13 @@ import com.savik.ContainerType;
 
 import java.util.Arrays;
 
-public class CoeffPeriodTeamWinAndTotalUnderBlock extends CoeffContainer {
-    public CoeffPeriodTeamWinAndTotalUnderBlock() {
+public class CoeffAnyWinAndTotalUnderBlock extends CoeffContainer {
+    public CoeffAnyWinAndTotalUnderBlock() {
         super(Arrays.asList(
-                new CoeffContainer(
-                        new Coeff(),
-                        ContainerType.UNDER_4_5
-                ),
                 new CoeffContainer(
                         new Coeff(),
                         ContainerType.UNDER_5_5
                 )
-        ), ContainerType.TEAM_WIN_AND_TOTAL_UNDER);
+        ), ContainerType.ANY_WIN_AND_TOTAL_UNDER);
     }
 }

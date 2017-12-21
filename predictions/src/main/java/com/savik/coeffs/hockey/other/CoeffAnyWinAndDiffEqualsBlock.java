@@ -7,8 +7,8 @@ import com.savik.ContainerType;
 
 import java.util.Arrays;
 
-public class CoeffPeriodAnyWinAndDiffEqualsBlock extends CoeffContainer {
-    public CoeffPeriodAnyWinAndDiffEqualsBlock() {
+public class CoeffAnyWinAndDiffEqualsBlock extends CoeffContainer {
+    public CoeffAnyWinAndDiffEqualsBlock() {
         super(Arrays.asList(
                 new CoeffContainer(
                         new Coeff(),

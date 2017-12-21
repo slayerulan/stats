@@ -33,6 +33,11 @@ public class Book1xbetShortName {
     public static final String OPPOSING_TEAM_NOT_LOOSE_AND_TOTAL_UNDER_YES = "193";
     public static final String OPPOSING_TEAM_NOT_LOOSE_AND_TOTAL_UNDER_NO = "213";
 
+    public static final String ANY_TEAM_WIN_AND_TOTAL_OVER_YES = "1559";
+    public static final String ANY_TEAM_WIN_AND_TOTAL_OVER_NO = "1636";
+    public static final String ANY_TEAM_WIN_AND_TOTAL_UNDER_YES = "1558";
+    public static final String ANY_TEAM_WIN_AND_TOTAL_UNDER_NO = "1635";
+
     public static final String TEAM_TOTAL_OVER_ALL_PERIODS_YES = "841";
     public static final String TEAM_TOTAL_OVER_ALL_PERIODS_NO = "842";
     public static final String OPPOSING_TEAM_TOTAL_OVER_ALL_PERIODS_YES = "843";
@@ -46,14 +51,25 @@ public class Book1xbetShortName {
 
     public static final String TEAM_WIN_AT_LEAST_1_PERIODS_YES = "3090";
     public static final String TEAM_WIN_AT_LEAST_1_PERIODS_NO = "3091";
+    public static final String TEAM_WIN_AT_LEAST_N_PERIODS_YES = "1210";
+    public static final String TEAM_WIN_AT_LEAST_N_PERIODS_NO = "1211";
 
     public static final String OPPOSING_TEAM_WIN_AT_LEAST_1_PERIODS_YES = "3092";
     public static final String OPPOSING_TEAM_WIN_AT_LEAST_1_PERIODS_NO = "3093";
+    public static final String OPPOSING_TEAM_WIN_AT_LEAST_N_PERIODS_YES = "1212";
+    public static final String OPPOSING_TEAM_WIN_AT_LEAST_N_PERIODS_NO = "1213";
+
+    public static final String DRAW_AT_LEAST_1_PERIODS_YES = "3094";
+    public static final String DRAW_AT_LEAST_1_PERIODS_NO = "3095";
+
 
     public static final String MOST_EFFECTIVE_PERIOD_TOTAL_OVER_YES = "1238";
     public static final String MOST_EFFECTIVE_PERIOD_TOTAL_OVER_NO = "1239";
 
-    public static final String FIRST_GOAL_BEFORE = "480";
+    public static final String FIRST_GOAL_BEFORE_YES = "480";
+    public static final String FIRST_GOAL_BEFORE_NO = "481";
+    public static final String LAST_GOAL_AFTER_YES = "837";
+    public static final String LAST_GOAL_AFTER_NO = "836";
 
     public static final String POWERPLAY_GOALS_TOTAL_OVER_YES = "1045";
     public static final String POWERPLAY_GOALS_TOTAL_OVER_NO = "1046";

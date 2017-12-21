@@ -78,6 +78,7 @@ public enum ContainerType {
     OVER_6_5,
     OVER_7_5,
     OVER_8_5,
+    OVER_50,
     OVER_54,
     OVER_55,
     OVER_13_5,

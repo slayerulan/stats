@@ -12,6 +12,10 @@ public class CoeffPeriodLastGoalAfterBlock extends CoeffContainer {
         super(Arrays.asList(
                 new CoeffContainer(
                         new Coeff(),
+                        ContainerType.OVER_50
+                ),
+                new CoeffContainer(
+                        new Coeff(),
                         ContainerType.OVER_54
                 ),
                 new CoeffContainer(
