@@ -13,22 +13,22 @@ public class CoeffOtherBlock extends CoeffContainer {
                 new CoeffTotalUnderInAllPeriodsBlock(),
 
 
-                new CoeffPeriodAnyWinAndTotalOverBlock(),
-                new CoeffPeriodAnyWinAndTotalUnderBlock(),
-                new CoeffPeriodAnyWinAndDiffEqualsBlock(),
+                new CoeffAnyWinAndTotalOverBlock(),
+                new CoeffAnyWinAndTotalUnderBlock(),
+                new CoeffAnyWinAndDiffEqualsBlock(),
 
                 new CoeffPeriodFirstGoalBeforeBlock(),
                 new CoeffPeriodLastGoalAfterBlock(),
 
-                new CoeffPeriodTeamWinAndTotalOverBlock(),
-                new CoeffPeriodTeamWinAndTotalUnderBlock(),
-                new CoeffPeriodTeamNotLooseAndTotalOverBlock(),
-                new CoeffPeriodTeamNotLooseAndTotalUnderBlock(),
+                new CoeffTeamWinAndTotalOverBlock(),
+                new CoeffTeamWinAndTotalUnderBlock(),
+                new CoeffTeamNotLooseAndTotalOverBlock(),
+                new CoeffTeamNotLooseAndTotalUnderBlock(),
 
-                new CoeffPeriodOpposingTeamWinAndTotalOverBlock(),
-                new CoeffPeriodOpposingTeamWinAndTotalUnderBlock(),
-                new CoeffPeriodOpposingTeamNotLooseAndTotalOverBlock(),
-                new CoeffPeriodOpposingTeamNotLooseAndTotalUnderBlock(),
+                new CoeffOpposingTeamWinAndTotalOverBlock(),
+                new CoeffOpposingTeamWinAndTotalUnderBlock(),
+                new CoeffOpposingTeamNotLooseAndTotalOverBlock(),
+                new CoeffOpposingTeamNotLooseAndTotalUnderBlock(),
 
                 new CoeffTeamTotalOverInAllPeriodsBlock(),
                 new CoeffOpposingTeamTotalOverInAllPeriodsBlock(),
