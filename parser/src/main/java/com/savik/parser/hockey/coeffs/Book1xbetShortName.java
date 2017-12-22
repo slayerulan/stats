@@ -31,10 +31,10 @@ public class Book1xbetShortName {
     public static final String TEAM_NOT_LOOSE_AND_TOTAL_UNDER_YES = "198";
     public static final String TEAM_NOT_LOOSE_AND_TOTAL_UNDER_NO = "208";
 
-    public static final String OPPOSING_TEAM_WIN_AND_TOTAL_OVER_YES = "191";
-    public static final String OPPOSING_TEAM_WIN_AND_TOTAL_OVER_NO = "211";
-    public static final String OPPOSING_TEAM_WIN_AND_TOTAL_UNDER_YES = "192";
-    public static final String OPPOSING_TEAM_WIN_AND_TOTAL_UNDER_NO = "212";
+    public static final String OPPOSING_TEAM_WIN_AND_TOTAL_OVER_YES = "192";
+    public static final String OPPOSING_TEAM_WIN_AND_TOTAL_OVER_NO = "212";
+    public static final String OPPOSING_TEAM_WIN_AND_TOTAL_UNDER_YES = "191";
+    public static final String OPPOSING_TEAM_WIN_AND_TOTAL_UNDER_NO = "211";
     public static final String OPPOSING_TEAM_NOT_LOOSE_AND_TOTAL_OVER_YES = "194";
     public static final String OPPOSING_TEAM_NOT_LOOSE_AND_TOTAL_OVER_NO = "214";
     public static final String OPPOSING_TEAM_NOT_LOOSE_AND_TOTAL_UNDER_YES = "193";

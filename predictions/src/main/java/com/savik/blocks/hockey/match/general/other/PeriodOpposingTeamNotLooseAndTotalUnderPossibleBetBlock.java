@@ -20,6 +20,10 @@ class PeriodOpposingTeamNotLooseAndTotalUnderPossibleBetBlock extends PossibleBe
                         new PossibleBetContainer<>(
                                 new PeriodOpposingTeamNotLooseAndTotalUnderPossibleBet<>(homeMatchData, guestMatchData, HockeyMatch.MATCH, 5.5),
                                 ContainerType.UNDER_5_5
+                        ),
+                        new PossibleBetContainer<>(
+                                new PeriodOpposingTeamNotLooseAndTotalUnderPossibleBet<>(homeMatchData, guestMatchData, HockeyMatch.MATCH, 6.5),
+                                ContainerType.UNDER_6_5
                         )
                 ), ContainerType.OPPOSING_TEAM_NOT_LOOSE_AND_TOTAL_UNDER
         );

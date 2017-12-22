@@ -17,6 +17,10 @@ public class CoeffTeamWinAndTotalOverBlock extends CoeffContainer {
                 new CoeffContainer(
                         new Coeff(),
                         ContainerType.OVER_5_5
+                ),
+                new CoeffContainer(
+                        new Coeff(),
+                        ContainerType.OVER_6_5
                 )
         ), ContainerType.TEAM_WIN_AND_TOTAL_OVER);
     }

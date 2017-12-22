@@ -17,6 +17,10 @@ public class CoeffTeamWinAndTotalUnderBlock extends CoeffContainer {
                 new CoeffContainer(
                         new Coeff(),
                         ContainerType.UNDER_5_5
+                ),
+                new CoeffContainer(
+                        new Coeff(),
+                        ContainerType.UNDER_6_5
                 )
         ), ContainerType.TEAM_WIN_AND_TOTAL_UNDER);
     }

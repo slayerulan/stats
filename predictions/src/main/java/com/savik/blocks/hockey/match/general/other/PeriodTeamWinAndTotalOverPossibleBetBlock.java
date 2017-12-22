@@ -20,6 +20,10 @@ class PeriodTeamWinAndTotalOverPossibleBetBlock extends PossibleBetContainer<Hoc
                         new PossibleBetContainer<>(
                                 new PeriodTeamWinAndTotalOverPossibleBet<>(homeMatchData, guestMatchData, HockeyMatch.MATCH, 5.5),
                                 ContainerType.OVER_5_5
+                        ),
+                        new PossibleBetContainer<>(
+                                new PeriodTeamWinAndTotalOverPossibleBet<>(homeMatchData, guestMatchData, HockeyMatch.MATCH, 6.5),
+                                ContainerType.OVER_6_5
                         )
                 ), ContainerType.TEAM_WIN_AND_TOTAL_OVER
         );

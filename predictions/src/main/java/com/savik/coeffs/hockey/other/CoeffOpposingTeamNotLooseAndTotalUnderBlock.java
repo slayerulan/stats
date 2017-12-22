@@ -17,6 +17,10 @@ public class CoeffOpposingTeamNotLooseAndTotalUnderBlock extends CoeffContainer 
                 new CoeffContainer(
                         new Coeff(),
                         ContainerType.UNDER_5_5
+                ),
+                new CoeffContainer(
+                        new Coeff(),
+                        ContainerType.UNDER_6_5
                 )
         ), ContainerType.OPPOSING_TEAM_NOT_LOOSE_AND_TOTAL_UNDER);
     }
