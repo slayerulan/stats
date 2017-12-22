@@ -45,9 +45,9 @@ public class Hockey1xstavkaCoeffsMatchParser {
     @Autowired
     ObjectMapper objectMapper;
 
-    public void parse(HockeyFutureMatch hockeyFutureMatch) throws IOException {
+    public CoeffBlock parse(HockeyFutureMatch hockeyFutureMatch, String leagueUrl) throws IOException {
 
-        String json = downloader.getJson("https://1xecu.xyz/LineFeed/GetChampZip?lng=ru&champ=30619&tf=3000000&afterDays=0&tz=0&sport=2&country=1");
+        String json = downloader.getJson(leagueUrl);
         JSONObject jsonObject = new JSONObject(json);
         Set<BookFutureMatchRepresentation> list = objectMapper.readValue(
                 jsonObject.getJSONObject("Value").getJSONArray("G").toString(),
@@ -55,40 +55,38 @@ public class Hockey1xstavkaCoeffsMatchParser {
                 }
         );
 
-
+        CoeffBlock coeffBlock;
         for (BookFutureMatchRepresentation matchRepresentation : list) {
-            //String matchCoeffsJson = downloader.getJson("https://1xecu.xyz/LineFeed/GetGameZip?lng=ru&cfview=0&isSubGames=true&GroupEvents=true&countevents=1000&grMode=2&id=" + matchRepresentation.getCi());
-            String matchCoeffsJson = downloader.getJson("https://1xecu.xyz/LineFeed/GetGameZip?lng=ru&cfview=0&isSubGames=true&GroupEvents=true&countevents=1000&grMode=2&id=19736709");
-            JSONObject matchCoeffsObject = new JSONObject(matchCoeffsJson);
+            if(matchRepresentation.o1.contains(hockeyFutureMatch.getHomeTeam().getName()) || matchRepresentation.o2.contains(hockeyFutureMatch.getGuestTeam().getName())) {
+                String matchCoeffsJson = downloader.getJson("https://1xecu.xyz/LineFeed/GetGameZip?lng=ru&cfview=0&isSubGames=true&GroupEvents=true&countevents=1000&grMode=2&id=" + matchRepresentation.getCi());
+                JSONObject matchCoeffsObject = new JSONObject(matchCoeffsJson);
 
-            Set<BookFutureMatchCoeff> futureMatchCoeffs = objectMapper.readValue(
-                    matchCoeffsObject.getJSONObject("Value").getJSONArray("E").toString(),
-                    new TypeReference<Set<BookFutureMatchCoeff>>() {
-                    }
-            );
-
-            JSONArray jsonArray = matchCoeffsObject.getJSONObject("Value").getJSONArray("GE");
-            for (Object o : jsonArray) {
-                JSONArray temp1 = ((JSONObject) o).getJSONArray("E");
-                List<List<BookFutureMatchCoeff>> lists = objectMapper.readValue(
-                        temp1.toString(),
-                        new TypeReference<List<List<BookFutureMatchCoeff>>>() {
+                Set<BookFutureMatchCoeff> futureMatchCoeffs = objectMapper.readValue(
+                        matchCoeffsObject.getJSONObject("Value").getJSONArray("E").toString(),
+                        new TypeReference<Set<BookFutureMatchCoeff>>() {
                         }
                 );
-                List<BookFutureMatchCoeff> addtionalCoeffs = lists.stream()
-                        .flatMap(List::stream)
-                        .collect(Collectors.toList());
-                futureMatchCoeffs.addAll(addtionalCoeffs);
+
+                JSONArray jsonArray = matchCoeffsObject.getJSONObject("Value").getJSONArray("GE");
+                for (Object o : jsonArray) {
+                    JSONArray temp1 = ((JSONObject) o).getJSONArray("E");
+                    List<List<BookFutureMatchCoeff>> lists = objectMapper.readValue(
+                            temp1.toString(),
+                            new TypeReference<List<List<BookFutureMatchCoeff>>>() {
+                            }
+                    );
+                    List<BookFutureMatchCoeff> addtionalCoeffs = lists.stream()
+                            .flatMap(List::stream)
+                            .collect(Collectors.toList());
+                    futureMatchCoeffs.addAll(addtionalCoeffs);
+                }
+                coeffBlock = new CoeffBlock();
+                fill(futureMatchCoeffs, coeffBlock);
+                fillSpecialGroups(matchCoeffsObject, coeffBlock);
+                return coeffBlock;
             }
-            CoeffBlock coeffBlock = new CoeffBlock();
-            fill(futureMatchCoeffs, coeffBlock);
-            fillSpecialGroups(matchCoeffsObject, coeffBlock);
-            String a = "";
-
         }
-
-        String a = "";
-
+        throw new RuntimeException("strange< myscore code = " + hockeyFutureMatch.getMyscoreCode());
     }
 
     private void fill(Set<BookFutureMatchCoeff> futureMatchCoeffs, CoeffContainer rootContainer) {
@@ -547,7 +545,7 @@ public class Hockey1xstavkaCoeffsMatchParser {
                     biConsumer.accept(posCoeff, negativeCoeff.get());
                 }
             } else {
-                throw new RuntimeException(String.format("strange %s - %s", posCoeff.getId(), posCoeff.getKind()));
+                System.out.println(String.format("strange %s - %s", posCoeff.getId(), posCoeff.getKind()));
             }
         }
     }

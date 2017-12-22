@@ -12,6 +12,7 @@ import com.savik.hockey.repository.HockeyFutureMatchRepository;
 import com.savik.hockey.repository.HockeyMatchRepository;
 import com.savik.hockey.repository.HockeyTeamRepository;
 import com.savik.parser.hockey.coeffs.HockeyCoeffsMatchParser;
+import com.savik.parser.utils.CoeffTransformer;
 import com.savik.repository.CoeffRepository;
 import com.savik.result_block.hockey.match.general.GeneralBlock;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 import static com.savik.hockey.specifications.HockeyMatchSpec.*;
@@ -153,20 +152,9 @@ public class TestController {
 
     @GetMapping("/bets/test")
     public List<CoeffEntry> test(HockeyMatchFilter hockeyMatchFilter) {
-        List<CoeffEntry> gx2euw5b = coeffRepository.findByMyscoreCode("Gx2euw5b");
         HockeyFutureMatch futureMatch = hockeyFutureMatchRepository.findByMyscoreCode(hockeyMatchFilter.getMyscoreCode());
-
         CoeffBlock coeffBlock = hockeyCoeffsMatchParser.parse(futureMatch);
-        List<CoeffEntry> migrate = transformBlockToEntry(coeffBlock, "");
-        Iterator<CoeffEntry> iterator = migrate.iterator();
-        while (iterator.hasNext()) {
-            CoeffEntry coeffEntry = iterator.next();
-            if (coeffEntry.getCoeff() == null || coeffEntry.getCoeff().isAverageCoeff()) {
-                iterator.remove();
-            }
-            coeffEntry.setMyscoreCode(hockeyMatchFilter.getMyscoreCode());
-
-        }
+        List<CoeffEntry> migrate = CoeffTransformer.transformBlockToEntryWithoutAverageCoeffs(coeffBlock, hockeyMatchFilter.getMyscoreCode());
         coeffRepository.save(migrate);
         return migrate;
     }
@@ -192,62 +180,14 @@ public class TestController {
         possibleBetsBlock.check(homeTeamMatches, guestTeamMatches);
 
         List<CoeffEntry> coeffEntries = coeffRepository.findByMyscoreCode(hockeyMatchFilter.getMyscoreCode());
-        CoeffContainer coeffContainer = transformEntryToBlock(coeffEntries);
+        CoeffContainer coeffContainer = CoeffTransformer.transformEntryToBlock(coeffEntries);
 
         PossibleBetResultContainer resultContainer = CoefficientsAnalyzer.analyze(coeffContainer, possibleBetsBlock);
         return resultContainer;
     }
 
-    public List<CoeffEntry> transformBlockToEntry(CoeffContainer coeffBlock, String parentPath) {
-        if (coeffBlock.getLeaf()) {
-            return Arrays.asList(
-                    new CoeffEntry(
-                            coeffBlock.getCoeff(),
-                            true,
-                            String.format("%s.%d", parentPath, coeffBlock.getType().ordinal())
-                    )
-            );
-        } else {
-            List<? extends CoeffContainer> childrenBlocks = coeffBlock.getChildrenBlocks();
-            List<CoeffEntry> childBlocks = new ArrayList<>();
-            String path = parentPath.isEmpty() ? String.valueOf(coeffBlock.getType().ordinal()) :
-                    String.format("%s.%d", parentPath, coeffBlock.getType().ordinal());
-            childBlocks.add(
-                    new CoeffEntry(
-                            coeffBlock.getCoeff(), false, path
-                    )
-            );
-            for (CoeffContainer childBlock : childrenBlocks) {
-                List<CoeffEntry> coeffEntries = transformBlockToEntry(childBlock, path);
-                childBlocks.addAll(coeffEntries);
-            }
-            return childBlocks;
-        }
-    }
 
-    public CoeffContainer transformEntryToBlock(List<CoeffEntry> coeffEntries) {
-        CoeffContainer root = new CoeffContainer(new ArrayList<>(), ContainerType.ROOT);
-        for (CoeffEntry coeffEntry : coeffEntries) {
 
-            CoeffContainer current = root;
-            String path = coeffEntry.getPath();
-            List<String> types = Arrays.asList(path.split("\\."));
-            for (int i = 1; i < types.size(); i++) {
-                String ordinal = types.get(i);
-                ContainerType containerType = ContainerType.values()[Integer.valueOf(ordinal)];
-                CoeffContainer temp = current.findByTypeInFirstLevel(containerType);
-                if (temp == null) {
-                    if (i == types.size() - 1) {
-                        temp = new CoeffContainer(coeffEntry.getCoeff(), containerType);
-                    } else {
-                        temp = new CoeffContainer(new ArrayList<>(), containerType);
-                    }
-                    current.getChildrenBlocks().add(temp);
-                }
-                current = temp;
-            }
-        }
-        return root;
-    }
+
 
 }
