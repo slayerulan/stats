@@ -120,6 +120,11 @@ public class Hockey1xstavkaCoeffsMatchParser {
                 rootContainer.findByType(PERIODS).findByType(THIRD_PERIOD)
         );
 
+        fillShotsBlock(
+                getBookFutureMatchCoeffs(findSpecialGroupByTG(specialGroups, "Броски в створ ворот")),
+                rootContainer.findByType(STATS)
+        );
+
 
     }
 
@@ -127,6 +132,16 @@ public class Hockey1xstavkaCoeffsMatchParser {
         for (Object period : periods) {
             JSONObject jsonObject = (JSONObject) period;
             if (jsonObject.has("PN") && jsonObject.getString("PN").contains(periodNumber)) {
+                return jsonObject;
+            }
+        }
+        return null;
+    }
+
+    private JSONObject findSpecialGroupByTG(JSONArray periods, String tg) {
+        for (Object period : periods) {
+            JSONObject jsonObject = (JSONObject) period;
+            if (jsonObject.has("TG") && jsonObject.getString("TG").contains(tg)) {
                 return jsonObject;
             }
         }
@@ -492,6 +507,59 @@ public class Hockey1xstavkaCoeffsMatchParser {
                 periodContainer.findByType(BOTH_TEAMS_TOTAL_OVER));
 
 
+    }
+
+    private void fillShotsBlock(Set<BookFutureMatchCoeff> futureMatchCoeffs, CoeffContainer statsContainer) {
+        fillShotsTotalOverBlock(findByShortNameId(futureMatchCoeffs, Book1xbetShortName.TOTAL_OVER),
+                findByShortNameId(futureMatchCoeffs, Book1xbetShortName.TOTAL_UNDER),
+                statsContainer.findByType(SHOTS_ON_TARGET_OVER));
+
+        fillTeamShotsHandicap(findByShortNameId(futureMatchCoeffs, Book1xbetShortName.TEAM_HANDICAP),
+                statsContainer.findByType(TEAM_SHOTS_ON_TARGET_HANDICAP));
+
+        fillTeamShotsHandicap(findByShortNameId(futureMatchCoeffs, Book1xbetShortName.OPPOSING_TEAM_HANDICAP),
+                statsContainer.findByType(OPPOSING_TEAM_SHOTS_ON_TARGET_HANDICAP));
+
+        fillTeamWinShots(findByShortNameId(futureMatchCoeffs, Book1xbetShortName.TEAM_WIN),
+                statsContainer.findByType(TEAM_SHOTS_ON_TARGET_WIN));
+
+        fillTeamWinShots(findByShortNameId(futureMatchCoeffs, Book1xbetShortName.OPPOSING_TEAM_WIN),
+                statsContainer.findByType(OPPOSING_TEAM_SHOTS_ON_TARGET_WIN));
+
+    }
+
+
+    private void fillShotsTotalOverBlock(Set<BookFutureMatchCoeff> futureMatchPosCoeffs,
+                                              Set<BookFutureMatchCoeff> futureMatchNegCoeffs,
+                                              CoeffContainer container) {
+        fillPosAndNegContainer(futureMatchPosCoeffs, futureMatchNegCoeffs,
+                (posCoeff, negCoeff) -> checkIfContainsKindAndSetPosAndNegCoeff(posCoeff, negCoeff, container.findByType(OVER_57_5), "57.5"),
+                (posCoeff, negCoeff) -> checkIfContainsKindAndSetPosAndNegCoeff(posCoeff, negCoeff, container.findByType(OVER_58_5), "58.5"),
+                (posCoeff, negCoeff) -> checkIfContainsKindAndSetPosAndNegCoeff(posCoeff, negCoeff, container.findByType(OVER_59_5), "59.5"),
+                (posCoeff, negCoeff) -> checkIfContainsKindAndSetPosAndNegCoeff(posCoeff, negCoeff, container.findByType(OVER_60_5), "60.5"),
+                (posCoeff, negCoeff) -> checkIfContainsKindAndSetPosAndNegCoeff(posCoeff, negCoeff, container.findByType(OVER_61_5), "61.5"),
+                (posCoeff, negCoeff) -> checkIfContainsKindAndSetPosAndNegCoeff(posCoeff, negCoeff, container.findByType(OVER_62_5), "62.5"),
+                (posCoeff, negCoeff) -> checkIfContainsKindAndSetPosAndNegCoeff(posCoeff, negCoeff, container.findByType(OVER_63_5), "63.5")
+        );
+    }
+
+    private void fillTeamShotsHandicap(Set<BookFutureMatchCoeff> futureMatchCoeffs, CoeffContainer totalOverContainer) {
+        for (BookFutureMatchCoeff bookFutureMatchCoeff : futureMatchCoeffs) {
+            checkIfContainsKindAndSetCoeff(bookFutureMatchCoeff, totalOverContainer.findByType(PLUS_5_5), "5.5");
+            checkIfContainsKindAndSetCoeff(bookFutureMatchCoeff, totalOverContainer.findByType(PLUS_4_5), "4.5");
+            checkIfContainsKindAndSetCoeff(bookFutureMatchCoeff, totalOverContainer.findByType(PLUS_3_5), "3.5");
+            checkIfContainsKindAndSetCoeff(bookFutureMatchCoeff, totalOverContainer.findByType(PLUS_2_5), "2.5");
+            checkIfContainsKindAndSetCoeff(bookFutureMatchCoeff, totalOverContainer.findByType(PLUS_1_5), "1.5");
+            checkIfContainsKindAndSetCoeff(bookFutureMatchCoeff, totalOverContainer.findByType(MINUS_1_5), "-1.5");
+            checkIfContainsKindAndSetCoeff(bookFutureMatchCoeff, totalOverContainer.findByType(MINUS_2_5), "-2.5");
+            checkIfContainsKindAndSetCoeff(bookFutureMatchCoeff, totalOverContainer.findByType(MINUS_3_5), "-3.5");
+            checkIfContainsKindAndSetCoeff(bookFutureMatchCoeff, totalOverContainer.findByType(MINUS_4_5), "-4.5");
+            checkIfContainsKindAndSetCoeff(bookFutureMatchCoeff, totalOverContainer.findByType(MINUS_5_5), "-5.5");
+        }
+    }
+
+    private void fillTeamWinShots(Set<BookFutureMatchCoeff> futureMatchCoeffs, CoeffContainer container) {
+        setYesCoeff(futureMatchCoeffs, container);
     }
 
     private void fillPeriodTotalOverBlock(Set<BookFutureMatchCoeff> futureMatchCoeffs, CoeffContainer totalOverContainer) {

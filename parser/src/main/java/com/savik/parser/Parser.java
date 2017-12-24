@@ -39,7 +39,7 @@ public class Parser {
 
     @PostConstruct
     public void parse() throws Exception {
-        //hockeyCoeffsMatchTest.parse();
+        hockeyCoeffsMatchTest.parse();
         // hockeyFutureMatchesParser.parse();
         //hockeyParser.parse();
     }

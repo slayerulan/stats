@@ -2,10 +2,14 @@ package com.savik.parser.hockey.coeffs;
 
 
 public class Book1xbetShortName {
+    public static final String TEAM_WIN = "1";
     public static final String DRAW = "2";
+    public static final String OPPOSING_TEAM_WIN = "3";
     public static final String TEAM_NOT_LOOSE = "4";
     public static final String ANY_WIN = "5";
     public static final String OPPOSING_TEAM_NOT_LOOSE = "6";
+    public static final String TEAM_HANDICAP = "7";
+    public static final String OPPOSING_TEAM_HANDICAP = "8";
     public static final String TOTAL_OVER = "9";
     public static final String TOTAL_UNDER = "10";
     public static final String BOTH_TEAMS_TOTAL_OVER_YES = "1145";
