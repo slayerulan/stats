@@ -560,12 +560,64 @@ public class HockeyPossibleBetBlockTest {
     }
 
     @Test
-    public void testAnyComebackMatchPossible() {
+    public void testAnyComebackMatch() {
         PossibleBetContainer possibleBetsBlock = getPossibleBetsBlock();
 
         PossibleBetContainer block = possibleBetsBlock.findByType(ANY_COMEBACK);
         assertEquals(0, block.getFirstTeamPercentage());
         assertEquals(0, block.getSecondTeamPercentage());
+    }
+
+    @Test
+    public void testTeamScoredNInRow() {
+        PossibleBetContainer possibleBetsBlock = getPossibleBetsBlock();
+
+        PossibleBetContainer block = possibleBetsBlock.findByType(TEAM_SCORED_N_IN_ROW);
+
+        PossibleBetContainer number2 = block.findByType(NUMBER_2);
+        assertEquals(60, number2.getFirstTeamPercentage());
+        assertEquals(80, number2.getSecondTeamPercentage());
+
+        PossibleBetContainer number3 = block.findByType(NUMBER_3);
+        assertEquals(20, number3.getFirstTeamPercentage());
+        assertEquals(40, number3.getSecondTeamPercentage());
+
+    }
+
+    @Test
+    public void testOpposingTeamScoredNInRow() {
+        PossibleBetContainer possibleBetsBlock = getPossibleBetsBlock();
+
+        PossibleBetContainer block = possibleBetsBlock.findByType(OPPOSING_TEAM_SCORED_N_IN_ROW);
+
+        PossibleBetContainer number2 = block.findByType(NUMBER_2);
+        assertEquals(40, number2.getFirstTeamPercentage());
+        assertEquals(100, number2.getSecondTeamPercentage());
+
+        PossibleBetContainer number3 = block.findByType(NUMBER_3);
+        assertEquals(0, number3.getFirstTeamPercentage());
+        assertEquals(40, number3.getSecondTeamPercentage());
+
+    }
+
+    @Test
+    public void testPeriodXMoreEffectiveThanY() {
+        PossibleBetContainer possibleBetsBlock = getPossibleBetsBlock();
+
+        PossibleBetContainer block = possibleBetsBlock.findByType(PERIOD_X_MORE_EFFECTIVE_THAN_Y);
+
+        PossibleBetContainer p2MoreP1 = block.findByType(P2_MORE_P1);
+        assertEquals(60, p2MoreP1.getFirstTeamPercentage());
+        assertEquals(60, p2MoreP1.getSecondTeamPercentage());
+
+        PossibleBetContainer p3MoreP2 = block.findByType(P3_MORE_P2);
+        assertEquals(20, p3MoreP2.getFirstTeamPercentage());
+        assertEquals(60, p3MoreP2.getSecondTeamPercentage());
+
+        PossibleBetContainer p3MoreP1 = block.findByType(P3_MORE_P1);
+        assertEquals(40, p3MoreP1.getFirstTeamPercentage());
+        assertEquals(80, p3MoreP1.getSecondTeamPercentage());
+
     }
 
 
