@@ -70,16 +70,16 @@ public class Book1xbetShortName {
     public static final String DRAW_AT_LEAST_1_PERIODS_NO = "3095";
 
 
-    public static final String MOST_EFFECTIVE_PERIOD_TOTAL_OVER_YES = "1238";
-    public static final String MOST_EFFECTIVE_PERIOD_TOTAL_OVER_NO = "1239";
+    public static final String MOST_EFFECTIVE_PERIOD_TOTAL_OVER_YES = "1239";
+    public static final String MOST_EFFECTIVE_PERIOD_TOTAL_OVER_NO = "1238";
 
     public static final String FIRST_GOAL_BEFORE_YES = "480";
     public static final String FIRST_GOAL_BEFORE_NO = "481";
     public static final String LAST_GOAL_AFTER_YES = "837";
     public static final String LAST_GOAL_AFTER_NO = "838";
 
-    public static final String POWERPLAY_GOALS_TOTAL_OVER_YES = "1045";
-    public static final String POWERPLAY_GOALS_TOTAL_OVER_NO = "1046";
+    public static final String POWERPLAY_GOALS_TOTAL_OVER_YES = "1046";
+    public static final String POWERPLAY_GOALS_TOTAL_OVER_NO = "1045";
 
 
 

@@ -33,11 +33,12 @@ public class HockeyCoeffsMatchTest {
 
     public void parse() throws URISyntaxException, IOException {
         List<HockeyFutureMatch> all = hockeyFutureMatchRepository.findAll();
-        parseLeague(all.stream().filter(m -> m.getChampionship() == HockeyChampionship.NHL).collect(Collectors.toList()),
+/*        parseLeague(all.stream().filter(m -> m.getMyscoreCode().equals("A3ymaIws")).collect(Collectors.toList()),
                 "https://1xecu.xyz/LineFeed/GetChampZip?lng=ru&champ=30619&tf=3000000&afterDays=0&tz=0&sport=2&country=1");
+        parseLeague(all.stream().filter(m -> m.getChampionship() == HockeyChampionship.NHL).collect(Collectors.toList()),
+                "https://1xecu.xyz/LineFeed/GetChampZip?lng=ru&champ=30619&tf=3000000&afterDays=0&tz=0&sport=2&country=1");*/
         parseLeague(all.stream().filter(m -> m.getChampionship() == HockeyChampionship.KHL).collect(Collectors.toList()),
                 "https://1xecu.xyz/LineFeed/GetChampZip?lng=ru&champ=3355&tf=3000000&afterDays=0&tz=0&sport=2&country=1");
-        //hockeyCoeffsMatchParser.parse(futureMatch);
         String a = "";
     }
 
