@@ -86,5 +86,11 @@ public class Book1xbetShortName {
     public static final String POWERPLAY_GOALS_TOTAL_OVER_NO = "1045";
 
 
+    public static final String TEAM_SCORED_IN_ROW_YES = "1125";
+    public static final String TEAM_SCORED_IN_ROW_NO = "1126";
+    public static final String OPPOSING_TEAM_SCORED_IN_ROW_YES = "1127";
+    public static final String OPPOSING_TEAM_SCORED_IN_ROW_NO = "1128";
+
+
 
 }

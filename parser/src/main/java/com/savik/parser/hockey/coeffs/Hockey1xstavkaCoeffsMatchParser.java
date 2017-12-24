@@ -324,6 +324,14 @@ public class Hockey1xstavkaCoeffsMatchParser {
                 findByShortNameId(futureMatchCoeffs, Book1xbetShortName.MOST_EFFECTIVE_PERIOD_TOTAL_OVER_NO),
                 totalContainer.findByType(MOST_EFFECTIVE_PERIOD_TOTAL_OVER));
 
+        fillTeamScoredInRowBlock(findByShortNameId(futureMatchCoeffs, Book1xbetShortName.TEAM_SCORED_IN_ROW_YES),
+                findByShortNameId(futureMatchCoeffs, Book1xbetShortName.TEAM_SCORED_IN_ROW_NO),
+                totalContainer.findByType(TEAM_SCORED_N_IN_ROW));
+
+        fillTeamScoredInRowBlock(findByShortNameId(futureMatchCoeffs, Book1xbetShortName.OPPOSING_TEAM_SCORED_IN_ROW_YES),
+                findByShortNameId(futureMatchCoeffs, Book1xbetShortName.OPPOSING_TEAM_SCORED_IN_ROW_NO),
+                totalContainer.findByType(OPPOSING_TEAM_SCORED_N_IN_ROW));
+
     }
 
     private void fillStatsBlock(Set<BookFutureMatchCoeff> futureMatchCoeffs, CoeffContainer totalContainer) {
@@ -470,6 +478,15 @@ public class Hockey1xstavkaCoeffsMatchParser {
                                                   CoeffContainer container) {
         fillPosAndNegContainer(futureMatchPosCoeffs, futureMatchNegCoeffs,
                 (posCoeff, negCoeff) -> checkIfContainsKindAndSetPosAndNegCoeff(posCoeff, negCoeff, container.findByType(OVER_1_5), "1.5")
+        );
+    }
+
+    private void fillTeamScoredInRowBlock(Set<BookFutureMatchCoeff> futureMatchPosCoeffs,
+                                                  Set<BookFutureMatchCoeff> futureMatchNegCoeffs,
+                                                  CoeffContainer container) {
+        fillPosAndNegContainer(futureMatchPosCoeffs, futureMatchNegCoeffs,
+                (posCoeff, negCoeff) -> checkIfContainsKindAndSetPosAndNegCoeff(posCoeff, negCoeff, container.findByType(NUMBER_2), "2"),
+                (posCoeff, negCoeff) -> checkIfContainsKindAndSetPosAndNegCoeff(posCoeff, negCoeff, container.findByType(NUMBER_3), "3")
         );
     }
 

@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotNull;
+import java.util.Comparator;
 
 @Entity
 @NoArgsConstructor
@@ -16,6 +17,8 @@ import javax.validation.constraints.NotNull;
 @SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "hockey_goal_id_generator")
 @EqualsAndHashCode(callSuper = true)
 public class HockeyGoal extends Goal {
+
+    public static Comparator<HockeyGoal> byTime = Comparator.comparingInt(HockeyGoal::getMinute).thenComparing(HockeyGoal::getSeconds);
 
     @NotNull
     @OneToOne

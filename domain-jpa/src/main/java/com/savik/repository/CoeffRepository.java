@@ -2,6 +2,7 @@ package com.savik.repository;
 
 import com.savik.CoeffEntry;
 import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
