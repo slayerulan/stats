@@ -71,6 +71,7 @@ public enum ContainerType {
     POWERPLAY_GOALS_OVER,
     TEAM_SCORED_N_IN_ROW,
     OPPOSING_TEAM_SCORED_N_IN_ROW,
+    PERIOD_X_MORE_EFFECTIVE_THAN_Y,
     OVER_0_5,
     OVER_1_5,
     OVER_2_5,
@@ -129,6 +130,8 @@ public enum ContainerType {
     MINUS_2_5,
     MINUS_3_5,
     MINUS_4_5,
-    MINUS_5_5
-
+    MINUS_5_5,
+    P2_MORE_P1,
+    P3_MORE_P2,
+    P3_MORE_P1
 }

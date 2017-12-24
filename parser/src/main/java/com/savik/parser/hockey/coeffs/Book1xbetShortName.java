@@ -96,5 +96,8 @@ public class Book1xbetShortName {
     public static final String OPPOSING_TEAM_FIRST_SCORED_AND_WIN_YES = "1039";
     public static final String OPPOSING_TEAM_FIRST_SCORED_AND_WIN_NO = "1040";
 
+    public static final String PERIOD_X_MORE_EFFECTIVE_THAN_Y_YES = "780";
+    public static final String PERIOD_X_MORE_EFFECTIVE_THAN_Y_NO = "781";
+
 
 }

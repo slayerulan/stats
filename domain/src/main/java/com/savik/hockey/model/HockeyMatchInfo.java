@@ -1,6 +1,7 @@
 package com.savik.hockey.model;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.savik.Period;
 import com.savik.domain.Identifiable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -40,6 +41,21 @@ public class HockeyMatchInfo extends Identifiable {
 
     @OneToOne(cascade = CascadeType.ALL)
     HockeyPeriod overtime;
+
+    public HockeyPeriod getByStatus(Period.PeriodStatus periodStatus) {
+        if (periodStatus == Period.PeriodStatus.FIRST) {
+            return firstPeriod;
+        } else if (periodStatus == Period.PeriodStatus.SECOND) {
+            return secondPeriod;
+        } else if (periodStatus == Period.PeriodStatus.THIRD) {
+            return thirdPeriod;
+        } else if (periodStatus == Period.PeriodStatus.MATCH) {
+            return match;
+        } else if (periodStatus == Period.PeriodStatus.OVERTIME) {
+            return overtime;
+        }
+        throw new RuntimeException("periodsStatus is invalid = " + periodStatus);
+    }
 
     @Override
     @JsonValue

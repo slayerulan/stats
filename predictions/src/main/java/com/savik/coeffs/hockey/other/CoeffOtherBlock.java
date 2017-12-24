@@ -43,7 +43,9 @@ public class CoeffOtherBlock extends CoeffContainer {
                 new CoeffAnyComebackMatchBlock(),
 
                 new CoeffTeamScoredNInRowBlock(),
-                new CoeffOpposingTeamScoredNInRowBlock()
+                new CoeffOpposingTeamScoredNInRowBlock(),
+
+                new CoeffPeriodXMoreEffectiveThanYBlock()
         ), ContainerType.OTHER);
     }
 }
