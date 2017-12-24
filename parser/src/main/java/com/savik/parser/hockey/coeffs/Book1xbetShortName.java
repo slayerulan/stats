@@ -91,6 +91,10 @@ public class Book1xbetShortName {
     public static final String OPPOSING_TEAM_SCORED_IN_ROW_YES = "1127";
     public static final String OPPOSING_TEAM_SCORED_IN_ROW_NO = "1128";
 
+    public static final String TEAM_FIRST_SCORED_AND_WIN_YES = "1037";
+    public static final String TEAM_FIRST_SCORED_AND_WIN_NO = "1038";
+    public static final String OPPOSING_TEAM_FIRST_SCORED_AND_WIN_YES = "1039";
+    public static final String OPPOSING_TEAM_FIRST_SCORED_AND_WIN_NO = "1040";
 
 
 }
