@@ -451,8 +451,8 @@ public class HockeyMatchParserTest {
         assertEquals(6, matchPeriod.getTotalScore().intValue());
         assertEquals(Winner.DRAW, matchPeriod.getWinner());
         assertEquals(HockeyPeriod.PeriodStatus.MATCH, matchPeriod.getPeriodStatus());
-        assertEquals(1, matchPeriod.getHomeMinorPenaltiesAmount().intValue());
-        assertEquals(3, matchPeriod.getGuestMinorPenaltiesAmount().intValue());
+        assertEquals(0, matchPeriod.getHomeMinorPenaltiesAmount().intValue());
+        assertEquals(1, matchPeriod.getGuestMinorPenaltiesAmount().intValue());
         assertTrue(matchPeriod.getGoals().containsAll(new HashSet<>(Arrays.asList(
                 HockeyGoal.builder().minute(18).whoScored(Who.HOME).seconds(34).team(home).build(),
                 HockeyGoal.builder().minute(18).whoScored(Who.HOME).seconds(50).team(home).build(),
@@ -471,9 +471,43 @@ public class HockeyMatchParserTest {
         assertEquals(1, matchPeriod.getGuestPowerplayGoals().intValue());
 
 
+    }
+
+
+
+    @Test
+    public void testMatchWithOvertimeScore() {
+        HockeyMatch match = matchParser.parse("SWXVJTjN", HockeyChampionship.KHL, Season.S2017);
+        hockeyMatchRepository.save(match);
+        match = hockeyMatchRepository.findByMyscoreCode("SWXVJTjN");
+
+        HockeyMatchInfo hockeyMatchInfo = match.getMatchInfo();
+
+        /*
+         Овертайм 0-0
+        * */
+        HockeyPeriod overtime = hockeyMatchInfo.getOvertime();
+
+        assertEquals(0, overtime.getHomeScore().intValue());
+        assertEquals(1, overtime.getGuestScore().intValue());
+        assertEquals(1, overtime.getTotalScore().intValue());
+        assertEquals(Winner.GUEST, overtime.getWinner());
+        assertEquals(HockeyPeriod.PeriodStatus.OVERTIME, overtime.getPeriodStatus());
+        assertEquals(1, overtime.getGoals().size());
+
+         /*
+          матч
+        * */
+        HockeyPeriod matchPeriod = hockeyMatchInfo.getMatch();
+
+        assertEquals(2, matchPeriod.getHomeScore().intValue());
+        assertEquals(2, matchPeriod.getGuestScore().intValue());
+        assertEquals(4, matchPeriod.getTotalScore().intValue());
+        assertEquals(Winner.DRAW, matchPeriod.getWinner());
+        assertEquals(HockeyPeriod.PeriodStatus.MATCH, matchPeriod.getPeriodStatus());
+
 
 
     }
-
 
 }

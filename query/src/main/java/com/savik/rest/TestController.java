@@ -163,6 +163,8 @@ public class TestController {
     public PossibleBetResultContainer test2(HockeyMatchFilter hockeyMatchFilter) {
         HockeyFutureMatch futureMatch = hockeyFutureMatchRepository.findByMyscoreCode(hockeyMatchFilter.getMyscoreCode());
 
+        HockeyMatch swxvjTjN = hockeyMatchRepository.findByMyscoreCode("SWXVJTjN");
+
         HockeyTeam homeTeam = futureMatch.getHomeTeam();
         MatchData homeMatchData = new MatchData(homeTeam);
         List<HockeyMatch> homeTeamMatches = hockeyMatchRepository.findAll(

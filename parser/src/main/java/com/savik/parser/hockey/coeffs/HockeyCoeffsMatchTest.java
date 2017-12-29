@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 
@@ -33,13 +34,21 @@ public class HockeyCoeffsMatchTest {
 
     public void parse() throws URISyntaxException, IOException {
         List<HockeyFutureMatch> all = hockeyFutureMatchRepository.findAll();
-        parseLeague(all.stream().filter(m -> m.getMyscoreCode().equals("EJGwUskB")).collect(Collectors.toList()),
-                "https://1xecu.xyz/LineFeed/GetChampZip?lng=ru&champ=3355&tf=3000000&afterDays=0&tz=0&sport=2&country=1");
-        /*parseLeague(all.stream().filter(m -> m.getChampionship() == HockeyChampionship.NHL).collect(Collectors.toList()),
-                "https://1xecu.xyz/LineFeed/GetChampZip?lng=ru&champ=30619&tf=3000000&afterDays=0&tz=0&sport=2&country=1");
+/*        parseLeague(all.stream().filter(m -> m.getChampionship() == HockeyChampionship.NHL).collect(Collectors.toList()),
+                "https://1xecu.xyz/LineFeed/GetChampZip?lng=ru&champ=30619&tf=3000000&afterDays=0&tz=0&sport=2&country=1");*/
+
+/*       */
+
+
         parseLeague(all.stream().filter(m -> m.getChampionship() == HockeyChampionship.KHL).collect(Collectors.toList()),
+                "https://1xecu.xyz/LineFeed/GetChampZip?lng=ru&champ=3355&tf=3000000&afterDays=0&tz=0&sport=2&country=1");
+       /*
+        parseLeague(all.stream().filter(m -> m.getChampionship() == HockeyChampionship.EXTRA).collect(Collectors.toList()),
+                "https://1xecu.xyz/LineFeed/GetChampZip?lng=ru&champ=104959&tf=3000000&afterDays=0&tz=0&sport=2&country=1");*/
+
+
+/*        parseLeague(all.stream().filter(m -> Objects.equals(m.getMyscoreCode(), "MmxpjDlG")).collect(Collectors.toList()),
                 "https://1xecu.xyz/LineFeed/GetChampZip?lng=ru&champ=3355&tf=3000000&afterDays=0&tz=0&sport=2&country=1");*/
-        String a = "";
     }
 
     private void parseLeague(List<HockeyFutureMatch> matches, String leagueUrl) throws IOException {

@@ -59,14 +59,19 @@ public class Hockey1xstavkaCoeffsMatchParser {
         CoeffBlock coeffBlock;
         for (BookFutureMatchRepresentation matchRepresentation : list) {
             if (matchRepresentation.o1.contains(hockeyFutureMatch.getHomeTeam().getName()) && matchRepresentation.o2.contains(hockeyFutureMatch.getGuestTeam().getName())) {
-                String matchCoeffsJson = downloader.getJson("https://1xecu.xyz/LineFeed/GetGameZip?lng=ru&cfview=0&isSubGames=true&GroupEvents=true&countevents=1000&grMode=2&id=" + matchRepresentation.getCi());
-                JSONObject matchCoeffsObject = new JSONObject(matchCoeffsJson);
+                try {
+                    String matchCoeffsJson = downloader.getJson("https://1xecu.xyz/LineFeed/GetGameZip?lng=ru&cfview=0&isSubGames=true&GroupEvents=true&countevents=1000&grMode=2&id=" + matchRepresentation.getCi());
+                    JSONObject matchCoeffsObject = new JSONObject(matchCoeffsJson);
 
-                Set<BookFutureMatchCoeff> futureMatchCoeffs = getBookFutureMatchCoeffs(matchCoeffsObject.getJSONObject("Value"));
-                coeffBlock = new CoeffBlock();
-                fill(futureMatchCoeffs, coeffBlock);
-                fillSpecialGroups(matchCoeffsObject, coeffBlock);
-                return coeffBlock;
+                    Set<BookFutureMatchCoeff> futureMatchCoeffs = getBookFutureMatchCoeffs(matchCoeffsObject.getJSONObject("Value"));
+                    coeffBlock = new CoeffBlock();
+                    fill(futureMatchCoeffs, coeffBlock);
+                    fillSpecialGroups(matchCoeffsObject, coeffBlock);
+                    return coeffBlock;
+                }catch (Exception ex) {
+                    throw new RuntimeException("myscore code = " + hockeyFutureMatch.getMyscoreCode(), ex);
+                }
+
             }
         }
         throw new RuntimeException("strange myscore code = " + hockeyFutureMatch.getMyscoreCode());
@@ -120,11 +125,13 @@ public class Hockey1xstavkaCoeffsMatchParser {
                 rootContainer.findByType(PERIODS).findByType(THIRD_PERIOD)
         );
 
-        fillShotsBlock(
-                getBookFutureMatchCoeffs(findSpecialGroupByTG(specialGroups, "Броски в створ ворот")),
-                rootContainer.findByType(STATS)
-        );
-
+        JSONObject shotsOnTarget = findSpecialGroupByTG(specialGroups, "Броски в створ ворот");
+        if(shotsOnTarget != null) {
+            fillShotsBlock(
+                    getBookFutureMatchCoeffs(shotsOnTarget),
+                    rootContainer.findByType(STATS)
+            );
+        }
 
     }
 
@@ -407,6 +414,9 @@ public class Hockey1xstavkaCoeffsMatchParser {
 
     private void fillFirstGoalTimeBlock(Set<BookFutureMatchCoeff> futureMatchPosCoeffs,
                                         Set<BookFutureMatchCoeff> futureMatchNegCoeffs, CoeffContainer container) {
+        if(futureMatchPosCoeffs.size() == 0) {
+            return;
+        }
         if (futureMatchNegCoeffs.size() != 1) {
             throw new RuntimeException("strange");
         }
@@ -591,6 +601,9 @@ public class Hockey1xstavkaCoeffsMatchParser {
 
     private void fillTeamShotsHandicap(Set<BookFutureMatchCoeff> futureMatchCoeffs, CoeffContainer totalOverContainer) {
         for (BookFutureMatchCoeff bookFutureMatchCoeff : futureMatchCoeffs) {
+            if(bookFutureMatchCoeff.getKind() == null) {
+                continue;
+            }
             checkIfContainsKindAndSetCoeff(bookFutureMatchCoeff, totalOverContainer.findByType(PLUS_5_5), "5.5");
             checkIfContainsKindAndSetCoeff(bookFutureMatchCoeff, totalOverContainer.findByType(PLUS_4_5), "4.5");
             checkIfContainsKindAndSetCoeff(bookFutureMatchCoeff, totalOverContainer.findByType(PLUS_3_5), "3.5");
@@ -681,7 +694,10 @@ public class Hockey1xstavkaCoeffsMatchParser {
     }
 
     private void setYesCoeff(Set<BookFutureMatchCoeff> futureMatchPosCoeffs, CoeffContainer container) {
-        if (futureMatchPosCoeffs.size() != 1) {
+        if(futureMatchPosCoeffs.isEmpty()) {
+            System.out.println("strange" + futureMatchPosCoeffs);
+            return;
+        } else if (futureMatchPosCoeffs.size() != 1) {
             throw new RuntimeException("size should be equals 1");
         }
         BookFutureMatchCoeff posCoeff = futureMatchPosCoeffs.stream().findFirst().get();

@@ -76,7 +76,7 @@ public class HockeySingleMatchParser {
         List<Element> overtimeRows  =  overtimeIndex == null ? null : allRows.subList(finalPeriodIndex, overtimeIndex);
 
         HockeyMatchInfoParser.GeneralInfoDto matchPeriodInfo = HockeyMatchInfoParser.parseGeneralInfo(
-                new Elements(allRows.subList(0,  overtimeIndex == null ? finalPeriodIndex : overtimeIndex)), null
+                new Elements(allRows.subList(0, finalPeriodIndex)), null
         );
         HockeyMatchInfoParser.GeneralInfoDto firstPeriodInfo =
                 HockeyMatchInfoParser.parseGeneralInfo(new Elements(firstPeriodRows), 1);
