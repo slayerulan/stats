@@ -41,22 +41,24 @@ public class HockeyParser {
         List<Entity> entities = Arrays.asList(
                 new Entity("https://www.myscore.com.ua/khl/results/", HockeyChampionship.KHL, Season.S2017),
                 new Entity("https://www.myscore.com.ua/hockey/usa/nhl/results/", HockeyChampionship.NHL, Season.S2017),
-                new Entity("https://www.myscore.com.ua/hockey/czech-republic/extraliga/results/", HockeyChampionship.EXTRA, Season.S2017)
+                new Entity("https://www.myscore.com.ua/hockey/czech-republic/extraliga/results/", HockeyChampionship.EXTRA, Season.S2017),
+                new Entity("https://www.myscore.com.ua/hockey/germany/del/results/", HockeyChampionship.DEL, Season.S2017),
+                new Entity("https://www.myscore.com.ua/hockey/sweden/shl/results/", HockeyChampionship.SHL, Season.S2017)
         );
 
         /*
         KvlMqOL3 - с овертаймом и буллитами
         * */
-        try {
+       /* try {
             HockeyMatch match = matchParser.parse("SWXVJTjN", HockeyChampionship.NHL, Season.S2017);
             hockeyMatchRepository.save(match);
             log.debug("match saved = {}", match);
             Thread.sleep(1000);
         } catch (Exception ex) {
             throw new RuntimeException(ex);
-        }
+        }*/
 
-        /*for (Entity entity : entities) {
+        for (Entity entity : entities) {
             List<String> allMatches = leagueParser.findAllMatches(entity.getUrl());
             for (String matchId : allMatches) {
                 try {
@@ -69,10 +71,12 @@ public class HockeyParser {
                         System.out.println("parsed = " + matchId);
                     }
                 } catch (Exception ex) {
-                    throw new RuntimeException(ex);
+                    System.out.println("myscore code = " + matchId);
+                    System.out.println(ex.getStackTrace().toString());
+                    //throw new RuntimeException(ex);
                 }
             }
-        }*/
+        }
 
 
     }

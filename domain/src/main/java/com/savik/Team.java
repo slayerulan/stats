@@ -2,10 +2,7 @@ package com.savik;
 
 
 import com.savik.domain.Identifiable;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
@@ -18,6 +15,7 @@ import javax.validation.constraints.NotNull;
 public abstract class Team extends Identifiable {
 
     @NotNull
+    @Setter
     protected String name;
 
 }

@@ -5,4 +5,6 @@ public enum HockeyChampionship {
     NHL,
     KHL,
     EXTRA,
+    DEL,
+    SHL // швеция
 }
