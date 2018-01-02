@@ -43,6 +43,8 @@ public class HockeyCoeffsMatchTest {
         parseLeague(all.stream().filter(m -> m.getChampionship() == HockeyChampionship.SHL).collect(Collectors.toList()),
                 "https://1xecu.xyz/LineFeed/GetChampZip?lng=ru&champ=1388257&tf=3000000&afterDays=0&tz=0&sport=2&country=1", shlMapping);
 
+        parseLeague(all.stream().filter(m -> m.getChampionship() == HockeyChampionship.DEL).collect(Collectors.toList()),
+                "https://1xecu.xyz/LineFeed/GetChampZip?lng=ru&champ=104035&tf=3000000&afterDays=0&tz=0&sport=2&country=1", delMapping);
 /*       */
 
 
@@ -51,8 +53,7 @@ public class HockeyCoeffsMatchTest {
 /*        parseLeague(all.stream().filter(m -> m.getChampionship() == HockeyChampionship.EXTRA).collect(Collectors.toList()),
                 "https://1xecu.xyz/LineFeed/GetChampZip?lng=ru&champ=104959&tf=3000000&afterDays=0&tz=0&sport=2&country=1", extraMapping);*/
 
-/*        parseLeague(all.stream().filter(m -> m.getChampionship() == HockeyChampionship.DEL).collect(Collectors.toList()),
-                "https://1xecu.xyz/LineFeed/GetChampZip?lng=ru&champ=104035&tf=3000000&afterDays=0&tz=0&sport=2&country=1", delMapping);*/
+/*        */
 
 
 /*        parseLeague(all.stream().filter(m -> Objects.equals(m.getMyscoreCode(), "MmxpjDlG")).collect(Collectors.toList()),

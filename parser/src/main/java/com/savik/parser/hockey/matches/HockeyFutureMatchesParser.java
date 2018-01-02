@@ -29,7 +29,7 @@ public class HockeyFutureMatchesParser {
     FutureMatchesParser futureMatchesParser;
 
     public void parse() {
-        List<EventItem> eventItems = futureMatchesParser.parse(1);
+        List<EventItem> eventItems = futureMatchesParser.parse(0);
         eventItems.forEach(e -> {
             HockeyFutureMatch footballFutureMatch = convert(e);
             if (footballFutureMatch != null &&
