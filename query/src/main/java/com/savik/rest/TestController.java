@@ -1,5 +1,6 @@
 package com.savik.rest;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.savik.*;
 import com.savik.blocks.hockey.match.general.PossibleBetsBlock;
 import com.savik.coeffs.hockey.CoeffBlock;
@@ -20,6 +21,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
@@ -44,6 +50,9 @@ public class TestController {
 
     @Autowired
     HockeyFutureMatchRepository hockeyFutureMatchRepository;
+
+    @Autowired
+    ObjectMapper objectMapper;
 
     @GetMapping("/match")
     public GeneralBetContainer matchStats(HockeyMatchFilter hockeyMatchFilter) {
@@ -70,7 +79,7 @@ public class TestController {
         );
     }
 
-    @GetMapping("/bets/all")
+    /*@GetMapping("/bets/all")
     public PossibleBetResultContainer possibleBetsAll(HockeyMatchFilter hockeyMatchFilter) {
         HockeyFutureMatch futureMatch = hockeyFutureMatchRepository.findByMyscoreCode(hockeyMatchFilter.getMyscoreCode());
 
@@ -95,7 +104,7 @@ public class TestController {
         PossibleBetResultContainer resultContainer = CoefficientsAnalyzer.analyze(coeffBlock, possibleBetsBlock);
 
         return resultContainer;
-    }
+    }*/
 
     @GetMapping("/bets/home")
     public PossibleBetResultContainer possibleBetsHome(HockeyMatchFilter hockeyMatchFilter) {
@@ -189,7 +198,39 @@ public class TestController {
     }
 
 
+    @GetMapping("/bets/all")
+    public void parseAll() throws IOException {
+        List<HockeyFutureMatch> all = hockeyFutureMatchRepository.findAll();
+        for (HockeyFutureMatch futureMatch : all) {
 
+            HockeyTeam homeTeam = futureMatch.getHomeTeam();
+            MatchData homeMatchData = new MatchData(homeTeam);
+            List<HockeyMatch> homeTeamMatches = hockeyMatchRepository.findAll(
+                    hasHomeTeam(homeTeam.getId())
+            );
+
+
+            HockeyTeam guestTeam = futureMatch.getGuestTeam();
+            MatchData guestMatchData = new MatchData(guestTeam);
+            List<HockeyMatch> guestTeamMatches = hockeyMatchRepository.findAll(
+                    hasGuestTeam(guestTeam.getId())
+            );
+
+            PossibleBetsBlock possibleBetsBlock = new PossibleBetsBlock(homeMatchData, guestMatchData);
+            possibleBetsBlock.check(homeTeamMatches, guestTeamMatches);
+
+            List<CoeffEntry> coeffEntries = coeffRepository.findByMyscoreCode(futureMatch.getMyscoreCode());
+            CoeffContainer coeffContainer = CoeffTransformer.transformEntryToBlock(coeffEntries);
+
+            PossibleBetResultContainer resultContainer = CoefficientsAnalyzer.analyze(coeffContainer, possibleBetsBlock);
+
+
+            File leagueDir = new File("info/matches/" + futureMatch.getChampionship().toString());
+            Files.createDirectories(leagueDir.toPath());
+            File matchFile = new File(leagueDir, futureMatch.getMyscoreCode() + ".json");
+            objectMapper.writeValue(matchFile, resultContainer);
+        }
+    }
 
 
 }

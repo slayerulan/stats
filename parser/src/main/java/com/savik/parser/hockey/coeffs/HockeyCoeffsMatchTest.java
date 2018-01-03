@@ -37,27 +37,22 @@ public class HockeyCoeffsMatchTest {
 
     public void parse() throws URISyntaxException, IOException {
         List<HockeyFutureMatch> all = hockeyFutureMatchRepository.findAll();
-/*        parseLeague(all.stream().filter(m -> m.getChampionship() == HockeyChampionship.NHL).collect(Collectors.toList()),
-                "https://1xecu.xyz/LineFeed/GetChampZip?lng=ru&champ=30619&tf=3000000&afterDays=0&tz=0&sport=2&country=1", new HashMap<>());*/
+        parseLeague(all.stream().filter(m -> m.getChampionship() == HockeyChampionship.NHL).collect(Collectors.toList()),
+                "https://1xecu.xyz/LineFeed/GetChampZip?lng=ru&champ=30619&tf=3000000&afterDays=0&tz=0&sport=2&country=1", new HashMap<>());
 
         parseLeague(all.stream().filter(m -> m.getChampionship() == HockeyChampionship.SHL).collect(Collectors.toList()),
                 "https://1xecu.xyz/LineFeed/GetChampZip?lng=ru&champ=1388257&tf=3000000&afterDays=0&tz=0&sport=2&country=1", shlMapping);
 
         parseLeague(all.stream().filter(m -> m.getChampionship() == HockeyChampionship.DEL).collect(Collectors.toList()),
                 "https://1xecu.xyz/LineFeed/GetChampZip?lng=ru&champ=104035&tf=3000000&afterDays=0&tz=0&sport=2&country=1", delMapping);
-/*       */
+
+        parseLeague(all.stream().filter(m -> m.getChampionship() == HockeyChampionship.KHL).collect(Collectors.toList()),
+                "https://1xecu.xyz/LineFeed/GetChampZip?lng=ru&champ=3355&tf=3000000&afterDays=0&tz=0&sport=2&country=1", khlMapping);
+
+        parseLeague(all.stream().filter(m -> m.getChampionship() == HockeyChampionship.EXTRA).collect(Collectors.toList()),
+                "https://1xecu.xyz/LineFeed/GetChampZip?lng=ru&champ=104959&tf=3000000&afterDays=0&tz=0&sport=2&country=1", extraMapping);
 
 
-/*        parseLeague(all.stream().filter(m -> m.getChampionship() == HockeyChampionship.KHL).collect(Collectors.toList()),
-                "https://1xecu.xyz/LineFeed/GetChampZip?lng=ru&champ=3355&tf=3000000&afterDays=0&tz=0&sport=2&country=1");*/
-/*        parseLeague(all.stream().filter(m -> m.getChampionship() == HockeyChampionship.EXTRA).collect(Collectors.toList()),
-                "https://1xecu.xyz/LineFeed/GetChampZip?lng=ru&champ=104959&tf=3000000&afterDays=0&tz=0&sport=2&country=1", extraMapping);*/
-
-/*        */
-
-
-/*        parseLeague(all.stream().filter(m -> Objects.equals(m.getMyscoreCode(), "MmxpjDlG")).collect(Collectors.toList()),
-                "https://1xecu.xyz/LineFeed/GetChampZip?lng=ru&champ=3355&tf=3000000&afterDays=0&tz=0&sport=2&country=1");*/
     }
 
     private void parseLeague(List<HockeyFutureMatch> matches, String leagueUrl, Map<String, String> teamNameMapping) throws IOException {
@@ -79,12 +74,21 @@ public class HockeyCoeffsMatchTest {
         }
     }
 
+    private static Map<String, String> khlMapping = new HashMap<String, String>(){
+        {
+            put("Куньлунь РС", "Красная Звезда Куньлунь");
+        }
+    };
+
     private static Map<String, String> extraMapping = new HashMap<String, String>(){
         {
             put("Тршинец", "Оцеларжи");
             put("Хомутов", "Пираты");
             put("Либерец", "Били Тигржи");
             put("Плзень", "Шкода Пльзень");
+            put("Млада Болеслав", "Млада");
+            put("Хомутов", "Пираты");
+            put("ХК Маунтфилд", "Градец Кралове");
         }
     };
 
