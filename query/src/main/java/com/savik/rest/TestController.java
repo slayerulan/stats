@@ -80,12 +80,7 @@ public class TestController {
     @GetMapping("/bets/possible")
     public PossibleBetsBlock betsOnlyHomeGuestMatches(HockeyMatchFilter hockeyMatchFilter) {
         HockeyFutureMatch futureMatch = hockeyFutureMatchRepository.findByMyscoreCode(hockeyMatchFilter.getMyscoreCode());
-
-        HockeyTeam homeTeam = futureMatch.getHomeTeam();
-        HockeyTeam guestTeam = futureMatch.getGuestTeam();
-
-        PossibleBetsBlock possibleBetsBlock = getPossibleBetsBlock(hockeyMatchFilter.isIncludeAllMatches(), homeTeam, guestTeam);
-
+        PossibleBetsBlock possibleBetsBlock = new Analyzer(hockeyMatchFilter, futureMatch).getPossibleBetsBlock();
         return possibleBetsBlock;
     }
 
@@ -96,26 +91,24 @@ public class TestController {
     public ProposedBetsContainer proposedBets(HockeyMatchFilter hockeyMatchFilter) {
         HockeyFutureMatch futureMatch = hockeyFutureMatchRepository.findByMyscoreCode(hockeyMatchFilter.getMyscoreCode());
 
-        HockeyTeam homeTeam = futureMatch.getHomeTeam();
-        HockeyTeam guestTeam = futureMatch.getGuestTeam();
-        PossibleBetsBlock possibleBetsBlock = getPossibleBetsBlock(hockeyMatchFilter.isIncludeAllMatches(), homeTeam, guestTeam);
+        PossibleBetsBlock possibleBetsBlock = new Analyzer(hockeyMatchFilter, futureMatch).getPossibleBetsBlock();
         ProposedBetsContainer resultContainer = getProposedBetsContainer(hockeyMatchFilter.getMyscoreCode(), possibleBetsBlock);
         return resultContainer;
     }
 
     @GetMapping("/bets/all")
-    public void parseAll() throws IOException {
+    public void parseAll(HockeyMatchFilter hockeyMatchFilter) throws IOException {
         List<HockeyFutureMatch> all = hockeyFutureMatchRepository.findAll();
         for (HockeyFutureMatch futureMatch : all) {
-            HockeyTeam homeTeam = futureMatch.getHomeTeam();
-            HockeyTeam guestTeam = futureMatch.getGuestTeam();
 
-            PossibleBetsBlock possibleBetsBlock = getPossibleBetsBlock(false, homeTeam, guestTeam);
+            hockeyMatchFilter.setIncludeAllMatches(false);
+            PossibleBetsBlock possibleBetsBlock = new Analyzer(hockeyMatchFilter, futureMatch).getPossibleBetsBlock();
             ProposedBetsContainer resultContainer = getProposedBetsContainer(futureMatch.getMyscoreCode(), possibleBetsBlock);
             writeMatchToFile("info/matches/home/", futureMatch, resultContainer);
 
 
-            PossibleBetsBlock possibleBetsBlockAllMatches = getPossibleBetsBlock(true, homeTeam, guestTeam);
+            hockeyMatchFilter.setIncludeAllMatches(true);
+            PossibleBetsBlock possibleBetsBlockAllMatches = new Analyzer(hockeyMatchFilter, futureMatch).getPossibleBetsBlock();
             ProposedBetsContainer resultContainerAllMatches = getProposedBetsContainer(futureMatch.getMyscoreCode(), possibleBetsBlockAllMatches);
             writeMatchToFile("info/matches/all/", futureMatch, resultContainerAllMatches);
         }
@@ -129,33 +122,54 @@ public class TestController {
         objectMapper.writeValue(matchFile, proposedBets);
     }
 
-    private PossibleBetsBlock getPossibleBetsBlock(boolean isIncludeAllMatches, HockeyTeam homeTeam, HockeyTeam guestTeam) {
-        Specification<HockeyMatch> homeTeamSpec;
-        Specification<HockeyMatch> guestTeamSpec;
-        if (isIncludeAllMatches) {
-            homeTeamSpec = hasTeam(homeTeam.getId());
-            guestTeamSpec = hasTeam(guestTeam.getId());
-        } else {
-            homeTeamSpec = hasHomeTeam(homeTeam.getId());
-            guestTeamSpec = hasGuestTeam(guestTeam.getId());
-        }
-
-        List<HockeyMatch> homeTeamMatches = hockeyMatchRepository.findAll(homeTeamSpec);
-        List<HockeyMatch> guestTeamMatches = hockeyMatchRepository.findAll(guestTeamSpec);
-
-        MatchData homeMatchData = new MatchData(homeTeam);
-        MatchData guestMatchData = new MatchData(guestTeam);
-        PossibleBetsBlock possibleBetsBlock = new PossibleBetsBlock(homeMatchData, guestMatchData);
-        possibleBetsBlock.check(homeTeamMatches, guestTeamMatches);
-        return possibleBetsBlock;
-    }
-
     private ProposedBetsContainer getProposedBetsContainer(String myscoreCode, PossibleBetsBlock possibleBetsBlock) {
         List<CoeffEntry> coeffEntries = coeffRepository.findByMyscoreCode(myscoreCode);
         CoeffContainer coeffContainer = CoeffTransformer.transformEntryToBlock(coeffEntries);
         return CoefficientsAnalyzer.analyze(coeffContainer, possibleBetsBlock);
     }
 
+
+    class Analyzer {
+
+        HockeyMatchFilter hockeyMatchFilter;
+
+        HockeyFutureMatch futureMatch;
+
+        boolean isIncludeAllMatches;
+
+        Integer size;
+
+        Analyzer(HockeyMatchFilter hockeyMatchFilter, HockeyFutureMatch futureMatch) {
+            this.hockeyMatchFilter = hockeyMatchFilter;
+            this.futureMatch = futureMatch;
+            this.isIncludeAllMatches = hockeyMatchFilter.isIncludeAllMatches();
+            this.size = hockeyMatchFilter.getSize();
+        }
+
+        PossibleBetsBlock getPossibleBetsBlock() {
+            Specification<HockeyMatch> homeTeamSpec;
+            Specification<HockeyMatch> guestTeamSpec;
+            HockeyTeam homeTeam = futureMatch.getHomeTeam();
+            HockeyTeam guestTeam = futureMatch.getGuestTeam();
+            if (isIncludeAllMatches) {
+                homeTeamSpec = hasTeam(homeTeam.getId());
+                guestTeamSpec = hasTeam(guestTeam.getId());
+            } else {
+                homeTeamSpec = hasHomeTeam(homeTeam.getId());
+                guestTeamSpec = hasGuestTeam(guestTeam.getId());
+            }
+
+            List<HockeyMatch> homeTeamMatches = hockeyMatchRepository.findAll(homeTeamSpec, size);
+            List<HockeyMatch> guestTeamMatches = hockeyMatchRepository.findAll(guestTeamSpec, size);
+
+            MatchData homeMatchData = new MatchData(homeTeam);
+            MatchData guestMatchData = new MatchData(guestTeam);
+            PossibleBetsBlock possibleBetsBlock = new PossibleBetsBlock(homeMatchData, guestMatchData);
+            possibleBetsBlock.check(homeTeamMatches, guestTeamMatches);
+            return possibleBetsBlock;
+        }
+
+    }
 
 
 

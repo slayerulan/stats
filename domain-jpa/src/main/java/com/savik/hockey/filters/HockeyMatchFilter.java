@@ -24,6 +24,8 @@ public class HockeyMatchFilter implements Filter<HockeyMatch> {
 
     private boolean includeAllMatches;
 
+    private Integer size;
+
     public Specification<HockeyMatch> toSpecification() {
         return where(hasHomeTeam(homeId));
     }
