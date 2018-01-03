@@ -26,10 +26,11 @@ import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 
 import static com.savik.ContainerType.*;
+import static com.savik.parser.hockey.coeffs.Book1xbetConstants.EVENT_URL;
 
 
 @Service
-public class Hockey1xstavkaCoeffsMatchParser {
+class Hockey1xstavkaCoeffsLeagueParser {
 
     @Autowired
     HockeyTeamRepository hockeyTeamRepository;
@@ -56,25 +57,24 @@ public class Hockey1xstavkaCoeffsMatchParser {
                 }
         );
 
-        CoeffBlock coeffBlock;
         for (BookFutureMatchRepresentation matchRepresentation : list) {
             if (matchRepresentation.o1.contains(hockeyFutureMatch.getHomeTeam().getName()) && matchRepresentation.o2.contains(hockeyFutureMatch.getGuestTeam().getName())) {
                 try {
-                    String matchCoeffsJson = downloader.getJson("https://1xecu.xyz/LineFeed/GetGameZip?lng=ru&cfview=0&isSubGames=true&GroupEvents=true&countevents=1000&grMode=2&id=" + matchRepresentation.getCi());
+                    String matchCoeffsJson = downloader.getJson(EVENT_URL + matchRepresentation.getCi());
                     JSONObject matchCoeffsObject = new JSONObject(matchCoeffsJson);
 
                     Set<BookFutureMatchCoeff> futureMatchCoeffs = getBookFutureMatchCoeffs(matchCoeffsObject.getJSONObject("Value"));
-                    coeffBlock = new CoeffBlock();
+                    CoeffBlock coeffBlock = new CoeffBlock();
                     fill(futureMatchCoeffs, coeffBlock);
                     fillSpecialGroups(matchCoeffsObject, coeffBlock);
                     return coeffBlock;
                 }catch (Exception ex) {
-                    throw new RuntimeException("myscore code = " + hockeyFutureMatch.getMyscoreCode(), ex);
+                    throw new RuntimeException("error while parsing, myscore code = " + hockeyFutureMatch.getMyscoreCode(), ex);
                 }
 
             }
         }
-        throw new RuntimeException("strange myscore code = " + hockeyFutureMatch.getMyscoreCode());
+        throw new RuntimeException("match not found,  myscore code = " + hockeyFutureMatch.getMyscoreCode());
     }
 
     private Set<BookFutureMatchCoeff> getBookFutureMatchCoeffs(JSONObject value) throws IOException {

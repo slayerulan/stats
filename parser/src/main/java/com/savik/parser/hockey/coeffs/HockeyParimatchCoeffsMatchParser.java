@@ -31,7 +31,7 @@ import static java.util.Arrays.asList;
 
 
 @Service
-public class HockeyCoeffsMatchParser {
+public class HockeyParimatchCoeffsMatchParser {
 
     @Autowired
     HockeyTeamRepository hockeyTeamRepository;

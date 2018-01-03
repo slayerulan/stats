@@ -2,7 +2,7 @@ package com.savik.parser;
 
 import com.savik.parser.football.FootballFutureMatchesParser;
 import com.savik.parser.football.FootballParser;
-import com.savik.parser.hockey.coeffs.HockeyCoeffsMatchTest;
+import com.savik.parser.hockey.coeffs.Hockey1xstavkaCoeffsParser;
 import com.savik.parser.hockey.matches.HockeyFutureMatchesParser;
 import com.savik.parser.hockey.matches.HockeyParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,12 +34,12 @@ public class Parser {
     HockeyFutureMatchesParser hockeyFutureMatchesParser;
 
     @Autowired
-    HockeyCoeffsMatchTest hockeyCoeffsMatchTest;
+    Hockey1xstavkaCoeffsParser hockey1xstavkaCoeffsParser;
 
 
     @PostConstruct
     public void parse() throws Exception {
-        //hockeyCoeffsMatchTest.parse();
+        //hockey1xstavkaCoeffsParser.parse();
         //hockeyFutureMatchesParser.parse();
         //hockeyParser.parse();
     }
