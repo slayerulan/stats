@@ -9,9 +9,9 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-public class PossibleBetResultContainer {
+public class ProposedBetsContainer {
 
-    private List<PossibleBetResultContainer> childrenBlocks;
+    private List<ProposedBetsContainer> childrenBlocks;
 
     private ContainerType type;
 
@@ -34,13 +34,13 @@ public class PossibleBetResultContainer {
     private Double secondTeamPercentage;
 
 
-    public PossibleBetResultContainer(List<PossibleBetResultContainer> childrenBlocks, ContainerType type) {
+    public ProposedBetsContainer(List<ProposedBetsContainer> childrenBlocks, ContainerType type) {
         this.childrenBlocks = childrenBlocks;
         this.type = type;
         this.leaf = false;
     }
 
-    public PossibleBetResultContainer(ContainerType type) {
+    public ProposedBetsContainer(ContainerType type) {
         this.type = type;
         this.leaf = true;
     }

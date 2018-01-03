@@ -10,6 +10,8 @@ import com.savik.parser.FutureMatchesParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -27,6 +29,13 @@ public class HockeyFutureMatchesParser {
 
     @Autowired
     FutureMatchesParser futureMatchesParser;
+
+
+    // todo: убрать отсюда
+    @PostConstruct
+    public void deleteFinishedFutureMatches() {
+        matchRepository.deleteByDateBefore(LocalDateTime.now());
+    }
 
     public void parse() {
         List<EventItem> eventItems = futureMatchesParser.parse(1);

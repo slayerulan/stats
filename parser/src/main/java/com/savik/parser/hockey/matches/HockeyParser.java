@@ -69,6 +69,7 @@ public class HockeyParser {
                         Thread.sleep(1000);
                     } else {
                         System.out.println("parsed = " + matchId);
+                        break;
                     }
                 } catch (Exception ex) {
                     System.out.println("myscore code = " + matchId);

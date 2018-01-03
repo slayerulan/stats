@@ -22,6 +22,8 @@ public class HockeyMatchFilter implements Filter<HockeyMatch> {
 
     private String myscoreCode;
 
+    private boolean includeAllMatches;
+
     public Specification<HockeyMatch> toSpecification() {
         return where(hasHomeTeam(homeId));
     }
