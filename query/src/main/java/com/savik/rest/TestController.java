@@ -11,7 +11,6 @@ import com.savik.hockey.model.HockeyTeam;
 import com.savik.hockey.repository.HockeyFutureMatchRepository;
 import com.savik.hockey.repository.HockeyMatchRepository;
 import com.savik.hockey.repository.HockeyTeamRepository;
-import com.savik.parser.hockey.coeffs.HockeyCoeffsMatchParser;
 import com.savik.parser.utils.CoeffTransformer;
 import com.savik.repository.CoeffRepository;
 import com.savik.result_block.hockey.match.general.GeneralBlock;
@@ -42,9 +41,6 @@ public class TestController {
 
     @Autowired
     HockeyTeamRepository hockeyTeamRepository;
-
-    @Autowired
-    HockeyCoeffsMatchParser hockeyCoeffsMatchParser;
 
     @Autowired
     HockeyFutureMatchRepository hockeyFutureMatchRepository;
