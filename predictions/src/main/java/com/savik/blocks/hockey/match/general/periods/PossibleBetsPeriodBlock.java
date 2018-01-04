@@ -5,6 +5,7 @@ import com.savik.ContainerType;
 import com.savik.MatchData;
 import com.savik.Period;
 import com.savik.PossibleBetContainer;
+import com.savik.bets.general.goals.PeriodGoaBetweenPossibleBet;
 import com.savik.bets.general.periods.PeriodAnyWinnerPossibleBet;
 import com.savik.bets.general.periods.PeriodDrawPossibleBet;
 import com.savik.bets.general.periods.PeriodOpposingTeamNotLoosePossibleBet;
@@ -34,6 +35,23 @@ public class PossibleBetsPeriodBlock extends PossibleBetContainer<HockeyMatch> {
                 new PossibleBetContainer<>(
                         new PeriodOpposingTeamNotLoosePossibleBet<>(homeMatchData, guestMatchData, function),
                         ContainerType.OPPOSING_TEAM_NOT_LOOSE
+                ),
+                new PossibleBetContainer<>(
+                        Arrays.asList(
+                                new PossibleBetContainer<>(
+                                        new PeriodGoaBetweenPossibleBet<>(function, 0, 7),
+                                        ContainerType.BETWEEN_1_7
+                                ),
+                                new PossibleBetContainer<>(
+                                        new PeriodGoaBetweenPossibleBet<>(function, 7, 15),
+                                        ContainerType.BETWEEN_8_15
+                                ),
+                                new PossibleBetContainer<>(
+                                        new PeriodGoaBetweenPossibleBet<>(function, 15, 20),
+                                        ContainerType.BETWEEN_16_20
+                                )
+                        ),
+                        ContainerType.GOAL_BETWEEN
                 ),
                 new PossibleBetContainer<>(
                         Arrays.asList(

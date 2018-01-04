@@ -30,23 +30,31 @@ public class HockeyFutureMatchesParser {
     @Autowired
     FutureMatchesParser futureMatchesParser;
 
+    private static final int TODAY = 0;
+    private static final int TOMORROW = 1;
+
 
     // todo: убрать отсюда
     @PostConstruct
     public void deleteFinishedFutureMatches() {
-        matchRepository.deleteByDateBefore(LocalDateTime.now().minusHours(2));
+        matchRepository.deleteByDateBefore(LocalDateTime.now());
     }
 
     public void parse() {
-        List<EventItem> eventItems = futureMatchesParser.parse(0);
+        parseDay(TODAY);
+        parseDay(TOMORROW);
+    }
+
+    private void parseDay(int day) {
+        List<EventItem> eventItems = futureMatchesParser.parse(day);
         eventItems.forEach(e -> {
             HockeyFutureMatch footballFutureMatch = convert(e);
             if (footballFutureMatch != null &&
-                    matchRepository.findByMyscoreCode(footballFutureMatch.getMyscoreCode()) == null) {
+                    matchRepository.findByMyscoreCode(footballFutureMatch.getMyscoreCode()) == null &&
+                    footballFutureMatch.getDate().isAfter(LocalDateTime.now())) {
                 matchRepository.save(footballFutureMatch);
             }
         });
-
     }
 
     private HockeyFutureMatch convert(EventItem eventItem) {

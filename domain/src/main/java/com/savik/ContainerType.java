@@ -133,5 +133,9 @@ public enum ContainerType {
     MINUS_5_5,
     P2_MORE_P1,
     P3_MORE_P2,
-    P3_MORE_P1
+    P3_MORE_P1,
+    GOAL_BETWEEN,
+    BETWEEN_1_7,
+    BETWEEN_8_15,
+    BETWEEN_16_20,
 }

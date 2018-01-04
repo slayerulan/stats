@@ -12,33 +12,33 @@ public class CoeffPeriodsBlock extends CoeffContainer {
         super(Arrays.asList(
                 new CoeffContainer(
                         Arrays.asList(
-                                new CoeffContainer(new Coeff(1.43), ContainerType.ANY_WIN),
-                                new CoeffContainer(new Coeff(2.7), ContainerType.DRAW),
-                                new CoeffContainer(new Coeff(1.4), ContainerType.TEAM_NOT_LOOSE),
-                                new CoeffContainer(new Coeff(1.35), ContainerType.OPPOSING_TEAM_NOT_LOOSE),
+                                new CoeffContainer(new Coeff(), ContainerType.ANY_WIN),
+                                new CoeffContainer(new Coeff(), ContainerType.DRAW),
+                                new CoeffContainer(new Coeff(), ContainerType.TEAM_NOT_LOOSE),
+                                new CoeffContainer(new Coeff(), ContainerType.OPPOSING_TEAM_NOT_LOOSE),
                                 new CoeffContainer(Arrays.asList(
                                         new CoeffContainer(
-                                                new Coeff(1.22),
+                                                new Coeff(),
                                                 ContainerType.OVER_0_5
                                         ),
                                         new CoeffContainer(
-                                                new Coeff(1.96),
+                                                new Coeff(),
                                                 ContainerType.OVER_1_5
                                         )
                                 ), ContainerType.TOTAL_OVER),
                                 new CoeffContainer(Arrays.asList(
                                         new CoeffContainer(
-                                                new Coeff(1.82),
+                                                new Coeff(),
                                                 ContainerType.UNDER_1_5
                                         ),
                                         new CoeffContainer(
-                                                new Coeff(1.19),
+                                                new Coeff(),
                                                 ContainerType.UNDER_2_5
                                         )
                                 ), ContainerType.TOTAL_UNDER),
                                 new CoeffContainer(Arrays.asList(
                                         new CoeffContainer(
-                                                new Coeff(1.8, 2.0),
+                                                new Coeff(),
                                                 ContainerType.OVER_0_5
                                         ),
                                         new CoeffContainer(
@@ -49,7 +49,7 @@ public class CoeffPeriodsBlock extends CoeffContainer {
 
                                 new CoeffContainer(Arrays.asList(
                                         new CoeffContainer(
-                                                new Coeff(1.75, 2.08),
+                                                new Coeff(),
                                                 ContainerType.OVER_0_5
                                         ),
                                         new CoeffContainer(
@@ -59,7 +59,7 @@ public class CoeffPeriodsBlock extends CoeffContainer {
                                 ), ContainerType.OPPOSING_TEAM_TOTAL_OVER),
                                 new CoeffContainer(Arrays.asList(
                                         new CoeffContainer(
-                                                new Coeff(3.04, 1.38),
+                                                new Coeff(),
                                                 ContainerType.OVER_0_5
                                         )
                                 ), ContainerType.BOTH_TEAMS_TOTAL_OVER)
@@ -67,33 +67,33 @@ public class CoeffPeriodsBlock extends CoeffContainer {
                 ),
                 new CoeffContainer(
                         Arrays.asList(
-                                new CoeffContainer(new Coeff(1.36), ContainerType.ANY_WIN),
-                                new CoeffContainer(new Coeff(2.91), ContainerType.DRAW),
-                                new CoeffContainer(new Coeff(1.41), ContainerType.TEAM_NOT_LOOSE),
-                                new CoeffContainer(new Coeff(1.4), ContainerType.OPPOSING_TEAM_NOT_LOOSE),
+                                new CoeffContainer(new Coeff(), ContainerType.ANY_WIN),
+                                new CoeffContainer(new Coeff(), ContainerType.DRAW),
+                                new CoeffContainer(new Coeff(), ContainerType.TEAM_NOT_LOOSE),
+                                new CoeffContainer(new Coeff(), ContainerType.OPPOSING_TEAM_NOT_LOOSE),
                                 new CoeffContainer(Arrays.asList(
                                         new CoeffContainer(
-                                                new Coeff(1.1),
+                                                new Coeff(),
                                                 ContainerType.OVER_0_5
                                         ),
                                         new CoeffContainer(
-                                                new Coeff(1.68),
+                                                new Coeff(),
                                                 ContainerType.OVER_1_5
                                         )
                                 ), ContainerType.TOTAL_OVER),
                                 new CoeffContainer(Arrays.asList(
                                         new CoeffContainer(
-                                                new Coeff(2.19),
+                                                new Coeff(),
                                                 ContainerType.UNDER_1_5
                                         ),
                                         new CoeffContainer(
-                                                new Coeff(1.39),
+                                                new Coeff(),
                                                 ContainerType.UNDER_2_5
                                         )
                                 ), ContainerType.TOTAL_UNDER),
                                 new CoeffContainer(Arrays.asList(
                                         new CoeffContainer(
-                                                new Coeff(1.57, 2.4),
+                                                new Coeff(),
                                                 ContainerType.OVER_0_5
                                         ),
                                         new CoeffContainer(
@@ -104,7 +104,7 @@ public class CoeffPeriodsBlock extends CoeffContainer {
 
                                 new CoeffContainer(Arrays.asList(
                                         new CoeffContainer(
-                                                new Coeff(1.53, 2.45),
+                                                new Coeff(),
                                                 ContainerType.OVER_0_5
                                         ),
                                         new CoeffContainer(
@@ -114,7 +114,7 @@ public class CoeffPeriodsBlock extends CoeffContainer {
                                 ), ContainerType.OPPOSING_TEAM_TOTAL_OVER),
                                 new CoeffContainer(Arrays.asList(
                                         new CoeffContainer(
-                                                new Coeff(2.43, 1.56),
+                                                new Coeff(),
                                                 ContainerType.OVER_0_5
                                         )
                                 ), ContainerType.BOTH_TEAMS_TOTAL_OVER)
@@ -122,33 +122,33 @@ public class CoeffPeriodsBlock extends CoeffContainer {
                 ),
                 new CoeffContainer(
                         Arrays.asList(
-                                new CoeffContainer(new Coeff(1.38), ContainerType.ANY_WIN),
-                                new CoeffContainer(new Coeff(2.85), ContainerType.DRAW),
-                                new CoeffContainer(new Coeff(1.42), ContainerType.TEAM_NOT_LOOSE),
-                                new CoeffContainer(new Coeff(1.38), ContainerType.OPPOSING_TEAM_NOT_LOOSE),
+                                new CoeffContainer(new Coeff(), ContainerType.ANY_WIN),
+                                new CoeffContainer(new Coeff(), ContainerType.DRAW),
+                                new CoeffContainer(new Coeff(), ContainerType.TEAM_NOT_LOOSE),
+                                new CoeffContainer(new Coeff(), ContainerType.OPPOSING_TEAM_NOT_LOOSE),
                                 new CoeffContainer(Arrays.asList(
                                         new CoeffContainer(
-                                                new Coeff(1.16),
+                                                new Coeff(),
                                                 ContainerType.OVER_0_5
                                         ),
                                         new CoeffContainer(
-                                                new Coeff(1.74),
+                                                new Coeff(),
                                                 ContainerType.OVER_1_5
                                         )
                                 ), ContainerType.TOTAL_OVER),
                                 new CoeffContainer(Arrays.asList(
                                         new CoeffContainer(
-                                                new Coeff(2.09),
+                                                new Coeff(),
                                                 ContainerType.UNDER_1_5
                                         ),
                                         new CoeffContainer(
-                                                new Coeff(1.35),
+                                                new Coeff(),
                                                 ContainerType.UNDER_2_5
                                         )
                                 ), ContainerType.TOTAL_UNDER),
                                 new CoeffContainer(Arrays.asList(
                                         new CoeffContainer(
-                                                new Coeff(1.6, 2.3),
+                                                new Coeff(),
                                                 ContainerType.OVER_0_5
                                         ),
                                         new CoeffContainer(
@@ -159,7 +159,7 @@ public class CoeffPeriodsBlock extends CoeffContainer {
 
                                 new CoeffContainer(Arrays.asList(
                                         new CoeffContainer(
-                                                new Coeff(1.57, 2.38),
+                                                new Coeff(),
                                                 ContainerType.OVER_0_5
                                         ),
                                         new CoeffContainer(
@@ -169,7 +169,7 @@ public class CoeffPeriodsBlock extends CoeffContainer {
                                 ), ContainerType.OPPOSING_TEAM_TOTAL_OVER),
                                 new CoeffContainer(Arrays.asList(
                                         new CoeffContainer(
-                                                new Coeff(2.53, 1.25),
+                                                new Coeff(),
                                                 ContainerType.OVER_0_5
                                         )
                                 ), ContainerType.BOTH_TEAMS_TOTAL_OVER)

@@ -113,8 +113,8 @@ public class TestController {
     private void writeMatchToFile(String folderPrefix, HockeyFutureMatch futureMatch, ProposedBetsContainer proposedBets) throws IOException {
         File leagueDir2 = new File(folderPrefix + futureMatch.getChampionship().toString());
         Files.createDirectories(leagueDir2.toPath());
-        File matchFile = new File(leagueDir2, String.format("%s  %s===%s.json", futureMatch.getMyscoreCode(),
-                futureMatch.getHomeTeam().getName(), futureMatch.getGuestTeam().getName()));
+        File matchFile = new File(leagueDir2, String.format("%s-%s  %s===%s.json", futureMatch.getMyscoreCode(),
+                futureMatch.getDate().toString(), futureMatch.getHomeTeam().getName(), futureMatch.getGuestTeam().getName()));
         objectMapper.writeValue(matchFile, proposedBets);
     }
 

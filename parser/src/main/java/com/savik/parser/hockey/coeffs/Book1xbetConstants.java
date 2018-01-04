@@ -16,6 +16,7 @@ public class Book1xbetConstants {
     public static Map<String, String> khlMapping = new HashMap<String, String>(){
         {
             put("Куньлунь РС", "Красная Звезда Куньлунь");
+            put("Спартак Москва", "Спартак");
         }
     };
 

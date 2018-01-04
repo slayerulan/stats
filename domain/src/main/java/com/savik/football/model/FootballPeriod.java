@@ -73,5 +73,8 @@ public class FootballPeriod extends Period<FootballGoal> {
     }
 
 
-
+    @Override
+    public int getMinuteFromStart(int minute) {
+        return 0;
+    }
 }

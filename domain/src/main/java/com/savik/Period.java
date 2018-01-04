@@ -120,9 +120,22 @@ public abstract class  Period<T extends Goal> extends Identifiable {
         if (goals == null) {
             return false;
         }
-        return goals.stream().anyMatch(g -> g.getMinute() > from && g.getMinute() < before);
+        return goals.stream().anyMatch(g -> g.getMinute() >= from && g.getMinute() < before);
     }
 
-    protected abstract Set<T> getGoals();
+    public boolean hasGoalBetweenFromPeriodStart(int from, int before) {
+        Set<T> goals = getGoals();
+        if (goals == null) {
+            return false;
+        }
+        return goals.stream().anyMatch(g -> {
+            int minuteFromStart = getMinuteFromStart(g.getMinute());
+            return minuteFromStart >= from && minuteFromStart < before;
+        });
+    }
+
+    public abstract int getMinuteFromStart(int minute);
+
+    public abstract Set<T> getGoals();
 
 }
