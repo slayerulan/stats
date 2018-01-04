@@ -56,4 +56,9 @@ public class CoeffContainer {
         }
         return null;
     }
+
+    @Override
+    public String toString() {
+        return "CoeffContainer{" + "type=" + type + '}';
+    }
 }

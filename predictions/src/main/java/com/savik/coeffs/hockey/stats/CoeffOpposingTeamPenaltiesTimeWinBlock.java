@@ -7,6 +7,6 @@ import com.savik.ContainerType;
 
 public class CoeffOpposingTeamPenaltiesTimeWinBlock extends CoeffContainer {
     public CoeffOpposingTeamPenaltiesTimeWinBlock() {
-        super(new Coeff(), ContainerType.OPPOSING_TEAM_PENALTIES_TIME_WIN);
+        super(new Coeff(), ContainerType.OPPOSING_TEAM_MINOR_PENALTIES_TIME_NOT_LOOSE);
     }
 }

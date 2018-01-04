@@ -1284,7 +1284,7 @@ public class HockeyPossibleBetBlockTest {
     public void testTeamPenaltiesTimeWin() {
         PossibleBetContainer possibleBetsBlock = getPossibleBetsBlock();
 
-        PossibleBetContainer block = possibleBetsBlock.findByType(TEAM_PENALTIES_TIME_WIN);
+        PossibleBetContainer block = possibleBetsBlock.findByType(TEAM_MINOR_PENALTIES_TIME_NOT_LOOSE);
         assertEquals(40, block.getFirstTeamPercentage());
         assertEquals(80, block.getSecondTeamPercentage());
     }
@@ -1293,7 +1293,7 @@ public class HockeyPossibleBetBlockTest {
     public void testOpposingTeamPenaltiesTimeWin() {
         PossibleBetContainer possibleBetsBlock = getPossibleBetsBlock();
 
-        PossibleBetContainer block = possibleBetsBlock.findByType(OPPOSING_TEAM_PENALTIES_TIME_WIN);
+        PossibleBetContainer block = possibleBetsBlock.findByType(OPPOSING_TEAM_MINOR_PENALTIES_TIME_NOT_LOOSE);
         assertEquals(60, block.getFirstTeamPercentage());
         assertEquals(0, block.getSecondTeamPercentage());
     }

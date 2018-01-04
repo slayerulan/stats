@@ -411,12 +411,12 @@ public class HockeyParimatchCoeffsMatchParser {
 
         if (tds.get(8) != null) {
             String coeff = tds.get(8).select("u a").first().text();
-            CoeffContainer winContainer = container.findByType(TEAM_PENALTIES_TIME_WIN);
+            CoeffContainer winContainer = container.findByType(TEAM_MINOR_PENALTIES_TIME_NOT_LOOSE);
             winContainer.getCoeff().set(Double.valueOf(coeff));
         }
         if (tds.get(10) != null) {
             String coeff = tds.get(10).select("u a").first().text();
-            CoeffContainer winContainer = container.findByType(OPPOSING_TEAM_PENALTIES_TIME_WIN);
+            CoeffContainer winContainer = container.findByType(OPPOSING_TEAM_MINOR_PENALTIES_TIME_NOT_LOOSE);
             winContainer.getCoeff().set(Double.valueOf(coeff));
         }
 

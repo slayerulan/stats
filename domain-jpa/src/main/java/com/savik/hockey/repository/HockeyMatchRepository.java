@@ -16,6 +16,12 @@ public interface HockeyMatchRepository extends JpaEntryRepository<HockeyMatch> {
     HockeyMatch findByMyscoreCode(String code);
 
     @Override
+    default List<HockeyMatch> findAll() {
+        Sort defaultSort = new Sort(Sort.Direction.DESC, HockeyMatch_.date.getName());
+        return findAll(defaultSort);
+    };
+
+    @Override
     default List<HockeyMatch> findAll(Specification<HockeyMatch> specification, Integer size) {
         Sort defaultSort = new Sort(Sort.Direction.DESC, HockeyMatch_.date.getName());
         if (size == null) {

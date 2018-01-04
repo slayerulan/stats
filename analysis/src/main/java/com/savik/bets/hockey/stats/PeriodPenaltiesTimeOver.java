@@ -15,11 +15,11 @@ public class PeriodPenaltiesTimeOver extends PeriodBet<HockeyPeriod> {
 
     @Override
     public boolean canAnalyze(HockeyPeriod period) {
-        return period.getGuestPenaltiesTime() != null && period.getHomePenaltiesTime() != null;
+        return period.getGuestMinorPenaltiesAmount() != null && period.getHomeMinorPenaltiesAmount() != null;
     }
 
     @Override
     public boolean check(HockeyPeriod period) {
-        return period.getGuestPenaltiesTime() + period.getHomePenaltiesTime() > amount;
+        return (period.getGuestMinorPenaltiesAmount() + period.getHomeMinorPenaltiesAmount()) * 2 > amount;
     }
 }

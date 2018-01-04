@@ -12,6 +12,10 @@ public class CoeffPenaltiesTimeTotalOverBlock extends CoeffContainer {
         super(Arrays.asList(
                 new CoeffContainer(
                         new Coeff(),
+                        ContainerType.OVER_12_5
+                ),
+                new CoeffContainer(
+                        new Coeff(),
                         ContainerType.OVER_13_5
                 ),
                 new CoeffContainer(
@@ -21,6 +25,22 @@ public class CoeffPenaltiesTimeTotalOverBlock extends CoeffContainer {
                 new CoeffContainer(
                         new Coeff(),
                         ContainerType.OVER_15_5
+                ),
+                new CoeffContainer(
+                        new Coeff(),
+                        ContainerType.OVER_16_5
+                ),
+                new CoeffContainer(
+                        new Coeff(),
+                        ContainerType.OVER_18_5
+                ),
+                new CoeffContainer(
+                        new Coeff(),
+                        ContainerType.OVER_20_5
+                ),
+                new CoeffContainer(
+                        new Coeff(),
+                        ContainerType.OVER_22_5
                 )
         ), ContainerType.PENALTIES_TIME_OVER);
     }
