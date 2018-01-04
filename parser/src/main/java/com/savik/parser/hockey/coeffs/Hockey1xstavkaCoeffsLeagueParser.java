@@ -543,6 +543,10 @@ class Hockey1xstavkaCoeffsLeagueParser {
         fillPeriodTeamNotLooseBlock(findByShortNameId(futureMatchCoeffs, Book1xbetShortName.OPPOSING_TEAM_NOT_LOOSE),
                 periodContainer.findByType(OPPOSING_TEAM_NOT_LOOSE));
 
+        fillPeriodGoalBetweenBlock(findByShortNameId(futureMatchCoeffs, Book1xbetShortName.GOAL_BETWEEN_YES),
+                findByShortNameId(futureMatchCoeffs, Book1xbetShortName.GOAL_BETWEEN_NO),
+                periodContainer.findByType(GOAL_BETWEEN));
+
         fillPeriodTotalOverBlock(findByShortNameId(futureMatchCoeffs, Book1xbetShortName.TOTAL_OVER),
                 periodContainer.findByType(TOTAL_OVER));
 
@@ -645,6 +649,16 @@ class Hockey1xstavkaCoeffsLeagueParser {
 
     private void fillPeriodTeamNotLooseBlock(Set<BookFutureMatchCoeff> futureMatchCoeffs, CoeffContainer container) {
         setYesCoeff(futureMatchCoeffs, container);
+    }
+
+    private void fillPeriodGoalBetweenBlock(Set<BookFutureMatchCoeff> futureMatchPosCoeffs,
+                                              Set<BookFutureMatchCoeff> futureMatchNegCoeffs,
+                                              CoeffContainer container) {
+        fillPosAndNegContainer(futureMatchPosCoeffs, futureMatchNegCoeffs,
+                (posCoeff, negCoeff) -> checkIfContainsKindAndSetPosAndNegCoeff(posCoeff, negCoeff, container.findByType(BETWEEN_1_7), "1.007"),
+                (posCoeff, negCoeff) -> checkIfContainsKindAndSetPosAndNegCoeff(posCoeff, negCoeff, container.findByType(BETWEEN_8_15), "8.015"),
+                (posCoeff, negCoeff) -> checkIfContainsKindAndSetPosAndNegCoeff(posCoeff, negCoeff, container.findByType(BETWEEN_16_20), "16.02")
+        );
     }
 
     private void fillPeriodTeamTotalOverBlock(Set<BookFutureMatchCoeff> futureMatchPosCoeffs,
