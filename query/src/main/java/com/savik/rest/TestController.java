@@ -97,24 +97,33 @@ public class TestController {
         List<HockeyFutureMatch> all = hockeyFutureMatchRepository.findAll();
         for (HockeyFutureMatch futureMatch : all) {
 
-            hockeyMatchFilter.setIncludeAllMatches(false);
-            PossibleBetsBlock possibleBetsBlock = new Analyzer(hockeyMatchFilter, futureMatch).getPossibleBetsBlock();
+            HockeyMatchFilter homeFilter = hockeyMatchFilter.builder().includeAllMatches(false).build();
+            PossibleBetsBlock possibleBetsBlock = new Analyzer(homeFilter, futureMatch).getPossibleBetsBlock();
             ProposedBetsContainer resultContainer = getProposedBetsContainer(futureMatch.getMyscoreCode(), possibleBetsBlock);
-            writeMatchToFile("info/matches/home/", futureMatch, resultContainer);
+            writeMatchToFile("info/matches/", "home", futureMatch, resultContainer);
 
 
-            hockeyMatchFilter.setIncludeAllMatches(true);
-            PossibleBetsBlock possibleBetsBlockAllMatches = new Analyzer(hockeyMatchFilter, futureMatch).getPossibleBetsBlock();
+            HockeyMatchFilter allFilter = hockeyMatchFilter.builder().includeAllMatches(true).build();
+            PossibleBetsBlock possibleBetsBlockAllMatches = new Analyzer(allFilter, futureMatch).getPossibleBetsBlock();
             ProposedBetsContainer resultContainerAllMatches = getProposedBetsContainer(futureMatch.getMyscoreCode(), possibleBetsBlockAllMatches);
-            writeMatchToFile("info/matches/all/", futureMatch, resultContainerAllMatches);
+            writeMatchToFile("info/matches/", "all", futureMatch, resultContainerAllMatches);
+
+            HockeyMatchFilter last10Filter = hockeyMatchFilter.builder().includeAllMatches(false).size(10).build();
+            PossibleBetsBlock possibleBetsBlockLast10Matches = new Analyzer(last10Filter, futureMatch).getPossibleBetsBlock();
+            ProposedBetsContainer resultContainerkLast10Matches = getProposedBetsContainer(futureMatch.getMyscoreCode(), possibleBetsBlockLast10Matches);
+            writeMatchToFile("info/matches/", "last10home", futureMatch, resultContainerkLast10Matches);
         }
     }
 
-    private void writeMatchToFile(String folderPrefix, HockeyFutureMatch futureMatch, ProposedBetsContainer proposedBets) throws IOException {
+    private void writeMatchToFile(String folderPrefix, String matchPrefix, HockeyFutureMatch futureMatch, ProposedBetsContainer proposedBets) throws IOException {
         File leagueDir2 = new File(folderPrefix + futureMatch.getChampionship().toString());
         Files.createDirectories(leagueDir2.toPath());
-        File matchFile = new File(leagueDir2, String.format("%s-%s  %s===%s.json", futureMatch.getMyscoreCode(),
-                futureMatch.getDate().toString(), futureMatch.getHomeTeam().getName(), futureMatch.getGuestTeam().getName()));
+        File matchFile = new File(leagueDir2,
+                String.format(
+                        "%s-%s(%s)  %s===%s.json", futureMatch.getMyscoreCode(), futureMatch.getDate().toString(),
+                        matchPrefix, futureMatch.getHomeTeam().getName(), futureMatch.getGuestTeam().getName()
+                )
+        );
         objectMapper.writeValue(matchFile, proposedBets);
     }
 

@@ -3,6 +3,7 @@ package com.savik.hockey.filters;
 import com.savik.filter.Filter;
 import com.savik.hockey.model.HockeyMatch;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
@@ -14,6 +15,7 @@ import static org.springframework.data.jpa.domain.Specifications.where;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class HockeyMatchFilter implements Filter<HockeyMatch> {
 
     private Long homeId;
