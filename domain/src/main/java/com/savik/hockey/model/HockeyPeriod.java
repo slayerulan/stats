@@ -47,10 +47,10 @@ public class HockeyPeriod extends Period<HockeyGoal> {
 
     Integer guestPenaltiesTime;
 
-    @Property(optionality=Optionality.OPTIONAL)
+    @Property(optionality = Optionality.OPTIONAL)
     Integer homeMinorPenaltiesAmount;
 
-    @Property(optionality=Optionality.OPTIONAL)
+    @Property(optionality = Optionality.OPTIONAL)
     Integer guestMinorPenaltiesAmount;
 
     @Builder(toBuilder = true)
@@ -76,6 +76,18 @@ public class HockeyPeriod extends Period<HockeyGoal> {
     @Override
     @JsonValue
     public String toString() {
-        return "{" + homeScore + "-" + guestScore + '}';
+        return "{" + homeScore + "-" + guestScore + ", pen=(" + homeMinorPenaltiesAmount + "-" + guestMinorPenaltiesAmount + ")}";
+    }
+
+    @Override
+    public int getMinuteFromStart(int minute) {
+        if (periodStatus == PeriodStatus.FIRST) {
+            return minute;
+        } else if (periodStatus == PeriodStatus.SECOND) {
+            return minute - 20;
+        } else if (periodStatus == PeriodStatus.THIRD) {
+            return minute - 40;
+        }
+        throw new IllegalStateException("status = " + periodStatus);
     }
 }
