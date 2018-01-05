@@ -103,10 +103,10 @@ public class TestController {
             writeMatchToFile("info/matches/", "home", futureMatch, resultContainer);
 
 
-            HockeyMatchFilter allFilter = hockeyMatchFilter.builder().includeAllMatches(true).build();
+            /*HockeyMatchFilter allFilter = hockeyMatchFilter.builder().includeAllMatches(true).build();
             PossibleBetsBlock possibleBetsBlockAllMatches = new Analyzer(allFilter, futureMatch).getPossibleBetsBlock();
             ProposedBetsContainer resultContainerAllMatches = getProposedBetsContainer(futureMatch.getMyscoreCode(), possibleBetsBlockAllMatches);
-            writeMatchToFile("info/matches/", "all", futureMatch, resultContainerAllMatches);
+            writeMatchToFile("info/matches/", "all", futureMatch, resultContainerAllMatches);*/
 
             HockeyMatchFilter last10Filter = hockeyMatchFilter.builder().includeAllMatches(false).size(10).build();
             PossibleBetsBlock possibleBetsBlockLast10Matches = new Analyzer(last10Filter, futureMatch).getPossibleBetsBlock();
@@ -120,7 +120,7 @@ public class TestController {
         Files.createDirectories(leagueDir2.toPath());
         File matchFile = new File(leagueDir2,
                 String.format(
-                        "%s-%s(%s)  %s===%s.json", futureMatch.getMyscoreCode(), futureMatch.getDate().toString(),
+                        "%s-%s(%s)  %s===%s.json", futureMatch.getDate().toString(), futureMatch.getMyscoreCode(),
                         matchPrefix, futureMatch.getHomeTeam().getName(), futureMatch.getGuestTeam().getName()
                 )
         );
@@ -130,7 +130,9 @@ public class TestController {
     private ProposedBetsContainer getProposedBetsContainer(String myscoreCode, PossibleBetsBlock possibleBetsBlock) {
         List<CoeffEntry> coeffEntries = coeffRepository.findByMyscoreCode(myscoreCode);
         CoeffContainer coeffContainer = CoeffTransformer.transformEntryToBlock(coeffEntries);
-        return CoefficientsAnalyzer.analyze(coeffContainer, possibleBetsBlock);
+        ProposedBetsContainer proposedBetsContainer = CoefficientsAnalyzer.analyze(coeffContainer, possibleBetsBlock);
+        //CoefficientsAnalyzer.clearExceptGoodBets(proposedBetsContainer);
+        return proposedBetsContainer;
     }
 
 

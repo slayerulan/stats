@@ -76,7 +76,7 @@ public class CoefficientsAnalyzer {
         boolean firstTeamHasGoodNegativeChances = firstTeamContainerPercentage < MIN_PERCENTAGE;
         boolean secondTeamHasGoodNegativeChanges = secondTeamContainerPercentage < MIN_PERCENTAGE;
 
-        if(firstTeamHasGoodPositiveChances || secondTeamHasGoodPositiveChanges) {
+        if (firstTeamHasGoodPositiveChances || secondTeamHasGoodPositiveChanges) {
             proposedBetsContainer.setPossibleBetStatus(PossibleBetStatus.PERCENTAGES);
             proposedBetsContainer.setCoeffType(CoeffType.POSITIVE);
         } else if (firstTeamHasGoodNegativeChances || secondTeamHasGoodNegativeChanges) {
@@ -144,7 +144,7 @@ public class CoefficientsAnalyzer {
         boolean firstTeamHasGoodChances = firstTeamContainerPercentage < MIN_PERCENTAGE || firstTeamContainerPercentage > MAX_PERCENTAGE;
         boolean secondTeamHasGoodChanges = secondTeamContainerPercentage < MIN_PERCENTAGE || secondTeamContainerPercentage > MAX_PERCENTAGE;
 
-        if(firstTeamHasGoodChances || secondTeamHasGoodChanges) {
+        if (firstTeamHasGoodChances || secondTeamHasGoodChanges) {
             proposedBetsContainer.setPossibleBetStatus(PossibleBetStatus.PERCENTAGES);
         }
 
@@ -188,5 +188,17 @@ public class CoefficientsAnalyzer {
                 childBlocks,
                 betContainer.getType()
         );
+    }
+
+    public static boolean clearExceptGoodBets(ProposedBetsContainer betContainer) {
+        if (betContainer.getLeaf()) {
+            PossibleBetStatus possibleBetStatus = betContainer.getPossibleBetStatus();
+            return possibleBetStatus == PossibleBetStatus.GOOD || possibleBetStatus == PossibleBetStatus.PERCENTAGES
+                    || possibleBetStatus == PossibleBetStatus.GOOD_PERCENTAGES;
+        } else {
+            betContainer.getChildrenBlocks().removeIf(child -> !clearExceptGoodBets(child));
+            return !betContainer.getChildrenBlocks().isEmpty();
+        }
+
     }
 }

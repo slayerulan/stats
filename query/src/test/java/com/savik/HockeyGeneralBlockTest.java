@@ -1071,7 +1071,7 @@ public class HockeyGeneralBlockTest {
     public void testPenalTimeOver() {
         GeneralBlock generalBlock = getGeneralBlock();
 
-        BetContainer block = generalBlock.findByType(PENALTIES_TIME_OVER);
+        BetContainer block = generalBlock.findByType(MINOR_PENALTIES_TIME_OVER);
 
         BetContainer over14AndHalf = block.findByType(OVER_14_5);
         assertEquals(12, over14AndHalf.getAnalyzedMatchesAmount().intValue());

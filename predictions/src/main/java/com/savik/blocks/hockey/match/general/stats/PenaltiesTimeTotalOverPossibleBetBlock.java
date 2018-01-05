@@ -43,7 +43,7 @@ public class PenaltiesTimeTotalOverPossibleBetBlock extends PossibleBetContainer
                         new PenaltiesTimeTotalOverPossibleBet(HockeyMatch.MATCH, 22.5),
                         ContainerType.OVER_22_5
                 )
-                ), ContainerType.PENALTIES_TIME_OVER
+                ), ContainerType.MINOR_PENALTIES_TIME_OVER
         );
     }
 }

@@ -42,6 +42,6 @@ public class CoeffPenaltiesTimeTotalOverBlock extends CoeffContainer {
                         new Coeff(),
                         ContainerType.OVER_22_5
                 )
-        ), ContainerType.PENALTIES_TIME_OVER);
+        ), ContainerType.MINOR_PENALTIES_TIME_OVER);
     }
 }

@@ -16,7 +16,7 @@ class GeneralPenaltiesTimeTotalOverBlock extends PeriodBetContainer {
                         new PeriodPenaltiesTimeOverSingleBlock(14.5, ContainerType.OVER_14_5),
                         new PeriodPenaltiesTimeOverSingleBlock(16.5, ContainerType.OVER_16_5),
                         new PeriodPenaltiesTimeOverSingleBlock(18.5, ContainerType.OVER_18_5)
-                ), HockeyMatch.MATCH, ContainerType.PENALTIES_TIME_OVER
+                ), HockeyMatch.MATCH, ContainerType.MINOR_PENALTIES_TIME_OVER
         );
     }
 }

@@ -22,6 +22,6 @@ public class CoeffTeamPenaltiesTimeTotalOverBlock extends CoeffContainer {
                         new Coeff(),
                         ContainerType.OVER_8_5
                 )
-        ), ContainerType.TEAM_PENALTIES_TIME_OVER);
+        ), ContainerType.TEAM_MINOR_PENALTIES_TIME_OVER);
     }
 }

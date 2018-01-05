@@ -19,7 +19,7 @@ public interface HockeyMatchRepository extends JpaEntryRepository<HockeyMatch> {
     default List<HockeyMatch> findAll() {
         Sort defaultSort = new Sort(Sort.Direction.DESC, HockeyMatch_.date.getName());
         return findAll(defaultSort);
-    };
+    }
 
     @Override
     default List<HockeyMatch> findAll(Specification<HockeyMatch> specification, Integer size) {

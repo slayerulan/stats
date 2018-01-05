@@ -396,7 +396,7 @@ public class HockeyParimatchCoeffsMatchParser {
             String totalText = tds.get(5).select("b").first().text();
             String totalOverCoeff = tds.get(6).select("u a").first().text();
             String totalUnderCoeff = tds.get(7).select("u a").first().text();
-            CoeffContainer teamTotalOverContainer = container.findByType(PENALTIES_TIME_OVER);
+            CoeffContainer teamTotalOverContainer = container.findByType(MINOR_PENALTIES_TIME_OVER);
             CoeffContainer over13AndHalf = teamTotalOverContainer.findByType(OVER_13_5);
             CoeffContainer over14AndHalf = teamTotalOverContainer.findByType(OVER_14_5);
             CoeffContainer over15AndHalf = teamTotalOverContainer.findByType(OVER_15_5);
@@ -425,7 +425,7 @@ public class HockeyParimatchCoeffsMatchParser {
             String totalText = tds.get(14).select("b").first().text();
             String totalOverCoeff = tds.get(15).select("u a").first().text();
             String totalUnderCoeff = tds.get(16).select("u a").first().text();
-            CoeffContainer teamTotalOverContainer = container.findByType(TEAM_PENALTIES_TIME_OVER);
+            CoeffContainer teamTotalOverContainer = container.findByType(TEAM_MINOR_PENALTIES_TIME_OVER);
             CoeffContainer over6AndHalf = teamTotalOverContainer.findByType(OVER_6_5);
             CoeffContainer over7AndHalf = teamTotalOverContainer.findByType(OVER_7_5);
             CoeffContainer over8AndHalf = teamTotalOverContainer.findByType(OVER_8_5);
@@ -442,7 +442,7 @@ public class HockeyParimatchCoeffsMatchParser {
             String totalText = tds.get(14).select("b").get(1).text();
             String totalOverCoeff = tds.get(15).select("u a").get(1).text();
             String totalUnderCoeff = tds.get(16).select("u a").get(1).text();
-            CoeffContainer teamTotalOverContainer = container.findByType(OPPOSING_TEAM_PENALTIES_TIME_OVER);
+            CoeffContainer teamTotalOverContainer = container.findByType(OPPOSING_TEAM_MINOR_PENALTIES_TIME_OVER);
             CoeffContainer over6AndHalf = teamTotalOverContainer.findByType(OVER_6_5);
             CoeffContainer over7AndHalf = teamTotalOverContainer.findByType(OVER_7_5);
             CoeffContainer over8AndHalf = teamTotalOverContainer.findByType(OVER_8_5);

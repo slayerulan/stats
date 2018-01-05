@@ -27,7 +27,7 @@ public class TeamPenaltiesTimeTotalOverPossibleBetBlock extends PossibleBetConta
                                 homeMatchData, guestMatchData, HockeyMatch.MATCH, 8.5),
                         ContainerType.OVER_8_5
                 )
-                ), ContainerType.TEAM_PENALTIES_TIME_OVER
+                ), ContainerType.TEAM_MINOR_PENALTIES_TIME_OVER
         );
     }
 }

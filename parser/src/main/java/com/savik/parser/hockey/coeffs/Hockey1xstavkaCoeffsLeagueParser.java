@@ -687,15 +687,15 @@ class Hockey1xstavkaCoeffsLeagueParser {
     private void fillPenaltiesBlock(Set<BookFutureMatchCoeff> futureMatchCoeffs, CoeffContainer statsContainer) {
         fillPenaltiesTotalOverBlock(findByShortNameId(futureMatchCoeffs, Book1xbetShortName.TOTAL_OVER),
                 findByShortNameId(futureMatchCoeffs, Book1xbetShortName.TOTAL_UNDER),
-                statsContainer.findByType(PENALTIES_TIME_OVER));
+                statsContainer.findByType(MINOR_PENALTIES_TIME_OVER));
 
         fillTeamPenaltiesTotalOverBlock(findByShortNameId(futureMatchCoeffs, Book1xbetShortName.TEAM_TOTAL_OVER),
                 findByShortNameId(futureMatchCoeffs, Book1xbetShortName.TEAM_TOTAL_UNDER),
-                statsContainer.findByType(TEAM_PENALTIES_TIME_OVER));
+                statsContainer.findByType(TEAM_MINOR_PENALTIES_TIME_OVER));
 
         fillTeamPenaltiesTotalOverBlock(findByShortNameId(futureMatchCoeffs, Book1xbetShortName.OPPOSING_TEAM_TOTAL_OVER),
                 findByShortNameId(futureMatchCoeffs, Book1xbetShortName.OPPOSING_TEAM_TOTAL_UNDER),
-                statsContainer.findByType(OPPOSING_TEAM_PENALTIES_TIME_OVER));
+                statsContainer.findByType(OPPOSING_TEAM_MINOR_PENALTIES_TIME_OVER));
 
         fillTeamNotLoosePenalties(findByShortNameId(futureMatchCoeffs, Book1xbetShortName.TEAM_NOT_LOOSE),
                 statsContainer.findByType(TEAM_MINOR_PENALTIES_TIME_NOT_LOOSE));
@@ -752,7 +752,10 @@ class Hockey1xstavkaCoeffsLeagueParser {
     private void setYesOrNoCoeff(Set<BookFutureMatchCoeff> futureMatchPosCoeffs,
                                  Set<BookFutureMatchCoeff> futureMatchNegCoeffs,
                                  CoeffContainer container) {
-        if (futureMatchNegCoeffs.size() != 1 || futureMatchNegCoeffs.size() != 1) {
+        if(futureMatchPosCoeffs.isEmpty() && futureMatchNegCoeffs.isEmpty()) {
+            System.out.println("strange" + futureMatchPosCoeffs);
+            return;
+        } else if (futureMatchNegCoeffs.size() != 1 || futureMatchNegCoeffs.size() != 1) {
             throw new RuntimeException("size should be equals 1");
         }
         BookFutureMatchCoeff posCoeff = futureMatchPosCoeffs.stream().findFirst().get();
