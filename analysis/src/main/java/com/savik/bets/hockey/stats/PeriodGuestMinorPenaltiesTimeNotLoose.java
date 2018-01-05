@@ -5,7 +5,7 @@ import com.savik.hockey.model.HockeyPeriod;
 import lombok.Getter;
 
 @Getter
-public class PeriodGuestPenaltiesTimeNotLoose extends PeriodBet<HockeyPeriod> {
+public class PeriodGuestMinorPenaltiesTimeNotLoose extends PeriodBet<HockeyPeriod> {
 
     @Override
     public boolean canAnalyze(HockeyPeriod period) {
