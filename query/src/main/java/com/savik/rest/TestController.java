@@ -97,7 +97,7 @@ public class TestController {
         List<HockeyFutureMatch> all = hockeyFutureMatchRepository.findAll();
         for (HockeyFutureMatch futureMatch : all) {
 
-            HockeyMatchFilter homeFilter = hockeyMatchFilter.builder().includeAllMatches(false).build();
+            HockeyMatchFilter homeFilter = hockeyMatchFilter.builder().includeAllMatches(false).size(15).build();
             PossibleBetsBlock possibleBetsBlock = new Analyzer(homeFilter, futureMatch).getPossibleBetsBlock();
             ProposedBetsContainer resultContainer = getProposedBetsContainer(futureMatch.getMyscoreCode(), possibleBetsBlock);
             writeMatchToFile("info/matches/", "home", futureMatch, resultContainer);
