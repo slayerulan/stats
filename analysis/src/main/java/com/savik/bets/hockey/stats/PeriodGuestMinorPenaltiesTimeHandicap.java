@@ -21,8 +21,8 @@ public class PeriodGuestMinorPenaltiesTimeHandicap extends PeriodBet<HockeyPerio
     @Override
     public boolean check(HockeyPeriod period) {
         if (amount <= 0) {
-            return (period.getHomeMinorPenaltiesAmount() - period.getGuestMinorPenaltiesAmount()) * 2 > Math.abs(amount);
+            return (period.getGuestMinorPenaltiesAmount() - period.getHomeMinorPenaltiesAmount()) * 2 > Math.abs(amount);
         }
-        return (period.getGuestMinorPenaltiesAmount() - period.getHomeMinorPenaltiesAmount()) * 2 < amount;
+        return (period.getHomeMinorPenaltiesAmount() - period.getGuestMinorPenaltiesAmount()) * 2 < amount;
     }
 }

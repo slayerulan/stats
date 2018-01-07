@@ -21,6 +21,8 @@ public class CoeffStatsBlock extends CoeffContainer {
                 new CoeffOpposingTeamPenaltiesTimeTotalOverBlock(),
                 new CoeffTeamPenaltiesTimeWinBlock(),
                 new CoeffOpposingTeamPenaltiesTimeWinBlock(),
+                new CoeffTeamPenaltiesTimeHandicapBlock(),
+                new CoeffOpposingTeamPenaltiesTimeHandicapBlock(),
                 new CoeffPowerplayGoalsTotalOverBlock()
         ), ContainerType.STATS);
     }

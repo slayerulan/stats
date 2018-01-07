@@ -1223,7 +1223,7 @@ public class HockeyPossibleBetBlockTest {
 
 
     @Test
-    public void testMinorPenaltiesTimeTotalOverTotalOver() {
+    public void testMinorPenaltiesTimeTotalOver() {
         PossibleBetContainer possibleBetsBlock = getPossibleBetsBlock();
 
         PossibleBetContainer block = possibleBetsBlock.findByType(MINOR_PENALTIES_TIME_OVER);
@@ -1258,7 +1258,7 @@ public class HockeyPossibleBetBlockTest {
     }
 
     @Test
-    public void testTeamMinorPenaltiesTimeTotalOverTotalOver() {
+    public void testTeamMinorPenaltiesTimeTotalOver() {
         PossibleBetContainer possibleBetsBlock = getPossibleBetsBlock();
 
         PossibleBetContainer block = possibleBetsBlock.findByType(TEAM_MINOR_PENALTIES_TIME_OVER);
@@ -1273,7 +1273,7 @@ public class HockeyPossibleBetBlockTest {
     }
 
     @Test
-    public void testOpposingTeamMinorPenaltiesTimeTotalOverTotalOver() {
+    public void testOpposingTeamMinorPenaltiesTimeTotalOver() {
         PossibleBetContainer possibleBetsBlock = getPossibleBetsBlock();
 
         PossibleBetContainer block = possibleBetsBlock.findByType(OPPOSING_TEAM_MINOR_PENALTIES_TIME_OVER);
@@ -1304,6 +1304,44 @@ public class HockeyPossibleBetBlockTest {
         PossibleBetContainer block = possibleBetsBlock.findByType(OPPOSING_TEAM_MINOR_PENALTIES_TIME_NOT_LOOSE);
         assertEquals(60, block.getFirstTeamPercentage());
         assertEquals(20, block.getSecondTeamPercentage());
+    }
+
+    @Test
+    public void testTeamMinorPenaltiesTimeHandicap() {
+        PossibleBetContainer possibleBetsBlock = getPossibleBetsBlock();
+
+        PossibleBetContainer block = possibleBetsBlock.findByType(TEAM_MINOR_PENALTIES_TIME_HANDICAP);
+
+        PossibleBetContainer plus4AndHalf = block.findByType(PLUS_4_5);
+        assertEquals(100, plus4AndHalf.getFirstTeamPercentage());
+        assertEquals(100, plus4AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer plus2AndHalf = block.findByType(PLUS_2_5);
+        assertEquals(100, plus2AndHalf.getFirstTeamPercentage());
+        assertEquals(80, plus2AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer minus2AndHalf = block.findByType(MINUS_2_5);
+        assertEquals(20, minus2AndHalf.getFirstTeamPercentage());
+        assertEquals(60, minus2AndHalf.getSecondTeamPercentage());
+    }
+
+    @Test
+    public void testOpposingTeamMinorPenaltiesTimeHandicap() {
+        PossibleBetContainer possibleBetsBlock = getPossibleBetsBlock();
+
+        PossibleBetContainer block = possibleBetsBlock.findByType(OPPOSING_TEAM_MINOR_PENALTIES_TIME_HANDICAP);
+
+        PossibleBetContainer plus4AndHalf = block.findByType(PLUS_4_5);
+        assertEquals(80, plus4AndHalf.getFirstTeamPercentage());
+        assertEquals(80, plus4AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer plus2AndHalf = block.findByType(PLUS_2_5);
+        assertEquals(80, plus2AndHalf.getFirstTeamPercentage());
+        assertEquals(40, plus2AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer minus2AndHalf = block.findByType(MINUS_2_5);
+        assertEquals(0, minus2AndHalf.getFirstTeamPercentage());
+        assertEquals(20, minus2AndHalf.getSecondTeamPercentage());
     }
 
     @Test

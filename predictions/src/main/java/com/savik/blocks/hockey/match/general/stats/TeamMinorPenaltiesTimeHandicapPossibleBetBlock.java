@@ -24,7 +24,7 @@ public class TeamMinorPenaltiesTimeHandicapPossibleBetBlock extends PossibleBetC
                         ContainerType.PLUS_2_5
                 ),
                 new PossibleBetContainer<>(
-                        new TeamPenaltiesTimeTotalOverPossibleBet(
+                        new TeamMinorPenaltiesTimeHandicapPossibleBet(
                                 homeMatchData, guestMatchData, HockeyMatch.MATCH, -2.5),
                         ContainerType.MINUS_2_5
                 )

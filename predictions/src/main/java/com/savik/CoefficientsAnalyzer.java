@@ -7,7 +7,7 @@ import java.util.List;
 
 public class CoefficientsAnalyzer {
 
-    public static double LOW_VALUE_BORDER = 1.15;
+    public static double LOW_VALUE_BORDER = 1.20;
     public static double RISK_BET_LOW_VALUE_BORDER = 2.0;
     public static double MIN_PERCENTAGE = 0.15;
     public static double MAX_PERCENTAGE = 0.85;

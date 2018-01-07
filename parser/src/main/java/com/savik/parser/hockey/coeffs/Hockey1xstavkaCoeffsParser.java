@@ -31,7 +31,7 @@ public class Hockey1xstavkaCoeffsParser {
     HockeyParimatchCoeffsMatchParser hockeyParimatchCoeffsMatchParser;
 
     @Autowired
-    Hockey1xstavkaCoeffsLeagueParser hockey1XstavkaCoeffsLeagueParser;
+    Hockey1xstavkaCoeffsMatchParser hockey1XstavkaCoeffsMatchParser;
 
     @Autowired
     CoeffRepository coeffRepository;
@@ -58,7 +58,7 @@ public class Hockey1xstavkaCoeffsParser {
         for (HockeyFutureMatch match : matches) {
             mapName(match.getHomeTeam(), teamNameMapping);
             mapName(match.getGuestTeam(), teamNameMapping);
-            CoeffBlock coeffBlock = hockey1XstavkaCoeffsLeagueParser.parse(match, leagueUrl);
+            CoeffBlock coeffBlock = hockey1XstavkaCoeffsMatchParser.parse(match, leagueUrl);
             List<CoeffEntry> coeffEntries = CoeffTransformer.transformBlockToEntryWithoutAverageCoeffs(coeffBlock, match.getMyscoreCode());
             coeffRepository.deleteAllByMyscoreCode(match.getMyscoreCode());
             coeffRepository.save(coeffEntries);

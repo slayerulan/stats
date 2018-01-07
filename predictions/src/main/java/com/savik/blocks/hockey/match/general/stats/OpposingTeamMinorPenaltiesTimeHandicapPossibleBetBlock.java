@@ -4,6 +4,7 @@ package com.savik.blocks.hockey.match.general.stats;
 import com.savik.ContainerType;
 import com.savik.MatchData;
 import com.savik.PossibleBetContainer;
+import com.savik.bets.hockey.stats.OpposingTeamMinorPenaltiesTimeHandicapPossibleBet;
 import com.savik.bets.hockey.stats.TeamMinorPenaltiesTimeHandicapPossibleBet;
 import com.savik.bets.hockey.stats.TeamPenaltiesTimeTotalOverPossibleBet;
 import com.savik.hockey.model.HockeyMatch;
@@ -14,17 +15,17 @@ public class OpposingTeamMinorPenaltiesTimeHandicapPossibleBetBlock extends Poss
     public OpposingTeamMinorPenaltiesTimeHandicapPossibleBetBlock(MatchData homeMatchData, MatchData guestMatchData) {
         super(Arrays.asList(
                 new PossibleBetContainer<>(
-                        new TeamMinorPenaltiesTimeHandicapPossibleBet(
+                        new OpposingTeamMinorPenaltiesTimeHandicapPossibleBet(
                                 homeMatchData, guestMatchData, HockeyMatch.MATCH, 4.5),
                         ContainerType.PLUS_4_5
                 ),
                 new PossibleBetContainer<>(
-                        new TeamMinorPenaltiesTimeHandicapPossibleBet(
+                        new OpposingTeamMinorPenaltiesTimeHandicapPossibleBet(
                                 homeMatchData, guestMatchData, HockeyMatch.MATCH, 2.5),
                         ContainerType.PLUS_2_5
                 ),
                 new PossibleBetContainer<>(
-                        new TeamPenaltiesTimeTotalOverPossibleBet(
+                        new OpposingTeamMinorPenaltiesTimeHandicapPossibleBet(
                                 homeMatchData, guestMatchData, HockeyMatch.MATCH, -2.5),
                         ContainerType.MINUS_2_5
                 )
