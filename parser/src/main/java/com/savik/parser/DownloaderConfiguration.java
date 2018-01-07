@@ -26,6 +26,9 @@ public class DownloaderConfiguration {
     @Value("${url.odds}")
     private String oddsUrlTemplate;
 
+    @Value("${url.snookerOdds}")
+    private String snookerOddsTemplate;
+
     @Value("${url.footballMatches}")
     private String footballMatchesScheduleTemplate;
 

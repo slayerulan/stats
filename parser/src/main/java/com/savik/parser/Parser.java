@@ -5,6 +5,7 @@ import com.savik.parser.football.FootballParser;
 import com.savik.parser.hockey.coeffs.Hockey1xstavkaCoeffsParser;
 import com.savik.parser.hockey.matches.HockeyFutureMatchesParser;
 import com.savik.parser.hockey.matches.HockeyParser;
+import com.savik.parser.snooker.matches.SnookerParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,11 +37,15 @@ public class Parser {
     @Autowired
     Hockey1xstavkaCoeffsParser hockey1xstavkaCoeffsParser;
 
+    @Autowired
+    SnookerParser snookerParser;
+
 
     @PostConstruct
     public void parse() throws Exception {
         //hockey1xstavkaCoeffsParser.parse();
         //hockeyFutureMatchesParser.parse();
         //hockeyParser.parse();
+        //snookerParser.parse();
     }
 }
