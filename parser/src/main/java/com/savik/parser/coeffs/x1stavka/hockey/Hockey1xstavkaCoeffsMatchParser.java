@@ -402,6 +402,9 @@ class Hockey1xstavkaCoeffsMatchParser extends Sport1xstavkaCoeffsMatchParser {
     private void fillTeamFirstScoredAndWinBlock(Set<BookFutureMatchCoeff> futureMatchPosCoeffs,
                                                 Set<BookFutureMatchCoeff> futureMatchNegCoeffs,
                                                 CoeffContainer container) {
+        if(futureMatchPosCoeffs.size() == 1 && futureMatchNegCoeffs.isEmpty()) {
+            return;
+        }
         setYesOrNoCoeff(futureMatchPosCoeffs, futureMatchNegCoeffs, container);
     }
 

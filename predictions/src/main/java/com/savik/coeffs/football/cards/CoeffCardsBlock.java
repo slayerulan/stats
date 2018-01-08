@@ -17,6 +17,6 @@ public class CoeffCardsBlock extends CoeffContainer {
                 new CoeffOpposingTeamYellowCardsWDNotLooseBlock(),
                 new CoeffTeamYellowCardsWDHandicapBlock(),
                 new CoeffOpposingTeamYellowCardsWDHandicapBlock()
-        ), ContainerType.CORNERS);
+        ), ContainerType.CARDS);
     }
 }

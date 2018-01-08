@@ -63,6 +63,18 @@ public abstract class Sport1xstavkaCoeffsMatchParser {
         throw new RuntimeException("match not found,  myscore code = " + hockeyFutureMatch.getMyscoreCode());
     }
 
+    protected Set<BookFutureMatchCoeff> downloadAdditionalGroupCoeffs(JSONObject group) throws IOException {
+        BookFutureMatchRepresentation groupJsonRepresentation = objectMapper.readValue(
+                group.toString(),
+                BookFutureMatchRepresentation.class
+        );
+        String groupResponseJson = downloader.getJson(EVENT_URL + groupJsonRepresentation.getCi());
+        Set<BookFutureMatchCoeff> groupCoeffs = getBookFutureMatchCoeffs(
+                new JSONObject(groupResponseJson).getJSONObject("Value")
+        );
+        return groupCoeffs;
+    }
+
     protected Set<BookFutureMatchCoeff> getBookFutureMatchCoeffs(JSONObject value) throws IOException {
         Set<BookFutureMatchCoeff> futureMatchCoeffs = value.has("E") ? objectMapper.readValue(
                 value.getJSONArray("E").toString(),
@@ -105,6 +117,19 @@ public abstract class Sport1xstavkaCoeffsMatchParser {
             JSONObject jsonObject = (JSONObject) period;
             if (jsonObject.has("TG") && jsonObject.getString("TG").contains(tg)) {
                 return jsonObject;
+            }
+        }
+        return null;
+    }
+
+    protected JSONObject findSpecialGroupByTGAndTN(JSONArray periods, String tg, String tn) {
+        for (Object period : periods) {
+            JSONObject jsonObject = (JSONObject) period;
+            if (jsonObject.has("TG") && jsonObject.getString("TG").contains(tg)) {
+                if ((tn == null && !jsonObject.has("TN")) ||
+                        (tn != null && jsonObject.has("TN") && jsonObject.getString("TN").contains(tn))) {
+                    return jsonObject;
+                }
             }
         }
         return null;

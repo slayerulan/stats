@@ -13,10 +13,6 @@ public class YellowCardsWDTotalUnderPossibleBetBlock extends PossibleBetContaine
     public YellowCardsWDTotalUnderPossibleBetBlock() {
         super(Arrays.asList(
                 new PossibleBetContainer<>(
-                        new PeriodYellowCardsWDTotalUnderPossibleBet(FootballMatch.MATCH, 2.5),
-                        ContainerType.UNDER_2_5
-                ),
-                new PossibleBetContainer<>(
                         new PeriodYellowCardsWDTotalUnderPossibleBet(FootballMatch.MATCH, 3.5),
                         ContainerType.UNDER_3_5
                 ),
@@ -31,6 +27,10 @@ public class YellowCardsWDTotalUnderPossibleBetBlock extends PossibleBetContaine
                 new PossibleBetContainer<>(
                         new PeriodYellowCardsWDTotalUnderPossibleBet(FootballMatch.MATCH, 6.5),
                         ContainerType.UNDER_6_5
+                ),
+                new PossibleBetContainer<>(
+                        new PeriodYellowCardsWDTotalUnderPossibleBet(FootballMatch.MATCH, 7.5),
+                        ContainerType.UNDER_7_5
                 )
                 ), ContainerType.TOTAL_UNDER
         );
