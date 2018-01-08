@@ -12,6 +12,7 @@ public enum ContainerType {
     OTHER,
     PERIODS,
     CORNERS,
+    CARDS,
     TEAM_CORNERS,
     FIRST_PERIOD,
     SECOND_PERIOD,
