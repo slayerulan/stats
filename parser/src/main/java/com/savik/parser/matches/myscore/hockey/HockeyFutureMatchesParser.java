@@ -5,6 +5,7 @@ import com.savik.hockey.model.HockeyChampionship;
 import com.savik.hockey.model.HockeyFutureMatch;
 import com.savik.hockey.repository.HockeyFutureMatchRepository;
 import com.savik.hockey.repository.HockeyTeamRepository;
+import com.savik.parser.Downloader;
 import com.savik.parser.EventItem;
 import com.savik.parser.FutureMatchesParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,9 @@ public class HockeyFutureMatchesParser {
     @Autowired
     FutureMatchesParser futureMatchesParser;
 
+    @Autowired
+    Downloader downloader;
+
     private static final int TODAY = 0;
     private static final int TOMORROW = 1;
 
@@ -46,7 +50,8 @@ public class HockeyFutureMatchesParser {
     }
 
     private void parseDay(int day) {
-        List<EventItem> eventItems = futureMatchesParser.parse(day);
+        String response = downloader.downloadHockeyMatchesSchedule(day).body().html();
+        List<EventItem> eventItems = futureMatchesParser.parse(response);
         eventItems.forEach(e -> {
             HockeyFutureMatch footballFutureMatch = convert(e);
             if (footballFutureMatch != null &&

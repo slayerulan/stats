@@ -1,6 +1,5 @@
 package com.savik.parser;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -30,13 +29,8 @@ public class FutureMatchesParser {
 
     private static final String DATE_INDEX = "AD";
 
-    @Autowired
-    Downloader downloader;
 
-    public List<EventItem> parse(int offsetDays) {
-
-        String response = downloader.downloadHockeyMatchesSchedule(offsetDays).body().html();
-
+    public List<EventItem> parse(String response) {
         List<String> rows = Arrays.asList(response.split(JS_ROW_END));
         String leagueId = null;
         List<EventItem> eventItems = new ArrayList<>();

@@ -6,12 +6,13 @@ import java.util.Map;
 
 public class Book1xbetConstants {
     public static final String URL = "https://1xecu.xyz/LineFeed/GetChampZip?lng=ru&tf=3000000&afterDays=0&tz=0&sport=2&country=1&champ=";
-    public static final String EVENT_URL = "https://1xecu.xyz/LineFeed/GetGameZip?lng=ru&cfview=0&isSubGames=true&GroupEvents=true&countevents=1000&grMode=2&id=";
+    public static final String EVENT_URL = "https://1xecu.xyz/LineFeed/GetGameZip?lng=ru&cfview=0&isSubGames=true&GroupEvents=true&countevents=1500&grMode=2&id=";
     public static final String NHL = URL + "30619";
     public static final String KHL = URL + "3355";
     public static final String EXTRA = URL + "104959";
     public static final String DEL = URL + "104035";
     public static final String SHL = URL + "1388257";
+    public static final String LA = URL + "127733";
 
     public static Map<String, String> khlMapping = new HashMap<String, String>(){
         {

@@ -1,5 +1,6 @@
 package com.savik.parser;
 
+import com.savik.parser.coeffs.x1stavka.football.Football1xstavkaCoeffsParser;
 import com.savik.parser.coeffs.x1stavka.hockey.Hockey1xstavkaCoeffsParser;
 import com.savik.parser.matches.myscore.football.FootballFutureMatchesParser;
 import com.savik.parser.matches.myscore.football.FootballParser;
@@ -30,12 +31,14 @@ public class Parser {
     @Autowired
     FootballFutureMatchesParser footballFutureMatchesParser;
 
-
     @Autowired
     HockeyFutureMatchesParser hockeyFutureMatchesParser;
 
     @Autowired
     Hockey1xstavkaCoeffsParser hockey1xstavkaCoeffsParser;
+
+    @Autowired
+    Football1xstavkaCoeffsParser football1xstavkaCoeffsParser;
 
     @Autowired
     SnookerParser snookerParser;
@@ -48,5 +51,7 @@ public class Parser {
         //hockeyParser.parse();
         //snookerParser.parse();
         //footballParser.parse();
+        football1xstavkaCoeffsParser.parse();
+        //footballFutureMatchesParser.parse();
     }
 }

@@ -1,7 +1,7 @@
 package com.savik.hockey.model;
 
+import com.savik.FutureMatch;
 import com.savik.Season;
-import com.savik.domain.Identifiable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,34 +14,23 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Table(
         uniqueConstraints = @UniqueConstraint(columnNames = "myscoreCode"),
         indexes = @Index(columnList = "myscoreCode")
 )
 @SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "hockey_future_match_id_generator")
 @Data
-public class HockeyFutureMatch extends Identifiable {
+public class HockeyFutureMatch extends FutureMatch<HockeyTeam> {
 
-    @NotNull
-    @OneToOne
-    HockeyTeam homeTeam;
 
-    @NotNull
-    @OneToOne
-    HockeyTeam guestTeam;
 
     @NotNull
     @Enumerated(EnumType.STRING)
     HockeyChampionship championship;
 
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    Season season;
-
-    @NotNull
-    LocalDateTime date;
-
-    @NotNull
-    String myscoreCode;
+    @Builder
+    public HockeyFutureMatch(HockeyTeam homeTeam, HockeyTeam guestTeam, String myscoreCode, Season season, LocalDateTime date, HockeyChampionship championship) {
+        super(homeTeam, guestTeam, myscoreCode, season, date);
+        this.championship = championship;
+    }
 }
