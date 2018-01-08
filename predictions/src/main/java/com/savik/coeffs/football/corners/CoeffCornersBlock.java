@@ -10,7 +10,9 @@ public class CoeffCornersBlock extends CoeffContainer {
     public CoeffCornersBlock() {
         super(Arrays.asList(
                 new CoeffCornersTotalOverBlock(),
-                new CoeffCornersTotalUnderBlock()
+                new CoeffCornersTotalUnderBlock(),
+                new CoeffTeamCornersTotalOverBlock(),
+                new CoeffOpposingTeamCornersTotalOverBlock()
         ), ContainerType.CORNERS);
     }
 }

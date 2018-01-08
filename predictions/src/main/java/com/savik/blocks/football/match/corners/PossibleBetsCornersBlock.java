@@ -12,7 +12,9 @@ public class PossibleBetsCornersBlock extends PossibleBetContainer<FootballMatch
     public PossibleBetsCornersBlock(MatchData homeMatchData, MatchData guestMatchData) {
         super(Arrays.asList(
                 new PeriodCornersTotalOverPossibleBetBlock(),
-                new PeriodCornersTotalUnderPossibleBetBlock()
+                new PeriodCornersTotalUnderPossibleBetBlock(),
+                new PeriodTeamCornersTotalOverPossibleBetBlock(homeMatchData, guestMatchData),
+                new PeriodOpposingTeamCornersTotalOverPossibleBetBlock(homeMatchData, guestMatchData)
         ), ContainerType.CORNERS);
     }
 }

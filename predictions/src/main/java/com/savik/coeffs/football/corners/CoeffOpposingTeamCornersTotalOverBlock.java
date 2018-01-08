@@ -7,37 +7,33 @@ import com.savik.ContainerType;
 
 import java.util.Arrays;
 
-public class CoeffCornersTotalUnderBlock extends CoeffContainer {
-    public CoeffCornersTotalUnderBlock() {
+public class CoeffOpposingTeamCornersTotalOverBlock extends CoeffContainer {
+    public CoeffOpposingTeamCornersTotalOverBlock() {
         super(Arrays.asList(
                 new CoeffContainer(
                         new Coeff(),
-                        ContainerType.UNDER_6_5
+                        ContainerType.OVER_2_5
                 ),
                 new CoeffContainer(
                         new Coeff(),
-                        ContainerType.UNDER_7_5
+                        ContainerType.OVER_3_5
                 ),
                 new CoeffContainer(
                         new Coeff(),
-                        ContainerType.UNDER_8_5
+                        ContainerType.OVER_4_5
                 ),
                 new CoeffContainer(
                         new Coeff(),
-                        ContainerType.UNDER_9_5
+                        ContainerType.OVER_5_5
                 ),
                 new CoeffContainer(
                         new Coeff(),
-                        ContainerType.UNDER_10_5
+                        ContainerType.OVER_6_5
                 ),
                 new CoeffContainer(
                         new Coeff(),
-                        ContainerType.UNDER_11_5
-                ),
-                new CoeffContainer(
-                        new Coeff(),
-                        ContainerType.UNDER_12_5
+                        ContainerType.OVER_7_5
                 )
-        ), ContainerType.TOTAL_UNDER);
+        ), ContainerType.OPPOSING_TEAM_TOTAL_OVER);
     }
 }
