@@ -2,7 +2,9 @@ package com.savik.football.model;
 
 import com.codiform.moo.annotation.CollectionProperty;
 import com.codiform.moo.annotation.Optionality;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.savik.Period;
+import com.savik.Who;
 import com.savik.Winner;
 import lombok.Builder;
 import lombok.Getter;
@@ -84,5 +86,15 @@ public class FootballPeriod extends Period<FootballGoal> {
     @Override
     public int getMinuteFromStart(int minute) {
         throw new NotImplementedException();
+    }
+
+    @Override
+    @JsonValue
+    public String toString() {
+        long home = getCards().stream().filter(c -> c.getType() == FootballCard.Type.YELLOW && c.getWho() == Who.HOME)
+                .count();
+        long guest = getCards().stream().filter(c -> c.getType() == FootballCard.Type.YELLOW && c.getWho() == Who.GUEST)
+                .count();
+        return "{crns= " + homeCorners + "-" + guestCorners + ",cards=(" + home + "-" + guest +")}";
     }
 }

@@ -1,5 +1,6 @@
 package com.savik.football.model;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.savik.Team;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,5 +32,11 @@ public class FootballTeam extends Team {
     public FootballTeam(String name, FootballChampionship championship) {
         super(name);
         this.championship = championship;
+    }
+
+    @JsonValue
+    @Override
+    public String toString() {
+        return name;
     }
 }

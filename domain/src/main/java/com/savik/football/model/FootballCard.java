@@ -41,4 +41,8 @@ public class FootballCard extends Identifiable {
         YELLOW_RED
     }
 
+    @Override
+    public String toString() {
+        return "card{" + ", team=" + team + ", type=" + type + '}';
+    }
 }

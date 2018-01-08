@@ -1,8 +1,10 @@
 package com.savik.football.model;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.savik.Match;
 import com.savik.Period;
 import com.savik.Season;
+import com.savik.hockey.model.HockeyGoal;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,6 +13,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Set;
 import java.util.function.Function;
 
 @Entity
@@ -61,4 +65,27 @@ public class FootballMatch extends Match {
 
     @OneToOne
     FootballReferee referee;
+
+    @PostLoad
+    private void onPostLoad() {
+        Set<FootballGoal> goals = matchInfo.getMatch().getGoals();
+        goals.addAll(matchInfo.getFirstPeriod().getGoals());
+        goals.addAll(matchInfo.getSecondPeriod().getGoals());
+
+        Set<FootballCard> cards = matchInfo.getMatch().getCards();
+        cards.addAll(matchInfo.getFirstPeriod().getCards());
+        cards.addAll(matchInfo.getSecondPeriod().getCards());
+    }
+
+    @JsonValue
+    @Override
+    public String toString() {
+        return "{" +
+                "home=" + homeTeam +
+                ", guest=" + guestTeam +
+                ", matchInfo=" + matchInfo +
+                ", date=" + date.format(DateTimeFormatter.ISO_LOCAL_DATE) +
+                ", myscoreCode='" + myscoreCode + '\'' +
+                '}';
+    }
 }

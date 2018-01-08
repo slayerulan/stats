@@ -114,7 +114,7 @@ public class TestController {
             MatchFilter homeFilter = matchFilter.builder().includeAllMatches(false).size(15).build();
             HockeyPossibleBetsBlock hockeyPossibleBetsBlock = new HockeyAnalyzer(homeFilter, futureMatch).getPossibleBetsBlock();
             ProposedBetsContainer resultContainer = getProposedBetsContainer(futureMatch.getMyscoreCode(), hockeyPossibleBetsBlock);
-            writeMatchToFile("info/hockey/matches/", "home", futureMatch, resultContainer);
+            writeMatchToFile("info/matches/hockey/", "home", futureMatch, resultContainer);
 
 
             /*MatchFilter allFilter = matchFilter.builder().includeAllMatches(true).build();
@@ -125,7 +125,7 @@ public class TestController {
             MatchFilter last10Filter = matchFilter.builder().includeAllMatches(false).size(10).build();
             HockeyPossibleBetsBlock hockeyPossibleBetsBlockLast10Matches = new HockeyAnalyzer(last10Filter, futureMatch).getPossibleBetsBlock();
             ProposedBetsContainer resultContainerkLast10Matches = getProposedBetsContainer(futureMatch.getMyscoreCode(), hockeyPossibleBetsBlockLast10Matches);
-            writeMatchToFile("info/hockey/matches/", "last10home", futureMatch, resultContainerkLast10Matches);
+            writeMatchToFile("info/matches/hockey/", "last10home", futureMatch, resultContainerkLast10Matches);
         }
     }
 
@@ -136,18 +136,18 @@ public class TestController {
             MatchFilter homeFilter = matchFilter.builder().includeAllMatches(false).size(15).build();
             FootballPossibleBetsBlock hockeyPossibleBetsBlock = new FootballAnalyzer(homeFilter, futureMatch).getPossibleBetsBlock();
             ProposedBetsContainer resultContainer = getProposedBetsContainer(futureMatch.getMyscoreCode(), hockeyPossibleBetsBlock);
-            writeMatchToFile("info/football/matches/", "home", futureMatch, resultContainer);
+            writeMatchToFile("info/matches/football/", "home", futureMatch, resultContainer);
 
 
-            /*MatchFilter allFilter = matchFilter.builder().includeAllMatches(true).build();
-            HockeyPossibleBetsBlock possibleBetsBlockAllMatches = new HockeyAnalyzer(allFilter, futureMatch).getPossibleBetsBlock();
+            MatchFilter allFilter = matchFilter.builder().includeAllMatches(true).build();
+            FootballPossibleBetsBlock possibleBetsBlockAllMatches = new FootballAnalyzer(allFilter, futureMatch).getPossibleBetsBlock();
             ProposedBetsContainer resultContainerAllMatches = getProposedBetsContainer(futureMatch.getMyscoreCode(), possibleBetsBlockAllMatches);
-            writeMatchToFile("info/matches/", "all", futureMatch, resultContainerAllMatches);*/
+            writeMatchToFile("info/matches/football/", "all", futureMatch, resultContainerAllMatches);
 
-            MatchFilter last10Filter = matchFilter.builder().includeAllMatches(false).size(10).build();
+/*            MatchFilter last10Filter = matchFilter.builder().includeAllMatches(false).size(10).build();
             FootballPossibleBetsBlock hockeyPossibleBetsBlockLast10Matches = new FootballAnalyzer(last10Filter, futureMatch).getPossibleBetsBlock();
             ProposedBetsContainer resultContainerkLast10Matches = getProposedBetsContainer(futureMatch.getMyscoreCode(), hockeyPossibleBetsBlockLast10Matches);
-            writeMatchToFile("info/football/matches/", "last10home", futureMatch, resultContainerkLast10Matches);
+            writeMatchToFile("info/matches/football/", "last10home", futureMatch, resultContainerkLast10Matches);*/
         }
     }
 
