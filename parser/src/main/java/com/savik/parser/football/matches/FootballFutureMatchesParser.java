@@ -1,16 +1,16 @@
-package com.savik.parser.football;
+package com.savik.parser.football.matches;
 
-import java.util.List;
-
+import com.savik.Season;
 import com.savik.football.model.FootballChampionship;
 import com.savik.football.model.FootballFutureMatch;
-import com.savik.Season;
 import com.savik.football.repository.FootballFutureMatchRepository;
 import com.savik.football.repository.FootballTeamRepository;
 import com.savik.parser.EventItem;
 import com.savik.parser.FutureMatchesParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author Savushkin Yauheni

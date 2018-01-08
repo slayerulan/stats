@@ -1,14 +1,16 @@
-package com.savik.parser.football;
+package com.savik.parser.football.matches;
+
+import com.savik.Who;
+import com.savik.football.model.FootballCard;
+import com.savik.football.model.FootballGoal;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
-import com.savik.football.model.FootballCard;
-import com.savik.football.model.FootballGoal;
-import com.savik.Who;
-import lombok.*;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 /**
  * @author Savushkin Yauheni

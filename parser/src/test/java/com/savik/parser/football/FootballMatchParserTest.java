@@ -8,6 +8,7 @@ import com.savik.football.model.*;
 import com.savik.football.repository.FootballMatchRepository;
 import com.savik.football.repository.FootballRefereeRepository;
 import com.savik.football.repository.FootballTeamRepository;
+import com.savik.parser.football.matches.MatchParser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

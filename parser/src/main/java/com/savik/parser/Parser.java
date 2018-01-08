@@ -1,7 +1,7 @@
 package com.savik.parser;
 
-import com.savik.parser.football.FootballFutureMatchesParser;
-import com.savik.parser.football.FootballParser;
+import com.savik.parser.football.matches.FootballFutureMatchesParser;
+import com.savik.parser.football.matches.FootballParser;
 import com.savik.parser.hockey.coeffs.Hockey1xstavkaCoeffsParser;
 import com.savik.parser.hockey.matches.HockeyFutureMatchesParser;
 import com.savik.parser.hockey.matches.HockeyParser;
