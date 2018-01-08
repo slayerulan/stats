@@ -14,6 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -49,8 +51,13 @@ public class SnookerParser {
         double value = 0;
         int maxFailedStreak = 0;
         int failedCounter = 0;
+        int successCounter = 0;
         double maxDrawdawn = 0;
-        List<SnookerMatch> all = snookerMatchRepository.findBySeason(Season.S2016);
+        List<SnookerMatch> all = snookerMatchRepository.findBySeason(Season.S2017);
+        List<SnookerMatch> tempFailedMatches = new ArrayList<>();
+        List<SnookerMatch> failedMatches = new ArrayList<>();
+        List<Integer> streaks = new ArrayList<>();
+        List<Entry> successCoeffs = new ArrayList<>();
         for (SnookerMatch match : all) {
             SnookerBookieStats bookieStats = match.getBookieStats();
             if (bookieStats != null) {
@@ -61,19 +68,30 @@ public class SnookerParser {
                 }
                 if (favorite == Who.HOME && match.getWinner() == Winner.GUEST) {
                     value += bookieStats.getGuestRate() - 1;
+                    streaks.add(failedCounter);
                     failedCounter = 0;
+                    successCounter++;
+                    tempFailedMatches = new ArrayList<>();
+                    successCoeffs.add(new Entry(match.getHomeTeam().getName(), match.getGuestTeam().getName(), match.getDate(), bookieStats.getGuestRate()));
                 } else if (favorite == Who.GUEST && match.getWinner() == Winner.HOME) {
                     value += bookieStats.getHomeRate() - 1;
+                    streaks.add(failedCounter);
                     failedCounter = 0;
+                    successCounter++;
+                    tempFailedMatches = new ArrayList<>();
+                    successCoeffs.add(new Entry(match.getHomeTeam().getName(), match.getGuestTeam().getName(), match.getDate(), bookieStats.getHomeRate()));
                 } else {
                     value -= 1;
                     failedCounter++;
+                    tempFailedMatches.add(match);
                 }
                 if (failedCounter > maxFailedStreak) {
                     maxFailedStreak = failedCounter;
+                    failedMatches = new ArrayList<>(tempFailedMatches);
                 }
             }
         }
+        streaks.add(failedCounter);
         System.out.println("value = " + value);
         System.out.println("maxFailedStreak = " + maxFailedStreak);
 
@@ -102,5 +120,24 @@ public class SnookerParser {
         }*/
 
 
+    }
+
+    @AllArgsConstructor
+    @Getter
+    static class Entry {
+        String home;
+        String guest;
+        LocalDateTime time;
+        Double coeff;
+
+        @Override
+        public String toString() {
+            return "{" +
+                    "home='" + home + '\'' +
+                    ", guest='" + guest + '\'' +
+                    ", time=" + time +
+                    ", coeff=" + coeff +
+                    '}';
+        }
     }
 }
