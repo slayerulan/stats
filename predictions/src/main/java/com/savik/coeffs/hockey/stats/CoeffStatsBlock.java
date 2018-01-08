@@ -17,12 +17,12 @@ public class CoeffStatsBlock extends CoeffContainer {
                 new CoeffTeamShotsOnTargetWinBlock(),
                 new CoeffOpposingTeamShotsOnTargetWinBlock(),
                 new CoeffPenaltiesTimeTotalOverBlock(),
-                new CoeffTeamPenaltiesTimeTotalOverBlock(),
-                new CoeffOpposingTeamPenaltiesTimeTotalOverBlock(),
-                new CoeffTeamPenaltiesTimeWinBlock(),
-                new CoeffOpposingTeamPenaltiesTimeWinBlock(),
-                new CoeffTeamPenaltiesTimeHandicapBlock(),
-                new CoeffOpposingTeamPenaltiesTimeHandicapBlock(),
+                new CoeffTeamMinorPenaltiesTimeTotalOverBlock(),
+                new CoeffOpposingTeamMinorPenaltiesTimeTotalOverBlock(),
+                new CoeffTeamMinorPenaltiesTimeNotLooseBlock(),
+                new CoeffOpposingTeamMinorPenaltiesTimeNotLooseBlock(),
+                new CoeffTeamMinorPenaltiesTimeHandicapBlock(),
+                new CoeffOpposingTeamMinorPenaltiesTimeHandicapBlock(),
                 new CoeffPowerplayGoalsTotalOverBlock()
         ), ContainerType.STATS);
     }

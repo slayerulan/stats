@@ -16,6 +16,20 @@ import static com.savik.ContainerType.*;
 @Service
 public class Football1xstavkaCoeffsMatchParser extends Sport1xstavkaCoeffsMatchParser {
 
+    public void fillSpecialGroups(JSONObject matchCoeffsObject, CoeffContainer rootContainer) throws IOException {
+        JSONArray specialGroups = matchCoeffsObject.getJSONObject("Value").getJSONArray("SG");
+
+
+        JSONObject corners = findSpecialGroupByTG(specialGroups, "Угловые");
+        if (corners != null) {
+            fillCornersBlock(
+                    getBookFutureMatchCoeffs(corners),
+                    rootContainer.findByType(CORNERS)
+            );
+        }
+
+    }
+
 
     public void fill(Set<BookFutureMatchCoeff> futureMatchCoeffs, CoeffContainer rootContainer) {
     }
@@ -34,6 +48,12 @@ public class Football1xstavkaCoeffsMatchParser extends Sport1xstavkaCoeffsMatchP
         fillTeamCornersTotalOverBlock(findByShortNameId(futureMatchCoeffs, Book1xbetShortName.OPPOSING_TEAM_TOTAL_OVER),
                 findByShortNameId(futureMatchCoeffs, Book1xbetShortName.OPPOSING_TEAM_TOTAL_UNDER),
                 cornersContainer.findByType(OPPOSING_TEAM_TOTAL_OVER));
+
+        fillTeamCornersNotLoose(findByShortNameId(futureMatchCoeffs, Book1xbetShortName.TEAM_NOT_LOOSE),
+                cornersContainer.findByType(TEAM_NOT_LOOSE));
+
+        fillTeamCornersNotLoose(findByShortNameId(futureMatchCoeffs, Book1xbetShortName.OPPOSING_TEAM_NOT_LOOSE),
+                cornersContainer.findByType(OPPOSING_TEAM_NOT_LOOSE));
 
     }
 
@@ -74,18 +94,8 @@ public class Football1xstavkaCoeffsMatchParser extends Sport1xstavkaCoeffsMatchP
         );
     }
 
-    public void fillSpecialGroups(JSONObject matchCoeffsObject, CoeffContainer rootContainer) throws IOException {
-        JSONArray specialGroups = matchCoeffsObject.getJSONObject("Value").getJSONArray("SG");
-
-
-        JSONObject corners = findSpecialGroupByTG(specialGroups, "Угловые");
-        if (corners != null) {
-            fillCornersBlock(
-                    getBookFutureMatchCoeffs(corners),
-                    rootContainer.findByType(CORNERS)
-            );
-        }
-
+    private void fillTeamCornersNotLoose(Set<BookFutureMatchCoeff> futureMatchCoeffs, CoeffContainer container) {
+        setYesCoeff(futureMatchCoeffs, container);
     }
 
 
