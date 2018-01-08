@@ -1,15 +1,18 @@
 package com.savik.parser.football;
 
-import java.util.List;
-
+import com.savik.Season;
 import com.savik.football.model.FootballChampionship;
 import com.savik.football.model.FootballMatch;
-import com.savik.Season;
 import com.savik.football.repository.FootballMatchRepository;
 import com.savik.parser.LeagueParser;
-import lombok.extern.slf4j.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author Savushkin Yauheni
@@ -28,35 +31,40 @@ public class FootballParser {
     @Autowired
     LeagueParser leagueParser;
 
+    @AllArgsConstructor
+    @Getter
+    private class Entity {
+        String url;
+        FootballChampionship footballChampionship;
+        Season season;
+    }
+
     public void parse() {
 
-        /*
-        bcLlhGkn - кривой матч без статы по таймам
-        v9xniz5h - есть матч и 2 тайм
-        * */
-/*        try {
-     //       if(matchRepository.findByMyscoreCode("v9xniz5h") == null) {
-                FootballMatch match = matchParser.parse("v9xniz5h", Championship.LA, Season.S2016);
-                matchRepository.save(match);
-                Thread.sleep(1000);
- //           }
-        } catch (Exception ex) {
-            throw new RuntimeException(ex);
-        }*/
+        List<Entity> entities = Arrays.asList(
+                new Entity("http://www.myscore.ru/football/spain/laliga/results/", FootballChampionship.LA, Season.S2017)
+        );
 
-        List<String> allMatches = leagueParser.findAllMatches("http://www.myscore.ru/football/spain/laliga/results/");
-        for (String matchId : allMatches) {
-            try {
-                if (footballMatchRepository.findByMyscoreCode(matchId) == null) {
-                    FootballMatch match = matchParser.parse(matchId, FootballChampionship.LA, Season.S2016);
-                    footballMatchRepository.save(match);
-                    log.debug("match saved = {}", match);
-                    Thread.sleep(1000);
+
+        for (FootballParser.Entity entity : entities) {
+            List<String> allMatches = leagueParser.findAllMatches(entity.getUrl());
+            for (String matchId : allMatches) {
+                try {
+                    if (footballMatchRepository.findByMyscoreCode(matchId) == null) {
+                        FootballMatch match = matchParser.parse(matchId, entity.getFootballChampionship(), entity.getSeason());
+                        footballMatchRepository.save(match);
+                        log.debug("match saved = {}", match);
+                        Thread.sleep(1000);
+                    } else {
+                        System.out.println("parsed = " + matchId);
+                        //break;
+                    }
+                } catch (Exception ex) {
+                    System.out.println("myscore code = " + matchId);
+                    System.out.println(ex.getStackTrace().toString());
+                    throw new RuntimeException(ex);
                 }
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
             }
         }
-
     }
 }

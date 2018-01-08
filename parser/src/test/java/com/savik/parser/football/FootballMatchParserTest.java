@@ -6,14 +6,17 @@ import com.savik.Who;
 import com.savik.Winner;
 import com.savik.football.model.*;
 import com.savik.football.repository.FootballMatchRepository;
+import com.savik.football.repository.FootballRefereeRepository;
 import com.savik.football.repository.FootballTeamRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -29,6 +32,8 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK, classes = Application.class)
 @ActiveProfiles("test")
+@Transactional
+@Rollback
 public class FootballMatchParserTest {
 
     @Autowired
@@ -40,6 +45,9 @@ public class FootballMatchParserTest {
     @Autowired
     FootballMatchRepository footballMatchRepository;
 
+    @Autowired
+    FootballRefereeRepository footballRefereeRepository;
+
     @Test
     public void testMatchWithoutFirstTimeStats() {
         FootballMatch match = matchParser.parse("v9xniz5h", FootballChampionship.LA, Season.S2016);
@@ -47,12 +55,14 @@ public class FootballMatchParserTest {
 
         FootballTeam home = footballTeamRepository.findOneByNameAndChampionship("Эспаньол", FootballChampionship.LA);
         FootballTeam guest = footballTeamRepository.findOneByNameAndChampionship("Бетис", FootballChampionship.LA);
+        FootballReferee referee = footballRefereeRepository.findOneByName("Гонсалес Г. (Исп)");
 
         assertEquals(match.getSeason(), Season.S2016);
         assertEquals(match.getMyscoreCode(), "v9xniz5h");
         assertEquals(match.getChampionship(), FootballChampionship.LA);
         assertEquals(match.getHomeTeam(), home);
         assertEquals(match.getGuestTeam(), guest);
+        assertEquals(match.getReferee(), referee);
         assertEquals(match.getBookieStats().getHomeRate(), Double.valueOf(2.2));
         assertEquals(match.getBookieStats().getDrawRate(), Double.valueOf(3.2));
         assertEquals(match.getBookieStats().getGuestRate(), Double.valueOf(3.5));
@@ -157,12 +167,14 @@ public class FootballMatchParserTest {
 
         FootballTeam home = footballTeamRepository.findOneByNameAndChampionship("Вильярреал", FootballChampionship.LA);
         FootballTeam guest = footballTeamRepository.findOneByNameAndChampionship("Эйбар", FootballChampionship.LA);
+        FootballReferee referee = footballRefereeRepository.findOneByName("Arraiz D. (Исп)");
 
         assertEquals(footballMatch.getSeason(), Season.S2016);
         assertEquals(footballMatch.getMyscoreCode(), "bcLlhGkn");
         assertEquals(footballMatch.getChampionship(), FootballChampionship.LA);
         assertEquals(footballMatch.getHomeTeam(), home);
         assertEquals(footballMatch.getGuestTeam(), guest);
+        assertEquals(footballMatch.getReferee(), referee);
         assertEquals(footballMatch.getBookieStats().getHomeRate(), Double.valueOf(1.91));
         assertEquals(footballMatch.getBookieStats().getDrawRate(), Double.valueOf(3.5));
         assertEquals(footballMatch.getBookieStats().getGuestRate(), Double.valueOf(4.2));
@@ -273,12 +285,15 @@ public class FootballMatchParserTest {
 
         FootballTeam home = footballTeamRepository.findOneByNameAndChampionship("Реал Мадрид", FootballChampionship.LA);
         FootballTeam guest = footballTeamRepository.findOneByNameAndChampionship("Барселона", FootballChampionship.LA);
+        FootballReferee referee = footballRefereeRepository.findOneByName("Hernandez A. (Исп)");
+
 
         assertEquals(footballMatch.getSeason(), Season.S2016);
         assertEquals(footballMatch.getMyscoreCode(), "8O2GJGpD");
         assertEquals(footballMatch.getChampionship(), FootballChampionship.LA);
         assertEquals(footballMatch.getHomeTeam(), home);
         assertEquals(footballMatch.getGuestTeam(), guest);
+        assertEquals(footballMatch.getReferee(), referee);
         assertEquals(footballMatch.getBookieStats().getHomeRate(), Double.valueOf(1.91));
         assertEquals(footballMatch.getBookieStats().getDrawRate(), Double.valueOf(4.2));
         assertEquals(footballMatch.getBookieStats().getGuestRate(), Double.valueOf(3.5));
@@ -379,5 +394,22 @@ public class FootballMatchParserTest {
         assertEquals(matchPeriod.getGuestOffsides().intValue(), 2);
         assertEquals(matchPeriod.getHomeFouls().intValue(), 13);
         assertEquals(matchPeriod.getGuestFouls().intValue(), 8);
+    }
+
+    @Test
+    public void testRefereeParsing() {
+        FootballMatch footballMatch1 = matchParser.parse("QZmuilgs", FootballChampionship.LA, Season.S2017);
+        footballMatch1 = footballMatchRepository.save(footballMatch1);
+        FootballReferee referee1 = footballRefereeRepository.findOneByName("Rojas J. A. (Исп)");
+        assertEquals(footballMatch1.getReferee(), referee1);
+
+        FootballMatch footballMatch2 = matchParser.parse("hA5vZFXe", FootballChampionship.LA, Season.S2017);
+        footballMatch2 = footballMatchRepository.save(footballMatch2);
+        FootballReferee referee2 = footballRefereeRepository.findOneByName("Rojas J. A. (Исп)");
+        assertEquals(footballMatch2.getReferee(), referee2);
+
+
+        assertEquals(referee1, referee2);
+        assertEquals(1, footballRefereeRepository.findAll().size());
     }
 }

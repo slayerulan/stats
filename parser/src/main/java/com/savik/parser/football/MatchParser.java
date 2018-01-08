@@ -1,13 +1,9 @@
 package com.savik.parser.football;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.List;
-
 import com.savik.Season;
 import com.savik.football.model.*;
 import com.savik.football.repository.FootballMatchRepository;
+import com.savik.football.repository.FootballRefereeRepository;
 import com.savik.football.repository.FootballTeamRepository;
 import com.savik.parser.Downloader;
 import com.savik.parser.LeagueParser;
@@ -17,6 +13,11 @@ import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.List;
 
 /**
  * @author Savushkin Yauheni
@@ -30,6 +31,9 @@ public class MatchParser {
 
     @Autowired
     FootballMatchRepository footballMatchRepository;
+
+    @Autowired
+    FootballRefereeRepository footballRefereeRepository;
 
     @Autowired
     Downloader downloader;
@@ -58,6 +62,7 @@ public class MatchParser {
 
         FootballTeam home = footballTeamRepository.findOneByNameAndChampionship(homeTeam, footballChampionship);
         FootballTeam guest = footballTeamRepository.findOneByNameAndChampionship(guestTeam, footballChampionship);
+        FootballReferee referee = getFootballReferee(generalInfo);
 
         Elements allRows = generalInfo.getElementById("parts").select("tr");
         int secondTimeIndex = generalInfo.getElementById("parts").select("tr .h-part").get(1).parent().siblingIndex();
@@ -115,29 +120,48 @@ public class MatchParser {
         if (!odds.isEmpty()) {
             List<Element> rates = odds.get(0).select("td > span");
             footballBookieStats = FootballBookieStats.builder()
-                                                     .homeRate(Double.valueOf(rates.get(0).text()))
-                                                     .drawRate(Double.valueOf(rates.get(1).text()))
-                                                     .guestRate(Double.valueOf(rates.get(2).text()))
-                                                     .build();
+                    .homeRate(Double.valueOf(rates.get(0).text()))
+                    .drawRate(Double.valueOf(rates.get(1).text()))
+                    .guestRate(Double.valueOf(rates.get(2).text()))
+                    .build();
         }
 
-        FootballMatch footballMatch = MatchCreator.builder()
-                                                  .matchGeneralInfoDto(matchPeriodInfo)
-                                                  .firstPeriodGeneralInfoDto(firstPeriodInfo)
-                                                  .secondPeriodGeneralInfoDto(secondPeriodInfo)
-                                                  .matchStatsInfoDto(matchStats)
-                                                  .firstPeriodStatsInfoDto(firstPeriodStats)
-                                                  .secondPeriodStatsInfoDto(secondPeriodStats)
-                                                  .homeTeam(home)
-                                                  .guestTeam(guest)
-                                                  .date(dateTime)
-                                                  .championship(footballChampionship)
-                                                  .season(season)
-                                                  .myscoreCode(matchId)
-                                                  .bookieStats(footballBookieStats)
-                                                  .build()
-                                                  .createMatch();
+        FootballMatch footballMatch = MatchCreator
+                .builder()
+                .matchGeneralInfoDto(matchPeriodInfo)
+                .firstPeriodGeneralInfoDto(firstPeriodInfo)
+                .secondPeriodGeneralInfoDto(secondPeriodInfo)
+                .matchStatsInfoDto(matchStats)
+                .firstPeriodStatsInfoDto(firstPeriodStats)
+                .secondPeriodStatsInfoDto(secondPeriodStats)
+                .homeTeam(home)
+                .guestTeam(guest)
+                .date(dateTime)
+                .championship(footballChampionship)
+                .season(season)
+                .myscoreCode(matchId)
+                .bookieStats(footballBookieStats)
+                .footballReferee(referee)
+                .build()
+                .createMatch();
 
         return footballMatch;
+    }
+
+    private FootballReferee getFootballReferee(Document generalInfo) {
+        Elements temp = generalInfo.select(".match-information");
+        FootballReferee referee = null;
+        if (!temp.isEmpty()) {
+            Element matchInformation = temp.first();
+            Elements contentTemp = matchInformation.select("tr.content");
+            if (contentTemp.size() != 2) {
+                throw new RuntimeException("content is invalid");
+            }
+            Element refereeBlock = contentTemp.first().select("td").first();
+            String text = refereeBlock.text();
+            String refereeName = text.replaceAll("Судья:", "").trim();
+            referee = footballRefereeRepository.findOneByName(refereeName);
+        }
+        return referee;
     }
 }

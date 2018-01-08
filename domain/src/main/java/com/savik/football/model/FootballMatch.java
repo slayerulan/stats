@@ -52,4 +52,7 @@ public class FootballMatch extends Match {
 
     @NotNull
     String myscoreCode;
+
+    @OneToOne
+    FootballReferee referee;
 }

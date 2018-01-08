@@ -1,15 +1,16 @@
 package com.savik.parser.football;
 
-import java.time.LocalDateTime;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import com.codiform.moo.curry.Update;
 import com.savik.Season;
 import com.savik.Who;
 import com.savik.Winner;
 import com.savik.football.model.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+
+import java.time.LocalDateTime;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Builder
@@ -41,17 +42,20 @@ public class MatchCreator {
 
     FootballBookieStats bookieStats;
 
+    FootballReferee footballReferee;
+
     public FootballMatch createMatch() {
         return FootballMatch.builder()
-                            .myscoreCode(myscoreCode)
-                            .season(season)
-                            .championship(championship)
-                            .date(date)
-                            .matchInfo(createMatchInfo())
-                            .homeTeam(homeTeam)
-                            .guestTeam(guestTeam)
-                            .bookieStats(bookieStats)
-                            .build();
+                .myscoreCode(myscoreCode)
+                .season(season)
+                .championship(championship)
+                .date(date)
+                .matchInfo(createMatchInfo())
+                .homeTeam(homeTeam)
+                .guestTeam(guestTeam)
+                .bookieStats(bookieStats)
+                .referee(footballReferee)
+                .build();
     }
 
     private FootballMatchInfo createMatchInfo() {
@@ -67,10 +71,10 @@ public class MatchCreator {
         );
         FootballPeriod match = createPeriod(matchGeneralInfoDto, matchStatsInfoDto, FootballPeriod.PeriodStatus.MATCH);
         return FootballMatchInfo.builder()
-                                .firstPeriod(firstPeriod)
-                                .secondPeriod(secondPeriod)
-                                .match(match)
-                                .build();
+                .firstPeriod(firstPeriod)
+                .secondPeriod(secondPeriod)
+                .match(match)
+                .build();
     }
 
     private FootballPeriod createPeriod(
