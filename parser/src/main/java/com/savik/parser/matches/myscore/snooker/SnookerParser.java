@@ -1,4 +1,4 @@
-package com.savik.parser.snooker.matches;
+package com.savik.parser.matches.myscore.snooker;
 
 import com.savik.Season;
 import com.savik.Who;

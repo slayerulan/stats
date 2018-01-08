@@ -1,4 +1,4 @@
-package com.savik.parser.football.matches;
+package com.savik.parser.matches.myscore.football;
 
 import com.savik.Season;
 import com.savik.football.model.*;

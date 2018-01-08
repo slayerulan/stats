@@ -1,4 +1,4 @@
-package com.savik.parser.hockey.coeffs;
+package com.savik.parser.coeffs.x1stavka.hockey;
 
 import com.savik.CoeffEntry;
 import com.savik.Team;
@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static com.savik.parser.hockey.coeffs.Book1xbetConstants.*;
+import static com.savik.parser.coeffs.x1stavka.hockey.Book1xbetConstants.*;
 
 
 @Service

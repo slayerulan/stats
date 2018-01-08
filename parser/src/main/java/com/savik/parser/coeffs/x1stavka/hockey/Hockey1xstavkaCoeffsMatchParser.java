@@ -1,4 +1,4 @@
-package com.savik.parser.hockey.coeffs;
+package com.savik.parser.coeffs.x1stavka.hockey;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -26,7 +26,7 @@ import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 
 import static com.savik.ContainerType.*;
-import static com.savik.parser.hockey.coeffs.Book1xbetConstants.EVENT_URL;
+import static com.savik.parser.coeffs.x1stavka.hockey.Book1xbetConstants.EVENT_URL;
 
 
 @Service

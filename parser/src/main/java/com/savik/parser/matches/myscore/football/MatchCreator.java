@@ -1,4 +1,4 @@
-package com.savik.parser.football.matches;
+package com.savik.parser.matches.myscore.football;
 
 import com.codiform.moo.curry.Update;
 import com.savik.Season;

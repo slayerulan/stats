@@ -1,4 +1,4 @@
-package com.savik.parser.hockey.matches;
+package com.savik.parser.matches.myscore.hockey;
 
 import com.savik.Who;
 import com.savik.hockey.model.HockeyGoal;

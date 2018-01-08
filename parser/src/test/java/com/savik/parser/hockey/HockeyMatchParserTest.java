@@ -7,7 +7,7 @@ import com.savik.Winner;
 import com.savik.hockey.model.*;
 import com.savik.hockey.repository.HockeyMatchRepository;
 import com.savik.hockey.repository.HockeyTeamRepository;
-import com.savik.parser.hockey.matches.HockeySingleMatchParser;
+import com.savik.parser.matches.myscore.hockey.HockeySingleMatchParser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
