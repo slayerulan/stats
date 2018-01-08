@@ -1,6 +1,6 @@
 package com.savik;
 
-import com.savik.blocks.hockey.match.general.PossibleBetsBlock;
+import com.savik.blocks.hockey.match.general.HockeyPossibleBetsBlock;
 import com.savik.hockey.model.HockeyMatch;
 import com.savik.hockey.model.HockeyTeam;
 import com.savik.hockey.repository.HockeyMatchRepository;
@@ -1371,11 +1371,11 @@ public class HockeyPossibleBetBlockTest {
                 hasTeam(BUFFALO_TEAM_ID)
         );
 
-        PossibleBetsBlock possibleBetsBlock = new PossibleBetsBlock(homeMatchData, guestMatchData);
-        possibleBetsBlock.check(homeTeamMatches, guestTeamMatches);
+        HockeyPossibleBetsBlock hockeyPossibleBetsBlock = new HockeyPossibleBetsBlock(homeMatchData, guestMatchData);
+        hockeyPossibleBetsBlock.check(homeTeamMatches, guestTeamMatches);
 
 
-        return possibleBetsBlock;
+        return hockeyPossibleBetsBlock;
     }
 
 }

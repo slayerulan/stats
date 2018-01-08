@@ -31,4 +31,9 @@ public class FootballFutureMatch extends FutureMatch<FootballTeam> {
         super(homeTeam, guestTeam, myscoreCode, season, date);
         this.championship = championship;
     }
+
+    @Override
+    public String getChampionshipString() {
+        return championship.toString();
+    }
 }

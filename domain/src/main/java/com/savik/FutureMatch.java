@@ -39,4 +39,6 @@ public abstract class FutureMatch<T extends Team> extends Identifiable {
     @NotNull
     LocalDateTime date;
 
+    public abstract String getChampionshipString();
+
 }
