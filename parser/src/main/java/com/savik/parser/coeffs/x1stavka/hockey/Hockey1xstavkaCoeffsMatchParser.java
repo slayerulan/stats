@@ -9,6 +9,8 @@ import com.savik.hockey.model.HockeyFutureMatch;
 import com.savik.hockey.repository.HockeyMatchRepository;
 import com.savik.hockey.repository.HockeyTeamRepository;
 import com.savik.parser.Downloader;
+import com.savik.parser.coeffs.parimatch.hockey.HockeyDownloaderConfiguration;
+import com.savik.parser.coeffs.x1stavka.Book1xbetShortName;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,7 +28,7 @@ import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 
 import static com.savik.ContainerType.*;
-import static com.savik.parser.coeffs.x1stavka.hockey.Book1xbetConstants.EVENT_URL;
+import static com.savik.parser.coeffs.x1stavka.Book1xbetConstants.EVENT_URL;
 
 
 @Service

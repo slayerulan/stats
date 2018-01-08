@@ -6,6 +6,7 @@ import com.savik.coeffs.hockey.CoeffBlock;
 import com.savik.hockey.model.HockeyChampionship;
 import com.savik.hockey.model.HockeyFutureMatch;
 import com.savik.hockey.repository.HockeyFutureMatchRepository;
+import com.savik.parser.coeffs.parimatch.hockey.HockeyParimatchCoeffsMatchParser;
 import com.savik.parser.utils.CoeffTransformer;
 import com.savik.repository.CoeffRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static com.savik.parser.coeffs.x1stavka.hockey.Book1xbetConstants.*;
+import static com.savik.parser.coeffs.x1stavka.Book1xbetConstants.*;
 
 
 @Service

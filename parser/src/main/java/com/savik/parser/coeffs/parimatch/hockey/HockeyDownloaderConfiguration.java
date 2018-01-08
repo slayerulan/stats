@@ -1,4 +1,4 @@
-package com.savik.parser.coeffs.x1stavka.hockey;
+package com.savik.parser.coeffs.parimatch.hockey;
 
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;

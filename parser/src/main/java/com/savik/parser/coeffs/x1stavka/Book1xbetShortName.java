@@ -1,4 +1,4 @@
-package com.savik.parser.coeffs.x1stavka.hockey;
+package com.savik.parser.coeffs.x1stavka;
 
 
 public class Book1xbetShortName {
