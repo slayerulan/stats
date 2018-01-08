@@ -55,6 +55,12 @@ public class Football1xstavkaCoeffsMatchParser extends Sport1xstavkaCoeffsMatchP
         fillTeamCornersNotLoose(findByShortNameId(futureMatchCoeffs, Book1xbetShortName.OPPOSING_TEAM_NOT_LOOSE),
                 cornersContainer.findByType(OPPOSING_TEAM_NOT_LOOSE));
 
+        fillTeamCornersHandicap(findByShortNameId(futureMatchCoeffs, Book1xbetShortName.TEAM_HANDICAP),
+                cornersContainer.findByType(TEAM_HANDICAP));
+
+        fillTeamCornersHandicap(findByShortNameId(futureMatchCoeffs, Book1xbetShortName.OPPOSING_TEAM_HANDICAP),
+                cornersContainer.findByType(OPPOSING_TEAM_HANDICAP));
+
     }
 
     private void fillCornersTotalOverBlock(Set<BookFutureMatchCoeff> futureMatchCoeffs, CoeffContainer totalOverContainer) {
@@ -96,6 +102,22 @@ public class Football1xstavkaCoeffsMatchParser extends Sport1xstavkaCoeffsMatchP
 
     private void fillTeamCornersNotLoose(Set<BookFutureMatchCoeff> futureMatchCoeffs, CoeffContainer container) {
         setYesCoeff(futureMatchCoeffs, container);
+    }
+
+    private void fillTeamCornersHandicap(Set<BookFutureMatchCoeff> futureMatchCoeffs, CoeffContainer handicapContainer) {
+        for (BookFutureMatchCoeff bookFutureMatchCoeff : futureMatchCoeffs) {
+            if (bookFutureMatchCoeff.getKind() == null) {
+                continue;
+            }
+            checkIfContainsKindAndSetCoeff(bookFutureMatchCoeff, handicapContainer.findByType(PLUS_4_5), "4.5");
+            checkIfContainsKindAndSetCoeff(bookFutureMatchCoeff, handicapContainer.findByType(PLUS_3_5), "3.5");
+            checkIfContainsKindAndSetCoeff(bookFutureMatchCoeff, handicapContainer.findByType(PLUS_2_5), "2.5");
+            checkIfContainsKindAndSetCoeff(bookFutureMatchCoeff, handicapContainer.findByType(PLUS_1_5), "1.5");
+            checkIfContainsKindAndSetCoeff(bookFutureMatchCoeff, handicapContainer.findByType(MINUS_1_5), "-1.5");
+            checkIfContainsKindAndSetCoeff(bookFutureMatchCoeff, handicapContainer.findByType(MINUS_2_5), "-2.5");
+            checkIfContainsKindAndSetCoeff(bookFutureMatchCoeff, handicapContainer.findByType(MINUS_3_5), "-3.5");
+            checkIfContainsKindAndSetCoeff(bookFutureMatchCoeff, handicapContainer.findByType(MINUS_4_5), "-4.5");
+        }
     }
 
 

@@ -14,7 +14,9 @@ public class CoeffCornersBlock extends CoeffContainer {
                 new CoeffTeamCornersTotalOverBlock(),
                 new CoeffOpposingTeamCornersTotalOverBlock(),
                 new CoeffTeamCornersNotLooseBlock(),
-                new CoeffOpposingTeamCornersNotLooseBlock()
+                new CoeffOpposingTeamCornersNotLooseBlock(),
+                new CoeffTeamCornersHandicapBlock(),
+                new CoeffOpposingTeamCornersHandicapBlock()
         ), ContainerType.CORNERS);
     }
 }
