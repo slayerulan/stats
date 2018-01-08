@@ -200,7 +200,7 @@ public class TestController {
         PossibleBetsBlock possibleBetsBlock = new PossibleBetsBlock(homeMatchData, guestMatchData);
         possibleBetsBlock.check(homeTeamMatches, guestTeamMatches);
 
-        CoeffBlock coeffBlock = hockeyCoeffsMatchParser.parse(futureMatch);
+        HockeyCoeffBlock coeffBlock = hockeyCoeffsMatchParser.parse(futureMatch);
 
         ProposedBetsContainer resultContainer = CoefficientsAnalyzer.analyze(coeffBlock, possibleBetsBlock);
 
@@ -227,7 +227,7 @@ public class TestController {
         PossibleBetsBlock possibleBetsBlock = new PossibleBetsBlock(homeMatchData, guestMatchData);
         possibleBetsBlock.check(homeTeamMatches, guestTeamMatches);
 
-        CoeffBlock coeffBlock = hockeyCoeffsMatchParser.parse(futureMatch);
+        HockeyCoeffBlock coeffBlock = hockeyCoeffsMatchParser.parse(futureMatch);
 
         ProposedBetsContainer resultContainer = CoefficientsAnalyzer.analyze(coeffBlock, possibleBetsBlock);
 

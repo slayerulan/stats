@@ -11,8 +11,8 @@ import com.savik.coeffs.hockey.total.CoeffTotalBlock;
 
 import java.util.Arrays;
 
-public class CoeffBlock extends CoeffContainer {
-    public CoeffBlock() {
+public class HockeyCoeffBlock extends CoeffContainer {
+    public HockeyCoeffBlock() {
         super(Arrays.asList(
                 new CoeffTotalBlock(),
                 new CoeffOtherBlock(),

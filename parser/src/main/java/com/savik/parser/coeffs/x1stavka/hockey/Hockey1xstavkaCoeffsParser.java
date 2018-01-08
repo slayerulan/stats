@@ -1,7 +1,7 @@
 package com.savik.parser.coeffs.x1stavka.hockey;
 
 import com.savik.CoeffContainer;
-import com.savik.coeffs.hockey.CoeffBlock;
+import com.savik.coeffs.hockey.HockeyCoeffBlock;
 import com.savik.hockey.model.HockeyChampionship;
 import com.savik.hockey.model.HockeyFutureMatch;
 import com.savik.hockey.repository.HockeyFutureMatchRepository;
@@ -50,6 +50,6 @@ public class Hockey1xstavkaCoeffsParser extends Sport1xstavkaCoeffsParser {
 
     @Override
     protected CoeffContainer createCoeffContainer() {
-        return new CoeffBlock();
+        return new HockeyCoeffBlock();
     }
 }

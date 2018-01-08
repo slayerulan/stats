@@ -4,7 +4,7 @@ import com.savik.Coeff;
 import com.savik.CoeffContainer;
 import com.savik.ContainerType;
 import com.savik.Team;
-import com.savik.coeffs.hockey.CoeffBlock;
+import com.savik.coeffs.hockey.HockeyCoeffBlock;
 import com.savik.hockey.model.HockeyFutureMatch;
 import com.savik.hockey.model.HockeyTeam;
 import com.savik.hockey.repository.HockeyMatchRepository;
@@ -45,7 +45,7 @@ public class HockeyParimatchCoeffsMatchParser {
     @Autowired
     HockeyDownloaderConfiguration hockeyDownloaderConfiguration;
 
-    public CoeffBlock parse(HockeyFutureMatch hockeyFutureMatch) {
+    public HockeyCoeffBlock parse(HockeyFutureMatch hockeyFutureMatch) {
 
         Path statsPath = null;
         Path shotsPath = null;
@@ -67,7 +67,7 @@ public class HockeyParimatchCoeffsMatchParser {
         HockeyTeam homeTeam = hockeyFutureMatch.getHomeTeam();
         HockeyTeam guestTeam = hockeyFutureMatch.getGuestTeam();
 
-        CoeffBlock coeffBlock = new CoeffBlock();
+        HockeyCoeffBlock hockeyCoeffBlock = new HockeyCoeffBlock();
         Element tempHref = null;
         if (!statsHtml.select("a.om:containsOwn(" + homeTeam.getName() + ")").isEmpty()) {
             tempHref = statsHtml.select(String.format("a.om:containsOwn(%s)", homeTeam.getName())).get(0);
@@ -78,31 +78,31 @@ public class HockeyParimatchCoeffsMatchParser {
         Element matchTbodyTag = tempHref.parent().parent().parent();
         Element matchCoeffsTbodyTag = matchTbodyTag.nextElementSibling();
 
-        fillSomeSpecialBets(tempHref.parent().parent(), coeffBlock);
-        fillTotalBlock(matchCoeffsTbodyTag, coeffBlock.findByType(TOTAL), hockeyFutureMatch);
-        fillOtherBlock(matchCoeffsTbodyTag, coeffBlock.findByType(OTHER), hockeyFutureMatch);
-        fillHandicapBlock(matchCoeffsTbodyTag, coeffBlock.findByType(HANDICAP), hockeyFutureMatch);
-        fillPeriodsBlock(matchCoeffsTbodyTag, coeffBlock.findByType(PERIODS), hockeyFutureMatch);
+        fillSomeSpecialBets(tempHref.parent().parent(), hockeyCoeffBlock);
+        fillTotalBlock(matchCoeffsTbodyTag, hockeyCoeffBlock.findByType(TOTAL), hockeyFutureMatch);
+        fillOtherBlock(matchCoeffsTbodyTag, hockeyCoeffBlock.findByType(OTHER), hockeyFutureMatch);
+        fillHandicapBlock(matchCoeffsTbodyTag, hockeyCoeffBlock.findByType(HANDICAP), hockeyFutureMatch);
+        fillPeriodsBlock(matchCoeffsTbodyTag, hockeyCoeffBlock.findByType(PERIODS), hockeyFutureMatch);
 
 
         Document shotsHtml = downloader.downloadFile(new File(shotsPath.toUri()));
         if (!shotsHtml.select(String.format("a.om:contains(%s)", homeTeam.getName())).isEmpty()) {
             tempHref = shotsHtml.select(String.format("a.om:contains(%s)", homeTeam.getName())).get(0);
-            fillShotsSpecialBets(tempHref.parent().parent(), coeffBlock.findByType(STATS));
+            fillShotsSpecialBets(tempHref.parent().parent(), hockeyCoeffBlock.findByType(STATS));
             fillShotsBets(
                     tempHref.parent().parent().parent().nextElementSibling(),
-                    coeffBlock.findByType(STATS), hockeyFutureMatch
+                    hockeyCoeffBlock.findByType(STATS), hockeyFutureMatch
             );
         }
 
         Document penaltiesHtml = downloader.downloadFile(new File(penaltiesPath.toUri()));
         if (!penaltiesHtml.select(String.format("td:contains(%s)", homeTeam.getName())).isEmpty()) {
             tempHref = penaltiesHtml.select(String.format("td:contains(%s)", homeTeam.getName())).get(0);
-            fillPenaltiesSpecialBets(tempHref.parent().parent(), coeffBlock.findByType(STATS));
+            fillPenaltiesSpecialBets(tempHref.parent().parent(), hockeyCoeffBlock.findByType(STATS));
         }
 
 
-        return coeffBlock;
+        return hockeyCoeffBlock;
     }
 
     // which placed on parimatch main screen
