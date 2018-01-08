@@ -9,7 +9,8 @@ import java.util.Arrays;
 public class CoeffCornersBlock extends CoeffContainer {
     public CoeffCornersBlock() {
         super(Arrays.asList(
-                new CoeffCornersTotalOverBlock()
+                new CoeffCornersTotalOverBlock(),
+                new CoeffCornersTotalUnderBlock()
         ), ContainerType.CORNERS);
     }
 }

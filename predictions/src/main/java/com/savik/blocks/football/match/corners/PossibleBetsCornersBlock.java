@@ -11,7 +11,8 @@ import java.util.Arrays;
 public class PossibleBetsCornersBlock extends PossibleBetContainer<FootballMatch> {
     public PossibleBetsCornersBlock(MatchData homeMatchData, MatchData guestMatchData) {
         super(Arrays.asList(
-                new PeriodCornersTotalOverPossibleBetBlock()
+                new PeriodCornersTotalOverPossibleBetBlock(),
+                new PeriodCornersTotalUnderPossibleBetBlock()
         ), ContainerType.CORNERS);
     }
 }
