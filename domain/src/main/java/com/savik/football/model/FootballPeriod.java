@@ -7,6 +7,7 @@ import com.savik.Winner;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -72,9 +73,16 @@ public class FootballPeriod extends Period<FootballGoal> {
         this.guestFouls = guestFouls;
     }
 
+    public boolean hasCorners() {
+        return homeCorners != null && guestCorners != null;
+    }
+
+    public Integer getCornersTotal() {
+        return homeCorners + guestCorners;
+    }
 
     @Override
     public int getMinuteFromStart(int minute) {
-        return 0;
+        throw new NotImplementedException();
     }
 }
