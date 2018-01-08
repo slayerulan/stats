@@ -4,6 +4,8 @@ import com.savik.ContainerType;
 import com.savik.MatchData;
 import com.savik.Period;
 import com.savik.PeriodTeamBetContainer;
+import com.savik.bets.football.corners.PeriodGuestCornersTotalOver;
+import com.savik.bets.football.corners.PeriodHomeCornersTotalOver;
 import com.savik.football.model.FootballMatch;
 
 import java.util.function.Function;
