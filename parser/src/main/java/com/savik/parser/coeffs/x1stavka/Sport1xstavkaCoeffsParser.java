@@ -2,9 +2,8 @@ package com.savik.parser.coeffs.x1stavka;
 
 import com.savik.CoeffContainer;
 import com.savik.CoeffEntry;
+import com.savik.FutureMatch;
 import com.savik.Team;
-import com.savik.coeffs.football.FootballCoeffBlock;
-import com.savik.football.model.FootballFutureMatch;
 import com.savik.parser.utils.CoeffTransformer;
 import com.savik.repository.CoeffRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,7 @@ import java.util.Map;
 
 
 @Service
-public class Sport1xstavkaCoeffsParser {
+public abstract class Sport1xstavkaCoeffsParser {
 
 
     @Autowired
@@ -28,11 +27,11 @@ public class Sport1xstavkaCoeffsParser {
         this.sport1xstavkaCoeffsMatchParser = sport1xstavkaCoeffsMatchParser;
     }
 
-    protected void parseLeague(List<FootballFutureMatch> matches, String leagueUrl, Map<String, String> teamNameMapping) throws IOException {
-        for (FootballFutureMatch match : matches) {
+    protected void parseLeague(List<FutureMatch> matches, String leagueUrl, Map<String, String> teamNameMapping) throws IOException {
+        for (FutureMatch match : matches) {
             mapName(match.getHomeTeam(), teamNameMapping);
             mapName(match.getGuestTeam(), teamNameMapping);
-            CoeffContainer coeffBlock = sport1xstavkaCoeffsMatchParser.parse(match, leagueUrl, new FootballCoeffBlock());
+            CoeffContainer coeffBlock = sport1xstavkaCoeffsMatchParser.parse(match, leagueUrl, createCoeffContainer());
             List<CoeffEntry> coeffEntries = CoeffTransformer.transformBlockToEntryWithoutAverageCoeffs(coeffBlock, match.getMyscoreCode());
             coeffRepository.deleteAllByMyscoreCode(match.getMyscoreCode());
             coeffRepository.save(coeffEntries);
@@ -46,4 +45,6 @@ public class Sport1xstavkaCoeffsParser {
             team.setName(teamNameMapping.get(team.getName()));
         }
     }
+
+    protected abstract CoeffContainer createCoeffContainer();
 }

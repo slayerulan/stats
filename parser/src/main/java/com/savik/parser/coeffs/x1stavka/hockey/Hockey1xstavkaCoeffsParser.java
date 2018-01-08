@@ -1,14 +1,11 @@
 package com.savik.parser.coeffs.x1stavka.hockey;
 
-import com.savik.CoeffEntry;
-import com.savik.Team;
+import com.savik.CoeffContainer;
 import com.savik.coeffs.hockey.CoeffBlock;
 import com.savik.hockey.model.HockeyChampionship;
 import com.savik.hockey.model.HockeyFutureMatch;
 import com.savik.hockey.repository.HockeyFutureMatchRepository;
-import com.savik.parser.coeffs.parimatch.hockey.HockeyParimatchCoeffsMatchParser;
-import com.savik.parser.utils.CoeffTransformer;
-import com.savik.repository.CoeffRepository;
+import com.savik.parser.coeffs.x1stavka.Sport1xstavkaCoeffsParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,26 +13,22 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import static com.savik.parser.coeffs.x1stavka.Book1xbetConstants.*;
 
 
 @Service
-public class Hockey1xstavkaCoeffsParser {
+public class Hockey1xstavkaCoeffsParser extends Sport1xstavkaCoeffsParser {
 
     @Autowired
     HockeyFutureMatchRepository hockeyFutureMatchRepository;
 
     @Autowired
-    HockeyParimatchCoeffsMatchParser hockeyParimatchCoeffsMatchParser;
+    public void setFootball1xstavkaCoeffsMatchParser(Hockey1xstavkaCoeffsMatchParser hockey1xstavkaCoeffsMatchParser) {
+        setSport1xstavkaCoeffsMatchParser(hockey1xstavkaCoeffsMatchParser);
+    }
 
-    @Autowired
-    Hockey1xstavkaCoeffsMatchParser hockey1XstavkaCoeffsMatchParser;
-
-    @Autowired
-    CoeffRepository coeffRepository;
 
     public void parse() throws URISyntaxException, IOException {
         List<HockeyFutureMatch> all = hockeyFutureMatchRepository.findAll();
@@ -55,22 +48,8 @@ public class Hockey1xstavkaCoeffsParser {
                 EXTRA, extraMapping);
     }
 
-    private void parseLeague(List<HockeyFutureMatch> matches, String leagueUrl, Map<String, String> teamNameMapping) throws IOException {
-        for (HockeyFutureMatch match : matches) {
-            mapName(match.getHomeTeam(), teamNameMapping);
-            mapName(match.getGuestTeam(), teamNameMapping);
-            CoeffBlock coeffBlock = hockey1XstavkaCoeffsMatchParser.parse(match, leagueUrl);
-            List<CoeffEntry> coeffEntries = CoeffTransformer.transformBlockToEntryWithoutAverageCoeffs(coeffBlock, match.getMyscoreCode());
-            coeffRepository.deleteAllByMyscoreCode(match.getMyscoreCode());
-            coeffRepository.save(coeffEntries);
-            System.out.println("parsed = " + match.getMyscoreCode());
-
-        }
-    }
-
-    private void mapName(Team team, Map<String, String> teamNameMapping) {
-        if (teamNameMapping.containsKey(team.getName())) {
-            team.setName(teamNameMapping.get(team.getName()));
-        }
+    @Override
+    protected CoeffContainer createCoeffContainer() {
+        return new CoeffBlock();
     }
 }

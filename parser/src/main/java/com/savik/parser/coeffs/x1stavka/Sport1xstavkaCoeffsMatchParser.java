@@ -90,7 +90,7 @@ public abstract class Sport1xstavkaCoeffsMatchParser {
 
     public abstract void fillSpecialGroups(JSONObject matchCoeffsObject, CoeffContainer rootContainer) throws IOException;
 
-    private JSONObject findPeriod(JSONArray periods, String periodNumber) {
+    protected JSONObject findPeriod(JSONArray periods, String periodNumber) {
         for (Object period : periods) {
             JSONObject jsonObject = (JSONObject) period;
             if (jsonObject.has("PN") && jsonObject.getString("PN").contains(periodNumber)) {
@@ -111,11 +111,9 @@ public abstract class Sport1xstavkaCoeffsMatchParser {
     }
 
 
-
-
-    private void fillPosAndNegContainer(Set<BookFutureMatchCoeff> futureMatchPosCoeffs,
-                                        Set<BookFutureMatchCoeff> futureMatchNegCoeffs,
-                                        BiConsumer<BookFutureMatchCoeff, BookFutureMatchCoeff>... biConsumers) {
+    protected void fillPosAndNegContainer(Set<BookFutureMatchCoeff> futureMatchPosCoeffs,
+                                          Set<BookFutureMatchCoeff> futureMatchNegCoeffs,
+                                          BiConsumer<BookFutureMatchCoeff, BookFutureMatchCoeff>... biConsumers) {
         for (BookFutureMatchCoeff posCoeff : futureMatchPosCoeffs) {
             Optional<BookFutureMatchCoeff> negativeCoeff = futureMatchNegCoeffs.stream()
                     .filter(negCoeff -> negCoeff.getKind().equals(posCoeff.getKind())).findFirst();
@@ -129,9 +127,9 @@ public abstract class Sport1xstavkaCoeffsMatchParser {
         }
     }
 
-    private void setYesOrNoCoeff(Set<BookFutureMatchCoeff> futureMatchPosCoeffs,
-                                 Set<BookFutureMatchCoeff> futureMatchNegCoeffs,
-                                 CoeffContainer container) {
+    protected void setYesOrNoCoeff(Set<BookFutureMatchCoeff> futureMatchPosCoeffs,
+                                   Set<BookFutureMatchCoeff> futureMatchNegCoeffs,
+                                   CoeffContainer container) {
         if (futureMatchPosCoeffs.isEmpty() && futureMatchNegCoeffs.isEmpty()) {
             System.out.println("strange" + futureMatchPosCoeffs);
             return;
@@ -145,7 +143,7 @@ public abstract class Sport1xstavkaCoeffsMatchParser {
         );
     }
 
-    private void setYesCoeff(Set<BookFutureMatchCoeff> futureMatchPosCoeffs, CoeffContainer container) {
+    protected void setYesCoeff(Set<BookFutureMatchCoeff> futureMatchPosCoeffs, CoeffContainer container) {
         if (futureMatchPosCoeffs.isEmpty()) {
             System.out.println("strange" + futureMatchPosCoeffs);
             return;
@@ -164,15 +162,15 @@ public abstract class Sport1xstavkaCoeffsMatchParser {
         }
     }
 
-    private void checkIfContainsKindAndSetPosAndNegCoeff(BookFutureMatchCoeff posCoeff, BookFutureMatchCoeff negCoeff,
-                                                         CoeffContainer coeffContainer, String option) {
+    protected void checkIfContainsKindAndSetPosAndNegCoeff(BookFutureMatchCoeff posCoeff, BookFutureMatchCoeff negCoeff,
+                                                           CoeffContainer coeffContainer, String option) {
         if (posCoeff.getKind().equals(option) && negCoeff.getKind().equals(option)) {
             coeffContainer.getCoeff().set(Double.valueOf(posCoeff.getCoeff()), Double.valueOf(negCoeff.getCoeff()));
         }
     }
 
-    private void checkIfPosContainsKindAndSetPosAndNegCoeff(BookFutureMatchCoeff posCoeff, BookFutureMatchCoeff negCoeff,
-                                                            CoeffContainer coeffContainer, String option) {
+    protected void checkIfPosContainsKindAndSetPosAndNegCoeff(BookFutureMatchCoeff posCoeff, BookFutureMatchCoeff negCoeff,
+                                                              CoeffContainer coeffContainer, String option) {
         if (posCoeff.getKind().equals(option)) {
             coeffContainer.getCoeff().set(Double.valueOf(posCoeff.getCoeff()), Double.valueOf(negCoeff.getCoeff()));
         }

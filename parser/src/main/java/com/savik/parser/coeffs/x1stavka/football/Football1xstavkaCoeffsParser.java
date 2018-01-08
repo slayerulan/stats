@@ -1,5 +1,7 @@
 package com.savik.parser.coeffs.x1stavka.football;
 
+import com.savik.CoeffContainer;
+import com.savik.coeffs.football.FootballCoeffBlock;
 import com.savik.football.model.FootballChampionship;
 import com.savik.football.model.FootballFutureMatch;
 import com.savik.football.repository.FootballFutureMatchRepository;
@@ -31,5 +33,10 @@ public class Football1xstavkaCoeffsParser extends Sport1xstavkaCoeffsParser {
         List<FootballFutureMatch> all = footballFutureMatchRepository.findAll();
         parseLeague(all.stream().filter(m -> m.getChampionship() == FootballChampionship.LA).collect(Collectors.toList()),
                 LA, new HashMap<>());
+    }
+
+    @Override
+    protected CoeffContainer createCoeffContainer() {
+        return new FootballCoeffBlock();
     }
 }

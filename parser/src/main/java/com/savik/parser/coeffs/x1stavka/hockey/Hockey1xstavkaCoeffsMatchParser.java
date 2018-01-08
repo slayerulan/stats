@@ -1,114 +1,28 @@
 package com.savik.parser.coeffs.x1stavka.hockey;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.savik.CoeffContainer;
-import com.savik.coeffs.hockey.CoeffBlock;
-import com.savik.hockey.model.HockeyFutureMatch;
-import com.savik.hockey.repository.HockeyMatchRepository;
-import com.savik.hockey.repository.HockeyTeamRepository;
-import com.savik.parser.Downloader;
-import com.savik.parser.coeffs.parimatch.hockey.HockeyDownloaderConfiguration;
 import com.savik.parser.coeffs.x1stavka.Book1xbetShortName;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.savik.parser.coeffs.x1stavka.Sport1xstavkaCoeffsMatchParser;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
 import java.util.Set;
-import java.util.function.BiConsumer;
-import java.util.stream.Collectors;
 
 import static com.savik.ContainerType.*;
-import static com.savik.parser.coeffs.x1stavka.Book1xbetConstants.EVENT_URL;
 
 
 @Service
-class Hockey1xstavkaCoeffsMatchParser {
+class Hockey1xstavkaCoeffsMatchParser extends Sport1xstavkaCoeffsMatchParser {
 
-    @Autowired
-    HockeyTeamRepository hockeyTeamRepository;
-
-    @Autowired
-    HockeyMatchRepository hockeyMatchRepository;
-
-    @Autowired
-    Downloader downloader;
-
-    @Autowired
-    HockeyDownloaderConfiguration hockeyDownloaderConfiguration;
-
-    @Autowired
-    ObjectMapper objectMapper;
-
-    public CoeffBlock parse(HockeyFutureMatch hockeyFutureMatch, String leagueUrl) throws IOException {
-
-        String json = downloader.getJson(leagueUrl);
-        JSONObject jsonObject = new JSONObject(json);
-        Set<BookFutureMatchRepresentation> list = objectMapper.readValue(
-                jsonObject.getJSONObject("Value").getJSONArray("G").toString(),
-                new TypeReference<Set<BookFutureMatchRepresentation>>() {
-                }
-        );
-
-        for (BookFutureMatchRepresentation matchRepresentation : list) {
-            if (matchRepresentation.o1.contains(hockeyFutureMatch.getHomeTeam().getName()) && matchRepresentation.o2.contains(hockeyFutureMatch.getGuestTeam().getName())) {
-                try {
-                    String matchCoeffsJson = downloader.getJson(EVENT_URL + matchRepresentation.getCi());
-                    JSONObject matchCoeffsObject = new JSONObject(matchCoeffsJson);
-
-                    Set<BookFutureMatchCoeff> futureMatchCoeffs = getBookFutureMatchCoeffs(matchCoeffsObject.getJSONObject("Value"));
-                    CoeffBlock coeffBlock = new CoeffBlock();
-                    fill(futureMatchCoeffs, coeffBlock);
-                    fillSpecialGroups(matchCoeffsObject, coeffBlock);
-                    return coeffBlock;
-                }catch (Exception ex) {
-                    throw new RuntimeException("error while parsing, myscore code = " + hockeyFutureMatch.getMyscoreCode(), ex);
-                }
-
-            }
-        }
-        throw new RuntimeException("match not found,  myscore code = " + hockeyFutureMatch.getMyscoreCode());
-    }
-
-    private Set<BookFutureMatchCoeff> getBookFutureMatchCoeffs(JSONObject value) throws IOException {
-        Set<BookFutureMatchCoeff> futureMatchCoeffs = value.has("E") ? objectMapper.readValue(
-                value.getJSONArray("E").toString(),
-                new TypeReference<Set<BookFutureMatchCoeff>>() {
-                }
-        ) : new HashSet<>();
-
-        JSONArray jsonArray = value.getJSONArray("GE");
-        for (Object o : jsonArray) {
-            JSONArray temp1 = ((JSONObject) o).getJSONArray("E");
-            List<List<BookFutureMatchCoeff>> lists = objectMapper.readValue(
-                    temp1.toString(),
-                    new TypeReference<List<List<BookFutureMatchCoeff>>>() {
-                    }
-            );
-            List<BookFutureMatchCoeff> addtionalCoeffs = lists.stream()
-                    .flatMap(List::stream)
-                    .collect(Collectors.toList());
-            futureMatchCoeffs.addAll(addtionalCoeffs);
-        }
-        return futureMatchCoeffs;
-    }
-
-    private void fill(Set<BookFutureMatchCoeff> futureMatchCoeffs, CoeffContainer rootContainer) {
+    public void fill(Set<BookFutureMatchCoeff> futureMatchCoeffs, CoeffContainer rootContainer) {
         fillTotalBlock(futureMatchCoeffs, rootContainer.findByType(TOTAL));
         fillOtherBlock(futureMatchCoeffs, rootContainer.findByType(OTHER));
         fillStatsBlock(futureMatchCoeffs, rootContainer.findByType(STATS));
     }
 
-    private void fillSpecialGroups(JSONObject matchCoeffsObject, CoeffContainer rootContainer) throws IOException {
+    public void fillSpecialGroups(JSONObject matchCoeffsObject, CoeffContainer rootContainer) throws IOException {
         JSONArray specialGroups = matchCoeffsObject.getJSONObject("Value").getJSONArray("SG");
 
         fillPeriodBlock(
@@ -128,7 +42,7 @@ class Hockey1xstavkaCoeffsMatchParser {
         );
 
         JSONObject shotsOnTarget = findSpecialGroupByTG(specialGroups, "Броски в створ ворот");
-        if(shotsOnTarget != null) {
+        if (shotsOnTarget != null) {
             fillShotsBlock(
                     getBookFutureMatchCoeffs(shotsOnTarget),
                     rootContainer.findByType(STATS)
@@ -136,33 +50,13 @@ class Hockey1xstavkaCoeffsMatchParser {
         }
 
         JSONObject penaltiesTarget = findSpecialGroupByTG(specialGroups, "Штрафное время");
-        if(shotsOnTarget != null) {
+        if (shotsOnTarget != null) {
             fillPenaltiesBlock(
                     getBookFutureMatchCoeffs(penaltiesTarget),
                     rootContainer.findByType(STATS)
             );
         }
 
-    }
-
-    private JSONObject findPeriod(JSONArray periods, String periodNumber) {
-        for (Object period : periods) {
-            JSONObject jsonObject = (JSONObject) period;
-            if (jsonObject.has("PN") && jsonObject.getString("PN").contains(periodNumber)) {
-                return jsonObject;
-            }
-        }
-        return null;
-    }
-
-    private JSONObject findSpecialGroupByTG(JSONArray periods, String tg) {
-        for (Object period : periods) {
-            JSONObject jsonObject = (JSONObject) period;
-            if (jsonObject.has("TG") && jsonObject.getString("TG").contains(tg)) {
-                return jsonObject;
-            }
-        }
-        return null;
     }
 
     private void fillTotalBlock(Set<BookFutureMatchCoeff> futureMatchCoeffs, CoeffContainer totalContainer) {
@@ -424,7 +318,7 @@ class Hockey1xstavkaCoeffsMatchParser {
 
     private void fillFirstGoalTimeBlock(Set<BookFutureMatchCoeff> futureMatchPosCoeffs,
                                         Set<BookFutureMatchCoeff> futureMatchNegCoeffs, CoeffContainer container) {
-        if(futureMatchPosCoeffs.size() == 0) {
+        if (futureMatchPosCoeffs.size() == 0) {
             return;
         }
         if (futureMatchNegCoeffs.size() != 1) {
@@ -506,14 +400,14 @@ class Hockey1xstavkaCoeffsMatchParser {
     }
 
     private void fillTeamFirstScoredAndWinBlock(Set<BookFutureMatchCoeff> futureMatchPosCoeffs,
-                                              Set<BookFutureMatchCoeff> futureMatchNegCoeffs,
-                                              CoeffContainer container) {
+                                                Set<BookFutureMatchCoeff> futureMatchNegCoeffs,
+                                                CoeffContainer container) {
         setYesOrNoCoeff(futureMatchPosCoeffs, futureMatchNegCoeffs, container);
     }
 
     private void fillPeriodXMoreEffectiveThanYBlock(Set<BookFutureMatchCoeff> futureMatchPosCoeffs,
-                                                       Set<BookFutureMatchCoeff> futureMatchNegCoeffs,
-                                                       CoeffContainer container) {
+                                                    Set<BookFutureMatchCoeff> futureMatchNegCoeffs,
+                                                    CoeffContainer container) {
         fillPosAndNegContainer(futureMatchPosCoeffs, futureMatchNegCoeffs,
                 (posCoeff, negCoeff) -> checkIfContainsKindAndSetPosAndNegCoeff(posCoeff, negCoeff, container.findByType(P2_MORE_P1), "2.001"),
                 (posCoeff, negCoeff) -> checkIfContainsKindAndSetPosAndNegCoeff(posCoeff, negCoeff, container.findByType(P3_MORE_P1), "3.001"),
@@ -531,8 +425,8 @@ class Hockey1xstavkaCoeffsMatchParser {
     }
 
     private void fillTeamScoredInRowBlock(Set<BookFutureMatchCoeff> futureMatchPosCoeffs,
-                                                  Set<BookFutureMatchCoeff> futureMatchNegCoeffs,
-                                                  CoeffContainer container) {
+                                          Set<BookFutureMatchCoeff> futureMatchNegCoeffs,
+                                          CoeffContainer container) {
         fillPosAndNegContainer(futureMatchPosCoeffs, futureMatchNegCoeffs,
                 (posCoeff, negCoeff) -> checkIfContainsKindAndSetPosAndNegCoeff(posCoeff, negCoeff, container.findByType(NUMBER_2), "2"),
                 (posCoeff, negCoeff) -> checkIfContainsKindAndSetPosAndNegCoeff(posCoeff, negCoeff, container.findByType(NUMBER_3), "3")
@@ -599,8 +493,8 @@ class Hockey1xstavkaCoeffsMatchParser {
     }
 
     private void fillShotsTotalOverBlock(Set<BookFutureMatchCoeff> futureMatchPosCoeffs,
-                                              Set<BookFutureMatchCoeff> futureMatchNegCoeffs,
-                                              CoeffContainer container) {
+                                         Set<BookFutureMatchCoeff> futureMatchNegCoeffs,
+                                         CoeffContainer container) {
         fillPosAndNegContainer(futureMatchPosCoeffs, futureMatchNegCoeffs,
                 (posCoeff, negCoeff) -> checkIfContainsKindAndSetPosAndNegCoeff(posCoeff, negCoeff, container.findByType(OVER_57_5), "57.5"),
                 (posCoeff, negCoeff) -> checkIfContainsKindAndSetPosAndNegCoeff(posCoeff, negCoeff, container.findByType(OVER_58_5), "58.5"),
@@ -614,7 +508,7 @@ class Hockey1xstavkaCoeffsMatchParser {
 
     private void fillTeamShotsHandicap(Set<BookFutureMatchCoeff> futureMatchCoeffs, CoeffContainer totalOverContainer) {
         for (BookFutureMatchCoeff bookFutureMatchCoeff : futureMatchCoeffs) {
-            if(bookFutureMatchCoeff.getKind() == null) {
+            if (bookFutureMatchCoeff.getKind() == null) {
                 continue;
             }
             checkIfContainsKindAndSetCoeff(bookFutureMatchCoeff, totalOverContainer.findByType(PLUS_5_5), "5.5");
@@ -661,8 +555,8 @@ class Hockey1xstavkaCoeffsMatchParser {
     }
 
     private void fillPeriodGoalBetweenBlock(Set<BookFutureMatchCoeff> futureMatchPosCoeffs,
-                                              Set<BookFutureMatchCoeff> futureMatchNegCoeffs,
-                                              CoeffContainer container) {
+                                            Set<BookFutureMatchCoeff> futureMatchNegCoeffs,
+                                            CoeffContainer container) {
         fillPosAndNegContainer(futureMatchPosCoeffs, futureMatchNegCoeffs,
                 (posCoeff, negCoeff) -> checkIfContainsKindAndSetPosAndNegCoeff(posCoeff, negCoeff, container.findByType(BETWEEN_1_7), "1.007"),
                 (posCoeff, negCoeff) -> checkIfContainsKindAndSetPosAndNegCoeff(posCoeff, negCoeff, container.findByType(BETWEEN_8_15), "8.015"),
@@ -714,8 +608,8 @@ class Hockey1xstavkaCoeffsMatchParser {
     }
 
     private void fillPenaltiesTotalOverBlock(Set<BookFutureMatchCoeff> futureMatchPosCoeffs,
-                                         Set<BookFutureMatchCoeff> futureMatchNegCoeffs,
-                                         CoeffContainer container) {
+                                             Set<BookFutureMatchCoeff> futureMatchNegCoeffs,
+                                             CoeffContainer container) {
         fillPosAndNegContainer(futureMatchPosCoeffs, futureMatchNegCoeffs,
                 (posCoeff, negCoeff) -> checkIfContainsKindAndSetPosAndNegCoeff(posCoeff, negCoeff, container.findByType(OVER_12_5), "12.5"),
                 (posCoeff, negCoeff) -> checkIfContainsKindAndSetPosAndNegCoeff(posCoeff, negCoeff, container.findByType(OVER_14_5), "14.5"),
@@ -728,7 +622,7 @@ class Hockey1xstavkaCoeffsMatchParser {
 
     private void fillTeamPenaltiesHandicap(Set<BookFutureMatchCoeff> futureMatchCoeffs, CoeffContainer totalOverContainer) {
         for (BookFutureMatchCoeff bookFutureMatchCoeff : futureMatchCoeffs) {
-            if(bookFutureMatchCoeff.getKind() == null) {
+            if (bookFutureMatchCoeff.getKind() == null) {
                 continue;
             }
             checkIfContainsKindAndSetCoeff(bookFutureMatchCoeff, totalOverContainer.findByType(PLUS_4_5), "4.5");
@@ -738,8 +632,8 @@ class Hockey1xstavkaCoeffsMatchParser {
     }
 
     private void fillTeamPenaltiesTotalOverBlock(Set<BookFutureMatchCoeff> futureMatchPosCoeffs,
-                                             Set<BookFutureMatchCoeff> futureMatchNegCoeffs,
-                                             CoeffContainer container) {
+                                                 Set<BookFutureMatchCoeff> futureMatchNegCoeffs,
+                                                 CoeffContainer container) {
         fillPosAndNegContainer(futureMatchPosCoeffs, futureMatchNegCoeffs,
                 (posCoeff, negCoeff) -> checkIfContainsKindAndSetPosAndNegCoeff(posCoeff, negCoeff, container.findByType(OVER_6_5), "6.5"),
                 (posCoeff, negCoeff) -> checkIfContainsKindAndSetPosAndNegCoeff(posCoeff, negCoeff, container.findByType(OVER_7_5), "7.5"),
@@ -750,125 +644,6 @@ class Hockey1xstavkaCoeffsMatchParser {
     private void fillTeamNotLoosePenalties(Set<BookFutureMatchCoeff> futureMatchCoeffs, CoeffContainer container) {
         setYesCoeff(futureMatchCoeffs, container);
     }
-
-
-    private void fillPosAndNegContainer(Set<BookFutureMatchCoeff> futureMatchPosCoeffs,
-                                        Set<BookFutureMatchCoeff> futureMatchNegCoeffs,
-                                        BiConsumer<BookFutureMatchCoeff, BookFutureMatchCoeff>... biConsumers) {
-        for (BookFutureMatchCoeff posCoeff : futureMatchPosCoeffs) {
-            Optional<BookFutureMatchCoeff> negativeCoeff = futureMatchNegCoeffs.stream()
-                    .filter(negCoeff -> negCoeff.getKind().equals(posCoeff.getKind())).findFirst();
-            if (negativeCoeff.isPresent()) {
-                for (BiConsumer<BookFutureMatchCoeff, BookFutureMatchCoeff> biConsumer : biConsumers) {
-                    biConsumer.accept(posCoeff, negativeCoeff.get());
-                }
-            } else {
-                System.out.println(String.format("strange %s - %s", posCoeff.getId(), posCoeff.getKind()));
-            }
-        }
-    }
-
-    private void setYesOrNoCoeff(Set<BookFutureMatchCoeff> futureMatchPosCoeffs,
-                                 Set<BookFutureMatchCoeff> futureMatchNegCoeffs,
-                                 CoeffContainer container) {
-        if(futureMatchPosCoeffs.isEmpty() && futureMatchNegCoeffs.isEmpty()) {
-            System.out.println("strange" + futureMatchPosCoeffs);
-            return;
-        } else if (futureMatchNegCoeffs.size() != 1 || futureMatchNegCoeffs.size() != 1) {
-            throw new RuntimeException("size should be equals 1");
-        }
-        BookFutureMatchCoeff posCoeff = futureMatchPosCoeffs.stream().findFirst().get();
-        BookFutureMatchCoeff negCoeff = futureMatchNegCoeffs.stream().findFirst().get();
-        container.getCoeff().set(
-                Double.valueOf(posCoeff.getCoeff()), Double.valueOf(negCoeff.getCoeff())
-        );
-    }
-
-    private void setYesCoeff(Set<BookFutureMatchCoeff> futureMatchPosCoeffs, CoeffContainer container) {
-        if(futureMatchPosCoeffs.isEmpty()) {
-            System.out.println("strange" + futureMatchPosCoeffs);
-            return;
-        } else if (futureMatchPosCoeffs.size() != 1) {
-            throw new RuntimeException("size should be equals 1");
-        }
-        BookFutureMatchCoeff posCoeff = futureMatchPosCoeffs.stream().findFirst().get();
-        container.getCoeff().set(
-                Double.valueOf(posCoeff.getCoeff())
-        );
-    }
-
-    private void checkIfContainsKindAndSetCoeff(BookFutureMatchCoeff futureMatchCoeff, CoeffContainer coeffContainer, String option) {
-        if (futureMatchCoeff.getKind().equals(option)) {
-            coeffContainer.getCoeff().set(Double.valueOf(futureMatchCoeff.getCoeff()));
-        }
-    }
-
-    private void checkIfContainsKindAndSetPosAndNegCoeff(BookFutureMatchCoeff posCoeff, BookFutureMatchCoeff negCoeff,
-                                                         CoeffContainer coeffContainer, String option) {
-        if (posCoeff.getKind().equals(option) && negCoeff.getKind().equals(option)) {
-            coeffContainer.getCoeff().set(Double.valueOf(posCoeff.getCoeff()), Double.valueOf(negCoeff.getCoeff()));
-        }
-    }
-
-    private void checkIfPosContainsKindAndSetPosAndNegCoeff(BookFutureMatchCoeff posCoeff, BookFutureMatchCoeff negCoeff,
-                                                            CoeffContainer coeffContainer, String option) {
-        if (posCoeff.getKind().equals(option)) {
-            coeffContainer.getCoeff().set(Double.valueOf(posCoeff.getCoeff()), Double.valueOf(negCoeff.getCoeff()));
-        }
-    }
-
-    private Set<BookFutureMatchCoeff> findByShortNameId(Set<BookFutureMatchCoeff> futureMatchCoeffs, String id) {
-        return futureMatchCoeffs.stream().filter(c -> c.getId().equals(id)).collect(Collectors.toSet());
-    }
-
-    @Setter
-    @Getter
-    @NoArgsConstructor
-    static class BookFutureMatchRepresentation {
-
-        @JsonProperty(value = "CI", required = true)
-        private String ci;
-
-        @JsonProperty(value = "O1", required = true)
-        private String o1;
-
-        @JsonProperty(value = "O2", required = true)
-        private String o2;
-    }
-
-    @Setter
-    @Getter
-    @NoArgsConstructor
-    static class BookFutureMatchCoeff {
-
-        @JsonProperty(value = "C", required = true)
-        private String coeff;
-
-        @JsonProperty("P")
-        private String kind;
-
-        @JsonProperty(value = "T", required = true)
-        private String id;
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-
-            BookFutureMatchCoeff that = (BookFutureMatchCoeff) o;
-
-            if (kind != null ? !kind.equals(that.kind) : that.kind != null) return false;
-            return id.equals(that.id);
-        }
-
-        @Override
-        public int hashCode() {
-            int result = kind != null ? kind.hashCode() : 0;
-            result = 31 * result + id.hashCode();
-            return result;
-        }
-    }
-
 
 }
 
