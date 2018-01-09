@@ -102,5 +102,8 @@ public class Book1xbetShortName {
     public static final String PERIOD_X_MORE_EFFECTIVE_THAN_Y_YES = "780";
     public static final String PERIOD_X_MORE_EFFECTIVE_THAN_Y_NO = "781";
 
+    public static final String THREE_WAY_TOTAL_OVER = "739";
+    public static final String THREE_WAY_TOTAL_UNDER = "743";
+
 
 }

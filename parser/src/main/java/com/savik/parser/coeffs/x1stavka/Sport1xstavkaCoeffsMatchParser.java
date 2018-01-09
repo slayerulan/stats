@@ -183,6 +183,9 @@ public abstract class Sport1xstavkaCoeffsMatchParser {
 
     protected void checkIfContainsKindAndSetCoeff(BookFutureMatchCoeff futureMatchCoeff, CoeffContainer coeffContainer, String option) {
         if (futureMatchCoeff.getKind().equals(option)) {
+            if(coeffContainer.getCoeff().hasValue()) {
+                return;
+            }
             coeffContainer.getCoeff().set(Double.valueOf(futureMatchCoeff.getCoeff()));
         }
     }

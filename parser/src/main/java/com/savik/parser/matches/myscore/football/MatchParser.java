@@ -154,9 +154,9 @@ public class MatchParser {
         if (!temp.isEmpty()) {
             Element matchInformation = temp.first();
             Elements contentTemp = matchInformation.select("tr.content");
-            if (contentTemp.size() != 2) {
+/*            if (contentTemp.size() != 2) {
                 throw new RuntimeException("content is invalid");
-            }
+            }*/
             Element refereeBlock = contentTemp.first().select("td").first();
             String text = refereeBlock.text();
             String refereeName = text.replaceAll("Судья:", "").trim();

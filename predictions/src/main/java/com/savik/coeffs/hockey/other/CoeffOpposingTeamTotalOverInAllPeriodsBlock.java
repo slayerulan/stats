@@ -11,7 +11,7 @@ public class CoeffOpposingTeamTotalOverInAllPeriodsBlock extends CoeffContainer 
     public CoeffOpposingTeamTotalOverInAllPeriodsBlock() {
         super(Arrays.asList(
                 new CoeffContainer(
-                        new Coeff(1.6),
+                        new Coeff(),
                         ContainerType.OVER_0_5
                 )
         ), ContainerType.OPPOSING_TEAM_TOTAL_OVER_ALL_PERIODS);

@@ -91,6 +91,9 @@ public class FootballPeriod extends Period<FootballGoal> {
     @Override
     @JsonValue
     public String toString() {
+        if(getCards() == null) {
+            return "{crns= " + homeCorners + "-" + guestCorners +")}";
+        }
         long home = getCards().stream().filter(c -> c.getType() == FootballCard.Type.YELLOW && c.getWho() == Who.HOME)
                 .count();
         long guest = getCards().stream().filter(c -> c.getType() == FootballCard.Type.YELLOW && c.getWho() == Who.GUEST)

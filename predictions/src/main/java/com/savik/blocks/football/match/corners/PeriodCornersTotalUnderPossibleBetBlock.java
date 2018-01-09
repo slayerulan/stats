@@ -39,7 +39,7 @@ public class PeriodCornersTotalUnderPossibleBetBlock extends PossibleBetContaine
                         new PeriodCornersTotalUnderPossibleBet(FootballMatch.MATCH, 12.5),
                         ContainerType.UNDER_12_5
                 )
-                ), ContainerType.TOTAL_OVER
+                ), ContainerType.TOTAL_UNDER
         );
     }
 }

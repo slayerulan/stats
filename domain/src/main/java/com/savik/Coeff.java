@@ -21,7 +21,7 @@ public class Coeff {
 
     public Coeff() {
         // TODO: remove
-        this.value = UNKNOWN;
+        //this.value = UNKNOWN;
         this.averageCoeff = true; // todo: fix
     }
 
@@ -48,6 +48,10 @@ public class Coeff {
         this.positiveValue = positiveValue;
         this.negativeValue = negativeValue;
         this.averageCoeff = false;
+    }
+
+    public boolean hasValue() {
+        return value != null || (positiveValue != null && negativeValue != null);
     }
 
     public CoeffType getStatus() {

@@ -50,7 +50,7 @@ public class Parser {
         //hockeyFutureMatchesParser.parse();
         //hockeyParser.parse();
         //footballParser.parse();
-        //football1xstavkaCoeffsParser.parse();
+        football1xstavkaCoeffsParser.parse();
         //footballFutureMatchesParser.parse();
 
 

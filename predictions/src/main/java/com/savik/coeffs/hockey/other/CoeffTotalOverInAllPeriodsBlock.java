@@ -11,7 +11,7 @@ public class CoeffTotalOverInAllPeriodsBlock extends CoeffContainer {
     public CoeffTotalOverInAllPeriodsBlock() {
         super(Arrays.asList(
                 new CoeffContainer(
-                        new Coeff(1.6),
+                        new Coeff(),
                         ContainerType.OVER_0_5
                 )
         ), ContainerType.TOTAL_OVER_ALL_PERIODS);

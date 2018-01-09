@@ -15,7 +15,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.savik.parser.coeffs.x1stavka.Book1xbetConstants.AUSTRALIA_A;
 import static com.savik.parser.coeffs.x1stavka.Book1xbetConstants.LA;
+import static com.savik.parser.coeffs.x1stavka.Book1xbetConstants.PORTUGAL_PREMIER;
 
 
 @Service
@@ -33,6 +35,10 @@ public class Football1xstavkaCoeffsParser extends Sport1xstavkaCoeffsParser {
         List<FootballFutureMatch> all = footballFutureMatchRepository.findAll();
         parseLeague(all.stream().filter(m -> m.getChampionship() == FootballChampionship.LA).collect(Collectors.toList()),
                 LA, new HashMap<>());
+        parseLeague(all.stream().filter(m -> m.getChampionship() == FootballChampionship.AUSTRALIA_A).collect(Collectors.toList()),
+                AUSTRALIA_A, new HashMap<>());
+        parseLeague(all.stream().filter(m -> m.getChampionship() == FootballChampionship.PORTUGAL_PREMIER).collect(Collectors.toList()),
+                PORTUGAL_PREMIER, new HashMap<>());
     }
 
     @Override

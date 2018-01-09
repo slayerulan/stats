@@ -6,5 +6,8 @@ package com.savik.football.model;
  */
 public enum FootballChampionship {
     LA,
+    AUSTRALIA_A,
+    PORTUGAL_PREMIER,
+    INDIA_SUPERLIGA,
     SERIE_A
 }
