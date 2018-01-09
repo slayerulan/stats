@@ -8,8 +8,8 @@ import com.savik.football.model.FootballMatch;
 
 import java.util.Arrays;
 
-public class PeriodCornersTotalUnderPossibleBetBlock extends PossibleBetContainer<FootballMatch> {
-    public PeriodCornersTotalUnderPossibleBetBlock() {
+public class CornersTotalUnderPossibleBetBlock extends PossibleBetContainer<FootballMatch> {
+    public CornersTotalUnderPossibleBetBlock() {
         super(Arrays.asList(
                 new PossibleBetContainer<>(
                         new PeriodCornersTotalUnderPossibleBet(FootballMatch.MATCH, 6.5),

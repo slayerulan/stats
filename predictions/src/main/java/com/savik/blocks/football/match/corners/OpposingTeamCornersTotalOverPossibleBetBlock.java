@@ -9,8 +9,8 @@ import com.savik.football.model.FootballMatch;
 
 import java.util.Arrays;
 
-public class PeriodOpposingTeamCornersTotalOverPossibleBetBlock extends PossibleBetContainer<FootballMatch> {
-    public PeriodOpposingTeamCornersTotalOverPossibleBetBlock(MatchData homeMatchData, MatchData guestMatchData) {
+public class OpposingTeamCornersTotalOverPossibleBetBlock extends PossibleBetContainer<FootballMatch> {
+    public OpposingTeamCornersTotalOverPossibleBetBlock(MatchData homeMatchData, MatchData guestMatchData) {
         super(Arrays.asList(
                 new PossibleBetContainer<>(
                         new PeriodOpposingTeamCornersTotalOverPossibleBet(homeMatchData, guestMatchData, FootballMatch.MATCH, 2.5),
