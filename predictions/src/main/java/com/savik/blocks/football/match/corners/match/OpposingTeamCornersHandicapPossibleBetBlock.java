@@ -1,4 +1,4 @@
-package com.savik.blocks.football.match.corners;
+package com.savik.blocks.football.match.corners.match;
 
 
 import com.savik.ContainerType;
