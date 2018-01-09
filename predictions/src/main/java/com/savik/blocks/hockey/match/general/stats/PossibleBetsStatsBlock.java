@@ -4,7 +4,8 @@ package com.savik.blocks.hockey.match.general.stats;
 import com.savik.ContainerType;
 import com.savik.MatchData;
 import com.savik.PossibleBetContainer;
-import com.savik.blocks.hockey.match.general.stats.penalties.*;
+import com.savik.blocks.hockey.match.general.stats.penalties.PossibleBetsPenaltiesStatsBlock;
+import com.savik.blocks.hockey.match.general.stats.penalties.match.*;
 import com.savik.hockey.model.HockeyMatch;
 
 import java.util.Arrays;
@@ -19,13 +20,7 @@ public class PossibleBetsStatsBlock extends PossibleBetContainer<HockeyMatch> {
                 new OpposingTeamShotsOnTargetHandicapPossibleBetBlock(homeMatchData, guestMatchData),
                 new TeamShotsOnTargetWinPossibleBetBlock(homeMatchData, guestMatchData),
                 new OpposingTeamShotsOnTargetWinPossibleBetBlock(homeMatchData, guestMatchData),
-                new PenaltiesTimeTotalOverPossibleBetBlock(),
-                new TeamMinorPenaltiesTimeTotalOverPossibleBetBlock(homeMatchData, guestMatchData),
-                new OpposingTeamMinorPenaltiesTimeTotalOverPossibleBetBlock(homeMatchData, guestMatchData),
-                new TeamMinorPenaltiesTimeNotLoosePossibleBetBlock(homeMatchData, guestMatchData),
-                new OpposingTeamMinorPenaltiesTimeNotLoosePossibleBetBlock(homeMatchData, guestMatchData),
-                new TeamMinorPenaltiesTimeHandicapPossibleBetBlock(homeMatchData, guestMatchData),
-                new OpposingTeamMinorPenaltiesTimeHandicapPossibleBetBlock(homeMatchData, guestMatchData),
+                new PossibleBetsPenaltiesStatsBlock(homeMatchData, guestMatchData),
                 new PowerplayGoalsTotalOverPossibleBetBlock()
         ), ContainerType.STATS);
     }

@@ -53,7 +53,7 @@ class Hockey1xstavkaCoeffsMatchParser extends Sport1xstavkaCoeffsMatchParser {
         if (shotsOnTarget != null) {
             fillPenaltiesBlock(
                     getBookFutureMatchCoeffs(penaltiesTarget),
-                    rootContainer.findByType(STATS)
+                    rootContainer.findByType(STATS).findByType(PENALTIES)
             );
         }
 

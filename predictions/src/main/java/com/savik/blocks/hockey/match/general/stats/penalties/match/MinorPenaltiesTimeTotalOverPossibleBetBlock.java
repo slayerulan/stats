@@ -1,4 +1,4 @@
-package com.savik.blocks.hockey.match.general.stats;
+package com.savik.blocks.hockey.match.general.stats.penalties.match;
 
 
 import com.savik.ContainerType;
@@ -8,8 +8,8 @@ import com.savik.hockey.model.HockeyMatch;
 
 import java.util.Arrays;
 
-public class PenaltiesTimeTotalOverPossibleBetBlock extends PossibleBetContainer<HockeyMatch> {
-    public PenaltiesTimeTotalOverPossibleBetBlock() {
+public class MinorPenaltiesTimeTotalOverPossibleBetBlock extends PossibleBetContainer<HockeyMatch> {
+    public MinorPenaltiesTimeTotalOverPossibleBetBlock() {
         super(Arrays.asList(
                 new PossibleBetContainer<>(
                         new PenaltiesTimeTotalOverPossibleBet(HockeyMatch.MATCH, 12.5),

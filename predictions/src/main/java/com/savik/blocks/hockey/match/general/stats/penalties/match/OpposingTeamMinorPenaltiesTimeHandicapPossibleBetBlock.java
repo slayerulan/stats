@@ -1,4 +1,4 @@
-package com.savik.blocks.hockey.match.general.stats.penalties;
+package com.savik.blocks.hockey.match.general.stats.penalties.match;
 
 
 import com.savik.ContainerType;
