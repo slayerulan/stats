@@ -3,6 +3,7 @@ package com.savik.coeffs.hockey.stats;
 
 import com.savik.CoeffContainer;
 import com.savik.ContainerType;
+import com.savik.coeffs.hockey.stats.penalties.CoeffPenaltiesStatsBlock;
 
 import java.util.Arrays;
 
@@ -16,13 +17,7 @@ public class CoeffStatsBlock extends CoeffContainer {
                 new CoeffOpposingTeamShotsOnTargetHandicapBlock(),
                 new CoeffTeamShotsOnTargetWinBlock(),
                 new CoeffOpposingTeamShotsOnTargetWinBlock(),
-                new CoeffPenaltiesTimeTotalOverBlock(),
-                new CoeffTeamMinorPenaltiesTimeTotalOverBlock(),
-                new CoeffOpposingTeamMinorPenaltiesTimeTotalOverBlock(),
-                new CoeffTeamMinorPenaltiesTimeNotLooseBlock(),
-                new CoeffOpposingTeamMinorPenaltiesTimeNotLooseBlock(),
-                new CoeffTeamMinorPenaltiesTimeHandicapBlock(),
-                new CoeffOpposingTeamMinorPenaltiesTimeHandicapBlock(),
+                new CoeffPenaltiesStatsBlock(),
                 new CoeffPowerplayGoalsTotalOverBlock()
         ), ContainerType.STATS);
     }

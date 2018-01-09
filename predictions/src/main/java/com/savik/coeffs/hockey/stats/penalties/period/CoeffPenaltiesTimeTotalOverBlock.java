@@ -1,4 +1,4 @@
-package com.savik.coeffs.hockey.stats;
+package com.savik.coeffs.hockey.stats.penalties.period;
 
 
 import com.savik.Coeff;
@@ -10,6 +10,18 @@ import java.util.Arrays;
 public class CoeffPenaltiesTimeTotalOverBlock extends CoeffContainer {
     public CoeffPenaltiesTimeTotalOverBlock() {
         super(Arrays.asList(
+                new CoeffContainer(
+                        new Coeff(),
+                        ContainerType.OVER_2_5
+                ),
+                new CoeffContainer(
+                        new Coeff(),
+                        ContainerType.OVER_4_5
+                ),
+                new CoeffContainer(
+                        new Coeff(),
+                        ContainerType.OVER_6_5
+                ),
                 new CoeffContainer(
                         new Coeff(),
                         ContainerType.OVER_12_5

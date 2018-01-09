@@ -1,4 +1,4 @@
-package com.savik.coeffs.hockey.stats;
+package com.savik.coeffs.hockey.stats.penalties.period;
 
 
 import com.savik.Coeff;

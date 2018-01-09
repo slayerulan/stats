@@ -49,11 +49,19 @@ class Hockey1xstavkaCoeffsMatchParser extends Sport1xstavkaCoeffsMatchParser {
             );
         }
 
-        JSONObject penaltiesTarget = findSpecialGroupByTG(specialGroups, "Штрафное время");
+        JSONObject penalties = findSpecialGroupByTG(specialGroups, "Штрафное время");
         if (shotsOnTarget != null) {
             fillPenaltiesBlock(
-                    getBookFutureMatchCoeffs(penaltiesTarget),
-                    rootContainer.findByType(STATS).findByType(PENALTIES)
+                    getBookFutureMatchCoeffs(penalties),
+                    rootContainer.findByType(STATS).findByType(PENALTIES).findByType(MATCH)
+            );
+        }
+
+        JSONObject firstPeriodPenalties = findSpecialGroupByTGAndPN(specialGroups, "Штрафное время",  "1-й  Тайм");
+        if (shotsOnTarget != null) {
+            fillPenaltiesBlock(
+                    getBookFutureMatchCoeffs(firstPeriodPenalties),
+                    rootContainer.findByType(STATS).findByType(PENALTIES).findByType(FIRST_PERIOD)
             );
         }
 
