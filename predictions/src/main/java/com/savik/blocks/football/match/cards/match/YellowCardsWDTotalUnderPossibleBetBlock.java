@@ -1,9 +1,8 @@
-package com.savik.blocks.football.match.cards;
+package com.savik.blocks.football.match.cards.match;
 
 
 import com.savik.ContainerType;
 import com.savik.PossibleBetContainer;
-import com.savik.bets.football.cards.PeriodYellowCardsWDTotalOverPossibleBet;
 import com.savik.bets.football.cards.PeriodYellowCardsWDTotalUnderPossibleBet;
 import com.savik.football.model.FootballMatch;
 
