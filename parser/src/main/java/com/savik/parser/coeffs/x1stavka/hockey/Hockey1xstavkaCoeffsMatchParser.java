@@ -57,7 +57,7 @@ class Hockey1xstavkaCoeffsMatchParser extends Sport1xstavkaCoeffsMatchParser {
             );
         }
 
-        JSONObject firstPeriodPenalties = findSpecialGroupByTGAndPN(specialGroups, "Штрафное время",  "1-й  Тайм");
+        JSONObject firstPeriodPenalties = findSpecialGroupByTGAndPN(specialGroups, "Штрафное время",  "1-й  Период");
         if (shotsOnTarget != null) {
             fillPenaltiesBlock(
                     getBookFutureMatchCoeffs(firstPeriodPenalties),
@@ -622,6 +622,9 @@ class Hockey1xstavkaCoeffsMatchParser extends Sport1xstavkaCoeffsMatchParser {
                                              Set<BookFutureMatchCoeff> futureMatchNegCoeffs,
                                              CoeffContainer container) {
         fillPosAndNegContainer(futureMatchPosCoeffs, futureMatchNegCoeffs,
+                (posCoeff, negCoeff) -> checkIfContainsKindAndSetPosAndNegCoeff(posCoeff, negCoeff, container.findByType(OVER_2_5), "2.5"),
+                (posCoeff, negCoeff) -> checkIfContainsKindAndSetPosAndNegCoeff(posCoeff, negCoeff, container.findByType(OVER_4_5), "4.5"),
+                (posCoeff, negCoeff) -> checkIfContainsKindAndSetPosAndNegCoeff(posCoeff, negCoeff, container.findByType(OVER_6_5), "6.5"),
                 (posCoeff, negCoeff) -> checkIfContainsKindAndSetPosAndNegCoeff(posCoeff, negCoeff, container.findByType(OVER_12_5), "12.5"),
                 (posCoeff, negCoeff) -> checkIfContainsKindAndSetPosAndNegCoeff(posCoeff, negCoeff, container.findByType(OVER_14_5), "14.5"),
                 (posCoeff, negCoeff) -> checkIfContainsKindAndSetPosAndNegCoeff(posCoeff, negCoeff, container.findByType(OVER_16_5), "16.5"),
@@ -646,6 +649,8 @@ class Hockey1xstavkaCoeffsMatchParser extends Sport1xstavkaCoeffsMatchParser {
                                                  Set<BookFutureMatchCoeff> futureMatchNegCoeffs,
                                                  CoeffContainer container) {
         fillPosAndNegContainer(futureMatchPosCoeffs, futureMatchNegCoeffs,
+                (posCoeff, negCoeff) -> checkIfContainsKindAndSetPosAndNegCoeff(posCoeff, negCoeff, container.findByType(OVER_0_5), "0.5"),
+                (posCoeff, negCoeff) -> checkIfContainsKindAndSetPosAndNegCoeff(posCoeff, negCoeff, container.findByType(OVER_2_5), "2.5"),
                 (posCoeff, negCoeff) -> checkIfContainsKindAndSetPosAndNegCoeff(posCoeff, negCoeff, container.findByType(OVER_6_5), "6.5"),
                 (posCoeff, negCoeff) -> checkIfContainsKindAndSetPosAndNegCoeff(posCoeff, negCoeff, container.findByType(OVER_7_5), "7.5"),
                 (posCoeff, negCoeff) -> checkIfContainsKindAndSetPosAndNegCoeff(posCoeff, negCoeff, container.findByType(OVER_8_5), "8.5")

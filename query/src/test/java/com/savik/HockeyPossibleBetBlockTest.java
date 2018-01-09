@@ -1226,7 +1226,7 @@ public class HockeyPossibleBetBlockTest {
     public void testMinorPenaltiesTimeTotalOver() {
         PossibleBetContainer possibleBetsBlock = getPossibleBetsBlock();
 
-        PossibleBetContainer block = possibleBetsBlock.findByType(MINOR_PENALTIES_TIME_OVER);
+        PossibleBetContainer block = possibleBetsBlock.findByType(STATS).findByType(MATCH).findByType(MINOR_PENALTIES_TIME_OVER);
 
         PossibleBetContainer over12AndHalf = block.findByType(OVER_12_5);
         assertEquals(60, over12AndHalf.getFirstTeamPercentage());
@@ -1261,7 +1261,7 @@ public class HockeyPossibleBetBlockTest {
     public void testTeamMinorPenaltiesTimeTotalOver() {
         PossibleBetContainer possibleBetsBlock = getPossibleBetsBlock();
 
-        PossibleBetContainer block = possibleBetsBlock.findByType(TEAM_MINOR_PENALTIES_TIME_OVER);
+        PossibleBetContainer block = possibleBetsBlock.findByType(STATS).findByType(MATCH).findByType(TEAM_MINOR_PENALTIES_TIME_OVER);
 
         PossibleBetContainer over6AndHalf = block.findByType(OVER_6_5);
         assertEquals(60, over6AndHalf.getFirstTeamPercentage());
@@ -1276,7 +1276,7 @@ public class HockeyPossibleBetBlockTest {
     public void testOpposingTeamMinorPenaltiesTimeTotalOver() {
         PossibleBetContainer possibleBetsBlock = getPossibleBetsBlock();
 
-        PossibleBetContainer block = possibleBetsBlock.findByType(OPPOSING_TEAM_MINOR_PENALTIES_TIME_OVER);
+        PossibleBetContainer block = possibleBetsBlock.findByType(STATS).findByType(MATCH).findByType(OPPOSING_TEAM_MINOR_PENALTIES_TIME_OVER);
 
         PossibleBetContainer over6AndHalf = block.findByType(OVER_6_5);
         assertEquals(20, over6AndHalf.getFirstTeamPercentage());
@@ -1292,7 +1292,7 @@ public class HockeyPossibleBetBlockTest {
     public void testTeamMinorPenaltiesTimeNotLoose() {
         PossibleBetContainer possibleBetsBlock = getPossibleBetsBlock();
 
-        PossibleBetContainer block = possibleBetsBlock.findByType(TEAM_MINOR_PENALTIES_TIME_NOT_LOOSE);
+        PossibleBetContainer block = possibleBetsBlock.findByType(STATS).findByType(MATCH).findByType(TEAM_MINOR_PENALTIES_TIME_NOT_LOOSE);
         assertEquals(40, block.getFirstTeamPercentage());
         assertEquals(80, block.getSecondTeamPercentage());
     }
@@ -1301,7 +1301,7 @@ public class HockeyPossibleBetBlockTest {
     public void testOpposingTeamMinorPenaltiesTimeNotLoose() {
         PossibleBetContainer possibleBetsBlock = getPossibleBetsBlock();
 
-        PossibleBetContainer block = possibleBetsBlock.findByType(OPPOSING_TEAM_MINOR_PENALTIES_TIME_NOT_LOOSE);
+        PossibleBetContainer block = possibleBetsBlock.findByType(STATS).findByType(MATCH).findByType(OPPOSING_TEAM_MINOR_PENALTIES_TIME_NOT_LOOSE);
         assertEquals(60, block.getFirstTeamPercentage());
         assertEquals(20, block.getSecondTeamPercentage());
     }
@@ -1310,7 +1310,7 @@ public class HockeyPossibleBetBlockTest {
     public void testTeamMinorPenaltiesTimeHandicap() {
         PossibleBetContainer possibleBetsBlock = getPossibleBetsBlock();
 
-        PossibleBetContainer block = possibleBetsBlock.findByType(TEAM_MINOR_PENALTIES_TIME_HANDICAP);
+        PossibleBetContainer block = possibleBetsBlock.findByType(STATS).findByType(MATCH).findByType(TEAM_MINOR_PENALTIES_TIME_HANDICAP);
 
         PossibleBetContainer plus4AndHalf = block.findByType(PLUS_4_5);
         assertEquals(100, plus4AndHalf.getFirstTeamPercentage());
@@ -1329,7 +1329,7 @@ public class HockeyPossibleBetBlockTest {
     public void testOpposingTeamMinorPenaltiesTimeHandicap() {
         PossibleBetContainer possibleBetsBlock = getPossibleBetsBlock();
 
-        PossibleBetContainer block = possibleBetsBlock.findByType(OPPOSING_TEAM_MINOR_PENALTIES_TIME_HANDICAP);
+        PossibleBetContainer block = possibleBetsBlock.findByType(STATS).findByType(MATCH).findByType(OPPOSING_TEAM_MINOR_PENALTIES_TIME_HANDICAP);
 
         PossibleBetContainer plus4AndHalf = block.findByType(PLUS_4_5);
         assertEquals(80, plus4AndHalf.getFirstTeamPercentage());

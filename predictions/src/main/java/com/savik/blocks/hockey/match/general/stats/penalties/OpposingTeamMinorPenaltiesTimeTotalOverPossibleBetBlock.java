@@ -17,6 +17,16 @@ public class OpposingTeamMinorPenaltiesTimeTotalOverPossibleBetBlock extends Pos
         super(Arrays.asList(
                 new PossibleBetContainer<>(
                         new OpposingTeamPenaltiesTimeTotalOverPossibleBet(
+                                homeMatchData, guestMatchData, period, 0.5),
+                        ContainerType.OVER_0_5
+                ),
+                new PossibleBetContainer<>(
+                        new OpposingTeamPenaltiesTimeTotalOverPossibleBet(
+                                homeMatchData, guestMatchData, period, 2.5),
+                        ContainerType.OVER_2_5
+                ),
+                new PossibleBetContainer<>(
+                        new OpposingTeamPenaltiesTimeTotalOverPossibleBet(
                                 homeMatchData, guestMatchData, period, 6.5),
                         ContainerType.OVER_6_5
                 ),
