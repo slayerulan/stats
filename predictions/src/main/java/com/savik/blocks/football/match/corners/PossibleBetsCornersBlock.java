@@ -11,14 +11,14 @@ import java.util.Arrays;
 public class PossibleBetsCornersBlock extends PossibleBetContainer<FootballMatch> {
     public PossibleBetsCornersBlock(MatchData homeMatchData, MatchData guestMatchData) {
         super(Arrays.asList(
-                new PeriodCornersTotalOverPossibleBetBlock(),
-                new PeriodCornersTotalUnderPossibleBetBlock(),
-                new PeriodTeamCornersTotalOverPossibleBetBlock(homeMatchData, guestMatchData),
-                new PeriodOpposingTeamCornersTotalOverPossibleBetBlock(homeMatchData, guestMatchData),
+                new CornersTotalOverPossibleBetBlock(),
+                new CornersTotalUnderPossibleBetBlock(),
+                new TeamCornersTotalOverPossibleBetBlock(homeMatchData, guestMatchData),
+                new OpposingTeamCornersTotalOverPossibleBetBlock(homeMatchData, guestMatchData),
                 new TeamCornersNotLoosePossibleBetBlock(homeMatchData, guestMatchData),
                 new OpposingTeamCornersNotLoosePossibleBetBlock(homeMatchData, guestMatchData),
-                new PeriodTeamCornersHandicapPossibleBetBlock(homeMatchData, guestMatchData),
-                new PeriodOpposingTeamCornersHandicapPossibleBetBlock(homeMatchData, guestMatchData)
+                new TeamCornersHandicapPossibleBetBlock(homeMatchData, guestMatchData),
+                new OpposingTeamCornersHandicapPossibleBetBlock(homeMatchData, guestMatchData)
         ), ContainerType.CORNERS);
     }
 }
