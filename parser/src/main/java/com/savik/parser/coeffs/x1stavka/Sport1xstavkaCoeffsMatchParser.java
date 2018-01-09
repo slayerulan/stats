@@ -122,12 +122,12 @@ public abstract class Sport1xstavkaCoeffsMatchParser {
         return null;
     }
 
-    protected JSONObject findSpecialGroupByTGAndTN(JSONArray periods, String tg, String tn) {
+    protected JSONObject findSpecialGroupByTGAndPN(JSONArray periods, String tg, String tn) {
         for (Object period : periods) {
             JSONObject jsonObject = (JSONObject) period;
             if (jsonObject.has("TG") && jsonObject.getString("TG").contains(tg)) {
-                if ((tn == null && !jsonObject.has("TN")) ||
-                        (tn != null && jsonObject.has("TN") && jsonObject.getString("TN").contains(tn))) {
+                if ((tn == null && !jsonObject.has("PN")) ||
+                        (tn != null && jsonObject.has("PN") && jsonObject.getString("PN").contains(tn))) {
                     return jsonObject;
                 }
             }

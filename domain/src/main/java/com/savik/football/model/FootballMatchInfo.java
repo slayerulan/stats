@@ -37,8 +37,8 @@ public class FootballMatchInfo extends Identifiable {
     public String toString() {
         return "{" +
                 "m=" + match +
-                "h1=, " + firstPeriod +
-                "h2=, " + secondPeriod +
+                ", h1= " + firstPeriod +
+                ", h2= " + secondPeriod +
                 '}';
     }
 

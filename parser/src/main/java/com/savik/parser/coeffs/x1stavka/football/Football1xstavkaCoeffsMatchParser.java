@@ -20,15 +20,31 @@ public class Football1xstavkaCoeffsMatchParser extends Sport1xstavkaCoeffsMatchP
         JSONArray specialGroups = matchCoeffsObject.getJSONObject("Value").getJSONArray("SG");
 
 
-        JSONObject corners = findSpecialGroupByTG(specialGroups, "Угловые");
-        if (corners != null) {
+        JSONObject matchCorners = findSpecialGroupByTGAndPN(specialGroups, "Угловые", null);
+        if (matchCorners != null) {
             fillCornersBlock(
-                    getBookFutureMatchCoeffs(corners),
-                    rootContainer.findByType(CORNERS)
+                    getBookFutureMatchCoeffs(matchCorners),
+                    rootContainer.findByType(CORNERS).findByType(MATCH)
             );
         }
 
-        JSONObject cards = findSpecialGroupByTGAndTN(specialGroups, "Желтые карточки", null);
+        JSONObject firstPeriodCorners = findSpecialGroupByTGAndPN(specialGroups, "Угловые", "1-й  Тайм");
+        if (firstPeriodCorners != null) {
+            fillCornersBlock(
+                    getBookFutureMatchCoeffs(firstPeriodCorners),
+                    rootContainer.findByType(CORNERS).findByType(FIRST_PERIOD)
+            );
+        }
+
+        JSONObject secondPeriodCorners = findSpecialGroupByTGAndPN(specialGroups, "Угловые", "2-й  Тайм");
+        if (secondPeriodCorners != null) {
+            fillCornersBlock(
+                    getBookFutureMatchCoeffs(secondPeriodCorners),
+                    rootContainer.findByType(CORNERS).findByType(SECOND_PERIOD)
+            );
+        }
+
+        JSONObject cards = findSpecialGroupByTGAndPN(specialGroups, "Желтые карточки", null);
         if (cards != null) {
             fillCardsBlock(
                     downloadAdditionalGroupCoeffs(cards),
@@ -79,6 +95,12 @@ public class Football1xstavkaCoeffsMatchParser extends Sport1xstavkaCoeffsMatchP
 
     private void fillCornersTotalOverBlock(Set<BookFutureMatchCoeff> futureMatchCoeffs, CoeffContainer totalOverContainer) {
         for (BookFutureMatchCoeff bookFutureMatchCoeff : futureMatchCoeffs) {
+            checkIfContainsKindAndSetCoeff(bookFutureMatchCoeff, totalOverContainer.findByType(OVER_3_5), "3.5");
+            checkIfContainsKindAndSetCoeff(bookFutureMatchCoeff, totalOverContainer.findByType(OVER_3_5), "3");
+            checkIfContainsKindAndSetCoeff(bookFutureMatchCoeff, totalOverContainer.findByType(OVER_4_5), "4.5");
+            checkIfContainsKindAndSetCoeff(bookFutureMatchCoeff, totalOverContainer.findByType(OVER_4_5), "4");
+            checkIfContainsKindAndSetCoeff(bookFutureMatchCoeff, totalOverContainer.findByType(OVER_5_5), "5.5");
+            checkIfContainsKindAndSetCoeff(bookFutureMatchCoeff, totalOverContainer.findByType(OVER_5_5), "5");
             checkIfContainsKindAndSetCoeff(bookFutureMatchCoeff, totalOverContainer.findByType(OVER_6_5), "6.5");
             checkIfContainsKindAndSetCoeff(bookFutureMatchCoeff, totalOverContainer.findByType(OVER_6_5), "6");
             checkIfContainsKindAndSetCoeff(bookFutureMatchCoeff, totalOverContainer.findByType(OVER_7_5), "7.5");
@@ -98,6 +120,10 @@ public class Football1xstavkaCoeffsMatchParser extends Sport1xstavkaCoeffsMatchP
 
     private void fillCornersTotalUnderBlock(Set<BookFutureMatchCoeff> futureMatchCoeffs, CoeffContainer totalOverContainer) {
         for (BookFutureMatchCoeff bookFutureMatchCoeff : futureMatchCoeffs) {
+            checkIfContainsKindAndSetCoeff(bookFutureMatchCoeff, totalOverContainer.findByType(UNDER_4_5), "4.5");
+            checkIfContainsKindAndSetCoeff(bookFutureMatchCoeff, totalOverContainer.findByType(UNDER_4_5), "5");
+            checkIfContainsKindAndSetCoeff(bookFutureMatchCoeff, totalOverContainer.findByType(UNDER_5_5), "5.5");
+            checkIfContainsKindAndSetCoeff(bookFutureMatchCoeff, totalOverContainer.findByType(UNDER_5_5), "6");
             checkIfContainsKindAndSetCoeff(bookFutureMatchCoeff, totalOverContainer.findByType(UNDER_6_5), "6.5");
             checkIfContainsKindAndSetCoeff(bookFutureMatchCoeff, totalOverContainer.findByType(UNDER_6_5), "7");
             checkIfContainsKindAndSetCoeff(bookFutureMatchCoeff, totalOverContainer.findByType(UNDER_7_5), "7.5");
