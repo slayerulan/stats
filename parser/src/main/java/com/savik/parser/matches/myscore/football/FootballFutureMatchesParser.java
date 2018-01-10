@@ -87,6 +87,18 @@ public class FootballFutureMatchesParser {
         if (FootballLeagueIds.PORTUGAL_PREMIER.equals(myscoreLeagueId)) {
             return FootballChampionship.PORTUGAL_PREMIER;
         }
+        if (FootballLeagueIds.INDIA_SUPERLIGA.equals(myscoreLeagueId)) {
+            return FootballChampionship.INDIA_SUPERLIGA;
+        }
+        if (FootballLeagueIds.BUNDESLIGA.equals(myscoreLeagueId)) {
+            return FootballChampionship.BUNDESLIGA;
+        }
+        if (FootballLeagueIds.HOLLAND_1.equals(myscoreLeagueId)) {
+            return FootballChampionship.HOLLAND_1;
+        }
+        if (FootballLeagueIds.FRANCE_1.equals(myscoreLeagueId)) {
+            return FootballChampionship.FRANCE_1;
+        }
         return null;
     }
 }

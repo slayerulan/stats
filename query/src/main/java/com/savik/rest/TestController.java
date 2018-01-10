@@ -156,7 +156,7 @@ public class TestController {
         Files.createDirectories(leagueDir2.toPath());
         File matchFile = new File(leagueDir2,
                 String.format(
-                        "%s(%s)  %s===%s.json", futureMatch.getMyscoreCode(),
+                        "%s-%s(%s)  %s===%s.json", futureMatch.getDate().toString(), futureMatch.getMyscoreCode(),
                         matchPrefix, futureMatch.getHomeTeam().getName(), futureMatch.getGuestTeam().getName()
                 )
         );

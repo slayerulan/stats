@@ -79,8 +79,16 @@ public class FootballPeriod extends Period<FootballGoal> {
         return homeCorners != null && guestCorners != null;
     }
 
+    public boolean hasOffsides() {
+        return homeOffsides != null && guestOffsides != null;
+    }
+
     public Integer getCornersTotal() {
         return homeCorners + guestCorners;
+    }
+
+    public Integer getOffsidesTotal() {
+        return homeOffsides + guestOffsides;
     }
 
     @Override

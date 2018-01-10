@@ -6,6 +6,7 @@ import com.savik.MatchData;
 import com.savik.PossibleBetContainer;
 import com.savik.blocks.football.match.cards.PossibleBetsCardsBlock;
 import com.savik.blocks.football.match.corners.PossibleBetsCornersBlock;
+import com.savik.blocks.football.match.offsides.PossibleBetsOffsidesBlock;
 import com.savik.football.model.FootballMatch;
 
 import java.util.Arrays;
@@ -14,7 +15,8 @@ public class FootballPossibleBetsBlock extends PossibleBetContainer<FootballMatc
     public FootballPossibleBetsBlock(MatchData homeMatchData, MatchData guestMatchData) {
         super(Arrays.asList(
             new PossibleBetsCornersBlock(homeMatchData, guestMatchData),
-            new PossibleBetsCardsBlock(homeMatchData, guestMatchData)
+            new PossibleBetsCardsBlock(homeMatchData, guestMatchData),
+            new PossibleBetsOffsidesBlock(homeMatchData, guestMatchData)
         ), ContainerType.ROOT);
     }
 }

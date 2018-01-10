@@ -13,6 +13,7 @@ public enum ContainerType {
     PERIODS,
     CORNERS,
     CARDS,
+    OFFSIDES,
     TEAM_CORNERS,
     MATCH,
     FIRST_PERIOD,
