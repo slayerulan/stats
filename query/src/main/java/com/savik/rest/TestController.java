@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 
@@ -152,11 +153,12 @@ public class TestController {
     }
 
     private void writeMatchToFile(String folderPrefix, String matchPrefix, FutureMatch futureMatch, ProposedBetsContainer proposedBets) throws IOException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd(HH-mm)");
         File leagueDir2 = new File(folderPrefix + futureMatch.getChampionshipString().toString());
         Files.createDirectories(leagueDir2.toPath());
         File matchFile = new File(leagueDir2,
                 String.format(
-                        "%s-%s(%s)  %s===%s.json", futureMatch.getDate().toString(), futureMatch.getMyscoreCode(),
+                        "%s-%s(%s)  %s===%s.json", futureMatch.getDate().format(formatter), futureMatch.getMyscoreCode(),
                         matchPrefix, futureMatch.getHomeTeam().getName(), futureMatch.getGuestTeam().getName()
                 )
         );
