@@ -1,4 +1,4 @@
-package com.savik.coeffs.football.cards;
+package com.savik.coeffs.football.cards.period;
 
 
 import com.savik.Coeff;

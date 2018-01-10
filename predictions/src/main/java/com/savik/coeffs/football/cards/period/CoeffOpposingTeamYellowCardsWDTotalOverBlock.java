@@ -1,4 +1,4 @@
-package com.savik.coeffs.football.cards;
+package com.savik.coeffs.football.cards.period;
 
 
 import com.savik.Coeff;
@@ -7,8 +7,8 @@ import com.savik.ContainerType;
 
 import java.util.Arrays;
 
-public class CoeffTeamYellowCardsWDTotalOverBlock extends CoeffContainer {
-    public CoeffTeamYellowCardsWDTotalOverBlock() {
+public class CoeffOpposingTeamYellowCardsWDTotalOverBlock extends CoeffContainer {
+    public CoeffOpposingTeamYellowCardsWDTotalOverBlock() {
         super(Arrays.asList(
                 new CoeffContainer(
                         new Coeff(),
@@ -26,6 +26,6 @@ public class CoeffTeamYellowCardsWDTotalOverBlock extends CoeffContainer {
                         new Coeff(),
                         ContainerType.OVER_4_5
                 )
-        ), ContainerType.TEAM_TOTAL_OVER);
+        ), ContainerType.OPPOSING_TEAM_TOTAL_OVER);
     }
 }

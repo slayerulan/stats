@@ -48,7 +48,7 @@ public class Football1xstavkaCoeffsMatchParser extends Sport1xstavkaCoeffsMatchP
         if (cards != null) {
             fillCardsBlock(
                     downloadAdditionalGroupCoeffs(cards),
-                    rootContainer.findByType(CARDS)
+                    rootContainer.findByType(CARDS).findByType(MATCH)
             );
         }
 
