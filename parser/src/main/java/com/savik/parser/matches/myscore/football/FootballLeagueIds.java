@@ -1,7 +1,7 @@
 package com.savik.parser.matches.myscore.football;
 
 
-public class FootballLeagueIds {
+class FootballLeagueIds {
     public static final String LA = "QVmLl54o";
     public static final String AUSTRALIA_A = "OjWW1naM";
     public static final String PORTUGAL_PREMIER = "UmMRoGzp";

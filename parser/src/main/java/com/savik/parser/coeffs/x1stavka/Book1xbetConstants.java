@@ -15,6 +15,7 @@ public class Book1xbetConstants {
     public static final String LA = URL + "127733";
     public static final String AUSTRALIA_A = URL + "104509";
     public static final String PORTUGAL_PREMIER = URL + "118663";
+    public static final String INDIA_SUPERLIGA = URL + "1122087";
 
     // hockey
 
@@ -63,5 +64,11 @@ public class Book1xbetConstants {
     };
 
     // football
+
+    public static Map<String, String> indiaSuperligaMapping = new HashMap<String, String>(){
+        {
+            put("Дели Динамос", "Дели Дайнамос");
+        }
+    };
 
 }
