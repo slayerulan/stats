@@ -33,6 +33,7 @@ public class FootballFutureMatchesParser {
 
     private static final int TODAY = 0;
     private static final int TOMORROW = 1;
+    private static final int DAY_AFTER_TOMORROW = 2;
 
     @Autowired
     Downloader downloader;
@@ -46,6 +47,7 @@ public class FootballFutureMatchesParser {
     public void parse() {
         parseDay(TODAY);
         parseDay(TOMORROW);
+        parseDay(DAY_AFTER_TOMORROW);
     }
 
     private void parseDay(int day) {
@@ -98,6 +100,9 @@ public class FootballFutureMatchesParser {
         }
         if (FootballLeagueIds.FRANCE_1.equals(myscoreLeagueId)) {
             return FootballChampionship.FRANCE_1;
+        }
+        if (FootballLeagueIds.HOLLAND_EREDIVISIE.equals(myscoreLeagueId)) {
+            return FootballChampionship.HOLLAND_EREDIVISIE;
         }
         return null;
     }

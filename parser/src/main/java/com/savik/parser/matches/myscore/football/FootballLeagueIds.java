@@ -9,4 +9,5 @@ class FootballLeagueIds {
     public static final String INDIA_SUPERLIGA = "rmioSrer";
     public static final String HOLLAND_1 = "6Nl8nagD";
     public static final String FRANCE_1 = "KIShoMk3";
+    public static final String HOLLAND_EREDIVISIE = "Or1bBrWD";
 }

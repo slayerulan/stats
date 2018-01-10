@@ -11,6 +11,7 @@ public enum FootballChampionship {
     BUNDESLIGA,
     INDIA_SUPERLIGA,
     HOLLAND_1,
+    HOLLAND_EREDIVISIE,
     FRANCE_1,
     SERIE_A
 }

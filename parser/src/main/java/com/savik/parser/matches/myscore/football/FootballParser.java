@@ -46,6 +46,7 @@ public class FootballParser {
                 new Entity("https://www.myscore.com.ua/football/germany/bundesliga/results/", FootballChampionship.BUNDESLIGA, Season.S2017),
                 new Entity("https://www.myscore.com.ua/football/france/ligue-1/results/", FootballChampionship.FRANCE_1, Season.S2017),
                 new Entity("https://www.myscore.com.ua/football/netherlands/eerste-divisie/results/", FootballChampionship.HOLLAND_1, Season.S2017),
+                new Entity("https://www.myscore.com.ua/football/netherlands/eredivisie/results/", FootballChampionship.HOLLAND_EREDIVISIE, Season.S2017),
                 new Entity("https://www.myscore.com.ua/football/australia/a-league/results/", FootballChampionship.AUSTRALIA_A, Season.S2017),
                 new Entity("https://www.myscore.com.ua/football/portugal/primeira-liga/results/", FootballChampionship.PORTUGAL_PREMIER, Season.S2017),
                 new Entity("https://www.myscore.com.ua/football/india/isl/results/", FootballChampionship.INDIA_SUPERLIGA, Season.S2017)
@@ -63,7 +64,7 @@ public class FootballParser {
                         Thread.sleep(1000);
                     } else {
                         System.out.println("parsed = " + matchId);
-                        //break;
+                        break;
                     }
                 } catch (Exception ex) {
                     System.out.println("myscore code = " + matchId);

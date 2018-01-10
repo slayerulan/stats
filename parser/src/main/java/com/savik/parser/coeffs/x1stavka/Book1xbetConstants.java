@@ -16,6 +16,10 @@ public class Book1xbetConstants {
     public static final String AUSTRALIA_A = URL + "104509";
     public static final String PORTUGAL_PREMIER = URL + "118663";
     public static final String INDIA_SUPERLIGA = URL + "1122087";
+    public static final String BUNDESLIGA = URL + "96463";
+    public static final String FRANCE_1 = URL + "12821";
+    public static final String HOLLAND_1 = URL + "35677";
+    public static final String HOLLAND_EREDIVISIE = URL + "119575";
 
     // hockey
 
@@ -68,6 +72,28 @@ public class Book1xbetConstants {
     public static Map<String, String> indiaSuperligaMapping = new HashMap<String, String>(){
         {
             put("Дели Динамос", "Дели Дайнамос");
+            put("Jamshedpur", "Джамшедпур");
+            put("Норт-Ист Юнайтед", "Нортист Юнайтед");
+            put("ATK", "Атлетико де Калькутта");
+        }
+    };
+
+    public static Map<String, String> holland1Mapping = new HashMap<String, String>(){
+        {
+            put("Валвейк", "Ваалвейк");
+            put("Йонг АЗ Алкмар", "АЗ II");
+            put("Ден Босх", "Ден Бош");
+            put("Алмере", "Алмере Сити");
+            put("Йонг ПСВ", "ПСВ II");
+            put("Хельмонд", "Хелмонд Спорт");
+            put("Йонг Утрехт", "Утрехт II");
+            put("Камбур", "Камбуур");
+            put("Графсхап", "Де Графсхап");
+            put("Маастрихт", "МВВ");
+            put("Неймеген", "НЕК");
+            put("Гоу Эхед Иглс", "Гоу Эхед Иглз");
+            put("Фортуна", "Фортуна Ситтард");
+            put("Йонг Аякс", "Аякс II");
         }
     };
 
