@@ -28,15 +28,15 @@ import static org.junit.Assert.assertEquals;
 @Transactional
 @Rollback
 @Sql(scripts = {
-        "classpath:db/possible_bets/matches_AqombNzc.sql", "classpath:db/possible_bets/matches_CIGVL5B6.sql",
-        "classpath:db/possible_bets/matches_j5qIp46c.sql", "classpath:db/possible_bets/matches_rwPEPmCs.sql",
-        "classpath:db/possible_bets/matches_xn1B4zMd.sql",
+        "classpath:db/possible_bets/hockey/matches_AqombNzc.sql", "classpath:db/possible_bets/hockey/matches_CIGVL5B6.sql",
+        "classpath:db/possible_bets/hockey/matches_j5qIp46c.sql", "classpath:db/possible_bets/hockey/matches_rwPEPmCs.sql",
+        "classpath:db/possible_bets/hockey/matches_xn1B4zMd.sql",
 
 
         // real matches but Colorado replaced by Buffalo
-        "classpath:db/possible_bets/matches_Ai5wex7j.sql", "classpath:db/possible_bets/matches_QTEL7Fjd.sql",
-        "classpath:db/possible_bets/matches_vJ50rp5f.sql", "classpath:db/possible_bets/matches_YVeCUxb9.sql",
-        "classpath:db/possible_bets/matches_I39zqxpU.sql"
+        "classpath:db/possible_bets/hockey/matches_Ai5wex7j.sql", "classpath:db/possible_bets/hockey/matches_QTEL7Fjd.sql",
+        "classpath:db/possible_bets/hockey/matches_vJ50rp5f.sql", "classpath:db/possible_bets/hockey/matches_YVeCUxb9.sql",
+        "classpath:db/possible_bets/hockey/matches_I39zqxpU.sql"
 })
 public class HockeyPossibleBetBlockTest {
 
