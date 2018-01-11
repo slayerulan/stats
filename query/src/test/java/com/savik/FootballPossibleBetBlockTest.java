@@ -38,6 +38,9 @@ import static com.savik.football.specifications.FootballMatchSpec.hasTeam;
 
         "classpath:db/possible_bets/football/matches_OEPaNIYq.sql",
         "classpath:db/possible_bets/football/matches_vT8fEudT.sql",
+        "classpath:db/possible_bets/football/matches_0Io92rcH.sql",
+        "classpath:db/possible_bets/football/matches_vVJX2ii0.sql",
+        "classpath:db/possible_bets/football/matches_82s4vH8r.sql"
 
 })
 public class FootballPossibleBetBlockTest {
