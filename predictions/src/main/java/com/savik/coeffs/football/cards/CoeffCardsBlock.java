@@ -10,7 +10,9 @@ import java.util.Arrays;
 public class CoeffCardsBlock extends CoeffContainer {
     public CoeffCardsBlock() {
         super(Arrays.asList(
-                new CoeffPeriodCardsBlock(ContainerType.MATCH)
+                new CoeffPeriodCardsBlock(ContainerType.MATCH),
+                new CoeffPeriodCardsBlock(ContainerType.FIRST_PERIOD),
+                new CoeffPeriodCardsBlock(ContainerType.SECOND_PERIOD)
         ), ContainerType.CARDS);
     }
 }

@@ -52,6 +52,22 @@ public class Football1xstavkaCoeffsMatchParser extends Sport1xstavkaCoeffsMatchP
             );
         }
 
+        JSONObject firstPeriodCards = findSpecialGroupByTGAndPN(specialGroups, "Желтые карточки", "1-й  Тайм");
+        if (cards != null) {
+            fillCardsBlock(
+                    downloadAdditionalGroupCoeffs(firstPeriodCards),
+                    rootContainer.findByType(CARDS).findByType(FIRST_PERIOD)
+            );
+        }
+
+        JSONObject secondPeriodCards = findSpecialGroupByTGAndPN(specialGroups, "Желтые карточки", "2-й  Тайм");
+        if (cards != null) {
+            fillCardsBlock(
+                    downloadAdditionalGroupCoeffs(secondPeriodCards),
+                    rootContainer.findByType(CARDS).findByType(FIRST_PERIOD)
+            );
+        }
+
     }
 
 

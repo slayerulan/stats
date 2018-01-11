@@ -13,7 +13,9 @@ import java.util.Arrays;
 public class PossibleBetsCardsBlock extends PossibleBetContainer<FootballMatch> {
     public PossibleBetsCardsBlock(MatchData homeMatchData, MatchData guestMatchData) {
         super(Arrays.asList(
-                new PossibleBetsMatchCardsBlock(homeMatchData, guestMatchData)
+                new PossibleBetsMatchCardsBlock(homeMatchData, guestMatchData, FootballMatch.MATCH, ContainerType.MATCH),
+                new PossibleBetsMatchCardsBlock(homeMatchData, guestMatchData, FootballMatch.FIRST_PERIOD, ContainerType.FIRST_PERIOD),
+                new PossibleBetsMatchCardsBlock(homeMatchData, guestMatchData, FootballMatch.SECOND_PERIOD, ContainerType.SECOND_PERIOD)
         ), ContainerType.CARDS);
     }
 }
