@@ -8,6 +8,7 @@ public enum FootballChampionship {
     LA,
     AUSTRALIA_A,
     PORTUGAL_PREMIER,
+    ENGLAND_PREMIER,
     BUNDESLIGA,
     INDIA_SUPERLIGA,
     HOLLAND_1,

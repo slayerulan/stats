@@ -20,6 +20,7 @@ public class Book1xbetConstants {
     public static final String FRANCE_1 = URL + "12821";
     public static final String HOLLAND_1 = URL + "35677";
     public static final String HOLLAND_EREDIVISIE = URL + "119575";
+    public static final String ENGLAND_PREMIER = URL + "88637";
 
     // hockey
 
@@ -94,6 +95,13 @@ public class Book1xbetConstants {
             put("Гоу Эхед Иглс", "Гоу Эхед Иглз");
             put("Фортуна", "Фортуна Ситтард");
             put("Йонг Аякс", "Аякс II");
+        }
+    };
+
+    public static Map<String, String> englandPremierMapping = new HashMap<String, String>(){
+        {
+            put("Кристал Пэлас", "Кристал Пэлэс");
+            put("Бёрнли", "Бернли");
         }
     };
 

@@ -43,6 +43,7 @@ public class FootballParser {
 
         List<Entity> entities = Arrays.asList(
                 new Entity("http://www.myscore.ru/football/spain/laliga/results/", FootballChampionship.LA, Season.S2017),
+                new Entity("https://www.myscore.com.ua/football/england/premier-league/results/", FootballChampionship.ENGLAND_PREMIER, Season.S2017),
                 new Entity("https://www.myscore.com.ua/football/germany/bundesliga/results/", FootballChampionship.BUNDESLIGA, Season.S2017),
                 new Entity("https://www.myscore.com.ua/football/france/ligue-1/results/", FootballChampionship.FRANCE_1, Season.S2017),
                 new Entity("https://www.myscore.com.ua/football/netherlands/eerste-divisie/results/", FootballChampionship.HOLLAND_1, Season.S2017),

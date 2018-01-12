@@ -104,6 +104,9 @@ public class FootballFutureMatchesParser {
         if (FootballLeagueIds.HOLLAND_EREDIVISIE.equals(myscoreLeagueId)) {
             return FootballChampionship.HOLLAND_EREDIVISIE;
         }
+        if (FootballLeagueIds.ENGLAND_PREMIER.equals(myscoreLeagueId)) {
+            return FootballChampionship.ENGLAND_PREMIER;
+        }
         return null;
     }
 }
