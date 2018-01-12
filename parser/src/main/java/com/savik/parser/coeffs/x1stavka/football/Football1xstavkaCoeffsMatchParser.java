@@ -23,7 +23,7 @@ public class Football1xstavkaCoeffsMatchParser extends Sport1xstavkaCoeffsMatchP
         JSONObject matchCorners = findSpecialGroupByTGAndPN(specialGroups, "Угловые", null);
         if (matchCorners != null) {
             fillCornersBlock(
-                    getBookFutureMatchCoeffs(matchCorners),
+                    downloadAdditionalGroupCoeffs(matchCorners),
                     rootContainer.findByType(CORNERS).findByType(MATCH)
             );
         }
@@ -31,7 +31,7 @@ public class Football1xstavkaCoeffsMatchParser extends Sport1xstavkaCoeffsMatchP
         JSONObject firstPeriodCorners = findSpecialGroupByTGAndPN(specialGroups, "Угловые", "1-й  Тайм");
         if (firstPeriodCorners != null) {
             fillCornersBlock(
-                    getBookFutureMatchCoeffs(firstPeriodCorners),
+                    downloadAdditionalGroupCoeffs(firstPeriodCorners),
                     rootContainer.findByType(CORNERS).findByType(FIRST_PERIOD)
             );
         }
@@ -39,7 +39,7 @@ public class Football1xstavkaCoeffsMatchParser extends Sport1xstavkaCoeffsMatchP
         JSONObject secondPeriodCorners = findSpecialGroupByTGAndPN(specialGroups, "Угловые", "2-й  Тайм");
         if (secondPeriodCorners != null) {
             fillCornersBlock(
-                    getBookFutureMatchCoeffs(secondPeriodCorners),
+                    downloadAdditionalGroupCoeffs(secondPeriodCorners),
                     rootContainer.findByType(CORNERS).findByType(SECOND_PERIOD)
             );
         }
@@ -53,7 +53,7 @@ public class Football1xstavkaCoeffsMatchParser extends Sport1xstavkaCoeffsMatchP
         }
 
         JSONObject firstPeriodCards = findSpecialGroupByTGAndPN(specialGroups, "Желтые карточки", "1-й  Тайм");
-        if (cards != null) {
+        if (firstPeriodCards != null) {
             fillCardsBlock(
                     downloadAdditionalGroupCoeffs(firstPeriodCards),
                     rootContainer.findByType(CARDS).findByType(FIRST_PERIOD)
@@ -61,7 +61,7 @@ public class Football1xstavkaCoeffsMatchParser extends Sport1xstavkaCoeffsMatchP
         }
 
         JSONObject secondPeriodCards = findSpecialGroupByTGAndPN(specialGroups, "Желтые карточки", "2-й  Тайм");
-        if (cards != null) {
+        if (secondPeriodCards != null) {
             fillCardsBlock(
                     downloadAdditionalGroupCoeffs(secondPeriodCards),
                     rootContainer.findByType(CARDS).findByType(SECOND_PERIOD)

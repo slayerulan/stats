@@ -70,12 +70,31 @@ public class Book1xbetConstants {
 
     // football
 
+    public static Map<String, String> portugalPremierMapping = new HashMap<String, String>(){
+        {
+            put("Пасуш де Феррейра", "Пасуш Феррейра");
+            put("Маритиму", "Маритимо");
+            put("Портимоненси", "Портимоненсе");
+            put("Риу Аве", "Риу-Аве");
+        }
+    };
+
     public static Map<String, String> indiaSuperligaMapping = new HashMap<String, String>(){
         {
             put("Дели Динамос", "Дели Дайнамос");
             put("Jamshedpur", "Джамшедпур");
             put("Норт-Ист Юнайтед", "Нортист Юнайтед");
             put("ATK", "Атлетико де Калькутта");
+            put("Бангалор", "Бенгалуру");
+            put("Мумбаи Сити", "Мумбай Сити");
+        }
+    };
+
+    public static Map<String, String> bundesligaMapping = new HashMap<String, String>(){
+        {
+            put("Айнтрахт Ф", "Айнтрахт");
+            put("РБ Лейпциг", "Лейпциг");
+            put("Боруссия Д", "Боруссия");
         }
     };
 
