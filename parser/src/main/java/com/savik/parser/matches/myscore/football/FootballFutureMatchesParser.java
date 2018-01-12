@@ -47,7 +47,7 @@ public class FootballFutureMatchesParser {
     public void parse() {
         parseDay(TODAY);
         parseDay(TOMORROW);
-        parseDay(DAY_AFTER_TOMORROW);
+        //parseDay(DAY_AFTER_TOMORROW);
     }
 
     private void parseDay(int day) {
