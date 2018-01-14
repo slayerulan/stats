@@ -14,5 +14,9 @@ public enum FootballChampionship {
     HOLLAND_1,
     HOLLAND_EREDIVISIE,
     FRANCE_1,
-    SERIE_A
+    FRANCE_2,
+    SERIE_A,
+    GREECE_SUPERLIGA,
+    CYPRUS_1,
+    COSTA_RICA
 }

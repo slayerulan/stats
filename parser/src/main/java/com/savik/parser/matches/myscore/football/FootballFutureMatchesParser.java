@@ -101,11 +101,23 @@ public class FootballFutureMatchesParser {
         if (FootballLeagueIds.FRANCE_1.equals(myscoreLeagueId)) {
             return FootballChampionship.FRANCE_1;
         }
+        if (FootballLeagueIds.FRANCE_2.equals(myscoreLeagueId)) {
+            return FootballChampionship.FRANCE_2;
+        }
         if (FootballLeagueIds.HOLLAND_EREDIVISIE.equals(myscoreLeagueId)) {
             return FootballChampionship.HOLLAND_EREDIVISIE;
         }
         if (FootballLeagueIds.ENGLAND_PREMIER.equals(myscoreLeagueId)) {
             return FootballChampionship.ENGLAND_PREMIER;
+        }
+        if (FootballLeagueIds.GREECE_SUPERLIGA.equals(myscoreLeagueId)) {
+            return FootballChampionship.GREECE_SUPERLIGA;
+        }
+        if (FootballLeagueIds.COSTA_RICA.equals(myscoreLeagueId)) {
+            return FootballChampionship.COSTA_RICA;
+        }
+        if (FootballLeagueIds.CYPRUS_1.equals(myscoreLeagueId)) {
+            return FootballChampionship.CYPRUS_1;
         }
         return null;
     }

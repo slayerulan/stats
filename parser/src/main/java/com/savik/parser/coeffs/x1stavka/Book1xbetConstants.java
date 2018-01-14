@@ -18,9 +18,13 @@ public class Book1xbetConstants {
     public static final String INDIA_SUPERLIGA = URL + "1122087";
     public static final String BUNDESLIGA = URL + "96463";
     public static final String FRANCE_1 = URL + "12821";
+    public static final String FRANCE_2 = URL + "12829";
     public static final String HOLLAND_1 = URL + "35677";
     public static final String HOLLAND_EREDIVISIE = URL + "119575";
     public static final String ENGLAND_PREMIER = URL + "88637";
+    public static final String GREECE_SUPERLIGA = URL + "8777";
+    public static final String CYPRUS_1 = URL + "12505";
+    public static final String COSTA_RICA = URL + "28665";
 
     // hockey
 
@@ -76,6 +80,9 @@ public class Book1xbetConstants {
             put("Маритиму", "Маритимо");
             put("Портимоненси", "Портимоненсе");
             put("Риу Аве", "Риу-Аве");
+            put("Морейренси", "Морейренсе");
+            put("Сетубал", "Витория Сетубал");
+            put("Порту", "Порто");
         }
     };
 
@@ -121,6 +128,19 @@ public class Book1xbetConstants {
         {
             put("Кристал Пэлас", "Кристал Пэлэс");
             put("Бёрнли", "Бернли");
+        }
+    };
+
+    public static Map<String, String> greeceSuperligaMapping = new HashMap<String, String>(){
+        {
+            put("ПАС Янина", "ПАС Джаннина");
+        }
+    };
+
+    public static Map<String, String> cyprusMapping = new HashMap<String, String>(){
+        {
+            put("Алки Ороклини", "Альки Ороклинис");
+            put("Олимпиакос Никосия", "Олимпиакос Никосиа");
         }
     };
 

@@ -1,7 +1,7 @@
 logging:
   level:
     org:
-      hibernate: trace
+      hibernate: error
 
 server:
     port: 9999
@@ -19,4 +19,4 @@ spring:
         hibernate:
             ddl-auto: none
             use-new-id-generator-mappings: true
-        show-sql: true
+        show-sql: false
