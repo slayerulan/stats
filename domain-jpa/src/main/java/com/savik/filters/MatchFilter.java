@@ -16,6 +16,8 @@ public class MatchFilter {
 
     private Long guestId;
 
+    private Long refereeId;
+
     private String myscoreCode;
 
     private boolean includeAllMatches;

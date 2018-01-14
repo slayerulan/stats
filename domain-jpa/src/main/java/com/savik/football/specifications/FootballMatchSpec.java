@@ -32,5 +32,9 @@ public class FootballMatchSpec {
         return anyEquals(id, FootballMatch_.homeTeam, FootballMatch_.guestTeam);
     }
 
+    public static Specification<FootballMatch> hasReferee(Long id) {
+        return equal(FootballMatch_.referee, id);
+    }
+
 
 }

@@ -3,6 +3,7 @@ package com.savik.rest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.savik.*;
 import com.savik.blocks.football.match.FootballPossibleBetsBlock;
+import com.savik.blocks.football.match.cards.match.YellowCardsWDTotalOverPossibleBetBlock;
 import com.savik.blocks.hockey.match.general.HockeyPossibleBetsBlock;
 import com.savik.filters.MatchFilter;
 import com.savik.football.model.FootballFutureMatch;
@@ -33,6 +34,8 @@ import java.nio.file.Files;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
+
+import static com.savik.football.specifications.FootballMatchSpec.hasReferee;
 
 
 @RestController
@@ -100,6 +103,14 @@ public class TestController {
         HockeyPossibleBetsBlock hockeyPossibleBetsBlock = new HockeyAnalyzer(matchFilter, futureMatch).getPossibleBetsBlock();
         ProposedBetsContainer resultContainer = getProposedBetsContainer(matchFilter.getMyscoreCode(), hockeyPossibleBetsBlock);
         return resultContainer;
+    }
+
+    @GetMapping("/bets/referee")
+    public PossibleBetContainer referee(MatchFilter matchFilter) throws IOException {
+        List<FootballMatch> byRefereeId = footballMatchRepository.findAll(hasReferee(matchFilter.getRefereeId()));
+        YellowCardsWDTotalOverPossibleBetBlock block = new YellowCardsWDTotalOverPossibleBetBlock(FootballMatch.MATCH);
+        block.check(byRefereeId, byRefereeId);
+        return block;
     }
 
     @GetMapping("/bets/all")
