@@ -6,7 +6,7 @@ import com.savik.parser.matches.myscore.football.FootballFutureMatchesParser;
 import com.savik.parser.matches.myscore.football.FootballParser;
 import com.savik.parser.matches.myscore.hockey.HockeyFutureMatchesParser;
 import com.savik.parser.matches.myscore.hockey.HockeyParser;
-import com.savik.parser.matches.myscore.snooker.SnookerParser;
+import com.savik.parser.squads.myscore.football.FootballSquadsParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +41,7 @@ public class Parser {
     Football1xstavkaCoeffsParser football1xstavkaCoeffsParser;
 
     @Autowired
-    SnookerParser snookerParser;
+    FootballSquadsParser footballSquadsParser;
 
 
     @PostConstruct
@@ -54,7 +54,6 @@ public class Parser {
         footballFutureMatchesParser.parse();
         football1xstavkaCoeffsParser.parse();*/
 
-
-        //snookerParser.parse();
+        footballSquadsParser.parse();
     }
 }

@@ -45,6 +45,10 @@ public class Downloader {
         return download(String.format(configuration.getFootballMatchesScheduleTemplate(), day));
     }
 
+    public Document downloadTeamInfo(String teamPrefix) {
+        return download(String.format(configuration.getTeamInfo(), teamPrefix));
+    }
+
     public Document downloadHockeyMatchesSchedule(Integer day) {
         return download(String.format(configuration.getHockeyMatchesScheduleTemplate(), day));
     }
