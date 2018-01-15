@@ -44,7 +44,7 @@ public class Football1xstavkaCoeffsParser extends Sport1xstavkaCoeffsParser {
         parseLeague(all.stream().filter(m -> m.getChampionship() == FootballChampionship.FRANCE_1).collect(Collectors.toList()),
                 FRANCE_1, new HashMap<>());
         parseLeague(all.stream().filter(m -> m.getChampionship() == FootballChampionship.FRANCE_2).collect(Collectors.toList()),
-                FRANCE_2, new HashMap<>());
+                FRANCE_2, france2Mapping);
         parseLeague(all.stream().filter(m -> m.getChampionship() == FootballChampionship.HOLLAND_1).collect(Collectors.toList()),
                 HOLLAND_1, holland1Mapping);
         parseLeague(all.stream().filter(m -> m.getChampionship() == FootballChampionship.HOLLAND_EREDIVISIE).collect(Collectors.toList()),

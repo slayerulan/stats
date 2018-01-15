@@ -46,12 +46,13 @@ public class Parser {
 
     @PostConstruct
     public void parse() throws Exception {
-        //hockey1xstavkaCoeffsParser.parse();
-        //hockeyFutureMatchesParser.parse();
-        //hockeyParser.parse();
-        //footballParser.parse();
-        //football1xstavkaCoeffsParser.parse();
-        //footballFutureMatchesParser.parse();
+/*        hockeyParser.parse();
+        hockeyFutureMatchesParser.parse();
+        hockey1xstavkaCoeffsParser.parse();*/
+
+/*        footballParser.parse();
+        footballFutureMatchesParser.parse();
+        football1xstavkaCoeffsParser.parse();*/
 
 
         //snookerParser.parse();

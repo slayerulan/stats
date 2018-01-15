@@ -131,6 +131,14 @@ public class Book1xbetConstants {
         }
     };
 
+    public static Map<String, String> france2Mapping = new HashMap<String, String>(){
+        {
+            put("Кевийи Руан", "ЮС Квевилли");
+            put("ФК Париж", "Париж");
+            put("Газелек Аяччо", "Газелек");
+        }
+    };
+
     public static Map<String, String> greeceSuperligaMapping = new HashMap<String, String>(){
         {
             put("ПАС Янина", "ПАС Джаннина");
