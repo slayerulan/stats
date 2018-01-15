@@ -525,6 +525,229 @@ public class FootballPossibleBetBlockTest {
         assertEquals(100, plus4AndHalf.getFirstTeamPercentage());
         assertEquals(100, plus4AndHalf.getSecondTeamPercentage());
 
+    }
+
+
+    /*
+     * Second period corners
+     * */
+    @Test
+    public void testSecondPeriodCornersTotalOver() {
+        PossibleBetContainer possibleBetsBlock = getPossibleBetsBlock();
+
+        PossibleBetContainer totalOverBlock = possibleBetsBlock.findByType(CORNERS).findByType(SECOND_PERIOD).findByType(TOTAL_OVER);
+
+        PossibleBetContainer over3AndHalf = totalOverBlock.findByType(OVER_3_5);
+        assertEquals(40, over3AndHalf.getFirstTeamPercentage());
+        assertEquals(60, over3AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer over4AndHalf = totalOverBlock.findByType(OVER_4_5);
+        assertEquals(40, over4AndHalf.getFirstTeamPercentage());
+        assertEquals(20, over4AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer over5AndHalf = totalOverBlock.findByType(OVER_5_5);
+        assertEquals(20, over5AndHalf.getFirstTeamPercentage());
+        assertEquals(0, over5AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer over6AndHalf = totalOverBlock.findByType(OVER_6_5);
+        assertEquals(20, over6AndHalf.getFirstTeamPercentage());
+        assertEquals(0, over6AndHalf.getSecondTeamPercentage());
+
+    }
+
+    @Test
+    public void testSecondPeriodCornersTotalUnder() {
+        PossibleBetContainer possibleBetsBlock = getPossibleBetsBlock();
+
+        PossibleBetContainer totalOverBlock = possibleBetsBlock.findByType(CORNERS).findByType(SECOND_PERIOD).findByType(TOTAL_UNDER);
+
+        PossibleBetContainer under3AndHalf = totalOverBlock.findByType(UNDER_3_5);
+        assertEquals(60, under3AndHalf.getFirstTeamPercentage());
+        assertEquals(40, under3AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer under4AndHalf = totalOverBlock.findByType(UNDER_4_5);
+        assertEquals(60, under4AndHalf.getFirstTeamPercentage());
+        assertEquals(80, under4AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer under5AndHalf = totalOverBlock.findByType(UNDER_5_5);
+        assertEquals(80, under5AndHalf.getFirstTeamPercentage());
+        assertEquals(100, under5AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer under6AndHalf = totalOverBlock.findByType(UNDER_6_5);
+        assertEquals(80, under6AndHalf.getFirstTeamPercentage());
+        assertEquals(100, under6AndHalf.getSecondTeamPercentage());
+
+    }
+
+
+    @Test
+    public void testSecondPeriodTeamCornersTotalOver() {
+        PossibleBetContainer possibleBetsBlock = getPossibleBetsBlock();
+
+        PossibleBetContainer totalOverBlock = possibleBetsBlock.findByType(CORNERS).findByType(SECOND_PERIOD).findByType(TEAM_TOTAL_OVER);
+
+        PossibleBetContainer over2AndHalf = totalOverBlock.findByType(OVER_2_5);
+        assertEquals(20, over2AndHalf.getFirstTeamPercentage());
+        assertEquals(40, over2AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer over3AndHalf = totalOverBlock.findByType(OVER_3_5);
+        assertEquals(20, over3AndHalf.getFirstTeamPercentage());
+        assertEquals(20, over3AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer over4AndHalf = totalOverBlock.findByType(OVER_4_5);
+        assertEquals(0, over4AndHalf.getFirstTeamPercentage());
+        assertEquals(0, over4AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer over5AndHalf = totalOverBlock.findByType(OVER_5_5);
+        assertEquals(0, over5AndHalf.getFirstTeamPercentage());
+        assertEquals(0, over5AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer over6AndHalf = totalOverBlock.findByType(OVER_6_5);
+        assertEquals(0, over6AndHalf.getFirstTeamPercentage());
+        assertEquals(0, over6AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer over7AndHalf = totalOverBlock.findByType(OVER_7_5);
+        assertEquals(0, over7AndHalf.getFirstTeamPercentage());
+        assertEquals(0, over7AndHalf.getSecondTeamPercentage());
+
+
+    }
+
+
+    @Test
+    public void testSecondPeriodOpposingTeamCornersTotalOver() {
+        PossibleBetContainer possibleBetsBlock = getPossibleBetsBlock();
+
+        PossibleBetContainer totalOverBlock = possibleBetsBlock.findByType(CORNERS).findByType(SECOND_PERIOD).findByType(OPPOSING_TEAM_TOTAL_OVER);
+
+        PossibleBetContainer over2AndHalf = totalOverBlock.findByType(OVER_2_5);
+        assertEquals(40, over2AndHalf.getFirstTeamPercentage());
+        assertEquals(20, over2AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer over3AndHalf = totalOverBlock.findByType(OVER_3_5);
+        assertEquals(0, over3AndHalf.getFirstTeamPercentage());
+        assertEquals(0, over3AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer over4AndHalf = totalOverBlock.findByType(OVER_4_5);
+        assertEquals(0, over4AndHalf.getFirstTeamPercentage());
+        assertEquals(0, over4AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer over5AndHalf = totalOverBlock.findByType(OVER_5_5);
+        assertEquals(0, over5AndHalf.getFirstTeamPercentage());
+        assertEquals(0, over5AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer over6AndHalf = totalOverBlock.findByType(OVER_6_5);
+        assertEquals(0, over6AndHalf.getFirstTeamPercentage());
+        assertEquals(0, over6AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer over7AndHalf = totalOverBlock.findByType(OVER_7_5);
+        assertEquals(0, over7AndHalf.getFirstTeamPercentage());
+        assertEquals(0, over7AndHalf.getSecondTeamPercentage());
+
+
+    }
+
+
+    @Test
+    public void testSecondPeriodTeamCornersNotLoose() {
+        PossibleBetContainer possibleBetsBlock = getPossibleBetsBlock();
+
+        PossibleBetContainer block = possibleBetsBlock.findByType(CORNERS).findByType(SECOND_PERIOD).findByType(TEAM_NOT_LOOSE);
+        assertEquals(60, block.getFirstTeamPercentage());
+        assertEquals(80, block.getSecondTeamPercentage());
+
+    }
+
+
+    @Test
+    public void testSecondPeriodOpposingTeamCornersNotLoose() {
+        PossibleBetContainer possibleBetsBlock = getPossibleBetsBlock();
+
+        PossibleBetContainer block = possibleBetsBlock.findByType(CORNERS).findByType(SECOND_PERIOD).findByType(OPPOSING_TEAM_NOT_LOOSE);
+        assertEquals(80, block.getFirstTeamPercentage());
+        assertEquals(20, block.getSecondTeamPercentage());
+
+    }
+
+
+    @Test
+    public void testSecondPeriodTeamCornersHandicap() {
+        PossibleBetContainer possibleBetsBlock = getPossibleBetsBlock();
+
+        PossibleBetContainer totalOverBlock = possibleBetsBlock.findByType(CORNERS).findByType(SECOND_PERIOD).findByType(TEAM_HANDICAP);
+
+        PossibleBetContainer minus4AndHalf = totalOverBlock.findByType(MINUS_4_5);
+        assertEquals(0, minus4AndHalf.getFirstTeamPercentage());
+        assertEquals(0, minus4AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer minus3AndHalf = totalOverBlock.findByType(MINUS_3_5);
+        assertEquals(0, minus3AndHalf.getFirstTeamPercentage());
+        assertEquals(0, minus3AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer minus2AndHalf = totalOverBlock.findByType(MINUS_2_5);
+        assertEquals(0, minus2AndHalf.getFirstTeamPercentage());
+        assertEquals(20, minus2AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer minus1AndHalf = totalOverBlock.findByType(MINUS_1_5);
+        assertEquals(0, minus1AndHalf.getFirstTeamPercentage());
+        assertEquals(40, minus1AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer plus1AndHalf = totalOverBlock.findByType(PLUS_1_5);
+        assertEquals(100, plus1AndHalf.getFirstTeamPercentage());
+        assertEquals(80, plus1AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer plus2AndHalf = totalOverBlock.findByType(PLUS_2_5);
+        assertEquals(100, plus2AndHalf.getFirstTeamPercentage());
+        assertEquals(100, plus2AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer plus3AndHalf = totalOverBlock.findByType(PLUS_3_5);
+        assertEquals(100, plus3AndHalf.getFirstTeamPercentage());
+        assertEquals(100, plus3AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer plus4AndHalf = totalOverBlock.findByType(PLUS_4_5);
+        assertEquals(100, plus4AndHalf.getFirstTeamPercentage());
+        assertEquals(100, plus4AndHalf.getSecondTeamPercentage());
+
+    }
+
+
+    @Test
+    public void testSecondPeriodOpposingTeamCornersHandicap() {
+        PossibleBetContainer possibleBetsBlock = getPossibleBetsBlock();
+
+        PossibleBetContainer totalOverBlock = possibleBetsBlock.findByType(CORNERS).findByType(SECOND_PERIOD).findByType(OPPOSING_TEAM_HANDICAP);
+
+        PossibleBetContainer minus4AndHalf = totalOverBlock.findByType(MINUS_4_5);
+        assertEquals(0, minus4AndHalf.getFirstTeamPercentage());
+        assertEquals(0, minus4AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer minus3AndHalf = totalOverBlock.findByType(MINUS_3_5);
+        assertEquals(0, minus3AndHalf.getFirstTeamPercentage());
+        assertEquals(0, minus3AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer minus2AndHalf = totalOverBlock.findByType(MINUS_2_5);
+        assertEquals(0, minus2AndHalf.getFirstTeamPercentage());
+        assertEquals(0, minus2AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer minus1AndHalf = totalOverBlock.findByType(MINUS_1_5);
+        assertEquals(0, minus1AndHalf.getFirstTeamPercentage());
+        assertEquals(20, minus1AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer plus1AndHalf = totalOverBlock.findByType(PLUS_1_5);
+        assertEquals(100, plus1AndHalf.getFirstTeamPercentage());
+        assertEquals(60, plus1AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer plus2AndHalf = totalOverBlock.findByType(PLUS_2_5);
+        assertEquals(100, plus2AndHalf.getFirstTeamPercentage());
+        assertEquals(80, plus2AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer plus3AndHalf = totalOverBlock.findByType(PLUS_3_5);
+        assertEquals(100, plus3AndHalf.getFirstTeamPercentage());
+        assertEquals(100, plus3AndHalf.getSecondTeamPercentage());
+
+        PossibleBetContainer plus4AndHalf = totalOverBlock.findByType(PLUS_4_5);
+        assertEquals(100, plus4AndHalf.getFirstTeamPercentage());
+        assertEquals(100, plus4AndHalf.getSecondTeamPercentage());
 
     }
 
