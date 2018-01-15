@@ -4,10 +4,8 @@ import com.savik.football.model.FootballFutureMatch;
 import com.savik.football.model.FootballSquadPlayeer;
 import com.savik.football.model.FootballTeam;
 import com.savik.football.model.FootballTeamSquad;
-import com.savik.football.repository.FootballFutureMatchRepository;
-import com.savik.football.repository.FootballTeamRepository;
+import com.savik.football.repository.FootballTeamSquadRepository;
 import com.savik.parser.Downloader;
-import com.savik.parser.FutureMatchesParser;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -17,6 +15,8 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.Set;
 
+import static com.savik.football.specifications.FootballTeamSquadSpec.hasTeam;
+
 /**
  * @author Savushkin Yauheni
  * @since 12.04.2017
@@ -25,13 +25,7 @@ import java.util.Set;
 public class FootballTeamSquadParser {
 
     @Autowired
-    FootballFutureMatchRepository matchRepository;
-
-    @Autowired
-    FootballTeamRepository footballTeamRepository;
-
-    @Autowired
-    FutureMatchesParser futureMatchesParser;
+    FootballTeamSquadRepository footballTeamSquadRepository;
 
 
     @Autowired
@@ -46,6 +40,22 @@ public class FootballTeamSquadParser {
         Document guesteamInfo = downloader.downloadTeamInfo(guestPrefix);
         FootballTeamSquad homeSquad = parseFootballTeamSquad(homeTeamInfo, futureMatch, futureMatch.getHomeTeam());
         FootballTeamSquad guestSquad = parseFootballTeamSquad(guesteamInfo, futureMatch, futureMatch.getGuestTeam());
+
+        FootballTeamSquad homeSquadPersisted = footballTeamSquadRepository.findOne(hasTeam(futureMatch.getHomeTeam()));
+        if(homeSquadPersisted != null) {
+            homeSquadPersisted.setSquadPlayers(homeSquad.getSquadPlayers());
+            footballTeamSquadRepository.save(homeSquadPersisted);
+        } else {
+            footballTeamSquadRepository.save(homeSquad);
+        }
+
+        FootballTeamSquad guestSquadPersisted = footballTeamSquadRepository.findOne(hasTeam(futureMatch.getGuestTeam()));
+        if(guestSquadPersisted != null) {
+            guestSquadPersisted.setSquadPlayers(guestSquad.getSquadPlayers());
+            footballTeamSquadRepository.save(guestSquadPersisted);
+        } else {
+            footballTeamSquadRepository.save(guestSquad);
+        }
     }
 
     private FootballTeamSquad parseFootballTeamSquad(Document teamInfo, FootballFutureMatch futureMatch, FootballTeam team) {

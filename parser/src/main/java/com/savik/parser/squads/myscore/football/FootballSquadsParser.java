@@ -23,10 +23,13 @@ public class FootballSquadsParser {
 
     public void parse() {
 
+        FootballFutureMatch byMyscoreCode = matchRepository.findByMyscoreCode("0hjYWZ2T");
+        footballTeamSquadParser.parse(byMyscoreCode);
+/*
         List<FootballFutureMatch> matches = matchRepository.findAll();
         for (FootballFutureMatch match : matches) {
             footballTeamSquadParser.parse(match);
-        }
+        }*/
 
     }
 

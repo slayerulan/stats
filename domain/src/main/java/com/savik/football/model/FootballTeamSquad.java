@@ -4,10 +4,7 @@ import com.codiform.moo.annotation.CollectionProperty;
 import com.codiform.moo.annotation.Optionality;
 import com.savik.Season;
 import com.savik.domain.Identifiable;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -18,8 +15,13 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "football_league_squad_id_generator")
+@Table(
+        uniqueConstraints = @UniqueConstraint(columnNames = {"team_id", "season", "championship"})
+)
 @EqualsAndHashCode
 @Builder
+@Setter
+@Getter
 public class FootballTeamSquad extends Identifiable {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

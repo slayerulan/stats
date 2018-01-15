@@ -50,10 +50,10 @@ public class Parser {
         hockeyFutureMatchesParser.parse();
         hockey1xstavkaCoeffsParser.parse();*/
 
-/*        footballParser.parse();
-        footballFutureMatchesParser.parse();
-        football1xstavkaCoeffsParser.parse();*/
+       /* footballParser.parse();
+        footballFutureMatchesParser.parse();*/
+        //football1xstavkaCoeffsParser.parse();
 
-        footballSquadsParser.parse();
+        //footballSquadsParser.parse();
     }
 }

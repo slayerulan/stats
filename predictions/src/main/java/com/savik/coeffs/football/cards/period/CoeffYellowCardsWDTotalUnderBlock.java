@@ -12,6 +12,14 @@ public class CoeffYellowCardsWDTotalUnderBlock extends CoeffContainer {
         super(Arrays.asList(
                 new CoeffContainer(
                         new Coeff(),
+                        ContainerType.UNDER_1_5
+                ),
+                new CoeffContainer(
+                        new Coeff(),
+                        ContainerType.UNDER_2_5
+                ),
+                new CoeffContainer(
+                        new Coeff(),
                         ContainerType.UNDER_3_5
                 ),
                 new CoeffContainer(
