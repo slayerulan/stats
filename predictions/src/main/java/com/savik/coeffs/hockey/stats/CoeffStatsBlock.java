@@ -10,15 +10,15 @@ import java.util.Arrays;
 public class CoeffStatsBlock extends CoeffContainer {
     public CoeffStatsBlock() {
         super(Arrays.asList(
-                new CoeffShotsOnTargetTotalOverBlock(),
+/*                new CoeffShotsOnTargetTotalOverBlock(),
                 new CoeffTeamShotsOnTargetTotalOverBlock(),
                 new CoeffOpposingTeamShotsOnTargetTotalOverBlock(),
                 new CoeffTeamShotsOnTargetHandicapBlock(),
                 new CoeffOpposingTeamShotsOnTargetHandicapBlock(),
                 new CoeffTeamShotsOnTargetWinBlock(),
                 new CoeffOpposingTeamShotsOnTargetWinBlock(),
-                new CoeffPenaltiesStatsBlock(),
-                new CoeffPowerplayGoalsTotalOverBlock()
+                new CoeffPowerplayGoalsTotalOverBlock(),*/
+                new CoeffPenaltiesStatsBlock()
         ), ContainerType.STATS);
     }
 }

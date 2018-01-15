@@ -14,10 +14,10 @@ import java.util.Arrays;
 public class HockeyCoeffBlock extends CoeffContainer {
     public HockeyCoeffBlock() {
         super(Arrays.asList(
-                new CoeffTotalBlock(),
+/*                new CoeffTotalBlock(),
                 new CoeffOtherBlock(),
                 new CoeffHandicapBlock(),
-                new CoeffPeriodsBlock(),
+                new CoeffPeriodsBlock(),*/
                 new CoeffStatsBlock()
         ), ContainerType.ROOT);
     }

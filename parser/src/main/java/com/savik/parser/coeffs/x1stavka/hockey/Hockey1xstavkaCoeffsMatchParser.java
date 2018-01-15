@@ -17,15 +17,15 @@ import static com.savik.ContainerType.*;
 class Hockey1xstavkaCoeffsMatchParser extends Sport1xstavkaCoeffsMatchParser {
 
     public void fill(Set<BookFutureMatchCoeff> futureMatchCoeffs, CoeffContainer rootContainer) {
-        fillTotalBlock(futureMatchCoeffs, rootContainer.findByType(TOTAL));
+/*        fillTotalBlock(futureMatchCoeffs, rootContainer.findByType(TOTAL));
         fillOtherBlock(futureMatchCoeffs, rootContainer.findByType(OTHER));
-        fillStatsBlock(futureMatchCoeffs, rootContainer.findByType(STATS));
+        fillStatsBlock(futureMatchCoeffs, rootContainer.findByType(STATS));*/
     }
 
     public void fillSpecialGroups(JSONObject matchCoeffsObject, CoeffContainer rootContainer) throws IOException {
         JSONArray specialGroups = matchCoeffsObject.getJSONObject("Value").getJSONArray("SG");
 
-        fillPeriodBlock(
+        /*fillPeriodBlock(
                 getBookFutureMatchCoeffs(findPeriod(specialGroups, "1")),
                 rootContainer.findByType(PERIODS).findByType(FIRST_PERIOD)
         );
@@ -47,10 +47,10 @@ class Hockey1xstavkaCoeffsMatchParser extends Sport1xstavkaCoeffsMatchParser {
                     getBookFutureMatchCoeffs(shotsOnTarget),
                     rootContainer.findByType(STATS)
             );
-        }
+        }*/
 
         JSONObject penalties = findSpecialGroupByTG(specialGroups, "Штрафное время");
-        if (shotsOnTarget != null) {
+        if (penalties != null) {
             fillPenaltiesBlock(
                     getBookFutureMatchCoeffs(penalties),
                     rootContainer.findByType(STATS).findByType(PENALTIES).findByType(MATCH)
@@ -58,7 +58,7 @@ class Hockey1xstavkaCoeffsMatchParser extends Sport1xstavkaCoeffsMatchParser {
         }
 
         JSONObject firstPeriodPenalties = findSpecialGroupByTGAndPN(specialGroups, "Штрафное время",  "1-й  Период");
-        if (shotsOnTarget != null) {
+        if (firstPeriodPenalties != null) {
             fillPenaltiesBlock(
                     getBookFutureMatchCoeffs(firstPeriodPenalties),
                     rootContainer.findByType(STATS).findByType(PENALTIES).findByType(FIRST_PERIOD)
