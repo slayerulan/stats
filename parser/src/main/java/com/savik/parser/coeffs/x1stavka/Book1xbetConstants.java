@@ -25,6 +25,7 @@ public class Book1xbetConstants {
     public static final String GREECE_SUPERLIGA = URL + "8777";
     public static final String CYPRUS_1 = URL + "12505";
     public static final String COSTA_RICA = URL + "28665";
+    public static final String BELGIUM = URL + "28787";
 
     // hockey
 

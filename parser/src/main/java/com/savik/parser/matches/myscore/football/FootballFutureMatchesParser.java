@@ -119,6 +119,9 @@ public class FootballFutureMatchesParser {
         if (FootballLeagueIds.CYPRUS_1.equals(myscoreLeagueId)) {
             return FootballChampionship.CYPRUS_1;
         }
+        if (FootballLeagueIds.BELGIUM.equals(myscoreLeagueId)) {
+            return FootballChampionship.BELGIUM;
+        }
         return null;
     }
 }

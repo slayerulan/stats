@@ -15,4 +15,5 @@ class FootballLeagueIds {
     public static final String GREECE_SUPERLIGA = "d2pwJFHI";
     public static final String CYPRUS_1 = "EmZxlqvh";
     public static final String COSTA_RICA = "tpC1pUBH";
+    public static final String BELGIUM = "dG2SqPrf";
 }

@@ -18,5 +18,6 @@ public enum FootballChampionship {
     SERIE_A,
     GREECE_SUPERLIGA,
     CYPRUS_1,
-    COSTA_RICA
+    COSTA_RICA,
+    BELGIUM
 }
