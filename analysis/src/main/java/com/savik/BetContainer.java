@@ -80,6 +80,12 @@ public abstract class BetContainer<T extends Match> {
         }
     }
 
+    public void check(List<T> matches) {
+        for (T match : matches) {
+            check(match);
+        }
+    }
+
     public BetContainer<T> findByType(ContainerType type) {
         if(this.type == type) {
             return this;
