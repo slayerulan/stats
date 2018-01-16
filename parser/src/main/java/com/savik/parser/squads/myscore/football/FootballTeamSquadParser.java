@@ -91,11 +91,14 @@ public class FootballTeamSquadParser {
         for (Element player : players) {
             Element playerTd = player.select("td." + teamPrefix).first();
             Element playerATag = playerTd.select("div.name > a").first();
+            if(playerATag == null) {
+                continue;
+            }
             String onclick = playerATag.attr("onclick");
             String[] split = onclick.split("/");
             List<Node> nodes = playerATag.childNodes();
             String playerName;
-            if (nodes.size() == 1 || nodes.size() == 2 && nodes.get(0) instanceof TextNode) {
+            if ( (nodes.size() == 1 || nodes.size() == 2 || nodes.size() == 3) && nodes.get(0) instanceof TextNode) {
                 playerName = nodes.get(0).toString();
             } else {
                 throw new RuntimeException("name ??!?!?");
@@ -126,22 +129,22 @@ public class FootballTeamSquadParser {
         Element table = teamInfo.select("table.squad-table").first();
         Elements players = table.select(".player");
         Set<FootballSquadPlayeerSeasonStats> squadPlayers = new HashSet<>();
-        for (Element player : players) {
-            Element playerNameTd = player.select(".player-name").first();
-            Elements tds = player.select("> td");
+        for (Element playerElement : players) {
+            Element playerNameTd = playerElement.select(".player-name").first();
+            Elements tds = playerElement.select("> td");
 
             Element playerATag = playerNameTd.select("a").first();
             String playerName = playerATag.text();
             String href = playerATag.attr("href");
             String[] split = href.split("/");
-            FootballSquadPlayeer playeer = footballSquadPlayerRepository.findByMyscoreCode(split[MYSCORE_CODE_INDEX]);
-            if(playeer == null) {
-                playeer = FootballSquadPlayeer.builder()
+            FootballSquadPlayeer player = footballSquadPlayerRepository.findByMyscoreCode(split[MYSCORE_CODE_INDEX]);
+            if(player == null) {
+                player = FootballSquadPlayeer.builder()
                         .name(playerName)
                         .myscoreCode(split[MYSCORE_CODE_INDEX])
                         .myscoreUrlName(split[MYSCORE_URL_NAME_INDEX])
                         .build();
-                footballSquadPlayerRepository.save(playeer);
+                footballSquadPlayerRepository.save(player);
             }
 
 
@@ -155,7 +158,7 @@ public class FootballTeamSquadParser {
             Integer redCardsAmount = Integer.valueOf(tds.get(6).text());
 
             FootballSquadPlayeerSeasonStats squadPlayeer = FootballSquadPlayeerSeasonStats.builder()
-                    .playeer(playeer)
+                    .player(player)
                     .gamesPlayed(gamesPlayed)
                     .goalsScored(goalsScored)
                     .yellowCardsAmount(yellowCardsAmount)

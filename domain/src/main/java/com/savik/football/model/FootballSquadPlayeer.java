@@ -18,6 +18,7 @@ import java.util.Objects;
 )
 @EqualsAndHashCode
 @Builder
+@Getter
 public class FootballSquadPlayeer extends Identifiable {
 
     @NotNull
