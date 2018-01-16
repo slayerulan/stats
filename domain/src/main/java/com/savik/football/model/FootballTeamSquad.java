@@ -26,7 +26,7 @@ public class FootballTeamSquad extends Identifiable {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @CollectionProperty(optionality = Optionality.OPTIONAL)
-    Set<FootballSquadPlayeer> squadPlayers;
+    Set<FootballSquadPlayeerSeasonStats> squadPlayers;
 
     @NotNull
     @Enumerated(EnumType.STRING)

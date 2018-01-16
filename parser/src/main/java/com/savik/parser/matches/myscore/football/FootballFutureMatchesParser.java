@@ -41,7 +41,7 @@ public class FootballFutureMatchesParser {
     // todo: убрать отсюда
     @PostConstruct
     public void deleteFinishedFutureMatches() {
-        matchRepository.deleteByDateBefore(LocalDateTime.now());
+        //matchRepository.deleteByDateBefore(LocalDateTime.now());
     }
 
     public void parse() {

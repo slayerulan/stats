@@ -3,8 +3,7 @@ package com.savik.football.model;
 import com.savik.domain.Identifiable;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
@@ -13,6 +12,10 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @SequenceGenerator(allocationSize = 4, name = "sequence_id", sequenceName = "football_squad_player_id_generator")
+@Table(
+        uniqueConstraints = @UniqueConstraint(columnNames = "myscoreCode"),
+        indexes = @Index(columnList = "myscoreCode")
+)
 @EqualsAndHashCode
 @Builder
 public class FootballSquadPlayeer extends Identifiable {
@@ -21,23 +24,10 @@ public class FootballSquadPlayeer extends Identifiable {
     private String name;
 
     @NotNull
-    private Integer gamesPlayed;
+    private String myscoreUrlName;
 
     @NotNull
-    private Integer goalsScored;
-
-    @NotNull
-    private Integer yellowCardsAmount;
-
-    @NotNull
-    private Integer redCardsAmount;
-
-    @NotNull
-    private Boolean isInjured;
-
-    @NotNull
-    private Boolean isSuspended;
-
+    private String myscoreCode;
 
     @Override
     public String toString() {
@@ -50,12 +40,12 @@ public class FootballSquadPlayeer extends Identifiable {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         FootballSquadPlayeer that = (FootballSquadPlayeer) o;
-        return Objects.equals(name, that.name);
+        return Objects.equals(myscoreCode, that.myscoreCode);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(super.hashCode(), name);
+        return Objects.hash(super.hashCode(), myscoreCode);
     }
 }

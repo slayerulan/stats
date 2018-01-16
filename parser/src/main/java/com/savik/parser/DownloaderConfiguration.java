@@ -35,6 +35,9 @@ public class DownloaderConfiguration {
     @Value("${url.teamInfo}")
     private String teamInfo;
 
+    @Value("${url.matchSquad}")
+    private String matchSquad;
+
     @Value("${url.hockeyMatches}")
     private String hockeyMatchesScheduleTemplate;
 

@@ -48,6 +48,9 @@ public class MatchParser {
         Document summaryInfo = downloader.downloadSummaryInfo(matchId);
         Document oddsInfo = downloader.downloadOddsInfo(matchId);
 
+        if(!summaryInfo.select("td.mstat:containsOwn(Прерван)").isEmpty()) {
+            return null;
+        }
 
         String homeTeam = summaryInfo.select(".tname-home a").text();
         String guestTeam = summaryInfo.select(".tname-away a").text();

@@ -41,6 +41,10 @@ public class Downloader {
         return download(String.format(configuration.getSnookerOddsTemplate(), matchId));
     }
 
+    public Document downloadMatchSquads(String matchId) {
+        return download(String.format(configuration.getMatchSquad(), matchId));
+    }
+
     public Document downloadFootballMatchesSchedule(Integer day) {
         return download(String.format(configuration.getFootballMatchesScheduleTemplate(), day));
     }

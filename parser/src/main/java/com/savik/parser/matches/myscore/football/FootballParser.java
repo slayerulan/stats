@@ -64,6 +64,10 @@ public class FootballParser {
                 try {
                     if (footballMatchRepository.findByMyscoreCode(matchId) == null) {
                         FootballMatch match = matchParser.parse(matchId, entity.getFootballChampionship(), entity.getSeason());
+                        if(match == null) {
+                            System.out.println("something wrong = " + matchId);
+                            continue;
+                        }
                         footballMatchRepository.save(match);
                         System.out.println(" match saved = " + matchId);
                         Thread.sleep(1000);

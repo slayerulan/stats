@@ -8,3 +8,4 @@ url:
   footballMatches: http://d.myscore.com.ua/x/feed/f_1_%s_3_ru_1
   hockeyMatches: http://d.myscore.com.ua/x/feed/f_4_%s_3_ru_1
   teamInfo: https://www.myscore.com.ua/%s
+  matchSquad: https://d.myscore.com.ua/x/feed/d_li_%s_ru_1

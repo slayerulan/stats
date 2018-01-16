@@ -17,4 +17,12 @@ public class EventItem {
     String leagueId;
 
     LocalDateTime eventDate;
+
+    @Override
+    public String toString() {
+        return "EventItem{" +
+                "homeName='" + homeName + '\'' +
+                ", guestName='" + guestName + '\'' +
+                '}';
+    }
 }
