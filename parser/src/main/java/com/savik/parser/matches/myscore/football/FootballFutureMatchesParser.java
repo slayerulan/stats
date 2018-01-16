@@ -41,7 +41,7 @@ public class FootballFutureMatchesParser {
     // todo: убрать отсюда
     @PostConstruct
     public void deleteFinishedFutureMatches() {
-        //matchRepository.deleteByDateBefore(LocalDateTime.now());
+        matchRepository.deleteByDateBefore(LocalDateTime.now());
     }
 
     public void parse() {
@@ -112,13 +112,13 @@ public class FootballFutureMatchesParser {
         }
         if (FootballLeagueIds.GREECE_SUPERLIGA.equals(myscoreLeagueId)) {
             return FootballChampionship.GREECE_SUPERLIGA;
-        }
+        }/*
         if (FootballLeagueIds.COSTA_RICA.equals(myscoreLeagueId)) {
             return FootballChampionship.COSTA_RICA;
         }
         if (FootballLeagueIds.CYPRUS_1.equals(myscoreLeagueId)) {
             return FootballChampionship.CYPRUS_1;
-        }
+        }*/
         if (FootballLeagueIds.BELGIUM.equals(myscoreLeagueId)) {
             return FootballChampionship.BELGIUM;
         }
