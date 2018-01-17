@@ -91,14 +91,14 @@ public class FootballTeamSquadParser {
         for (Element player : players) {
             Element playerTd = player.select("td." + teamPrefix).first();
             Element playerATag = playerTd.select("div.name > a").first();
-            if(playerATag == null) {
+            if (playerATag == null) {
                 continue;
             }
             String onclick = playerATag.attr("onclick");
             String[] split = onclick.split("/");
             List<Node> nodes = playerATag.childNodes();
             String playerName;
-            if ( (nodes.size() == 1 || nodes.size() == 2 || nodes.size() == 3) && nodes.get(0) instanceof TextNode) {
+            if ((nodes.size() == 1 || nodes.size() == 2 || nodes.size() == 3) && nodes.get(0) instanceof TextNode) {
                 playerName = nodes.get(0).toString();
             } else {
                 throw new RuntimeException("name ??!?!?");
@@ -115,7 +115,7 @@ public class FootballTeamSquadParser {
     }
 
     private FootballTeamSquad parseFootballTeamSquad(Document teamInfo, FootballFutureMatch futureMatch, FootballTeam team) {
-        Set<FootballSquadPlayeerSeasonStats> squadPlayeers = parseFootballSquadPlayersStats(teamInfo);
+        Set<FootballSquadPlayerSeasonStats> squadPlayeers = parseFootballSquadPlayersStats(teamInfo);
         FootballTeamSquad teamSquad = FootballTeamSquad.builder()
                 .championship(futureMatch.getChampionship())
                 .season(futureMatch.getSeason())
@@ -125,10 +125,10 @@ public class FootballTeamSquadParser {
         return teamSquad;
     }
 
-    private Set<FootballSquadPlayeerSeasonStats> parseFootballSquadPlayersStats(Document teamInfo) {
+    private Set<FootballSquadPlayerSeasonStats> parseFootballSquadPlayersStats(Document teamInfo) {
         Element table = teamInfo.select("table.squad-table").first();
         Elements players = table.select(".player");
-        Set<FootballSquadPlayeerSeasonStats> squadPlayers = new HashSet<>();
+        Set<FootballSquadPlayerSeasonStats> squadPlayers = new HashSet<>();
         for (Element playerElement : players) {
             Element playerNameTd = playerElement.select(".player-name").first();
             Elements tds = playerElement.select("> td");
@@ -137,17 +137,15 @@ public class FootballTeamSquadParser {
             String playerName = playerATag.text();
             String href = playerATag.attr("href");
             String[] split = href.split("/");
-            FootballSquadPlayeer player = footballSquadPlayerRepository.findByMyscoreCode(split[MYSCORE_CODE_INDEX]);
-            if(player == null) {
-                player = FootballSquadPlayeer.builder()
+            FootballSquadPlayer player = footballSquadPlayerRepository.findByMyscoreCode(split[MYSCORE_CODE_INDEX]);
+            if (player == null) {
+                player = FootballSquadPlayer.builder()
                         .name(playerName)
                         .myscoreCode(split[MYSCORE_CODE_INDEX])
                         .myscoreUrlName(split[MYSCORE_URL_NAME_INDEX])
                         .build();
                 footballSquadPlayerRepository.save(player);
             }
-
-
 
 
             Boolean isInjured = !playerNameTd.select("span.injury").isEmpty();
@@ -157,7 +155,7 @@ public class FootballTeamSquadParser {
             Integer yellowCardsAmount = Integer.valueOf(tds.get(5).text());
             Integer redCardsAmount = Integer.valueOf(tds.get(6).text());
 
-            FootballSquadPlayeerSeasonStats squadPlayeer = FootballSquadPlayeerSeasonStats.builder()
+            FootballSquadPlayerSeasonStats squadPlayeer = FootballSquadPlayerSeasonStats.builder()
                     .player(player)
                     .gamesPlayed(gamesPlayed)
                     .goalsScored(goalsScored)

@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Book1xbetConstants {
-    public static final String URL = "https://1xecu.xyz/LineFeed/GetChampZip?lng=ru&tf=3000000&afterDays=0&tz=0&sport=2&country=1&champ=";
-    public static final String EVENT_URL = "https://1xecu.xyz/LineFeed/GetGameZip?lng=ru&cfview=0&isSubGames=true&GroupEvents=true&countevents=1500&grMode=2&id=";
+    public static final String URL = "https://1xcwy.top/LineFeed/GetChampZip?lng=ru&tf=3000000&afterDays=0&tz=0&sport=2&country=1&champ=";
+    public static final String EVENT_URL = "https://1xcwy.top/LineFeed/GetGameZip?lng=ru&cfview=0&isSubGames=true&GroupEvents=true&countevents=1500&grMode=2&id=";
     public static final String NHL = URL + "30619";
     public static final String KHL = URL + "3355";
     public static final String EXTRA = URL + "104959";
@@ -29,7 +29,7 @@ public class Book1xbetConstants {
 
     // hockey
 
-    public static Map<String, String> khlMapping = new HashMap<String, String>(){
+    public static Map<String, String> khlMapping = new HashMap<String, String>() {
         {
             put("Куньлунь РС", "Красная Звезда Куньлунь");
             put("Спартак Москва", "Спартак");
@@ -37,7 +37,7 @@ public class Book1xbetConstants {
         }
     };
 
-    public static Map<String, String> extraMapping = new HashMap<String, String>(){
+    public static Map<String, String> extraMapping = new HashMap<String, String>() {
         {
             put("Тршинец", "Оцеларжи");
             put("Хомутов", "Пираты");
@@ -49,7 +49,7 @@ public class Book1xbetConstants {
         }
     };
 
-    public static Map<String, String> delMapping = new HashMap<String, String>(){
+    public static Map<String, String> delMapping = new HashMap<String, String>() {
         {
             put("Адлер Мангейм", "Маннгейм");
             put("Бремерхавен", "Фиштаун Пингвинс");
@@ -61,7 +61,7 @@ public class Book1xbetConstants {
         }
     };
 
-    public static Map<String, String> shlMapping = new HashMap<String, String>(){
+    public static Map<String, String> shlMapping = new HashMap<String, String>() {
         {
             put("Лулео", "Лулеo"); // разные o
             put("Эребру", "Оребро");
@@ -75,7 +75,7 @@ public class Book1xbetConstants {
 
     // football
 
-    public static Map<String, String> portugalPremierMapping = new HashMap<String, String>(){
+    public static Map<String, String> portugalPremierMapping = new HashMap<String, String>() {
         {
             put("Пасуш де Феррейра", "Пасуш Феррейра");
             put("Маритиму", "Маритимо");
@@ -87,7 +87,7 @@ public class Book1xbetConstants {
         }
     };
 
-    public static Map<String, String> indiaSuperligaMapping = new HashMap<String, String>(){
+    public static Map<String, String> indiaSuperligaMapping = new HashMap<String, String>() {
         {
             put("Дели Динамос", "Дели Дайнамос");
             put("Jamshedpur", "Джамшедпур");
@@ -98,7 +98,7 @@ public class Book1xbetConstants {
         }
     };
 
-    public static Map<String, String> bundesligaMapping = new HashMap<String, String>(){
+    public static Map<String, String> bundesligaMapping = new HashMap<String, String>() {
         {
             put("Айнтрахт Ф", "Айнтрахт");
             put("РБ Лейпциг", "Лейпциг");
@@ -106,7 +106,7 @@ public class Book1xbetConstants {
         }
     };
 
-    public static Map<String, String> holland1Mapping = new HashMap<String, String>(){
+    public static Map<String, String> holland1Mapping = new HashMap<String, String>() {
         {
             put("Валвейк", "Ваалвейк");
             put("Йонг АЗ Алкмар", "АЗ II");
@@ -125,14 +125,14 @@ public class Book1xbetConstants {
         }
     };
 
-    public static Map<String, String> englandPremierMapping = new HashMap<String, String>(){
+    public static Map<String, String> englandPremierMapping = new HashMap<String, String>() {
         {
             put("Кристал Пэлас", "Кристал Пэлэс");
             put("Бёрнли", "Бернли");
         }
     };
 
-    public static Map<String, String> france2Mapping = new HashMap<String, String>(){
+    public static Map<String, String> france2Mapping = new HashMap<String, String>() {
         {
             put("Кевийи Руан", "ЮС Квевилли");
             put("ФК Париж", "Париж");
@@ -140,13 +140,13 @@ public class Book1xbetConstants {
         }
     };
 
-    public static Map<String, String> greeceSuperligaMapping = new HashMap<String, String>(){
+    public static Map<String, String> greeceSuperligaMapping = new HashMap<String, String>() {
         {
             put("ПАС Янина", "ПАС Джаннина");
         }
     };
 
-    public static Map<String, String> cyprusMapping = new HashMap<String, String>(){
+    public static Map<String, String> cyprusMapping = new HashMap<String, String>() {
         {
             put("Алки Ороклини", "Альки Ороклинис");
             put("Олимпиакос Никосия", "Олимпиакос Никосиа");

@@ -1,12 +1,12 @@
 package com.savik.football.repository;
 
-import com.savik.football.model.FootballSquadPlayeer;
+import com.savik.football.model.FootballSquadPlayer;
 import com.savik.repository.JpaEntryRepository;
 import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface FootballSquadPlayerRepository extends JpaEntryRepository<FootballSquadPlayeer> {
+public interface FootballSquadPlayerRepository extends JpaEntryRepository<FootballSquadPlayer> {
 
-    FootballSquadPlayeer findByMyscoreCode(String code);
+    FootballSquadPlayer findByMyscoreCode(String code);
 }

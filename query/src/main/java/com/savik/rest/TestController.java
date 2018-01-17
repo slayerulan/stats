@@ -5,13 +5,8 @@ import com.savik.*;
 import com.savik.blocks.football.match.FootballPossibleBetsBlock;
 import com.savik.blocks.hockey.match.general.HockeyPossibleBetsBlock;
 import com.savik.filters.MatchFilter;
-import com.savik.football.model.FootballFutureMatch;
-import com.savik.football.model.FootballMatch;
-import com.savik.football.model.FootballReferee;
-import com.savik.football.model.FootballTeam;
-import com.savik.football.repository.FootballFutureMatchRepository;
-import com.savik.football.repository.FootballMatchRepository;
-import com.savik.football.repository.FootballRefereeRepository;
+import com.savik.football.model.*;
+import com.savik.football.repository.*;
 import com.savik.football.specifications.FootballMatchSpec;
 import com.savik.hockey.model.HockeyFutureMatch;
 import com.savik.hockey.model.HockeyMatch;
@@ -37,6 +32,7 @@ import java.util.List;
 
 import static com.savik.football.specifications.FootballMatchSpec.hasReferee;
 import static com.savik.football.specifications.FootballRefereeSpec.hasName;
+import static com.savik.football.specifications.FootballTeamSquadSpec.hasTeam;
 
 
 @RestController
@@ -61,6 +57,12 @@ public class TestController {
 
     @Autowired
     FootballFutureMatchRepository footballFutureMatchRepository;
+
+    @Autowired
+    FootballTeamSquadRepository footballTeamSquadRepository;
+
+    @Autowired
+    FootballFutureMatchInfoRepository footballFutureMatchInfoRepository;
 
     @Autowired
     ObjectMapper objectMapper;
@@ -160,6 +162,16 @@ public class TestController {
             ProposedBetsContainer resultContainerAllMatches = getProposedBetsContainer(futureMatch.getMyscoreCode(), possibleBetsBlockAllMatches);
             writeMatchToFile("info/matches/football/", "all", futureMatch, resultContainerAllMatches);
 
+            FootballFutureMatchInfo futureMatchInfo = footballFutureMatchInfoRepository.findByMyscoreCode(futureMatch.getMyscoreCode());
+            if (futureMatchInfo != null) {
+                FootballTeamSquad homeSquad = footballTeamSquadRepository.findOne(hasTeam(futureMatch.getHomeTeam()));
+                FootballTeamSquad guestSquad = footballTeamSquadRepository.findOne(hasTeam(futureMatch.getGuestTeam()));
+                futureMatchInfo.setHomeSquad(homeSquad);
+                futureMatchInfo.setGuestSquad(guestSquad);
+                writeMatchToFile("info/matches/football/", "info", futureMatch, futureMatchInfo);
+            }
+
+
 /*            MatchFilter last10Filter = matchFilter.builder().includeAllMatches(false).size(10).build();
             FootballPossibleBetsBlock hockeyPossibleBetsBlockLast10Matches = new FootballAnalyzer(last10Filter, futureMatch).getPossibleBetsBlock();
             ProposedBetsContainer resultContainerkLast10Matches = getProposedBetsContainer(futureMatch.getMyscoreCode(), hockeyPossibleBetsBlockLast10Matches);
@@ -167,7 +179,7 @@ public class TestController {
         }
     }
 
-    private void writeMatchToFile(String folderPrefix, String matchPrefix, FutureMatch futureMatch, ProposedBetsContainer proposedBets) throws IOException {
+    private void writeMatchToFile(String folderPrefix, String matchPrefix, FutureMatch futureMatch, Object value) throws IOException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd(HH-mm)");
         File leagueDir2 = new File(folderPrefix + futureMatch.getChampionshipString().toString());
         Files.createDirectories(leagueDir2.toPath());
@@ -177,7 +189,7 @@ public class TestController {
                         matchPrefix, futureMatch.getHomeTeam().getName(), futureMatch.getGuestTeam().getName()
                 )
         );
-        objectMapper.writeValue(matchFile, proposedBets);
+        objectMapper.writeValue(matchFile, value);
     }
 
     private ProposedBetsContainer getProposedBetsContainer(String myscoreCode, PossibleBetContainer hockeyPossibleBetsBlock) {

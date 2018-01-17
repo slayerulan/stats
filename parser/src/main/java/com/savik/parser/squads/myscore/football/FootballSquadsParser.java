@@ -1,8 +1,7 @@
 package com.savik.parser.squads.myscore.football;
 
-import com.savik.football.model.FootballFutureMatch;
-import com.savik.football.model.FootballSquadPlayeerSeasonStats;
-import com.savik.football.model.FootballTeamSquad;
+import com.savik.football.model.*;
+import com.savik.football.repository.FootballFutureMatchInfoRepository;
 import com.savik.football.repository.FootballFutureMatchRepository;
 import com.savik.football.repository.FootballTeamSquadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +29,13 @@ public class FootballSquadsParser {
     @Autowired
     FootballTeamSquadRepository footballTeamSquadRepository;
 
+    @Autowired
+    FootballFutureMatchInfoRepository footballFutureMatchInfoRepository;
+
 
     public void parse() {
 
-        FootballFutureMatch byMyscoreCode = matchRepository.findByMyscoreCode("GCtcphcc");
+        FootballFutureMatch byMyscoreCode = matchRepository.findByMyscoreCode("O4vCMl5j");
         footballTeamSquadParser.parse(byMyscoreCode);
 
 
@@ -41,6 +43,41 @@ public class FootballSquadsParser {
         FootballTeamSquad guestSquadInfo = footballTeamSquadRepository.findOne(hasTeam(byMyscoreCode.getGuestTeam()));
 
         FutureMatchSquads futureMatchSquads = footballTeamSquadParser.parseTest(byMyscoreCode);
+
+        FootballFutureMatchSquadPart homeLineUps = new FootballFutureMatchSquadPart(
+                test2(homeSquadInfo, futureMatchSquads.getHomeLineUpPlayers())
+        );
+
+        FootballFutureMatchSquadPart homeSubs = new FootballFutureMatchSquadPart(
+                test2(homeSquadInfo, futureMatchSquads.getHomeSubstitutions())
+        );
+
+        FootballFutureMatchSquad homeTeamInfo = new FootballFutureMatchSquad(
+                homeLineUps, homeSubs
+
+        );
+
+        FootballFutureMatchSquadPart guestLineUps = new FootballFutureMatchSquadPart(
+                test2(guestSquadInfo, futureMatchSquads.getGuestLineUpPlayers())
+        );
+
+        FootballFutureMatchSquadPart guestSubs = new FootballFutureMatchSquadPart(
+                test2(guestSquadInfo, futureMatchSquads.getGuestSubstitutions())
+        );
+
+        FootballFutureMatchSquad guestTeamInfo = new FootballFutureMatchSquad(
+                guestLineUps, guestSubs
+        );
+
+        FootballFutureMatchInfo footballFutureMatchInfo = new FootballFutureMatchInfo(
+                "O4vCMl5j",
+                homeTeamInfo,
+                guestTeamInfo
+        );
+
+        footballFutureMatchInfoRepository.deleteByMyscoreCode("O4vCMl5j");
+        footballFutureMatchInfoRepository.save(footballFutureMatchInfo);
+
 
         System.out.println("\n\nhome line ups");
         test(homeSquadInfo, futureMatchSquads.getHomeLineUpPlayers());
@@ -55,9 +92,6 @@ public class FootballSquadsParser {
         test(guestSquadInfo, futureMatchSquads.getGuestSubstitutions());
 
 
-        String a = "";
-
-
 /*
         List<FootballFutureMatch> matches = matchRepository.findAll();
         for (FootballFutureMatch match : matches) {
@@ -66,42 +100,54 @@ public class FootballSquadsParser {
 
     }
 
-    private void test(FootballTeamSquad teamSquad, Set<FutureMatchSquadPlayer> futureMatchPlayers) {
-        /*List<FutureMatchSquadPlayer> lineUpPlayers = */
-        Set<FootballSquadPlayeerSeasonStats> squadPlayersStats = teamSquad.getSquadPlayers();
-        List<FootballSquadPlayeerSeasonStats> futureSquadStats = new ArrayList<>();
+    private Set<FootballSquadPlayerSeasonStats> test2(FootballTeamSquad teamSquad, Set<FutureMatchSquadPlayer> futureMatchPlayers) {
+        Set<FootballSquadPlayerSeasonStats> squadPlayersStats = teamSquad.getSquadPlayers();
+        Set<FootballSquadPlayerSeasonStats> futureSquadStats = new HashSet<>();
 
         for (FutureMatchSquadPlayer futureMatchSquadPlayer : futureMatchPlayers) {
-            FootballSquadPlayeerSeasonStats playeerSeasonStats = getStatsByPlayer(squadPlayersStats, futureMatchSquadPlayer);
-            if(playeerSeasonStats == null) {
+            FootballSquadPlayerSeasonStats playeerSeasonStats = getStatsByPlayer(squadPlayersStats, futureMatchSquadPlayer);
+            if (playeerSeasonStats == null) {
                 continue;
             }
             futureSquadStats.add(playeerSeasonStats);
         }
 
-        List<FootballSquadPlayeerSeasonStats> top5TeamYCardsPlayers = squadPlayersStats.stream()
+        return futureSquadStats;
+    }
+
+    private void test(FootballTeamSquad teamSquad, Set<FutureMatchSquadPlayer> futureMatchPlayers) {
+        Set<FootballSquadPlayerSeasonStats> squadPlayersStats = teamSquad.getSquadPlayers();
+        List<FootballSquadPlayerSeasonStats> futureSquadStats = new ArrayList<>();
+
+        for (FutureMatchSquadPlayer futureMatchSquadPlayer : futureMatchPlayers) {
+            FootballSquadPlayerSeasonStats playeerSeasonStats = getStatsByPlayer(squadPlayersStats, futureMatchSquadPlayer);
+            if (playeerSeasonStats == null) {
+                continue;
+            }
+            futureSquadStats.add(playeerSeasonStats);
+        }
+
+        List<FootballSquadPlayerSeasonStats> top5TeamYCardsPlayers = squadPlayersStats.stream()
                 .filter(st -> st.getGamesPlayed() > 5 && !st.getIsInjured() && !st.getIsSuspended())
-                .sorted(Comparator.comparing(FootballSquadPlayeerSeasonStats::ycAverage).reversed())
+                .sorted(Comparator.comparing(FootballSquadPlayerSeasonStats::ycAverage).reversed())
                 .limit(5)
                 .collect(Collectors.toList());
 
-        List<FootballSquadPlayeerSeasonStats> fromTop5 = top5TeamYCardsPlayers.stream().filter(p -> futureSquadStats.contains(p)).collect(Collectors.toList());
+        List<FootballSquadPlayerSeasonStats> fromTop5 = top5TeamYCardsPlayers.stream().filter(p -> futureSquadStats.contains(p)).collect(Collectors.toList());
 
         System.out.println("n of top 5 yc players = " + fromTop5.size() + " (" + fromTop5.toString() + ") players");
         System.out.println("average yc/gms from top 5 yc players = " + fromTop5.stream().mapToDouble(st -> st.ycAverage()).average().orElse(0));
         System.out.println("average match squad without from top 5 yc/gms  = " + futureSquadStats.stream()
                 .filter(st -> !fromTop5.contains(st))
-                .mapToDouble(st -> st.ycAverage()).average().getAsDouble());
+                .mapToDouble(st -> st.ycAverage()).average().orElse(0));
         System.out.println("average match squad yc/gms  = " + futureSquadStats.stream().mapToDouble(st -> st.ycAverage()).average().getAsDouble());
         System.out.println("less 5 games played = " + futureSquadStats.stream().filter(st -> st.getGamesPlayed() <= 5).count() + " players");
-
-        String a = "";
     }
 
-    FootballSquadPlayeerSeasonStats getStatsByPlayer(Set<FootballSquadPlayeerSeasonStats> squadPlayersStats, FutureMatchSquadPlayer player) {
-        Optional<FootballSquadPlayeerSeasonStats> playerStats = squadPlayersStats.stream()
+    FootballSquadPlayerSeasonStats getStatsByPlayer(Set<FootballSquadPlayerSeasonStats> squadPlayersStats, FutureMatchSquadPlayer player) {
+        Optional<FootballSquadPlayerSeasonStats> playerStats = squadPlayersStats.stream()
                 .filter(st -> st.getPlayer().getMyscoreCode().equals(player.getMyscoreCode())).findFirst();
-        if(!playerStats.isPresent()) {
+        if (!playerStats.isPresent()) {
             System.out.println("strange, player not found = " + player);
             return null;
         }
