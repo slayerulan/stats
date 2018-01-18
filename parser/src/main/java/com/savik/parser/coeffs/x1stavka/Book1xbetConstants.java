@@ -125,6 +125,12 @@ public class Book1xbetConstants {
         }
     };
 
+    public static Map<String, String> hollandSuperligaMapping = new HashMap<String, String>() {
+        {
+            put("АЗ Алкмар", "АЗ");
+        }
+    };
+
     public static Map<String, String> englandPremierMapping = new HashMap<String, String>() {
         {
             put("Кристал Пэлас", "Кристал Пэлэс");
