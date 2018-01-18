@@ -64,9 +64,12 @@ public class FootballTeamSquadParser {
         }
     }
 
-    public FutureMatchSquads parseTest(FootballFutureMatch futureMatch) {
+    public FutureMatchSquads parseFutureMatchSquads(FootballFutureMatch futureMatch) {
         Document document = downloader.downloadMatchSquads(futureMatch.getMyscoreCode());
         Element table = document.select("table.parts").first();
+        if(table == null) {
+            return null;
+        }
         Elements trs = table.select("tbody > tr");
         Integer startingLineupIndexTo = table.select("tbody > tr > td.h-part:containsOwn(Замены)").first().parent().elementSiblingIndex();
 

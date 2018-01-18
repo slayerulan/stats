@@ -35,48 +35,15 @@ public class FootballSquadsParser {
 
     public void parse() {
 
-        FootballFutureMatch byMyscoreCode = matchRepository.findByMyscoreCode("O4vCMl5j");
+/*        String myscoreCode = "byW1qCC3";
+        FootballFutureMatch byMyscoreCode = matchRepository.findByMyscoreCode(myscoreCode);
         footballTeamSquadParser.parse(byMyscoreCode);
 
 
         FootballTeamSquad homeSquadInfo = footballTeamSquadRepository.findOne(hasTeam(byMyscoreCode.getHomeTeam()));
         FootballTeamSquad guestSquadInfo = footballTeamSquadRepository.findOne(hasTeam(byMyscoreCode.getGuestTeam()));
 
-        FutureMatchSquads futureMatchSquads = footballTeamSquadParser.parseTest(byMyscoreCode);
-
-        FootballFutureMatchSquadPart homeLineUps = new FootballFutureMatchSquadPart(
-                test2(homeSquadInfo, futureMatchSquads.getHomeLineUpPlayers())
-        );
-
-        FootballFutureMatchSquadPart homeSubs = new FootballFutureMatchSquadPart(
-                test2(homeSquadInfo, futureMatchSquads.getHomeSubstitutions())
-        );
-
-        FootballFutureMatchSquad homeTeamInfo = new FootballFutureMatchSquad(
-                homeLineUps, homeSubs
-
-        );
-
-        FootballFutureMatchSquadPart guestLineUps = new FootballFutureMatchSquadPart(
-                test2(guestSquadInfo, futureMatchSquads.getGuestLineUpPlayers())
-        );
-
-        FootballFutureMatchSquadPart guestSubs = new FootballFutureMatchSquadPart(
-                test2(guestSquadInfo, futureMatchSquads.getGuestSubstitutions())
-        );
-
-        FootballFutureMatchSquad guestTeamInfo = new FootballFutureMatchSquad(
-                guestLineUps, guestSubs
-        );
-
-        FootballFutureMatchInfo footballFutureMatchInfo = new FootballFutureMatchInfo(
-                "O4vCMl5j",
-                homeTeamInfo,
-                guestTeamInfo
-        );
-
-        footballFutureMatchInfoRepository.deleteByMyscoreCode("O4vCMl5j");
-        footballFutureMatchInfoRepository.save(footballFutureMatchInfo);
+        FutureMatchSquads futureMatchSquads = footballTeamSquadParser.parseFutureMatchSquads(byMyscoreCode);
 
 
         System.out.println("\n\nhome line ups");
@@ -89,14 +56,67 @@ public class FootballSquadsParser {
         test(guestSquadInfo, futureMatchSquads.getGuestLineUpPlayers());
 
         System.out.println("\n\nguest substitutions");
-        test(guestSquadInfo, futureMatchSquads.getGuestSubstitutions());
+        test(guestSquadInfo, futureMatchSquads.getGuestSubstitutions());*/
 
-
-/*
         List<FootballFutureMatch> matches = matchRepository.findAll();
-        for (FootballFutureMatch match : matches) {
+
+        parseLeague(matches.stream().filter(m -> m.getChampionship() == FootballChampionship.FRANCE_1).collect(Collectors.toList()));
+        parseLeague(matches.stream().filter(m -> m.getChampionship() == FootballChampionship.BUNDESLIGA).collect(Collectors.toList()));
+        parseLeague(matches.stream().filter(m -> m.getChampionship() == FootballChampionship.LA).collect(Collectors.toList()));
+        parseLeague(matches.stream().filter(m -> m.getChampionship() == FootballChampionship.PORTUGAL_PREMIER).collect(Collectors.toList()));
+
+
+    }
+
+    private void parseLeague(List<FootballFutureMatch> footballFutureMatches) {
+
+        for (FootballFutureMatch match : footballFutureMatches) {
             footballTeamSquadParser.parse(match);
-        }*/
+
+            FootballTeamSquad homeSquadInfo = footballTeamSquadRepository.findOne(hasTeam(match.getHomeTeam()));
+            FootballTeamSquad guestSquadInfo = footballTeamSquadRepository.findOne(hasTeam(match.getGuestTeam()));
+
+            FutureMatchSquads futureMatchSquads = footballTeamSquadParser.parseFutureMatchSquads(match);
+
+            if(futureMatchSquads == null) {
+                System.out.println("match doesn't have squads = " + match.getMyscoreCode());
+                continue;
+            }
+
+            FootballFutureMatchSquadPart homeLineUps = new FootballFutureMatchSquadPart(
+                    test2(homeSquadInfo, futureMatchSquads.getHomeLineUpPlayers())
+            );
+
+            FootballFutureMatchSquadPart homeSubs = new FootballFutureMatchSquadPart(
+                    test2(homeSquadInfo, futureMatchSquads.getHomeSubstitutions())
+            );
+
+            FootballFutureMatchSquad homeTeamInfo = new FootballFutureMatchSquad(
+                    homeLineUps, homeSubs
+
+            );
+
+            FootballFutureMatchSquadPart guestLineUps = new FootballFutureMatchSquadPart(
+                    test2(guestSquadInfo, futureMatchSquads.getGuestLineUpPlayers())
+            );
+
+            FootballFutureMatchSquadPart guestSubs = new FootballFutureMatchSquadPart(
+                    test2(guestSquadInfo, futureMatchSquads.getGuestSubstitutions())
+            );
+
+            FootballFutureMatchSquad guestTeamInfo = new FootballFutureMatchSquad(
+                    guestLineUps, guestSubs
+            );
+
+            FootballFutureMatchInfo footballFutureMatchInfo = new FootballFutureMatchInfo(
+                    match.getMyscoreCode(),
+                    homeTeamInfo,
+                    guestTeamInfo
+            );
+
+            footballFutureMatchInfoRepository.deleteByMyscoreCode(match.getMyscoreCode());
+            footballFutureMatchInfoRepository.save(footballFutureMatchInfo);
+        }
 
     }
 
