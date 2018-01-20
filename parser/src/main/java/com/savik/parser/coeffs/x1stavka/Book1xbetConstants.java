@@ -128,6 +128,7 @@ public class Book1xbetConstants {
     public static Map<String, String> hollandSuperligaMapping = new HashMap<String, String>() {
         {
             put("АЗ Алкмар", "АЗ");
+            put("Бреда", "НАК");
         }
     };
 
@@ -149,6 +150,7 @@ public class Book1xbetConstants {
     public static Map<String, String> greeceSuperligaMapping = new HashMap<String, String>() {
         {
             put("ПАС Янина", "ПАС Джаннина");
+            put("Левадиакос", "Левадеякос");
         }
     };
 
@@ -156,6 +158,14 @@ public class Book1xbetConstants {
         {
             put("Алки Ороклини", "Альки Ороклинис");
             put("Олимпиакос Никосия", "Олимпиакос Никосиа");
+        }
+    };
+
+    public static Map<String, String> belgiumMapping = new HashMap<String, String>() {
+        {
+            put("Васланд-Беверен", "Васланд");
+            put("Синт-Трёйден", "Сент-Трюйден");
+            put("Зюльте-Варегем", "Зульте-Варегем");
         }
     };
 

@@ -35,7 +35,7 @@ public class FootballSquadsParser {
 
     public void parse() {
 
-/*        String myscoreCode = "byW1qCC3";
+        String myscoreCode = "fe9elyY3";
         FootballFutureMatch byMyscoreCode = matchRepository.findByMyscoreCode(myscoreCode);
         footballTeamSquadParser.parse(byMyscoreCode);
 
@@ -56,14 +56,14 @@ public class FootballSquadsParser {
         test(guestSquadInfo, futureMatchSquads.getGuestLineUpPlayers());
 
         System.out.println("\n\nguest substitutions");
-        test(guestSquadInfo, futureMatchSquads.getGuestSubstitutions());*/
+        test(guestSquadInfo, futureMatchSquads.getGuestSubstitutions());
 
-        List<FootballFutureMatch> matches = matchRepository.findAll();
+/*        List<FootballFutureMatch> matches = matchRepository.findAll();
 
         parseLeague(matches.stream().filter(m -> m.getChampionship() == FootballChampionship.FRANCE_1).collect(Collectors.toList()));
         parseLeague(matches.stream().filter(m -> m.getChampionship() == FootballChampionship.BUNDESLIGA).collect(Collectors.toList()));
         parseLeague(matches.stream().filter(m -> m.getChampionship() == FootballChampionship.LA).collect(Collectors.toList()));
-        parseLeague(matches.stream().filter(m -> m.getChampionship() == FootballChampionship.PORTUGAL_PREMIER).collect(Collectors.toList()));
+        parseLeague(matches.stream().filter(m -> m.getChampionship() == FootballChampionship.PORTUGAL_PREMIER).collect(Collectors.toList()));*/
 
 
     }

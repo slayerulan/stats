@@ -54,6 +54,6 @@ public class Parser {
         //footballFutureMatchesParser.parse();
         //football1xstavkaCoeffsParser.parse();
 
-        //footballSquadsParser.parse();
+        footballSquadsParser.parse();
     }
 }

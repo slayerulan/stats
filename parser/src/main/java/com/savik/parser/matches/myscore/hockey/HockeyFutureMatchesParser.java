@@ -84,7 +84,7 @@ public class HockeyFutureMatchesParser {
         }
         if (HockeyLeagueIds.KHL.equals(myscoreLeagueId)) {
             return HockeyChampionship.KHL;
-        }
+        }/*
         if (HockeyLeagueIds.EXTRA.equals(myscoreLeagueId)) {
             return HockeyChampionship.EXTRA;
         }
@@ -93,7 +93,7 @@ public class HockeyFutureMatchesParser {
         }
         if (HockeyLeagueIds.SHL.equals(myscoreLeagueId)) {
             return HockeyChampionship.SHL;
-        }
+        }*/
         return null;
 
     }
