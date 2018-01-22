@@ -35,7 +35,7 @@ public class FootballSquadsParser {
 
     public void parse() {
 
-        String myscoreCode = "fe9elyY3";
+        String myscoreCode = "4xFpylKq";
         FootballFutureMatch byMyscoreCode = matchRepository.findByMyscoreCode(myscoreCode);
         footballTeamSquadParser.parse(byMyscoreCode);
 

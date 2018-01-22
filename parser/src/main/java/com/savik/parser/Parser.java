@@ -26,9 +26,6 @@ public class Parser {
     HockeyParser hockeyParser;
 
     @Autowired
-    FutureMatchesParser futureMatchesParser;
-
-    @Autowired
     FootballFutureMatchesParser footballFutureMatchesParser;
 
     @Autowired
@@ -54,6 +51,6 @@ public class Parser {
         //footballFutureMatchesParser.parse();
         //football1xstavkaCoeffsParser.parse();
 
-        footballSquadsParser.parse();
+        //footballSquadsParser.parse();
     }
 }

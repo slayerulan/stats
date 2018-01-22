@@ -83,6 +83,9 @@ public class FootballFutureMatchesParser {
         if (FootballLeagueIds.LA.equals(myscoreLeagueId)) {
             return FootballChampionship.LA;
         }
+        if (FootballLeagueIds.SERIE_A.equals(myscoreLeagueId)) {
+            return FootballChampionship.SERIE_A;
+        }
         if (FootballLeagueIds.AUSTRALIA_A.equals(myscoreLeagueId)) {
             return FootballChampionship.AUSTRALIA_A;
         }
